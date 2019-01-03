@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="SigobMobile.Views.LoginPage"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}"
+    Title="Login">
+    <ContentPage.Content>
+        <StackLayout
+            Padding="20,40,20,20">
+            <Image
+                WidthRequest="240"
+                Source="sigob_logo">
+            </Image>
+            <Label
+                VerticalOptions="CenterAndExpand"
+                FontAttributes="Bold"
+                FontSize="Large"
+                HorizontalOptions="CenterAndExpand"
+                Text="Login">
+            </Label>
+            <Entry
+                Placeholder="User">
+            </Entry>
+            <Entry
+                IsPassword="true"
+                Placeholder="Password">
+            </Entry>
+            <Entry
+                Placeholder="Country - Institution">
+            </Entry>
+            <ActivityIndicator>
+            </ActivityIndicator>
+            <Button
+                VerticalOptions="CenterAndExpand"
+                BackgroundColor="Navy"
+                Text="Login"
+                TextColor="White">
+            </Button>
+            <Label
+                HorizontalOptions="Center"
+                Text="Forgot your passwor?"
+                VerticalOptions="CenterAndExpand">
+               </Label>
+            <Image
+                Source="ods_logo"
+                VerticalOptions="EndAndExpand"
+                WidthRequest="280">
+            </Image>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
