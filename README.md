@@ -1,4 +1,4 @@
-# SigobMovil
+# Sigob Mobile
 SIGOB Mobile Application (Android & iOS)
 
 SIGOB- Management Systems for Democratic Governance, include this componentes:
