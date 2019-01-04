@@ -39,7 +39,7 @@
                     <!--<StackLayout.GestureRecognizers>
                         <TapGestureRecognizer
                             Tapped="{Binding ListCountriesCall}"
-                             NumberOfTapsRequired="1">
+                            NumberOfTapsRequired="1">
                         </TapGestureRecognizer>
                     </StackLayout.GestureRecognizers>-->
                 </StackLayout>
@@ -51,10 +51,12 @@
                     <Button 
                         BackgroundColor="Navy"
                         Command="{Binding LoginCommand}"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                         Text="Login" 
                         TextColor="White">
                     </Button>
-                    <Label 
+                    <Label
+                        Margin="0,5"
                         HorizontalOptions="Center" 
                         Text="Forgot your password?">
                     </Label>

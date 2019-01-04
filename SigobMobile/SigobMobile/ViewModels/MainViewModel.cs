@@ -14,6 +14,12 @@ namespace SigobMobile.ViewModels
             get;
             set;
         }
+
+        public InstitutionsConnectViewModel InstitutionsConnect 
+        { 
+            get; 
+            set; 
+        }
         #endregion
 
         #region Constructors

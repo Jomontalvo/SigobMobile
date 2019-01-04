@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SigobMobile.Views.InstitutionsConnectPage"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}" 
+    Title="Institutions to connect">
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding InstitutionsConnect}"
+            Padding="5">
+            <Label
+                FontSize="Large"
+                Text="Lista de Instituciones">
+            </Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
