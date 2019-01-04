@@ -1,6 +1,9 @@
 ﻿namespace SigobMobile.ViewModels
 {
+    using System;
     using System.Windows.Input;
+    using GalaSoft.MvvmLight.Command;
+    using Xamarin.Forms;
 
     public class LoginViewModel
     {
@@ -31,16 +34,49 @@
         #endregion
 
         #region Constructors
-        public LoginViewModel()
-        {
+        //public LoginViewModel()
+        //{
+        //    //Initialize default values
+        //    //this.KeyLowerCases = Keyboard.Create(KeyboardFlags.None);
 
-        }
+        //}
         #endregion
+
         #region Commands
         public ICommand LoginCommand
         {
-            get;
-            set;
+            get
+            {
+                return new RelayCommand(Login);
+            }
+        }
+
+        private async void Login()
+        {
+           if (string.IsNullOrEmpty(this.UserName))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                title: "Error",
+                message: "Enter your username",
+                cancel: "Cancel");
+                return;
+            }
+            if (string.IsNullOrEmpty(this.Password))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                title: "Error",
+                message: "Enter your password",
+                cancel: "Cancel");
+                return;
+            }
+            if (string.IsNullOrEmpty(this.Institution))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                title: "Error",
+                message: "Select a Country and Institution",
+                cancel: "Cancel");
+                return;
+            }
         }
 
         #endregion

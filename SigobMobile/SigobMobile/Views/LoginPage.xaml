@@ -10,12 +10,18 @@
             <StackLayout Padding="20,50,20,20">
                 <Image WidthRequest="240" Source="sigob_logo">
                 </Image>
-                <Label VerticalOptions="CenterAndExpand" FontAttributes="Bold" FontSize="Large" HorizontalOptions="CenterAndExpand" Text="Login">
+                <Label 
+                    VerticalOptions="CenterAndExpand" 
+                    FontAttributes="Bold" 
+                    FontSize="Large" 
+                    HorizontalOptions="CenterAndExpand" 
+                    Text="Login">
                 </Label>
                 <Entry 
+                    Keyboard="Default"
                     Margin="0,10" 
                     Placeholder="User"
-                    Text="{Binding UserName,Mode=TwoWay}">
+                    Text="{Binding UserName, Mode=TwoWay}">
                 </Entry>
                 <Entry 
                     IsPassword="true" 
@@ -28,17 +34,17 @@
                     <Entry
                         IsEnabled="false"
                         Placeholder="Country - Institution"
-                        Text="{Binding Institution ,Mode=TwoWay}">
+                        Text="{Binding Institution, Mode=TwoWay}">
                     </Entry>
-                    <StackLayout.GestureRecognizers>
+                    <!--<StackLayout.GestureRecognizers>
                         <TapGestureRecognizer
                             Tapped="{Binding ListCountriesCall}"
                              NumberOfTapsRequired="1">
                         </TapGestureRecognizer>
-                    </StackLayout.GestureRecognizers>
+                    </StackLayout.GestureRecognizers>-->
                 </StackLayout>
                 <ActivityIndicator 
-                    IsRunning="{Binding IsRunning,Mode=TwoWay}"
+                    IsRunning="{Binding IsRunning, Mode=TwoWay}"
                     VerticalOptions="CenterAndExpand">
                 </ActivityIndicator>
                 <Button 
