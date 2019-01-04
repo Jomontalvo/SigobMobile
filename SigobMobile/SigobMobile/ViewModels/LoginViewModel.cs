@@ -31,15 +31,20 @@
             get;
             set;
         }
+
+        public object KeyLowerCases
+        { 
+            get; 
+            set; 
+        }
         #endregion
 
         #region Constructors
-        //public LoginViewModel()
-        //{
-        //    //Initialize default values
-        //    //this.KeyLowerCases = Keyboard.Create(KeyboardFlags.None);
-
-        //}
+        public LoginViewModel()
+        {
+            //Initialize default values
+            this.KeyLowerCases = Keyboard.Create(KeyboardFlags.None);
+        }
         #endregion
 
         #region Commands
