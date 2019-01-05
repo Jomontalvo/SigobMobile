@@ -9,7 +9,7 @@
         /// Gets or sets a value indicating whether this <see cref="T:SigobMobile.Models.Response"/> is sucess.
         /// </summary>
         /// <value><c>true</c> if is sucess; otherwise, <c>false</c>.</value>
-        public bool IsSucess { get; set; }
+        public bool IsSuccess { get; set; }
 
         /// <summary>
         /// Gets or sets the message resultant API call

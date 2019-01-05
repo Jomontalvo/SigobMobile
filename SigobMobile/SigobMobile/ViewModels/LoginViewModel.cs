@@ -123,6 +123,8 @@
 
             //Initialize Institutions to Connect Page (View)
             //await Application.Current.MainPage.p = new InstitutionsConnectPage();
+
+            MainViewModel.GetInstance().InstitutionsConnect = new InstitutionsConnectViewModel();
             Application.Current.MainPage = new InstitutionsConnectPage();
         }
 

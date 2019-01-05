@@ -9,7 +9,7 @@
     using Models;
     using Newtonsoft.Json;
     using Plugin.Connectivity;
-    using Domain;
+    //using Domain;
 
     public class ApiService
     {
@@ -20,12 +20,12 @@
                 return new Response
                 {
                     IsSuccess = false,
-                    Message = "Please turn on your internet settings.",
+                    Message = "Please turn on your phone internet settings.",
                 };
             }
 
             var isReachable = await CrossConnectivity.Current.IsRemoteReachable(
-                "google.com");
+                "microsoft.com");
             if (!isReachable)
             {
                 return new Response
@@ -42,50 +42,53 @@
             };
         }
 
-        public async Task<TokenResponse> GetToken(
-            string urlBase,
-            string username,
-            string password)
-        {
-            try
-            {
-                var client = new HttpClient();
-                client.BaseAddress = new Uri(urlBase);
-                var response = await client.PostAsync("Token",
-                    new StringContent(string.Format(
-                    "grant_type=password&username={0}&password={1}",
-                    username, password),
-                    Encoding.UTF8, "application/x-www-form-urlencoded"));
-                var resultJSON = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<TokenResponse>(
-                    resultJSON);
-                return result;
-            }
-            catch
-            {
-                return null;
-            }
-        }
+        //public async Task<TokenResponse> GetToken(
+        //    string urlBase,
+        //    string username,
+        //    string password)
+        //{
+        //    try
+        //    {
+        //        var client = new HttpClient();
+        //        client.BaseAddress = new Uri(urlBase);
+        //        var response = await client.PostAsync("Token",
+        //            new StringContent(string.Format(
+        //            "grant_type=password&username={0}&password={1}",
+        //            username, password),
+        //            Encoding.UTF8, "application/x-www-form-urlencoded"));
+        //        var resultJSON = await response.Content.ReadAsStringAsync();
+        //        var result = JsonConvert.DeserializeObject<TokenResponse>(
+        //            resultJSON);
+        //        return result;
+        //    }
+        //    catch
+        //    {
+        //        return null;
+        //    }
+        //}
 
+        /// <summary>
+        /// Get the specified objet (unsecure), calling and EndPoint through urlBase, servicePrefix, controller and identifier object.
+        /// </summary>
+        /// <returns>The get.</returns>
+        /// <param name="urlBase">URL base.</param>
+        /// <param name="servicePrefix">Service prefix.</param>
+        /// <param name="controller">Controller.</param>
+        /// <param name="id">Identifier.</param>
+        /// <typeparam name="T">The object type parameter.</typeparam>
         public async Task<Response> Get<T>(
             string urlBase,
             string servicePrefix,
             string controller,
-            string tokenType,
-            string accessToken,
             int id)
         {
             try
             {
-                var client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue(tokenType, accessToken);
-                client.BaseAddress = new Uri(urlBase);
-                var url = string.Format(
-                    "{0}{1}/{2}",
-                    servicePrefix,
-                    controller,
-                    id);
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+                var url = $"{servicePrefix}{controller}/{id}";
                 var response = await client.GetAsync(url);
 
                 if (!response.IsSuccessStatusCode)
@@ -116,109 +119,32 @@
             }
         }
 
-        public async Task<Response> GetList<T>(
-            string urlBase,
-            string servicePrefix,
-            string controller)
-        {
-            try
-            {
-                var client = new HttpClient();
-                client.BaseAddress = new Uri(urlBase);
-                var url = string.Format("{0}{1}", servicePrefix, controller);
-                var response = await client.GetAsync(url);
-                var result = await response.Content.ReadAsStringAsync();
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    return new Response
-                    {
-                        IsSuccess = false,
-                        Message = result,
-                    };
-                }
-
-                var list = JsonConvert.DeserializeObject<List<T>>(result);
-                return new Response
-                {
-                    IsSuccess = true,
-                    Message = "Ok",
-                    Result = list,
-                };
-            }
-            catch (Exception ex)
-            {
-                return new Response
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                };
-            }
-        }
-
-        public async Task<Response> GetList<T>(
+        /// <summary>
+        /// Get the specified object, calling an EndPoint through urlBase, servicePrefix, controller, tokenType, accessToken and id.
+        /// </summary>
+        /// <returns>The get.</returns>
+        /// <param name="urlBase">URL base.</param>
+        /// <param name="servicePrefix">Service prefix.</param>
+        /// <param name="controller">Controller.</param>
+        /// <param name="token">Token type.</param>
+        /// <param name="authToken">Access token.</param>
+        /// <param name="id">Identifier.</param>
+        /// <typeparam name="T">The object type parameter.</typeparam>
+        public async Task<Response> Get<T>(
             string urlBase,
             string servicePrefix,
             string controller,
-            string tokenType,
-            string accessToken)
-        {
-            try
-            {
-                var client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue(tokenType, accessToken);
-                client.BaseAddress = new Uri(urlBase);
-                var url = string.Format("{0}{1}", servicePrefix, controller);
-                var response = await client.GetAsync(url);
-                var result = await response.Content.ReadAsStringAsync();
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    return new Response
-                    {
-                        IsSuccess = false,
-                        Message = result,
-                    };
-                }
-
-                var list = JsonConvert.DeserializeObject<List<T>>(result);
-                return new Response
-                {
-                    IsSuccess = true,
-                    Message = "Ok",
-                    Result = list,
-                };
-            }
-            catch (Exception ex)
-            {
-                return new Response
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                };
-            }
-        }
-
-        public async Task<Response> GetList<T>(
-            string urlBase,
-            string servicePrefix,
-            string controller,
-            string tokenType,
-            string accessToken,
+            string token,
+            string authToken,
             int id)
         {
             try
             {
                 var client = new HttpClient();
                 client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue(tokenType, accessToken);
+                    new AuthenticationHeaderValue(token, authToken);
                 client.BaseAddress = new Uri(urlBase);
-                var url = string.Format(
-                    "{0}{1}/{2}",
-                    servicePrefix,
-                    controller,
-                    id);
+                var url = $"{servicePrefix}{controller}/{id}";
                 var response = await client.GetAsync(url);
 
                 if (!response.IsSuccessStatusCode)
@@ -231,6 +157,56 @@
                 }
 
                 var result = await response.Content.ReadAsStringAsync();
+                var model = JsonConvert.DeserializeObject<T>(result);
+                return new Response
+                {
+                    IsSuccess = true,
+                    Message = "Ok",
+                    Result = model,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+            }
+        }
+
+        /// <summary>
+        /// Gets list without token (unsecured method).
+        /// </summary>
+        /// <returns>The list.</returns>
+        /// <param name="urlBase">URL base.</param>
+        /// <param name="servicePrefix">Service prefix.</param>
+        /// <param name="controller">Controller name</param>
+        /// <typeparam name="T">The list type (any object).</typeparam>
+        public async Task<Response> GetList<T>(
+            string urlBase,
+            string servicePrefix,
+            string controller)
+        {
+            try
+            {
+                var client = new HttpClient()
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+                var url = $"{servicePrefix}{controller}";
+                var response = await client.GetAsync(url);
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
                 var list = JsonConvert.DeserializeObject<List<T>>(result);
                 return new Response
                 {
@@ -249,6 +225,73 @@
             }
         }
 
+        /// <summary>
+        /// Gets the list (secured method)
+        /// </summary>
+        /// <returns>The list.</returns>
+        /// <param name="urlBase">URL base.</param>
+        /// <param name="servicePrefix">Service prefix.</param>
+        /// <param name="controller">Controller.</param>
+        /// <param name="token">Token type.</param>
+        /// <param name="authToken">Access token.</param>
+        /// <typeparam name="T">The object type parameter.</typeparam>
+        public async Task<Response> GetList<T>(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            string token,
+            string authToken)
+        {
+            try
+            {
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+                client.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue(token, authToken);
+                var url = $"{servicePrefix}{controller}";
+                var response = await client.GetAsync(url);
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                var list = JsonConvert.DeserializeObject<List<T>>(result);
+                return new Response
+                {
+                    IsSuccess = true,
+                    Message = "Ok",
+                    Result = list,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+            }
+        }
+
+        /// <summary>
+        /// Post the specified urlBase, servicePrefix, controller, tokenType, accessToken and model.
+        /// </summary>
+        /// <returns>The post.</returns>
+        /// <param name="urlBase">URL base.</param>
+        /// <param name="servicePrefix">Service prefix.</param>
+        /// <param name="controller">Controller.</param>
+        /// <param name="tokenType">Token type.</param>
+        /// <param name="accessToken">Access token.</param>
+        /// <param name="model">Model.</param>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
         public async Task<Response> Post<T>(
             string urlBase,
             string servicePrefix,
@@ -297,6 +340,15 @@
             }
         }
 
+        /// <summary>
+        /// Post the specified urlBase, servicePrefix, controller and model.
+        /// </summary>
+        /// <returns>The post.</returns>
+        /// <param name="urlBase">URL base.</param>
+        /// <param name="servicePrefix">Service prefix.</param>
+        /// <param name="controller">Controller.</param>
+        /// <param name="model">Model.</param>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
         public async Task<Response> Post<T>(
             string urlBase,
             string servicePrefix,
@@ -344,6 +396,17 @@
             }
         }
 
+        /// <summary>
+        /// Put the specified urlBase, servicePrefix, controller, tokenType, accessToken and model.
+        /// </summary>
+        /// <returns>The put.</returns>
+        /// <param name="urlBase">URL base.</param>
+        /// <param name="servicePrefix">Service prefix.</param>
+        /// <param name="controller">Controller.</param>
+        /// <param name="tokenType">Token type.</param>
+        /// <param name="accessToken">Access token.</param>
+        /// <param name="model">Model.</param>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
         public async Task<Response> Put<T>(
             string urlBase,
             string servicePrefix,
@@ -395,6 +458,17 @@
             }
         }
 
+        /// <summary>
+        /// Delete the specified urlBase, servicePrefix, controller, tokenType, accessToken and model.
+        /// </summary>
+        /// <returns>The delete.</returns>
+        /// <param name="urlBase">URL base.</param>
+        /// <param name="servicePrefix">Service prefix.</param>
+        /// <param name="controller">Controller.</param>
+        /// <param name="tokenType">Token type.</param>
+        /// <param name="accessToken">Access token.</param>
+        /// <param name="model">Model.</param>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
         public async Task<Response> Delete<T>(
             string urlBase,
             string servicePrefix,

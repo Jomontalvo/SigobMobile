@@ -22,4 +22,7 @@
     <Folder Include="Infrastructure\" />
     <Folder Include="Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="ViewModels\InstitutionsConnectViewModel.cs" />
+  </ItemGroup>
 </Project>
