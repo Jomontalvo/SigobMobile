@@ -61,5 +61,19 @@
         /// <value>The API service URL.</value>
         [JsonProperty(PropertyName = "URLServicio")]
         public string UrlApiService { get; set; }
+        /// <summary>
+        /// Gets the name sort.
+        /// </summary>
+        /// <value>The name sort.</value>
+        public string NameSort
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(ISOCountryCode) || ISOCountryCode.Length == 0)
+                    return "?";
+                return ISOCountryCode[0].ToString().ToUpper();
+            }
+        }
+
     }
 }

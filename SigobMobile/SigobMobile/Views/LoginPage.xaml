@@ -38,7 +38,7 @@
                     </Entry>
                     <!--<StackLayout.GestureRecognizers>
                         <TapGestureRecognizer
-                            Tapped="{Binding ListCountriesCall}"
+                            Tapped="{Binding InstitutiosConnect}"
                             NumberOfTapsRequired="1">
                         </TapGestureRecognizer>
                     </StackLayout.GestureRecognizers>-->

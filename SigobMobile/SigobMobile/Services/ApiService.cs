@@ -25,7 +25,7 @@
             }
 
             var isReachable = await CrossConnectivity.Current.IsRemoteReachable(
-                "microsoft.com");
+                "google.com");
             if (!isReachable)
             {
                 return new Response
