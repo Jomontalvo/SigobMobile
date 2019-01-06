@@ -20,7 +20,7 @@
                 return new Response
                 {
                     IsSuccess = false,
-                    Message = "Please turn on your phone internet settings.",
+                    Message = "Please turn on your internet settings.",
                 };
             }
 
@@ -306,10 +306,12 @@
                 var content = new StringContent(
                     request, Encoding.UTF8,
                     "application/json");
-                var client = new HttpClient();
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
                 client.DefaultRequestHeaders.Authorization =
                     new AuthenticationHeaderValue(tokenType, accessToken);
-                client.BaseAddress = new Uri(urlBase);
                 var url = string.Format("{0}{1}", servicePrefix, controller);
                 var response = await client.PostAsync(url, content);
                 var result = await response.Content.ReadAsStringAsync();
@@ -362,8 +364,10 @@
                     request,
                     Encoding.UTF8,
                     "application/json");
-                var client = new HttpClient();
-                client.BaseAddress = new Uri(urlBase);
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
                 var url = string.Format("{0}{1}", servicePrefix, controller);
                 var response = await client.PostAsync(url, content);
 
@@ -421,10 +425,13 @@
                 var content = new StringContent(
                     request,
                     Encoding.UTF8, "application/json");
-                var client = new HttpClient();
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
                 client.DefaultRequestHeaders.Authorization =
                     new AuthenticationHeaderValue(tokenType, accessToken);
-                client.BaseAddress = new Uri(urlBase);
+
                 var url = string.Format(
                     "{0}{1}/{2}",
                     servicePrefix,
@@ -479,8 +486,10 @@
         {
             try
             {
-                var client = new HttpClient();
-                client.BaseAddress = new Uri(urlBase);
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
                 client.DefaultRequestHeaders.Authorization =
                     new AuthenticationHeaderValue(tokenType, accessToken);
                 var url = string.Format(
