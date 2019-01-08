@@ -29,20 +29,21 @@
                     Placeholder="Password"
                     Text="{Binding Password, Mode=TwoWay}">
                 </Entry>
-                <StackLayout
-                    Margin="0,5">
+                <Frame
+                    Margin="0,5"
+                    BorderColor="Transparent"
+                    HasShadow="true">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding SelectApiCommnand}">
+                        </TapGestureRecognizer>
+                    </Frame.GestureRecognizers>                    
                     <Entry
                         IsEnabled="false"
                         Placeholder="Country - Institution"
                         Text="{Binding Institution, Mode=TwoWay}">
                     </Entry>
-                    <!--<StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Tapped="{Binding InstitutiosConnect}"
-                            NumberOfTapsRequired="1">
-                        </TapGestureRecognizer>
-                    </StackLayout.GestureRecognizers>-->
-                </StackLayout>
+                </Frame>
                 <ActivityIndicator 
                     IsRunning="{Binding IsRunning, Mode=TwoWay}">
                 </ActivityIndicator>

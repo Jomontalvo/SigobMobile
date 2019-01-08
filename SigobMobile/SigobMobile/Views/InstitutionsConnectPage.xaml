@@ -9,22 +9,35 @@
             BindingContext="{Binding InstitutionsConnect}"
             Padding="5">
             <ListView
+                x:Name="list"
+                GroupDisplayBinding="{Binding Key}"
                 HasUnevenRows="true"
+                IsGroupingEnabled="true"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
-                ItemsSource="{Binding Institutions}"
-                RefreshCommand="{Binding RefreshCommand}">
+                ItemsSource="{Binding InstitutionsGrouped}"
+                RefreshCommand="{Binding RefreshCommand}"
+                ItemTapped="OnItemTapped">
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="25">
+                            <StackLayout 
+                                VerticalOptions="FillAndExpand"
+                            Padding="5"
+                            BackgroundColor="#3498DB">
+                                <Label Text="{Binding Key}" 
+                                       TextColor="White" 
+                                       VerticalOptions="Center"/>
+                                </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                    </ListView.GroupHeaderTemplate>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                        <ViewCell>
-                            <StackLayout>
-                                <Label
-                                    Text="{Binding Institution}">
-                                </Label>
-                                <Label
-                                    Text="{Binding Country}">
-                                </Label>
-                            </StackLayout>
+                            <Label
+                                Text="{Binding Institution}">
+                            </Label>
                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

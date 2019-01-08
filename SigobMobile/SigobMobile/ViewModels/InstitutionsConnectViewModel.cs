@@ -9,6 +9,7 @@
     using Helpers;
     using Xamarin.Forms;
     using System.Linq;
+    using System;
 
     public class InstitutionsConnectViewModel : BaseViewModel
     {
@@ -18,6 +19,7 @@
 
         #region Attributes
         private ObservableCollection<InstitutionConnect> institutions;
+        private ObservableCollection<Grouping<string, InstitutionConnect>> institutionsGrouped;
 
         private bool isRefreshing;
         #endregion
@@ -31,8 +33,8 @@
 
         public ObservableCollection<Grouping<string, InstitutionConnect>> InstitutionsGrouped
         {
-            get;
-            set;
+            get { return this.institutionsGrouped; }
+            set { SetValue(ref this.institutionsGrouped, value); }
         }
 
         public bool IsRefreshing
@@ -86,11 +88,21 @@
             //Order by group Country
             var sorted = from institution in Institutions
                          orderby institution.Country
-                         group institution by institution.NameSort into institutionGroup
+                         group institution by institution.Country into institutionGroup
                          select new Grouping<string, InstitutionConnect>(institutionGroup.Key, institutionGroup);
 
             this.InstitutionsGrouped = new ObservableCollection<Grouping<string, InstitutionConnect>>(sorted);
             this.IsRefreshing = false;
+        }
+
+        private async void SelectItem()
+        {
+            await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "Selected item!",
+                    "Cancel");
+            //Back to login
+            return;
         }
         #endregion
 

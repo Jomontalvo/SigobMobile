@@ -1,5 +1,6 @@
 ﻿namespace SigobMobile.ViewModels
 {
+    using System;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using SigobMobile.Views;
@@ -81,12 +82,33 @@
             }
         }
 
+        public ICommand SelectApiCommand
+        {
+            get
+            {
+                return new RelayCommand(SelectApi);
+            }
+        }
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Selects the API related with Institution
+        /// </summary>
+        private void SelectApi()
+        {
+            MainViewModel.GetInstance().InstitutionsConnect = new InstitutionsConnectViewModel();
+            Application.Current.MainPage = new InstitutionsConnectPage();
+        }
+
+
         /// <summary>
         /// Login to Sigob System with user credentials (validate entries)
         /// </summary>
         private async void Login()
         {
-           if (string.IsNullOrEmpty(UserName))
+            if (string.IsNullOrEmpty(UserName))
             {
                 await Application.Current.MainPage.DisplayAlert(
                 title: "Error",
@@ -123,11 +145,7 @@
 
             //Initialize Institutions to Connect Page (View)
             //await Application.Current.MainPage.p = new InstitutionsConnectPage();
-
-            MainViewModel.GetInstance().InstitutionsConnect = new InstitutionsConnectViewModel();
-            Application.Current.MainPage = new InstitutionsConnectPage();
         }
-
         #endregion
     }
 }
