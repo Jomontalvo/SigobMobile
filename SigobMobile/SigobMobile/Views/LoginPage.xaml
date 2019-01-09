@@ -2,8 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="SigobMobile.Views.LoginPage" 
-             BindingContext="{Binding Main, Source={StaticResource Locator}}" 
-             Title="Login">
+             BindingContext="{Binding Main, Source={StaticResource Locator}}">
     <ContentPage.Content>
         <ScrollView
             BindingContext="{Binding Login}">
@@ -29,28 +28,30 @@
                     Placeholder="Password"
                     Text="{Binding Password, Mode=TwoWay}">
                 </Entry>
-                <Frame
+                <Label
                     Margin="0,5"
-                    BorderColor="Transparent"
-                    HasShadow="true">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding SelectApiCommnand}">
-                        </TapGestureRecognizer>
-                    </Frame.GestureRecognizers>                    
-                    <Entry
-                        IsEnabled="false"
-                        Placeholder="Country - Institution"
-                        Text="{Binding Institution, Mode=TwoWay}">
-                    </Entry>
-                </Frame>
+                    HorizontalOptions="StartAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                Text="{Binding Institution, Mode=TwoWay}"
+                                TextColor="Gray"
+                                TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding SelectApiCommand}" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
                 <ActivityIndicator 
                     IsRunning="{Binding IsRunning, Mode=TwoWay}">
                 </ActivityIndicator>
                 <StackLayout
                     VerticalOptions="StartAndExpand">
                     <Button 
-                        BackgroundColor="Navy"
+                        BackgroundColor="{StaticResource lightBlue}"
                         Command="{Binding LoginCommand}"
                         IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                         Text="Login" 

@@ -49,9 +49,9 @@
         }
 
         public object KeyLowerCases
-        { 
-            get; 
-            set; 
+        {
+            get;
+            set;
         }
         #endregion
 
@@ -65,7 +65,7 @@
             //Test data
             this.UserName = "isma";
             this.Password = "1234";
-            this.Institution = "Proyecto Regional";
+            this.Institution = "Select country and institution...";
         }
         #endregion
 
@@ -92,14 +92,19 @@
         #endregion
 
         #region Methods
-
         /// <summary>
         /// Selects the API related with Institution
         /// </summary>
-        private void SelectApi()
+        private async void SelectApi()
         {
-            MainViewModel.GetInstance().InstitutionsConnect = new InstitutionsConnectViewModel();
-            Application.Current.MainPage = new InstitutionsConnectPage();
+            ////Call without Navigate
+            //MainViewModel.GetInstance().InstitutionsConnect = new InstitutionsConnectViewModel();
+            //Application.Current.MainPage = new InstitutionsConnectPage();
+
+            //Instance new ViewModel before Navigate.
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.InstitutionsConnect = new InstitutionsConnectViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new InstitutionsConnectPage());
         }
 
 

@@ -87,6 +87,23 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\drawable\sigob_logo.png" />
     <AndroidResource Include="Resources\drawable\ods_logo.png" />
+    <AndroidResource Include="Resources\drawable\co.png" />
+    <AndroidResource Include="Resources\drawable\ar.png" />
+    <AndroidResource Include="Resources\drawable\bo.png" />
+    <AndroidResource Include="Resources\drawable\br.png" />
+    <AndroidResource Include="Resources\drawable\cf.png" />
+    <AndroidResource Include="Resources\drawable\cl.png" />
+    <AndroidResource Include="Resources\drawable\do.png" />
+    <AndroidResource Include="Resources\drawable\ec.png" />
+    <AndroidResource Include="Resources\drawable\ly.png" />
+    <AndroidResource Include="Resources\drawable\mx.png" />
+    <AndroidResource Include="Resources\drawable\pa.png" />
+    <AndroidResource Include="Resources\drawable\pe.png" />
+    <AndroidResource Include="Resources\drawable\sv.png" />
+    <AndroidResource Include="Resources\drawable\un.png" />
+    <AndroidResource Include="Resources\drawable\uy.png" />
+    <AndroidResource Include="Resources\drawable\ve.png" />
+    <AndroidResource Include="Resources\drawable\py.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />

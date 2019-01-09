@@ -20,7 +20,6 @@
         #region Attributes
         private ObservableCollection<InstitutionConnect> institutions;
         private ObservableCollection<Grouping<string, InstitutionConnect>> institutionsGrouped;
-
         private bool isRefreshing;
         #endregion
 
@@ -64,14 +63,14 @@
                     "Error",
                     connection.Message,
                     "Cancel");
-                //Back to Login
+                await Application.Current.MainPage.Navigation.PopAsync();
                 return;
             }
 
             var response = await this.apiService.GetList<InstitutionConnect>(
-                "https://sigob-movil.firebaseio.com",
-                "institutions", 
-                ".json"
+                App.UrlBaseCentral,
+                App.PrefixCentral, 
+                App.ControllerCentral
             );
             if (!response.IsSuccess)
             {
@@ -80,7 +79,7 @@
                     "Error",
                     response.Message,
                     "Cancel");
-                //Back to login
+                await Application.Current.MainPage.Navigation.PopAsync();
                 return;
             }
             var list = (List<InstitutionConnect>)response.Result;
@@ -88,7 +87,8 @@
             //Order by group Country
             var sorted = from institution in Institutions
                          orderby institution.Country
-                         group institution by institution.Country into institutionGroup
+                         group institution by $"{institution.NameSort}|{institution.Country}|{ institution.ISOCountryCode}"
+                         into institutionGroup
                          select new Grouping<string, InstitutionConnect>(institutionGroup.Key, institutionGroup);
 
             this.InstitutionsGrouped = new ObservableCollection<Grouping<string, InstitutionConnect>>(sorted);
@@ -101,7 +101,7 @@
                     "Error",
                     "Selected item!",
                     "Cancel");
-            //Back to login
+            await Application.Current.MainPage.Navigation.PopAsync();
             return;
         }
         #endregion
