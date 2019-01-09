@@ -2,19 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="SigobMobile.Views.LoginPage" 
-             BindingContext="{Binding Main, Source={StaticResource Locator}}">
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Login">
     <ContentPage.Content>
         <ScrollView
             BindingContext="{Binding Login}">
-            <StackLayout Padding="20,50,20,20">
+            <StackLayout Padding="20,40,20,20">
                 <Image WidthRequest="240" Source="sigob_logo">
                 </Image>
                 <Label 
                     VerticalOptions="CenterAndExpand" 
-                    FontAttributes="Bold" 
-                    FontSize="Large" 
+                    FontAttributes="None" 
+                    FontSize="Small" 
                     HorizontalOptions="CenterAndExpand" 
-                    Text="Login">
+                    Text="Enter your user credentials to access.">
                 </Label>
                 <Entry 
                     Keyboard="{Binding KeyLowerCases, Mode=Default}"
@@ -29,14 +30,14 @@
                     Text="{Binding Password, Mode=TwoWay}">
                 </Entry>
                 <Label
-                    Margin="0,5"
+                    Margin="0,5,0,0"
                     HorizontalOptions="StartAndExpand">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span
                                 Text="{Binding Institution, Mode=TwoWay}"
                                 TextColor="Gray"
-                                TextDecorations="Underline">
+                                TextDecorations="None">
                                 <Span.GestureRecognizers>
                                     <TapGestureRecognizer 
                                         Command="{Binding SelectApiCommand}" />
@@ -45,6 +46,11 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
+                <BoxView
+                    BackgroundColor="{StaticResource accesoryGray}"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand">
+                </BoxView>
                 <ActivityIndicator 
                     IsRunning="{Binding IsRunning, Mode=TwoWay}">
                 </ActivityIndicator>
@@ -55,7 +61,8 @@
                         Command="{Binding LoginCommand}"
                         IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                         Text="Login" 
-                        TextColor="White">
+                        TextColor="White"
+                        FontSize="Medium">
                     </Button>
                     <Label
                         Margin="0,5"

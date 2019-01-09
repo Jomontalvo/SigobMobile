@@ -18,19 +18,20 @@
         #endregion
 
         #region Attributes
-        private ObservableCollection<InstitutionConnect> institutions;
-        private ObservableCollection<Grouping<string, InstitutionConnect>> institutionsGrouped;
+        private ObservableCollection<InstitutionItemViewModel> institutions;
+        private ObservableCollection<Grouping<string, InstitutionItemViewModel>> institutionsGrouped;
         private bool isRefreshing;
+        private List<InstitutionConnect> institutionList;
         #endregion
 
         #region Properties
-        public ObservableCollection<InstitutionConnect> Institutions
+        public ObservableCollection<InstitutionItemViewModel> Institutions
         {
             get { return this.institutions; }
             set { SetValue(ref this.institutions, value); }
         }
 
-        public ObservableCollection<Grouping<string, InstitutionConnect>> InstitutionsGrouped
+        public ObservableCollection<Grouping<string, InstitutionItemViewModel>> InstitutionsGrouped
         {
             get { return this.institutionsGrouped; }
             set { SetValue(ref this.institutionsGrouped, value); }
@@ -82,27 +83,37 @@
                 await Application.Current.MainPage.Navigation.PopAsync();
                 return;
             }
-            var list = (List<InstitutionConnect>)response.Result;
-            this.Institutions = new ObservableCollection<InstitutionConnect>(list);
+            this.institutionList = (List<InstitutionConnect>)response.Result;
+            this.Institutions = new ObservableCollection<InstitutionItemViewModel>(
+                this.ToInstitutionItemViewModel());
             //Order by group Country
             var sorted = from institution in Institutions
                          orderby institution.Country
                          group institution by $"{institution.NameSort}|{institution.Country}|{ institution.ISOCountryCode}"
                          into institutionGroup
-                         select new Grouping<string, InstitutionConnect>(institutionGroup.Key, institutionGroup);
+                         select new Grouping<string, InstitutionItemViewModel>(institutionGroup.Key, institutionGroup);
 
-            this.InstitutionsGrouped = new ObservableCollection<Grouping<string, InstitutionConnect>>(sorted);
+            this.InstitutionsGrouped = new ObservableCollection<Grouping<string, InstitutionItemViewModel>>(sorted);
             this.IsRefreshing = false;
         }
 
-        private async void SelectItem()
+        /// <summary>
+        /// Convert List InsttitutionConnect Model to InstitutionItemView model.
+        /// </summary>
+        /// <returns>The institution item view mode.</returns>
+        private IEnumerable<InstitutionItemViewModel> ToInstitutionItemViewModel()
         {
-            await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "Selected item!",
-                    "Cancel");
-            await Application.Current.MainPage.Navigation.PopAsync();
-            return;
+            return this.institutionList.Select(l => new InstitutionItemViewModel
+            {
+                Country = l.Country,
+                EndDateValidity = l.EndDateValidity,
+                Id = l.Id,
+                ISOCountryCode = l.ISOCountryCode,
+                Institution = l.Institution,
+                SecurityLogin = l.SecurityLogin,
+                Status = l.Status,
+                UrlApiService = l.UrlApiService
+            });
         }
         #endregion
 

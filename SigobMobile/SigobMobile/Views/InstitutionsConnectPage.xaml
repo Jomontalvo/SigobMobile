@@ -44,6 +44,11 @@
                                 HasShadow="false"
                                 Margin="10,5"
                                 Padding="5,8">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command ="{Binding SelectInstitutionCommand}">
+                                    </TapGestureRecognizer>
+                                </Frame.GestureRecognizers>
                                 <Label
                                     HorizontalOptions="StartAndExpand"
                                     Text="{Binding Institution}"
