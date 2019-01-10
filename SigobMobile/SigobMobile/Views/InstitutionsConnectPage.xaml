@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SigobMobile.Views.InstitutionsConnectPage"
+             BackgroundColor="{StaticResource defaultBackgroundView}"
              BindingContext="{Binding Main, Source={StaticResource Locator}}" 
              Title="Institutions to connect">
     <ContentPage.Content>
@@ -10,7 +11,6 @@
             <ListView
                 x:Name="list"
                 GroupDisplayBinding="{Binding Key}"
-                HasUnevenRows="true"
                 IsGroupingEnabled="true"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"

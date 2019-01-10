@@ -7,7 +7,7 @@
     <ContentPage.Content>
         <ScrollView
             BindingContext="{Binding Login}">
-            <StackLayout Padding="20,40,20,20">
+            <StackLayout Padding="20,20,20,20">
                 <Image WidthRequest="240" Source="sigob_logo">
                 </Image>
                 <Label 
@@ -17,24 +17,51 @@
                     HorizontalOptions="CenterAndExpand" 
                     Text="Enter your user credentials to access.">
                 </Label>
-                <Entry 
+                <Entry
+                    FontSize="Default"
                     Keyboard="{Binding KeyLowerCases, Mode=Default}"
                     Margin="0,5" 
                     Placeholder="User"
                     Text="{Binding UserName, Mode=TwoWay}">
                 </Entry>
-                <Entry 
-                    IsPassword="true" 
-                    Margin="0,5" 
-                    Placeholder="Password"
-                    Text="{Binding Password, Mode=TwoWay}">
-                </Entry>
+                
+                <StackLayout Grid.Row="2" Grid.Column="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions >
+                        <Entry 
+                            Grid.Column="0" 
+                            Grid.ColumnSpan="2"
+                            IsPassword="{Binding IsPassword, Mode=TwoWay}"
+                            Margin="0,5"
+                            Placeholder="Password"
+                            Text="{Binding Password, Mode=TwoWay}"
+                            x:Name="Password"/>
+                        <Image 
+                            Grid.Column="1"
+                            HorizontalOptions="End"
+                            Margin="5,0"
+                            Source="{Binding IconViewPassword}" 
+                            VerticalOptions="Center"
+                            WidthRequest="24">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding ShowHidePasswordCommand}"
+                                    NumberOfTapsRequired="1"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </StackLayout>
                 <Label
-                    Margin="0,5,0,0"
-                    HorizontalOptions="StartAndExpand">
+                    HorizontalOptions="StartAndExpand"
+                    LineBreakMode="TailTruncation"
+                    Margin="0,5,0,0">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span
+                                FontSize="Default"
                                 Text="{Binding Institution, Mode=TwoWay}"
                                 TextColor="Gray"
                                 TextDecorations="None">

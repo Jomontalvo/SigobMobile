@@ -163,22 +163,24 @@
   <ItemGroup>
     <BundleResource Include="Resources\sigob_logo.png" />
     <BundleResource Include="Resources\ods_logo.png" />
-    <BundleResource Include="Resources\co.png" />
-    <BundleResource Include="Resources\ar.png" />
-    <BundleResource Include="Resources\bo.png" />
-    <BundleResource Include="Resources\br.png" />
-    <BundleResource Include="Resources\cf.png" />
-    <BundleResource Include="Resources\cl.png" />
-    <BundleResource Include="Resources\do.png" />
-    <BundleResource Include="Resources\ec.png" />
-    <BundleResource Include="Resources\ly.png" />
-    <BundleResource Include="Resources\mx.png" />
-    <BundleResource Include="Resources\pa.png" />
-    <BundleResource Include="Resources\pe.png" />
-    <BundleResource Include="Resources\sv.png" />
-    <BundleResource Include="Resources\un.png" />
-    <BundleResource Include="Resources\uy.png" />
-    <BundleResource Include="Resources\ve.png" />
-    <BundleResource Include="Resources\py.png" />
+    <BundleResource Include="Resources\ic_co.png" />
+    <BundleResource Include="Resources\ic_ar.png" />
+    <BundleResource Include="Resources\ic_bo.png" />
+    <BundleResource Include="Resources\ic_br.png" />
+    <BundleResource Include="Resources\ic_cf.png" />
+    <BundleResource Include="Resources\ic_cl.png" />
+    <BundleResource Include="Resources\ic_do.png" />
+    <BundleResource Include="Resources\ic_ec.png" />
+    <BundleResource Include="Resources\ic_ly.png" />
+    <BundleResource Include="Resources\ic_mx.png" />
+    <BundleResource Include="Resources\ic_pa.png" />
+    <BundleResource Include="Resources\ic_pe.png" />
+    <BundleResource Include="Resources\ic_sv.png" />
+    <BundleResource Include="Resources\ic_un.png" />
+    <BundleResource Include="Resources\ic_uy.png" />
+    <BundleResource Include="Resources\ic_ve.png" />
+    <BundleResource Include="Resources\ic_py.png" />
+    <BundleResource Include="Resources\ic_eye_closed.png" />
+    <BundleResource Include="Resources\ic_eye.png" />
   </ItemGroup>
 </Project>

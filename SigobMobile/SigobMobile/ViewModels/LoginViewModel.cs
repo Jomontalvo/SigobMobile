@@ -1,13 +1,16 @@
 ﻿namespace SigobMobile.ViewModels
 {
-    using System;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
-    using SigobMobile.Views;
+    using Services;
+    using Views;
     using Xamarin.Forms;
 
     public class LoginViewModel : BaseViewModel
     {
+        #region Services
+        internal ApiService apiService;
+        #endregion
 
         #region Attributes
         private string username;
@@ -15,6 +18,8 @@
         private string institution;
         private bool isRunning;
         private bool isEnabled;
+        private bool isPassword;
+        private string iconViewPassword;
         #endregion
 
         #region Properties
@@ -48,11 +53,25 @@
             set { SetValue(ref this.isEnabled, value); }
         }
 
+        public bool IsPassword
+        {
+            get { return this.isPassword; }
+            set { SetValue(ref this.isPassword, value); }
+        }
+
+        public string IconViewPassword
+        {
+            get { return this.iconViewPassword; }
+            set { SetValue(ref this.iconViewPassword, value); }
+        }
+
         public object KeyLowerCases
         {
             get;
             set;
         }
+
+
         #endregion
 
         #region Constructors
@@ -61,7 +80,9 @@
             //Initialize default values
             this.KeyLowerCases = Keyboard.Create(KeyboardFlags.None);
             //Enabled Login button
-            this.isEnabled = true;
+            this.IsEnabled = true;
+            this.IsPassword = true;
+            this.IconViewPassword = "ic_eye";
             //Test data
             this.UserName = "isma";
             this.Password = "1234";
@@ -82,6 +103,10 @@
             }
         }
 
+        /// <summary>
+        /// Gets the list to select Institution - API command.
+        /// </summary>
+        /// <value>The select API command.</value>
         public ICommand SelectApiCommand
         {
             get
@@ -89,9 +114,27 @@
                 return new RelayCommand(SelectApi);
             }
         }
+
+        public ICommand ShowHidePasswordCommand
+        { 
+            get
+            {
+                return new RelayCommand(ShowHidePassword);
+            }
+        }
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Shows or hide password characters in login
+        /// </summary>
+        private void ShowHidePassword()
+        {
+            IsPassword = !IsPassword;
+            IconViewPassword = (IsPassword) ? "ic_eye" : "ic_eye_closed";
+        }
+
         /// <summary>
         /// Selects the API related with Institution
         /// </summary>
@@ -141,9 +184,41 @@
             this.IsEnabled = false;
 
             //Connect using API
-            //Code to connect here!
-            //If sucessfuly then clean entries user / password / institution
+            this.apiService = new ApiService();
 
+            // 1. Verify connection
+            var connection = await this.apiService.CheckConnection();
+            if (!connection.IsSuccess)
+            {
+                this.IsRunning = false;
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    connection.Message,
+                    "Cancel");
+                return;
+            }
+
+            // 2. Get the security parameters for connection.
+            var response = await this.apiService.GetList<string[]>(
+                App.UrlBaseApiSigob,
+                App.PrefixApiSigob,
+                "security/parameters"
+            );
+            if (!response.IsSuccess)
+            {
+                this.IsRunning = false;
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    response.Message,
+                    "Cancel");
+                return;
+            }
+            var parameters = (string[])response.Result;
+            await Application.Current.MainPage.DisplayAlert(
+                "Ok",
+                response.Message,
+                "Cancel");
+            //If sucessfuly then clean entries user / password / institution
             this.IsRunning = false;
             this.IsEnabled = true;
             this.UserName = this.Password = this.Institution = string.Empty;
