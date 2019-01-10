@@ -53,6 +53,9 @@
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Loads the institutions (with Sigob API service) to connect.
+        /// </summary>
         private async void LoadInstitutionsToConnect()
         {
             this.IsRefreshing = true;

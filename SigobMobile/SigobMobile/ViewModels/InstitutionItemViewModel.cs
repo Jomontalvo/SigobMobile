@@ -1,6 +1,7 @@
 ﻿namespace SigobMobile.ViewModels
 {
     using System;
+    using System.Linq;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using SigobMobile.Models;
@@ -25,9 +26,9 @@
         /// </summary>
         private async void SelectInstitution()
         {
-            //Assign global variable Url API
-            App.UrlBaseApiSigob = this.UrlApiService;
-
+            //Assign API URL global variable 
+            App.UrlBaseApiSigob = 
+                (this.UrlApiService.TrimEnd().Last() != '/') ? $"{this.UrlApiService.TrimEnd()}/" : this.UrlApiService;
             //Come back to Login
             var login = MainViewModel.GetInstance().Login;
             login.Institution = $"{this.Institution} ({this.ISOCountryCode})";

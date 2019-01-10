@@ -368,7 +368,7 @@
                 {
                     BaseAddress = new Uri(urlBase)
                 };
-                var url = string.Format("{0}{1}", servicePrefix, controller);
+                var url = $"{servicePrefix}{controller}";
                 var response = await client.PostAsync(url, content);
 
                 if (!response.IsSuccessStatusCode)
@@ -387,6 +387,64 @@
                 {
                     IsSuccess = true,
                     Message = "Record added OK",
+                    Result = newRecord,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+            }
+        }
+
+        /// <summary>
+        /// Post the specified urlBase, servicePrefix, controller and model.
+        /// </summary>
+        /// <returns>The post.</returns>
+        /// <param name="urlBase">URL base.</param>
+        /// <param name="servicePrefix">Service prefix.</param>
+        /// <param name="controller">Controller.</param>
+        /// <param name="model">Model.</param>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
+        public async Task<Response> PostLogin<T>(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            T model)
+        {
+            try
+            {
+                var request = JsonConvert.SerializeObject(model);
+                var content = new StringContent(
+                    request,
+                    Encoding.UTF8,
+                    "application/json");
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+                var url = $"{servicePrefix}{controller}";
+                var response = await client.PostAsync(url, content);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = response.StatusCode.ToString(),
+                    };
+                }
+
+                var result = await response.Content.ReadAsStringAsync();
+                var newRecord = JsonConvert.DeserializeObject<SessionSigob>(result);
+
+                return new Response
+                {
+                    IsSuccess = true,
+                    Message = "Success login!",
                     Result = newRecord,
                 };
             }

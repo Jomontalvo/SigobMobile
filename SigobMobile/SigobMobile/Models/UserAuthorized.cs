@@ -71,7 +71,7 @@
         [JsonProperty(PropertyName = "pais1")]
         public string Country1 { get; set; }
 
-        [JsonProperty(PropertyName = "usuario")]
+        [JsonProperty(PropertyName = "pais2")]
         public string Country2 { get; set; }
 
         [JsonProperty(PropertyName = "pais3")]
@@ -127,39 +127,6 @@
 
         [JsonProperty(PropertyName = "passwordDB")]
         public string PasswordDataBase { get; set; }
-    }
-
-    /// <summary>
-    /// Active Session object model
-    /// </summary>
-    public class ActiveSession
-    {
-        [JsonProperty(PropertyName = "usuarioLogeado")]
-        public UserAuthorized LoggedUser { get; set; }
-
-        [JsonProperty(PropertyName = "intentos")]
-        public int Attemps { get; set; }
-
-        [JsonProperty(PropertyName = "errorCode")]
-        public int ErrorCode { get; set; }
-
-        [JsonProperty(PropertyName = "tieneCentroGestion")]
-        public int HasCG { get; set; }
-
-        [JsonProperty(PropertyName = "nombreEventoAgenda")]
-        public string EventName { get; set; }
-
-        [JsonProperty(PropertyName = "nombreCorrespondencia")]
-        public string CorrespondenceName { get; set; }
-
-        [JsonProperty(PropertyName = "authToken")]
-        public string AuthToken { get; set; }
-
-        [JsonProperty(PropertyName = "databaseToken")]
-        public string DatabaseToken { get; set; }
-
-        [JsonProperty(PropertyName = "logoInsitucion")]
-        public string InstitutionLogo { get; set; }
     }
 }
 

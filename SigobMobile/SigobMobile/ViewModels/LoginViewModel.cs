@@ -1,8 +1,11 @@
 ﻿namespace SigobMobile.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using Services;
+    using Models;
     using Views;
     using Xamarin.Forms;
 
@@ -156,6 +159,7 @@
         /// </summary>
         private async void Login()
         {
+            #region Exists values in login fields
             if (string.IsNullOrEmpty(UserName))
             {
                 await Application.Current.MainPage.DisplayAlert(
@@ -180,6 +184,9 @@
                 cancel: "Cancel");
                 return;
             }
+            #endregion
+
+            #region API - Get Security Parameters for login
             this.IsRunning = true;
             this.IsEnabled = false;
 
@@ -199,7 +206,7 @@
             }
 
             // 2. Get the security parameters for connection.
-            var response = await this.apiService.GetList<string[]>(
+            var response = await this.apiService.GetList<string>(
                 App.UrlBaseApiSigob,
                 App.PrefixApiSigob,
                 "security/parameters"
@@ -213,16 +220,65 @@
                     "Cancel");
                 return;
             }
-            var parameters = (string[])response.Result;
-            await Application.Current.MainPage.DisplayAlert(
-                "Ok",
-                response.Message,
-                "Cancel");
-            //If sucessfuly then clean entries user / password / institution
-            this.IsRunning = false;
-            this.IsEnabled = true;
-            this.UserName = this.Password = this.Institution = string.Empty;
+            #endregion
 
+            // 3. Call API Login
+            try
+            {
+                #region API - Post for Login and assign token
+                var parameters = (List<string>)response.Result;
+                var loginCredentials =
+                new LoginCredentials()
+                {
+                    Attemps = 1,
+                    Ip = parameters[1],
+                    Password = this.Password,
+                    UserAgent = parameters[0],
+                    UserName = this.UserName,
+                };
+                response = await this.apiService.PostLogin<LoginCredentials>(
+                    App.UrlBaseApiSigob,
+                    App.PrefixApiSigob,
+                    "user/login",
+                    loginCredentials);
+                if (!response.IsSuccess)
+                {
+                    this.IsRunning = false;
+                    await Application.Current.MainPage.DisplayAlert(
+                        "Error",
+                        response.Message,
+                        "Cancel");
+                    return;
+                }
+                //Get Session, Token and DbToken for logged user.
+                var sucessLogin = (SessionSigob)response.Result;
+                App.ActiveSession = sucessLogin;
+                // Headers values to all API secured calls
+                App.AuthToken = sucessLogin.AuthToken;
+                App.DataBaseToken = sucessLogin.DatabaseToken;
+                #endregion
+
+                #region Navigate to SIGOB Main Page
+                await Application.Current.MainPage.DisplayAlert(
+                   "Ok",
+                   response.Message,
+                   "Accept");
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                      "Error",
+                      ex.Message,
+                      "Cancel");
+            }
+            finally
+            {
+                //If sucessfuly then clean entries user / password
+                this.IsRunning = false;
+                this.IsEnabled = true;
+                this.UserName = this.Password = string.Empty;
+            }
             //Initialize Institutions to Connect Page (View)
             //await Application.Current.MainPage.p = new InstitutionsConnectPage();
         }
