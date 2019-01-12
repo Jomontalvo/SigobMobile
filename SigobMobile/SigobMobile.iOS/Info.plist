@@ -35,5 +35,14 @@
 	<string>org.sigob.mobile</string>
 	<key>CFBundleShortVersionString</key>
 	<string>2.0</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>es</string>
+		<string>pt</string>
+		<string>fr</string>
+		<string>ar</string>
+	</array>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
 </dict>
 </plist>

@@ -8,6 +8,7 @@
     using Models;
     using Views;
     using Xamarin.Forms;
+    using Helpers;
 
     public class LoginViewModel : BaseViewModel
     {
@@ -163,25 +164,25 @@
             if (string.IsNullOrEmpty(UserName))
             {
                 await Application.Current.MainPage.DisplayAlert(
-                title: "Error",
+                title: Languages.Error,
                 message: "Enter your username",
-                cancel: "Cancel");
+                cancel: Languages.Cancel);
                 return;
             }
             if (string.IsNullOrEmpty(Password))
             {
                 await Application.Current.MainPage.DisplayAlert(
-                title: "Error",
+                title: Languages.Error,
                 message: "Enter your password",
-                cancel: "Cancel");
+                cancel: Languages.Cancel);
                 return;
             }
             if (string.IsNullOrEmpty(Institution))
             {
                 await Application.Current.MainPage.DisplayAlert(
-                title: "Error",
+                title: Languages.Error,
                 message: "Select a Country and Institution",
-                cancel: "Cancel");
+                cancel: Languages.Cancel);
                 return;
             }
             #endregion
@@ -199,9 +200,9 @@
             {
                 this.IsRunning = false;
                 await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    connection.Message,
-                    "Cancel");
+                    title: Languages.Error,
+                    message: connection.Message,
+                    cancel: Languages.Cancel);
                 return;
             }
 
@@ -215,9 +216,9 @@
             {
                 this.IsRunning = false;
                 await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    response.Message,
-                    "Cancel");
+                    title: Languages.Error,
+                    message: response.Message,
+                    cancel: "Cancel");
                 return;
             }
             #endregion
@@ -245,9 +246,9 @@
                 {
                     this.IsRunning = false;
                     await Application.Current.MainPage.DisplayAlert(
-                        "Error",
-                        response.Message,
-                        "Cancel");
+                        title: Languages.Error,
+                        message: response.Message,
+                        cancel: Languages.Cancel);
                     return;
                 }
                 //Get Session Model, Token and DbToken for logged user.
@@ -260,17 +261,17 @@
 
                 #region Navigate to SIGOB Main Page
                 await Application.Current.MainPage.DisplayAlert(
-                   "Ok",
-                   response.Message,
-                   "Accept");
+                   title: Languages.Ok,
+                   message: response.Message,
+                   cancel: Languages.Ok);
                 #endregion
             }
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert(
-                      "Error",
-                      ex.Message,
-                      "Cancel");
+                      title: Languages.Error,
+                      message: ex.Message,
+                      cancel: Languages.Cancel);
             }
             finally
             {

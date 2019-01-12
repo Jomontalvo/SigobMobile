@@ -88,6 +88,12 @@ namespace SigobMobile
             get;
             set;
         }
+
+        public string LanguageError
+        {
+            get;
+            set;
+        }
         #endregion
 
         #endregion
