@@ -22,6 +22,8 @@
     <Folder Include="Infrastructure\" />
     <Folder Include="Services\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="MainPage.xaml.cs" />

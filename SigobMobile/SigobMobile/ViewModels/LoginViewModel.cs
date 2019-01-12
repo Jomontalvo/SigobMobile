@@ -250,7 +250,7 @@
                         "Cancel");
                     return;
                 }
-                //Get Session, Token and DbToken for logged user.
+                //Get Session Model, Token and DbToken for logged user.
                 var sucessLogin = (SessionSigob)response.Result;
                 App.ActiveSession = sucessLogin;
                 // Headers values to all API secured calls
