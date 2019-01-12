@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lang="clr-namespace:SigobMobile.Helpers;assembly=SigobMobile"
              x:Class="SigobMobile.Views.LoginPage" 
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             Title="Login">
+             Title="{lang:Translate LoginViewTitle}">
     <ContentPage.Content>
         <ScrollView
             BindingContext="{Binding Login}">
@@ -15,13 +16,13 @@
                     FontAttributes="None" 
                     FontSize="Small" 
                     HorizontalOptions="CenterAndExpand" 
-                    Text="Enter your user credentials to access.">
+                    Text="{lang:Translate EnterCredentials}">
                 </Label>
                 <Entry
                     FontSize="Default"
                     Keyboard="{Binding KeyLowerCases, Mode=Default}"
                     Margin="0,5" 
-                    Placeholder="User"
+                    Placeholder="{lang:Translate Username}"
                     Text="{Binding UserName, Mode=TwoWay}">
                 </Entry>
                 
@@ -31,21 +32,25 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions >
-                        <Entry 
+                        <Entry
+                            Focused ="Handle_Focused"
                             Grid.Column="0" 
                             Grid.ColumnSpan="2"
                             IsPassword="{Binding IsPassword, Mode=TwoWay}"
                             Margin="0,5"
-                            Placeholder="Password"
+                            Placeholder="{lang:Translate Password}"
                             Text="{Binding Password, Mode=TwoWay}"
-                            x:Name="Password"/>
+                            x:Name="Password">
+                        </Entry>
                         <Image 
                             Grid.Column="1"
                             HorizontalOptions="End"
+                            IsVisible="{Binding IsVisibleIconViewPassword, Mode=TwoWay}"
                             Margin="5,0"
                             Source="{Binding IconViewPassword}" 
                             VerticalOptions="Center"
-                            WidthRequest="24">
+                            WidthRequest="24"
+                            x:Name="IconViewPassword" >
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer
                                     Command="{Binding ShowHidePasswordCommand}"
@@ -87,14 +92,14 @@
                         BackgroundColor="{StaticResource lightBlue}"
                         Command="{Binding LoginCommand}"
                         IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
-                        Text="Login" 
+                        Text="{lang:Translate Login}" 
                         TextColor="White"
                         FontSize="Medium">
                     </Button>
                     <Label
                         Margin="0,5"
                         HorizontalOptions="Center" 
-                        Text="Forgot your password?">
+                        Text="{lang:Translate ForgotPassword}">
                     </Label>
                 </StackLayout>
                 <Image 

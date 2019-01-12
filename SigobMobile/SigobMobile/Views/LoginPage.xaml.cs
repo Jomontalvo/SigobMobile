@@ -11,5 +11,10 @@ namespace SigobMobile.Views
         {
             InitializeComponent();
         }
+
+        void Handle_Focused(object sender, Xamarin.Forms.FocusEventArgs e)
+        {
+            IconViewPassword.IsVisible = e.IsFocused;
+        }
     }
 }

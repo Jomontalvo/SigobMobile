@@ -24,6 +24,7 @@
         private bool isEnabled;
         private bool isPassword;
         private string iconViewPassword;
+        private bool isVisibleIconViewPassword;
         #endregion
 
         #region Properties
@@ -69,6 +70,12 @@
             set { SetValue(ref this.iconViewPassword, value); }
         }
 
+        public bool IsVisibleIconViewPassword
+        {
+            get { return this.isVisibleIconViewPassword; }
+            set { SetValue(ref this.isVisibleIconViewPassword, value); }
+        }
+
         public object KeyLowerCases
         {
             get;
@@ -88,9 +95,9 @@
             this.IsPassword = true;
             this.IconViewPassword = "ic_eye";
             //Test data
-            this.UserName = "isma";
-            this.Password = "1234";
-            this.Institution = "Select country and institution...";
+            //this.UserName = "isma";
+            //this.Password = "1234";
+            this.Institution = Languages.SelectApiInstitution;
         }
         #endregion
 
@@ -165,7 +172,7 @@
             {
                 await Application.Current.MainPage.DisplayAlert(
                 title: Languages.Error,
-                message: "Enter your username",
+                message: Languages.UserValidationMsg,
                 cancel: Languages.Cancel);
                 return;
             }
@@ -173,15 +180,15 @@
             {
                 await Application.Current.MainPage.DisplayAlert(
                 title: Languages.Error,
-                message: "Enter your password",
+                message: Languages.PasswordValidationMsg,
                 cancel: Languages.Cancel);
                 return;
             }
-            if (string.IsNullOrEmpty(Institution))
+            if (string.IsNullOrEmpty(Institution) || Institution==Languages.SelectApiInstitution)
             {
                 await Application.Current.MainPage.DisplayAlert(
                 title: Languages.Error,
-                message: "Select a Country and Institution",
+                message: Languages.SelectApiInstitution,
                 cancel: Languages.Cancel);
                 return;
             }
@@ -218,7 +225,7 @@
                 await Application.Current.MainPage.DisplayAlert(
                     title: Languages.Error,
                     message: response.Message,
-                    cancel: "Cancel");
+                    cancel: Languages.Cancel);
                 return;
             }
             #endregion
@@ -245,9 +252,10 @@
                 if (!response.IsSuccess)
                 {
                     this.IsRunning = false;
+                    this.IsEnabled = true;
                     await Application.Current.MainPage.DisplayAlert(
                         title: Languages.Error,
-                        message: response.Message,
+                        message: Languages.InvalidCredentials,
                         cancel: Languages.Cancel);
                     return;
                 }
@@ -261,7 +269,7 @@
 
                 #region Navigate to SIGOB Main Page
                 await Application.Current.MainPage.DisplayAlert(
-                   title: Languages.Ok,
+                   title: Languages.Success,
                    message: response.Message,
                    cancel: Languages.Ok);
                 #endregion

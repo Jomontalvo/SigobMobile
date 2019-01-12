@@ -150,7 +150,7 @@
     <comment>Message request user credentials for login</comment>
   </data>
   <data name="Username" xml:space="preserve">
-    <value>User</value>
+    <value>Username</value>
     <comment>Username placeholder</comment>
   </data>
   <data name="Password" xml:space="preserve">
@@ -184,5 +184,9 @@
   <data name="InvalidCredentials" xml:space="preserve">
     <value>Invalid user or password</value>
     <comment>Message when the user and password are invalid.</comment>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+    <comment>Successfuly operation</comment>
   </data>
 </root>

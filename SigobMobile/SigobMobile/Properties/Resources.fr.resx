@@ -168,4 +168,7 @@
   <data name="InvalidCredentials" xml:space="preserve">
     <value>Nom d'utilisateur ou mot de passe incorrect</value>
   </data>
+  <data name="Success" xml:space="preserve">
+    <value>Opération réussie</value>
+  </data>
 </root>

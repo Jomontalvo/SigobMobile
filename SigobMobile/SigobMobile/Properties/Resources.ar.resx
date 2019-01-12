@@ -148,7 +148,7 @@
     <value>كلمة المرور</value>
   </data>
   <data name="SelectApiInstitution" xml:space="preserve">
-    <value>اختر الدولة والمؤسسات ...!</value>
+    <value>اختر الدولة والمؤسسات ...</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>تسجيل الدخول</value>
@@ -167,5 +167,8 @@
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
     <value>اسم المستخدم غير صحيح أو كلمة المرور غير صحيحة.</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>kkk</value>
   </data>
 </root>

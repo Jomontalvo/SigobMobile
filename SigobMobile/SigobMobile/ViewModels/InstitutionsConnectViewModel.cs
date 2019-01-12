@@ -64,9 +64,9 @@
             {
                 this.IsRefreshing = false;
                 await Application.Current.MainPage.DisplayAlert(
-                    "Error",
+                    Languages.Error,
                     connection.Message,
-                    "Cancel");
+                    Languages.Cancel);
                 await Application.Current.MainPage.Navigation.PopAsync();
                 return;
             }
@@ -80,9 +80,9 @@
             {
                 this.IsRefreshing = false;
                 await Application.Current.MainPage.DisplayAlert(
-                    "Error",
+                    Languages.Error,
                     response.Message,
-                    "Cancel");
+                    Languages.Cancel);
                 await Application.Current.MainPage.Navigation.PopAsync();
                 return;
             }

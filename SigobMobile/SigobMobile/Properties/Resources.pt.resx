@@ -139,7 +139,7 @@
     <value>Esqueceu sua senha?</value>
   </data>
   <data name="EnterCredentials" xml:space="preserve">
-    <value>Introduza as suas credenciais para conceder acesso.</value>
+    <value>Introduza as suas credenciais.</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Usuário</value>
@@ -167,5 +167,8 @@
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
     <value>Utilizador ou palavra-passe incorretos</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Sucesso</value>
   </data>
 </root>

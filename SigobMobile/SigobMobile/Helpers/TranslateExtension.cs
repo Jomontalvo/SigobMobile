@@ -12,7 +12,7 @@
     public class TranslateExtension : IMarkupExtension
     {
         readonly CultureInfo ci;
-        const string ResourceId = "SigobMobile.Resources.Resources";
+        const string ResourceId = "SigobMobile.Properties.Resources";
 
         static readonly Lazy<ResourceManager> ResMgr =
             new Lazy<ResourceManager>(() => new ResourceManager(
@@ -39,8 +39,7 @@
             {
 #if DEBUG
                 throw new ArgumentException(
-                    message: $"Key '{Text}' was not found in resources '{ResourceId}' for culture '{ci.Name}'.",
-                    paramName: nameof(Text));
+                    $"Key '{Text}' was not found in resources '{ResourceId}' for culture '{ci.Name}'.", nameof(Text));
 #else
                 translation = Text; // returns the key, which GETS DISPLAYED TO THE USER
 #endif

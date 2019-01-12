@@ -79,6 +79,15 @@ namespace SigobMobile.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Enter your user credentials to access..
+        /// </summary>
+        public static string EnterCredentials {
+            get {
+                return ResourceManager.GetString("EnterCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error.
         /// </summary>
         public static string Error {
@@ -97,6 +106,42 @@ namespace SigobMobile.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Institutions to connect.
+        /// </summary>
+        public static string InstitutionsConnect {
+            get {
+                return ResourceManager.GetString("InstitutionsConnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invalid user or password.
+        /// </summary>
+        public static string InvalidCredentials {
+            get {
+                return ResourceManager.GetString("InvalidCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Login.
+        /// </summary>
+        public static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Login.
+        /// </summary>
+        public static string LoginViewTitle {
+            get {
+                return ResourceManager.GetString("LoginViewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No.
         /// </summary>
         public static string No {
@@ -111,6 +156,60 @@ namespace SigobMobile.Properties {
         public static string Ok {
             get {
                 return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Password.
+        /// </summary>
+        public static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Enter a password!.
+        /// </summary>
+        public static string PasswordValidationMsg {
+            get {
+                return ResourceManager.GetString("PasswordValidationMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Select country and institution....
+        /// </summary>
+        public static string SelectApiInstitution {
+            get {
+                return ResourceManager.GetString("SelectApiInstitution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Success.
+        /// </summary>
+        public static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Username.
+        /// </summary>
+        public static string Username {
+            get {
+                return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Enter a username!.
+        /// </summary>
+        public static string UserValidationMsg {
+            get {
+                return ResourceManager.GetString("UserValidationMsg", resourceCulture);
             }
         }
         

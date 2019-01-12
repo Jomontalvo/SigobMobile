@@ -17,7 +17,7 @@ namespace SigobMobile.iOS.Implementations
             if (NSLocale.PreferredLanguages.Length > 0)
             {
                 var pref = NSLocale.PreferredLanguages[0];
-                netLanguage = IOSToDotnetLanguage(pref);
+                netLanguage = iOSToDotnetLanguage(pref);
             }
             // this gets called a lot - try/catch can be expensive so consider caching or something
             CultureInfo ci = null;
@@ -27,7 +27,7 @@ namespace SigobMobile.iOS.Implementations
             }
             catch (CultureNotFoundException e1)
             {
-                Debug.WriteLine(e1.Message);
+                //Debug.WriteLine(e1.Message);
                 // iOS locale not valid .NET culture (eg. "en-ES" : English in Spain)
                 // fallback to first characters, in this case "en"
                 try
@@ -39,7 +39,7 @@ namespace SigobMobile.iOS.Implementations
                 {
                     // iOS language not valid .NET culture, falling back to English
                     ci = new CultureInfo("en");
-                    Debug.WriteLine(e2.Message);
+                    //Debug.WriteLine(e2.Message);
                 }
             }
             return ci;
@@ -51,7 +51,7 @@ namespace SigobMobile.iOS.Implementations
             Thread.CurrentThread.CurrentUICulture = ci;
         }
 
-        string IOSToDotnetLanguage(string iOSLanguage)
+        string iOSToDotnetLanguage(string iOSLanguage)
         {
             var netLanguage = iOSLanguage;
             //certain languages need to be converted to CultureInfo equivalent

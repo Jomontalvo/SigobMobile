@@ -24,11 +24,25 @@
         public static string Ok { get { return Resources.Ok; } }
         public static string Yes { get { return Resources.Yes; } }
         public static string No { get { return Resources.No; } }
+        public static string Success { get { return Resources.Success; } }
         #endregion
 
         #region Login View
+        public static string LoginViewTitle { get { return Resources.LoginViewTitle; } }
+        public static string EnterCredentials { get { return Resources.EnterCredentials ; } }
+        public static string Username { get { return Resources.Username; } }
+        public static string Password { get { return Resources.Password; } }
+        public static string SelectApiInstitution { get { return Resources.SelectApiInstitution; } }
+        public static string Login { get { return Resources.Login; } }
         public static string ForgotPassword { get { return Resources.ForgotPassword; } }
-        public static string ForgotPassword { get { return Resources. ; } }
+        //Messages
+        public static string InvalidCredentials { get { return Resources.InvalidCredentials; } }
+        public static string UserValidationMsg { get { return Resources.UserValidationMsg; } }
+        public static string PasswordValidationMsg { get { return Resources.PasswordValidationMsg; } }
+        #endregion
+
+        #region Institutions to connect view
+        public static string InstitutionsConnect { get { return Resources.InstitutionsConnect; } }
         #endregion
 
         #endregion

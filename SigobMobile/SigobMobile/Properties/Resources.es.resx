@@ -160,12 +160,15 @@
     <value>Ingrese sus credenciales de usuario</value>
   </data>
   <data name="UserValidationMsg" xml:space="preserve">
-    <value>Ingrese un nombre de usuario!</value>
+    <value>Ingrese un nombre de usuario</value>
   </data>
   <data name="PasswordValidationMsg" xml:space="preserve">
     <value>Ingrese una contraseña</value>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
     <value>Credenciales de ingreso inválidas</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Operación exitosa</value>
   </data>
 </root>
