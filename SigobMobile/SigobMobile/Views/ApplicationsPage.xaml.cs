@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace SigobMobile.Views
 {
-    public partial class MainMenuPage : ContentPage
+    public partial class ApplicationsPage : ContentPage
     {
-        public MainMenuPage()
+        public ApplicationsPage()
         {
             InitializeComponent();
         }

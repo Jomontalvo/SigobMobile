@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="SigobMobile.Views.SecurityPage"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Security">
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding Security}">
+            <Label Text="{Binding SecurityLabel,Mode=TwoWay}"
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="CenterAndExpand">
+            </Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

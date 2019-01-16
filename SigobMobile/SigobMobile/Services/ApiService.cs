@@ -239,8 +239,8 @@
             string urlBase,
             string servicePrefix,
             string controller,
-            string token,
-            string authToken)
+            string authToken,
+            string authDbToken)
         {
             try
             {
@@ -248,8 +248,10 @@
                 {
                     BaseAddress = new Uri(urlBase)
                 };
-                client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue(token, authToken);
+                client.DefaultRequestHeaders.Add("token", authToken);
+                client.DefaultRequestHeaders.Add("dbtoken", authDbToken);
+                //client.DefaultRequestHeaders.Authorization. =
+                    //new AuthenticationHeaderValue("dbtoken", dbToken);
                 var url = $"{servicePrefix}{controller}";
                 var response = await client.GetAsync(url);
                 var result = await response.Content.ReadAsStringAsync();

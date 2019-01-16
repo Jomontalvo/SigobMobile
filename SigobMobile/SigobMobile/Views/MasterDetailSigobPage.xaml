@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms" 
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                  xmlns:views="clr-namespace:SigobMobile.Views"
+                  x:Class="SigobMobile.Views.MasterDetailSigobPage"
+                  xmlns:lang="clr-namespace:SigobMobile.Helpers;assembly=SigobMobile" 
+                  BindingContext="{Binding Main, Source={StaticResource Locator}}"
+                  MasterBehavior="Popover"
+                  Title="{lang:Translate MasterPageTitle}">
+    <MasterDetailPage.Master>
+        <views:MenuPage />
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <NavigationPage>
+            <x:Arguments>
+                <views:ApplicationsPage />
+            </x:Arguments>
+        </NavigationPage>
+    </MasterDetailPage.Detail>
+</MasterDetailPage>

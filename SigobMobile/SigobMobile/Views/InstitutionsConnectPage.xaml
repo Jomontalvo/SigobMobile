@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:lang="clr-namespace:SigobMobile.Helpers;assembly=SigobMobile"
              x:Class="SigobMobile.Views.InstitutionsConnectPage"
+             xmlns:lang="clr-namespace:SigobMobile.Helpers;assembly=SigobMobile"
              BackgroundColor="{StaticResource defaultBackgroundView}"
              BindingContext="{Binding Main, Source={StaticResource Locator}}" 
              Title="{lang:Translate InstitutionsConnect}">

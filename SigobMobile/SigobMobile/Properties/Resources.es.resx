@@ -145,7 +145,7 @@
     <value>Contraseña</value>
   </data>
   <data name="SelectApiInstitution" xml:space="preserve">
-    <value>Selecciones la institución...</value>
+    <value>Seleccione la institución...</value>
   </data>
   <data name="LoginViewTitle" xml:space="preserve">
     <value>Inicio de sesión</value>

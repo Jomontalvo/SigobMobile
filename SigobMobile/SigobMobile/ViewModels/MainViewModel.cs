@@ -9,17 +9,18 @@ namespace SigobMobile.ViewModels
     public class MainViewModel
     {
         #region ViewModels
-        public LoginViewModel Login
-        {
-            get;
-            set;
-        }
+        public LoginViewModel Login { get; set; }
 
-        public InstitutionsConnectViewModel InstitutionsConnect 
-        { 
-            get; 
-            set; 
-        }
+        public InstitutionsConnectViewModel InstitutionsConnect { get; set; }
+
+        public MasterDetailSigobViewModel MasterDetailSigob { get; set; }
+
+        public ApplicationsViewModel Applications { get; set; }
+
+        public MenuViewModel Menu { get; set; }
+
+        public SecurityViewModel Security { get; set; }
+
         #endregion
 
         #region Constructors

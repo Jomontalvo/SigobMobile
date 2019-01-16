@@ -1,10 +1,9 @@
 ﻿namespace SigobMobile.ViewModels
 {
-    using System;
     using System.Linq;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
-    using SigobMobile.Models;
+    using Models;
     using Xamarin.Forms;
 
     /// <summary>

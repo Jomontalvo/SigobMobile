@@ -189,4 +189,8 @@
     <value>Success</value>
     <comment>Successfuly operation</comment>
   </data>
+  <data name="MasterPageTitle" xml:space="preserve">
+    <value>Menu Options</value>
+    <comment>Left menu page title (visible depending platform) </comment>
+  </data>
 </root>

@@ -27,7 +27,7 @@ namespace SigobMobile.iOS.Implementations
             }
             catch (CultureNotFoundException e1)
             {
-                //Debug.WriteLine(e1.Message);
+                Debug.WriteLine(e1.Message);
                 // iOS locale not valid .NET culture (eg. "en-ES" : English in Spain)
                 // fallback to first characters, in this case "en"
                 try
@@ -39,7 +39,7 @@ namespace SigobMobile.iOS.Implementations
                 {
                     // iOS language not valid .NET culture, falling back to English
                     ci = new CultureInfo("en");
-                    //Debug.WriteLine(e2.Message);
+                    Debug.WriteLine(e2.Message);
                 }
             }
             return ci;

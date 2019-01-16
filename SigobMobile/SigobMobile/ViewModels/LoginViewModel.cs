@@ -93,7 +93,7 @@
             //Enabled Login button
             this.IsEnabled = true;
             this.IsPassword = true;
-            this.IconViewPassword = "ic_eye";
+            this.IconViewPassword = "ic_eye_closed";
             //Test data
             //this.UserName = "isma";
             //this.Password = "1234";
@@ -143,7 +143,7 @@
         private void ShowHidePassword()
         {
             IsPassword = !IsPassword;
-            IconViewPassword = (IsPassword) ? "ic_eye" : "ic_eye_closed";
+            IconViewPassword = (!IsPassword) ? "ic_eye" : "ic_eye_closed";
         }
 
         /// <summary>
@@ -268,10 +268,8 @@
                 #endregion
 
                 #region Navigate to SIGOB Main Page
-                await Application.Current.MainPage.DisplayAlert(
-                   title: Languages.Success,
-                   message: response.Message,
-                   cancel: Languages.Ok);
+                MainViewModel.GetInstance().MasterDetailSigob = new MasterDetailSigobViewModel();
+                Application.Current.MainPage = new MasterDetailSigobPage();
                 #endregion
             }
             catch (Exception ex)
