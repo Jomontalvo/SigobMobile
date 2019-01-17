@@ -183,7 +183,9 @@
     <BundleResource Include="Resources\ic_py.png" />
     <BundleResource Include="Resources\ic_eye_closed.png" />
     <BundleResource Include="Resources\ic_eye.png" />
-    <BundleResource Include="Resources\ic_hamburguer.png" />
+    <BundleResource Include="Resources\ic_menu.png" />
+    <BundleResource Include="Resources\ic_menu%402x.png" />
+    <BundleResource Include="Resources\ic_menu%403x.png" />
   </ItemGroup>
   <ItemGroup />
 </Project>

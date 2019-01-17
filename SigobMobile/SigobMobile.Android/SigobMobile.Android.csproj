@@ -115,11 +115,11 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_eye.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_eye.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_eye.png" />
-    <AndroidResource Include="Resources\drawable\ic_hamburguer.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\ic_hamburguer.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\ic_hamburguer.png" />
     <AndroidResource Include="Resources\mipmap-xxhdpi\ic_hamburguer.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_hamburguer.png" />
+    <AndroidResource Include="Resources\drawable\ic_menu.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_menu.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_menu.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

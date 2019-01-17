@@ -2520,28 +2520,28 @@ namespace SigobMobile.Droid
 			public const int ic_group_expand_15 = 2130837640;
 			
 			// aapt resource value: 0x7f020089
-			public const int ic_hamburguer = 2130837641;
+			public const int ic_ly = 2130837641;
 			
 			// aapt resource value: 0x7f02008a
-			public const int ic_ly = 2130837642;
+			public const int ic_media_pause_dark = 2130837642;
 			
 			// aapt resource value: 0x7f02008b
-			public const int ic_media_pause_dark = 2130837643;
+			public const int ic_media_pause_light = 2130837643;
 			
 			// aapt resource value: 0x7f02008c
-			public const int ic_media_pause_light = 2130837644;
+			public const int ic_media_play_dark = 2130837644;
 			
 			// aapt resource value: 0x7f02008d
-			public const int ic_media_play_dark = 2130837645;
+			public const int ic_media_play_light = 2130837645;
 			
 			// aapt resource value: 0x7f02008e
-			public const int ic_media_play_light = 2130837646;
+			public const int ic_media_stop_dark = 2130837646;
 			
 			// aapt resource value: 0x7f02008f
-			public const int ic_media_stop_dark = 2130837647;
+			public const int ic_media_stop_light = 2130837647;
 			
 			// aapt resource value: 0x7f020090
-			public const int ic_media_stop_light = 2130837648;
+			public const int ic_menu = 2130837648;
 			
 			// aapt resource value: 0x7f020091
 			public const int ic_mr_button_connected_00_dark = 2130837649;

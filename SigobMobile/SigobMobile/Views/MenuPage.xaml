@@ -6,7 +6,7 @@
              BackgroundColor="{StaticResource defaultBackgroundView}"
              BindingContext="{Binding Main, Source={StaticResource Locator}}" 
              Title="{lang:Translate Ok}"
-             Icon="ic_hamburguer">
+             Icon="ic_menu">
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Menu}"

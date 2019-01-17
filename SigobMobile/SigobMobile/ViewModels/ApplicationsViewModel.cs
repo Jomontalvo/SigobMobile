@@ -7,6 +7,8 @@
     using System.Collections.ObjectModel;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Windows.Input;
+    using GalaSoft.MvvmLight.Command;
 
     public class ApplicationsViewModel : BaseViewModel
     {
@@ -96,6 +98,16 @@
                 Message_2 = l.Message_2,
                 NewItems = l.NewItems
             });
+        }
+        #endregion
+
+        #region Commands
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return new RelayCommand(LoadApplicationsMenu);
+            }
         }
         #endregion
     }

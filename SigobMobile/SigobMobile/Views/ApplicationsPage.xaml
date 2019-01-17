@@ -25,6 +25,9 @@
                                         Command ="{Binding SelectedApplicationCommand}">
                                     </TapGestureRecognizer>
                                 </Frame.GestureRecognizers>
+                                <Grid>
+                                    
+                                </Grid>
                                 <Label
                                     HorizontalOptions="StartAndExpand"
                                     Text="{Binding NameApplication}"

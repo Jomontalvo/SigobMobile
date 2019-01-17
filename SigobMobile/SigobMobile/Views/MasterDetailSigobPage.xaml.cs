@@ -19,7 +19,8 @@
         {
             InitializeComponent();
             MainViewModel.GetInstance().Applications = new ApplicationsViewModel();
-            MenuPages.Add((int)MenuItemType.Home, (NavigationPage)Detail);
+            //MenuPages.Add((int)MenuItemType.Home, (NavigationPage)Detail);
+            MenuPages.Add((int)MenuItemType.Home, new NavigationPage(new ApplicationsPage()));
         }
         #endregion
 
