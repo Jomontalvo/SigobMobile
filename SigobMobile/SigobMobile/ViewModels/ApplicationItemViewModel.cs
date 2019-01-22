@@ -27,8 +27,8 @@
             switch (this.TypeApplication)
             {
                 case TypeApplication.ManagementCenter:
-                    appViewModel.Calendar = new CalendarViewModel();
-                    await Application.Current.MainPage.Navigation.PushAsync(new CalendarPage());
+                    appViewModel.CalendarMonth = new CalendarMonthViewModel();
+                    await Application.Current.MainPage.Navigation.PushAsync(new CalendarMonthPage());
                     break;
                 case TypeApplication.Tasks:
                     break;

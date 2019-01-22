@@ -22,7 +22,7 @@
         public TypeApplication TypeApplication { get; set; }
 
         [JsonProperty(PropertyName = "nombre_aplicacion")]
-        public string NameApplication { get; set; }
+        public string ApplicationName { get; set; }
 
         [JsonProperty(PropertyName = "visible")]
         public bool IsVisible { get; set; }
@@ -39,5 +39,14 @@
         /// <value>The new items.</value>
         [JsonProperty(PropertyName = "numero_items_nuevos")]
         public int NewItems { get; set; }
+
+        /// <summary>
+        /// Gets the module icon.
+        /// </summary>
+        /// <value>The module icon string</value>
+        public string ModuleIcon
+        {
+            get { return $"ic_module{TypeApplication.ToString()}"; }
+        }
     }
 }

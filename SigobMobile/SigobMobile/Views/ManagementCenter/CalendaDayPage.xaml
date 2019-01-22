@@ -2,14 +2,16 @@
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    x:Class="SigobMobile.Views.ManagementCenter.CalendarPage"
+    x:Class="SigobMobile.Views.ManagementCenter.CalendaDayPage"
+    xmlns:lang="clr-namespace:SigobMobile.Helpers"
     BindingContext="{Binding Main, Source={StaticResource Locator}}" 
-    Title="Calendar">
+    Title="Diario">
     <ContentPage.Content>
-        <StackLayout>
-            <Label 
-                Text="Centro de Gestión"
-                FontSize="Large">
+        <StackLayout
+            BindingContext="{Binding CalendarDay}">
+            <Label
+                VerticalOptions="CenterAndExpand"
+                Text="Candario día">
             </Label>
         </StackLayout>
     </ContentPage.Content>

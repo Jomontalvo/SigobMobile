@@ -92,7 +92,7 @@
             return this.applicationList.Select(l => new ApplicationItemViewModel
             {
                 TypeApplication = l.TypeApplication,
-                NameApplication = l.NameApplication,
+                ApplicationName = l.ApplicationName,
                 IsVisible = l.IsVisible,
                 Message_1 = l.Message_1,
                 Message_2 = l.Message_2,

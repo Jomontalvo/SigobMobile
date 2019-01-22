@@ -41,7 +41,7 @@
         public static string PasswordValidationMsg { get { return Resources.PasswordValidationMsg; } }
         #endregion
 
-        #region Institutions to connect view
+        #region Institutions to connect View
         public static string InstitutionsConnect { get { return Resources.InstitutionsConnect; } }
         #endregion
 
