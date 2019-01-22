@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="SigobMobile.Views.ManagementCenter.CalendarPage"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}" 
+    Title="Calendar">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label 
+                Text="Centro de Gestión"
+                FontSize="Large">
+            </Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -21,6 +21,8 @@ namespace SigobMobile.ViewModels
 
         public SecurityViewModel Security { get; set; }
 
+        public CalendarViewModel Calendar { get; set;  }
+
         #endregion
 
         #region Constructors

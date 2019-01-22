@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:lang="clr-namespace:SigobMobile.Helpers;assembly=SigobMobile"
+             xmlns:lang="clr-namespace:SigobMobile.Helpers"
              x:Class="SigobMobile.Views.ApplicationsPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}">
     <ContentPage.Content>
@@ -10,7 +10,7 @@
             <ListView
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
-                ItemsSource="{Binding ApplicationsMenu}"
+                ItemsSource="{Binding Applications}"
                 RefreshCommand="{Binding RefreshCommand}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -22,46 +22,9 @@
                                 Padding="5,8">
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer
-                                        Command ="{Binding SelectedApplicationCommand}">
+                                        Command ="{Binding SelectApplicationCommand}">
                                     </TapGestureRecognizer>
                                 </Frame.GestureRecognizers>
-                                
-                                
-                                
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition 
-                                    </Grid.RowDefinitions>
-                                    <Image 
-                                        Grid.Column="0"
-                                        HorizontalOptions="End" 
-                                        Source="{Binding IconApplication}">
-                                    </Image>
-                                    <Label
-                                    <StackLayout 
-                                        Grid.Column="1"
-                                        VerticalOptions="Center">
-                                        <Label 
-                                            FontAttributes="Bold"
-                                            FontSize="Medium" 
-                                            Text="{Binding Name}"
-                                            TextColor="Black">
-                                        </Label>
-                                        <Label 
-                                            Text="{Binding Capital}"
-                                            TextColor="Black">
-                                        </Label>
-                                    </StackLayout>
-                                    
-                                </Grid>
-                                
-                                
-                                
-                                
                                 <Label
                                     HorizontalOptions="StartAndExpand"
                                     Text="{Binding NameApplication}"

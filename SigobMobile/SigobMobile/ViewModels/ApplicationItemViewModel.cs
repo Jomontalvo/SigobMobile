@@ -3,28 +3,44 @@
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using Models;
+    using SigobMobile.Views.ManagementCenter;
     using Xamarin.Forms;
 
     public class ApplicationItemViewModel : ApplicationMenuItem
     {
         #region Commands
-        public ICommand SelectedApplicationCommand
+        public ICommand SelectApplicationCommand
         {
             get
             {
-                return new RelayCommand(SelectedApplication);
+                return new RelayCommand(SelectApplication);
             }
         }
 
         /// <summary>
-        /// Selects the institution an set global url API service.
+        /// Select the app to navigate
         /// </summary>
-        private async void SelectedApplication()
+        private async void SelectApplication()
         {
-            //Navigate to especific Application Sigob Page
-            //var login = MainViewModel.GetInstance().Login;
-            //login.Institution = $"{this.Institution} ({this.ISOCountryCode})";
-            await Application.Current.MainPage.Navigation.PopAsync();
+            // 1. GetInstance of View Model
+            var appViewModel = MainViewModel.GetInstance();
+            switch (this.TypeApplication)
+            {
+                case TypeApplication.ManagementCenter:
+                    appViewModel.Calendar = new CalendarViewModel();
+                    await Application.Current.MainPage.Navigation.PushAsync(new CalendarPage());
+                    break;
+                case TypeApplication.Tasks:
+                    break;
+                case TypeApplication.Correspondence:
+                    break;
+                case TypeApplication.WorkFlows:
+                    break;
+                case TypeApplication.Communications:
+                    break;
+                default:
+                    break;
+            }
         }
         #endregion
     }

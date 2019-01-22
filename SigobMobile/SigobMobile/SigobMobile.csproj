@@ -23,6 +23,12 @@
     <Folder Include="Services\" />
     <Folder Include="Helpers\" />
     <Folder Include="Interfaces\" />
+    <Folder Include="Views\ManagementCenter\" />
+    <Folder Include="Views\Goals\" />
+    <Folder Include="Views\Correspondence\" />
+    <Folder Include="Views\Tasks\" />
+    <Folder Include="Views\WorkFlow\" />
+    <Folder Include="Views\GovernmentSociety\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="MainPage.xaml.cs" />

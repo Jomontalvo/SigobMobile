@@ -24,7 +24,7 @@
         #endregion
 
         #region Properties
-        public ObservableCollection<ApplicationItemViewModel> ApplicationsMenu
+        public ObservableCollection<ApplicationItemViewModel> Applications
         {
             get { return this.applications; }
             set { SetValue(ref this.applications, value); }
@@ -78,7 +78,7 @@
                 return;
             }
             this.applicationList = (List<ApplicationMenuItem>)response.Result;
-            this.ApplicationsMenu = new ObservableCollection<ApplicationItemViewModel>(
+            this.Applications = new ObservableCollection<ApplicationItemViewModel>(
                 this.ToApplicationItemViewModel());
             this.IsRefreshing = false;
         }

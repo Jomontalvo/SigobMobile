@@ -268,8 +268,13 @@
                 #endregion
 
                 #region Navigate to SIGOB Main Page
-                MainViewModel.GetInstance().MasterDetailSigob = new MasterDetailSigobViewModel();
-                Application.Current.MainPage = new MasterDetailSigobPage();
+                MainViewModel.GetInstance().Applications = new ApplicationsViewModel();
+
+                await Application.Current.MainPage.Navigation.PushAsync(new ApplicationsPage());
+
+                //TODO
+                //MainViewModel.GetInstance().MasterDetailSigob = new MasterDetailSigobViewModel();
+
                 #endregion
             }
             catch (Exception ex)

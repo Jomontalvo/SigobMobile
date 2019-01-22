@@ -2,6 +2,16 @@
 {
     using Newtonsoft.Json;
 
+    public enum TypeApplication : int
+    {
+        Correspondence = 2,
+        ManagementCenter = 3,
+        Communications = 5,
+        Goals= 6,
+        WorkFlows = 8,
+        Tasks = 9
+    }
+
     public class ApplicationMenuItem
     {
         /// <summary>
@@ -9,7 +19,7 @@
         /// </summary>
         /// <value>The type application.</value>
         [JsonProperty(PropertyName = "tipo_instru")]
-        public int TypeApplication { get; set; }
+        public TypeApplication TypeApplication { get; set; }
 
         [JsonProperty(PropertyName = "nombre_aplicacion")]
         public string NameApplication { get; set; }

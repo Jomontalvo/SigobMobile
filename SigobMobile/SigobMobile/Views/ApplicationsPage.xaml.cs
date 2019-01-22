@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Xamarin.Forms;
-
-namespace SigobMobile.Views
+﻿namespace SigobMobile.Views
 {
+    using Xamarin.Forms;
+
     public partial class ApplicationsPage : ContentPage
     {
         public ApplicationsPage()
