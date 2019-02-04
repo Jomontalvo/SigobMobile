@@ -7,8 +7,15 @@
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Applications}">
+            <Label
+                Text="Módulos SIGOB"
+                FontAttributes="Bold"
+                HorizontalOptions="CenterAndExpand">
+            </Label>
             <ListView
                 IsPullToRefreshEnabled="true"
+                HasUnevenRows="true"
+                SeparatorVisibility="None"
                 IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
                 ItemsSource="{Binding Applications}"
                 RefreshCommand="{Binding RefreshCommand}">
@@ -16,8 +23,8 @@
                     <DataTemplate>
                        <ViewCell>
                             <Frame
-                                BorderColor="Transparent"
-                                HasShadow="false"
+                                BorderColor="{StaticResource softGray}"
+                                HasShadow="true"
                                 Margin="10,5"
                                 Padding="5,8">
                                 <Frame.GestureRecognizers>
@@ -31,40 +38,37 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <ffimageloading:CachedImage 
+                                    <Image 
                                         Grid.Column="0"
-                                        HeightRequest="30"
-                                        Source="{Binding Flag, Converter={StaticResource SvgImageSourceConverter}}"
-                                        WidthRequest="60">
-                                    </ffimageloading:CachedImage>
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        Source="ic_menu">
+                                    </Image>
                                     <StackLayout 
                                         Grid.Column="1"
                                         VerticalOptions="Center">
+                                        <Label
+                                            HorizontalOptions="StartAndExpand"
+                                            Text="{Binding ApplicationName}"
+                                            VerticalOptions="Center"
+                                            VerticalTextAlignment="Center">
+                                        </Label>
                                         <Label 
-                                            FontAttributes="Bold"
-                                            FontSize="Medium" 
-                                            Text="{Binding Name}"
+                                            Text="{Binding Message_1}"
                                             TextColor="Black">
                                         </Label>
                                         <Label 
-                                            Text="{Binding Capital}"
+                                            Text="{Binding Message_2}"
                                             TextColor="Black">
                                         </Label>
                                     </StackLayout>
                                     <Image 
                                         Grid.Column="2"
-                                        HorizontalOptions="End" 
-                                        Source="ic_chevron_right">
+                                        HorizontalOptions="End"
+                                        VerticalOptions="Start"
+                                        Source="ic_menu">
                                     </Image>
                                 </Grid>
-                                
-                                
-                                <Label
-                                    HorizontalOptions="StartAndExpand"
-                                    Text="{Binding ApplicationName}"
-                                    VerticalOptions="Center"
-                                    VerticalTextAlignment="Center">
-                                </Label>
                             </Frame>
                        </ViewCell>
                     </DataTemplate>

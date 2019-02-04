@@ -171,4 +171,32 @@
   <data name="Success" xml:space="preserve">
     <value>Sucesso</value>
   </data>
+  <data name="MasterPageTitle" xml:space="preserve">
+    <value>Menu Options</value>
+    <comment>Left menu page title (visible depending platfform) </comment>
+  </data>
+  <data name="HomeMenu" xml:space="preserve">
+    <value>Home</value>
+    <comment>Main Menu Home Option.</comment>
+  </data>
+  <data name="HelpMenu" xml:space="preserve">
+    <value>Help</value>
+    <comment>Main Menu Help Option.</comment>
+  </data>
+  <data name="TermsAndConditionsMenu" xml:space="preserve">
+    <value>Terms and Conditions</value>
+    <comment>Main Menu Terms and Conditions Option.</comment>
+  </data>
+  <data name="SecurityMenu" xml:space="preserve">
+    <value>Security</value>
+    <comment>Main Menu Security Option.</comment>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Contact us</value>
+    <comment>Main Menu Contact Us Option.</comment>
+  </data>
+  <data name="LogoutMenu" xml:space="preserve">
+    <value>Fechar sesion</value>
+    <comment>Main Menu Logout Option.</comment>
+  </data>
 </root>

@@ -160,5 +160,41 @@ namespace SigobMobile.Properties {
                 return ResourceManager.GetString("MasterPageTitle", resourceCulture);
             }
         }
+        
+        public static string HomeMenu {
+            get {
+                return ResourceManager.GetString("HomeMenu", resourceCulture);
+            }
+        }
+        
+        public static string HelpMenu {
+            get {
+                return ResourceManager.GetString("HelpMenu", resourceCulture);
+            }
+        }
+        
+        public static string TermsAndConditionsMenu {
+            get {
+                return ResourceManager.GetString("TermsAndConditionsMenu", resourceCulture);
+            }
+        }
+        
+        public static string SecurityMenu {
+            get {
+                return ResourceManager.GetString("SecurityMenu", resourceCulture);
+            }
+        }
+        
+        public static string ContactUs {
+            get {
+                return ResourceManager.GetString("ContactUs", resourceCulture);
+            }
+        }
+        
+        public static string LogoutMenu {
+            get {
+                return ResourceManager.GetString("LogoutMenu", resourceCulture);
+            }
+        }
     }
 }

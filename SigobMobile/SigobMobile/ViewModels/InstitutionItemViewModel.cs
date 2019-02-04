@@ -4,6 +4,7 @@
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using Models;
+    using Helpers;
     using Xamarin.Forms;
 
     /// <summary>
@@ -25,9 +26,10 @@
         /// </summary>
         private async void SelectInstitution()
         {
-            //Assign API URL global variable 
+            //Assign API URL global variable and Settings
             App.UrlBaseApiSigob = 
                 (this.UrlApiService.TrimEnd().Last() != '/') ? $"{this.UrlApiService.TrimEnd()}/" : this.UrlApiService;
+            Settings.UrlBaseApiSigob = App.UrlBaseApiSigob;
             //Come back to Login
             var login = MainViewModel.GetInstance().Login;
             login.Institution = $"{this.Institution} ({this.ISOCountryCode})";

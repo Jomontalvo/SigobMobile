@@ -171,4 +171,32 @@
   <data name="Success" xml:space="preserve">
     <value>Operación exitosa</value>
   </data>
+  <data name="MasterPageTitle" xml:space="preserve">
+    <value>Menú</value>
+    <comment>Título de la pagina de Menú principal (visible dependiendo de la plataforma) </comment>
+  </data>
+  <data name="HomeMenu" xml:space="preserve">
+    <value>Inicio</value>
+    <comment>Opción de Menú Inicio.</comment>
+  </data>
+  <data name="HelpMenu" xml:space="preserve">
+    <value>Ayuda</value>
+    <comment>Opcion de Menú Ayuda.</comment>
+  </data>
+  <data name="TermsAndConditionsMenu" xml:space="preserve">
+    <value>Términos y Condiciones</value>
+    <comment>Opción de Menú Términos y Condiciones.</comment>
+  </data>
+  <data name="SecurityMenu" xml:space="preserve">
+    <value>Seguridad</value>
+    <comment>Opción de Menú Seguridad</comment>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Contáctenos</value>
+    <comment>Opción de Menú Contáctenos.</comment>
+  </data>
+  <data name="LogoutMenu" xml:space="preserve">
+    <value>Cerrar sesión</value>
+    <comment>Opción de Menú Cerrar sesión.</comment>
+  </data>
 </root>

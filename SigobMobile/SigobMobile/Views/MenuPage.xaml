@@ -2,23 +2,55 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="SigobMobile.Views.MenuPage"
-             xmlns:lang="clr-namespace:SigobMobile.Helpers;assembly=SigobMobile"
+             xmlns:lang="clr-namespace:SigobMobile.Helpers"
              BackgroundColor="{StaticResource defaultBackgroundView}"
              BindingContext="{Binding Main, Source={StaticResource Locator}}" 
-             Title="{lang:Translate Ok}"
+             Title="{lang:Translate MasterPageTitle}"
              Icon="ic_menu">
     <ContentPage.Content>
         <StackLayout
-            BindingContext="{Binding Menu}"
-            VerticalOptions="FillAndExpand">
-            <ListView 
-                x:Name="ListViewMenu"
-                HasUnevenRows="True">
+            Padding="0,40,0,0">
+            <Image
+                BackgroundColor="{StaticResource defaultBackgroundView}"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="Start"
+                Source="ic_menu">
+            </Image>
+            <Label
+                HeightRequest="200"
+                HorizontalOptions="CenterAndExpand"
+                HorizontalTextAlignment="Center"
+                Text="Perfil">
+            </Label>
+            <ListView
+                BackgroundColor="{StaticResource lightBlue}"
+                ItemsSource="{Binding MainMenu}"
+                HasUnevenRows="true"
+                SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid Padding="10">
-                                <Label Text="{Binding Title}" FontSize="20" />
+                            <Grid
+                                Padding="10,5,0,5">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NavigateCommand}"/>
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    Grid.Column="0"
+                                    Source="{Binding Icon}"
+                                    VerticalOptions="Center">
+                                </Image>
+                                <Label
+                                    Grid.Column="1"
+                                    FontSize="Medium"
+                                    TextColor="{StaticResource defaultBackgroundView}"
+                                    Text="{Binding Title}"
+                                    VerticalOptions="Center">
+                                </Label>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

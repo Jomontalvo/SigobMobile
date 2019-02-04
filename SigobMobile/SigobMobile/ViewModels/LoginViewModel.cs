@@ -215,7 +215,7 @@
 
             // 2. Get the security parameters for connection.
             var response = await this.apiService.GetList<string>(
-                App.UrlBaseApiSigob,
+                Settings.UrlBaseApiSigob,
                 App.PrefixApiSigob,
                 "security/parameters"
             );
@@ -245,7 +245,7 @@
                     UserName = this.UserName,
                 };
                 response = await this.apiService.PostLogin<LoginCredentials>(
-                    App.UrlBaseApiSigob,
+                    Settings.UrlBaseApiSigob,
                     App.PrefixApiSigob,
                     "user/login",
                     loginCredentials);
@@ -268,13 +268,17 @@
                 #endregion
 
                 #region Navigate to SIGOB Main Page
-                MainViewModel.GetInstance().Applications = new ApplicationsViewModel();
+                var mainViewModel = MainViewModel.GetInstance();
+                mainViewModel.Token = sucessLogin.AuthToken;
+                mainViewModel.DbToken = sucessLogin.DatabaseToken;
+                //Save persist token access values
+                Settings.Token = sucessLogin.AuthToken;
+                Settings.DbToken = sucessLogin.DatabaseToken;
+                //Load Master Detail with ApplicationsPage
+                mainViewModel.Applications = new ApplicationsViewModel();
+                Application.Current.MainPage = new MasterDetailSigobPage();
 
-                await Application.Current.MainPage.Navigation.PushAsync(new ApplicationsPage());
-
-                //TODO
-                //MainViewModel.GetInstance().MasterDetailSigob = new MasterDetailSigobViewModel();
-
+                //await Application.Current.MainPage.Navigation.PushAsync(new ApplicationsPage());
                 #endregion
             }
             catch (Exception ex)

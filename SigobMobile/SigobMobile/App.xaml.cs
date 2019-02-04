@@ -4,9 +4,10 @@
 namespace SigobMobile
 {
     using Views;
+    using Helpers;
     using Models;
     using Xamarin.Forms;
-
+    using ViewModels;
 
     public partial class App : Application
     {
@@ -98,12 +99,33 @@ namespace SigobMobile
 
         #endregion
 
+        #region Properties
+        /// <summary>
+        /// Gets or sets the navigator property.
+        /// </summary>
+        /// <value>The navigator.</value>
+        public static NavigationPage Navigator { get; internal set; }
+        #endregion
+
+
         #region Contructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:SigobMobile.App"/> class.
+        /// </summary>
         public App()
         {
             InitializeComponent();
-
-            this.MainPage = new NavigationPage(new LoginPage());
+            //Settings.Token = Settings.DbToken = string.Empty;
+            if (string.IsNullOrEmpty(Settings.Token)) this.MainPage = new NavigationPage(new LoginPage());
+            else
+            {
+                var mainViewModel = MainViewModel.GetInstance();
+                mainViewModel.Token = Settings.Token;
+                mainViewModel.DbToken = Settings.DbToken;
+                //Load Master Detail with ApplicationsPage
+                mainViewModel.Applications = new ApplicationsViewModel();
+                Application.Current.MainPage = new MasterDetailSigobPage();
+            }
         }
         #endregion
 

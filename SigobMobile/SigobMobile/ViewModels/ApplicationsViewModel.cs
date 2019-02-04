@@ -9,6 +9,7 @@
     using System.Linq;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
+    using Views;
 
     public class ApplicationsViewModel : BaseViewModel
     {
@@ -61,11 +62,11 @@
                 return;
             }
             var response = await this.apiService.GetList<ApplicationMenuItem>(
-                App.UrlBaseApiSigob,
+                Settings.UrlBaseApiSigob,
                 App.PrefixApiSigob,
                 this.MenuController,
-                App.AuthToken,
-                App.DataBaseToken
+                Settings.Token,
+                Settings.DbToken
             );
             if (!response.IsSuccess)
             {
@@ -74,7 +75,11 @@
                     Languages.Error,
                     response.Message,
                     Languages.Cancel);
-                await Application.Current.MainPage.Navigation.PopAsync();
+                //Error in EndPoint call. Delete persist token values and go to Login Page
+                Settings.Token = Settings.DbToken = string.Empty;
+                var mainViewModel = MainViewModel.GetInstance();
+                mainViewModel.Token = mainViewModel.DbToken = string.Empty;
+                Application.Current.MainPage = new NavigationPage(new LoginPage());
                 return;
             }
             this.applicationList = (List<ApplicationMenuItem>)response.Result;

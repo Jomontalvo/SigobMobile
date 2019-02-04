@@ -2,12 +2,12 @@
 {
     using Newtonsoft.Json;
 
-    public enum TypeApplication : int
+    public enum TypeApplication
     {
         Correspondence = 2,
         ManagementCenter = 3,
         Communications = 5,
-        Goals= 6,
+        Goals = 6,
         WorkFlows = 8,
         Tasks = 9
     }

@@ -45,6 +45,16 @@
         public static string InstitutionsConnect { get { return Resources.InstitutionsConnect; } }
         #endregion
 
+        #region Main Menu Options
+        public static string MasterPageTitle { get { return Resources.MasterPageTitle; } }
+        public static string HomeMenu { get { return Resources.HomeMenu; } }
+        public static string HelpMenu { get { return Resources.HelpMenu; } }
+        public static string SecurityMenu { get { return Resources.SecurityMenu; } }
+        public static string TermsAndConditionsMenu { get { return Resources.TermsAndConditionsMenu; } }
+        public static string ContactUs { get { return Resources.ContactUs; } }
+        public static string LogoutMenu { get { return Resources.LogoutMenu; } }
+        #endregion
+
         #endregion
     }
 }
