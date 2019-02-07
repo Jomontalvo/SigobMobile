@@ -199,4 +199,8 @@
     <value>Cerrar sesión</value>
     <comment>Opción de Menú Cerrar sesión.</comment>
   </data>
+  <data name="ApplicationsViewTitle" xml:space="preserve">
+    <value>S I G O B</value>
+    <comment>Título de la ventana proncipal de módulos SIGOB</comment>
+  </data>
 </root>

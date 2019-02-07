@@ -38,15 +38,15 @@
         /// </summary>
         /// <value>The new items.</value>
         [JsonProperty(PropertyName = "numero_items_nuevos")]
-        public int NewItems { get; set; }
+        public string NewItems { get; set; }
 
         /// <summary>
         /// Gets the module icon.
         /// </summary>
         /// <value>The module icon string</value>
-        public string ModuleIcon
+        public string IconModule
         {
-            get { return $"ic_module{TypeApplication.ToString()}"; }
+            get { return (IsVisible) ? $"ic_app_{TypeApplication}" : $"ic_app_{TypeApplication}_gray"; }
         }
     }
 }

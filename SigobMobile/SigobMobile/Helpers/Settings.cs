@@ -24,6 +24,8 @@
         private const string token = "token";
         private const string dbToken = "dbtoken";
         private const string urlBaseApiSigob = "uriAPI";
+        private const string insitutionLogo = "logo";
+        private const string userFullName = "fullName";
         private static readonly string SettingsDefault = string.Empty;
 
         #endregion
@@ -76,6 +78,39 @@
                 AppSettings.AddOrUpdateValue(urlBaseApiSigob, value);
             }
         }
+
+        /// <summary>
+        /// Gets or sets the institution logo.
+        /// </summary>
+        /// <value>The logo institution.</value>
+        public static string InstitutionLogo
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(insitutionLogo, SettingsDefault);
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue( insitutionLogo, value);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the full name od active user.
+        /// </summary>
+        /// <value>The full name.</value>
+        public static string FullName
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(userFullName, SettingsDefault);
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(userFullName, value);
+            }
+        }
+
         #endregion
     }
 }

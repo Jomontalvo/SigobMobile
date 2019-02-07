@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1029999" />
+    <PackageReference Include="Xamarin.Forms" Version="3.5.0.129452" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.1" />
@@ -156,13 +156,27 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_menu_terms.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_menu_terms.png" />
     <AndroidResource Include="Resources\drawable\ic_menu_home.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\ic_hamburguer.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_hamburguer.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_menu_home.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_menu_home.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_menu_home.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_menu_home.png" />
     <AndroidResource Include="Resources\xml\file_paths.xml" />
+    <AndroidResource Include="Resources\drawable\ic_avatar_men.png" />
+    <AndroidResource Include="Resources\drawable\ic_avatar_women.png" />
+    <AndroidResource Include="Resources\drawable\ic_bt_search.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_menu.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_menu.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_bt_search.png" />
+    <AndroidResource Include="Resources\drawable\ic_app_Communications.png" />
+    <AndroidResource Include="Resources\drawable\ic_app_ManagementCenter.png" />
+    <AndroidResource Include="Resources\drawable\ic_app_Correspondence.png" />
+    <AndroidResource Include="Resources\drawable\ic_app_Goals.png" />
+    <AndroidResource Include="Resources\drawable\ic_app_Tasks.png" />
+    <AndroidResource Include="Resources\drawable\ic_app_WorkFlows.png" />
+    <AndroidResource Include="Resources\drawable\ic_app_Communications_gray.png" />
+    <AndroidResource Include="Resources\drawable\ic_app_WorkFlows_gray.png" />
+    <AndroidResource Include="Resources\drawable\ic_app_Goals_gray.png" />
+    <AndroidResource Include="Resources\drawable\ic_app_Correspondence_gray.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -174,6 +188,8 @@
   <ItemGroup>
     <Folder Include="Implementations\" />
     <Folder Include="Resources\xml\" />
+    <Folder Include="Resources\drawable-mdpi\" />
+    <Folder Include="Resources\drawable-ldpi\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

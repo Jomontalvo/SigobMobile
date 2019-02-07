@@ -55,6 +55,11 @@
         public static string LogoutMenu { get { return Resources.LogoutMenu; } }
         #endregion
 
+        #region My Profile View
+        public static string ProfileViewTitle { get { return Resources.ProfileViewTitle; } }
+
+        #endregion
+
         #endregion
     }
 }

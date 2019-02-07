@@ -268,14 +268,18 @@
                 #endregion
 
                 #region Navigate to SIGOB Main Page
+
                 var mainViewModel = MainViewModel.GetInstance();
                 mainViewModel.Token = sucessLogin.AuthToken;
                 mainViewModel.DbToken = sucessLogin.DatabaseToken;
+
                 //Save persist token access values
                 Settings.Token = sucessLogin.AuthToken;
                 Settings.DbToken = sucessLogin.DatabaseToken;
+                Settings.InstitutionLogo = sucessLogin.InstitutionLogo;
                 //Load Master Detail with ApplicationsPage
                 mainViewModel.Applications = new ApplicationsViewModel();
+                mainViewModel.Menu = new MenuViewModel();
                 Application.Current.MainPage = new MasterDetailSigobPage();
 
                 //await Application.Current.MainPage.Navigation.PushAsync(new ApplicationsPage());

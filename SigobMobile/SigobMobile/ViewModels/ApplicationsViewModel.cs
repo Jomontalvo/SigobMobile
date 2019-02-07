@@ -10,12 +10,13 @@
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using Views;
+    using System;
 
     public class ApplicationsViewModel : BaseViewModel
     {
         #region Services
         internal ApiService apiService;
-        internal string MenuController = "user/appmodules";
+        internal string apiMenuController = "user/appmodules";
         #endregion
 
         #region Attributes
@@ -25,6 +26,7 @@
         #endregion
 
         #region Properties
+
         public ObservableCollection<ApplicationItemViewModel> Applications
         {
             get { return this.applications; }
@@ -46,7 +48,28 @@
         }
         #endregion
 
+        #region Commands
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return new RelayCommand(LoadApplicationsMenu);
+            }
+        }
+
+        public ICommand SearchCommand
+        {
+            get
+            {
+                return new RelayCommand(Search);
+            }
+        }
+        #endregion
+
         #region Methods
+        /// <summary>
+        /// Loads the applications menu.
+        /// </summary>
         private async void LoadApplicationsMenu()
         {
             this.IsRefreshing = true;
@@ -64,7 +87,7 @@
             var response = await this.apiService.GetList<ApplicationMenuItem>(
                 Settings.UrlBaseApiSigob,
                 App.PrefixApiSigob,
-                this.MenuController,
+                this.apiMenuController,
                 Settings.Token,
                 Settings.DbToken
             );
@@ -75,8 +98,9 @@
                     Languages.Error,
                     response.Message,
                     Languages.Cancel);
+
                 //Error in EndPoint call. Delete persist token values and go to Login Page
-                Settings.Token = Settings.DbToken = string.Empty;
+                Settings.Token = Settings.DbToken = Settings.InstitutionLogo =  string.Empty;
                 var mainViewModel = MainViewModel.GetInstance();
                 mainViewModel.Token = mainViewModel.DbToken = string.Empty;
                 Application.Current.MainPage = new NavigationPage(new LoginPage());
@@ -84,7 +108,7 @@
             }
             this.applicationList = (List<ApplicationMenuItem>)response.Result;
             this.Applications = new ObservableCollection<ApplicationItemViewModel>(
-                this.ToApplicationItemViewModel());
+                ToApplicationItemViewModel());
             this.IsRefreshing = false;
         }
 
@@ -100,20 +124,23 @@
                 ApplicationName = l.ApplicationName,
                 IsVisible = l.IsVisible,
                 Message_1 = l.Message_1,
-                Message_2 = l.Message_2,
-                NewItems = l.NewItems
+                Message_2 = (!l.IsVisible) ? string.Empty : l.Message_2,
+                NewItems = (l.NewItems != "0") ? l.NewItems : string.Empty
             });
         }
-        #endregion
 
-        #region Commands
-        public ICommand RefreshCommand
+        /// <summary>
+        /// Search this instance.
+        /// </summary>
+        private async void Search()
         {
-            get
-            {
-                return new RelayCommand(LoadApplicationsMenu);
-            }
+            await Application.Current.MainPage.DisplayAlert(
+                title: Languages.Success,
+                message: Languages.Ok,
+                cancel: Languages.Accept);
+            return;
         }
+
         #endregion
     }
 }

@@ -11,7 +11,7 @@
             <Color x:Key="defaultBackgroundView">White</Color>
             <Color x:Key="clear">Transparent</Color>
             <Color x:Key="lightBlue">#55BBFF</Color>
-            <Color x:Key="darkBlue">#144C78</Color>
+            <Color x:Key="darkBlue">#265F91</Color>
             <Color x:Key="blue">#0073A7</Color>
             <Color x:Key="green">#3DA547</Color>
             <Color x:Key="red">#D62331</Color>
@@ -23,6 +23,16 @@
             <Color x:Key="softGray">#F9F9F9</Color>
             <Color x:Key="accesoryGray">#C1C6CE</Color>
             <Color x:Key="grayContent">#8E8E8E</Color>
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <ControlTemplate x:Key="HeaderSigobTemplate">
+                <Grid>
+                    <Image
+                        Source="ods_logo"
+                        HorizontalOptions="CenterAndExpand">
+                    </Image>
+                </Grid>
+            </ControlTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

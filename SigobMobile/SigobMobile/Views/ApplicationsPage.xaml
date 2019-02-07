@@ -3,15 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:lang="clr-namespace:SigobMobile.Helpers"
              x:Class="SigobMobile.Views.ApplicationsPage"
-             BindingContext="{Binding Main, Source={StaticResource Locator}}">
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             BackgroundColor="{StaticResource defaultBackgroundView}"
+             Title="{lang:Translate ApplicationsViewTitle}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            BindingContext="{Binding Applications}"
+            Command="{Binding SearchCommand}"
+            Icon="ic_bt_search"
+            Name="{lang:Translate Yes}" 
+            Order="Primary" 
+            Priority="0">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Applications}">
-            <Label
-                Text="Módulos SIGOB"
-                FontAttributes="Bold"
-                HorizontalOptions="CenterAndExpand">
-            </Label>
             <ListView
                 IsPullToRefreshEnabled="true"
                 HasUnevenRows="true"
@@ -26,48 +33,68 @@
                                 BorderColor="{StaticResource softGray}"
                                 HasShadow="true"
                                 Margin="10,5"
-                                Padding="5,8">
+                                Padding="2,8">
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer
                                         Command ="{Binding SelectApplicationCommand}">
                                     </TapGestureRecognizer>
                                 </Frame.GestureRecognizers>
-                                <Grid>
+                                <Grid
+                                    Padding="10,0,0,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Label
+                                        Grid.Column="2"
+                                        Grid.Row="0"
+                                        Grid.RowSpan="3"
+                                        Text="{Binding NewItems}"
+                                        IsVisible="{Binding IsVisible}"
+                                        VerticalOptions="StartAndExpand">
+                                    </Label>
                                     <Image 
                                         Grid.Column="0"
+                                        Grid.Row="1"
+                                        HeightRequest="60"
                                         HorizontalOptions="Center"
+                                        Margin="10,0,5,0"
                                         VerticalOptions="Center"
-                                        Source="ic_menu">
+                                        Source="{Binding IconModule}">
                                     </Image>
-                                    <StackLayout 
+                                    <Label
                                         Grid.Column="1"
+                                        Grid.Row="1"
+                                        FontSize="Medium"
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="StartAndExpand"
+                                        Text="{Binding ApplicationName}"
+                                        VerticalOptions="Center"
+                                        VerticalTextAlignment="Center">
+                                    </Label>
+                                    <StackLayout 
+                                        Grid.Column="0"
+                                        Grid.Row="2"
+                                        Grid.ColumnSpan="3"
+                                        Padding="5,0"
                                         VerticalOptions="Center">
                                         <Label
-                                            HorizontalOptions="StartAndExpand"
-                                            Text="{Binding ApplicationName}"
-                                            VerticalOptions="Center"
-                                            VerticalTextAlignment="Center">
-                                        </Label>
-                                        <Label 
+                                            FontSize="Small"
                                             Text="{Binding Message_1}"
-                                            TextColor="Black">
+                                            TextColor="Gray">
                                         </Label>
-                                        <Label 
+                                        <Label
+                                            FontSize="Small"
                                             Text="{Binding Message_2}"
-                                            TextColor="Black">
+                                            TextColor="Gray">
                                         </Label>
                                     </StackLayout>
-                                    <Image 
-                                        Grid.Column="2"
-                                        HorizontalOptions="End"
-                                        VerticalOptions="Start"
-                                        Source="ic_menu">
-                                    </Image>
                                 </Grid>
                             </Frame>
                        </ViewCell>

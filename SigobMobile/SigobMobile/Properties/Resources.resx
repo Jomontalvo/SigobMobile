@@ -217,4 +217,12 @@
     <value>Logout</value>
     <comment>Main Menu Logout Option.</comment>
   </data>
+  <data name="ApplicationsViewTitle" xml:space="preserve">
+    <value>Sigob</value>
+    <comment>SIGOB Applications View Title.</comment>
+  </data>
+  <data name="ProfileViewTitle" xml:space="preserve">
+    <value>My Profile</value>
+    <comment>SIGOB Profile View Title.</comment>
+  </data>
 </root>

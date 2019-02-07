@@ -19,7 +19,7 @@
                 RefreshCommand="{Binding RefreshCommand}">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
-                        <ViewCell Height="30">
+                        <ViewCell Height="25">
                             <StackLayout
                                 Orientation="Horizontal"
                                 VerticalOptions="FillAndExpand"
@@ -28,11 +28,13 @@
                                 <Image
                                     VerticalOptions="Center"
                                     Source="{Binding ImageGroup}"
-                                    WidthRequest="20">
+                                    WidthRequest="30">
                                 </Image>
-                                <Label Text="{Binding Name}"
-                                       FontAttributes="Bold"
-                                       VerticalOptions="Center"/>
+                                <Label
+                                    FontSize="Medium"
+                                    FontAttributes="Bold"
+                                    Text="{Binding Name}"
+                                    VerticalOptions="Center"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
@@ -44,13 +46,14 @@
                                 BorderColor="Transparent"
                                 HasShadow="false"
                                 Margin="10,5"
-                                Padding="5,8">
+                                Padding="5,5">
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer
                                         Command ="{Binding SelectInstitutionCommand}">
                                     </TapGestureRecognizer>
                                 </Frame.GestureRecognizers>
                                 <Label
+                                    FontSize="Medium"
                                     HorizontalOptions="StartAndExpand"
                                     Text="{Binding Institution}"
                                     VerticalOptions="Center"

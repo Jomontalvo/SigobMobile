@@ -105,6 +105,7 @@ namespace SigobMobile
         /// </summary>
         /// <value>The navigator.</value>
         public static NavigationPage Navigator { get; internal set; }
+        public static MasterDetailSigobPage Master { get; internal set; }
         #endregion
 
 
@@ -115,7 +116,7 @@ namespace SigobMobile
         public App()
         {
             InitializeComponent();
-            //Settings.Token = Settings.DbToken = string.Empty;
+            //Settings.Token = Settings.DbToken = Settings.InstitutionLogo =  string.Empty;
             if (string.IsNullOrEmpty(Settings.Token)) this.MainPage = new NavigationPage(new LoginPage());
             else
             {
@@ -124,6 +125,7 @@ namespace SigobMobile
                 mainViewModel.DbToken = Settings.DbToken;
                 //Load Master Detail with ApplicationsPage
                 mainViewModel.Applications = new ApplicationsViewModel();
+                mainViewModel.Menu = new MenuViewModel();
                 Application.Current.MainPage = new MasterDetailSigobPage();
             }
         }

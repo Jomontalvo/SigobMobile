@@ -196,5 +196,17 @@ namespace SigobMobile.Properties {
                 return ResourceManager.GetString("LogoutMenu", resourceCulture);
             }
         }
+        
+        public static string ApplicationsViewTitle {
+            get {
+                return ResourceManager.GetString("ApplicationsViewTitle", resourceCulture);
+            }
+        }
+        
+        public static string ProfileViewTitle {
+            get {
+                return ResourceManager.GetString("ProfileViewTitle", resourceCulture);
+            }
+        }
     }
 }
