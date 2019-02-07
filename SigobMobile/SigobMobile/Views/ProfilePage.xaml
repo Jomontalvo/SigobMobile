@@ -40,16 +40,16 @@
                     <TableSection 
                         Title="Personal data">
                         <TextCell 
-                            Text="{Binding User.LastName}"
-                            Detail="{Binding User.Position}">                            
+                            Text="{Binding UserLocal.LastName}"
+                            Detail="{lang:Translate LastNameText}">                            
                         </TextCell>  
                     </TableSection>
                     <TableSection
                         Title="Office data">
                         <EntryCell 
-                            Label="{Binding FormLabels.FirstNameLabel}" 
-                            Placeholder="{Binding FormLabels.FirstNameLabel}" 
-                            Text="{Binding User.FirstName}"/>
+                            Label="{lang:Translate FirstNameText}" 
+                            Placeholder="{lang:Translate FirstNameText}" 
+                            Text="{Binding UserLocal.FirstName, Mode=TwoWay }"/>
                     </TableSection>
                 </TableRoot>
             </TableView>

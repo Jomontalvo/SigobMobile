@@ -19,8 +19,8 @@
         #region Attributes
         private ImageSource imageSource;
         private bool isRunning;
+        private bool isEnabled;
         private UserBasicProfile profile;
-        private readonly ProfileLabels formLabels;
         //private MediaFile fileAvatar;
         #endregion
 
@@ -35,25 +35,24 @@
             get { return isRunning; }
             set { SetValue(ref this.isRunning, value); }
         }
-
-        public UserBasicProfile User
+        public bool IsEnabled
         {
-            get { return profile; }
-            set { SetValue(ref this.profile, value); }
+            get { return isEnabled; }
+            set { SetValue(ref this.isEnabled, value); }
         }
-
-        public ProfileLabels FormLabels
+        public UserBasicProfile UserLocal
         {
-            get { return formLabels; }
+            get;
+            set;
         }
         #endregion
 
-        #region Constructor
+        #region Constructors
         public ProfileViewModel()
         {
             this.apiService = new ApiService();
-            this.formLabels = new ProfileLabels();
             this.LoadUserProfile();
+            this.UserLocal = this.profile;
         }
         #endregion
 
