@@ -208,5 +208,59 @@ namespace SigobMobile.Properties {
                 return ResourceManager.GetString("ProfileViewTitle", resourceCulture);
             }
         }
+        
+        public static string FirstNameText {
+            get {
+                return ResourceManager.GetString("FirstNameText", resourceCulture);
+            }
+        }
+        
+        public static string LastNameText {
+            get {
+                return ResourceManager.GetString("LastNameText", resourceCulture);
+            }
+        }
+        
+        public static string InstitutionText {
+            get {
+                return ResourceManager.GetString("InstitutionText", resourceCulture);
+            }
+        }
+        
+        public static string PositionText {
+            get {
+                return ResourceManager.GetString("PositionText", resourceCulture);
+            }
+        }
+        
+        public static string AreaText {
+            get {
+                return ResourceManager.GetString("AreaText", resourceCulture);
+            }
+        }
+        
+        public static string PhoneText {
+            get {
+                return ResourceManager.GetString("PhoneText", resourceCulture);
+            }
+        }
+        
+        public static string CellPhoneText {
+            get {
+                return ResourceManager.GetString("CellPhoneText", resourceCulture);
+            }
+        }
+        
+        public static string EmailText {
+            get {
+                return ResourceManager.GetString("EmailText", resourceCulture);
+            }
+        }
+        
+        public static string UserImageText {
+            get {
+                return ResourceManager.GetString("UserImageText", resourceCulture);
+            }
+        }
     }
 }

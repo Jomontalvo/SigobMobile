@@ -24,6 +24,8 @@ namespace SigobMobile.ViewModels
 
         public SecurityViewModel Security { get; set; }
 
+        public ProfileViewModel Profile { get; set; }
+
         public CalendarDayViewModel CalendarDay { get; set;  }
 
         public CalendarWeekViewModel CalendarWeek { get; set; }

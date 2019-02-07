@@ -34,37 +34,31 @@
         private void Navigate()
         {
             App.Master.IsPresented = false;
-            if (this.PageName != CurrentPageName)
+            var mainViewModel = MainViewModel.GetInstance();
+            switch (this.PageName)
             {
-                switch (this.PageName)
-                {
-                    case "ApplicationsPage":
-
-                        MainViewModel.GetInstance().Applications = new ApplicationsViewModel();
-                        var appPage = new ApplicationsPage();
-                        App.Master.Detail = new NavigationPage(appPage);
-                        App.Navigator.PushAsync(appPage);
-                        break;
-                    case "SecurityPage":
-                        MainViewModel.GetInstance().Security = new SecurityViewModel();
-                        var secPage = new SecurityPage();
-                        App.Master.Detail = new NavigationPage(secPage);
-                        App.Navigator.PushAsync(secPage);
-                        break;
-                    case "WebViewHelpPage":
-                        break;
-                    case "WebViewTermsPage":
-                        break;
-                    case "WebViewContactPage":
-                        break;
-                    case "LoginPage":
-                        //Delete persist token values
-                        Settings.Token = Settings.DbToken = Settings.InstitutionLogo = string.Empty;
-                        var mainViewModel = MainViewModel.GetInstance();
-                        mainViewModel.Token = mainViewModel.DbToken = string.Empty;
-                        Application.Current.MainPage = new NavigationPage(new LoginPage());
-                        break;
-                }
+                case "ApplicationsPage":
+                    mainViewModel.Applications = new ApplicationsViewModel();
+                    App.Master.Detail = new NavigationPage(new ApplicationsPage());
+                    //App.Navigator.PushAsync(appPage);
+                    break;
+                case "SecurityPage":
+                    mainViewModel.Security = new SecurityViewModel();
+                    App.Master.Detail = new NavigationPage(new SecurityPage());
+                    //App.Navigator.PushAsync(secPage);
+                    break;
+                case "WebViewHelpPage":
+                    break;
+                case "WebViewTermsPage":
+                    break;
+                case "WebViewContactPage":
+                    break;
+                case "LoginPage":
+                    //Delete persist token values
+                    Settings.Token = Settings.DbToken = Settings.InstitutionLogo = string.Empty;
+                    mainViewModel.Token = mainViewModel.DbToken = string.Empty;
+                    Application.Current.MainPage = new NavigationPage(new LoginPage());
+                    break;
             }
         }
         #endregion

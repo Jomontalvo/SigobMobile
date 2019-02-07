@@ -3,7 +3,8 @@
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using Models;
-    using SigobMobile.Views.ManagementCenter;
+    using Views.ManagementCenter;
+    using Views;
     using Xamarin.Forms;
 
     public class ApplicationItemViewModel : ApplicationMenuItem
@@ -27,8 +28,8 @@
             switch (this.TypeApplication)
             {
                 case TypeApplication.ManagementCenter:
-                    appViewModel.CalendarMonth = new CalendarMonthViewModel();
-                    await App.Navigator.Navigation.PushAsync(new CalendarMonthPage());
+                    appViewModel.Profile = new ProfileViewModel();
+                    await App.Navigator.PushAsync(new ProfilePage());
                     break;
                 case TypeApplication.Tasks:
                     break;

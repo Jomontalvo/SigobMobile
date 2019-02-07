@@ -1,13 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:lang="clr-namespace:SigobMobile.Helpers"
-             xmlns:ctrls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             x:Class="SigobMobile.Views.ProfilePage"
-             BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             BackgroundColor="{StaticResource defaultBackgroundView}"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:lang="clr-namespace:SigobMobile.Helpers" 
+             xmlns:ctrls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin" 
+             x:Class="SigobMobile.Views.ProfilePage" 
+             FlowDirection="{x:Static Device.FlowDirection}" 
+             BindingContext="{Binding Main, Source={StaticResource Locator}}" 
+             BackgroundColor="{StaticResource defaultBackgroundView}" 
              Title="{lang:Translate ProfileViewTitle}">
     <ContentPage.Content>
-        
+        <StackLayout
+            BindingContext="{Binding Profile}"
+            Padding="5,30,5,5"
+            VerticalOptions="StartAndExpand">
+            <ctrls:CircleImage Aspect="AspectFill" HorizontalOptions="Center" Source="{Binding ImageSource}">
+                <ctrls:CircleImage.WidthRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android, iOS">150</On>
+                        <On Platform="WinPhone">200</On>
+                    </OnPlatform>
+                </ctrls:CircleImage.WidthRequest>
+                <ctrls:CircleImage.HeightRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android, iOS">150</On>
+                        <On Platform="WinPhone">200</On>
+                    </OnPlatform>
+                </ctrls:CircleImage.HeightRequest>
+                <ctrls:CircleImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ChangeUserImageCommand}" />
+                </ctrls:CircleImage.GestureRecognizers>
+            </ctrls:CircleImage>
+            <ActivityIndicator 
+                IsVisible="true" 
+                IsRunning="{Binding IsRunning, Mode=TwoWay}">
+            </ActivityIndicator>
+            <TableView
+                Intent="Settings">
+                <TableRoot>
+                    <TableSection 
+                        Title="Personal data">
+                        <TextCell 
+                            Text="{Binding User.LastName}"
+                            Detail="{Binding User.Position}">                            
+                        </TextCell>  
+                    </TableSection>
+                    <TableSection
+                        Title="Office data">
+                        <EntryCell 
+                            Label="{Binding FormLabels.FirstNameLabel}" 
+                            Placeholder="{Binding FormLabels.FirstNameLabel}" 
+                            Text="{Binding User.FirstName}"/>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

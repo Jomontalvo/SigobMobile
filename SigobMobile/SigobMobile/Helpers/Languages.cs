@@ -29,7 +29,7 @@
 
         #region Login View
         public static string LoginViewTitle { get { return Resources.LoginViewTitle; } }
-        public static string EnterCredentials { get { return Resources.EnterCredentials ; } }
+        public static string EnterCredentials { get { return Resources.EnterCredentials; } }
         public static string Username { get { return Resources.Username; } }
         public static string Password { get { return Resources.Password; } }
         public static string SelectApiInstitution { get { return Resources.SelectApiInstitution; } }
@@ -57,7 +57,15 @@
 
         #region My Profile View
         public static string ProfileViewTitle { get { return Resources.ProfileViewTitle; } }
-
+        public static string FirstNameText { get { return Resources.FirstNameText; } }
+        public static string LastNameText { get { return Resources.LastNameText; } }
+        public static string InstitutionText { get { return Resources.InstitutionText; } }
+        public static string AreaText { get { return Resources.AreaText; } }
+        public static string PositionText { get { return Resources.PositionText; } }
+        public static string PhoneText { get { return Resources.PhoneText; } }
+        public static string CellPhoneText { get { return Resources.CellPhoneText; } }
+        public static string EmailText { get { return Resources.EmailText; } }
+        public static string UserImageText { get { return Resources.UserImageText; } }
         #endregion
 
         #endregion

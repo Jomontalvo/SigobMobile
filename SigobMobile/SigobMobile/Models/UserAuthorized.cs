@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Newtonsoft.Json;
+    using Helpers;
 
     /// <summary>
     /// User authorized model
@@ -164,6 +165,19 @@
 
         [JsonProperty("imagenUsuario")]
         public string UserImage { get; set; }
+    }
+
+    public class ProfileLabels
+    {
+        public string FirstNameLabel { get { return Languages.FirstNameText; } }
+        public string LastNameLabel { get { return Languages.LastNameText; } }
+        public string InstitutionLabel { get { return Languages.InstitutionText; } }
+        public string AreaLabel { get { return Languages.AreaText; } }
+        public string PositionLabel { get { return Languages.PositionText; } }
+        public string PhoneLabel { get { return Languages.PhoneText ; } }
+        public string CellPhoneLabel { get { return Languages.CellPhoneText; } }
+        public string EmailLabel { get { return Languages.EmailText; } }
+        public string UserImageLabel { get { return Languages.UserImageText; } }
     }
 }
 

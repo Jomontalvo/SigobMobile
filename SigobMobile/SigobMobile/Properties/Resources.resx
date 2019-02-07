@@ -225,4 +225,42 @@
     <value>My Profile</value>
     <comment>SIGOB Profile View Title.</comment>
   </data>
+    
+    
+  <data name="FirstNameText" xml:space="preserve">
+    <value>First name</value>
+    <comment>Text for First Name profile Label; .</comment>
+  </data>
+  <data name="LastNameText" xml:space="preserve">
+    <value>Last name</value>
+    <comment>Text for Last Name profile Label; .</comment>
+  </data>
+  <data name="InstitutionText" xml:space="preserve">
+    <value>Institution</value>
+    <comment>Text for Institution profile label.</comment>
+  </data>
+  <data name="PositionText" xml:space="preserve">
+    <value>Position</value>
+    <comment>Text for Position (Role) Profile label.</comment>
+  </data>
+  <data name="AreaText" xml:space="preserve">
+    <value>Section</value>
+    <comment>Text for Area/Section Profile label.</comment>
+  </data>
+  <data name="PhoneText" xml:space="preserve">
+    <value>Phone</value>
+    <comment>Text for Phone profile label.</comment>
+  </data>
+  <data name="CellPhoneText" xml:space="preserve">
+    <value>Cellphone</value>
+    <comment>Text for CellPhone profile label.</comment>
+  </data>
+  <data name="EmailText" xml:space="preserve">
+    <value>E-mail</value>
+    <comment>Text for email profile label.</comment>
+  </data>
+  <data name="UserImageText" xml:space="preserve">
+    <value>Touch for change user image.</value>
+    <comment>Text for image of user profile label.</comment>
+  </data>
 </root>

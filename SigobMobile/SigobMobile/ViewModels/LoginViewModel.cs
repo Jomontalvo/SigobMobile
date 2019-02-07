@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
-    using Services;
+    using Helpers;
     using Models;
+    using Services;
     using Views;
     using Xamarin.Forms;
-    using Helpers;
 
     public class LoginViewModel : BaseViewModel
     {
