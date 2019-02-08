@@ -158,7 +158,7 @@
         public string Phone { get; set; }
 
         [JsonProperty("celular")]
-        public object CellPhone { get; set; }
+        public string CellPhone { get; set; }
 
         [JsonProperty("email")]
         public string Email { get; set; }

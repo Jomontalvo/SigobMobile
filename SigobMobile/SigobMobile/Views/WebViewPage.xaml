@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lang="clr-namespace:SigobMobile.Helpers;assembly=SigobMobile"
+             x:Class="SigobMobile.Views.WebViewPage"
+             FlowDirection="{x:Static Device.FlowDirection}"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="{Binding WebViewTitle}">
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding WebViewViewModel}">
+            <ActivityIndicator
+                IsRunning="{Binding IsRunning, Mode=TwoWay}">
+            </ActivityIndicator>
+            <WebView
+                HeightRequest="1000" 
+                WidthRequest="1000" 
+                Source="{Binding UrlSource}" 
+                Navigated="webviewNavigated" 
+                Navigating="webviewNavigating">
+            </WebView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

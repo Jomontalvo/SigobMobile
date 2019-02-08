@@ -209,6 +209,24 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string PersonalDataGroup {
+            get {
+                return ResourceManager.GetString("PersonalDataGroup", resourceCulture);
+            }
+        }
+        
+        public static string OfficialDataGroup {
+            get {
+                return ResourceManager.GetString("OfficialDataGroup", resourceCulture);
+            }
+        }
+        
+        public static string ContactDataGroup {
+            get {
+                return ResourceManager.GetString("ContactDataGroup", resourceCulture);
+            }
+        }
+        
         public static string FirstNameText {
             get {
                 return ResourceManager.GetString("FirstNameText", resourceCulture);

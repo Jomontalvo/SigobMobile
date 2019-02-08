@@ -57,6 +57,9 @@
 
         #region My Profile View
         public static string ProfileViewTitle { get { return Resources.ProfileViewTitle; } }
+        public static string PersonalDataGroup { get { return Resources.PersonalDataGroup; } }
+        public static string OfficialDataGroup { get { return Resources.OfficialDataGroup; } }
+        public static string ContactDataGroup { get { return Resources.ContactDataGroup; } }
         public static string FirstNameText { get { return Resources.FirstNameText; } }
         public static string LastNameText { get { return Resources.LastNameText; } }
         public static string InstitutionText { get { return Resources.InstitutionText; } }

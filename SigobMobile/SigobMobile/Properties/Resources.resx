@@ -225,8 +225,18 @@
     <value>My Profile</value>
     <comment>SIGOB Profile View Title.</comment>
   </data>
-    
-    
+  <data name="PersonalDataGroup" xml:space="preserve">
+    <value>Personal information</value>
+    <comment>Text for Group Personal Information</comment>
+  </data>
+  <data name="OfficialDataGroup" xml:space="preserve">
+    <value>Official information</value>
+    <comment>Text for Group Official Information.</comment>
+  </data>
+  <data name="ContactDataGroup" xml:space="preserve">
+    <value>Contact information</value>
+    <comment>Text for Group Contact Information.</comment>
+  </data>
   <data name="FirstNameText" xml:space="preserve">
     <value>First name</value>
     <comment>Text for First Name profile Label; .</comment>
