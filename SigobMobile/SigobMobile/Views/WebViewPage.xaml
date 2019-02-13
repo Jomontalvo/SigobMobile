@@ -15,9 +15,7 @@
             <WebView
                 HeightRequest="1000" 
                 WidthRequest="1000" 
-                Source="{Binding UrlSource}" 
-                Navigated="webviewNavigated" 
-                Navigating="webviewNavigating">
+                Source="{Binding UrlSource}">
             </WebView>
         </StackLayout>
     </ContentPage.Content>

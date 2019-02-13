@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:lang="clr-namespace:SigobMobile.Helpers;assembly=SigobMobile"
              x:Class="SigobMobile.Views.LoginPage" 
              FlowDirection="{x:Static Device.FlowDirection}"
@@ -64,31 +65,21 @@
                         </Image>
                     </Grid>
                 </StackLayout>
-                <Label
-                    FlowDirection="MatchParent"
-                    HorizontalOptions="FillAndExpand"
-                    LineBreakMode="TailTruncation"
-                    Margin="0,5,0,0">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span
-                                FontSize="Default"
-                                Text="{Binding Institution, Mode=TwoWay}"
-                                TextColor="Gray"
-                                TextDecorations="None">
-                                <Span.GestureRecognizers>
-                                    <TapGestureRecognizer 
-                                        Command="{Binding SelectApiCommand}" />
-                                </Span.GestureRecognizers>
-                            </Span>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <BoxView
-                    BackgroundColor="{StaticResource accesoryGray}"
-                    HeightRequest="1"
+                <ContentView
                     HorizontalOptions="FillAndExpand">
-                </BoxView>
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding SelectApiCommand}">
+                        </TapGestureRecognizer>
+                    </ContentView.GestureRecognizers>
+                    <Entry
+                        FlowDirection="MatchParent"
+                        HorizontalOptions="FillAndExpand"
+                        IsEnabled="false"
+                        Margin="0,5"
+                        Placeholder="{Binding Institution, Mode=TwoWay}}">
+                    </Entry>
+                </ContentView>
                 <ActivityIndicator 
                     IsRunning="{Binding IsRunning, Mode=TwoWay}">
                 </ActivityIndicator>

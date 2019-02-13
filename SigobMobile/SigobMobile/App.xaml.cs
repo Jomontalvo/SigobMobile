@@ -3,13 +3,14 @@
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace SigobMobile
 {
-    using Views;
     using Helpers;
     using Models;
-    using Xamarin.Forms;
     using ViewModels;
+    using Views;
+    using Xamarin.Forms;
+    using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
-    public partial class App : Application
+    public partial class App : Xamarin.Forms.Application
     {
         #region Global Constants and Variables
 
@@ -71,25 +72,9 @@ namespace SigobMobile
         }
 
         /// <summary>
-        /// Gets or sets the auth token.
+        /// Gets or sets the language error.
         /// </summary>
-        /// <value>The auth token.</value>
-        public static string AuthToken
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the data base token.
-        /// </summary>
-        /// <value>The data base token.</value>
-        public static string DataBaseToken
-        {
-            get;
-            set;
-        }
-
+        /// <value>The language error.</value>
         public string LanguageError
         {
             get;
@@ -104,7 +89,7 @@ namespace SigobMobile
         /// Gets or sets the navigator property.
         /// </summary>
         /// <value>The navigator.</value>
-        public static NavigationPage Navigator { get; internal set; }
+        public static Xamarin.Forms.NavigationPage Navigator { get; internal set; }
         public static MasterDetailSigobPage Master { get; internal set; }
         #endregion
 
@@ -117,16 +102,29 @@ namespace SigobMobile
         {
             InitializeComponent();
             //Settings.Token = Settings.DbToken = Settings.InstitutionLogo =  string.Empty;
-            if (string.IsNullOrEmpty(Settings.Token)) this.MainPage = new NavigationPage(new LoginPage());
+            if (string.IsNullOrEmpty(Settings.Token))
+            {
+                var navPage = new Xamarin.Forms.NavigationPage(new LoginPage());
+                navPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetPrefersLargeTitles(true);
+                navPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetLargeTitleDisplay(LargeTitleDisplayMode.Automatic);
+                this.MainPage = navPage;
+            }
             else
             {
                 var mainViewModel = MainViewModel.GetInstance();
+
                 mainViewModel.Token = Settings.Token;
                 mainViewModel.DbToken = Settings.DbToken;
+
                 //Load Master Detail with ApplicationsPage
-                mainViewModel.Applications = new ApplicationsViewModel();
                 mainViewModel.Menu = new MenuViewModel();
-                Application.Current.MainPage = new MasterDetailSigobPage();
+                mainViewModel.Applications = new ApplicationsViewModel();
+                var mainSigobPage = new MasterDetailSigobPage();
+                //NavigatePage properties IphoneX
+                Xamarin.Forms.NavigationPage navDetailPage = (Xamarin.Forms.NavigationPage)mainSigobPage.Detail;
+                navDetailPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetPrefersLargeTitles(true);
+                navDetailPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetLargeTitleDisplay(LargeTitleDisplayMode.Automatic);
+                Xamarin.Forms.Application.Current.MainPage = mainSigobPage;
             }
         }
         #endregion

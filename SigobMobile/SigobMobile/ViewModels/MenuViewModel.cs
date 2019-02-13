@@ -5,13 +5,12 @@
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using Helpers;
-    using Plugin.Media.Abstractions;
     using Services;
     using Models;
     using Views;
-    using Views.ManagementCenter;
     using Xamarin.Forms;
     using System.Collections.ObjectModel;
+    using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
     public class MenuViewModel : BaseViewModel
     {
@@ -26,8 +25,7 @@
         private string userFullName;
         private bool isRunning;
         private UserBasicProfile profile;
-        //private MediaFile fileAvatar;
-        //private MediaFile fileLogo;
+
         #endregion
 
         #region Properties
@@ -79,11 +77,11 @@
         /// </summary>
         private async void GetProfile()
         {
-            //#TODO Change to Profile Page
+            await App.Navigator.PopToRootAsync(false);
             App.Master.IsPresented = false;
             var profileViewModel = MainViewModel.GetInstance();
-            profileViewModel.CalendarMonth = new CalendarMonthViewModel();
-            await App.Navigator.PushAsync(new CalendarMonthPage());
+            profileViewModel.Profile  = new ProfileViewModel();
+            await App.Navigator.PushAsync(new ProfilePage(),false);
         }
         #endregion
 
@@ -96,7 +94,11 @@
             Settings.Token = Settings.DbToken = Settings.InstitutionLogo = string.Empty;
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.Token = mainViewModel.DbToken = string.Empty;
-            Application.Current.MainPage = new NavigationPage(new LoginPage());
+            //Return to ViewModel support iPhoneX LargeTitle
+            var navLoginPage = new Xamarin.Forms.NavigationPage(new LoginPage());
+            navLoginPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetPrefersLargeTitles(true);
+            navLoginPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetLargeTitleDisplay(LargeTitleDisplayMode.Automatic);
+            Xamarin.Forms.Application.Current.MainPage = navLoginPage;
         }
 
         /// <summary>
@@ -109,7 +111,7 @@
             if (!connection.IsSuccess)
             {
                 this.IsRunning = false;
-                await Application.Current.MainPage.DisplayAlert(
+                await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(
                     Languages.Error,
                     connection.Message,
                     Languages.Cancel);
@@ -129,7 +131,8 @@
             if (!response.IsSuccess)
             {
                 this.IsRunning = false;
-                await Application.Current.MainPage.DisplayAlert(
+                var apiErrorResult = response.Result;
+                await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(
                     Languages.Error,
                     response.Message,
                     Languages.Cancel);

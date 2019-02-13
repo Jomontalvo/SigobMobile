@@ -253,18 +253,16 @@
                 {
                     this.IsRunning = false;
                     this.IsEnabled = true;
-                    await Application.Current.MainPage.DisplayAlert(
+                    await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(
                         title: Languages.Error,
                         message: Languages.InvalidCredentials,
                         cancel: Languages.Cancel);
                     return;
                 }
-                //Get Session Model, Token and DbToken for logged user.
+                //Get Session Model (Token and DbToken for logged user).
                 var sucessLogin = (SessionSigob)response.Result;
                 App.ActiveSession = sucessLogin;
-                // Headers values to all API secured calls
-                App.AuthToken = sucessLogin.AuthToken;
-                App.DataBaseToken = sucessLogin.DatabaseToken;
+
                 #endregion
 
                 #region Navigate to SIGOB Main Page
@@ -277,6 +275,7 @@
                 Settings.Token = sucessLogin.AuthToken;
                 Settings.DbToken = sucessLogin.DatabaseToken;
                 Settings.InstitutionLogo = sucessLogin.InstitutionLogo;
+
                 //Load Master Detail with ApplicationsPage
                 mainViewModel.Applications = new ApplicationsViewModel();
                 mainViewModel.Menu = new MenuViewModel();
@@ -287,7 +286,7 @@
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert(
+                await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(
                       title: Languages.Error,
                       message: ex.Message,
                       cancel: Languages.Cancel);

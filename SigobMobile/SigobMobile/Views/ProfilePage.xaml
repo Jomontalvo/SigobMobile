@@ -1,89 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:lang="clr-namespace:SigobMobile.Helpers" 
              xmlns:ctrls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin" 
-             x:Class="SigobMobile.Views.ProfilePage"
+             x:Class="SigobMobile.Views.ProfilePage" 
              BindingContext="{Binding Main, Source={StaticResource Locator}}" 
-             BackgroundColor="{StaticResource defaultBackgroundView}" 
-             Title="{lang:Translate ProfileViewTitle}">
+             BackgroundColor="{StaticResource defaultBackgroundView}"
+             FlowDirection="{x:Static Device.FlowDirection}"
+             Title="{lang:Translate ProfileViewTitle}"
+             ios:Page.UseSafeArea="true"
+             ios:NavigationPage.PrefersLargeTitles="true"
+             ios:Page.LargeTitleDisplay="Automatic">
     <ContentPage.Content>
-        <StackLayout
-            BindingContext="{Binding Profile}"
-            Padding="5,5,5,5"
+        <StackLayout 
+            BindingContext="{Binding Profile}" 
+            Padding="0,5,0,0" 
             VerticalOptions="StartAndExpand">
-            <ctrls:CircleImage Aspect="AspectFill" HorizontalOptions="Center" Source="{Binding ImageSource}">
-                <ctrls:CircleImage.WidthRequest>
-                    <OnPlatform x:TypeArguments="x:Double">
-                        <On Platform="Android, iOS">150</On>
-                        <On Platform="WinPhone">200</On>
-                    </OnPlatform>
-                </ctrls:CircleImage.WidthRequest>
-                <ctrls:CircleImage.HeightRequest>
-                    <OnPlatform x:TypeArguments="x:Double">
-                        <On Platform="Android, iOS">150</On>
-                        <On Platform="WinPhone">200</On>
-                    </OnPlatform>
-                </ctrls:CircleImage.HeightRequest>
-                <ctrls:CircleImage.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ChangeUserImageCommand}" />
-                </ctrls:CircleImage.GestureRecognizers>
-            </ctrls:CircleImage>
             <ActivityIndicator 
-                IsVisible="false" 
+                IsVisible="{Binding IsRunning, Mode=TwoWay}" 
                 IsRunning="{Binding IsRunning, Mode=TwoWay}">
             </ActivityIndicator>
-            <TableView
-                Intent="Data">
-                <TableRoot>
-                    <TableSection 
-                        Title="{lang:Translate PersonalDataGroup}">
-                        <EntryCell 
-                            Label="{lang:Translate FirstNameText}" 
-                            Placeholder="{lang:Translate FirstNameText}" 
-                            Text="{Binding FirstName, Mode=TwoWay }">
-                        </EntryCell>
-                        <EntryCell 
-                            Label="{lang:Translate LastNameText}" 
-                            Placeholder="{lang:Translate LastNameText}" 
-                            Text="{Binding LastName, Mode=TwoWay }">
-                        </EntryCell>
-                    </TableSection>
-                    <TableSection
-                        Title="{lang:Translate OfficialDataGroup}">
-                        <TextCell
-                            Text="{Binding Position}"
-                            Detail="{lang:Translate PositionText}">                         
-                        </TextCell>
-                        <TextCell
-                            Text="{Binding Section}"
-                            Detail="{lang:Translate AreaText}">                         
-                        </TextCell>
-                        <TextCell
-                            Text="{Binding Institution}"
-                            Detail="{lang:Translate InstitutionText}">                         
-                        </TextCell>
-                    </TableSection>
-                    <TableSection
-                        Title="{lang:Translate ContactDataGroup}">
-                        <EntryCell
-                            Label="{lang:Translate PhoneText}"
-                            Placeholder="{lang:Translate PhoneText}"
-                            Text="{Binding Phone}">
-                        </EntryCell>
-                        <EntryCell
-                            Label="{lang:Translate CellPhoneText}"
-                            Placeholder="{lang:Translate CellPhoneText}"
-                            Text="{Binding CellPhone}">
-                        </EntryCell>
-                        <EntryCell
-                            Label="{lang:Translate EmailText}"
-                            Placeholder="{lang:Translate EmailText}"
-                            Text="{Binding Email}">
-                        </EntryCell>
-                    </TableSection>
-                </TableRoot>
-            </TableView>
+            <ScrollView>
+                <StackLayout>
+                    <ctrls:CircleImage 
+                        Aspect="AspectFill" 
+                        HorizontalOptions="Center" 
+                        Source="{Binding ImageSource}">
+                        <ctrls:CircleImage.WidthRequest>
+                            <OnPlatform x:TypeArguments="x:Double">
+                                <On Platform="Android, iOS">150</On>
+                                <On Platform="WinPhone">200</On>
+                            </OnPlatform>
+                        </ctrls:CircleImage.WidthRequest>
+                        <ctrls:CircleImage.HeightRequest>
+                            <OnPlatform x:TypeArguments="x:Double">
+                                <On Platform="Android, iOS">150</On>
+                                <On Platform="WinPhone">200</On>
+                            </OnPlatform>
+                        </ctrls:CircleImage.HeightRequest>
+                        <ctrls:CircleImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ChangeUserImageCommand}" />
+                        </ctrls:CircleImage.GestureRecognizers>
+                    </ctrls:CircleImage>
+                    <Label 
+                        FontAttributes="Bold" 
+                        FontSize="Default" 
+                        HorizontalOptions="CenterAndExpand" 
+                        Text="{Binding Position}" TextColor="Gray">
+                    </Label>
+                    <Label 
+                        FontAttributes="None" 
+                        FontSize="Small" 
+                        HorizontalOptions="CenterAndExpand" 
+                        Text="{Binding Section}" 
+                        TextColor="{StaticResource darkGray}">
+                    </Label>
+                    <Label 
+                        FontAttributes="None" 
+                        FontSize="Small" 
+                        HorizontalOptions="CenterAndExpand" 
+                        Text="{Binding Institution}" 
+                        TextColor="{StaticResource darkGray}">
+                    </Label>
+                    <TableView 
+                        Intent="Data" 
+                        HasUnevenRows="true" 
+                        VerticalOptions="StartAndExpand">
+                        <TableRoot>
+                            <TableSection 
+                                Title="{lang:Translate PersonalDataGroup}">
+                                <EntryCell 
+                                    Label="{lang:Translate FirstNameText}" 
+                                    Placeholder="{lang:Translate FirstNameText}" 
+                                    Text="{Binding FirstName, 
+                                    Mode=TwoWay }">
+                                </EntryCell>
+                                <EntryCell 
+                                    Label="{lang:Translate LastNameText}" 
+                                    Placeholder="{lang:Translate LastNameText}" 
+                                    Text="{Binding LastName, Mode=TwoWay }">
+                                </EntryCell>
+                            </TableSection>
+                            <TableSection 
+                                Title="{lang:Translate ContactDataGroup}">
+                                <EntryCell 
+                                    Keyboard="Telephone" 
+                                    Label="{lang:Translate PhoneText}" 
+                                    Placeholder="{lang:Translate PhoneText}" 
+                                    Text="{Binding Phone}">
+                                </EntryCell>
+                                <EntryCell 
+                                    Keyboard="Telephone" 
+                                    Label="{lang:Translate CellPhoneText}" 
+                                    Placeholder="{lang:Translate CellPhoneText}" 
+                                    Text="{Binding CellPhone}">
+                                </EntryCell>
+                                <EntryCell 
+                                    Keyboard="Email" 
+                                    Label="{lang:Translate EmailText}" 
+                                    Placeholder="{lang:Translate EmailText}" 
+                                    Text="{Binding Email}">
+                                </EntryCell>
+                            </TableSection>
+                        </TableRoot>
+                    </TableView>
+                </StackLayout>
+            </ScrollView>
+            <Grid
+                RowSpacing="0" ColumnSpacing="0"
+                VerticalOptions="End">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid 
+                    BackgroundColor="{StaticResource softGray}"
+                    Grid.Row="0" 
+                    VerticalOptions="End" 
+                    RowSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Text="Page1" />
+                    <Button Grid.Column="1" Text="Page2" />
+                    <Button Grid.Column="2" Text="Page3" />
+                </Grid>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

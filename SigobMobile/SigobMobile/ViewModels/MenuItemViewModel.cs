@@ -1,22 +1,17 @@
 ﻿namespace SigobMobile.ViewModels
 {
-    using System.Linq;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using Helpers;
     using Views;
-    using Xamarin.Forms;
+    using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
-    public class MenuItemViewModel
+    public class MenuItemViewModel : BaseViewModel
     {
         #region Properties
         public string Icon { get; set; }
         public string Title { get; set; }
         public string PageName { get; set; }
-        public string CurrentPageName
-        {
-            get { return App.Navigator.CurrentPage.ToString().Split('.').Last(); }
-        }
         #endregion
 
         #region Commands
@@ -27,25 +22,21 @@
                 return new RelayCommand(Navigate);
             }
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Navigate to Detail Page selected in MenuPage
         /// </summary>
-        private void Navigate()
+        private async void Navigate()
         {
-            App.Master.IsPresented = false;
             var mainViewModel = MainViewModel.GetInstance();
+            await App.Navigator.PopToRootAsync(false);
             switch (this.PageName)
             {
-                case "ApplicationsPage":
-                    mainViewModel.Applications = new ApplicationsViewModel();
-                    App.Master.Detail = new NavigationPage(new ApplicationsPage());
-                    //App.Navigator.PushAsync(appPage);
-                    break;
                 case "SecurityPage":
                     mainViewModel.Security = new SecurityViewModel();
-                    App.Master.Detail = new NavigationPage(new SecurityPage());
-                    //App.Navigator.PushAsync(secPage);
+                    await App.Navigator.PushAsync(new SecurityPage(), false);
                     break;
                 case "WebViewHelpPage":
                     break;
@@ -57,9 +48,16 @@
                     //Delete persist token values
                     Settings.Token = Settings.DbToken = Settings.InstitutionLogo = string.Empty;
                     mainViewModel.Token = mainViewModel.DbToken = string.Empty;
-                    Application.Current.MainPage = new NavigationPage(new LoginPage());
+                    //Navigate to Login 
+                    var navLoginPage = new Xamarin.Forms.NavigationPage(new LoginPage());
+                    navLoginPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetPrefersLargeTitles(true);
+                    navLoginPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetLargeTitleDisplay(LargeTitleDisplayMode.Automatic);
+                    Xamarin.Forms.Application.Current.MainPage  = navLoginPage;
+                    break;
+                default:
                     break;
             }
+            App.Master.IsPresented = false;
         }
         #endregion
     }

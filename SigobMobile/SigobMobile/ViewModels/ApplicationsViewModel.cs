@@ -1,16 +1,15 @@
 ﻿namespace SigobMobile.ViewModels
 {
-    using Helpers;
-    using Services;
-    using Models;
-    using Xamarin.Forms;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
+    using Helpers;
+    using Models;
+    using Services;
     using Views;
-    using System;
+    using Xamarin.Forms;
 
     public class ApplicationsViewModel : BaseViewModel
     {

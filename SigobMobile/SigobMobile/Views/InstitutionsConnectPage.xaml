@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              x:Class="SigobMobile.Views.InstitutionsConnectPage"
              xmlns:lang="clr-namespace:SigobMobile.Helpers;assembly=SigobMobile"
              BackgroundColor="{StaticResource defaultBackgroundView}"
              BindingContext="{Binding Main, Source={StaticResource Locator}}" 
-             Title="{lang:Translate InstitutionsConnect}">
+             Title="{lang:Translate InstitutionsConnect}"
+             ios:Page.UseSafeArea="true">
     <ContentPage.Content>
-        <StackLayout
+        <ScrollView
             BindingContext="{Binding InstitutionsConnect}">
             <ListView
                 x:Name="list"
                 GroupDisplayBinding="{Binding Key}"
                 IsGroupingEnabled="true"
-                IsPullToRefreshEnabled="true"
+                IsPullToRefreshEnabled="false"
                 IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
                 ItemsSource="{Binding InstitutionsGrouped}"
                 RefreshCommand="{Binding RefreshCommand}">
@@ -38,7 +40,7 @@
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
-                    </ListView.GroupHeaderTemplate>
+                </ListView.GroupHeaderTemplate>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                        <ViewCell>
@@ -64,6 +66,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

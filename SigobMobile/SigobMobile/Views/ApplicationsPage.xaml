@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:lang="clr-namespace:SigobMobile.Helpers"
              x:Class="SigobMobile.Views.ApplicationsPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              BackgroundColor="{StaticResource defaultBackgroundView}"
-             Title="{lang:Translate ApplicationsViewTitle}">
+             FlowDirection="{x:Static Device.FlowDirection}"
+             ios:Page.UseSafeArea="true">
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             BindingContext="{Binding Applications}"
@@ -16,9 +18,17 @@
             Priority="0">
         </ToolbarItem>
     </ContentPage.ToolbarItems>
+    <NavigationPage.TitleView>
+        <Image
+            HeightRequest="{OnPlatform Android=30, iOS=40, Default=40}"
+            HorizontalOptions="StartAndExpand"
+            Source="ic_top_brand">
+        </Image>
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <StackLayout
-            BindingContext="{Binding Applications}">
+            BindingContext="{Binding Applications}"
+            Padding="0,5,0,0">
             <ListView
                 IsPullToRefreshEnabled="true"
                 HasUnevenRows="true"

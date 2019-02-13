@@ -170,7 +170,7 @@
     <comment>Login View Title</comment>
   </data>
   <data name="InstitutionsConnect" xml:space="preserve">
-    <value>Institutions to connect</value>
+    <value>Institutions</value>
     <comment>List of Institutions to connect (API Service)</comment>
   </data>
   <data name="UserValidationMsg" xml:space="preserve">
@@ -226,15 +226,15 @@
     <comment>SIGOB Profile View Title.</comment>
   </data>
   <data name="PersonalDataGroup" xml:space="preserve">
-    <value>Personal information</value>
+    <value>Edit personal information</value>
     <comment>Text for Group Personal Information</comment>
   </data>
   <data name="OfficialDataGroup" xml:space="preserve">
-    <value>Official information</value>
+    <value>View Official information</value>
     <comment>Text for Group Official Information.</comment>
   </data>
   <data name="ContactDataGroup" xml:space="preserve">
-    <value>Contact information</value>
+    <value>Edit contact information</value>
     <comment>Text for Group Contact Information.</comment>
   </data>
   <data name="FirstNameText" xml:space="preserve">
