@@ -273,4 +273,16 @@
     <value>Touch for change user image.</value>
     <comment>Text for image of user profile label.</comment>
   </data>
+  <data name="AgendaViewTitle" xml:space="preserve">
+    <value>Agenda</value>
+    <comment>Text for agenda calendar page.</comment>
+  </data>
+  <data name="InstructionsViewTitle" xml:space="preserve">
+    <value>Instructions</value>
+    <comment>Text for image of user profile label.</comment>
+  </data>
+  <data name="TasksViewTitle" xml:space="preserve">
+    <value>Tasks</value>
+    <comment>Text for image of user profile label.</comment>
+  </data>
 </root>

@@ -23,6 +23,7 @@
             <Color x:Key="softGray">#F9F9F9</Color>
             <Color x:Key="accesoryGray">#C1C6CE</Color>
             <Color x:Key="grayContent">#8E8E8E</Color>
+            <Color x:Key="grayBorder">#E6E6E6</Color>
         </ResourceDictionary>
         <ResourceDictionary>
             <ControlTemplate x:Key="HeaderSigobTemplate">

@@ -280,5 +280,23 @@ namespace SigobMobile.Properties {
                 return ResourceManager.GetString("UserImageText", resourceCulture);
             }
         }
+        
+        public static string AgendaViewTitle {
+            get {
+                return ResourceManager.GetString("AgendaViewTitle", resourceCulture);
+            }
+        }
+        
+        public static string InstructionsViewTitle {
+            get {
+                return ResourceManager.GetString("InstructionsViewTitle", resourceCulture);
+            }
+        }
+        
+        public static string TasksViewTitle {
+            get {
+                return ResourceManager.GetString("TasksViewTitle", resourceCulture);
+            }
+        }
     }
 }

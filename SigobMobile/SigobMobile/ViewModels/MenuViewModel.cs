@@ -1,16 +1,16 @@
 ﻿namespace SigobMobile.ViewModels
 {
     using System;
+    using System.Collections.ObjectModel;
     using System.IO;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using Helpers;
-    using Services;
     using Models;
+    using Services;
     using Views;
     using Xamarin.Forms;
-    using System.Collections.ObjectModel;
-    using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
+    //using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
     public class MenuViewModel : BaseViewModel
     {
@@ -96,8 +96,8 @@
             mainViewModel.Token = mainViewModel.DbToken = string.Empty;
             //Return to ViewModel support iPhoneX LargeTitle
             var navLoginPage = new Xamarin.Forms.NavigationPage(new LoginPage());
-            navLoginPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetPrefersLargeTitles(true);
-            navLoginPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetLargeTitleDisplay(LargeTitleDisplayMode.Automatic);
+            //navLoginPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetPrefersLargeTitles(true);
+            //navLoginPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetLargeTitleDisplay(LargeTitleDisplayMode.Automatic);
             Xamarin.Forms.Application.Current.MainPage = navLoginPage;
         }
 

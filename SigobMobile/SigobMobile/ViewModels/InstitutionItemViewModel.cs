@@ -33,6 +33,7 @@
             //Come back to Login
             var login = MainViewModel.GetInstance().Login;
             login.Institution = $"{this.Institution} ({this.ISOCountryCode})";
+            login.IsSelectedColor = Color.Black;
             await Application.Current.MainPage.Navigation.PopAsync() ;
         }
         #endregion

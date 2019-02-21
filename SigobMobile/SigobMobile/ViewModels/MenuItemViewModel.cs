@@ -4,6 +4,8 @@
     using GalaSoft.MvvmLight.Command;
     using Helpers;
     using Views;
+    using Views.ManagementCenter;
+    using Xamarin.Forms;
     using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
     public class MenuItemViewModel : BaseViewModel
@@ -36,7 +38,7 @@
             {
                 case "SecurityPage":
                     mainViewModel.Security = new SecurityViewModel();
-                    await App.Navigator.PushAsync(new SecurityPage(), false);
+                    await App.Navigator.PushAsync(new SecurityPage(),false);
                     break;
                 case "WebViewHelpPage":
                     break;

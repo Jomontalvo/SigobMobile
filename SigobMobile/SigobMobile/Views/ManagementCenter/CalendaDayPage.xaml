@@ -1,18 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage 
+<ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    x:Class="SigobMobile.Views.ManagementCenter.CalendaDayPage"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:telerikInput="clr-namespace:Telerik.XamarinForms.Input;assembly=Telerik.XamarinForms.Input"
     xmlns:lang="clr-namespace:SigobMobile.Helpers"
-    BindingContext="{Binding Main, Source={StaticResource Locator}}" 
-    Title="Diario">
+    x:Class="SigobMobile.Views.ManagementCenter.CalendaDayPage"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}"
+    Title="{lang:Translate AgendaViewTitle}"
+    ios:Page.UseSafeArea="true">
+    <!-- ToolBarItems -->
+    <ContentPage.ToolbarItems>
+        <!-- Instructions -->
+        <ToolbarItem 
+            BindingContext="{Binding CalendarDay}"
+            Command="{Binding InstructionsListCommand}"
+            Icon="ic_bt_instructions"
+            Order="Primary" 
+            Priority="0">
+        </ToolbarItem>
+        <!-- Add Button -->
+        <ToolbarItem 
+            BindingContext="{Binding CalendarDay}"
+            Command="{Binding AddCommand}"
+            Icon="ic_bt_add"
+            Order="Primary"
+            Priority="1">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <!-- Content Page -->
     <ContentPage.Content>
-        <StackLayout
+        <AbsoluteLayout
             BindingContext="{Binding CalendarDay}">
-            <Label
-                VerticalOptions="CenterAndExpand"
-                Text="Candario día">
-            </Label>
-        </StackLayout>
+            <ActivityIndicator
+                AbsoluteLayout.LayoutFlags="All"
+                AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                IsVisible="{Binding IsRunning, Mode=TwoWay}"
+                IsRunning="{Binding IsRunning, Mode=TwoWay}">
+            </ActivityIndicator>
+            <!--Calendar-->
+            <telerikInput:RadCalendar 
+                x:Name="calendar" 
+                ViewMode="Day"
+                SchedulingUiEnabled="false"
+                AppointmentsSource="{Binding Events}">
+                <telerikInput:RadCalendar.AppointmentsStyle>
+                    <telerikInput:CalendarAppointmentsStyle DisplayMode="Shape" />
+                </telerikInput:RadCalendar.AppointmentsStyle>
+                <telerikInput:RadCalendar.DayViewSettings>
+                    <telerikInput:DayViewSettings
+                        DayStartTime="05:00:00"
+                        DayEndTime="23:00:00"
+                        TimelineInterval="1:00">
+                    </telerikInput:DayViewSettings>
+                </telerikInput:RadCalendar.DayViewSettings>
+            </telerikInput:RadCalendar>
+            <!--Button Add-->
+            <ImageButton
+                AbsoluteLayout.LayoutBounds="1,1,-1,-1"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                BackgroundColor="Transparent"
+                Command="{Binding AddCommand}"
+                Margin="0,0,10,50"
+                Source="ic_bt_add_fill"
+                WidthRequest="50"
+                IsVisible="{OnPlatform Android=true, iOS=false, UWP=true}">
+            </ImageButton>
+            <!--Bottom ToolBar-->
+            <Grid
+                AbsoluteLayout.LayoutBounds=".5,1,1,.1"
+                AbsoluteLayout.LayoutFlags="All"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                VerticalOptions="End">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <BoxView
+                    HeightRequest="1"
+                    BackgroundColor="{StaticResource accesoryGray}"
+                    Grid.Row="0">
+                </BoxView>
+                <Grid 
+                    BackgroundColor="{StaticResource softGray}"
+                    Grid.Row="1" 
+                    VerticalOptions="End" 
+                    RowSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button 
+                        BackgroundColor="Transparent" 
+                        BindingContext="{x:Reference Name=calendar}"
+                        Grid.Column="0"
+                        Text="Today">
+                    </Button>
+                    <Button BackgroundColor="{StaticResource softGray}" Grid.Column="1" Text="Calendars" />
+                    <Button BackgroundColor="{StaticResource softGray}" Grid.Column="2" Text="Filters" />
+                </Grid>
+            </Grid>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

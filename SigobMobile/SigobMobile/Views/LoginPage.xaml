@@ -2,11 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:telerikInput="clr-namespace:Telerik.XamarinForms.Input;assembly=Telerik.XamarinForms.Input"
              xmlns:lang="clr-namespace:SigobMobile.Helpers;assembly=SigobMobile"
              x:Class="SigobMobile.Views.LoginPage" 
              FlowDirection="{x:Static Device.FlowDirection}"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="{lang:Translate LoginViewTitle}">
+    <ContentPage.Resources>
+        <telerikInput:BorderStyle 
+            x:Key="EntryBorderStyle" 
+            BorderThickness="0">
+        </telerikInput:BorderStyle>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView
             BindingContext="{Binding Login}">
@@ -21,33 +28,43 @@
                     HorizontalOptions="CenterAndExpand" 
                     Text="{lang:Translate EnterCredentials}">
                 </Label>
-                <Entry
+                <telerikInput:RadEntry
+                    BorderStyle="{StaticResource EntryBorderStyle}"
                     FlowDirection="{x:Static Device.FlowDirection}"
                     FontSize="Default"
                     Keyboard="{Binding KeyLowerCases, Mode=Default}"
                     Margin="0,5" 
-                    Placeholder="{lang:Translate Username}"
+                    Padding="0"
+                    WatermarkText="{lang:Translate Username}"
                     Text="{Binding UserName, Mode=TwoWay}">
-                </Entry> 
+                </telerikInput:RadEntry>
+                <BoxView 
+                    BackgroundColor="{StaticResource grayBorder}"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand">
+                </BoxView>
                 <StackLayout 
                     Grid.Row="2" 
                     Grid.Column="1">
-                    <Grid>
+                    <Grid
+                        Padding="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions >
-                        <Entry
+                        <telerikInput:RadEntry
+                            BorderStyle="{StaticResource EntryBorderStyle}"
                             FlowDirection="{x:Static Device.FlowDirection}"
                             Focused ="Handle_Focused"
                             Grid.Column="0" 
                             Grid.ColumnSpan="2"
                             IsPassword="{Binding IsPassword, Mode=TwoWay}"
                             Margin="0,5"
-                            Placeholder="{lang:Translate Password}"
+                            Padding="0"
+                            WatermarkText="{lang:Translate Password}"
                             Text="{Binding Password, Mode=TwoWay}"
                             x:Name="Password">
-                        </Entry>
+                        </telerikInput:RadEntry>
                         <Image 
                             Grid.Column="1"
                             HorizontalOptions="End"
@@ -64,6 +81,11 @@
                             </Image.GestureRecognizers>
                         </Image>
                     </Grid>
+                    <BoxView 
+                        BackgroundColor="{StaticResource grayBorder}"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand">
+                    </BoxView>
                 </StackLayout>
                 <ContentView
                     HorizontalOptions="FillAndExpand">
@@ -72,14 +94,22 @@
                             Command="{Binding SelectApiCommand}">
                         </TapGestureRecognizer>
                     </ContentView.GestureRecognizers>
-                    <Entry
+                    <telerikInput:RadEntry
+                        BorderStyle="{StaticResource EntryBorderStyle}"
                         FlowDirection="MatchParent"
                         HorizontalOptions="FillAndExpand"
                         IsEnabled="false"
                         Margin="0,5"
-                        Placeholder="{Binding Institution, Mode=TwoWay}}">
-                    </Entry>
+                        Padding="0"
+                        WatermarkText="{Binding Institution, Mode=TwoWay}}"
+                        WatermarkTextColor="{Binding IsSelectedColor}">
+                    </telerikInput:RadEntry>
                 </ContentView>
+                <BoxView 
+                    BackgroundColor="{StaticResource grayBorder}"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand">
+                </BoxView>
                 <ActivityIndicator 
                     IsRunning="{Binding IsRunning, Mode=TwoWay}">
                 </ActivityIndicator>

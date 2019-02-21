@@ -1,9 +1,5 @@
 ﻿namespace SigobMobile.Views
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using Models;
-    using ViewModels;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 

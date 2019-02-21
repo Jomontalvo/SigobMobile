@@ -9,6 +9,8 @@
     using Models;
     using System.IO;
     using System.Diagnostics;
+    using Plugin.Media;
+    using Plugin.Media.Abstractions;
 
     public class ProfileViewModel : BaseViewModel
     {
@@ -19,6 +21,7 @@
 
         #region Attributes
         private ImageSource imageSource;
+        private MediaFile file;
         private bool isRunning;
         private bool isEnabled;
         private UserBasicProfile userProfile;
@@ -127,10 +130,53 @@
         /// </summary>
         private async void ChangeUserImage()
         {
-            await Application.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    Languages.Success,
-                    Languages.Accept);
+            await CrossMedia.Current.Initialize();
+
+            if (CrossMedia.Current.IsCameraAvailable &&
+                CrossMedia.Current.IsTakePhotoSupported)
+            {
+                var source = await Application.Current.MainPage.DisplayActionSheet(
+                    "que quiere?", //Languages.SourceImageQuestion,
+                    Languages.Cancel,
+                    null,
+                    "De galería",//Languages.FromGallery,
+                    "De Cámara");  //Languages.FromCamera);
+
+                if (source == Languages.Cancel)
+                {
+                    this.file = null;
+                    return;
+                }
+
+                if (source == "De Cámara" ) //Languages.FromCamera)
+                {
+                    this.file = await CrossMedia.Current.TakePhotoAsync(
+                        new StoreCameraMediaOptions
+                        {
+                            Directory = "Sample",
+                            Name = "test.jpg",
+                            PhotoSize = PhotoSize.Small,
+                        }
+                    );
+                }
+                else
+                {
+                    this.file = await CrossMedia.Current.PickPhotoAsync();
+                }
+            }
+            else
+            {
+                this.file = await CrossMedia.Current.PickPhotoAsync();
+            }
+
+            if (this.file != null)
+            {
+                this.ImageSource = ImageSource.FromStream(() =>
+                {
+                    var stream = file.GetStream();
+                    return stream;
+                });
+            }
         }
 
         /// <summary>

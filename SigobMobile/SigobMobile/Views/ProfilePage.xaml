@@ -9,9 +9,9 @@
              BackgroundColor="{StaticResource defaultBackgroundView}"
              FlowDirection="{x:Static Device.FlowDirection}"
              Title="{lang:Translate ProfileViewTitle}"
-             ios:Page.UseSafeArea="true"
-             ios:NavigationPage.PrefersLargeTitles="true"
-             ios:Page.LargeTitleDisplay="Automatic">
+             ios:Page.UseSafeArea="true">
+    <!--ios:NavigationPage.PrefersLargeTitles="true"-->
+    <!--ios:Page.LargeTitleDisplay="Automatic"-->
     <ContentPage.Content>
         <StackLayout 
             BindingContext="{Binding Profile}" 

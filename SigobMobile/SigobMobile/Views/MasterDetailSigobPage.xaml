@@ -8,7 +8,7 @@
     <MasterDetailPage.Detail>
         <NavigationPage 
             x:Name="Navigator"
-            ios:NavigationPage.PrefersLargeTitles="true"
+            ios:NavigationPage.PrefersLargeTitles="false"
             ios:Page.LargeTitleDisplay="Never">
             <x:Arguments>
                 <pages:ApplicationsPage />

@@ -49,4 +49,5 @@
             get { return (IsVisible) ? $"ic_app_{TypeApplication}" : $"ic_app_{TypeApplication}_gray"; }
         }
     }
+
 }

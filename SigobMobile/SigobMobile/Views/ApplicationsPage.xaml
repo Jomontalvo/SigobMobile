@@ -8,20 +8,26 @@
              BackgroundColor="{StaticResource defaultBackgroundView}"
              FlowDirection="{x:Static Device.FlowDirection}"
              ios:Page.UseSafeArea="true">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="ImageHorizontalLayout" x:TypeArguments="LayoutOptions" iOS="CenterAndExpand" Android="StartAndExpand" Default="Center"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
+        <!-- Search -->
         <ToolbarItem 
             BindingContext="{Binding Applications}"
             Command="{Binding SearchCommand}"
             Icon="ic_bt_search"
             Name="{lang:Translate Yes}" 
-            Order="Primary" 
+            Order="Default" 
             Priority="0">
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <NavigationPage.TitleView>
         <Image
-            HeightRequest="{OnPlatform Android=30, iOS=40, Default=40}"
-            HorizontalOptions="StartAndExpand"
+            HeightRequest="{OnPlatform Android= 30, iOS=30, Default=40}"
+            HorizontalOptions="{StaticResource ImageHorizontalLayout}"
             Source="ic_top_brand">
         </Image>
     </NavigationPage.TitleView>
@@ -84,9 +90,11 @@
                                         FontSize="Medium"
                                         FontAttributes="Bold"
                                         HorizontalOptions="StartAndExpand"
+                                        LineBreakMode="WordWrap"
                                         Text="{Binding ApplicationName}"
                                         VerticalOptions="Center"
-                                        VerticalTextAlignment="Center">
+                                        VerticalTextAlignment="Center"
+                                        WidthRequest="180">
                                     </Label>
                                     <StackLayout 
                                         Grid.Column="0"

@@ -122,8 +122,8 @@ namespace SigobMobile
                 var mainSigobPage = new MasterDetailSigobPage();
                 //NavigatePage properties IphoneX
                 Xamarin.Forms.NavigationPage navDetailPage = (Xamarin.Forms.NavigationPage)mainSigobPage.Detail;
-                navDetailPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetPrefersLargeTitles(true);
-                navDetailPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetLargeTitleDisplay(LargeTitleDisplayMode.Automatic);
+                navDetailPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetPrefersLargeTitles(false);
+                navDetailPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetLargeTitleDisplay(LargeTitleDisplayMode.Never);
                 Xamarin.Forms.Application.Current.MainPage = mainSigobPage;
             }
         }

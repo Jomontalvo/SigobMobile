@@ -112,7 +112,7 @@
         }
 
         /// <summary>
-        /// Convert List InsttitutionConnect Model to InstitutionItemView model.
+        /// Convert List InstitutionConnect Model to InstitutionItemView model.
         /// </summary>
         /// <returns>The institution item view mode.</returns>
         private IEnumerable<ApplicationItemViewModel> ToApplicationItemViewModel()

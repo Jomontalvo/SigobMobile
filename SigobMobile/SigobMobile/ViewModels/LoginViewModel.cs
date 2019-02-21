@@ -25,6 +25,7 @@
         private bool isPassword;
         private string iconViewPassword;
         private bool isVisibleIconViewPassword;
+        private Color isSelectedColor;
         #endregion
 
         #region Properties
@@ -81,8 +82,11 @@
             get;
             set;
         }
-
-
+        public Color IsSelectedColor
+        {
+            get { return this.isSelectedColor; }
+            set { SetValue(ref this.isSelectedColor, value); }
+        }
         #endregion
 
         #region Constructors
@@ -94,9 +98,8 @@
             this.IsEnabled = true;
             this.IsPassword = true;
             this.IconViewPassword = "ic_eye_closed";
-            //Test data
-            //this.UserName = "isma";
-            //this.Password = "1234";
+            //Institution data
+            this.isSelectedColor = Color.LightGray;
             this.Institution = Languages.SelectApiInstitution;
         }
         #endregion

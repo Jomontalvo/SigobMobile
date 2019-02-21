@@ -31,6 +31,10 @@ namespace SigobMobile.ViewModels
         public CalendarWeekViewModel CalendarWeek { get; set; }
 
         public CalendarMonthViewModel CalendarMonth { get; set; }
+
+        public InstructionsViewModel Instructions { get; set;  }
+
+        public InstructionViewModel Instruction { get; set; }
         #endregion
 
         #region Constructors

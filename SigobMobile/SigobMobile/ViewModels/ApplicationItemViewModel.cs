@@ -28,8 +28,8 @@
             switch (this.TypeApplication)
             {
                 case TypeApplication.ManagementCenter:
-                    appViewModel.Profile = new ProfileViewModel();
-                    await App.Navigator.PushAsync(new ProfilePage());
+                    appViewModel.CalendarDay = new CalendarDayViewModel();
+                    await App.Navigator.PushAsync(new CalendaDayPage(),true);
                     break;
                 case TypeApplication.Tasks:
                     break;

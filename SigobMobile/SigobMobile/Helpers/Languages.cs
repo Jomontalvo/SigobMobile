@@ -71,6 +71,10 @@
         public static string UserImageText { get { return Resources.UserImageText; } }
         #endregion
 
+        #region Calendar Agenda View
+        public static string AgendaViewTitle { get { return Resources.AgendaViewTitle; } }
+        #endregion
+
         #endregion
     }
 }
