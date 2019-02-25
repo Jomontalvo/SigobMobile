@@ -17,6 +17,23 @@
 
         #region Languages Properties (Main Dictionary)
 
+        #region Management Status (all componentes)
+        public static string InManagementStatus { get { return Resources.InManagementStatus; } }
+        public static string SuspendedStatus { get { return Resources.SuspendedStatus; } }
+        public static string CompletedStatus { get { return Resources.CompletedStatus; } }
+        public static string AllStatus { get { return Resources.AllStatus; } }
+        #endregion
+
+        #region Deadline Status (all components)
+        public static string PendingStatus { get { return Resources.PendingStatus; } }
+        public static string CloseToDeadlinedStatus { get { return Resources.CloseToDeadlinedStatus; } }
+        public static string ExpiredStatus { get { return Resources.ExpiredStatus; } }
+        #endregion
+
+        #region Search Tools
+        public static string SearchPlaceHolder { get { return Resources.SearchPlaceHolder; } }
+        #endregion
+
         #region Dialog Box
         public static string Accept { get { return Resources.Accept; } }
         public static string Cancel { get { return Resources.Cancel; } }

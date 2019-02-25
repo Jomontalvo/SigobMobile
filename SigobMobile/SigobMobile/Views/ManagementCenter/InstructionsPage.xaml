@@ -4,33 +4,108 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:telerikDataControls="clr-namespace:Telerik.XamarinForms.DataControls;assembly=Telerik.XamarinForms.DataControls"
              xmlns:telerikListView="clr-namespace:Telerik.XamarinForms.DataControls.ListView;assembly=Telerik.XamarinForms.DataControls"
-             xmlns:lang="clr-namespace:SigobMobile.Helpers;assembly=SigobMobile"
+             xmlns:telerikListViewCommands="clr-namespace:Telerik.XamarinForms.DataControls.ListView.Commands;assembly=Telerik.XamarinForms.DataControls"
+             xmlns:telerikInput="clr-namespace:Telerik.XamarinForms.Input;assembly=Telerik.XamarinForms.Input"
+             xmlns:lang="clr-namespace:SigobMobile.Helpers"
              x:Class="SigobMobile.Views.ManagementCenter.InstructionsPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Instructions"
              ios:Page.UseSafeArea="true">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Key="ListViewItemTemplate">
+            <DataTemplate x:Key="ListViewInstructionItemTemplate">
                 <telerikListView:ListViewTemplateCell>
                     <telerikListView:ListViewTemplateCell.View>
-                        <Grid Padding="16, 0, 0, 0" BackgroundColor="#F1F2F5">
-                            <Label Text="{Binding Title}" TextColor="#6F6F70" FontSize="Small" />
+                        <Grid 
+                            Padding="4, 8, 4, 8" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <StackLayout
+                                Grid.Column="0"
+                                Grid.RowSpan="3"
+                                WidthRequest="20"
+                                Padding="2,2,0,2">
+                                <BoxView
+                                    Color="{Binding StatusColor}"
+                                    CornerRadius="6"
+                                    HeightRequest="12"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Start"
+                                    WidthRequest="12">
+                                </BoxView>
+                                <Image
+                                    HorizontalOptions="Center"
+                                    Source="ic_notify_task"
+                                    IsVisible="{Binding TasksAmount, Converter={StaticResource intToBool}}">
+                                </Image>
+                                <Image
+                                    HorizontalOptions="Center"
+                                    Source="ic_notify_attachment"
+                                    IsVisible="{Binding DocumentsAmount, Converter={StaticResource intToBool}}">
+                                </Image>
+                            </StackLayout>
+                            <Label
+                                Grid.Column="1"
+                                Grid.Row="0"
+                                LineBreakMode="WordWrap"
+                                Text="{Binding Title}" 
+                                FontSize="Small">
+                            </Label>
+                            <Label
+                                Grid.Column="1"
+                                Grid.Row="1"
+                                FontSize="Small"
+                                TextColor="{StaticResource darkGray}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding EndDate, StringFormat='{0:MMMM dd, yyyy}'}"/>
+                                        <Span Text=" | "/>
+                                        <Span Text="{Binding TasksAmount}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label
+                                Grid.Column="1"
+                                Grid.Row="2"
+                                MaxLines="2"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding Description}"
+                                TextColor="{StaticResource darkGray}"
+                                FontSize="Small"
+                                VerticalTextAlignment="Start">
+                            </Label>
+                            <Image
+                                Grid.Column="2"
+                                Grid.Row="0"
+                                Grid.RowSpan="3"
+                                HeightRequest="24"
+                                Source="ic_chevron"
+                                VerticalOptions="Center">
+                            </Image>
                         </Grid>
                     </telerikListView:ListViewTemplateCell.View>
                 </telerikListView:ListViewTemplateCell>
             </DataTemplate>
             <DataTemplate x:Key="ListViewGroupHeaderTemplate">
-                <Grid BackgroundColor="#f1f2f5">
+                <Grid BackgroundColor="{StaticResource softGray}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Label 
-                        Text="&#x25B8;" 
-                        Margin="8, 12, 0, 6" 
+                        Text="&#x25B8;"
+                        Margin="8, 4, 0, 0" 
                         TextColor="DarkGray" 
-                        FontSize="Medium">
+                        FontSize="Large"
+                        FontAttributes="Bold">
                         <Label.Triggers>
                             <DataTrigger 
                                 TargetType="Label" 
@@ -44,27 +119,105 @@
                         </Label.Triggers>
                     </Label>
                     <Label 
-                        Margin="0, 12, 0, 6" 
+                        Margin="0, 10, 0, 0" 
                         Text="{Binding }" 
-                        Grid.Column="1" 
-                        TextColor="DarkGray" 
-                        FontSize="Medium" 
-                        HorizontalOptions="Start" >
+                        Grid.Column="1"
+                        FontSize="Small"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Start">
                     </Label>
                 </Grid>
             </DataTemplate>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ContentPage.Content>
-        <telerikDataControls:RadListView 
-            x:Name="listView" 
+    <ContentPage.ToolbarItems>
+        <!-- Search -->
+        <ToolbarItem 
             BindingContext="{Binding Instructions}"
-            ItemsSource="{Binding InstructionsItems}"
-            ItemTemplate="{StaticResource ListViewItemTemplate}"
-            GroupHeaderTemplate="{StaticResource ListViewGroupHeaderTemplate}">
+            Command="{Binding SwitchSearchCommand}"
+            Icon="ic_bt_search"
+            Name="{lang:Translate Yes}" 
+            Order="Primary" 
+            Priority="0">
+        </ToolbarItem>
+        <ToolbarItem 
+            BindingContext="{Binding Instructions}"
+            Command="{Binding AddCommand}"
+            Icon="ic_bt_add"
+            Order="Primary"
+            Priority="1">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid
+        Padding="0,0"
+        BindingContext="{Binding Instructions}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <SearchBar
+            BackgroundColor="{StaticResource grayBorder}"
+            FontSize="Small"
+            Grid.Row="0"
+            IsVisible="{Binding IsVisibleSearch}"
+            Placeholder="{lang:Translate SearchPlaceHolder}"
+            SearchCommand="{Binding SearchCommand}"
+            Text="{Binding Filter, Mode=TwoWay}">
+        </SearchBar>
+        <telerikInput:RadSegmentedControl
+            Grid.Row="1"
+            HeightRequest="28"
+            ItemsSource="{Binding InstructionStatus}"
+            Margin="10,1,10,1"
+            SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
+            VerticalOptions="Start">
+        </telerikInput:RadSegmentedControl>
+        <telerikDataControls:RadListView 
+            Grid.Row="2"
+            GroupHeaderTemplate="{StaticResource ListViewGroupHeaderTemplate}"
+            IsPullToRefreshEnabled="true"
+            IsPullToRefreshActive="{Binding IsRefreshing, Mode=TwoWay}"
+            ItemsSource="{Binding InstructionItems}"
+            ItemTemplate="{StaticResource ListViewInstructionItemTemplate}">
             <telerikDataControls:RadListView.GroupDescriptors>
                 <telerikListView:PropertyGroupDescriptor PropertyName="ManagementCenterName"/>
             </telerikDataControls:RadListView.GroupDescriptors>
+            <telerikDataControls:RadListView.Commands>
+                <telerikListViewCommands:ListViewUserCommand Id="PullToRefreshRequested" Command="{Binding RefreshCommand}" />
+                <telerikListViewCommands:ListViewUserCommand Id="ItemTap" Command="{Binding ItemTapCommand}" />
+            </telerikDataControls:RadListView.Commands>
         </telerikDataControls:RadListView>
-    </ContentPage.Content>
+        <!--  << listview-gettingstarted-listview-xaml  -->
+        <Grid
+            AbsoluteLayout.LayoutBounds=".5,1,1,.1"
+            AbsoluteLayout.LayoutFlags="All"
+            ColumnSpacing="0"
+            Grid.Row="3"
+            RowSpacing="0"
+            VerticalOptions="End">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <BoxView
+                HeightRequest="1"
+                BackgroundColor="{StaticResource accesoryGray}"
+                Grid.Row="0">
+            </BoxView>
+            <Grid 
+                BackgroundColor="{StaticResource softGray}"
+                Grid.Row="1" 
+                VerticalOptions="End" 
+                RowSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button BackgroundColor="{StaticResource softGray}" Grid.Column="0" Text="Calendars" />
+                <Button BackgroundColor="{StaticResource softGray}" Grid.Column="1" Text="Filters" />
+            </Grid>
+        </Grid>
+    </Grid>
 </ContentPage>

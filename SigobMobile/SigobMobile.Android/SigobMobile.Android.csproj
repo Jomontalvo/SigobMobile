@@ -211,6 +211,7 @@
     <AndroidResource Include="Resources\drawable\ic_top_brand.png" />
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\drawable\ic_bt_add_fill.png" />
+    <AndroidResource Include="Resources\drawable\ic_chevron.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

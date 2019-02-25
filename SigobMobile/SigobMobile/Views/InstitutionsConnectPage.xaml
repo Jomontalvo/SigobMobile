@@ -15,7 +15,7 @@
                 x:Name="list"
                 GroupDisplayBinding="{Binding Key}"
                 IsGroupingEnabled="true"
-                IsPullToRefreshEnabled="false"
+                IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
                 ItemsSource="{Binding InstitutionsGrouped}"
                 RefreshCommand="{Binding RefreshCommand}">

@@ -95,10 +95,11 @@
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.Token = mainViewModel.DbToken = string.Empty;
             //Return to ViewModel support iPhoneX LargeTitle
-            var navLoginPage = new Xamarin.Forms.NavigationPage(new LoginPage());
+            App.Navigator.PopToRootAsync();
+            var navLoginPage = new NavigationPage(new LoginPage());
             //navLoginPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetPrefersLargeTitles(true);
             //navLoginPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetLargeTitleDisplay(LargeTitleDisplayMode.Automatic);
-            Xamarin.Forms.Application.Current.MainPage = navLoginPage;
+            Application.Current.MainPage = navLoginPage;
         }
 
         /// <summary>
@@ -111,7 +112,8 @@
             if (!connection.IsSuccess)
             {
                 this.IsRunning = false;
-                await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(
+                if (Application.Current.MainPage != null)
+                await Application.Current.MainPage.DisplayAlert(
                     Languages.Error,
                     connection.Message,
                     Languages.Cancel);

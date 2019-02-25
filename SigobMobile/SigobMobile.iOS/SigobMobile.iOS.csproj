@@ -258,6 +258,9 @@
     <BundleResource Include="Resources\ic_bt_add%402x.png" />
     <BundleResource Include="Resources\ic_bt_instructions.png" />
     <BundleResource Include="Resources\ic_bt_instructions%402x.png" />
+    <BundleResource Include="Resources\ic_chevron.png" />
+    <BundleResource Include="Resources\ic_notify_task.png" />
+    <BundleResource Include="Resources\ic_notify_attachment.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

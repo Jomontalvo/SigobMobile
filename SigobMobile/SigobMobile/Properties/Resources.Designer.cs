@@ -298,5 +298,53 @@ namespace SigobMobile.Properties {
                 return ResourceManager.GetString("TasksViewTitle", resourceCulture);
             }
         }
+        
+        public static string SearchPlaceHolder {
+            get {
+                return ResourceManager.GetString("SearchPlaceHolder", resourceCulture);
+            }
+        }
+        
+        public static string InManagementStatus {
+            get {
+                return ResourceManager.GetString("InManagementStatus", resourceCulture);
+            }
+        }
+        
+        public static string PendingStatus {
+            get {
+                return ResourceManager.GetString("PendingStatus", resourceCulture);
+            }
+        }
+        
+        public static string CloseToDeadlinedStatus {
+            get {
+                return ResourceManager.GetString("CloseToDeadlinedStatus", resourceCulture);
+            }
+        }
+        
+        public static string ExpiredStatus {
+            get {
+                return ResourceManager.GetString("ExpiredStatus", resourceCulture);
+            }
+        }
+        
+        public static string CompletedStatus {
+            get {
+                return ResourceManager.GetString("CompletedStatus", resourceCulture);
+            }
+        }
+        
+        public static string SuspendedStatus {
+            get {
+                return ResourceManager.GetString("SuspendedStatus", resourceCulture);
+            }
+        }
+        
+        public static string AllStatus {
+            get {
+                return ResourceManager.GetString("AllStatus", resourceCulture);
+            }
+        }
     }
 }

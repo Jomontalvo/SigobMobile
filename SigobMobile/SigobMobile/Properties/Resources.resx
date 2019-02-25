@@ -285,4 +285,36 @@
     <value>Tasks</value>
     <comment>Text for image of user profile label.</comment>
   </data>
+  <data name="SearchPlaceHolder" xml:space="preserve">
+    <value>Type pattern...</value>
+    <comment>Text for search place holder.</comment>
+  </data>
+  <data name="InManagementStatus" xml:space="preserve">
+    <value>Management</value>
+    <comment>Text for Item in management status.</comment>
+  </data>
+  <data name="PendingStatus" xml:space="preserve">
+    <value>Pending</value>
+    <comment>Text for Item in pending status.</comment>
+  </data>
+  <data name="CloseToDeadlinedStatus" xml:space="preserve">
+    <value>Close to deadline</value>
+    <comment>Text for Item close to deadline time status.</comment>
+  </data>  
+  <data name="ExpiredStatus" xml:space="preserve">
+    <value>Over deadline</value>
+    <comment>Text for Item in expired time status.</comment>
+  </data>
+  <data name="CompletedStatus" xml:space="preserve">
+    <value>Completed</value>
+    <comment>Text for Item competed.</comment>
+  </data>
+  <data name="SuspendedStatus" xml:space="preserve">
+    <value>Suspended</value>
+    <comment>Text for Item competed.</comment>
+  </data>
+  <data name="AllStatus" xml:space="preserve">
+    <value>All</value>
+    <comment>Text for All items wherever status.</comment>
+  </data>
 </root>

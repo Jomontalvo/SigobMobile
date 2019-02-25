@@ -5,6 +5,7 @@ namespace SigobMobile.Models
     using System;
     using System.Collections.Generic;
     using Newtonsoft.Json;
+    using Xamarin.Forms;
 
     /// <summary>
     /// Participant of Instruction Model
@@ -76,6 +77,12 @@ namespace SigobMobile.Models
 
         [JsonProperty("participantes")]
         public List<Participant> Participants { get; set; }
-
+        /// <summary>
+        /// Gets the color of the status.
+        /// </summary>
+        /// <value>The color of the status.</value>
+        public Color StatusColor => (ExpiryPeriod < 0) ? 
+            (Color)Application.Current.Resources["red"] :
+            (Color)Application.Current.Resources["green"];
     }
 }
