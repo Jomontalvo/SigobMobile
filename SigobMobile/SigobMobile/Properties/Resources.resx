@@ -317,4 +317,80 @@
     <value>All</value>
     <comment>Text for All items wherever status.</comment>
   </data>
+  <data name="Day" xml:space="preserve">
+    <value>day</value>
+    <comment>Day text.</comment>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>days</value>
+    <comment>Days text.</comment>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>month</value>
+    <comment>Month text.</comment>
+  </data>
+  <data name="Months" xml:space="preserve">
+    <value>months</value>
+    <comment>Months text.</comment>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>year</value>
+    <comment>Year text.</comment>
+  </data>
+  <data name="Years" xml:space="preserve">
+    <value>years</value>
+    <comment>Years text.</comment>
+  </data>
+  <data name="CalendarsTitle" xml:space="preserve">
+    <value>Calendars</value>
+    <comment>Text of Calendars Page Title or Filter Option.</comment>
+  </data>
+  <data name="Calendar" xml:space="preserve">
+    <value>calendar</value>
+    <comment>Calendar text.</comment>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>Today</value>
+    <comment>Today text.</comment>
+  </data>
+  <data name="DailyView" xml:space="preserve">
+    <value>Daily</value>
+    <comment>Daily text.</comment>
+  </data>
+  <data name="MonthlyView" xml:space="preserve">
+    <value>Monthly</value>
+    <comment>Monthly text.</comment>
+  </data>
+  <data name="MultiDayView" xml:space="preserve">
+    <value>Multi-day</value>
+    <comment>Multiple days text.</comment>
+  </data>
+  <data name="AnnualView" xml:space="preserve">
+    <value>Annual</value>
+    <comment>Annual view text.</comment>
+  </data>
+  <data name="AgendaListView" xml:space="preserve">
+    <value>Agenda</value>
+    <comment>List of events text.</comment>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Filters</value>
+    <comment>Filters text.</comment>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Select all</value>
+    <comment>Select all option text.</comment>
+  </data>
+  <data name="UnselectAll" xml:space="preserve">
+    <value>Unselect all</value>
+    <comment>Select all option text.</comment>
+  </data>
+  <data name="ShowAll" xml:space="preserve">
+    <value>Show all</value>
+    <comment>View all option text.</comment>
+  </data>
+  <data name="HideAll" xml:space="preserve">
+    <value>Hide all</value>
+    <comment>Hide all option text.</comment>
+  </data>
 </root>

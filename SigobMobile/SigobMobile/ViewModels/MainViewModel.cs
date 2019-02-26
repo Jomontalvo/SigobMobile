@@ -26,6 +26,10 @@ namespace SigobMobile.ViewModels
 
         public ProfileViewModel Profile { get; set; }
 
+        public CalendarsViewModel Calendars { get; set; }
+
+        public CalendarFiltersViewModel CalendarFilters { get; set; }
+
         public CalendarDayViewModel CalendarDay { get; set;  }
 
         public CalendarWeekViewModel CalendarWeek { get; set; }

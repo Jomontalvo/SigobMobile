@@ -261,6 +261,7 @@
     <BundleResource Include="Resources\ic_chevron.png" />
     <BundleResource Include="Resources\ic_notify_task.png" />
     <BundleResource Include="Resources\ic_notify_attachment.png" />
+    <BundleResource Include="Resources\ic_color_palette.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

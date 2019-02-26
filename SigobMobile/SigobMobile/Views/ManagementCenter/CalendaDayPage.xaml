@@ -96,10 +96,20 @@
                         BackgroundColor="Transparent" 
                         BindingContext="{x:Reference Name=calendar}"
                         Grid.Column="0"
-                        Text="Today">
+                        Text="{lang:Translate Today}">
                     </Button>
-                    <Button BackgroundColor="{StaticResource softGray}" Grid.Column="1" Text="Calendars" />
-                    <Button BackgroundColor="{StaticResource softGray}" Grid.Column="2" Text="Filters" />
+                    <Button 
+                        BackgroundColor="{StaticResource softGray}"
+                        Command="{Binding OpenCalendarsCommand}"
+                        Grid.Column="1" 
+                        Text="{lang:Translate CalendarsTitle}">
+                    </Button>
+                    <Button 
+                        BackgroundColor="{StaticResource softGray}"
+                        Command="{Binding OpenFitersCommand}"
+                        Grid.Column="2" 
+                        Text="{lang:Translate Filters}">
+                    </Button>
                 </Grid>
             </Grid>
         </AbsoluteLayout>

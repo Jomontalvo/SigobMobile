@@ -346,5 +346,119 @@ namespace SigobMobile.Properties {
                 return ResourceManager.GetString("AllStatus", resourceCulture);
             }
         }
+        
+        public static string Day {
+            get {
+                return ResourceManager.GetString("Day", resourceCulture);
+            }
+        }
+        
+        public static string Days {
+            get {
+                return ResourceManager.GetString("Days", resourceCulture);
+            }
+        }
+        
+        public static string Month {
+            get {
+                return ResourceManager.GetString("Month", resourceCulture);
+            }
+        }
+        
+        public static string Months {
+            get {
+                return ResourceManager.GetString("Months", resourceCulture);
+            }
+        }
+        
+        public static string Year {
+            get {
+                return ResourceManager.GetString("Year", resourceCulture);
+            }
+        }
+        
+        public static string Years {
+            get {
+                return ResourceManager.GetString("Years", resourceCulture);
+            }
+        }
+        
+        public static string CalendarsTitle {
+            get {
+                return ResourceManager.GetString("CalendarsTitle", resourceCulture);
+            }
+        }
+        
+        public static string Calendar {
+            get {
+                return ResourceManager.GetString("Calendar", resourceCulture);
+            }
+        }
+        
+        public static string Today {
+            get {
+                return ResourceManager.GetString("Today", resourceCulture);
+            }
+        }
+        
+        public static string DailyView {
+            get {
+                return ResourceManager.GetString("DailyView", resourceCulture);
+            }
+        }
+        
+        public static string MonthlyView {
+            get {
+                return ResourceManager.GetString("MonthlyView", resourceCulture);
+            }
+        }
+        
+        public static string MultiDayView {
+            get {
+                return ResourceManager.GetString("MultiDayView", resourceCulture);
+            }
+        }
+        
+        public static string AnnualView {
+            get {
+                return ResourceManager.GetString("AnnualView", resourceCulture);
+            }
+        }
+        
+        public static string AgendaListView {
+            get {
+                return ResourceManager.GetString("AgendaListView", resourceCulture);
+            }
+        }
+        
+        public static string Filters {
+            get {
+                return ResourceManager.GetString("Filters", resourceCulture);
+            }
+        }
+        
+        public static string SelectAll {
+            get {
+                return ResourceManager.GetString("SelectAll", resourceCulture);
+            }
+        }
+        
+        public static string UnselectAll {
+            get {
+                return ResourceManager.GetString("UnselectAll", resourceCulture);
+            }
+        }
+        
+        public static string ShowAll {
+            get {
+                return ResourceManager.GetString("ShowAll", resourceCulture);
+            }
+        }
+        
+        public static string HideAll {
+            get {
+                return ResourceManager.GetString("HideAll", resourceCulture);
+            }
+        }
     }
 }

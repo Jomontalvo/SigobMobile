@@ -78,7 +78,7 @@
         {
             selectedDate = DateTime.Today;
             apiService = new ApiService();
-            LoadAppointments(selectedDate.GetValueOrDefault());
+            this.LoadAppointments(selectedDate.GetValueOrDefault());
         }
         #endregion
 
@@ -151,6 +151,28 @@
             string yy = dateParameter.Year.ToString();
             return $"{yy}{mn}{dy}";
         }
+
+        private async void OpenCalendars()
+        {
+            var calendarsMainViewModel = MainViewModel.GetInstance();
+            calendarsMainViewModel.Calendars = new CalendarsViewModel();
+            await Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new CalendarsPage()));
+        }
+
+        private void OpenFilters()
+        {
+            var filtersMainViewModel = MainViewModel.GetInstance();
+            filtersMainViewModel.CalendarFilters = new CalendarFiltersViewModel();
+            Application.Current.MainPage.Navigation.PushModalAsync(new CalendarFiltersPage());
+        }
+
+        private async void InstructionsList()
+        {
+            var instructionMainViewModel = MainViewModel.GetInstance();
+            instructionMainViewModel.Instructions = new InstructionsViewModel();
+            await App.Navigator.PushAsync(new InstructionsPage());
+            return;
+        }
         #endregion
 
         #region Commands
@@ -161,13 +183,20 @@
                 return new RelayCommand(InstructionsList);
             }
         }
-
-        private async void InstructionsList()
+        public ICommand OpenCalendarsCommand
         {
-            var instructionMainViewModel = MainViewModel.GetInstance();
-            instructionMainViewModel.Instructions = new InstructionsViewModel();
-            await App.Navigator.PushAsync(new InstructionsPage());
-            return;
+            get
+            {
+                return new RelayCommand(OpenCalendars);
+            }
+        }
+
+        public ICommand OpenFiltersCommand
+        {
+            get
+            {
+                return new RelayCommand(OpenFilters);
+            }
         }
         #endregion
 

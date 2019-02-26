@@ -23,9 +23,10 @@
         #region Attributes
         private ObservableCollection<Instruction> instructions;
         private ObservableCollection<string> instructionStatus;
-        private bool isRefreshing;
-        private bool isVisibleSearch;
         private int selectedIndex;
+        private bool isRefreshing;
+        private bool isRefreshingWhenNotPull;
+        private bool isVisibleSearch;
         private string filter;
         #endregion
 
@@ -45,6 +46,11 @@
         {
             get { return this.isRefreshing; }
             set { SetValue(ref this.isRefreshing, value); }
+        }
+        public bool IsRefreshingWhenNotPull
+        {
+            get { return this.isRefreshingWhenNotPull; }
+            set { SetValue(ref this.isRefreshingWhenNotPull, value); }
         }
         public bool IsVisibleSearch
         {
@@ -74,7 +80,7 @@
         #region Constructors
         public InstructionsViewModel()
         {
-            this.IsRefreshing = true;
+            this.isRefreshingWhenNotPull = true;
             this.apiService = new ApiService();
             this.SelectedIndex = 0;
             this.RefreshCommand = new Command<PullToRefreshRequestedCommandContext>(this.Refresh);
@@ -91,7 +97,7 @@
         /// </summary>
         private async void LoadItems()
         {
-            await this.LoadAllInstructions();
+            await this.LoadInstructions(false);
         }
 
         /// <summary>
@@ -109,15 +115,16 @@
         /// </summary>
         private async void OnSelectionChanged()
         {
-            await this.LoadAllInstructions();
+            await this.LoadInstructions(false);
         }
 
         /// <summary>
         /// Loads all instructions.
         /// </summary>
-        private async Task LoadAllInstructions()
+        private async Task LoadInstructions( bool LoadFromPullRehresh)
         {
             this.IsRefreshing = true;
+            this.IsRefreshingWhenNotPull = !LoadFromPullRehresh;
             var connection = await this.apiService.CheckConnection();
             if (!connection.IsSuccess)
             {
@@ -158,7 +165,8 @@
                 }
             }
             this.InstructionList = new List<Instruction>(InstructionItems);
-            this.IsRefreshing = false;
+            this.IsRefreshing = this.IsRefreshingWhenNotPull = false;
+
         }
 
         /// <summary>
@@ -176,7 +184,8 @@
                 this.InstructionItems = new ObservableCollection<Instruction>(
                     this.InstructionList.Where(
                         l => l.Title.ToLower().Contains(this.Filter.ToLower()) ||
-                             l.Description.ToLower().Contains(this.Filter.ToLower())));
+                             l.Description.ToLower().Contains(this.Filter.ToLower()) ||
+                             l.ProgrammerFullName.ToLower().Contains(this.Filter.ToLower())));
             }
         }
 
@@ -205,7 +214,8 @@
         /// <param name="context">Context.</param>
         private async void Refresh(PullToRefreshRequestedCommandContext context)
         {
-            await LoadAllInstructions();
+
+            await LoadInstructions(true);
         }
         #endregion
 

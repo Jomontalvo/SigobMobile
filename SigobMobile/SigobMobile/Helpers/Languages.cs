@@ -24,6 +24,15 @@
         public static string AllStatus { get { return Resources.AllStatus; } }
         #endregion
 
+        #region Time Measures
+        public static string Day { get { return Resources.Day; } }
+        public static string Days { get { return Resources.Days; } }
+        public static string Month { get { return Resources.Month; } }
+        public static string Months { get { return Resources.Months; } }
+        public static string Year { get { return Resources.Year; } }
+        public static string Years { get { return Resources.Years; } }
+        #endregion
+
         #region Deadline Status (all components)
         public static string PendingStatus { get { return Resources.PendingStatus; } }
         public static string CloseToDeadlinedStatus { get { return Resources.CloseToDeadlinedStatus; } }
@@ -32,6 +41,11 @@
 
         #region Search Tools
         public static string SearchPlaceHolder { get { return Resources.SearchPlaceHolder; } }
+        public static string Filters { get { return Resources.Filters; } }
+        public static string SelectAll { get { return Resources.SelectAll; } }
+        public static string UnselectAll { get { return Resources.UnselectAll; } }
+        public static string ShowAll { get { return Resources.ShowAll; } }
+        public static string HideAll { get { return Resources.HideAll; } }
         #endregion
 
         #region Dialog Box
@@ -90,6 +104,14 @@
 
         #region Calendar Agenda View
         public static string AgendaViewTitle { get { return Resources.AgendaViewTitle; } }
+        public static string CalendarsTitle { get { return Resources.CalendarsTitle; } }
+        public static string Calendar { get { return Resources.Calendar; } }
+        public static string Today { get { return Resources.Today; } }
+        public static string DailyView { get { return Resources.DailyView; } }
+        public static string MonthlyView { get { return Resources.MonthlyView; } }
+        public static string MultiDayView { get { return Resources.MultiDayView; } }
+        public static string AnnualView { get { return Resources.AnnualView; } }
+        public static string AgendaListView { get { return Resources.AgendaListView; } }
         #endregion
 
         #endregion

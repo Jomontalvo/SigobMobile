@@ -145,7 +145,7 @@
                 };
                 client.DefaultRequestHeaders.Add("token", authToken);
                 client.DefaultRequestHeaders.Add("dbtoken", authDbToken);
-                var url =  $"{servicePrefix}{controller}" ;
+                var url = $"{servicePrefix}{controller}";
                 var response = await client.GetAsync(url);
 
                 if (!response.IsSuccessStatusCode)
@@ -290,7 +290,7 @@
         /// <param name="urlBase">URL base.</param>
         /// <param name="servicePrefix">Service prefix.</param>
         /// <param name="controller">Controller.</param>
-        /// <param name="authToken">Token type.</param>
+        /// <param name="authToken">Authorization token.</param>
         /// <param name="authDbToken">Access database token.</param>
         /// <typeparam name="T">The object type parameter.</typeparam>
         public async Task<Response> GetList<T>(
@@ -309,7 +309,7 @@
                 client.DefaultRequestHeaders.Add("token", authToken);
                 client.DefaultRequestHeaders.Add("dbtoken", authDbToken);
                 //client.DefaultRequestHeaders.Authorization. =
-                    //new AuthenticationHeaderValue("dbtoken", dbToken);
+                //new AuthenticationHeaderValue("dbtoken", dbToken);
                 var url = $"{servicePrefix}{controller}";
                 var response = await client.GetAsync(url);
                 var result = await response.Content.ReadAsStringAsync();
@@ -342,23 +342,81 @@
         }
 
         /// <summary>
+        /// Post without body content, specified urlBase, servicePrefix, controller, authToken and authDbToken.
+        /// </summary>
+        /// <returns>The post.</returns>
+        /// <param name="urlBase">URL base.</param>
+        /// <param name="servicePrefix">Service prefix.</param>
+        /// <param name="controller">Controller.</param>
+        /// <param name="authToken">Auth token.</param>
+        /// <param name="authDbToken">Auth db token.</param>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
+        public async Task<Response> Post<T>(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            string authToken,
+            string authDbToken)
+        {
+            try
+            {
+                HttpClient client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+                client.DefaultRequestHeaders.Add("token", authToken);
+                client.DefaultRequestHeaders.Add("dbtoken", authDbToken);
+                //client.DefaultRequestHeaders.Authorization =
+                //new AuthenticationHeaderValue(tokenType, accessToken);
+
+                var url = string.Format("{0}{1}", servicePrefix, controller);
+                var response = await client.PostAsync(url, null);
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    var error = JsonConvert.DeserializeObject<Response>(result);
+                    error.IsSuccess = false;
+                    return error;
+                }
+
+                var newRecord = JsonConvert.DeserializeObject<T>(result);
+
+                return new Response
+                {
+                    IsSuccess = true,
+                    Message = "Record added OK",
+                    Result = newRecord,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+            }
+        }
+
+        /// <summary>
         /// Post the specified urlBase, servicePrefix, controller, tokenType, accessToken and model.
         /// </summary>
         /// <returns>The post.</returns>
         /// <param name="urlBase">URL base.</param>
         /// <param name="servicePrefix">Service prefix.</param>
         /// <param name="controller">Controller.</param>
-        /// <param name="tokenType">Token type.</param>
-        /// <param name="accessToken">Access token.</param>
+        /// <param name="authToken">Authorization token.</param>
+        /// <param name="authDbToken">Access token.</param>
         /// <param name="model">Model.</param>
         /// <typeparam name="T">The 1st type parameter.</typeparam>
         public async Task<Response> Post<T>(
-            string urlBase,
-            string servicePrefix,
-            string controller,
-            string tokenType,
-            string accessToken,
-            T model)
+        string urlBase,
+        string servicePrefix,
+        string controller,
+        string authToken,
+        string authDbToken,
+        T model)
         {
             try
             {
@@ -370,8 +428,11 @@
                 {
                     BaseAddress = new Uri(urlBase)
                 };
-                client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue(tokenType, accessToken);
+                client.DefaultRequestHeaders.Add("token", authToken);
+                client.DefaultRequestHeaders.Add("dbtoken", authDbToken);
+                //client.DefaultRequestHeaders.Authorization =
+                //new AuthenticationHeaderValue(tokenType, accessToken);
+
                 var url = string.Format("{0}{1}", servicePrefix, controller);
                 var response = await client.PostAsync(url, content);
                 var result = await response.Content.ReadAsStringAsync();
@@ -403,7 +464,7 @@
         }
 
         /// <summary>
-        /// Post the specified urlBase, servicePrefix, controller and model.
+        /// Unsecured Post the specified urlBase, servicePrefix, controller and model.
         /// </summary>
         /// <returns>The post.</returns>
         /// <param name="urlBase">URL base.</param>
@@ -461,7 +522,7 @@
         }
 
         /// <summary>
-        /// Post the specified urlBase, servicePrefix, controller and model.
+        /// Login Post the specified urlBase, servicePrefix, controller and model.
         /// </summary>
         /// <returns>The post.</returns>
         /// <param name="urlBase">URL base.</param>
