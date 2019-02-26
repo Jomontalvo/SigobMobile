@@ -460,5 +460,17 @@ namespace SigobMobile.Properties {
                 return ResourceManager.GetString("HideAll", resourceCulture);
             }
         }
+        
+        public static string GeneralError {
+            get {
+                return ResourceManager.GetString("GeneralError", resourceCulture);
+            }
+        }
+        
+        public static string SelectCalendarMessage {
+            get {
+                return ResourceManager.GetString("SelectCalendarMessage", resourceCulture);
+            }
+        }
     }
 }

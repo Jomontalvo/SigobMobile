@@ -56,6 +56,7 @@
         public static string Yes { get { return Resources.Yes; } }
         public static string No { get { return Resources.No; } }
         public static string Success { get { return Resources.Success; } }
+        public static string GeneralError { get { return Resources.GeneralError; } }
         #endregion
 
         #region Login View
@@ -112,6 +113,7 @@
         public static string MultiDayView { get { return Resources.MultiDayView; } }
         public static string AnnualView { get { return Resources.AnnualView; } }
         public static string AgendaListView { get { return Resources.AgendaListView; } }
+        public static string SelectCalendarMessage { get { return Resources.SelectCalendarMessage; } }
         #endregion
 
         #endregion

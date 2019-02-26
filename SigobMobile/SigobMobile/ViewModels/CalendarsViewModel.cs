@@ -11,6 +11,7 @@ namespace SigobMobile.ViewModels
     using Models;
     using Services;
     using Xamarin.Forms;
+    using Telerik.XamarinForms.Primitives.CheckBox.Commands;
 
     public class CalendarsViewModel : BaseViewModel
     {
@@ -18,6 +19,7 @@ namespace SigobMobile.ViewModels
         internal ApiService apiService;
         internal string apiGetCalendarsController = "calendars";
         internal string apiPostVisibilityController = "calendars/linkedcal/{0}/visible/{1}";
+        internal const string AllCalendars = "TODOS";
         #endregion
 
         #region Attributes
@@ -61,6 +63,7 @@ namespace SigobMobile.ViewModels
         public CalendarsViewModel()
         {
             this.apiService = new ApiService();
+            this.IsCheckedChangedCommand = new Command<CheckBoxIsCheckChangedCommandContext>(this.CheckBoxChange);
             this.SelectDeselectAll = Languages.ShowAll;
             this.LoadCalendars();
             this.IsEnabled = true;
@@ -68,6 +71,21 @@ namespace SigobMobile.ViewModels
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Execute when CheckBox is change.
+        /// </summary>
+        /// <param name="context">Context.</param>
+        private async void CheckBoxChange(CheckBoxIsCheckChangedCommandContext context)
+        {
+            await Application.Current.MainPage.DisplayAlert(
+                    Languages.Success,
+                    $"{Languages.GeneralError} en el checkbox {context.ToString()} valor {context.NewState}",
+                    Languages.Accept);
+        }
+
+        /// <summary>
+        /// Loads the calendars.
+        /// </summary>
         private async void LoadCalendars()
         {
             this.IsRefreshing = true;
@@ -103,6 +121,54 @@ namespace SigobMobile.ViewModels
             calendarList = (List<Calendar>)response.Result;
             CalendarList = new ObservableCollection<Calendar>(calendarList);
             IsRefreshing = false;
+        }
+
+        /// <summary>
+        /// Sets the calendar visibility for all items.
+        /// </summary>
+        /// <returns>The calendar visibility.</returns>
+        /// <param name="isVisible">Identifier.</param>
+        public async Task SetVisibilityToAllCalendars(bool isVisible)
+        {
+            var connection = await this.apiService.CheckConnection();
+            if (!connection.IsSuccess)
+            {
+                this.IsRunning = false;
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    connection.Message,
+                    Languages.Cancel);
+                await Application.Current.MainPage.Navigation.PopModalAsync();
+                return;
+            }
+
+            var response = await this.apiService.Post<bool>(
+                Settings.UrlBaseApiSigob,
+                App.PrefixApiSigob,
+                string.Format(apiPostVisibilityController, AllCalendars, isVisible),
+                Settings.Token,
+                Settings.DbToken
+            );
+            if (!response.IsSuccess)
+            {
+                this.IsRunning = false;
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    response.Message,
+                    Languages.Cancel);
+                await Application.Current.MainPage.Navigation.PopModalAsync();
+                return;
+            }
+            var resultSetVisibility = (bool)response.Result;
+            if (!resultSetVisibility)
+            {
+                this.IsRunning = false;
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    Languages.GeneralError,
+                    Languages.Cancel);
+                return;
+            }
         }
 
         /// <summary>
@@ -163,12 +229,16 @@ namespace SigobMobile.ViewModels
         /// <summary>
         /// Set all calendars with view enabled or disabled
         /// </summary>
-        private void CheckAllCalendars()
+        private async void CheckAllCalendars()
         {
             IsEnabled = false;
+            IsRunning = true;
             bool newState = (SelectDeselectAll == Languages.ShowAll);
             this.CalendarList.Select(c => { c.IsVisible = newState; return c; }).ToList();
+            await SetVisibilityToAllCalendars(newState);
             SelectDeselectAll = (SelectDeselectAll == Languages.ShowAll) ? Languages.HideAll : Languages.ShowAll;
+            IsRunning = false;
+            LoadCalendars();
             IsEnabled = true;
         }
         #endregion
@@ -187,6 +257,9 @@ namespace SigobMobile.ViewModels
         {
             get { return new RelayCommand(CheckAllCalendars); }
         }
+
+        public ICommand IsCheckedChangedCommand { get; set; }
+
         #endregion
     }
-}
+} 

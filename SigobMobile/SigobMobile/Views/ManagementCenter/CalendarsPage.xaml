@@ -20,63 +20,88 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout
-            Padding="5,5"
+            BackgroundColor="{StaticResource softGray}"
+            Padding="0,0"
             BindingContext="{Binding Calendars}">
-            <ListView
-                Footer=""
-                HasUnevenRows="false"
-                IsPullToRefreshEnabled="true"
-                IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
-                ItemsSource="{Binding CalendarList}"
-                RefreshCommand="{Binding RefreshCommand}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                       <ViewCell>
-                            <Grid
-                                Padding="16,10,10,10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <telerikPrimitives:RadCheckBox
-                                    CheckedColor="{Binding CalendarColor}"
-                                    CheckedSymbolColor="White"
-                                    Grid.Row="0"
-                                    Grid.Column="0"
-                                    IsChecked="{Binding IsVisible, Mode=TwoWay}"
-                                    UncheckedColor="{Binding CalendarColor}"
-                                    VerticalOptions="CenterAndExpand">
-                                </telerikPrimitives:RadCheckBox>
-                                <Label
-                                    FontSize="Default"
-                                    FontAttributes="{Binding IsBoldFontAttribute}"
-                                    Grid.Row="0"
-                                    Grid.Column="1"
-                                    HorizontalOptions="FillAndExpand"
-                                    Margin="5,0,0,0"
-                                    Text="{Binding AgendaName}"
-                                    VerticalOptions="Center"
-                                    VerticalTextAlignment="Center">
-                                </Label>
-                                <ImageButton
-                                    Grid.Row="0"
-                                    Grid.Column="2"
-                                    Command="{Binding ChangeColorCommand}"
-                                    CommandParameter="{Binding AgendaId,Mode=OneWayToSource}"
-                                    HeightRequest="20"
-                                    IsVisible="{Binding IsOwner}"
-                                    Source="ic_color_palette"
-                                    VerticalOptions="CenterAndExpand">
-                                </ImageButton>
-                            </Grid>
-                       </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <Grid
+                ColumnSpacing="0"
+                RowSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    FontSize="Small"
+                    WidthRequest="300"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    LineBreakMode="WordWrap"
+                    Margin="10"
+                    Text="{lang:Translate SelectCalendarMessage}"
+                    TextColor="{StaticResource darkGray}"
+                    VerticalTextAlignment="Center"
+                    VerticalOptions="Center">
+                </Label>
+                <ListView
+                    Footer=""
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    HasUnevenRows="false"
+                    IsPullToRefreshEnabled="false"
+                    IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                    ItemsSource="{Binding CalendarList}"
+                    RefreshCommand="{Binding RefreshCommand}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid
+                                    Padding="16,10,10,10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <telerikPrimitives:RadCheckBox 
+                                        x:Name="checkBoxViewCalendar"
+                                        CheckedColor="{Binding CalendarColor}"
+                                        UncheckedColor="{Binding CalendarColor}"
+                                        IsChecked="{Binding IsVisible}">
+                                    </telerikPrimitives:RadCheckBox>
+                                    <Label
+                                        FontSize="Default"
+                                        FontAttributes="{Binding IsBoldFontAttribute}"
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        HorizontalOptions="FillAndExpand"
+                                        Margin="5,0,0,0"
+                                        Text="{Binding AgendaName}"
+                                        VerticalOptions="Center"
+                                        VerticalTextAlignment="Center">
+                                    </Label>
+                                    <ImageButton
+                                        Command="{Binding ChangeColorCommand}"
+                                        CommandParameter="{Binding AgendaId}"
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        HeightRequest="20"
+                                        IsVisible="{Binding IsOwner}"
+                                        Source="ic_color_palette"
+                                        VerticalOptions="CenterAndExpand">
+                                    </ImageButton>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
             <ActivityIndicator
                 AbsoluteLayout.LayoutFlags="PositionProportional"
                 AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"

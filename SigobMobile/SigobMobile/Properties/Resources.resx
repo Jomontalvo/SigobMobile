@@ -393,4 +393,12 @@
     <value>Hide all</value>
     <comment>Hide all option text.</comment>
   </data>
+  <data name="GeneralError" xml:space="preserve">
+    <value>Sorry there was an error while making the request.</value>
+    <comment>Error message when sucess Call API, but result is false.</comment>
+  </data>
+  <data name="SelectCalendarMessage" xml:space="preserve">
+    <value>Please, select the calendars that you want to make visible in your Management Center.</value>
+    <comment>Message for set visibility of calendar.</comment>
+  </data>
 </root>
