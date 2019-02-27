@@ -4,8 +4,6 @@
     using GalaSoft.MvvmLight.Command;
     using Models;
     using Views.ManagementCenter;
-    using Views;
-    using Xamarin.Forms;
 
     public class ApplicationItemViewModel : ApplicationMenuItem
     {

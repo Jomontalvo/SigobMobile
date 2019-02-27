@@ -23,7 +23,7 @@ namespace SigobMobile.ViewModels
         #endregion
 
         #region Attributes
-        private ObservableCollection<Calendar> calendars;
+        private ObservableCollection<CalendarItemViewModel> calendars;
         private List<Calendar> calendarList;
         private bool isRefreshing;
         private bool isRunning;
@@ -32,7 +32,7 @@ namespace SigobMobile.ViewModels
         #endregion
 
         #region Properties
-        public ObservableCollection<Calendar> CalendarList
+        public ObservableCollection<CalendarItemViewModel> CalendarSource
         {
             get { return this.calendars; }
             set { SetValue(ref this.calendars, value); }
@@ -63,7 +63,7 @@ namespace SigobMobile.ViewModels
         public CalendarsViewModel()
         {
             this.apiService = new ApiService();
-            this.IsCheckedChangedCommand = new Command<CheckBoxIsCheckChangedCommandContext>(this.CheckBoxChange);
+            //this.IsCheckedChangedCommand = new Command<CheckBoxIsCheckChangedCommandContext>(this.CheckBoxChange);
             this.SelectDeselectAll = Languages.ShowAll;
             this.LoadCalendars();
             this.IsEnabled = true;
@@ -71,18 +71,6 @@ namespace SigobMobile.ViewModels
         #endregion
 
         #region Methods
-        /// <summary>
-        /// Execute when CheckBox is change.
-        /// </summary>
-        /// <param name="context">Context.</param>
-        private async void CheckBoxChange(CheckBoxIsCheckChangedCommandContext context)
-        {
-            await Application.Current.MainPage.DisplayAlert(
-                    Languages.Success,
-                    $"{Languages.GeneralError} en el checkbox {context.ToString()} valor {context.NewState}",
-                    Languages.Accept);
-        }
-
         /// <summary>
         /// Loads the calendars.
         /// </summary>
@@ -119,8 +107,29 @@ namespace SigobMobile.ViewModels
                 return;
             }
             calendarList = (List<Calendar>)response.Result;
-            CalendarList = new ObservableCollection<Calendar>(calendarList);
+            this.CalendarSource = new ObservableCollection<CalendarItemViewModel>(ToCalendarItemViewModel());
             IsRefreshing = false;
+        }
+
+        /// <summary>
+        /// Convert list obtained with API Call to ViewModel ObservableCollection.
+        /// </summary>
+        /// <returns>The calendar item view model.</returns>
+        private IEnumerable<CalendarItemViewModel> ToCalendarItemViewModel()
+        {
+            return calendarList.Select(c => new CalendarItemViewModel
+            {
+                AgendaName = c.AgendaName,
+                BlueColor = c.BlueColor,
+                GreenColor = c.GreenColor,
+                IsOwner = c.IsOwner,
+                IsVisible = c.IsVisible,
+                ManagementCenterId = c.ManagementCenterId,
+                NumberColor = c.NumberColor,
+                OfficeId = c.OfficeId,
+                Permission = c.Permission,
+                RedColor = c.RedColor
+            });
         }
 
         /// <summary>
@@ -218,7 +227,7 @@ namespace SigobMobile.ViewModels
         {
             IsRunning = true;
             //Update all checkboxes
-            foreach (var item in CalendarList)
+            foreach (var item in CalendarSource)
             {
                 await SetCalendarVisibility(item);
             }
@@ -234,7 +243,7 @@ namespace SigobMobile.ViewModels
             IsEnabled = false;
             IsRunning = true;
             bool newState = (SelectDeselectAll == Languages.ShowAll);
-            this.CalendarList.Select(c => { c.IsVisible = newState; return c; }).ToList();
+            this.CalendarSource.Select(c => { c.IsVisible = newState; return c; }).ToList();
             await SetVisibilityToAllCalendars(newState);
             SelectDeselectAll = (SelectDeselectAll == Languages.ShowAll) ? Languages.HideAll : Languages.ShowAll;
             IsRunning = false;
@@ -248,7 +257,6 @@ namespace SigobMobile.ViewModels
         {
             get { return new RelayCommand(OkAndClose); }
         }
-
         public ICommand RefreshCommand
         {
             get { return new RelayCommand(LoadCalendars); }
@@ -257,9 +265,6 @@ namespace SigobMobile.ViewModels
         {
             get { return new RelayCommand(CheckAllCalendars); }
         }
-
-        public ICommand IsCheckedChangedCommand { get; set; }
-
         #endregion
     }
-} 
+}

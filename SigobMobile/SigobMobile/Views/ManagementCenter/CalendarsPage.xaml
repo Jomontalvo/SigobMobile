@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
+             xmlns:checkBoxComamnds="clr-namespace:Telerik.XamarinForms.Primitives.CheckBox.Commands;assembly=Telerik.XamarinForms.Primitives"
              xmlns:lang="clr-namespace:SigobMobile.Helpers"
              x:Class="SigobMobile.Views.ManagementCenter.CalendarsPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}" 
@@ -54,7 +55,7 @@
                     HasUnevenRows="false"
                     IsPullToRefreshEnabled="false"
                     IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
-                    ItemsSource="{Binding CalendarList}"
+                    ItemsSource="{Binding CalendarSource}"
                     RefreshCommand="{Binding RefreshCommand}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -74,6 +75,13 @@
                                         CheckedColor="{Binding CalendarColor}"
                                         UncheckedColor="{Binding CalendarColor}"
                                         IsChecked="{Binding IsVisible}">
+                                        <telerikPrimitives:RadCheckBox.Commands>
+                                            <checkBoxComamnds:CheckBoxUserCommand
+                                                Id="Unknown"
+                                                Command="IsCheckedChangedCommand"
+                                                SuppressDefaultCommand="true">
+                                            </checkBoxComamnds:CheckBoxUserCommand>
+                                        </telerikPrimitives:RadCheckBox.Commands>
                                     </telerikPrimitives:RadCheckBox>
                                     <Label
                                         FontSize="Default"
@@ -87,14 +95,42 @@
                                         VerticalTextAlignment="Center">
                                     </Label>
                                     <ImageButton
-                                        Command="{Binding ChangeColorCommand}"
-                                        CommandParameter="{Binding AgendaId}"
+                                        Command="{Binding OpenChangeColorCommand}"
                                         Grid.Row="0"
                                         Grid.Column="2"
                                         HeightRequest="20"
                                         IsVisible="{Binding IsOwner}"
                                         Source="ic_color_palette"
                                         VerticalOptions="CenterAndExpand">
+                                        <telerikPrimitives:RadPopup.Popup>
+                                            <telerikPrimitives:RadPopup 
+                                                x:Name="popupSelectColor"
+                                                IsModal="True"
+                                                IsOpen="{Binding IsOpen}"
+                                                OutsideBackgroundColor="#6F000000"> 
+                                                <telerikPrimitives:RadBorder 
+                                                    CornerRadius="6" 
+                                                    BackgroundColor="#93D7FF"
+                                                    Padding="10">
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto" />
+                                                            <RowDefinition Height="26" />
+                                                        </Grid.RowDefinitions>
+                                                        <Label Text="Telerik RadPopup for Xamarin" />
+                                                        <Button 
+                                                            Command="{Binding ChangeColorAndCloseCommand}"
+                                                            Grid.Row="1" 
+                                                            Padding="2" 
+                                                            HorizontalOptions="Center" 
+                                                            Text="Close" 
+                                                            CornerRadius="6"
+                                                            BackgroundColor="#7A9BFF"
+                                                            TextColor="White" />
+                                                    </Grid>
+                                                </telerikPrimitives:RadBorder>
+                                            </telerikPrimitives:RadPopup>
+                                        </telerikPrimitives:RadPopup.Popup>
                                     </ImageButton>
                                 </Grid>
                             </ViewCell>
