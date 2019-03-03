@@ -48,7 +48,7 @@
                     break;
                 case "LoginPage":
                     //Delete persist token values
-                    Settings.Token = Settings.DbToken = Settings.InstitutionLogo = string.Empty;
+                    Settings.Token = Settings.DbToken = Settings.InstitutionLogo = Settings.FullName = Settings.OfficeCode = string.Empty;
                     mainViewModel.Token = mainViewModel.DbToken = string.Empty;
                     //Navigate to Login 
                     var navLoginPage = new Xamarin.Forms.NavigationPage(new LoginPage());

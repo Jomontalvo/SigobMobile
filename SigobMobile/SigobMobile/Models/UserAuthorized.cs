@@ -16,7 +16,7 @@
         public string Password { get; set; }
 
         [JsonProperty(PropertyName = "despacho")]
-        public string Despacho { get; set; }
+        public string OfficeCode { get; set; }
 
         [JsonProperty(PropertyName = "codigoFuncionario")]
         public string FunctionaryCode { get; set; }

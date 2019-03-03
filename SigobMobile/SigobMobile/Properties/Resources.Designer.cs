@@ -472,5 +472,11 @@ namespace SigobMobile.Properties {
                 return ResourceManager.GetString("SelectCalendarMessage", resourceCulture);
             }
         }
+        
+        public static string SelectCalendarColor {
+            get {
+                return ResourceManager.GetString("SelectCalendarColor", resourceCulture);
+            }
+        }
     }
 }

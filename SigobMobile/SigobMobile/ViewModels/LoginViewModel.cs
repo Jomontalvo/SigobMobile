@@ -278,6 +278,8 @@
                 Settings.Token = sucessLogin.AuthToken;
                 Settings.DbToken = sucessLogin.DatabaseToken;
                 Settings.InstitutionLogo = sucessLogin.InstitutionLogo;
+                Settings.FullName = sucessLogin.LoggedUser.Name;
+                Settings.OfficeCode = sucessLogin.LoggedUser.OfficeCode;
 
                 //Load Master Detail with ApplicationsPage
                 mainViewModel.Applications = new ApplicationsViewModel();

@@ -114,6 +114,7 @@
         public static string AnnualView { get { return Resources.AnnualView; } }
         public static string AgendaListView { get { return Resources.AgendaListView; } }
         public static string SelectCalendarMessage { get { return Resources.SelectCalendarMessage; } }
+        public static string SelectCalendarColor { get { return Resources.SelectCalendarColor; } }
         #endregion
 
         #endregion

@@ -401,4 +401,8 @@
     <value>Please, select the calendars that you want to make visible in your Management Center.</value>
     <comment>Message for set visibility of calendar.</comment>
   </data>
+ <data name="SelectCalendarColor" xml:space="preserve">
+    <value>Please, choose a color for your calendar.</value>
+    <comment>Message for choose a color of calendar.</comment>
+  </data> 
 </root>

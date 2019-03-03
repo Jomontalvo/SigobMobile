@@ -26,6 +26,7 @@
         private const string urlBaseApiSigob = "uriAPI";
         private const string insitutionLogo = "logo";
         private const string userFullName = "fullName";
+        private const string officeCode = "officeCode";
         private static readonly string SettingsDefault = string.Empty;
 
         #endregion
@@ -96,7 +97,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the full name od active user.
+        /// Gets or sets the full name of active user.
         /// </summary>
         /// <value>The full name.</value>
         public static string FullName
@@ -108,6 +109,22 @@
             set
             {
                 AppSettings.AddOrUpdateValue(userFullName, value);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the SIGOB office code of active user.
+        /// </summary>
+        /// <value>The full name.</value>
+        public static string OfficeCode
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(officeCode, SettingsDefault);
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(officeCode, value);
             }
         }
 

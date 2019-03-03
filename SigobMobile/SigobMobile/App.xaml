@@ -10,6 +10,7 @@
         </ResourceDictionary>
         <ResourceDictionary>
             <local:IntToBoolConverter x:Key="intToBool" />
+            <local:InverseBooleanConverter x:Key="inverseBool" />
         </ResourceDictionary>
         <ResourceDictionary>
             <Color x:Key="defaultBackgroundView">White</Color>
@@ -28,6 +29,24 @@
             <Color x:Key="accesoryGray">#C1C6CE</Color>
             <Color x:Key="grayContent">#8E8E8E</Color>
             <Color x:Key="grayBorder">#E6E6E6</Color>
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <Color x:Key="calRedOrange">#FF8A66</Color>
+            <Color x:Key="calDarkGreen">#58BC8A</Color>
+            <Color x:Key="calLightGreen">#9CCC66</Color>
+            <Color x:Key="calTurquoise">#5F97F6</Color>
+            <Color x:Key="calLightPurple">#7985CD</Color>
+            <Color x:Key="calLightOrange">#FDA829</Color>
+            <Color x:Key="calMediumGray">#90A4AD</Color>
+            <Color x:Key="calPurple">#9675CE</Color>
+            <Color x:Key="calFucsia">#B968C7</Color>
+            <Color x:Key="calLightBlue">#4FC2F8</Color>
+            <Color x:Key="calMango">#F6BF26</Color>
+            <Color x:Key="calLightBrown">#A0887E</Color>
+            <Color x:Key="calIndigo">#E06055</Color>
+            <Color x:Key="calDarkPink">#E06055</Color>
+            <Color x:Key="calRed">#DC2227</Color>
+            <Color x:Key="calGray">#E1E1E1</Color>
         </ResourceDictionary>
         <ResourceDictionary>
             <ControlTemplate x:Key="HeaderSigobTemplate">

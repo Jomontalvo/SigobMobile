@@ -1,64 +1,92 @@
 ﻿namespace SigobMobile.ViewModels
 {
+    using System.Threading.Tasks;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
+    using Helpers;
     using Models;
     using PropertyChanged;
-    using SigobMobile.Helpers;
+    using Services;
     using Telerik.XamarinForms.Primitives.CheckBox.Commands;
     using Xamarin.Forms;
 
     [AddINotifyPropertyChangedInterface]
     public class CalendarItemViewModel : Calendar
     {
-        #region Properties
-        public bool IsOpen {  get; set; }
+        #region Services
+        internal ApiService apiService;
+        internal string apiPostVisibilityController = "calendars/linkedcal/{0}/visible/{1}";
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:SigobMobile.ViewModels.CalendarItemViewModel"/> class.
+        /// </summary>
+        public CalendarItemViewModel()
+        {
+            this.apiService = new ApiService();
+            this.IsCheckedChangedCommand = new Command<CheckBoxIsCheckChangedCommandContext>(this.CheckBoxChange);
+        }
         #endregion
 
         #region Commands
-        public ICommand IsCheckedChangedCommand => new Command<CheckBoxIsCheckChangedCommandContext>(this.CheckBoxChange);
-        public ICommand OpenChangeColorCommand
-        {
-            get
-            {
-                return new RelayCommand(OpenChangeColor);
-            }
-        }
-
-        public ICommand ChangeColorAndCloseCommand
-        {
-            get { return new RelayCommand(ChangeColorAndClose); }
-        }
+        public ICommand IsCheckedChangedCommand { get; set; }
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Sets the calendar visibility.
+        /// </summary>
+        /// <returns>The calendar visibility.</returns>
+        public async Task SetCalendarVisibility(bool? isVisible)
+        {
+            var connection = await this.apiService.CheckConnection();
+            if (!connection.IsSuccess)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    connection.Message,
+                    Languages.Cancel);
+                await Application.Current.MainPage.Navigation.PopModalAsync();
+                return;
+            }
+
+            var response = await this.apiService.Post<bool>(
+                Settings.UrlBaseApiSigob,
+                App.PrefixApiSigob,
+                string.Format(apiPostVisibilityController, this.OfficeId, isVisible),
+                Settings.Token,
+                Settings.DbToken
+            );
+            if (!response.IsSuccess)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    response.Message,
+                    Languages.Cancel);
+                await Application.Current.MainPage.Navigation.PopModalAsync();
+                return;
+            }
+            var resultCallApi = (bool)response.Result;
+            if (!resultCallApi)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    Languages.GeneralError,
+                    Languages.Cancel);
+                await Application.Current.MainPage.Navigation.PopModalAsync();
+                return;
+            }
+        }
+
         /// <summary>
         /// Execute when CheckBox is change.
         /// </summary>
         /// <param name="context">Context.</param>
         private async void CheckBoxChange(CheckBoxIsCheckChangedCommandContext context)
         {
-            await Application.Current.MainPage.DisplayAlert(
-                    Languages.Success,
-                    $"{Languages.GeneralError} en el checkbox {context.ToString()} valor {context.NewState}",
-                    Languages.Accept);
-        }
-        /// <summary>
-        /// Open Modal Page with available colors
-        /// </summary>
-        private void OpenChangeColor()
-        {
-            IsOpen = true;
-            //MainViewModel.GetInstance().Calendars.IsOpen = true;
-        }
-
-        /// <summary>
-        /// Changes the color and close modal view
-        /// </summary>
-        private void ChangeColorAndClose()
-        {
-            IsOpen = false;
-            //MainViewModel.GetInstance().Calendars.IsOpen = false;
+            await SetCalendarVisibility( context.NewState );
         }
         #endregion
     }

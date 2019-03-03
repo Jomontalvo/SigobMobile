@@ -97,6 +97,7 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderers\IconViewRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -252,7 +253,6 @@
     <BundleResource Include="Resources\ar.lproj\sigob_logo.png" />
     <BundleResource Include="Resources\ic_top_brand.png" />
     <BundleResource Include="Resources\ic_bt_add_fill.png" />
-    <BundleResource Include="ic_bt_add.png" />
     <BundleResource Include="Resources\ic_bt_search%403x.png" />
     <BundleResource Include="Resources\ic_bt_add.png" />
     <BundleResource Include="Resources\ic_bt_add%402x.png" />
@@ -262,6 +262,8 @@
     <BundleResource Include="Resources\ic_notify_task.png" />
     <BundleResource Include="Resources\ic_notify_attachment.png" />
     <BundleResource Include="Resources\ic_color_palette.png" />
+    <BundleResource Include="Resources\ic_circle_check_color.png" />
+    <BundleResource Include="Resources\ic_circle_color.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -270,5 +272,6 @@
     <Folder Include="Resources\fr.lproj\" />
     <Folder Include="Resources\en.lproj\" />
     <Folder Include="Resources\ar.lproj\" />
+    <Folder Include="Renderers\" />
   </ItemGroup>
 </Project>

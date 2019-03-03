@@ -1,6 +1,6 @@
-﻿using System;
-namespace SigobMobile.ViewModels
+﻿namespace SigobMobile.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -11,7 +11,6 @@ namespace SigobMobile.ViewModels
     using Models;
     using Services;
     using Xamarin.Forms;
-    using Telerik.XamarinForms.Primitives.CheckBox.Commands;
 
     public class CalendarsViewModel : BaseViewModel
     {
@@ -28,7 +27,13 @@ namespace SigobMobile.ViewModels
         private bool isRefreshing;
         private bool isRunning;
         private bool isEnabled;
+        private bool isOpen;
+        private Color myCalendarColor;
         private string selectDeselectAll;
+        #endregion
+
+        #region Agenda Color Attributes
+        private string iconColorChecked;
         #endregion
 
         #region Properties
@@ -52,25 +57,104 @@ namespace SigobMobile.ViewModels
             get { return this.isEnabled; }
             set { SetValue(ref this.isEnabled, value); }
         }
+        public bool IsOpen
+        {
+            get { return this.isOpen; }
+            set { SetValue(ref this.isOpen, value); }
+        }
         public string SelectDeselectAll
         {
             get { return this.selectDeselectAll; }
             set { SetValue(ref this.selectDeselectAll, value); }
         }
+
+        public string MyAgendaName => Settings.FullName;
+
+        public Color MyCalendarColor
+        {
+            get { return this.myCalendarColor; }
+            set { SetValue(ref this.myCalendarColor, value); }
+        }
+
+        public string IconColorChecked
+        {
+            get { return this.iconColorChecked; }
+            set { SetValue(ref this.iconColorChecked, value); }
+        }
+
         #endregion
 
         #region Constructors
         public CalendarsViewModel()
         {
-            this.apiService = new ApiService();
-            //this.IsCheckedChangedCommand = new Command<CheckBoxIsCheckChangedCommandContext>(this.CheckBoxChange);
-            this.SelectDeselectAll = Languages.ShowAll;
-            this.LoadCalendars();
-            this.IsEnabled = true;
+            apiService = new ApiService();
+            SelectDeselectAll = Languages.ShowAll;
+            LoadCalendars();
+            SetOptionsColors();
+            IsEnabled = true;
         }
         #endregion
 
+        #region Commands
+        public ICommand OpenChangeColorCommand
+        {
+            get
+            {
+                return new RelayCommand(OpenChangeColor);
+            }
+        }
+
+        public ICommand ChangeColorAndCloseCommand
+        {
+            get { return new RelayCommand(ChangeColorAndClose); }
+        }
+
+        public ICommand OkAndCloseCommand => new RelayCommand(OkAndClose);
+       
+       public ICommand RefreshCommand
+        {
+            get { return new RelayCommand(LoadCalendars); }
+        }
+
+        public ICommand CheckAllCalendarsCommand
+        {
+            get { return new RelayCommand(CheckAllCalendars); }
+        }
+
+        public ICommand SelectColorCommand
+        {
+            get
+            {
+                return new RelayCommand(SelectColor);
+            }
+        }
+
+        private async void SelectColor()
+        {
+            await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    Languages.Ok,
+                    Languages.Cancel);
+        }
+
+
+        #endregion
+
         #region Methods
+
+        /// <summary>
+        /// Selects the color of the calendar and change button.
+        /// </summary>
+
+
+        /// <summary>
+        /// Sets the color options for active user calendar
+        /// </summary>
+        private void SetOptionsColors()
+        {
+            IconColorChecked =  "ic_circle_color"; //TODO: Assign checked image
+        }
+
         /// <summary>
         /// Loads the calendars.
         /// </summary>
@@ -108,7 +192,9 @@ namespace SigobMobile.ViewModels
             }
             calendarList = (List<Calendar>)response.Result;
             this.CalendarSource = new ObservableCollection<CalendarItemViewModel>(ToCalendarItemViewModel());
+            MyCalendarColor = calendarList.Where(c => c.OfficeId == Settings.OfficeCode).Select(c => c.CalendarColor).First();
             IsRefreshing = false;
+            return;
         }
 
         /// <summary>
@@ -129,7 +215,7 @@ namespace SigobMobile.ViewModels
                 OfficeId = c.OfficeId,
                 Permission = c.Permission,
                 RedColor = c.RedColor
-            });
+            }) .Where(c => c.OfficeId != Settings.OfficeCode);
         }
 
         /// <summary>
@@ -181,60 +267,14 @@ namespace SigobMobile.ViewModels
         }
 
         /// <summary>
-        /// Sets the calendar visibility.
-        /// </summary>
-        /// <returns>The calendar visibility.</returns>
-        /// <param name="itemCalendar">Identifier.</param>
-        public async Task SetCalendarVisibility(Calendar itemCalendar)
-        {
-            var connection = await this.apiService.CheckConnection();
-            if (!connection.IsSuccess)
-            {
-                this.IsRunning = false;
-                await Application.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    connection.Message,
-                    Languages.Cancel);
-                await Application.Current.MainPage.Navigation.PopModalAsync();
-                return;
-            }
-
-            var response = await this.apiService.Post<bool>(
-                Settings.UrlBaseApiSigob,
-                App.PrefixApiSigob,
-                string.Format(apiPostVisibilityController,itemCalendar.OfficeId, itemCalendar.IsVisible),
-                Settings.Token,
-                Settings.DbToken
-            );
-            if (!response.IsSuccess)
-            {
-                this.IsRunning = false;
-                await Application.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    response.Message,
-                    Languages.Cancel);
-                await Application.Current.MainPage.Navigation.PopModalAsync();
-                return;
-            }
-            var resultSetVisibility = (bool)response.Result;
-            // Upate Calendar item in ObservableCollection
-        }
-
-        /// <summary>
         /// Close view and return to Modal Async Parent
         /// </summary>
         private async void OkAndClose()
         {
-            IsRunning = true;
-            //Update all checkboxes
-            foreach (var item in CalendarSource)
-            {
-                await SetCalendarVisibility(item);
-            }
-            IsRefreshing = false;
             //Go to parent page
             await Application.Current.MainPage.Navigation.PopModalAsync();
         }
+
         /// <summary>
         /// Set all calendars with view enabled or disabled
         /// </summary>
@@ -250,21 +290,24 @@ namespace SigobMobile.ViewModels
             LoadCalendars();
             IsEnabled = true;
         }
+
+        /// <summary>
+        /// Open Modal Page with available colors
+        /// </summary>
+        private void OpenChangeColor()
+        {
+            IsOpen = true;
+        }
+
+        /// <summary>
+        /// Changes the color and close modal view
+        /// </summary>
+        private void ChangeColorAndClose()
+        {
+            IsOpen = false;
+        }
         #endregion
 
-        #region Commands
-        public ICommand OkAndCloseCommand
-        {
-            get { return new RelayCommand(OkAndClose); }
-        }
-        public ICommand RefreshCommand
-        {
-            get { return new RelayCommand(LoadCalendars); }
-        }
-        public ICommand CheckAllCalendarsCommand
-        {
-            get { return new RelayCommand(CheckAllCalendars); }
-        }
-        #endregion
+
     }
 }

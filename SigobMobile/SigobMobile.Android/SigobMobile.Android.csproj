@@ -97,6 +97,7 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Implementations\Localize.cs" />
+    <Compile Include="Renderers\IconViewRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -212,6 +213,8 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\drawable\ic_bt_add_fill.png" />
     <AndroidResource Include="Resources\drawable\ic_chevron.png" />
+    <AndroidResource Include="Resources\drawable\ic_circle_check_color.png" />
+    <AndroidResource Include="Resources\drawable\ic_circle_color.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -235,6 +238,7 @@
     <Folder Include="Resources\values-es\" />
     <Folder Include="Resources\values-pt\" />
     <Folder Include="Resources\values-fr\" />
+    <Folder Include="Renderers\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
