@@ -35,6 +35,9 @@
         private string phone;
         private string cellPhone;
         private string email;
+        private string isMaleSelected;
+        private string isFemaleSelected;
+        private byte? gender;
         #endregion
 
         #region Properties
@@ -42,6 +45,16 @@
         {
             get { return this.imageSource; }
             set { SetValue(ref this.imageSource, value); }
+        }
+        public string IsMaleSelected
+        {
+            get { return isMaleSelected; }
+            set { SetValue(ref this.isMaleSelected, value); }
+        }
+        public string IsFemaleSelected
+        {
+            get { return isFemaleSelected; }
+            set { SetValue(ref this.isFemaleSelected, value); }
         }
         public bool IsRunning
         {
@@ -74,6 +87,12 @@
             get { return lastName; }
             set { SetValue(ref this.lastName, value); }
         }
+        public byte? Gender
+        {
+            get { return gender; }
+            set { SetValue(ref this.gender, value); }
+        }
+
         public string Institution
         {
             get { return institution; }
@@ -122,9 +141,37 @@
             get { return new RelayCommand(ChangeUserImage); }
 
         }
+        public ICommand SelectFemaleCommand
+        {
+            get { return new RelayCommand(SelectFemale); }
+        }
+        public ICommand SelectMaleCommand
+        {
+            get { return new RelayCommand(SelectMale); }
+        }
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Selects the female gender in radio button
+        /// </summary>
+        private void SelectFemale()
+        {
+            IsFemaleSelected = "ic_rbutton_selected";
+            IsMaleSelected = "ic_rbutton_unselected";
+            this.Gender = 2;
+        }
+
+        /// <summary>
+        /// Selects the male gender in radio button
+        /// </summary>
+        private void SelectMale()
+        {
+            IsMaleSelected = "ic_rbutton_selected";
+            IsFemaleSelected = "ic_rbutton_unselected";
+            this.Gender = 1;
+        }
+
         /// <summary>
         /// Changes the user image.
         /// </summary>
@@ -136,11 +183,11 @@
                 CrossMedia.Current.IsTakePhotoSupported)
             {
                 var source = await Application.Current.MainPage.DisplayActionSheet(
-                    "que quiere?", //Languages.SourceImageQuestion,
+                    Languages.SourceImageQuestion,
                     Languages.Cancel,
-                    null,
-                    "De galería",//Languages.FromGallery,
-                    "De Cámara");  //Languages.FromCamera);
+                    Languages.DeletePicture,
+                    Languages.FromGallery,
+                    Languages.FromCamera);
 
                 if (source == Languages.Cancel)
                 {
@@ -148,7 +195,7 @@
                     return;
                 }
 
-                if (source == "De Cámara" ) //Languages.FromCamera)
+                if (source == Languages.FromCamera)
                 {
                     this.file = await CrossMedia.Current.TakePhotoAsync(
                         new StoreCameraMediaOptions
@@ -226,7 +273,7 @@
                     byte[] userImageStream = Convert.FromBase64String(this.userProfile.UserImage);
                     ImageSource = ImageSource.FromStream(() => new MemoryStream(userImageStream));
                 }
-                else ImageSource = ImageSource.FromFile("ic_avatar_men");
+                else ImageSource = (userProfile.Gender == 2) ? ImageSource.FromFile("ic_avatar_women") : ImageSource.FromFile("ic_avatar_men");
             }
             catch (Exception ex) { Debug.WriteLine(ex.Message); }
             finally { this.IsRunning = false; }
@@ -246,6 +293,20 @@
             if (!String.IsNullOrEmpty(userProfile.Phone)) Phone = userProfile.Phone;
             if (!String.IsNullOrEmpty(userProfile.CellPhone)) CellPhone = userProfile.CellPhone;
             if (!String.IsNullOrEmpty(userProfile.Email)) Email = userProfile.Email;
+            if (userProfile.Gender == null) IsMaleSelected = IsFemaleSelected = "ic_rbutton_unselected";
+            else
+            {
+                if (userProfile.Gender == 2)
+                {
+                    IsFemaleSelected = "ic_rbutton_selected";
+                    IsMaleSelected = "ic_rbutton_unselected";
+                }
+                else
+                {
+                    IsMaleSelected = "ic_rbutton_selected";
+                    IsFemaleSelected = "ic_rbutton_unselected";
+                }
+            }
         }
         #endregion
     }

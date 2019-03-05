@@ -57,6 +57,7 @@
         public static string No { get { return Resources.No; } }
         public static string Success { get { return Resources.Success; } }
         public static string GeneralError { get { return Resources.GeneralError; } }
+        public static string Delete { get { return Resources.Delete; } }
         #endregion
 
         #region Login View
@@ -100,7 +101,16 @@
         public static string PhoneText { get { return Resources.PhoneText; } }
         public static string CellPhoneText { get { return Resources.CellPhoneText; } }
         public static string EmailText { get { return Resources.EmailText; } }
+        public static string GenderText { get { return Resources.GenderText; } }
+        public static string SelectGenderPlaceHolder { get { return Resources.SelectGenderPlaceHolder; } }
+        public static string MaleGender { get { return Resources.MaleGender; } }
+        public static string FemaleGender { get { return Resources.FemaleGender; } }
         public static string UserImageText { get { return Resources.UserImageText; } }
+        public static string SourceImageQuestion { get { return Resources.SourceImageQuestion; } }
+        public static string FromCamera { get { return Resources.FromCamera; } }
+        public static string FromGallery { get { return Resources.FromGallery; } }
+        public static string DeletePicture { get { return Resources.DeletePicture; } }
+
         #endregion
 
         #region Calendar Agenda View

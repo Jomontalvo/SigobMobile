@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:telerikInput="clr-namespace:Telerik.XamarinForms.Input;assembly=Telerik.XamarinForms.Input"
              xmlns:lang="clr-namespace:SigobMobile.Helpers"
              x:Class="SigobMobile.Views.ApplicationsPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
@@ -41,7 +42,8 @@
                 SeparatorVisibility="None"
                 IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
                 ItemsSource="{Binding Applications}"
-                RefreshCommand="{Binding RefreshCommand}">
+                RefreshCommand="{Binding RefreshCommand}"
+                x:Name="listViewApplications">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                        <ViewCell>
@@ -56,7 +58,7 @@
                                     </TapGestureRecognizer>
                                 </Frame.GestureRecognizers>
                                 <Grid
-                                    Padding="10,0,0,0">
+                                    Padding="10,0,5,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
@@ -67,14 +69,20 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <Label
+                                    <telerikInput:RadButton
+                                        BackgroundColor="{StaticResource lightBlue}" 
+                                        BorderRadius="10"
+                                        FontSize="Micro"
                                         Grid.Column="2"
                                         Grid.Row="0"
                                         Grid.RowSpan="3"
-                                        Text="{Binding NewItems}"
-                                        IsVisible="{Binding IsVisible}"
-                                        VerticalOptions="StartAndExpand">
-                                    </Label>
+                                        HeightRequest="20"
+                                        IsVisible="{Binding NewItems, Converter={StaticResource intToBool}}"
+                                        Text="{Binding NewItems}" 
+                                        TextColor="White"
+                                        VerticalOptions="Start"
+                                        WidthRequest="20">
+                                    </telerikInput:RadButton>
                                     <Image 
                                         Grid.Column="0"
                                         Grid.Row="1"

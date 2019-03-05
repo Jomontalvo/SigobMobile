@@ -9,7 +9,7 @@
              xmlns:lang="clr-namespace:SigobMobile.Helpers"
              x:Class="SigobMobile.Views.ManagementCenter.InstructionsPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             Title="Instructions"
+             Title="{lang:Translate InstructionsViewTitle}"
              ios:Page.UseSafeArea="true">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -213,7 +213,8 @@
             ColumnSpacing="0"
             Grid.Row="4"
             RowSpacing="0"
-            VerticalOptions="End">
+            VerticalOptions="End"
+            x:Name="gridToolBar">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -225,7 +226,6 @@
             </BoxView>
             <Grid 
                 BackgroundColor="{StaticResource softGray}"
-                BindingContext="{Binding CalendarDay}"
                 Grid.Row="1" 
                 VerticalOptions="End" 
                 RowSpacing="0">
@@ -241,7 +241,7 @@
                 </Button>
                 <Button 
                     BackgroundColor="{StaticResource softGray}"
-                    Command="{Binding OpenFitersCommand}"
+                    Command="{Binding OpenFiltersCommand}"
                     Grid.Column="2" 
                     Text="{lang:Translate Filters}">
                 </Button>

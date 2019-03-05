@@ -124,7 +124,7 @@
                 IsVisible = l.IsVisible,
                 Message_1 = l.Message_1,
                 Message_2 = (!l.IsVisible) ? string.Empty : l.Message_2,
-                NewItems = (l.NewItems != "0") ? l.NewItems : string.Empty
+                NewItems = l.NewItems
             });
         }
 

@@ -38,7 +38,7 @@
         /// </summary>
         /// <value>The new items.</value>
         [JsonProperty(PropertyName = "numero_items_nuevos")]
-        public string NewItems { get; set; }
+        public int NewItems { get; set; }
 
         /// <summary>
         /// Gets the module icon.

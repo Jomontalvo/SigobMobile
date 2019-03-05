@@ -58,7 +58,7 @@
                     Padding="16,10,10,10">
                     <Frame
                         BackgroundColor="{Binding MyCalendarColor}"
-                        CornerRadius="11"
+                        CornerRadius="{OnPlatform iOS=11,Android=2,UWP=2}"
                         HeightRequest="22"
                         WidthRequest="22"
                         HorizontalOptions="Start"
@@ -105,10 +105,17 @@
                                         </Grid.RowDefinitions>
                                         <Label 
                                             Grid.Row="0"
+                                            HorizontalOptions="FillAndExpand"
+                                            HorizontalTextAlignment="{OnPlatform iOS=Center, Android=Start, UWP=Start}"
+                                            Margin="5,10,5,5"
                                             Text="{lang:Translate SelectCalendarColor}">
                                         </Label>
                                         <Grid
-                                            Grid.Row="1">
+                                            Grid.Row="1"
+                                            HorizontalOptions="CenterAndExpand"
+                                            Padding="20,10"
+                                            ColumnSpacing="10"
+                                            RowSpacing="10">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="Auto"/>
@@ -120,32 +127,361 @@
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
+                                            <!--Color 1-->
                                             <lang:IconView
                                                 x:Name="circleColorRedOrange"
                                                 Foreground="{StaticResource calRedOrange}"
                                                 Grid.Column="0"
                                                 Grid.Row="0"
-                                                HeightRequest="20"
+                                                HeightRequest="30"
                                                 HorizontalOptions="Center"
                                                 Source="{Binding IconColorChecked}" 
-                                                WidthRequest="20"
+                                                WidthRequest="30"
                                                 VerticalOptions="Center">
                                                 <lang:IconView.GestureRecognizers>
                                                     <TapGestureRecognizer
-                                                        Command ="{Binding SelectCalendarColor}"
-                                                        CommandParameter="{Binding .}"
+                                                        Command ="{Binding SelectColorCommand}"
+                                                        CommandParameter="{Binding Source={x:Reference circleColorRedOrange}}"
                                                         NumberOfTapsRequired="1">
                                                     </TapGestureRecognizer>
                                                 </lang:IconView.GestureRecognizers>
                                             </lang:IconView>
+                                            <!--Color 2-->
+                                            <lang:IconView
+                                                x:Name="circleColorDarkGreen"
+                                                Foreground="{StaticResource calDarkGreen}"
+                                                Grid.Column="1"
+                                                Grid.Row="0"
+                                                HeightRequest="30"
+                                                HorizontalOptions="Center"
+                                                Source="{Binding IconColorChecked}" 
+                                                WidthRequest="30"
+                                                VerticalOptions="Center">
+                                                <lang:IconView.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command ="{Binding SelectColorCommand}"
+                                                        CommandParameter="{Binding Source={x:Reference circleColorDarkGreen}}"
+                                                        NumberOfTapsRequired="1">
+                                                    </TapGestureRecognizer>
+                                                </lang:IconView.GestureRecognizers>
+                                            </lang:IconView>
+                                            <!--Color 3-->
+                                            <lang:IconView
+                                                x:Name="circleColorLightGreen"
+                                                Foreground="{StaticResource calLightGreen}"
+                                                Grid.Column="2"
+                                                Grid.Row="0"
+                                                HeightRequest="30"
+                                                HorizontalOptions="Center"
+                                                Source="{Binding IconColorChecked}" 
+                                                WidthRequest="30"
+                                                VerticalOptions="Center">
+                                                <lang:IconView.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command ="{Binding SelectColorCommand}"
+                                                        CommandParameter="{Binding Source={x:Reference circleColorLightGreen}}"
+                                                        NumberOfTapsRequired="1">
+                                                    </TapGestureRecognizer>
+                                                </lang:IconView.GestureRecognizers>
+                                            </lang:IconView>
+                                            <!--Color 4-->
+                                            <lang:IconView
+                                                x:Name="circleColorTurquoise"
+                                                Foreground="{StaticResource calTurquoise}"
+                                                Grid.Column="3"
+                                                Grid.Row="0"
+                                                HeightRequest="30"
+                                                HorizontalOptions="Center"
+                                                Source="{Binding IconColorChecked}" 
+                                                WidthRequest="30"
+                                                VerticalOptions="Center">
+                                                <lang:IconView.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command ="{Binding SelectColorCommand}"
+                                                        CommandParameter="{Binding Source={x:Reference circleColorTurquoise}}"
+                                                        NumberOfTapsRequired="1">
+                                                    </TapGestureRecognizer>
+                                                </lang:IconView.GestureRecognizers>
+                                            </lang:IconView>
+                                            <!--Color 5-->
+                                            <lang:IconView
+                                                x:Name="circleColorLightPurple"
+                                                Foreground="{StaticResource calLightPurple}"
+                                                Grid.Column="4"
+                                                Grid.Row="0"
+                                                HeightRequest="30"
+                                                HorizontalOptions="Center"
+                                                Source="{Binding IconColorChecked}" 
+                                                WidthRequest="30"
+                                                VerticalOptions="Center">
+                                                <lang:IconView.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command ="{Binding SelectColorCommand}"
+                                                        CommandParameter="{Binding Source={x:Reference circleColorLightPurple}}"
+                                                        NumberOfTapsRequired="1">
+                                                    </TapGestureRecognizer>
+                                                </lang:IconView.GestureRecognizers>
+                                            </lang:IconView>
+                                            <!--Color 6-->
+                                            <lang:IconView
+                                                x:Name="circleColorLightOrange"
+                                                Foreground="{StaticResource calLightOrange}"
+                                                Grid.Column="5"
+                                                Grid.Row="0"
+                                                HeightRequest="30"
+                                                HorizontalOptions="Center"
+                                                Source="{Binding IconColorChecked}" 
+                                                WidthRequest="30"
+                                                VerticalOptions="Center">
+                                                <lang:IconView.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command ="{Binding SelectColorCommand}"
+                                                        CommandParameter="{Binding Source={x:Reference circleColorLightOrange}}"
+                                                        NumberOfTapsRequired="1">
+                                                    </TapGestureRecognizer>
+                                                </lang:IconView.GestureRecognizers>
+                                            </lang:IconView>
+                                            <!--Second row-->
+                                            <!--Color 7-->
+                                            <lang:IconView
+                                                x:Name="circleColorMediumGray"
+                                                Foreground="{StaticResource calMediumGray}"
+                                                Grid.Column="0"
+                                                Grid.Row="1"
+                                                HeightRequest="30"
+                                                HorizontalOptions="Center"
+                                                Source="{Binding IconColorChecked}" 
+                                                WidthRequest="30"
+                                                VerticalOptions="Center">
+                                                <lang:IconView.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command ="{Binding SelectColorCommand}"
+                                                        CommandParameter="{Binding Source={x:Reference circleColorMediumGray}}"
+                                                        NumberOfTapsRequired="1">
+                                                    </TapGestureRecognizer>
+                                                </lang:IconView.GestureRecognizers>
+                                            </lang:IconView>
+                                            <!--Color 8-->
+                                            <lang:IconView
+                                                x:Name="circleColorPurple"
+                                                Foreground="{StaticResource calPurple}"
+                                                Grid.Column="1"
+                                                Grid.Row="1"
+                                                HeightRequest="30"
+                                                HorizontalOptions="Center"
+                                                Source="{Binding IconColorChecked}" 
+                                                WidthRequest="30"
+                                                VerticalOptions="Center">
+                                                <lang:IconView.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command ="{Binding SelectColorCommand}"
+                                                        CommandParameter="{Binding Source={x:Reference circleColorPurple}}"
+                                                        NumberOfTapsRequired="1">
+                                                    </TapGestureRecognizer>
+                                                </lang:IconView.GestureRecognizers>
+                                            </lang:IconView>
+                                            <!--Color 9-->
+                                            <lang:IconView
+                                                x:Name="circleColorLightBlue"
+                                                Foreground="{StaticResource calLightBlue}"
+                                                Grid.Column="2"
+                                                Grid.Row="1"
+                                                HeightRequest="30"
+                                                HorizontalOptions="Center"
+                                                Source="{Binding IconColorChecked}" 
+                                                WidthRequest="30"
+                                                VerticalOptions="Center">
+                                                <lang:IconView.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command ="{Binding SelectColorCommand}"
+                                                        CommandParameter="{Binding Source={x:Reference circleColorLightBlue}}"
+                                                        NumberOfTapsRequired="1">
+                                                    </TapGestureRecognizer>
+                                                </lang:IconView.GestureRecognizers>
+                                            </lang:IconView>
+                                            <!--Color 10-->
+                                            <lang:IconView
+                                                x:Name="circleColorFucsia"
+                                                Foreground="{StaticResource calFucsia}"
+                                                Grid.Column="3"
+                                                Grid.Row="1"
+                                                HeightRequest="30"
+                                                HorizontalOptions="Center"
+                                                Source="{Binding IconColorChecked}" 
+                                                WidthRequest="30"
+                                                VerticalOptions="Center">
+                                                <lang:IconView.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command ="{Binding SelectColorCommand}"
+                                                        CommandParameter="{Binding Source={x:Reference circleColorFucsia}}"
+                                                        NumberOfTapsRequired="1">
+                                                    </TapGestureRecognizer>
+                                                </lang:IconView.GestureRecognizers>
+                                            </lang:IconView>
+                                            <!--Color 11-->
+                                            <lang:IconView
+                                                x:Name="circleColorMango"
+                                                Foreground="{StaticResource calMango}"
+                                                Grid.Column="4"
+                                                Grid.Row="1"
+                                                HeightRequest="30"
+                                                HorizontalOptions="Center"
+                                                Source="{Binding IconColorChecked}" 
+                                                WidthRequest="30"
+                                                VerticalOptions="Center">
+                                                <lang:IconView.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command ="{Binding SelectColorCommand}"
+                                                        CommandParameter="{Binding Source={x:Reference circleColorMango}}"
+                                                        NumberOfTapsRequired="1">
+                                                    </TapGestureRecognizer>
+                                                </lang:IconView.GestureRecognizers>
+                                            </lang:IconView>
+                                            <!--Color 12-->
+                                            <lang:IconView
+                                                x:Name="circleColorLightBrown"
+                                                Foreground="{StaticResource calLightBrown}"
+                                                Grid.Column="5"
+                                                Grid.Row="1"
+                                                HeightRequest="30"
+                                                HorizontalOptions="Center"
+                                                Source="{Binding IconColorChecked}" 
+                                                WidthRequest="30"
+                                                VerticalOptions="Center">
+                                                <lang:IconView.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command ="{Binding SelectColorCommand}"
+                                                        CommandParameter="{Binding Source={x:Reference circleColorLightBrown}}"
+                                                        NumberOfTapsRequired="1">
+                                                    </TapGestureRecognizer>
+                                                </lang:IconView.GestureRecognizers>
+                                            </lang:IconView>
+                                            <!--Third row-->
+                                            <!--Color 13-->
+                                            <lang:IconView
+                                                x:Name="circleColorIndigo"
+                                                Foreground="{StaticResource calIndigo}"
+                                                Grid.Column="0"
+                                                Grid.Row="2"
+                                                HeightRequest="30"
+                                                HorizontalOptions="Center"
+                                                Source="{Binding IconColorChecked}" 
+                                                WidthRequest="30"
+                                                VerticalOptions="Center">
+                                                <lang:IconView.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command ="{Binding SelectColorCommand}"
+                                                        CommandParameter="{Binding Source={x:Reference circleColorIndigo}}"
+                                                        NumberOfTapsRequired="1">
+                                                    </TapGestureRecognizer>
+                                                </lang:IconView.GestureRecognizers>
+                                            </lang:IconView>
+                                            <!--Color 14-->
+                                            <lang:IconView
+                                                x:Name="circleColorDarkPink"
+                                                Foreground="{StaticResource calDarkPink}"
+                                                Grid.Column="1"
+                                                Grid.Row="2"
+                                                HeightRequest="30"
+                                                HorizontalOptions="Center"
+                                                Source="{Binding IconColorChecked}" 
+                                                WidthRequest="30"
+                                                VerticalOptions="Center">
+                                                <lang:IconView.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command ="{Binding SelectColorCommand}"
+                                                        CommandParameter="{Binding Source={x:Reference circleColorDarkPink}}"
+                                                        NumberOfTapsRequired="1">
+                                                    </TapGestureRecognizer>
+                                                </lang:IconView.GestureRecognizers>
+                                            </lang:IconView>
+                                            <!--Color 15-->
+                                            <lang:IconView
+                                                x:Name="circleColorRed"
+                                                Foreground="{StaticResource calRed}"
+                                                Grid.Column="2"
+                                                Grid.Row="2"
+                                                HeightRequest="30"
+                                                HorizontalOptions="Center"
+                                                Source="{Binding IconColorChecked}" 
+                                                WidthRequest="30"
+                                                VerticalOptions="Center">
+                                                <lang:IconView.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command ="{Binding SelectColorCommand}"
+                                                        CommandParameter="{Binding Source={x:Reference circleColorRed}}"
+                                                        NumberOfTapsRequired="1">
+                                                    </TapGestureRecognizer>
+                                                </lang:IconView.GestureRecognizers>
+                                            </lang:IconView>
+                                            <!--Color 16-->
+                                            <lang:IconView
+                                                x:Name="circleColorGrayGreen"
+                                                Foreground="{StaticResource calGrayGreen}"
+                                                Grid.Column="3"
+                                                Grid.Row="2"
+                                                HeightRequest="30"
+                                                HorizontalOptions="Center"
+                                                Source="{Binding IconColorChecked}" 
+                                                WidthRequest="30"
+                                                VerticalOptions="Center">
+                                                <lang:IconView.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command ="{Binding SelectColorCommand}"
+                                                        CommandParameter="{Binding Source={x:Reference circleColorGrayGreen}}"
+                                                        NumberOfTapsRequired="1">
+                                                    </TapGestureRecognizer>
+                                                </lang:IconView.GestureRecognizers>
+                                            </lang:IconView>
+                                            <!--Color 17-->
+                                            <lang:IconView
+                                                x:Name="circleColorGray"
+                                                Foreground="{StaticResource calGray}"
+                                                Grid.Column="4"
+                                                Grid.Row="2"
+                                                HeightRequest="30"
+                                                HorizontalOptions="Center"
+                                                Source="{Binding IconColorChecked}" 
+                                                WidthRequest="30"
+                                                VerticalOptions="Center">
+                                                <lang:IconView.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command ="{Binding SelectColorCommand}"
+                                                        CommandParameter="{Binding Source={x:Reference circleColorGray}}"
+                                                        NumberOfTapsRequired="1">
+                                                    </TapGestureRecognizer>
+                                                </lang:IconView.GestureRecognizers>
+                                            </lang:IconView>
+                                            <!--Color 18-->
+                                            <lang:IconView
+                                                x:Name="circleColorAqua"
+                                                Foreground="{StaticResource calAqua}"
+                                                Grid.Column="5"
+                                                Grid.Row="2"
+                                                HeightRequest="30"
+                                                HorizontalOptions="Center"
+                                                Source="{Binding IconColorChecked}" 
+                                                WidthRequest="30"
+                                                VerticalOptions="Center">
+                                                <lang:IconView.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command ="{Binding SelectColorCommand}"
+                                                        CommandParameter="{Binding Source={x:Reference circleColorAqua}}"
+                                                        NumberOfTapsRequired="1">
+                                                    </TapGestureRecognizer>
+                                                </lang:IconView.GestureRecognizers>
+                                            </lang:IconView>
+                                            
+                                            
                                         </Grid>
                                         <Button 
-                                            Command="{Binding ChangeColorAndCloseCommand}"
+                                            Command="{Binding CloseChangeColorCommand}"
                                             Grid.Row="2" 
                                             Padding="4" 
                                             HorizontalOptions="End" 
-                                            Text="{lang:Translate Accept}" 
+                                            Text="{lang:Translate Cancel}" 
                                             CornerRadius="6"
                                             BackgroundColor="Transparent"/>
                                     </Grid>
@@ -190,7 +526,8 @@
                                         CheckedColor="{Binding CalendarColor}"
                                         UncheckedColor="{Binding CalendarColor}"
                                         IsChecked="{Binding IsVisible}"
-                                        IsEnabled="{Binding IsOwner, Converter={StaticResource inverseBool}}">
+                                        IsEnabled="{Binding IsOwner, Converter={StaticResource inverseBool}}"
+                                        StrokeWidth="3">
                                         <telerikPrimitives:RadCheckBox.Commands>
                                             <checkBoxCommands:CheckBoxUserCommand
                                                 Id="IsCheckedChanged"

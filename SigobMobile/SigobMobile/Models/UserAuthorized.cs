@@ -163,6 +163,9 @@
         [JsonProperty("email")]
         public string Email { get; set; }
 
+        [JsonProperty("sexo")]
+        public byte? Gender { get; set; }
+
         [JsonProperty("imagenUsuario")]
         public string UserImage { get; set; }
     }

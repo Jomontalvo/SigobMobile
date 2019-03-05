@@ -18,6 +18,7 @@
         internal ApiService apiService;
         internal string apiGetCalendarsController = "calendars";
         internal string apiPostVisibilityController = "calendars/linkedcal/{0}/visible/{1}";
+        internal string apiPostChangeColorController = "calendars/color/{0}";
         internal const string AllCalendars = "TODOS";
         #endregion
 
@@ -90,7 +91,7 @@
             apiService = new ApiService();
             SelectDeselectAll = Languages.ShowAll;
             LoadCalendars();
-            SetOptionsColors();
+            SetColorOptions();
             IsEnabled = true;
         }
         #endregion
@@ -104,14 +105,14 @@
             }
         }
 
-        public ICommand ChangeColorAndCloseCommand
+        public ICommand CloseChangeColorCommand
         {
-            get { return new RelayCommand(ChangeColorAndClose); }
+            get { return new RelayCommand(CloseChangeColor); }
         }
 
         public ICommand OkAndCloseCommand => new RelayCommand(OkAndClose);
        
-       public ICommand RefreshCommand
+        public ICommand RefreshCommand
         {
             get { return new RelayCommand(LoadCalendars); }
         }
@@ -125,19 +126,9 @@
         {
             get
             {
-                return new RelayCommand(SelectColor);
+                return new RelayCommand<IconView>(SelectColor);
             }
         }
-
-        private async void SelectColor()
-        {
-            await Application.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    Languages.Ok,
-                    Languages.Cancel);
-        }
-
-
         #endregion
 
         #region Methods
@@ -145,12 +136,62 @@
         /// <summary>
         /// Selects the color of the calendar and change button.
         /// </summary>
+        private async void SelectColor(IconView colorSelected)
+        {
+            colorSelected.Source = (colorSelected.Source == "ic_circle_color") ? "ic_circle_check_color" : "ic_circle_color";
+            var connection = await this.apiService.CheckConnection();
+            if (!connection.IsSuccess)
+            {
+                this.IsRunning = false;
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    connection.Message,
+                    Languages.Cancel);
+                IsOpen = false;
+                return;
+            }
 
+            //Change Foreground color to Number, before call EndPoint
+            int numColor = ((Convert.ToInt32(colorSelected.Foreground.R * 255) * 256 * 256) +
+                            (Convert.ToInt32(colorSelected.Foreground.G * 255) * 256) +
+                             Convert.ToInt32(colorSelected.Foreground.B * 255));
+
+            var response = await this.apiService.Put<bool>(
+                Settings.UrlBaseApiSigob,
+                App.PrefixApiSigob,
+                string.Format(apiPostChangeColorController, numColor),
+                Settings.Token,
+                Settings.DbToken
+            );
+            if (!response.IsSuccess)
+            {
+                this.IsRunning = false;
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    response.Message,
+                    Languages.Cancel);
+                IsOpen = false;
+                return;
+            }
+            bool resultSetColor = (bool)response.Result;
+            if (!resultSetColor)
+            {
+                this.IsRunning = false;
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    Languages.GeneralError,
+                    Languages.Cancel);
+                return;
+            }
+            MyCalendarColor = colorSelected.Foreground;
+            colorSelected.Source = "ic_circle_color";
+            IsOpen = false;
+        }
 
         /// <summary>
         /// Sets the color options for active user calendar
         /// </summary>
-        private void SetOptionsColors()
+        private void SetColorOptions()
         {
             IconColorChecked =  "ic_circle_color"; //TODO: Assign checked image
         }
@@ -302,7 +343,7 @@
         /// <summary>
         /// Changes the color and close modal view
         /// </summary>
-        private void ChangeColorAndClose()
+        private void CloseChangeColor()
         {
             IsOpen = false;
         }

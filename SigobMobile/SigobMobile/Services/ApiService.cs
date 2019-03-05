@@ -13,6 +13,10 @@
 
     public class ApiService
     {
+        /// <summary>
+        /// Checks the connection.
+        /// </summary>
+        /// <returns>The connection.</returns>
         public async Task<Response> CheckConnection()
         {
             if (!CrossConnectivity.Current.IsConnected)
@@ -42,30 +46,7 @@
             };
         }
 
-        //public async Task<TokenResponse> GetToken(
-        //    string urlBase,
-        //    string username,
-        //    string password)
-        //{
-        //    try
-        //    {
-        //        var client = new HttpClient();
-        //        client.BaseAddress = new Uri(urlBase);
-        //        var response = await client.PostAsync("Token",
-        //            new StringContent(string.Format(
-        //            "grant_type=password&username={0}&password={1}",
-        //            username, password),
-        //            Encoding.UTF8, "application/x-www-form-urlencoded"));
-        //        var resultJSON = await response.Content.ReadAsStringAsync();
-        //        var result = JsonConvert.DeserializeObject<TokenResponse>(
-        //            resultJSON);
-        //        return result;
-        //    }
-        //    catch
-        //    {
-        //        return null;
-        //    }
-        //}
+        #region GET API Calls
 
         /// <summary>
         /// Get the specified objet (unsecure), calling and EndPoint through urlBase, servicePrefix, controller and identifier object.
@@ -126,8 +107,8 @@
         /// <param name="urlBase">URL base.</param>
         /// <param name="servicePrefix">Service prefix.</param>
         /// <param name="controller">Controller.</param>
-        /// <param name="token">Token type.</param>
-        /// <param name="authToken">Access token.</param>
+        /// <param name="authToken">Authorized Token.</param>
+        /// <param name="authDbToken">Access database token.</param>
         /// <typeparam name="T">The object type parameter.</typeparam>
         public async Task<Response> Get<T>(
             string urlBase,
@@ -340,6 +321,11 @@
                 };
             }
         }
+
+        #endregion
+
+
+        #region POST API Calls
 
         /// <summary>
         /// Post without body content, specified urlBase, servicePrefix, controller, authToken and authDbToken.
@@ -579,6 +565,64 @@
             }
         }
 
+        #endregion
+
+        #region PUT API Call
+        /// <summary>
+        /// Put without Model the specified urlBase, servicePrefix, controller, authToken and authDbToken.
+        /// </summary>
+        /// <returns>The put.</returns>
+        /// <param name="urlBase">URL base.</param>
+        /// <param name="servicePrefix">Service prefix.</param>
+        /// <param name="controller">Controller.</param>
+        /// <param name="authToken">Auth token.</param>
+        /// <param name="authDbToken">Auth db token.</param>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
+        public async Task<Response> Put<T>(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            string authToken,
+            string authDbToken)
+        {
+            try
+            {
+
+                HttpClient client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+                client.DefaultRequestHeaders.Add("token", authToken);
+                client.DefaultRequestHeaders.Add("dbtoken", authDbToken);
+                var url = string.Format("{0}{1}", servicePrefix, controller);
+                var response = await client.PutAsync(url, null);
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    var error = JsonConvert.DeserializeObject<Response>(result);
+                    error.IsSuccess = false;
+                    return error;
+                }
+
+                var newRecord = JsonConvert.DeserializeObject<T>(result);
+
+                return new Response
+                {
+                    IsSuccess = true,
+                    Result = newRecord,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+            }
+        }
+
         /// <summary>
         /// Put the specified urlBase, servicePrefix, controller, tokenType, accessToken and model.
         /// </summary>
@@ -644,6 +688,10 @@
             }
         }
 
+        #endregion
+
+        #region DELETE API Call
+
         /// <summary>
         /// Delete the specified urlBase, servicePrefix, controller, tokenType, accessToken and model.
         /// </summary>
@@ -700,5 +748,6 @@
                 };
             }
         }
+        #endregion
     }
 }

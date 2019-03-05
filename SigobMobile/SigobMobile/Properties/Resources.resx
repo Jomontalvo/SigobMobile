@@ -401,8 +401,44 @@
     <value>Please, select the calendars that you want to make visible in your Management Center.</value>
     <comment>Message for set visibility of calendar.</comment>
   </data>
- <data name="SelectCalendarColor" xml:space="preserve">
-    <value>Please, choose a color for your calendar.</value>
+  <data name="SelectCalendarColor" xml:space="preserve">
+    <value>Select the calendar color.</value>
     <comment>Message for choose a color of calendar.</comment>
-  </data> 
+  </data>
+  <data name="MaleGender" xml:space="preserve">
+    <value>Male</value>
+    <comment>Text of Gender Male.</comment>
+  </data>
+  <data name="FemaleGender" xml:space="preserve">
+    <value>Female</value>
+    <comment>Text of Gender Female.</comment>
+  </data>
+  <data name="GenderText" xml:space="preserve">
+    <value>Gender</value>
+    <comment>Label for Gender Entry.</comment>
+  </data>
+  <data name="SelectGenderPlaceHolder" xml:space="preserve">
+    <value>Select a gender.</value>
+    <comment>Placeholder text for gender selection.</comment>
+  </data>
+  <data name="SourceImageQuestion" xml:space="preserve">
+    <value>Where will you take your profile picture?</value>
+    <comment>Place from select a new image.</comment>
+  </data>
+  <data name="FromGallery" xml:space="preserve">
+    <value>From gallery</value>
+    <comment>Take image from gallery</comment>
+  </data>
+  <data name="FromCamera" xml:space="preserve">
+    <value>From camera</value>
+    <comment>Take image from camera</comment>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+    <comment>Delete option</comment>
+  </data>
+  <data name="DeletePicture" xml:space="preserve">
+    <value>Delete picture</value>
+    <comment>Delete the current picture</comment>
+  </data>
 </root>

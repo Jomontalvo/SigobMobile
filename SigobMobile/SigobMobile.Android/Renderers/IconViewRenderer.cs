@@ -59,7 +59,13 @@ namespace SigobMobile.Droid.Renderers
             if (!_isDisposed && !string.IsNullOrWhiteSpace(Element.Source))
             {
                 var d = Context.GetDrawable(Element.Source).Mutate();
-                d.SetColorFilter(new LightingColorFilter(Element.Foreground.ToAndroid(), Element.Foreground.ToAndroid()));
+
+                //d.SetColorFilter(new LightingColorFilter(Element.Foreground.ToAndroid(), Element.Foreground.ToAndroid()));
+
+                //d.SetTint(Element.Foreground.ToAndroid());
+
+                d.SetColorFilter(new PorterDuffColorFilter(Element.Foreground.ToAndroid(), PorterDuff.Mode.SrcAtop));
+
                 d.Alpha = Element.Foreground.ToAndroid().A;
                 Control.SetImageDrawable(d);
                 ((IVisualElementController)Element).NativeSizeChanged();

@@ -478,5 +478,59 @@ namespace SigobMobile.Properties {
                 return ResourceManager.GetString("SelectCalendarColor", resourceCulture);
             }
         }
+        
+        public static string MaleGender {
+            get {
+                return ResourceManager.GetString("MaleGender", resourceCulture);
+            }
+        }
+        
+        public static string FemaleGender {
+            get {
+                return ResourceManager.GetString("FemaleGender", resourceCulture);
+            }
+        }
+        
+        public static string GenderText {
+            get {
+                return ResourceManager.GetString("GenderText", resourceCulture);
+            }
+        }
+        
+        public static string SelectGenderPlaceHolder {
+            get {
+                return ResourceManager.GetString("SelectGenderPlaceHolder", resourceCulture);
+            }
+        }
+        
+        public static string SourceImageQuestion {
+            get {
+                return ResourceManager.GetString("SourceImageQuestion", resourceCulture);
+            }
+        }
+        
+        public static string FromGallery {
+            get {
+                return ResourceManager.GetString("FromGallery", resourceCulture);
+            }
+        }
+        
+        public static string FromCamera {
+            get {
+                return ResourceManager.GetString("FromCamera", resourceCulture);
+            }
+        }
+        
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        public static string DeletePicture {
+            get {
+                return ResourceManager.GetString("DeletePicture", resourceCulture);
+            }
+        }
     }
 }

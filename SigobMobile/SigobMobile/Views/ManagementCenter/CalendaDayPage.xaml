@@ -22,8 +22,8 @@
         <!-- Add Button -->
         <ToolbarItem 
             BindingContext="{Binding CalendarDay}"
-            Command="{Binding AddCommand}"
-            Icon="ic_bt_add"
+            Command="{Binding FirstButtonCommand}"
+            Icon="{OnPlatform Android=ic_bt_menu_vertical, Default=ic_bt_add}"
             Order="Primary"
             Priority="1">
         </ToolbarItem>
@@ -55,7 +55,7 @@
                     </telerikInput:DayViewSettings>
                 </telerikInput:RadCalendar.DayViewSettings>
             </telerikInput:RadCalendar>
-            <!--Button Add-->
+            <!--Button Add for Android-->
             <ImageButton
                 AbsoluteLayout.LayoutBounds="1,1,-1,-1"
                 AbsoluteLayout.LayoutFlags="PositionProportional"

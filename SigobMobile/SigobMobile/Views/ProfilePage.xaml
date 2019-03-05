@@ -12,6 +12,16 @@
              ios:Page.UseSafeArea="true">
     <!--ios:NavigationPage.PrefersLargeTitles="true"-->
     <!--ios:Page.LargeTitleDisplay="Automatic"-->
+    <ContentPage.ToolbarItems>
+        <!-- Save -->
+        <ToolbarItem
+            BindingContext="{Binding Profile}"
+            Command="{Binding SaveCommand}"
+            Text="{lang:Translate Ok}"
+            Order="Primary" 
+            Priority="0">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout 
             BindingContext="{Binding Profile}" 
@@ -21,113 +31,118 @@
                 IsVisible="{Binding IsRunning, Mode=TwoWay}" 
                 IsRunning="{Binding IsRunning, Mode=TwoWay}">
             </ActivityIndicator>
-            <ScrollView>
-                <StackLayout>
-                    <ctrls:CircleImage 
-                        Aspect="AspectFill" 
-                        HorizontalOptions="Center" 
-                        Source="{Binding ImageSource}">
-                        <ctrls:CircleImage.WidthRequest>
-                            <OnPlatform x:TypeArguments="x:Double">
-                                <On Platform="Android, iOS">150</On>
-                                <On Platform="WinPhone">200</On>
-                            </OnPlatform>
-                        </ctrls:CircleImage.WidthRequest>
-                        <ctrls:CircleImage.HeightRequest>
-                            <OnPlatform x:TypeArguments="x:Double">
-                                <On Platform="Android, iOS">150</On>
-                                <On Platform="WinPhone">200</On>
-                            </OnPlatform>
-                        </ctrls:CircleImage.HeightRequest>
-                        <ctrls:CircleImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ChangeUserImageCommand}" />
-                        </ctrls:CircleImage.GestureRecognizers>
-                    </ctrls:CircleImage>
-                    <Label 
-                        FontAttributes="Bold" 
-                        FontSize="Default" 
-                        HorizontalOptions="CenterAndExpand" 
-                        Text="{Binding Position}" TextColor="Gray">
-                    </Label>
-                    <Label 
-                        FontAttributes="None" 
-                        FontSize="Small" 
-                        HorizontalOptions="CenterAndExpand" 
-                        Text="{Binding Section}" 
-                        TextColor="{StaticResource darkGray}">
-                    </Label>
-                    <Label 
-                        FontAttributes="None" 
-                        FontSize="Small" 
-                        HorizontalOptions="CenterAndExpand" 
-                        Text="{Binding Institution}" 
-                        TextColor="{StaticResource darkGray}">
-                    </Label>
-                    <TableView 
-                        Intent="Data" 
-                        HasUnevenRows="true" 
-                        VerticalOptions="StartAndExpand">
-                        <TableRoot>
-                            <TableSection 
-                                Title="{lang:Translate PersonalDataGroup}">
-                                <EntryCell 
-                                    Label="{lang:Translate FirstNameText}" 
-                                    Placeholder="{lang:Translate FirstNameText}" 
-                                    Text="{Binding FirstName, 
-                                    Mode=TwoWay }">
-                                </EntryCell>
-                                <EntryCell 
-                                    Label="{lang:Translate LastNameText}" 
-                                    Placeholder="{lang:Translate LastNameText}" 
-                                    Text="{Binding LastName, Mode=TwoWay }">
-                                </EntryCell>
-                            </TableSection>
-                            <TableSection 
-                                Title="{lang:Translate ContactDataGroup}">
-                                <EntryCell 
-                                    Keyboard="Telephone" 
-                                    Label="{lang:Translate PhoneText}" 
-                                    Placeholder="{lang:Translate PhoneText}" 
-                                    Text="{Binding Phone}">
-                                </EntryCell>
-                                <EntryCell 
-                                    Keyboard="Telephone" 
-                                    Label="{lang:Translate CellPhoneText}" 
-                                    Placeholder="{lang:Translate CellPhoneText}" 
-                                    Text="{Binding CellPhone}">
-                                </EntryCell>
-                                <EntryCell 
-                                    Keyboard="Email" 
-                                    Label="{lang:Translate EmailText}" 
-                                    Placeholder="{lang:Translate EmailText}" 
-                                    Text="{Binding Email}">
-                                </EntryCell>
-                            </TableSection>
-                        </TableRoot>
-                    </TableView>
-                </StackLayout>
-            </ScrollView>
-            <Grid
-                RowSpacing="0" ColumnSpacing="0"
-                VerticalOptions="End">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid 
-                    BackgroundColor="{StaticResource softGray}"
-                    Grid.Row="0" 
-                    VerticalOptions="End" 
-                    RowSpacing="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Text="Page1" />
-                    <Button Grid.Column="1" Text="Page2" />
-                    <Button Grid.Column="2" Text="Page3" />
-                </Grid>
-            </Grid>
+            <ctrls:CircleImage 
+                Aspect="AspectFill" 
+                HorizontalOptions="Center" 
+                Source="{Binding ImageSource}">
+                <ctrls:CircleImage.WidthRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android, iOS">150</On>
+                        <On Platform="WinPhone">200</On>
+                    </OnPlatform>
+                </ctrls:CircleImage.WidthRequest>
+                <ctrls:CircleImage.HeightRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android, iOS">150</On>
+                        <On Platform="WinPhone">200</On>
+                    </OnPlatform>
+                </ctrls:CircleImage.HeightRequest>
+                <ctrls:CircleImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ChangeUserImageCommand}" />
+                </ctrls:CircleImage.GestureRecognizers>
+            </ctrls:CircleImage>
+            <Label 
+                FontAttributes="Bold" 
+                FontSize="Default" 
+                HorizontalOptions="CenterAndExpand" 
+                Text="{Binding Position}" TextColor="Gray">
+            </Label>
+            <Label 
+                FontAttributes="None" 
+                FontSize="Small" 
+                HorizontalOptions="CenterAndExpand" 
+                Text="{Binding Section}" 
+                TextColor="{StaticResource darkGray}">
+            </Label>
+            <Label 
+                FontAttributes="None" 
+                FontSize="Small" 
+                HorizontalOptions="CenterAndExpand" 
+                Text="{Binding Institution}" 
+                TextColor="{StaticResource darkGray}">
+            </Label>
+            <TableView 
+                Intent="Data" 
+                HasUnevenRows="true" 
+                VerticalOptions="StartAndExpand">
+                <TableRoot>
+                    <TableSection 
+                        Title="{lang:Translate PersonalDataGroup}">
+                        <EntryCell 
+                            Label="{lang:Translate FirstNameText}" 
+                            Placeholder="{lang:Translate FirstNameText}" 
+                            Text="{Binding FirstName, 
+                            Mode=TwoWay }">
+                        </EntryCell>
+                        <EntryCell 
+                            Label="{lang:Translate LastNameText}" 
+                            Placeholder="{lang:Translate LastNameText}" 
+                            Text="{Binding LastName, Mode=TwoWay }">
+                        </EntryCell>
+                        <ViewCell>
+                            <StackLayout
+                                Orientation="Horizontal">
+                                <Label
+                                    HorizontalOptions="Start"
+                                    Margin="15,0,0,0"
+                                    Text="{lang:Translate GenderText}"
+                                    VerticalOptions="Center"
+                                    WidthRequest="80">
+                                </Label>
+                                <Button
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding SelectMaleCommand}"
+                                    FontSize="Medium"
+                                    Image="{Binding IsMaleSelected}"
+                                    Padding="5,0,0,0"
+                                    Text="{lang:Translate MaleGender}"
+                                    TextColor="Black">
+                                </Button>
+                                <Button
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding SelectFemaleCommand}"
+                                    FontSize="Medium"
+                                    Image="{Binding IsFemaleSelected}"
+                                    Padding="10,0,0,0"
+                                    Text="{lang:Translate FemaleGender}"
+                                    TextColor="Black">
+                                </Button>
+                            </StackLayout>
+                        </ViewCell>
+                    </TableSection>
+                    <TableSection 
+                        Title="{lang:Translate ContactDataGroup}">
+                        <EntryCell 
+                            Keyboard="Telephone" 
+                            Label="{lang:Translate PhoneText}" 
+                            Placeholder="{lang:Translate PhoneText}" 
+                            Text="{Binding Phone}">
+                        </EntryCell>
+                        <EntryCell 
+                            Keyboard="Telephone" 
+                            Label="{lang:Translate CellPhoneText}" 
+                            Placeholder="{lang:Translate CellPhoneText}" 
+                            Text="{Binding CellPhone}">
+                        </EntryCell>
+                        <EntryCell 
+                            Keyboard="Email" 
+                            Label="{lang:Translate EmailText}" 
+                            Placeholder="{lang:Translate EmailText}" 
+                            Text="{Binding Email}">
+                        </EntryCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -215,6 +215,12 @@
     <AndroidResource Include="Resources\drawable\ic_chevron.png" />
     <AndroidResource Include="Resources\drawable\ic_circle_check_color.png" />
     <AndroidResource Include="Resources\drawable\ic_circle_color.png" />
+    <AndroidResource Include="Resources\drawable\ic_bt_instructions.png" />
+    <AndroidResource Include="Resources\drawable\ic_bt_menu_vertical.png" />
+    <AndroidResource Include="Resources\drawable\ic_color_palette.png" />
+    <AndroidResource Include="Resources\drawable\ic_bt_add.png" />
+    <AndroidResource Include="Resources\drawable\ic_rbutton_selected.png" />
+    <AndroidResource Include="Resources\drawable\ic_rbutton_unselected.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

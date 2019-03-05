@@ -264,6 +264,8 @@
     <BundleResource Include="Resources\ic_color_palette.png" />
     <BundleResource Include="Resources\ic_circle_check_color.png" />
     <BundleResource Include="Resources\ic_circle_color.png" />
+    <BundleResource Include="Resources\ic_rbutton_selected.png" />
+    <BundleResource Include="Resources\ic_rbutton_unselected.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

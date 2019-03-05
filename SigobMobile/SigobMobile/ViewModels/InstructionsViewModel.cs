@@ -10,6 +10,7 @@
     using Helpers;
     using Models;
     using Services;
+    using Views.ManagementCenter;
     using Telerik.XamarinForms.DataControls.ListView.Commands;
     using Xamarin.Forms;
 
@@ -111,7 +112,7 @@
         }
 
         /// <summary>
-        /// Ons the selection changed.
+        /// Event ocurrs when thw selection is changed.
         /// </summary>
         private async void OnSelectionChanged()
         {
@@ -133,7 +134,7 @@
                     Languages.Error,
                     connection.Message,
                     Languages.Cancel);
-                await Application.Current.MainPage.Navigation.PopAsync();
+                await App.Navigator.PopToRootAsync();
                 return;
             }
 
@@ -151,7 +152,7 @@
                     Languages.Error,
                     response.Message,
                     Languages.Cancel);
-                await Application.Current.MainPage.Navigation.PopAsync();
+                await App.Navigator.PopAsync();
                 return;
             }
             var instructionList = (List<Instruction>)response.Result;
@@ -209,6 +210,27 @@
         }
 
         /// <summary>
+        /// Opens the calendars visibility options
+        /// </summary>
+        private async void OpenCalendars()
+        {
+            var calendarsMainViewModel = MainViewModel.GetInstance();
+            calendarsMainViewModel.Calendars = new CalendarsViewModel();
+            await Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new CalendarsPage()));
+        }
+
+
+        /// <summary>
+        /// Opens the filters.
+        /// </summary>
+        private void OpenFilters()
+        {
+            var filtersMainViewModel = MainViewModel.GetInstance();
+            filtersMainViewModel.CalendarFilters = new CalendarFiltersViewModel();
+            Application.Current.MainPage.Navigation.PushModalAsync(new CalendarFiltersPage());
+        }
+
+        /// <summary>
         /// Refresh the specified context.
         /// </summary>
         /// <param name="context">Context.</param>
@@ -225,6 +247,20 @@
             get
             {
                 return new RelayCommand(Search);
+            }
+        }
+        public ICommand OpenCalendarsCommand
+        {
+            get
+            {
+                return new RelayCommand(OpenCalendars);
+            }
+        }
+        public ICommand OpenFiltersCommand
+        {
+            get
+            {
+                return new RelayCommand(OpenFilters);
             }
         }
         public ICommand RefreshCommand { get; set; }
