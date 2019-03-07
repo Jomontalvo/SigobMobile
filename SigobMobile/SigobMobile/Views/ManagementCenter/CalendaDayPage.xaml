@@ -18,7 +18,6 @@
             <Label 
                 Text="{lang:Translate HomeMenu}" 
                 FontSize="Default"
-                FontAttributes="Bold"
                 HorizontalOptions="StartAndExpand"
                 HorizontalTextAlignment="Start"
                 TextColor="{OnPlatform Android=White, iOS={StaticResource iOSBlue}}"

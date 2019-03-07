@@ -83,8 +83,9 @@
         #region Constructors
         public CalendarDayViewModel()
         {
-            selectedDate = DateTime.Today;
-            apiService = new ApiService();
+            this.CalendarView = (CalendarViewMode)Settings.CurrentCalendarViewMode;
+            this.selectedDate = DateTime.Today;
+            this.apiService = new ApiService();
             this.LoadAppointments(selectedDate.GetValueOrDefault());
         }
         #endregion
@@ -198,6 +199,7 @@
                 if (source == Languages.MultiDayView) CalendarView = CalendarViewMode.MultiDay;
                 if (source == Languages.MonthlyView) CalendarView = CalendarViewMode.Month;
                 if (source == Languages.YearView) CalendarView = CalendarViewMode.Year;
+            Settings.CurrentCalendarViewMode = (int)CalendarView;
             return;
         }
         #endregion

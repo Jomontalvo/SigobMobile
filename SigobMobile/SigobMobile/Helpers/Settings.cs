@@ -2,7 +2,7 @@
 {
     using Plugin.Settings;
     using Plugin.Settings.Abstractions;
-    using SigobMobile.Models;
+    using Telerik.XamarinForms.Input;
 
     /// <summary>
     /// This is the Settings static class that can be used in your Core solution or in any
@@ -29,9 +29,22 @@
         private const string officeCode = "officeCode";
         private static readonly string SettingsDefault = string.Empty;
 
+        private const string calendarViewMode = "calendarViewMode";
+        private static readonly int SettingsCalendarViewDefault = (int)CalendarViewMode.Day; 
+
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Gets or sets the current calendar view mode.
+        /// </summary>
+        /// <value>The current calendar view mode.</value>
+        public static int CurrentCalendarViewMode
+        {
+            get => AppSettings.GetValueOrDefault(calendarViewMode, SettingsCalendarViewDefault);
+            set => AppSettings.AddOrUpdateValue(calendarViewMode, value);
+        }
+
         /// <summary>
         /// Gets or sets the token.
         /// </summary>
