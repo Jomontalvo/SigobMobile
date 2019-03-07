@@ -9,6 +9,7 @@
     using Models;
     using Services;
     using SigobMobile.Helpers;
+    using Telerik.XamarinForms.Input;
     using Views.ManagementCenter;
     using Xamarin.Forms;
 
@@ -31,10 +32,16 @@
         private byte viewTentative;
         private DateTime? selectedDate;
         private List<AppointmentItem> eventList;
+        private CalendarViewMode calendarView;
         #endregion
 
         #region Properties
 
+        public CalendarViewMode CalendarView
+        {
+            get { return this.calendarView; }
+            set { SetValue(ref this.calendarView, value); }
+        }
         public ObservableCollection<Event> Events
         {
             get { return this.events; }
@@ -170,12 +177,43 @@
         {
             var instructionMainViewModel = MainViewModel.GetInstance();
             instructionMainViewModel.Instructions = new InstructionsViewModel();
-            await App.Navigator.PushAsync(new InstructionsPage());
+            await App.Navigator.PushAsync(new InstructionsPage(),true);
+            return;
+        }
+
+        /// <summary>
+        /// Firsts the button.
+        /// </summary>
+        private async void SetCalendarViewMode()
+        {
+            var source = await Application.Current.MainPage.DisplayActionSheet(
+                Languages.CalendarViewModeText,
+                Languages.Cancel,
+                null,
+                Languages.DailyView,
+                Languages.MultiDayView,
+                Languages.MonthlyView,
+                Languages.YearView);
+                if (source == Languages.DailyView) CalendarView = CalendarViewMode.Day;
+                if (source == Languages.MultiDayView) CalendarView = CalendarViewMode.MultiDay;
+                if (source == Languages.MonthlyView) CalendarView = CalendarViewMode.Month;
+                if (source == Languages.YearView) CalendarView = CalendarViewMode.Year;
             return;
         }
         #endregion
 
         #region Commands
+
+        public ICommand SetCalendarViewModeCommand
+        {
+            get
+            {
+                return new RelayCommand(SetCalendarViewMode);
+            }
+        }
+
+
+
         public ICommand InstructionsListCommand
         {
             get

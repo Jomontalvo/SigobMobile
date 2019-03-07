@@ -78,7 +78,7 @@
                 <TableRoot>
                     <TableSection 
                         Title="{lang:Translate PersonalDataGroup}">
-                        <EntryCell 
+                        <EntryCell
                             Label="{lang:Translate FirstNameText}" 
                             Placeholder="{lang:Translate FirstNameText}" 
                             Text="{Binding FirstName, 

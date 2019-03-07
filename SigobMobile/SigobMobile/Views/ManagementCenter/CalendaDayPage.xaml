@@ -9,25 +9,48 @@
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
     Title="{lang:Translate AgendaViewTitle}"
     ios:Page.UseSafeArea="true">
-    <!-- ToolBarItems -->
-    <ContentPage.ToolbarItems>
-        <!-- Instructions -->
-        <ToolbarItem 
+    <NavigationPage.TitleView>
+        <StackLayout
             BindingContext="{Binding CalendarDay}"
-            Command="{Binding InstructionsListCommand}"
-            Icon="ic_bt_instructions"
-            Order="Primary" 
-            Priority="0">
-        </ToolbarItem>
-        <!-- Add Button -->
-        <ToolbarItem 
-            BindingContext="{Binding CalendarDay}"
-            Command="{Binding FirstButtonCommand}"
-            Icon="{OnPlatform Android=ic_bt_menu_vertical, Default=ic_bt_add}"
-            Order="Primary"
-            Priority="1">
-        </ToolbarItem>
-    </ContentPage.ToolbarItems>
+            Orientation="Horizontal" 
+            VerticalOptions="Center" 
+            HorizontalOptions="FillAndExpand">
+            <Label 
+                Text="{lang:Translate HomeMenu}" 
+                FontSize="Default"
+                FontAttributes="Bold"
+                HorizontalOptions="StartAndExpand"
+                HorizontalTextAlignment="Start"
+                TextColor="{OnPlatform Android=White, iOS={StaticResource iOSBlue}}"
+                VerticalTextAlignment="Center">
+            </Label>
+            <ImageButton
+                BackgroundColor="Transparent"
+                Command="{Binding InstructionsListCommand}"
+                HorizontalOptions="End"
+                Source="ic_bt_instructions">
+            </ImageButton>
+            <ImageButton
+                BackgroundColor="Transparent"
+                Command="{Binding SetCalendarViewModeCommand}"
+                HorizontalOptions="End"
+                Source="ic_bt_calendar_view">
+            </ImageButton>
+            <ImageButton
+                BackgroundColor="Transparent"
+                Command="{Binding SearchEventCommand}"
+                HorizontalOptions="End"
+                Source="ic_bt_search">
+            </ImageButton>
+            <ImageButton
+                BackgroundColor="Transparent"
+                Command="{Binding AddCommand}"
+                HorizontalOptions="End"
+                IsVisible="{OnPlatform Android=false, iOS=true}"
+                Source="ic_bt_add">
+            </ImageButton>
+        </StackLayout>
+    </NavigationPage.TitleView>
     <!-- Content Page -->
     <ContentPage.Content>
         <AbsoluteLayout
@@ -41,7 +64,7 @@
             <!--Calendar-->
             <telerikInput:RadCalendar 
                 x:Name="calendar" 
-                ViewMode="Day"
+                ViewMode="{Binding CalendarView, Mode=TwoWay}"
                 SchedulingUiEnabled="false"
                 AppointmentsSource="{Binding Events}">
                 <telerikInput:RadCalendar.AppointmentsStyle>

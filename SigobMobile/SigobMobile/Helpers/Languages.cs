@@ -118,11 +118,12 @@
         public static string CalendarsTitle { get { return Resources.CalendarsTitle; } }
         public static string Calendar { get { return Resources.Calendar; } }
         public static string Today { get { return Resources.Today; } }
+        public static string CalendarViewModeText { get { return Resources.CalendarViewModeText; } }
         public static string DailyView { get { return Resources.DailyView; } }
         public static string MonthlyView { get { return Resources.MonthlyView; } }
         public static string MultiDayView { get { return Resources.MultiDayView; } }
-        public static string AnnualView { get { return Resources.AnnualView; } }
-        public static string AgendaListView { get { return Resources.AgendaListView; } }
+        public static string YearView { get { return Resources.YearView; } }
+        public static string WeeklyView { get { return Resources.WeeklyView; } }
         public static string SelectCalendarMessage { get { return Resources.SelectCalendarMessage; } }
         public static string SelectCalendarColor { get { return Resources.SelectCalendarColor; } }
         #endregion

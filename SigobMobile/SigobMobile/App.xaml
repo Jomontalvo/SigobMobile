@@ -16,6 +16,7 @@
             <Color x:Key="defaultBackgroundView">White</Color>
             <Color x:Key="clear">Transparent</Color>
             <Color x:Key="lightBlue">#55BBFF</Color>
+            <Color x:Key="iOSBlue">#007AFF</Color>
             <Color x:Key="darkBlue">#265F91</Color>
             <Color x:Key="blue">#0073A7</Color>
             <Color x:Key="green">#3DA547</Color>

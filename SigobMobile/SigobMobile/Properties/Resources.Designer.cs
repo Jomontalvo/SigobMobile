@@ -401,36 +401,6 @@ namespace SigobMobile.Properties {
             }
         }
         
-        public static string DailyView {
-            get {
-                return ResourceManager.GetString("DailyView", resourceCulture);
-            }
-        }
-        
-        public static string MonthlyView {
-            get {
-                return ResourceManager.GetString("MonthlyView", resourceCulture);
-            }
-        }
-        
-        public static string MultiDayView {
-            get {
-                return ResourceManager.GetString("MultiDayView", resourceCulture);
-            }
-        }
-        
-        public static string AnnualView {
-            get {
-                return ResourceManager.GetString("AnnualView", resourceCulture);
-            }
-        }
-        
-        public static string AgendaListView {
-            get {
-                return ResourceManager.GetString("AgendaListView", resourceCulture);
-            }
-        }
-        
         public static string Filters {
             get {
                 return ResourceManager.GetString("Filters", resourceCulture);
@@ -530,6 +500,42 @@ namespace SigobMobile.Properties {
         public static string DeletePicture {
             get {
                 return ResourceManager.GetString("DeletePicture", resourceCulture);
+            }
+        }
+        
+        public static string CalendarViewModeText {
+            get {
+                return ResourceManager.GetString("CalendarViewModeText", resourceCulture);
+            }
+        }
+        
+        public static string MonthlyView {
+            get {
+                return ResourceManager.GetString("MonthlyView", resourceCulture);
+            }
+        }
+        
+        public static string DailyView {
+            get {
+                return ResourceManager.GetString("DailyView", resourceCulture);
+            }
+        }
+        
+        public static string MultiDayView {
+            get {
+                return ResourceManager.GetString("MultiDayView", resourceCulture);
+            }
+        }
+        
+        public static string YearView {
+            get {
+                return ResourceManager.GetString("YearView", resourceCulture);
+            }
+        }
+        
+        public static string WeeklyView {
+            get {
+                return ResourceManager.GetString("WeeklyView", resourceCulture);
             }
         }
     }

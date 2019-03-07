@@ -353,26 +353,6 @@
     <value>Today</value>
     <comment>Today text.</comment>
   </data>
-  <data name="DailyView" xml:space="preserve">
-    <value>Daily</value>
-    <comment>Daily text.</comment>
-  </data>
-  <data name="MonthlyView" xml:space="preserve">
-    <value>Monthly</value>
-    <comment>Monthly text.</comment>
-  </data>
-  <data name="MultiDayView" xml:space="preserve">
-    <value>Multi-day</value>
-    <comment>Multiple days text.</comment>
-  </data>
-  <data name="AnnualView" xml:space="preserve">
-    <value>Annual</value>
-    <comment>Annual view text.</comment>
-  </data>
-  <data name="AgendaListView" xml:space="preserve">
-    <value>Agenda</value>
-    <comment>List of events text.</comment>
-  </data>
   <data name="Filters" xml:space="preserve">
     <value>Filters</value>
     <comment>Filters text.</comment>
@@ -422,15 +402,15 @@
     <comment>Placeholder text for gender selection.</comment>
   </data>
   <data name="SourceImageQuestion" xml:space="preserve">
-    <value>Where will you take your profile picture?</value>
+    <value>Change your profile picture.</value>
     <comment>Place from select a new image.</comment>
   </data>
   <data name="FromGallery" xml:space="preserve">
-    <value>From gallery</value>
+    <value>Upload photo from gallery</value>
     <comment>Take image from gallery</comment>
   </data>
   <data name="FromCamera" xml:space="preserve">
-    <value>From camera</value>
+    <value>Take photo with camera</value>
     <comment>Take image from camera</comment>
   </data>
   <data name="Delete" xml:space="preserve">
@@ -438,7 +418,31 @@
     <comment>Delete option</comment>
   </data>
   <data name="DeletePicture" xml:space="preserve">
-    <value>Delete picture</value>
+    <value>Remove photo</value>
     <comment>Delete the current picture</comment>
+  </data>
+  <data name="CalendarViewModeText" xml:space="preserve">
+    <value>Select the calendar view.</value>
+    <comment>Monthly view of calendar</comment>
+  </data>
+  <data name="MonthlyView" xml:space="preserve">
+    <value>Monthly view</value>
+    <comment>Monthly view of calendar</comment>
+  </data>
+  <data name="DailyView" xml:space="preserve">
+    <value>Daily view</value>
+    <comment>Dailyy view of calendar</comment>
+  </data>
+  <data name="MultiDayView" xml:space="preserve">
+    <value>Three days view</value>
+    <comment>MultiDay view of calendar</comment>
+  </data>
+  <data name="YearView" xml:space="preserve">
+    <value>Year view</value>
+    <comment>Year view of calendar</comment>
+  </data>
+  <data name="WeeklyView" xml:space="preserve">
+    <value>Weekly view</value>
+    <comment>Weelly view of calendar</comment>
   </data>
 </root>

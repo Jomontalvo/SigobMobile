@@ -3,7 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="SigobMobile.Views.SecurityPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             Title="Security">
+             Title="Security"
+             NavigationPage.BackButtonTitle = "Atrás">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="End">
+            <Label 
+                Text="3.2.0" 
+                FontSize="16" 
+                TextColor="Black"
+                HorizontalTextAlignment="End"
+                VerticalTextAlignment="Center">
+            </Label>
+        </StackLayout>
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Security}">
