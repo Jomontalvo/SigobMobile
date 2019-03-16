@@ -8,6 +8,7 @@
              xmlns:telerikInput="clr-namespace:Telerik.XamarinForms.Input;assembly=Telerik.XamarinForms.Input"
              xmlns:lang="clr-namespace:SigobMobile.Helpers"
              x:Class="SigobMobile.Views.ManagementCenter.InstructionsPage"
+             BackgroundColor="{StaticResource defaultBackgroundView}"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="{lang:Translate InstructionsViewTitle}"
              ios:Page.UseSafeArea="true">
@@ -16,8 +17,10 @@
             <DataTemplate x:Key="ListViewInstructionItemTemplate">
                 <telerikListView:ListViewTemplateCell>
                     <telerikListView:ListViewTemplateCell.View>
-                        <Grid 
-                            Padding="4, 8, 4, 8" >
+                        <Grid
+                            ColumnSpacing="0"
+                            Padding="4, 8, 4, 8"
+                            RowSpacing="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
@@ -27,6 +30,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
+                                <RowDefinition Height="1"/>
                             </Grid.RowDefinitions>
                             <StackLayout
                                 Grid.Column="0"
@@ -99,6 +103,14 @@
                                 Source="ic_chevron"
                                 VerticalOptions="Center">
                             </Image>
+                            <BoxView
+                                Color="{StaticResource grayBorder}"
+                                Grid.Column="0"
+                                Grid.Row="3"
+                                Grid.ColumnSpan="3"
+                                HeightRequest="1"
+                                IsVisible="{OnPlatform iOS=false, Default=true}"> 
+                            </BoxView>
                         </Grid>
                     </telerikListView:ListViewTemplateCell.View>
                 </telerikListView:ListViewTemplateCell>

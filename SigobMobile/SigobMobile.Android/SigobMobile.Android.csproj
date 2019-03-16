@@ -91,6 +91,9 @@
     <PackageReference Include="Telerik.UI.for.Xamarin">
       <Version>2019.1.220.1</Version>
     </PackageReference>
+    <PackageReference Include="Refractored.FloatingActionButton">
+      <Version>2.1.0</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -211,7 +214,7 @@
     <AndroidResource Include="Resources\values-pt\Strings.xml" />
     <AndroidResource Include="Resources\drawable\ic_top_brand.png" />
     <AndroidResource Include="Resources\values\Strings.xml" />
-    <AndroidResource Include="Resources\drawable\ic_bt_add_fill.png" />
+    <AndroidResource Include="Resources\drawable\ic_fab_add.png" />
     <AndroidResource Include="Resources\drawable\ic_chevron.png" />
     <AndroidResource Include="Resources\drawable\ic_circle_check_color.png" />
     <AndroidResource Include="Resources\drawable\ic_circle_color.png" />

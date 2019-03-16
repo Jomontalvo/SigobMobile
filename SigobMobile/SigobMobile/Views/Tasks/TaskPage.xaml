@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="SigobMobile.Views.Tasks.TaskPage"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:lang="clr-namespace:SigobMobile.Helpers"
+    BackgroundColor="{StaticResource defaultBackgroundView}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}"
+    Title="Task"
+    ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding Task}">
+            <Label
+                HorizontalOptions="CenterAndExpand"
+                Text="{Binding LocalTask.Title}"
+                VerticalOptions="CenterAndExpand">
+            </Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

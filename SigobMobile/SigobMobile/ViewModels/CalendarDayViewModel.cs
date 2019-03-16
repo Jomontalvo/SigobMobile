@@ -9,7 +9,9 @@
     using Models;
     using Services;
     using SigobMobile.Helpers;
+    using SigobMobile.Views.Tasks;
     using Telerik.XamarinForms.Input;
+    using Telerik.XamarinForms.Input.Calendar.Commands;
     using Views.ManagementCenter;
     using Xamarin.Forms;
 
@@ -94,13 +96,13 @@
         private async void LoadAppointments(DateTime date)
         {
             DateTime pivot = (date == default(DateTime)) ? DateTime.Today : date;
-            this.isRunning = true;
+            this.IsRunning = true;
             startDate = pivot.AddDays(-30).ToString("yyyyMMdd");
             endDate = pivot.AddDays(30).ToString("yyyyMMdd");
             var connection = await this.apiService.CheckConnection();
             if (!connection.IsSuccess)
             {
-                isRunning = false;
+                IsRunning = false;
                 await Application.Current.MainPage.DisplayAlert(
                     Languages.Error,
                     connection.Message,
@@ -117,7 +119,7 @@
             );
             if (!response.IsSuccess)
             {
-                this.isRunning = false;
+                this.IsRunning = false;
                 await Application.Current.MainPage.DisplayAlert(
                     Languages.Error,
                     response.Message,
@@ -126,7 +128,7 @@
             }
             this.eventList = (List<AppointmentItem>)response.Result;
             this.Events = new ObservableCollection<Event>(ToCalendarEvents());
-            this.isRunning = false;
+            this.IsRunning = false;
         }
 
         private IEnumerable<Event> ToCalendarEvents()
@@ -134,7 +136,7 @@
             return this.eventList.Select(l => new Event
             {
                 Id = l.Id,
-                Color = (l.IsTask) ? Color.FromRgb(l.RedColorType,l.GreenColorType,l.BlueColorType) : Color.FromRgb(l.RedColorItem, l.GreenColorItem, l.BlueColorItem),
+                Color = (l.IsTask) ? Color.FromRgb(l.RedColorType, l.GreenColorType, l.BlueColorType) : Color.FromRgb(l.RedColorItem, l.GreenColorItem, l.BlueColorItem),
                 Detail = l.Place,
                 StartDate = (l.Id == 0 || l.IsTask) ? l.End.DateTime.ToLocalTime().Date : l.Start.DateTime.ToLocalTime(), // IsHoliday or Task Control 
                 EndDate = (l.Id == 0 || l.IsTask) ? l.End.DateTime.ToLocalTime().Date.AddMinutes(1) : l.End.DateTime.ToLocalTime(),
@@ -144,6 +146,13 @@
                 Owner = l.AgendaOwner,
                 Programmer = l.ProgrammerAgenda,
                 Title = l.Description,
+                TypeColor = Color.FromRgb(l.RedColorType, l.GreenColorType, l.BlueColorType),
+                ModuleType = l.ModuleType,
+                IsHighlighted = l.IsHighlighted,
+                IsTask = l.IsTask,
+                IsVisible = (l.IsVisible == 1) ? true : false,
+                SecurityLevel = l.SecurityLevel,
+                TypeId = l.TypeId
             });
         }
 
@@ -160,6 +169,9 @@
             return $"{yy}{mn}{dy}";
         }
 
+        /// <summary>
+        /// Opens the calendars.
+        /// </summary>
         private async void OpenCalendars()
         {
             var calendarsMainViewModel = MainViewModel.GetInstance();
@@ -167,6 +179,9 @@
             await Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new CalendarsPage()));
         }
 
+        /// <summary>
+        /// Opens the filters.
+        /// </summary>
         private void OpenFilters()
         {
             var filtersMainViewModel = MainViewModel.GetInstance();
@@ -174,6 +189,9 @@
             Application.Current.MainPage.Navigation.PushModalAsync(new CalendarFiltersPage());
         }
 
+        /// <summary>
+        /// Instructionses the list.
+        /// </summary>
         private async void InstructionsList()
         {
             var instructionMainViewModel = MainViewModel.GetInstance();
@@ -199,12 +217,56 @@
                 if (source == Languages.MultiDayView) CalendarView = CalendarViewMode.MultiDay;
                 if (source == Languages.MonthlyView) CalendarView = CalendarViewMode.Month;
                 if (source == Languages.YearView) CalendarView = CalendarViewMode.Year;
+            this.IsRunning = true;
             Settings.CurrentCalendarViewMode = (int)CalendarView;
+            this.IsRunning = false;
             return;
+        }
+
+        /// <summary>
+        /// Backs to main page.
+        /// </summary>
+        private async void BackToMainPage()
+        {
+            await App.Navigator.PopAsync();
+            return;
+        }
+
+        /// <summary>
+        /// Tapped Appointments
+        /// </summary>
+        /// <param name="context">Context.</param>
+        private async void AppointmentTapped(AppointmentTapCommandContext context)
+        {
+            Event eventSelected = (Event)context.Appointment;
+            var appViewModel = MainViewModel.GetInstance();
+            if (!eventSelected.IsTask)
+            {
+                switch (eventSelected.ModuleType)
+                {
+                    case 4:
+                        appViewModel.EventAgenda = new EventAgendaViewModel(eventSelected);
+                        await App.Navigator.PushAsync(new EventAgendaPage());
+                        break;
+                    case 7:
+                        appViewModel.EventCg = new EventCgViewModel(eventSelected);
+                        await App.Navigator.PushAsync(new EventCgPage());
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                appViewModel.Task = new TaskViewModel(eventSelected);
+                await App.Navigator.PushAsync(new TaskPage());
+            }
         }
         #endregion
 
         #region Commands
+
+        public ICommand AppointmentTappedCommand => new RelayCommand<AppointmentTapCommandContext>(AppointmentTapped);
 
         public ICommand SetCalendarViewModeCommand
         {
@@ -214,6 +276,7 @@
             }
         }
 
+        public ICommand BackToMainPageCommand => new RelayCommand(BackToMainPage);
 
 
         public ICommand InstructionsListCommand

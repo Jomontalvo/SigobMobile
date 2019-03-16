@@ -1,5 +1,6 @@
 ﻿namespace SigobMobile.Helpers
 {
+    using System;
     using Plugin.Settings;
     using Plugin.Settings.Abstractions;
     using Telerik.XamarinForms.Input;
@@ -30,11 +31,25 @@
         private static readonly string SettingsDefault = string.Empty;
 
         private const string calendarViewMode = "calendarViewMode";
-        private static readonly int SettingsCalendarViewDefault = (int)CalendarViewMode.Day; 
+        private static readonly int SettingsCalendarViewDefault = (int)CalendarViewMode.Day;
+
+        private const string calSelectedDate = "selectedDate";
+        private static readonly DateTime SettingsSelectedDateDefault= DateTime.Today;
 
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the last date visited in Management Center
+        /// </summary>
+        /// <value>The selected date.</value>
+        public static DateTime SelectedDate
+        {
+            get => AppSettings.GetValueOrDefault(calSelectedDate, SettingsSelectedDateDefault);
+            set => AppSettings.AddOrUpdateValue(calSelectedDate, value);
+        }
+
         /// <summary>
         /// Gets or sets the current calendar view mode.
         /// </summary>

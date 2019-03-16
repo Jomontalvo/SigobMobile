@@ -1,18 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    
+    xmlns:fab="clr-namespace:Refractored.FabControl;assembly=Refractored.FabControl"
+    
+    xmlns:telerikInput="clr-namespace:Telerik.XamarinForms.Input;assembly=Telerik.XamarinForms.Input"
+    xmlns:telerikCalendar="clr-namespace:Telerik.XamarinForms.Input.Calendar.Commands;assembly=Telerik.XamarinForms.Input"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
     x:Class="SigobMobile.Views.ManagementCenter.CalendarMonthPage"
     xmlns:lang="clr-namespace:SigobMobile.Helpers"
     BindingContext="{Binding Main, Source={StaticResource Locator}}" 
     Title="Mensual">
     <ContentPage.Content>
-        <StackLayout
-            BindingContext="{Binding CalendarMonth}">
-            <Label
-                VerticalOptions="CenterAndExpand"
-                Text="Calendario mensual">
-            </Label>
-        </StackLayout>
+        <Grid
+            BindingContext="{Binding CalendarMonth}"
+            ColumnSpacing="0"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="44"/>
+            </Grid.RowDefinitions>
+            <telerikInput:RadCalendar
+                x:Name="calendar"
+                Grid.Row="0"
+                ViewMode="Month"
+                BackgroundColor="White"
+                AppointmentsSource="{Binding Appointments}">
+                <telerikInput:RadCalendar.Commands>
+                    <telerikCalendar:CalendarUserCommand
+                        Id="AppointmentTap"
+                        Command="{Binding AppointmentTappedCommand}" />
+                </telerikInput:RadCalendar.Commands>
+            </telerikInput:RadCalendar>
+            <fab:FloatingActionButtonView
+                x:Name="FloatingActionButtonAdd"
+                ColorNormal="{StaticResource DroidPrimary}"
+                ColorPressed="{StaticResource DroidPrimaryDark}"
+                ColorRipple="{StaticResource DroidPrimaryDark}"
+                Command="{Binding AddCommand}"
+                Grid.Row="0"
+                HorizontalOptions="End"
+                ImageName="ic_fab_add.png"
+                IsVisible="{OnPlatform Android=true, iOS=false, Default=false}"
+                VerticalOptions="End">
+            </fab:FloatingActionButtonView>
+            <telerikPrimitives:RadBorder
+                BorderColor="#4488F6" 
+                CornerRadius="5"
+                Grid.Row="1">
+                <Label
+                    HorizontalOptions="FillAndExpand"
+                    Margin="2"
+                    Text="Hello there this is a ToolBar Region">
+                </Label>
+            </telerikPrimitives:RadBorder>
+            <ActivityIndicator
+                Grid.Row="0"
+                HorizontalOptions="Center"
+                IsVisible="true"
+                IsRunning="true"
+                VerticalOptions="Center">
+            </ActivityIndicator>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

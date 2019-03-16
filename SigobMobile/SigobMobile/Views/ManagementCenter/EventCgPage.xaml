@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="SigobMobile.Views.ManagementCenter.EventCgPage"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:lang="clr-namespace:SigobMobile.Helpers"
+    BackgroundColor="{StaticResource defaultBackgroundView}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}"
+    Title="Event"
+    ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding EventCg}">
+            <StackLayout Orientation="Horizontal">
+                <BoxView
+                    Color="{Binding LocalAppointment.TypeColor}"
+                    CornerRadius="5"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    HeightRequest="20"
+                    HorizontalOptions="Start"
+                    WidthRequest="20">
+                </BoxView>
+                <Label
+                    x:Name="EventTitle"
+                    BackgroundColor="{Binding LocalAppointment.Color}"
+                    HorizontalOptions="StartAndExpand"
+                    Text="{Binding LocalAppointment.Title}">
+                </Label>    
+            </StackLayout>
+            <ScrollView>
+                <Grid
+                    BackgroundColor="{StaticResource softGray}"
+                    ColumnSpacing="0"
+                    RowSpacing="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ActivityIndicator
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        IsRunning="{Binding IsRunning}"
+                        IsVisible="{Binding IsRunning}">
+                    </ActivityIndicator>
+                </Grid>
+            </ScrollView>
+            <Label
+                x:Name="Details"
+                Text="{Binding EventCg.Location}">
+            </Label>
+            <lang:IconView
+                Source="ic_rbutton_selected"
+                WidthRequest="24"
+                HeightRequest="24"
+                Foreground="{Binding LocalAppointment.TypeColor}">
+            </lang:IconView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

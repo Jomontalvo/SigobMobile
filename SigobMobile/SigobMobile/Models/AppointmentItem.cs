@@ -11,8 +11,8 @@
     public enum StatusAppointment : byte
     {
         InManagement = 0,
-        Suspended = 1,
-        Finished = 2
+        Finished = 1,
+        Suspended = 2
     }
 
     /// <summary>
@@ -97,11 +97,16 @@
         public Color Color { get; set; }
         public bool IsAllDay { get; set; }
         public string Detail { get; set; }
+        public int ModuleType { get; set; }
         public string Owner { get; set; }
         public string Programmer { get; set; }
+        public int TypeId { get; set; }
         public Color TypeColor { get; set; }
         public byte SecurityLevel { get; set; }
-        public bool IsTentative { get; set; }
         public bool IsLocked { get; set; }
+        public bool IsTentative { get; set; }
+        public bool IsHighlighted { get; set; }
+        public bool IsTask { get; set;  }
+        public bool IsVisible { get; set; }
     }
 }

@@ -12,11 +12,11 @@
             <local:IntToBoolConverter x:Key="intToBool" />
             <local:InverseBooleanConverter x:Key="inverseBool" />
         </ResourceDictionary>
+        <!--Global colors-->
         <ResourceDictionary>
             <Color x:Key="defaultBackgroundView">White</Color>
             <Color x:Key="clear">Transparent</Color>
             <Color x:Key="lightBlue">#55BBFF</Color>
-            <Color x:Key="iOSBlue">#007AFF</Color>
             <Color x:Key="darkBlue">#265F91</Color>
             <Color x:Key="blue">#0073A7</Color>
             <Color x:Key="green">#3DA547</Color>
@@ -31,8 +31,25 @@
             <Color x:Key="grayContent">#8E8E8E</Color>
             <Color x:Key="grayBorder">#E6E6E6</Color>
         </ResourceDictionary>
+        <!--iOS Colors-->
         <ResourceDictionary>
-            <!-- <Color x:Key="calRedOrange">#FF8A66</Color>-->
+            <Color x:Key="iOSBlue">#007AFF</Color>
+            <Color x:Key="iOSRed">#FF3B30</Color>
+            <Color x:Key="iOSOrange">#FF9500</Color>
+            <Color x:Key="iOSYellow">#FFCC00</Color>
+            <Color x:Key="iOSGreen">#4CD964</Color>
+            <Color x:Key="iOSTealBlue">#5AC8FA</Color>
+            <Color x:Key="iOSPurple">#5856D6</Color>
+            <Color x:Key="iOSPink">#FF2D55</Color>
+        </ResourceDictionary>
+        <!--Droid Colors-->
+        <ResourceDictionary>
+            <Color x:Key="DroidPrimary">#265F91</Color>
+            <Color x:Key="DroidPrimaryDark">#003366</Color>
+            <Color x:Key="DroidAccent">#BBBBBB</Color>
+        </ResourceDictionary>
+        <!-- Color x:Key="calRedOrange">#FF8A66</Color>-->
+        <ResourceDictionary>
             <Color x:Key="calRedOrange">#FE887C</Color>
             <Color x:Key="calDarkGreen">#58BC8A</Color>
             <Color x:Key="calLightGreen">#9CCC66</Color>

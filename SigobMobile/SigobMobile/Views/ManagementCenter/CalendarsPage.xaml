@@ -6,6 +6,7 @@
              xmlns:checkBoxCommands="clr-namespace:Telerik.XamarinForms.Primitives.CheckBox.Commands;assembly=Telerik.XamarinForms.Primitives"
              xmlns:lang="clr-namespace:SigobMobile.Helpers"
              x:Class="SigobMobile.Views.ManagementCenter.CalendarsPage"
+             BackgroundColor="{StaticResource defaultBackgroundView}"
              BindingContext="{Binding Main, Source={StaticResource Locator}}" 
              Title="{lang:Translate CalendarsTitle}"
              ios:Page.UseSafeArea="true">

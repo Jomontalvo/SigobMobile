@@ -172,7 +172,7 @@
     <value>Operación exitosa</value>
   </data>
   <data name="MasterPageTitle" xml:space="preserve">
-    <value>Menú</value>
+    <value>SIGOB</value>
     <comment>Título de la pagina de Menú principal (visible dependiendo de la plataforma) </comment>
   </data>
   <data name="HomeMenu" xml:space="preserve">
