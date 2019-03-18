@@ -290,7 +290,7 @@
     <comment>Text for search place holder.</comment>
   </data>
   <data name="InManagementStatus" xml:space="preserve">
-    <value>Management</value>
+    <value>In management</value>
     <comment>Text for Item in management status.</comment>
   </data>
   <data name="PendingStatus" xml:space="preserve">

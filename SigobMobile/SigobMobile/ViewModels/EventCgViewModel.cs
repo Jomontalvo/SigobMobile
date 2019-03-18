@@ -4,6 +4,7 @@
     using Services;
     using Helpers;
     using Xamarin.Forms;
+    using System;
 
     public class EventCgViewModel : BaseViewModel
     {
@@ -20,6 +21,7 @@
         #region Attributes
         private bool isRunning;
         private ManagementCenterEvent eventDetails;
+        private string interval;
         #endregion
 
         #region Properties
@@ -30,8 +32,18 @@
         /// <value><c>true</c> if is running; otherwise, <c>false</c>.</value>
         public bool IsRunning
         {
-            get { return this.isRunning; }
-            set { SetValue(ref this.isRunning, value); }
+            get => this.isRunning;
+            set => SetValue(ref this.isRunning, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the time interval when event is schedule.
+        /// </summary>
+        /// <value>The interval.</value>
+        public string Interval
+        {
+            get => this.interval;
+            set => SetValue(ref this.interval, value);
         }
 
         /// <summary>
@@ -90,6 +102,7 @@
             }
             this.eventDetails = (ManagementCenterEvent)response.Result;
             this.EventCg = eventDetails;
+            this.Interval = DateTime.Now.ToString("t");
             this.IsRunning = false;
         }
         #endregion

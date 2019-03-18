@@ -225,6 +225,14 @@
     <AndroidResource Include="Resources\drawable\ic_rbutton_selected.png" />
     <AndroidResource Include="Resources\drawable\ic_rbutton_unselected.png" />
     <AndroidResource Include="Resources\drawable\ic_bt_calendar_view.png" />
+    <AndroidResource Include="Resources\drawable\ic_ev_location.png" />
+    <AndroidResource Include="Resources\drawable\ic_ev_type_color.png" />
+    <AndroidResource Include="Resources\drawable\ic_ev_calendar.png" />
+    <AndroidResource Include="Resources\drawable\ic_ev_status.png" />
+    <AndroidResource Include="Resources\drawable\ic_ev_programmer.png" />
+    <AndroidResource Include="Resources\drawable\ic_ev_security.png" />
+    <AndroidResource Include="Resources\drawable\ic_ev_guests.png" />
+    <AndroidResource Include="Resources\drawable\ic_ev_calendar_color.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

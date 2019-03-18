@@ -10,57 +10,224 @@
     Title="Event"
     ios:Page.UseSafeArea="true">
     <ContentPage.Content>
-        <StackLayout
-            BindingContext="{Binding EventCg}">
-            <StackLayout Orientation="Horizontal">
-                <BoxView
-                    Color="{Binding LocalAppointment.TypeColor}"
-                    CornerRadius="5"
-                    Grid.Row="1"
+        <ScrollView
+            BindingContext="{Binding EventCg}"
+            Padding="5,5,5,0">
+            <Grid
+                ColumnSpacing="10"
+                Padding="5,5"
+                RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ActivityIndicator
                     Grid.Column="0"
-                    HeightRequest="20"
-                    HorizontalOptions="Start"
-                    WidthRequest="20">
-                </BoxView>
+                    Grid.ColumnSpan="3"
+                    Grid.Row="0"
+                    IsRunning="{Binding IsRunning}"
+                    IsVisible="{Binding IsRunning}">
+                </ActivityIndicator>
+                <lang:IconView
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Foreground="{Binding LocalAppointment.Color}"
+                    Margin="0,1,0,0"
+                    HorizontalOptions="Center"
+                    Source="ic_ev_calendar_color"
+                    VerticalOptions="Start">
+                </lang:IconView>
+                <StackLayout
+                    Grid.Column="1"
+                    Grid.Row="0">
+                    <Label
+                        x:Name="EventTitle"
+                        FontSize="Medium"
+                        HorizontalOptions="StartAndExpand"
+                        Text="{Binding LocalAppointment.Title}">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="iOS" Value="Avenir Next" />
+                                    <On Platform="Android" Value="monospace" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <Label
+                        FontSize="Small"
+                        Text="{Binding EventCg.StartDate, StringFormat='{0:dddd, dd MMMM yyyy}'}"
+                        TextColor="{StaticResource darkGray}"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Label
+                        FontSize="Small"
+                        Text="{Binding LocalAppointment.StartDate, StringFormat='{0:dddd, dd MMMM yyyy}'}"
+                        TextColor="{StaticResource darkGray}"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Label
+                        FontSize="Small"
+                        Text="{Binding Interval}"
+                        TextColor="{StaticResource darkGray}"
+                        VerticalOptions="Center">
+                    </Label>
+                </StackLayout>
+                <Image
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Source="ic_ev_location"
+                    VerticalOptions="Center">
+                </Image>
                 <Label
-                    x:Name="EventTitle"
-                    BackgroundColor="{Binding LocalAppointment.Color}"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    FontSize="Small"
+                    Text="{Binding EventCg.Location}"
+                    TextColor="{StaticResource darkGray}"
+                    VerticalOptions="Center">
+                </Label>
+                <!--Separator 1-->
+                <BoxView
+                    Color="{StaticResource gray}"
+                    Grid.Column="1"
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand">
+                </BoxView>
+                <!--Second Section-->
+                <Image
+                    Grid.Column="0"
+                    Grid.Row="3"
+                    Source="ic_ev_calendar"
+                    VerticalOptions="Center">
+                </Image>
+                <Label
+                    Grid.Column="1"
+                    Grid.Row="3"
+                    FontSize="Small"
+                    Text="{Binding EventCg.CalendarName}"
+                    TextColor="{StaticResource darkGray}"
+                    VerticalOptions="Center">
+                </Label>
+                <lang:IconView
+                    Grid.Column="0"
+                    Grid.Row="4"
+                    Foreground="{Binding LocalAppointment.TypeColor}"
+                    HeightRequest="16"
+                    HorizontalOptions="Center"
+                    Source="ic_ev_type_color"
+                    VerticalOptions="Center"
+                    WidthRequest="16">
+                </lang:IconView>
+                <Label
+                    FontSize="Small"
+                    Grid.Column="1"
+                    Grid.Row="4"
+                    HorizontalOptions="Start"
+                    Text="{Binding EventCg.EventTypeDescription}"
+                    TextColor="{StaticResource darkGray}"
+                    VerticalOptions="Center">
+                </Label>
+                <Image
+                    Grid.Column="0"
+                    Grid.Row="5"
+                    Source="ic_ev_status"
+                    VerticalOptions="Center">
+                </Image>
+                <Label
+                    Grid.Column="1"
+                    Grid.Row="5"
+                    FontSize="Small"
+                    Text="{Binding EventCg.StatusDescription}"
+                    TextColor="{StaticResource darkGray}"
+                    VerticalOptions="Center">
+                </Label>
+                <!--Security Level-->
+                <Image
+                    Grid.Column="0"
+                    Grid.Row="6"
+                    Source="ic_ev_security"
+                    VerticalOptions="Center">
+                </Image>
+                <Label
+                    Grid.Column="1"
+                    Grid.Row="6"
+                    FontSize="Small"
+                    Text="{Binding EventCg.PrivacyDescription}"
+                    TextColor="{StaticResource darkGray}"
+                    VerticalOptions="Center">
+                </Label>
+                <!--Programmer Name-->
+                <Image
+                    Grid.Column="0"
+                    Grid.Row="7"
+                    Source="ic_ev_programmer"
+                    VerticalOptions="Center">
+                </Image>
+                <Label
+                    Grid.Column="1"
+                    Grid.Row="7"
+                    FontSize="Small"
+                    Text="{Binding EventCg.ProgrammerName}"
+                    TextColor="{StaticResource darkGray}"
+                    VerticalOptions="Center">
+                </Label>
+                <!--Separator 2-->
+                <BoxView
+                    Color="{StaticResource gray}"
+                    Grid.Column="1"
+                    Grid.Row="8"
+                    Grid.ColumnSpan="2"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand">
+                </BoxView>
+                <!--Participants-->
+                <Image
+                    Grid.Column="0"
+                    Grid.Row="9"
+                    Source="ic_ev_guests"
+                    VerticalOptions="Center">
+                </Image>
+                <Label
+                    Grid.Column="1"
+                    Grid.Row="9"
+                    FontSize="Small"
                     HorizontalOptions="StartAndExpand"
-                    Text="{Binding LocalAppointment.Title}">
-                </Label>    
-            </StackLayout>
-            <ScrollView>
-                <Grid
-                    BackgroundColor="{StaticResource softGray}"
-                    ColumnSpacing="0"
-                    RowSpacing="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <ActivityIndicator
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="2"
-                        IsRunning="{Binding IsRunning}"
-                        IsVisible="{Binding IsRunning}">
-                    </ActivityIndicator>
-                </Grid>
-            </ScrollView>
-            <Label
-                x:Name="Details"
-                Text="{Binding EventCg.Location}">
-            </Label>
-            <lang:IconView
-                Source="ic_rbutton_selected"
-                WidthRequest="24"
-                HeightRequest="24"
-                Foreground="{Binding LocalAppointment.TypeColor}">
-            </lang:IconView>
-        </StackLayout>
+                    Text="4 Participants (Me and 3+)"
+                    TextColor="{StaticResource darkGray}"
+                    VerticalOptions="Center">
+                </Label>
+                <Image
+                    Grid.Column="2"
+                    Grid.Row="9"
+                    HeightRequest="20"
+                    Source="ic_chevron"
+                    VerticalOptions="Center">
+                </Image>
+                <!--Separator 3-->
+                <BoxView
+                    Color="{StaticResource gray}"
+                    Grid.Column="1"
+                    Grid.Row="10"
+                    Grid.ColumnSpan="2"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand">
+                </BoxView>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

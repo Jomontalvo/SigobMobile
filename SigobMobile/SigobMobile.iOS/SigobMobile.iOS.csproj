@@ -268,6 +268,14 @@
     <BundleResource Include="Resources\ic_rbutton_unselected.png" />
     <BundleResource Include="Resources\ic_bt_calendar_view.png" />
     <BundleResource Include="Resources\ic_bt_calendar_view%402x.png" />
+    <BundleResource Include="Resources\ic_ev_location.png" />
+    <BundleResource Include="Resources\ic_ev_type_color.png" />
+    <BundleResource Include="Resources\ic_ev_calendar.png" />
+    <BundleResource Include="Resources\ic_ev_status.png" />
+    <BundleResource Include="Resources\ic_ev_programmer.png" />
+    <BundleResource Include="Resources\ic_ev_security.png" />
+    <BundleResource Include="Resources\ic_ev_guests.png" />
+    <BundleResource Include="Resources\ic_ev_calendar_color.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
