@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using Models;
@@ -96,10 +97,10 @@
     #region Constructors
     public CalendarDayViewModel()
         {
+            this.selectedDate = this.displayDate = DateTime.Today;
             this.CalendarView = (CalendarViewMode)Settings.CurrentCalendarViewMode;
-            this.selectedDate = this.displayDate =  DateTime.Today;
             this.apiService = new ApiService();
-            this.LoadAppointments(this.selectedDate);
+            this.LoadAppointments(DateTime.Today);
         }
         #endregion
 
@@ -282,53 +283,41 @@
             this.DisplayDate = DateTime.Today;
             this.SelectedDate = DateTime.Today;
         }
+
+        /// <summary>
+        /// Happens when calendar cell is tapped.
+        /// </summary>
+        private void CellDateTapped(CalendarDayCell cell)
+        {
+            if (this.CalendarView == CalendarViewMode.Month || this.CalendarView == CalendarViewMode.Year)
+            {
+                SelectedDate = cell.Date;
+                CalendarView = CalendarViewMode.Day;
+                Task.Delay(50);
+                DisplayDate = SelectedDate;
+            }
+        }
+
         #endregion
 
         #region Commands
 
         public ICommand AppointmentTappedCommand => new RelayCommand<AppointmentTapCommandContext>(AppointmentTapped);
 
-        public ICommand GoTodayCommand
-        {
-            get
-            {
-                return new RelayCommand(GoToday);
-            }
-        }
+        public ICommand CellDateTappedCommand => new RelayCommand<CalendarDayCell>(CellDateTapped);
 
-        public ICommand SetCalendarViewModeCommand
-        {
-            get
-            {
-                return new RelayCommand(SetCalendarViewMode);
-            }
-        }
+        public ICommand GoTodayCommand => new RelayCommand(GoToday);
+
+        public ICommand SetCalendarViewModeCommand => new RelayCommand(SetCalendarViewMode);
 
         public ICommand BackToMainPageCommand => new RelayCommand(BackToMainPage);
 
+        public ICommand InstructionsListCommand => new RelayCommand(InstructionsList);
 
-        public ICommand InstructionsListCommand
-        {
-            get
-            {
-                return new RelayCommand(InstructionsList);
-            }
-        }
-        public ICommand OpenCalendarsCommand
-        {
-            get
-            {
-                return new RelayCommand(OpenCalendars);
-            }
-        }
+        public ICommand OpenCalendarsCommand => new RelayCommand(OpenCalendars);
 
-        public ICommand OpenFiltersCommand
-        {
-            get
-            {
-                return new RelayCommand(OpenFilters);
-            }
-        }
+        public ICommand OpenFiltersCommand => new RelayCommand(OpenFilters);
+
         #endregion
 
     }

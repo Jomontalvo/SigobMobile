@@ -77,10 +77,11 @@
             <telerikInput:RadCalendar
                 x:Name="calendar"
                 AppointmentsSource="{Binding Events}"
+                DisplayDate="{Binding DisplayDate, Mode=TwoWay}"
                 Grid.Row="0"
+                SelectionChanged="Calendar_SelectionChanged"
                 SchedulingUiEnabled="false"
                 SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
-                DisplayDate="{Binding DisplayDate, Mode=TwoWay}"
                 ViewMode="{Binding CalendarView, Mode=TwoWay}">
                 <telerikInput:RadCalendar.AppointmentsStyle>
                     <telerikInput:CalendarAppointmentsStyle 
