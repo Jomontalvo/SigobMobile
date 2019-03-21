@@ -32,7 +32,8 @@
         private string startDate;
         private string endDate;
         private byte viewTentative;
-        private DateTime? selectedDate;
+        private DateTime selectedDate;
+        private DateTime displayDate;
         private List<AppointmentItem> eventList;
         private CalendarViewMode calendarView;
         #endregion
@@ -75,20 +76,30 @@
             get { return this.viewTentative; }
             set { SetValue(ref this.viewTentative, value); }
         }
-        public DateTime? SelectedDate
+        public DateTime SelectedDate
         {
             get { return this.selectedDate; }
-            set { SetValue(ref this.selectedDate, value); }
+            set
+            { 
+                SetValue(ref this.selectedDate, value);
+                if (this.selectedDate.Month != this.DisplayDate.Month || this.selectedDate.Year != this.DisplayDate.Year)
+                    this.DisplayDate = this.selectedDate;
+            }
         }
-        #endregion
+        public DateTime DisplayDate
+        {
+            get { return this.displayDate; }
+            set { SetValue(ref this.displayDate, value); }
+        }
+    #endregion
 
-        #region Constructors
-        public CalendarDayViewModel()
+    #region Constructors
+    public CalendarDayViewModel()
         {
             this.CalendarView = (CalendarViewMode)Settings.CurrentCalendarViewMode;
-            this.selectedDate = DateTime.Today;
+            this.selectedDate = this.displayDate =  DateTime.Today;
             this.apiService = new ApiService();
-            this.LoadAppointments(selectedDate.GetValueOrDefault());
+            this.LoadAppointments(this.selectedDate);
         }
         #endregion
 
@@ -97,8 +108,8 @@
         {
             DateTime pivot = (date == default(DateTime)) ? DateTime.Today : date;
             this.IsRunning = true;
-            startDate = pivot.AddDays(-30).ToString("yyyyMMdd");
-            endDate = pivot.AddDays(30).ToString("yyyyMMdd");
+            startDate = pivot.AddYears(-2).ToString("yyyyMMdd");
+            endDate = pivot.AddYears(5).ToString("yyyyMMdd");
             var connection = await this.apiService.CheckConnection();
             if (!connection.IsSuccess)
             {
@@ -262,11 +273,28 @@
                 await App.Navigator.PushAsync(new TaskPage());
             }
         }
+
+        /// <summary>
+        /// Go Selected Date Today
+        /// </summary>
+        private void GoToday()
+        {
+            this.DisplayDate = DateTime.Today;
+            this.SelectedDate = DateTime.Today;
+        }
         #endregion
 
         #region Commands
 
         public ICommand AppointmentTappedCommand => new RelayCommand<AppointmentTapCommandContext>(AppointmentTapped);
+
+        public ICommand GoTodayCommand
+        {
+            get
+            {
+                return new RelayCommand(GoToday);
+            }
+        }
 
         public ICommand SetCalendarViewModeCommand
         {

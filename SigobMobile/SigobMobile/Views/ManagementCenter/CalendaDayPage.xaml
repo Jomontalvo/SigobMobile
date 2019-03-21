@@ -79,7 +79,8 @@
                 AppointmentsSource="{Binding Events}"
                 Grid.Row="0"
                 SchedulingUiEnabled="false"
-                SelectedDate="{Binding SelectedDate}"
+                SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
+                DisplayDate="{Binding DisplayDate, Mode=TwoWay}"
                 ViewMode="{Binding CalendarView, Mode=TwoWay}">
                 <telerikInput:RadCalendar.AppointmentsStyle>
                     <telerikInput:CalendarAppointmentsStyle 
@@ -95,6 +96,8 @@
                 </telerikInput:RadCalendar.DayViewSettings>
                 <telerikInput:RadCalendar.MultiDayViewSettings>
                     <telerikInput:MultiDayViewSettings
+                        DayStartTime="05:00:00"
+                        DayEndTime="23:00:00"
                         IsCurrentTimeIndicatorVisible="true"
                         IsWeekendVisible="true"
                         VisibleDays="3">
@@ -145,8 +148,8 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Button 
-                        BackgroundColor="Transparent" 
-                        BindingContext="{x:Reference Name=calendar}"
+                        BackgroundColor="Transparent"
+                        Command="{Binding GoTodayCommand}"
                         Grid.Column="0"
                         Text="{lang:Translate Today}">
                     </Button>
