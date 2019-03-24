@@ -35,6 +35,7 @@
 
         #region Agenda Color Attributes
         private string iconColorChecked;
+        private CalendarDayViewModel calendarDayViewModel;
         #endregion
 
         #region Properties
@@ -88,47 +89,38 @@
         #region Constructors
         public CalendarsViewModel()
         {
+            this.ModelInitialization();
+        }
+
+        public CalendarsViewModel(CalendarDayViewModel calendarDayViewModel)
+        {
+            this.calendarDayViewModel = calendarDayViewModel;
+            this.ModelInitialization();
+        }
+
+        private void ModelInitialization ()
+        {
             apiService = new ApiService();
             SelectDeselectAll = Languages.ShowAll;
             LoadCalendars();
             SetColorOptions();
             IsEnabled = true;
         }
+
         #endregion
 
         #region Commands
-        public ICommand OpenChangeColorCommand
-        {
-            get
-            {
-                return new RelayCommand(OpenChangeColor);
-            }
-        }
+        public ICommand OpenChangeColorCommand => new RelayCommand(OpenChangeColor);
 
-        public ICommand CloseChangeColorCommand
-        {
-            get { return new RelayCommand(CloseChangeColor); }
-        }
+        public ICommand CloseChangeColorCommand => new RelayCommand(CloseChangeColor);
 
         public ICommand OkAndCloseCommand => new RelayCommand(OkAndClose);
-       
-        public ICommand RefreshCommand
-        {
-            get { return new RelayCommand(LoadCalendars); }
-        }
 
-        public ICommand CheckAllCalendarsCommand
-        {
-            get { return new RelayCommand(CheckAllCalendars); }
-        }
+        public ICommand RefreshCommand => new RelayCommand(LoadCalendars);
 
-        public ICommand SelectColorCommand
-        {
-            get
-            {
-                return new RelayCommand<IconView>(SelectColor);
-            }
-        }
+        public ICommand CheckAllCalendarsCommand => new RelayCommand(CheckAllCalendars);
+
+        public ICommand SelectColorCommand => new RelayCommand<IconView>(SelectColor);
         #endregion
 
         #region Methods
@@ -312,6 +304,8 @@
         /// </summary>
         private async void OkAndClose()
         {
+            //Refresh Observable collection from Parent
+            this.calendarDayViewModel.LoadAppointments(calendarDayViewModel.SelectedDate.GetValueOrDefault());
             //Go to parent page
             await Application.Current.MainPage.Navigation.PopModalAsync();
         }

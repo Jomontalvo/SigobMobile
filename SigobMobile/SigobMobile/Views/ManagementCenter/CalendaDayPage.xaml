@@ -12,12 +12,14 @@
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
     Title="{lang:Translate AgendaViewTitle}"
     ios:Page.UseSafeArea="true">
+    <!--Title View Settings-->
     <NavigationPage.TitleView>
         <StackLayout
             BindingContext="{Binding CalendarDay}"
             Orientation="Horizontal" 
             VerticalOptions="Center" 
             HorizontalOptions="FillAndExpand">
+            <!--Text="{Binding DisplayDate,StringFormat='{0:dd-MMM-yyyy}'}"-->
             <Label 
                 Text="{lang:Translate MasterPageTitle}"
                 FontAttributes="{OnPlatform iOS=None, Android=Bold}"
@@ -79,7 +81,7 @@
                 AppointmentsSource="{Binding Events}"
                 DisplayDate="{Binding DisplayDate, Mode=TwoWay}"
                 Grid.Row="0"
-                SelectionChanged="Calendar_SelectionChanged"
+                SelectionChanged="Calendar_OnSelectionChanged"
                 SchedulingUiEnabled="false"
                 SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
                 ViewMode="{Binding CalendarView, Mode=TwoWay}">

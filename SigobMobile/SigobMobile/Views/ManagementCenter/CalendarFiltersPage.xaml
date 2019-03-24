@@ -1,9 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:lang="clr-namespace:SigobMobile.Helpers"
-             x:Class="SigobMobile.Views.ManagementCenter.CalendarFiltersPage"
-             Title="{lang:Translate Filters}">
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:lang="clr-namespace:SigobMobile.Helpers"
+    x:Class="SigobMobile.Views.ManagementCenter.CalendarFiltersPage"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}"
+    Title="{lang:Translate Filters}"
+    ios:Page.UseSafeArea="true">
     <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding CalendarFilters}">
+            <StackLayout
+                BackgroundColor="{StaticResource defaultBackgroundView}"
+                HorizontalOptions="FillAndExpand"
+                Orientation="Horizontal"
+                Padding="15,0, 15, 0"
+                VerticalOptions="Center">
+                <Button
+                    BackgroundColor="Transparent"
+                    Command="{Binding CancelFiltersCommand}"
+                    HeightRequest="38"
+                    HorizontalOptions="Start"
+                    Text="{lang:Translate Cancel}"
+                    TextColor="{OnPlatform iOS={StaticResource iOSBlue}}">
+                </Button>
+                <Label 
+                    Text="{lang:Translate Filters}"
+                    FontAttributes="Bold"
+                    FontSize="{OnPlatform Android=Large, Default=Default}"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center">
+                </Label>
+                <Button
+                    BackgroundColor="Transparent"
+                    Command="{Binding SaveFiltersCommand}"
+                    HeightRequest="38"
+                    HorizontalOptions="End"
+                    Text="{lang:Translate Ok}"
+                    TextColor="{OnPlatform iOS={StaticResource iOSBlue}}">
+                </Button>
+            </StackLayout>
+            <BoxView
+                Color="{StaticResource gray}"
+                HeightRequest="1"
+                HorizontalOptions="FillAndExpand">
+            </BoxView>
+            <Label
+                FontSize="Small"
+                WidthRequest="350"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                LineBreakMode="WordWrap"
+                Margin="10"
+                Text="{lang:Translate CalendarFiltersMessage}"
+                TextColor="{StaticResource darkGray}"
+                VerticalTextAlignment="Center"
+                VerticalOptions="Center">
+            </Label>
+            <TableView
+                Intent="Settings">
+                <TableRoot>
+                    <TableSection
+                        Title="{lang:Translate ManagementStatusTitle}">
+                        <SwitchCell
+                            On="{Binding IsVisibleInManagementStatus, Mode=TwoWay}"
+                            Text="{lang:Translate InManagementStatus}">
+                        </SwitchCell>
+                        <SwitchCell
+                            On="{Binding IsVisibleCompletedStatus, Mode=TwoWay}"
+                            Text="{lang:Translate CompletedStatus}">
+                        </SwitchCell>
+                        <SwitchCell
+                            On="{Binding IsVisibleSuspendedStatus, Mode=TwoWay}"
+                            Text="{lang:Translate SuspendedStatus}">
+                        </SwitchCell>
+                    </TableSection>
+                    <TableSection
+                        Title="{lang:Translate ConfirmedFilterTitle}">
+                        <ViewCell>
+                            <Picker
+                                ItemsSource="{Binding ConfirmedFilterItems}"
+                                SelectedItem="{Binding SelectedFilter}"
+                                SelectedIndex="{Binding FilterSelectedIndex}"
+                                Title="{lang:Translate ConfirmedFilterTitle}">
+                            </Picker>
+                        </ViewCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

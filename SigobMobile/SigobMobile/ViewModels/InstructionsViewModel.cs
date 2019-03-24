@@ -225,9 +225,9 @@
         /// </summary>
         private void OpenFilters()
         {
-            var filtersMainViewModel = MainViewModel.GetInstance();
-            filtersMainViewModel.CalendarFilters = new CalendarFiltersViewModel();
-            Application.Current.MainPage.Navigation.PushModalAsync(new CalendarFiltersPage());
+            //var filtersMainViewModel = MainViewModel.GetInstance();
+            //filtersMainViewModel.CalendarFilters = new CalendarFiltersViewModel(this);
+            //Application.Current.MainPage.Navigation.PushModalAsync(new CalendarFiltersPage());
         }
 
         /// <summary>

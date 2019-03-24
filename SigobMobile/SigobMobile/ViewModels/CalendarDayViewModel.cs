@@ -33,7 +33,7 @@
         private string startDate;
         private string endDate;
         private byte viewTentative;
-        private DateTime selectedDate;
+        private DateTime? selectedDate;
         private DateTime displayDate;
         private List<AppointmentItem> eventList;
         private CalendarViewMode calendarView;
@@ -77,14 +77,15 @@
             get { return this.viewTentative; }
             set { SetValue(ref this.viewTentative, value); }
         }
-        public DateTime SelectedDate
+        public DateTime? SelectedDate
         {
-            get { return this.selectedDate; }
+            get => this.selectedDate;
             set
-            { 
+            {
                 SetValue(ref this.selectedDate, value);
-                if (this.selectedDate.Month != this.DisplayDate.Month || this.selectedDate.Year != this.DisplayDate.Year)
-                    this.DisplayDate = this.selectedDate;
+                //DateTime currentSelectedDate = this.selectedDate.GetValueOrDefault();
+                //if (currentSelectedDate.Month != this.DisplayDate.Month || currentSelectedDate.Year != this.DisplayDate.Year)
+                this.DisplayDate = this.selectedDate.GetValueOrDefault();
             }
         }
         public DateTime DisplayDate
@@ -97,19 +98,34 @@
     #region Constructors
     public CalendarDayViewModel()
         {
-            this.selectedDate = this.displayDate = DateTime.Today;
-            this.CalendarView = (CalendarViewMode)Settings.CurrentCalendarViewMode;
             this.apiService = new ApiService();
             this.LoadAppointments(DateTime.Today);
+            this.CalendarView = (CalendarViewMode)Settings.CurrentCalendarViewMode;
+            this.SelectedDate = Settings.SelectedDate;
+            this.DisplayDate = Settings.SelectedDate;
         }
         #endregion
 
         #region Methods
-        private async void LoadAppointments(DateTime date)
+        /// <summary>
+        /// Load the appointments.
+        /// </summary>
+        /// <param name="date">Date.</param>
+        public async void LoadAppointments(DateTime date)
+        {
+            await UpdateAppointments(date);
+        }
+
+        /// <summary>
+        /// Update appointments Async Task.
+        /// </summary>
+        /// <returns>The appointments.</returns>
+        /// <param name="date">Date.</param>
+        public async Task UpdateAppointments(DateTime date)
         {
             DateTime pivot = (date == default(DateTime)) ? DateTime.Today : date;
             this.IsRunning = true;
-            startDate = pivot.AddYears(-2).ToString("yyyyMMdd");
+            startDate = pivot.AddYears(-3).ToString("yyyyMMdd");
             endDate = pivot.AddYears(5).ToString("yyyyMMdd");
             var connection = await this.apiService.CheckConnection();
             if (!connection.IsSuccess)
@@ -148,24 +164,27 @@
             return this.eventList.Select(l => new Event
             {
                 Id = l.Id,
-                Color = (l.IsTask) ? Color.FromRgb(l.RedColorType, l.GreenColorType, l.BlueColorType) : Color.FromRgb(l.RedColorItem, l.GreenColorItem, l.BlueColorItem),
+                Color = l.IsTask ? Color.FromRgb(l.RedColorType, l.GreenColorType, l.BlueColorType) : (l.Status != StatusAppointment.Suspended) ? Color.FromRgb(l.RedColorItem, l.GreenColorItem, l.BlueColorItem) : (Color)Application.Current.Resources["grayBorder"],
                 Detail = l.Place,
                 StartDate = (l.Id == 0 || l.IsTask) ? l.End.DateTime.ToLocalTime().Date : l.Start.DateTime.ToLocalTime(), // IsHoliday or Task Control 
                 EndDate = (l.Id == 0 || l.IsTask) ? l.End.DateTime.ToLocalTime().Date.AddMinutes(1) : l.End.DateTime.ToLocalTime(),
-                IsAllDay = (l.IsTask || l.Id == 0),
-                IsLocked = (l.IsVisible == 1),
+                IsAllDay = l.IsTask || l.Id == 0,
+                IsLocked = l.IsVisible == 1,
                 IsTentative = l.IsTentative,
                 Owner = l.AgendaOwner,
                 Programmer = l.ProgrammerAgenda,
-                Title = l.Description,
+                Title = (l.Status == StatusAppointment.Suspended) ? $"[{Languages.SuspendedStatus}] {l.Description}" : l.IsTentative ? $"{l.Description} ({Languages.TentativeLabel})" : l.Description,
                 TypeColor = Color.FromRgb(l.RedColorType, l.GreenColorType, l.BlueColorType),
                 ModuleType = l.ModuleType,
                 IsHighlighted = l.IsHighlighted,
                 IsTask = l.IsTask,
-                IsVisible = (l.IsVisible == 1) ? true : false,
+                IsVisible = (l.IsVisible == 1),
                 SecurityLevel = l.SecurityLevel,
-                TypeId = l.TypeId
-            });
+                TypeId = l.TypeId,
+                Status = l.Status
+            }).Where(l =>  (Settings.IsVisibleManagementStatus && (l.Status == StatusAppointment.InManagement))
+                        || (Settings.IsVisibleCompletedStatus && (l.Status == StatusAppointment.Finished))
+                        || (Settings.IsVisibleSuspendStatus && (l.Status == StatusAppointment.Suspended)));
         }
 
         /// <summary>
@@ -187,18 +206,18 @@
         private async void OpenCalendars()
         {
             var calendarsMainViewModel = MainViewModel.GetInstance();
-            calendarsMainViewModel.Calendars = new CalendarsViewModel();
+            calendarsMainViewModel.Calendars = new CalendarsViewModel(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new CalendarsPage()));
         }
 
         /// <summary>
         /// Opens the filters.
         /// </summary>
-        private void OpenFilters()
+        private async void OpenFilters()
         {
             var filtersMainViewModel = MainViewModel.GetInstance();
-            filtersMainViewModel.CalendarFilters = new CalendarFiltersViewModel();
-            Application.Current.MainPage.Navigation.PushModalAsync(new CalendarFiltersPage());
+            filtersMainViewModel.CalendarFilters = new CalendarFiltersViewModel(this);
+            await Application.Current.MainPage.Navigation.PushModalAsync(new CalendarFiltersPage());
         }
 
         /// <summary>
@@ -280,21 +299,24 @@
         /// </summary>
         private void GoToday()
         {
-            this.DisplayDate = DateTime.Today;
             this.SelectedDate = DateTime.Today;
+            this.DisplayDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
+            Settings.SelectedDate = this.DisplayDate;
         }
 
         /// <summary>
         /// Happens when calendar cell is tapped.
         /// </summary>
-        private void CellDateTapped(CalendarDayCell cell)
+        private async void CellDateTapped(CalendarDayCell cell)
         {
+            Settings.SelectedDate = cell.Date;
+            this.SelectedDate = cell.Date;
             if (this.CalendarView == CalendarViewMode.Month || this.CalendarView == CalendarViewMode.Year)
             {
-                SelectedDate = cell.Date;
                 CalendarView = CalendarViewMode.Day;
-                Task.Delay(50);
-                DisplayDate = SelectedDate;
+                await Task.Delay(50);
+                Settings.CurrentCalendarViewMode = (int)CalendarView;
+                this.DisplayDate = cell.Date;
             }
         }
 

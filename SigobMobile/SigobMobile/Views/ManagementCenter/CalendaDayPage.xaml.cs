@@ -3,6 +3,7 @@
     using ViewModels;
     using Telerik.XamarinForms.Input;
     using Xamarin.Forms;
+    using Helpers;
     public partial class CalendaDayPage : ContentPage
     {
         #region Constructors
@@ -13,15 +14,10 @@
         #endregion
 
         #region Events
-        void Calendar_SelectionChanged(object sender, Telerik.XamarinForms.Common.ValueChangedEventArgs<object> e)
+        void Calendar_OnSelectionChanged(object sender, Telerik.XamarinForms.Common.ValueChangedEventArgs<object> e)
         {
-            if (e.PreviousValue != null)
-            if (calendar.ViewMode == CalendarViewMode.Month )
-            {
-                //calendar.TrySetViewMode(CalendarViewMode.Day);
-                //calendar.DisplayDate = calendar.SelectedDate.GetValueOrDefault();
-                //calendar.SelectedDate = calendar.SelectedDate.GetValueOrDefault();
-            }
+            //RadCalendar cal = (RadCalendar)sender;
+            //if (cal.ViewMode == CalendarViewMode.Year) Settings.CurrentCalendarViewMode = (int)CalendarViewMode.Month;
         }
         #endregion
 

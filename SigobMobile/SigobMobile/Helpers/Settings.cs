@@ -36,10 +36,34 @@
         private const string calSelectedDate = "selectedDate";
         private static readonly DateTime SettingsSelectedDateDefault= DateTime.Today;
 
+        private const string isVisibleManagementStatus = "isVisibleManagementStatus";
+        private const string isVisibleCompletedStatus = "isVisibleCompletedStatus";
+        private const string isVisibleSuspendStatus = "isVisibleSuspendStatus";
+        private static readonly bool SettingsFilterStatus = true; 
+
         #endregion
 
         #region Properties
-
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:SigobMobile.Helpers.Settings"/> is visible
+        /// management status.
+        /// </summary>
+        /// <value><c>true</c> if is visible management status; otherwise, <c>false</c>.</value>
+        public static bool IsVisibleManagementStatus
+        {
+            get => AppSettings.GetValueOrDefault(isVisibleManagementStatus, SettingsFilterStatus);
+            set => AppSettings.AddOrUpdateValue(isVisibleManagementStatus, value);
+        }
+        public static bool IsVisibleCompletedStatus
+        {
+            get => AppSettings.GetValueOrDefault(isVisibleCompletedStatus, SettingsFilterStatus);
+            set => AppSettings.AddOrUpdateValue(isVisibleCompletedStatus, value);
+        }
+        public static bool IsVisibleSuspendStatus
+        {
+            get => AppSettings.GetValueOrDefault(isVisibleSuspendStatus, SettingsFilterStatus);
+            set => AppSettings.AddOrUpdateValue(isVisibleSuspendStatus, value);
+        }
         /// <summary>
         /// Gets or sets the last date visited in Management Center
         /// </summary>

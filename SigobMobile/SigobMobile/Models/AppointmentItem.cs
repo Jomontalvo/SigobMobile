@@ -108,5 +108,6 @@
         public bool IsHighlighted { get; set; }
         public bool IsTask { get; set;  }
         public bool IsVisible { get; set; }
+        public StatusAppointment Status { get; set; }
     }
 }

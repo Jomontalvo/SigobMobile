@@ -18,115 +18,130 @@
         #region Languages Properties (Main Dictionary)
 
         #region Management Status (all componentes)
-        public static string InManagementStatus { get { return Resources.InManagementStatus; } }
-        public static string SuspendedStatus { get { return Resources.SuspendedStatus; } }
-        public static string CompletedStatus { get { return Resources.CompletedStatus; } }
-        public static string AllStatus { get { return Resources.AllStatus; } }
+        public static string AllStatus => Resources.AllStatus;
+        public static string CompletedStatus => Resources.CompletedStatus;
+        public static string InManagementStatus => Resources.InManagementStatus;
+        public static string ManagementStatusTitle => Resources.ManagementStatusTitle;
+        public static string SuspendedStatus => Resources.SuspendedStatus;
+        #endregion
+
+        #region Filter for Confirmation Appointment Status
+        public static string CalendarFiltersMessage => Resources.CalendarFiltersMessage; 
+        public static string ConfirmedFilterTitle => Resources.ConfirmedFilterTitle;
+        public static string OnlyConfirmed => Resources.OnlyConfirmed;
+        public static string OnlyTentative => Resources.OnlyTentative;
+        public static string ConfirmedAndTentative => Resources.ConfirmedAndTentative;
+        public static string TentativeLabel => Resources.TentativeLabel;
         #endregion
 
         #region Time Measures
-        public static string Day { get { return Resources.Day; } }
-        public static string Days { get { return Resources.Days; } }
-        public static string Month { get { return Resources.Month; } }
-        public static string Months { get { return Resources.Months; } }
-        public static string Year { get { return Resources.Year; } }
-        public static string Years { get { return Resources.Years; } }
+        public static string Day => Resources.Day;
+        public static string Days => Resources.Days;
+        public static string Month => Resources.Month;
+        public static string Months => Resources.Months;
+        public static string Year => Resources.Year;
+        public static string Years => Resources.Years;
         #endregion
 
         #region Deadline Status (all components)
-        public static string PendingStatus { get { return Resources.PendingStatus; } }
-        public static string CloseToDeadlinedStatus { get { return Resources.CloseToDeadlinedStatus; } }
-        public static string ExpiredStatus { get { return Resources.ExpiredStatus; } }
+        public static string PendingStatus => Resources.PendingStatus;
+        public static string CloseToDeadlinedStatus => Resources.CloseToDeadlinedStatus;
+        public static string ExpiredStatus => Resources.ExpiredStatus;
         #endregion
 
         #region Search Tools
-        public static string SearchPlaceHolder { get { return Resources.SearchPlaceHolder; } }
-        public static string Filters { get { return Resources.Filters; } }
-        public static string SelectAll { get { return Resources.SelectAll; } }
-        public static string UnselectAll { get { return Resources.UnselectAll; } }
-        public static string ShowAll { get { return Resources.ShowAll; } }
-        public static string HideAll { get { return Resources.HideAll; } }
+        public static string SearchPlaceHolder => Resources.SearchPlaceHolder;
+        public static string Filters => Resources.Filters;
+        public static string SelectAll => Resources.SelectAll;
+        public static string UnselectAll => Resources.UnselectAll;
+        public static string ShowAll => Resources.ShowAll;
+        public static string HideAll => Resources.HideAll;
         #endregion
 
         #region Dialog Box
-        public static string Accept { get { return Resources.Accept; } }
-        public static string Cancel { get { return Resources.Cancel; } }
-        public static string Error { get { return Resources.Error; } }
-        public static string Ok { get { return Resources.Ok; } }
-        public static string Yes { get { return Resources.Yes; } }
-        public static string No { get { return Resources.No; } }
-        public static string Success { get { return Resources.Success; } }
-        public static string GeneralError { get { return Resources.GeneralError; } }
-        public static string Delete { get { return Resources.Delete; } }
+        public static string Accept => Resources.Accept;
+        public static string Cancel => Resources.Cancel;
+        public static string Error => Resources.Error;
+        public static string Ok => Resources.Ok;
+        public static string Yes => Resources.Yes;
+        public static string No => Resources.No;
+        public static string Success => Resources.Success;
+        public static string GeneralError => Resources.GeneralError;
+        public static string Add => Resources.Add;
+        public static string Edit => Resources.Edit;
+        public static string Save => Resources.Save;
+        public static string Delete => Resources.Delete;
         #endregion
 
         #region Login View
-        public static string LoginViewTitle { get { return Resources.LoginViewTitle; } }
-        public static string EnterCredentials { get { return Resources.EnterCredentials; } }
-        public static string Username { get { return Resources.Username; } }
-        public static string Password { get { return Resources.Password; } }
-        public static string SelectApiInstitution { get { return Resources.SelectApiInstitution; } }
-        public static string Login { get { return Resources.Login; } }
-        public static string ForgotPassword { get { return Resources.ForgotPassword; } }
+        public static string LoginViewTitle => Resources.LoginViewTitle;
+        public static string EnterCredentials => Resources.EnterCredentials;
+        public static string Username => Resources.Username;
+        public static string Password => Resources.Password;
+        public static string SelectApiInstitution => Resources.SelectApiInstitution;
+        public static string Login => Resources.Login;
+        public static string ForgotPassword => Resources.ForgotPassword;
         //Messages
-        public static string InvalidCredentials { get { return Resources.InvalidCredentials; } }
-        public static string UserValidationMsg { get { return Resources.UserValidationMsg; } }
-        public static string PasswordValidationMsg { get { return Resources.PasswordValidationMsg; } }
+        public static string InvalidCredentials => Resources.InvalidCredentials;
+        public static string UserValidationMsg => Resources.UserValidationMsg;
+        public static string PasswordValidationMsg => Resources.PasswordValidationMsg;
         #endregion
 
         #region Institutions to connect View
-        public static string InstitutionsConnect { get { return Resources.InstitutionsConnect; } }
+        public static string InstitutionsConnect => Resources.InstitutionsConnect;
         #endregion
 
         #region Main Menu Options
-        public static string MasterPageTitle { get { return Resources.MasterPageTitle; } }
-        public static string HomeMenu { get { return Resources.HomeMenu; } }
-        public static string HelpMenu { get { return Resources.HelpMenu; } }
-        public static string SecurityMenu { get { return Resources.SecurityMenu; } }
-        public static string TermsAndConditionsMenu { get { return Resources.TermsAndConditionsMenu; } }
-        public static string ContactUs { get { return Resources.ContactUs; } }
-        public static string LogoutMenu { get { return Resources.LogoutMenu; } }
+        public static string MasterPageTitle => Resources.MasterPageTitle;
+        public static string HomeMenu => Resources.HomeMenu;
+        public static string HelpMenu => Resources.HelpMenu;
+        public static string SecurityMenu => Resources.SecurityMenu;
+        public static string TermsAndConditionsMenu => Resources.TermsAndConditionsMenu;
+        public static string ContactUs => Resources.ContactUs;
+        public static string LogoutMenu => Resources.LogoutMenu;
         #endregion
 
         #region My Profile View
-        public static string ProfileViewTitle { get { return Resources.ProfileViewTitle; } }
-        public static string PersonalDataGroup { get { return Resources.PersonalDataGroup; } }
-        public static string OfficialDataGroup { get { return Resources.OfficialDataGroup; } }
-        public static string ContactDataGroup { get { return Resources.ContactDataGroup; } }
-        public static string FirstNameText { get { return Resources.FirstNameText; } }
-        public static string LastNameText { get { return Resources.LastNameText; } }
-        public static string InstitutionText { get { return Resources.InstitutionText; } }
-        public static string AreaText { get { return Resources.AreaText; } }
-        public static string PositionText { get { return Resources.PositionText; } }
-        public static string PhoneText { get { return Resources.PhoneText; } }
-        public static string CellPhoneText { get { return Resources.CellPhoneText; } }
-        public static string EmailText { get { return Resources.EmailText; } }
-        public static string GenderText { get { return Resources.GenderText; } }
-        public static string SelectGenderPlaceHolder { get { return Resources.SelectGenderPlaceHolder; } }
-        public static string MaleGender { get { return Resources.MaleGender; } }
-        public static string FemaleGender { get { return Resources.FemaleGender; } }
-        public static string UserImageText { get { return Resources.UserImageText; } }
-        public static string SourceImageQuestion { get { return Resources.SourceImageQuestion; } }
-        public static string FromCamera { get { return Resources.FromCamera; } }
-        public static string FromGallery { get { return Resources.FromGallery; } }
-        public static string DeletePicture { get { return Resources.DeletePicture; } }
+        public static string ProfileViewTitle => Resources.ProfileViewTitle;
+        public static string PersonalDataGroup => Resources.PersonalDataGroup;
+        public static string OfficialDataGroup => Resources.OfficialDataGroup;
+        public static string ContactDataGroup => Resources.ContactDataGroup;
+        public static string FirstNameText => Resources.FirstNameText;
+        public static string LastNameText => Resources.LastNameText;
+        public static string InstitutionText => Resources.InstitutionText;
+        public static string AreaText => Resources.AreaText;
+        public static string PositionText => Resources.PositionText;
+        public static string PhoneText => Resources.PhoneText;
+        public static string CellPhoneText => Resources.CellPhoneText;
+        public static string EmailText => Resources.EmailText;
+        public static string GenderText => Resources.GenderText;
+        public static string SelectGenderPlaceHolder => Resources.SelectGenderPlaceHolder;
+        public static string MaleGender => Resources.MaleGender;
+        public static string FemaleGender => Resources.FemaleGender;
+        public static string UserImageText => Resources.UserImageText;
+        public static string SourceImageQuestion => Resources.SourceImageQuestion;
+        public static string FromCamera => Resources.FromCamera;
+        public static string FromGallery => Resources.FromGallery;
+        public static string DeletePicture => Resources.DeletePicture;
 
         #endregion
 
         #region Calendar Agenda View
-        public static string AgendaViewTitle { get { return Resources.AgendaViewTitle; } }
-        public static string CalendarsTitle { get { return Resources.CalendarsTitle; } }
-        public static string Calendar { get { return Resources.Calendar; } }
-        public static string Today { get { return Resources.Today; } }
-        public static string CalendarViewModeText { get { return Resources.CalendarViewModeText; } }
-        public static string DailyView { get { return Resources.DailyView; } }
-        public static string MonthlyView { get { return Resources.MonthlyView; } }
-        public static string MultiDayView { get { return Resources.MultiDayView; } }
-        public static string YearView { get { return Resources.YearView; } }
-        public static string WeeklyView { get { return Resources.WeeklyView; } }
-        public static string SelectCalendarMessage { get { return Resources.SelectCalendarMessage; } }
-        public static string SelectCalendarColor { get { return Resources.SelectCalendarColor; } }
+        public static string AgendaViewTitle => Resources.AgendaViewTitle;
+        public static string CalendarsTitle => Resources.CalendarsTitle;
+        public static string Calendar => Resources.Calendar;
+        public static string Today => Resources.Today;
+        public static string CalendarViewModeText => Resources.CalendarViewModeText;
+        public static string DailyView => Resources.DailyView;
+        public static string MonthlyView => Resources.MonthlyView;
+        public static string MultiDayView => Resources.MultiDayView;
+        public static string YearView => Resources.YearView;
+        public static string WeeklyView => Resources.WeeklyView;
+        public static string SelectCalendarMessage => Resources.SelectCalendarMessage;
+        public static string SelectCalendarColor => Resources.SelectCalendarColor;
         #endregion
+
+
 
         #endregion
     }

@@ -141,6 +141,18 @@
     <value>Yes</value>
     <comment>Yes answer (Message with ask)</comment>
   </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+    <comment>Edit option of Toolbar Item</comment>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+    <comment>Add option of Toolbar Item</comment>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+    <comment>Save option of Toolbar Item</comment>
+  </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>Forgot your password?</value>
     <comment>Question when user forget the password access</comment>
@@ -289,6 +301,10 @@
     <value>Type pattern...</value>
     <comment>Text for search place holder.</comment>
   </data>
+  <data name="ManagementStatusTitle" xml:space="preserve">
+    <value>Management status</value>
+    <comment>Text for Title of management status list or selector.</comment>
+  </data>
   <data name="InManagementStatus" xml:space="preserve">
     <value>In management</value>
     <comment>Text for Item in management status.</comment>
@@ -381,6 +397,10 @@
     <value>Please, select the calendars that you want to make visible in your Management Center.</value>
     <comment>Message for set visibility of calendar.</comment>
   </data>
+  <data name="CalendarFiltersMessage" xml:space="preserve">
+    <value>Please, select the filtering options that you want to apply in your Management Center calendar.</value>
+    <comment>Message for set filters of calendar.</comment>
+  </data>
   <data name="SelectCalendarColor" xml:space="preserve">
     <value>Select the calendar color.</value>
     <comment>Message for choose a color of calendar.</comment>
@@ -444,5 +464,25 @@
   <data name="WeeklyView" xml:space="preserve">
     <value>Weekly view</value>
     <comment>Weelly view of calendar</comment>
+  </data>
+  <data name="ConfirmedFilterTitle" xml:space="preserve">
+    <value>Show confirmed tentative</value>
+    <comment>Title for filter of confirmation status of the appointment</comment>
+  </data>
+  <data name="OnlyConfirmed" xml:space="preserve">
+    <value>Show only confirmed</value>
+    <comment>Filter to show only confirmed appointments</comment>
+  </data>
+  <data name="OnlyTentative" xml:space="preserve">
+    <value>Show only tentative</value>
+    <comment>Filter to show only tentative appointments</comment>
+  </data>
+  <data name="ConfirmedAndTentative" xml:space="preserve">
+    <value>Show confirmed an tentative</value>
+    <comment>Show both appointment types</comment>
+  </data>
+  <data name="TentativeLabel" xml:space="preserve">
+    <value>Tentative</value>
+    <comment>Text for tentative appointments</comment>
   </data>
 </root>

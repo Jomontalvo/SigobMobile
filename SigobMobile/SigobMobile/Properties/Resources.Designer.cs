@@ -83,6 +83,24 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
         public static string ForgotPassword {
             get {
                 return ResourceManager.GetString("ForgotPassword", resourceCulture);
@@ -305,6 +323,12 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string ManagementStatusTitle {
+            get {
+                return ResourceManager.GetString("ManagementStatusTitle", resourceCulture);
+            }
+        }
+        
         public static string InManagementStatus {
             get {
                 return ResourceManager.GetString("InManagementStatus", resourceCulture);
@@ -443,6 +467,12 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string CalendarFiltersMessage {
+            get {
+                return ResourceManager.GetString("CalendarFiltersMessage", resourceCulture);
+            }
+        }
+        
         public static string SelectCalendarColor {
             get {
                 return ResourceManager.GetString("SelectCalendarColor", resourceCulture);
@@ -536,6 +566,36 @@ namespace SigobMobile.Properties {
         public static string WeeklyView {
             get {
                 return ResourceManager.GetString("WeeklyView", resourceCulture);
+            }
+        }
+        
+        public static string ConfirmedFilterTitle {
+            get {
+                return ResourceManager.GetString("ConfirmedFilterTitle", resourceCulture);
+            }
+        }
+        
+        public static string OnlyConfirmed {
+            get {
+                return ResourceManager.GetString("OnlyConfirmed", resourceCulture);
+            }
+        }
+        
+        public static string OnlyTentative {
+            get {
+                return ResourceManager.GetString("OnlyTentative", resourceCulture);
+            }
+        }
+        
+        public static string ConfirmedAndTentative {
+            get {
+                return ResourceManager.GetString("ConfirmedAndTentative", resourceCulture);
+            }
+        }
+        
+        public static string TentativeLabel {
+            get {
+                return ResourceManager.GetString("TentativeLabel", resourceCulture);
             }
         }
     }
