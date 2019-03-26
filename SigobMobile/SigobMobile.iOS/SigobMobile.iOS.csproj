@@ -282,6 +282,9 @@
     <BundleResource Include="Resources\ic_ev_record.png" />
     <BundleResource Include="Resources\ic_ev_tasks.png" />
     <BundleResource Include="Resources\ic_ev_documents.png" />
+    <BundleResource Include="Resources\ic_ev_status_active.png" />
+    <BundleResource Include="Resources\ic_ev_status_finished.png" />
+    <BundleResource Include="Resources\ic_ev_status_suspended.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

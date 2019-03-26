@@ -163,7 +163,7 @@
         public string Annotations { get; set; }
 
         [JsonProperty("puede_modificar")]
-        public byte IsModifiable { get; set; }
+        public EventAttribute AttributeOnEvents { get; set; }
 
         [JsonProperty("modifica_participantes")]
         public EventParticipantsAttribute ModifyParticipants { get; set; }

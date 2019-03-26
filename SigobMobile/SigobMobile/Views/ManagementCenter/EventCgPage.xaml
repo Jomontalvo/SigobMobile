@@ -9,6 +9,16 @@
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
     Title="Event"
     ios:Page.UseSafeArea="true">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            BindingContext="{Binding EventCg}"
+            Command="{Binding EditEventCommand}"
+            IsEnabled="false"
+            Order="Default" 
+            Priority="0"
+            Text="{lang:Translate Edit}">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <ScrollView
@@ -54,7 +64,7 @@
                             x:Name="EventTitle"
                             FontSize="Medium"
                             HorizontalOptions="StartAndExpand"
-                            Text="{Binding LocalAppointment.Title}">
+                            Text="{Binding EventCg.Title}">
                             <Label.FontFamily>
                                 <OnPlatform x:TypeArguments="x:String">
                                         <On Platform="iOS" Value="Avenir Next" />
@@ -150,7 +160,7 @@
                     <Image
                         Grid.Column="0"
                         Grid.Row="5"
-                        Source="ic_ev_status"
+                        Source="{Binding IconStatus}"
                         VerticalOptions="Center">
                     </Image>
                     <Label

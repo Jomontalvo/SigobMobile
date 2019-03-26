@@ -234,6 +234,9 @@
     <AndroidResource Include="Resources\drawable\ic_ev_guests.png" />
     <AndroidResource Include="Resources\drawable\ic_ev_calendar_color.png" />
     <AndroidResource Include="Resources\drawable\ic_ev_summary.png" />
+    <AndroidResource Include="Resources\drawable\ic_ev_status_active.png" />
+    <AndroidResource Include="Resources\drawable\ic_ev_status_finished.png" />
+    <AndroidResource Include="Resources\drawable\ic_ev_status_suspended.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

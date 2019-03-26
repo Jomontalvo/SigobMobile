@@ -20,11 +20,23 @@
 
         #region Attributes
         private bool isRunning;
+        private bool isEditable;
         private ManagementCenterEvent eventDetails;
         private string interval;
+        private string iconStatus;
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:SigobMobile.ViewModels.EventCgViewModel"/> is editable.
+        /// </summary>
+        /// <value><c>true</c> if is editable; otherwise, <c>false</c>.</value>
+        public bool IsEditable
+        {
+            get => this.isEditable;
+            set => SetValue(ref this.isEditable, value);
+        }
+
         /// <summary>
         /// For ActivityIndicator => Gets or sets a value indicating whether this
         /// <see cref="T:SigobMobile.ViewModels.EventManagementCenterViewModel"/> is running.
@@ -57,6 +69,16 @@
         /// </summary>
         /// <value>The event details.</value>
         public ManagementCenterEvent EventCg { get; set; }
+
+        /// <summary>
+        /// Gets or sets the icon status.
+        /// </summary>
+        /// <value>The icon status.</value>
+        public string IconStatus
+        {
+            get => this.iconStatus;
+            set => SetValue(ref this.iconStatus, value);
+        }
         #endregion
 
         #region Constructors
@@ -70,6 +92,9 @@
 
         #region Methods
 
+        /// <summary>
+        /// Load the event details.
+        /// </summary>
         private async void LoadEventDetails()
         {
             IsRunning = true;
@@ -102,8 +127,38 @@
             }
             this.eventDetails = (ManagementCenterEvent)response.Result;
             this.EventCg = eventDetails;
-            this.Interval = DateTime.Now.ToString("t");
+            this.SetEventValues();
             this.IsRunning = false;
+        }
+
+        /// <summary>
+        /// Set the event values.
+        /// </summary>
+        private void SetEventValues()
+        {
+            //Event interval
+            this.Interval = DateTime.Now.ToString("t");
+
+            //Event Management Status
+            switch (EventCg.Status)
+            {
+                case StatusAppointment.InManagement:
+                    IconStatus = "ic_ev_status_active";
+                    break;
+                case StatusAppointment.Finished:
+                    IconStatus = "ic_ev_status_finished";
+                    break;
+                case StatusAppointment.Suspended:
+                    IconStatus = "ic_ev_status_suspended";
+                    break;
+                default:
+                    IconStatus = "ic_ev_status";
+                    break;
+            }
+
+            //Attributes
+            IsEditable = (EventCg.AttributeOnEvents == EventAttribute.Create || 
+                         (EventCg.AttributeOnEvents == EventAttribute.CreateOwner && EventCg.ProgrammerOfficeId == Settings.OfficeCode));
         }
         #endregion
 
