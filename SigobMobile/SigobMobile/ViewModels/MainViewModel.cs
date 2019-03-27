@@ -34,7 +34,11 @@ namespace SigobMobile.ViewModels
 
         public EventCgViewModel EventCg { get; set; }
 
-        public EventAgendaViewModel EventAgenda { get; set;  }
+        public EditEventViewModel EditEvent { get; set; }
+
+        public EditAppointmentViewModel EditAppointment { get; set; }
+
+        public AppointmentViewModel Appointment { get; set; }
 
         public CalendarWeekViewModel CalendarWeek { get; set; }
 

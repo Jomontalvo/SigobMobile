@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="SigobMobile.Views.ManagementCenter.AppointmentPage"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:lang="clr-namespace:SigobMobile.Helpers"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}"
+    Title="{lang:Translate AppointmentViewTitle}"
+    ios:Page.UseSafeArea="true">
+    <ContentPage.ToolbarItems>
+        <lang:ToolbarItemEx
+            BindingContext="{Binding Appointment}"
+            IsVisible="{Binding IsEditable}"
+            Order="Default"
+            Priority="0"
+            Text="{lang:Translate Edit}">
+        </lang:ToolbarItemEx>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView
+                BindingContext="{Binding Appointment}"
+                Padding="10,5,5,0"
+                VerticalOptions="StartAndExpand">
+                <Grid
+                    ColumnSpacing="15"
+                    Padding="5,5"
+                    RowSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <lang:IconView
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Foreground="{Binding LocalAppointment.Color}"
+                        Margin="0,1,0,0"
+                        HorizontalOptions="Center"
+                        Source="ic_ev_calendar_color"
+                        VerticalOptions="Start">
+                    </lang:IconView>
+                    <StackLayout
+                        Grid.Column="1"
+                        Grid.Row="0">
+                        <Label
+                            x:Name="EventTitle"
+                            FontSize="Medium"
+                            HorizontalOptions="StartAndExpand"
+                            Text="{Binding LocalAppointment.Title}">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS" Value="Avenir Next" />
+                                        <On Platform="Android" Value="monospace" />
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label
+                            FontSize="Small"
+                            Text="{Binding LocalAppointment.StartDate, StringFormat='{0:dddd, dd MMMM yyyy}'}"
+                            TextColor="{StaticResource darkGray}"
+                            VerticalOptions="Center">
+                        </Label>
+                    </StackLayout>
+                </Grid>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

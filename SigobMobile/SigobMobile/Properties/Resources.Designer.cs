@@ -598,5 +598,11 @@ namespace SigobMobile.Properties {
                 return ResourceManager.GetString("TentativeLabel", resourceCulture);
             }
         }
+        
+        public static string AppointmentViewTitle {
+            get {
+                return ResourceManager.GetString("AppointmentViewTitle", resourceCulture);
+            }
+        }
     }
 }

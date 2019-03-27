@@ -13,13 +13,7 @@
     public class InstitutionItemViewModel : InstitutionConnect
     {
         #region Commands
-        public ICommand SelectInstitutionCommand
-        {
-            get
-            {
-                return new RelayCommand(SelectInstitution);
-            }
-        }
+        public ICommand SelectInstitutionCommand => new RelayCommand(SelectInstitution);
 
         /// <summary>
         /// Selects the institution an set global url API service.

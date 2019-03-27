@@ -141,6 +141,9 @@
         public static string SelectCalendarColor => Resources.SelectCalendarColor;
         #endregion
 
+        #region Appointment View
+        public static string AppointmentViewTitle => Resources.AppointmentViewTitle;
+        #endregion
 
 
         #endregion

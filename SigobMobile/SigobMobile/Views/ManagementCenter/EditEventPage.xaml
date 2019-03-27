@@ -2,27 +2,16 @@
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    x:Class="SigobMobile.Views.ManagementCenter.EventCgPage"
+    x:Class="SigobMobile.Views.ManagementCenter.EditEventPage"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:lang="clr-namespace:SigobMobile.Helpers"
     BackgroundColor="{StaticResource defaultBackgroundView}"
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
-    Title="Event"
     ios:Page.UseSafeArea="true">
-    <ContentPage.ToolbarItems>
-        <lang:ToolbarItemEx
-            BindingContext="{Binding EventCg}"
-            Command="{Binding EditButtonCommand}"
-            IsVisible="{Binding IsEditable}"
-            Order="Default"
-            Priority="0"
-            Text="{lang:Translate Edit}">
-        </lang:ToolbarItemEx>
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <ScrollView
-                BindingContext="{Binding EventCg}"
+                BindingContext="{Binding EditEvent}"
                 Padding="10,5,5,0"
                 VerticalOptions="StartAndExpand">
                 <Grid

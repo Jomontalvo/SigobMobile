@@ -5,6 +5,9 @@
     using Helpers;
     using Xamarin.Forms;
     using System;
+    using System.Windows.Input;
+    using GalaSoft.MvvmLight.Command;
+    using Views.ManagementCenter;
 
     public class EventCgViewModel : BaseViewModel
     {
@@ -84,13 +87,28 @@
         #region Constructors
         public EventCgViewModel(Event appoitment)
         {
+            this.IsEditable = true;
             this.LocalAppointment = appoitment;
             this.apiService = new ApiService();
             this.LoadEventDetails();
         }
         #endregion
 
+        #region Commands
+        public ICommand EditButtonCommand => new RelayCommand(EditButton);
+        #endregion
+
         #region Methods
+
+        /// <summary>
+        /// Call Edit Event view.
+        /// </summary>
+        private async void EditButton()
+        {
+            var editEventViewModel = MainViewModel.GetInstance();
+            editEventViewModel.EditEvent = new EditEventViewModel(this.EventCg);
+            await Application.Current.MainPage.Navigation.PushModalAsync(new EditEventPage());
+        }
 
         /// <summary>
         /// Load the event details.
@@ -157,8 +175,8 @@
             }
 
             //Attributes
-            IsEditable = (EventCg.AttributeOnEvents == EventAttribute.Create || 
-                         (EventCg.AttributeOnEvents == EventAttribute.CreateOwner && EventCg.ProgrammerOfficeId == Settings.OfficeCode));
+            IsEditable = EventCg.AttributeOnEvents == EventAttribute.Create || 
+                         (EventCg.AttributeOnEvents == EventAttribute.CreateOwner && EventCg.ProgrammerOfficeId == Settings.OfficeCode);
         }
         #endregion
 

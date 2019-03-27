@@ -270,27 +270,30 @@
         private async void AppointmentTapped(AppointmentTapCommandContext context)
         {
             Event eventSelected = (Event)context.Appointment;
-            var appViewModel = MainViewModel.GetInstance();
-            if (!eventSelected.IsTask)
+            if (eventSelected.IsVisible)
             {
-                switch (eventSelected.ModuleType)
+                var appViewModel = MainViewModel.GetInstance();
+                if (!eventSelected.IsTask)
                 {
-                    case 4:
-                        appViewModel.EventAgenda = new EventAgendaViewModel(eventSelected);
-                        await App.Navigator.PushAsync(new EventAgendaPage());
-                        break;
-                    case 7:
-                        appViewModel.EventCg = new EventCgViewModel(eventSelected);
-                        await App.Navigator.PushAsync(new EventCgPage());
-                        break;
-                    default:
-                        break;
+                    switch (eventSelected.ModuleType)
+                    {
+                        case 4:
+                            appViewModel.Appointment = new AppointmentViewModel(eventSelected);
+                            await App.Navigator.PushAsync(new AppointmentPage());
+                            break;
+                        case 7:
+                            appViewModel.EventCg = new EventCgViewModel(eventSelected);
+                            await App.Navigator.PushAsync(new EventCgPage());
+                            break;
+                        default:
+                            break;
+                    }
                 }
-            }
-            else
-            {
-                appViewModel.Task = new TaskViewModel(eventSelected);
-                await App.Navigator.PushAsync(new TaskPage());
+                else
+                {
+                    appViewModel.Task = new TaskViewModel(eventSelected);
+                    await App.Navigator.PushAsync(new TaskPage());
+                }
             }
         }
 

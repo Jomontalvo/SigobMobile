@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace SigobMobile.Views.ManagementCenter
 {
-    public partial class EventAgendaPage : ContentPage
+    public partial class EditAppointmentPage : ContentPage
     {
-        public EventAgendaPage()
+        public EditAppointmentPage()
         {
             InitializeComponent();
         }

@@ -485,4 +485,8 @@
     <value>Tentative</value>
     <comment>Text for tentative appointments</comment>
   </data>
+  <data name="AppointmentViewTitle" xml:space="preserve">
+    <value>Appointment</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
 </root>
