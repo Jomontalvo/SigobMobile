@@ -5,7 +5,7 @@
     x:Class="SigobMobile.Views.ManagementCenter.EditEventPage"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:telerikInput="clr-namespace:Telerik.XamarinForms.Input;assembly=Telerik.XamarinForms.Input"
-    xmlns:lang="clr-namespace:SigobMobile.Helpers"
+    xmlns:local="clr-namespace:SigobMobile.Helpers"
     BackgroundColor="{StaticResource defaultBackgroundView}"
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
     ios:Page.UseSafeArea="true">
@@ -29,6 +29,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <ImageButton
+                    BackgroundColor="{StaticResource clear}"
                     Command="{Binding CancelEditCommand}"
                     Grid.Column="0"
                     Grid.Row="0"
@@ -52,8 +53,9 @@
                     Grid.Column="2"
                     Grid.Row="0"
                     HorizontalOptions = "Start"
-                    Padding="10"
-                    Text="{lang:Translate Save}"
+                    Padding="2,5"
+                    CornerRadius="8"
+                    Text="{local:Translate Save}"
                     TextColor = "{StaticResource defaultBackgroundView}">
                 </telerikInput:RadButton>
             </Grid>
@@ -68,7 +70,7 @@
                     <ColumnDefinition Width="20" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <lang:IconView
+                <local:IconView
                     Grid.Column="0"
                     Grid.Row="0"
                     Foreground="{StaticResource iOSPurple}"
@@ -76,23 +78,24 @@
                     HorizontalOptions="Center"
                     Source="{StaticResource clear}"
                     VerticalOptions="Start">
-                </lang:IconView>
-                <telerikInput:RadEntry
-                    BorderStyle="{StaticResource EntryBorderStyle}"
+                </local:IconView>
+                <local:BorderlessEditor
+                    AutoSize="TextChanges"
                     FontSize="Medium"
                     Grid.Column="1"
                     Grid.Row="0"
                     HorizontalOptions="FillAndExpand"
-                    Text="{Binding LocalEvent.Title, Mode=TwoWay}"
-                    WatermarkText="{lang:Translate EventNameText}">
-                    <telerikInput:RadEntry.FontFamily>
+                    MaxLength="250"
+                    Placeholder="{local:Translate EventNameText}"
+                    Text="{Binding LocalEvent.Title, Mode=TwoWay}">
+                    <Editor.FontFamily>
                         <OnPlatform
                             x:TypeArguments="x:String">
                             <On Platform="iOS" Value="Avenir Next" />
                             <On Platform="Android" Value="monospace" />
                         </OnPlatform>
-                    </telerikInput:RadEntry.FontFamily>
-                </telerikInput:RadEntry>
+                    </Editor.FontFamily>
+                </local:BorderlessEditor>
                 <BoxView
                     Color="{StaticResource gray}"
                     Grid.Column="0"
@@ -190,7 +193,7 @@
                         TextColor="{StaticResource darkGray}"
                         VerticalOptions="Center">
                     </Label>
-                    <lang:IconView
+                    <local:IconView
                         Grid.Column="0"
                         Grid.Row="4"
                         Foreground="{Binding LocalAppointment.TypeColor}"
@@ -199,7 +202,7 @@
                         Source="ic_ev_type_color"
                         VerticalOptions="Center"
                         WidthRequest="16">
-                    </lang:IconView>
+                    </local:IconView>
                     <Label
                         FontSize="Small"
                         Grid.Column="1"
