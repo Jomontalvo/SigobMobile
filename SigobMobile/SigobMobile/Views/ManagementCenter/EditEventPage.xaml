@@ -4,12 +4,104 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     x:Class="SigobMobile.Views.ManagementCenter.EditEventPage"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:telerikInput="clr-namespace:Telerik.XamarinForms.Input;assembly=Telerik.XamarinForms.Input"
     xmlns:lang="clr-namespace:SigobMobile.Helpers"
     BackgroundColor="{StaticResource defaultBackgroundView}"
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
     ios:Page.UseSafeArea="true">
+    <ContentPage.Resources>
+        <telerikInput:BorderStyle 
+            x:Key="EntryBorderStyle" 
+            BorderThickness="0">
+        </telerikInput:BorderStyle>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout
+            BindingContext="{Binding EditEvent}">
+            <Grid
+                Padding="15,8,15,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ImageButton
+                    Command="{Binding CancelEditCommand}"
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Source="ic_bt_close_window">
+                </ImageButton>
+                <Label 
+                    FontAttributes="Bold"
+                    FontSize="{OnPlatform Android=Large, Default=Default}"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding EditEventTitle}"
+                    VerticalTextAlignment="Center">
+                </Label>
+                <telerikInput:RadButton
+                    BackgroundColor = "{StaticResource DroidPrimary}"
+                    BorderWidth = "1"
+                    BorderThickness = "1"
+                    BorderColor = "{StaticResource DroidPrimary}"
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    HorizontalOptions = "Start"
+                    Padding="10"
+                    Text="{lang:Translate Save}"
+                    TextColor = "{StaticResource defaultBackgroundView}">
+                </telerikInput:RadButton>
+            </Grid>
+            <Grid
+                ColumnSpacing="7"
+                Padding="15,0,10,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <lang:IconView
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Foreground="{StaticResource iOSPurple}"
+                    Margin="0,1,0,0"
+                    HorizontalOptions="Center"
+                    Source="{StaticResource clear}"
+                    VerticalOptions="Start">
+                </lang:IconView>
+                <telerikInput:RadEntry
+                    BorderStyle="{StaticResource EntryBorderStyle}"
+                    FontSize="Medium"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    HorizontalOptions="FillAndExpand"
+                    Text="{Binding LocalEvent.Title, Mode=TwoWay}"
+                    WatermarkText="{lang:Translate EventNameText}">
+                    <telerikInput:RadEntry.FontFamily>
+                        <OnPlatform
+                            x:TypeArguments="x:String">
+                            <On Platform="iOS" Value="Avenir Next" />
+                            <On Platform="Android" Value="monospace" />
+                        </OnPlatform>
+                    </telerikInput:RadEntry.FontFamily>
+                </telerikInput:RadEntry>
+                <BoxView
+                    Color="{StaticResource gray}"
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand">
+                </BoxView>
+            </Grid>
             <ScrollView
                 BindingContext="{Binding EditEvent}"
                 Padding="10,5,5,0"
@@ -37,30 +129,10 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <lang:IconView
-                        Grid.Column="0"
-                        Grid.Row="0"
-                        Foreground="{Binding LocalAppointment.Color}"
-                        Margin="0,1,0,0"
-                        HorizontalOptions="Center"
-                        Source="ic_ev_calendar_color"
-                        VerticalOptions="Start">
-                    </lang:IconView>
                     <StackLayout
                         Grid.Column="1"
-                        Grid.Row="0">
-                        <Label
-                            x:Name="EventTitle"
-                            FontSize="Medium"
-                            HorizontalOptions="StartAndExpand"
-                            Text="{Binding EventCg.Title}">
-                            <Label.FontFamily>
-                                <OnPlatform x:TypeArguments="x:String">
-                                        <On Platform="iOS" Value="Avenir Next" />
-                                        <On Platform="Android" Value="monospace" />
-                                </OnPlatform>
-                            </Label.FontFamily>
-                        </Label>
+                        Grid.Row="0"
+                        Grid.ColumnSpan="2">
                         <Label
                             FontSize="Small"
                             Text="{Binding EventCg.StartDate, StringFormat='{0:dddd, dd MMMM yyyy}'}"
@@ -460,48 +532,7 @@
                     </Grid>
                 </Grid>
             </ScrollView>
-            <Grid
-                AbsoluteLayout.LayoutBounds=".5,1,1,.1"
-                AbsoluteLayout.LayoutFlags="All"
-                ColumnSpacing="0"
-                RowSpacing="0"
-                VerticalOptions="End">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <BoxView
-                    HeightRequest="1"
-                    BackgroundColor="{StaticResource accesoryGray}"
-                    Grid.Row="0">
-                </BoxView>
-                <Grid 
-                    BackgroundColor="{StaticResource softGray}"
-                    Grid.Row="1" 
-                    VerticalOptions="End" 
-                    RowSpacing="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Button 
-                        BackgroundColor="{StaticResource softGray}"
-                        Command="{Binding CheckAllCalendarsCommand}"
-                        Grid.Column="0"
-                        HorizontalOptions="CenterAndExpand"
-                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
-                        Text="Finish">
-                    </Button>
-                    <Button 
-                        BackgroundColor="{StaticResource softGray}"
-                        Command="{Binding CheckAllCalendarsCommand}"
-                        Grid.Column="1"
-                        HorizontalOptions="CenterAndExpand"
-                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
-                        Text="Delete">
-                    </Button>
-                </Grid>
-            </Grid>    
+            
         </StackLayout>
 
     </ContentPage.Content>

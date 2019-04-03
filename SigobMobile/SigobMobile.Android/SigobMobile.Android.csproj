@@ -237,6 +237,7 @@
     <AndroidResource Include="Resources\drawable\ic_ev_status_active.png" />
     <AndroidResource Include="Resources\drawable\ic_ev_status_finished.png" />
     <AndroidResource Include="Resources\drawable\ic_ev_status_suspended.png" />
+    <AndroidResource Include="Resources\drawable\ic_bt_close_window.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

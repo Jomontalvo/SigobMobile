@@ -28,7 +28,8 @@
                 <Label 
                     Text="{lang:Translate Filters}"
                     FontAttributes="Bold"
-                    FontSize="{OnPlatform Android=Large, Default=Default}"
+                    FontSize="{OnPlatform Android=Medium,Default=Default}"
+                    TextColor="{OnPlatform Android={StaticResource DroidPrimary}}"
                     HorizontalOptions="CenterAndExpand"
                     HorizontalTextAlignment="Center"
                     VerticalTextAlignment="Center">
@@ -60,36 +61,40 @@
                 VerticalOptions="Center">
             </Label>
             <TableView
-                Intent="Settings">
+                HeightRequest="246"
+                Intent="Settings"
+                VerticalOptions="Start">
                 <TableRoot>
                     <TableSection
                         Title="{lang:Translate ManagementStatusTitle}">
                         <SwitchCell
                             On="{Binding IsVisibleInManagementStatus, Mode=TwoWay}"
+                            OnColor="{OnPlatform Android={StaticResource lightBlue}}"
                             Text="{lang:Translate InManagementStatus}">
                         </SwitchCell>
                         <SwitchCell
                             On="{Binding IsVisibleCompletedStatus, Mode=TwoWay}"
+                            OnColor="{OnPlatform Android={StaticResource iOSGreen}}"
                             Text="{lang:Translate CompletedStatus}">
                         </SwitchCell>
                         <SwitchCell
                             On="{Binding IsVisibleSuspendedStatus, Mode=TwoWay}"
+                            OnColor="{OnPlatform Android={StaticResource iOSPink}}"
                             Text="{lang:Translate SuspendedStatus}">
                         </SwitchCell>
                     </TableSection>
                     <TableSection
                         Title="{lang:Translate ConfirmedFilterTitle}">
-                        <ViewCell>
-                            <Picker
-                                ItemsSource="{Binding ConfirmedFilterItems}"
-                                SelectedItem="{Binding SelectedFilter}"
-                                SelectedIndex="{Binding FilterSelectedIndex}"
-                                Title="{lang:Translate ConfirmedFilterTitle}">
-                            </Picker>
-                        </ViewCell>
                     </TableSection>
                 </TableRoot>
             </TableView>
+            <lang:BorderlessPicker
+                Margin="15,0"
+                ItemsSource="{Binding ConfirmedFilterItems}"
+                SelectedItem="{Binding SelectedFilter}"
+                SelectedIndex="{Binding FilterSelectedIndex}"
+                Title="{lang:Translate ConfirmedFilterTitle}">
+            </lang:BorderlessPicker>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

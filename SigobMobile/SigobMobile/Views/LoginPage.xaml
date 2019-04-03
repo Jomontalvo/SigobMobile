@@ -11,7 +11,8 @@
     <ContentPage.Resources>
         <telerikInput:BorderStyle 
             x:Key="EntryBorderStyle" 
-            BorderThickness="0">
+            BorderThickness="0,0,0,1"
+            BorderColor="{StaticResource grayBorder}">
         </telerikInput:BorderStyle>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -38,14 +39,10 @@
                     WatermarkText="{lang:Translate Username}"
                     Text="{Binding UserName, Mode=TwoWay}">
                 </telerikInput:RadEntry>
-                <BoxView 
-                    BackgroundColor="{StaticResource grayBorder}"
-                    HeightRequest="1"
-                    HorizontalOptions="FillAndExpand">
-                </BoxView>
                 <StackLayout 
                     Grid.Row="2" 
-                    Grid.Column="1">
+                    Grid.Column="1"
+                    Padding="0,15,0,15">
                     <Grid
                         Padding="0">
                         <Grid.ColumnDefinitions>
@@ -69,9 +66,9 @@
                             Grid.Column="1"
                             HorizontalOptions="End"
                             IsVisible="{Binding IsVisibleIconViewPassword, Mode=TwoWay}"
-                            Margin="5,0"
+                            Margin="5,0,5,2"
                             Source="{Binding IconViewPassword}" 
-                            VerticalOptions="Center"
+                            VerticalOptions="Start"
                             WidthRequest="24"
                             x:Name="IconViewPassword" >
                             <Image.GestureRecognizers>
@@ -81,11 +78,6 @@
                             </Image.GestureRecognizers>
                         </Image>
                     </Grid>
-                    <BoxView 
-                        BackgroundColor="{StaticResource grayBorder}"
-                        HeightRequest="1"
-                        HorizontalOptions="FillAndExpand">
-                    </BoxView>
                 </StackLayout>
                 <ContentView
                     HorizontalOptions="FillAndExpand">
@@ -105,11 +97,6 @@
                         WatermarkTextColor="{Binding IsSelectedColor}">
                     </telerikInput:RadEntry>
                 </ContentView>
-                <BoxView 
-                    BackgroundColor="{StaticResource grayBorder}"
-                    HeightRequest="1"
-                    HorizontalOptions="FillAndExpand">
-                </BoxView>
                 <ActivityIndicator 
                     IsRunning="{Binding IsRunning, Mode=TwoWay}">
                 </ActivityIndicator>

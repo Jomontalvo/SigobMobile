@@ -604,5 +604,89 @@ namespace SigobMobile.Properties {
                 return ResourceManager.GetString("AppointmentViewTitle", resourceCulture);
             }
         }
+        
+        public static string EventNameText {
+            get {
+                return ResourceManager.GetString("EventNameText", resourceCulture);
+            }
+        }
+        
+        public static string EventLocationText {
+            get {
+                return ResourceManager.GetString("EventLocationText", resourceCulture);
+            }
+        }
+        
+        public static string EventStartText {
+            get {
+                return ResourceManager.GetString("EventStartText", resourceCulture);
+            }
+        }
+        
+        public static string EventEndText {
+            get {
+                return ResourceManager.GetString("EventEndText", resourceCulture);
+            }
+        }
+        
+        public static string EventTimeStartText {
+            get {
+                return ResourceManager.GetString("EventTimeStartText", resourceCulture);
+            }
+        }
+        
+        public static string EventTimeEndText {
+            get {
+                return ResourceManager.GetString("EventTimeEndText", resourceCulture);
+            }
+        }
+        
+        public static string EventCalendarOwner {
+            get {
+                return ResourceManager.GetString("EventCalendarOwner", resourceCulture);
+            }
+        }
+        
+        public static string EventTypeText {
+            get {
+                return ResourceManager.GetString("EventTypeText", resourceCulture);
+            }
+        }
+        
+        public static string EventStatusText {
+            get {
+                return ResourceManager.GetString("EventStatusText", resourceCulture);
+            }
+        }
+        
+        public static string EventProgrammerText {
+            get {
+                return ResourceManager.GetString("EventProgrammerText", resourceCulture);
+            }
+        }
+        
+        public static string EventSummaryText {
+            get {
+                return ResourceManager.GetString("EventSummaryText", resourceCulture);
+            }
+        }
+        
+        public static string EventParticipantsText {
+            get {
+                return ResourceManager.GetString("EventParticipantsText", resourceCulture);
+            }
+        }
+        
+        public static string EventAbstractText {
+            get {
+                return ResourceManager.GetString("EventAbstractText", resourceCulture);
+            }
+        }
+        
+        public static string EventAnnotationsText {
+            get {
+                return ResourceManager.GetString("EventAnnotationsText", resourceCulture);
+            }
+        }
     }
 }

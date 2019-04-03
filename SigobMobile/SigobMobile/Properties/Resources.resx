@@ -488,5 +488,61 @@
   <data name="AppointmentViewTitle" xml:space="preserve">
     <value>Appointment</value>
     <comment>Title for appointment (personal agenda) view</comment>
+  </data>    
+  <data name="EventNameText" xml:space="preserve">
+    <value>Enter the event title.</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+  <data name="EventLocationText" xml:space="preserve">
+    <value>Appointment</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+  <data name="EventStartText" xml:space="preserve">
+    <value>Appointment</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+  <data name="EventEndText" xml:space="preserve">
+    <value>Appointment</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+  <data name="EventTimeStartText" xml:space="preserve">
+    <value>Appointment</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+  <data name="EventTimeEndText" xml:space="preserve">
+    <value>Appointment</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+  <data name="EventCalendarOwner" xml:space="preserve">
+    <value>Appointment</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+  <data name="EventTypeText" xml:space="preserve">
+    <value>Appointment</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>  
+  <data name="EventStatusText" xml:space="preserve">
+    <value>Select management status</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+  <data name="EventProgrammerText" xml:space="preserve">
+    <value>Programmed by</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+  <data name="EventSummaryText" xml:space="preserve">
+    <value>Appointment</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+  <data name="EventParticipantsText" xml:space="preserve">
+    <value>Guests</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+  <data name="EventAbstractText" xml:space="preserve">
+    <value>Executive abstract</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+  <data name="EventAnnotationsText" xml:space="preserve">
+    <value>Executive abstract</value>
+    <comment>Title for appointment (personal agenda) view</comment>
   </data>
 </root>

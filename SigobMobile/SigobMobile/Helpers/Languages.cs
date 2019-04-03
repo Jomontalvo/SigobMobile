@@ -141,10 +141,26 @@
         public static string SelectCalendarColor => Resources.SelectCalendarColor;
         #endregion
 
+        #region Event View
+        public static string EventNameText => Resources.EventNameText;
+        public static string EventLocationText => Resources.EventLocationText;
+        public static string EventStartDateText => Resources.EventStartText;
+        public static string EventEndDateText => Resources.EventEndText;
+        public static string EventTimeStartText => Resources.EventTimeStartText;
+        public static string EventTimeEndText => Resources.EventTimeEndText;
+        public static string EventCalendarOwner => Resources.EventCalendarOwner;
+        public static string EventTypeText => Resources.EventTypeText;
+        public static string EventStatusText => Resources.EventStatusText;
+        public static string EventProgrammerText => Resources.EventProgrammerText;
+        public static string EventSummaryText => Resources.EventSummaryText;
+        public static string EventParticipantsText => Resources.EventParticipantsText;
+        public static string EventAbstractText => Resources.EventAbstractText;
+        public static string EventAnnotationsText => Resources.EventAnnotationsText;
+        #endregion
+
         #region Appointment View
         public static string AppointmentViewTitle => Resources.AppointmentViewTitle;
         #endregion
-
 
         #endregion
     }
