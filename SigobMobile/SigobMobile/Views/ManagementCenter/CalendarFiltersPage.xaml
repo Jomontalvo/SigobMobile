@@ -74,12 +74,12 @@
                         </SwitchCell>
                         <SwitchCell
                             On="{Binding IsVisibleCompletedStatus, Mode=TwoWay}"
-                            OnColor="{OnPlatform Android={StaticResource iOSGreen}}"
+                            OnColor="{OnPlatform Android={StaticResource lightBlue}}"
                             Text="{lang:Translate CompletedStatus}">
                         </SwitchCell>
                         <SwitchCell
                             On="{Binding IsVisibleSuspendedStatus, Mode=TwoWay}"
-                            OnColor="{OnPlatform Android={StaticResource iOSPink}}"
+                            OnColor="{OnPlatform Android={StaticResource lightBlue}}"
                             Text="{lang:Translate SuspendedStatus}">
                         </SwitchCell>
                     </TableSection>

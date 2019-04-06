@@ -59,7 +59,7 @@
             <ImageButton
                 Padding="8,0"
                 BackgroundColor="Transparent"
-                Command="{Binding AddCommand}"
+                Command="{Binding AddItemCommand}"
                 HorizontalOptions="End"
                 IsVisible="{OnPlatform Android=false, iOS=true}"
                 Source="ic_bt_add">
@@ -129,7 +129,7 @@
                 ColorNormal="{StaticResource DroidPrimary}"
                 ColorPressed="{StaticResource DroidPrimaryDark}"
                 ColorRipple="{StaticResource DroidPrimaryDark}"
-                Command="{Binding AddCommand}"
+                Command="{Binding AddItemCommand}"
                 Grid.Row="0"
                 HorizontalOptions="End"
                 ImageName="ic_fab_add.png"

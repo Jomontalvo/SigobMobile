@@ -46,14 +46,14 @@
                     VerticalTextAlignment="Center">
                 </Label>
                 <telerikInput:RadButton
-                    BackgroundColor = "{StaticResource DroidPrimary}"
+                    BackgroundColor = "{OnPlatform Android={StaticResource DroidPrimary}, iOS={StaticResource iOSBlue}}"
                     BorderWidth = "1"
                     BorderThickness = "1"
-                    BorderColor = "{StaticResource DroidPrimary}"
+                    BorderColor = "{OnPlatform Android={StaticResource DroidPrimary}, iOS={StaticResource iOSBlue}}"
                     Grid.Column="2"
                     Grid.Row="0"
                     HorizontalOptions = "Start"
-                    Padding="2,5"
+                    Padding="{OnPlatform iOS='10,5',Default='2,5'}"
                     CornerRadius="8"
                     Text="{local:Translate Save}"
                     TextColor = "{StaticResource defaultBackgroundView}">
@@ -81,7 +81,7 @@
                 </local:IconView>
                 <local:BorderlessEditor
                     AutoSize="TextChanges"
-                    FontSize="Medium"
+                    FontSize="Large"
                     Grid.Column="1"
                     Grid.Row="0"
                     HorizontalOptions="FillAndExpand"
@@ -92,7 +92,7 @@
                         <OnPlatform
                             x:TypeArguments="x:String">
                             <On Platform="iOS" Value="Avenir Next" />
-                            <On Platform="Android" Value="monospace" />
+                            <On Platform="Android" Value="sans-serif-smallcaps" />
                         </OnPlatform>
                     </Editor.FontFamily>
                 </local:BorderlessEditor>
@@ -106,7 +106,6 @@
                 </BoxView>
             </Grid>
             <ScrollView
-                BindingContext="{Binding EditEvent}"
                 Padding="10,5,5,0"
                 VerticalOptions="StartAndExpand">
                 <Grid
@@ -114,9 +113,9 @@
                     Padding="5,5"
                     RowSpacing="10">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -132,38 +131,67 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <StackLayout
-                        Grid.Column="1"
-                        Grid.Row="0"
-                        Grid.ColumnSpan="2">
-                        <Label
-                            FontSize="Small"
-                            Text="{Binding EventCg.StartDate, StringFormat='{0:dddd, dd MMMM yyyy}'}"
-                            TextColor="{StaticResource darkGray}"
-                            VerticalOptions="Center">
-                        </Label>
-                        <Label
-                            FontSize="Small"
-                            Text="{Binding LocalAppointment.StartDate, StringFormat='{0:dddd, dd MMMM yyyy}'}"
-                            TextColor="{StaticResource darkGray}"
-                            VerticalOptions="Center">
-                        </Label>
-                        <Label
-                            FontSize="Small"
-                            Text="{Binding Interval}"
-                            TextColor="{StaticResource darkGray}"
-                            VerticalOptions="Center">
-                        </Label>
-                    </StackLayout>
                     <Image
                         Grid.Column="0"
+                        Grid.Row="0"
+                        Source="ic_ev_time"
+                        VerticalOptions="Center">
+                    </Image>
+                    <!--All Day-->
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        HorizontalOptions="StartAndExpand"
+                        Text="{local:Translate AllDay}"
+                        TextColor="{StaticResource darkGray}"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Switch
+                        Grid.Column="2"
+                        Grid.Row="0"
+                        HorizontalOptions="End"
+                        On="{Binding IsAllDay, Mode=TwoWay}"
+                        OnColor="{OnPlatform Android={StaticResource lightBlue}}">
+                    </Switch>
+                    <!--Date and Time-->
+                    <DatePicker
+                        BackgroundColor="Transparent"
+                        Grid.Column="1"
                         Grid.Row="1"
+                        FontSize="Default"
+                        TextColor="{StaticResource darkGray}"
+                        Format="D">
+                    </DatePicker>
+                    <TimePicker
+                        FontSize="Default"
+                        Grid.Column="2"
+                        Grid.Row="1"
+                        TextColor="{StaticResource darkGray}">
+                    </TimePicker>
+                    <DatePicker
+                        BackgroundColor="Transparent"
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        FontSize="Default"
+                        TextColor="{StaticResource darkGray}"
+                        Format="D">
+                    </DatePicker>
+                    <TimePicker
+                        FontSize="Default"
+                        Grid.Column="2"
+                        Grid.Row="2"
+                        TextColor="{StaticResource darkGray}">
+                    </TimePicker>
+                    
+                    <Image
+                        Grid.Column="0"
+                        Grid.Row="2"
                         Source="ic_ev_location"
                         VerticalOptions="Center">
                     </Image>
                     <Label
                         Grid.Column="1"
-                        Grid.Row="1"
+                        Grid.Row="2"
                         FontSize="Small"
                         Text="{Binding EventCg.Location}"
                         TextColor="{StaticResource darkGray}"
@@ -173,7 +201,7 @@
                     <BoxView
                         Color="{StaticResource gray}"
                         Grid.Column="0"
-                        Grid.Row="2"
+                        Grid.Row="3"
                         Grid.ColumnSpan="3"
                         HeightRequest="1"
                         HorizontalOptions="FillAndExpand">

@@ -425,6 +425,12 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string AllDay {
+            get {
+                return ResourceManager.GetString("AllDay", resourceCulture);
+            }
+        }
+        
         public static string Filters {
             get {
                 return ResourceManager.GetString("Filters", resourceCulture);

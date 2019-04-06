@@ -93,10 +93,10 @@
             get { return this.displayDate; }
             set { SetValue(ref this.displayDate, value); }
         }
-    #endregion
+        #endregion
 
-    #region Constructors
-    public CalendarDayViewModel()
+        #region Constructors
+        public CalendarDayViewModel()
         {
             this.apiService = new ApiService();
             this.LoadAppointments(DateTime.Today);
@@ -125,7 +125,7 @@
         {
             DateTime pivot = (date == default(DateTime)) ? DateTime.Today : date;
             this.IsRunning = true;
-            startDate = pivot.AddYears(-3).ToString("yyyyMMdd");
+            startDate = pivot.AddYears(-2).ToString("yyyyMMdd");
             endDate = pivot.AddYears(5).ToString("yyyyMMdd");
             var connection = await this.apiService.CheckConnection();
             if (!connection.IsSuccess)
@@ -141,7 +141,7 @@
             var response = await this.apiService.GetList<AppointmentItem>(
                 Settings.UrlBaseApiSigob,
                 App.PrefixApiSigob,
-                string.Format(this.apiEventsController,startDate, endDate, viewTentative),
+                string.Format(this.apiEventsController, startDate, endDate, viewTentative),
                 Settings.Token,
                 Settings.DbToken
             );
@@ -151,7 +151,7 @@
                 await Application.Current.MainPage.DisplayAlert(
                     Languages.Error,
                     response.Message,
-                    Languages.Cancel);                    
+                    Languages.Cancel);
                 return;
             }
             this.eventList = (List<AppointmentItem>)response.Result;
@@ -164,6 +164,7 @@
             return this.eventList.Select(l => new Event
             {
                 Id = l.Id,
+                Title = (l.Status == StatusAppointment.Suspended) ? $"[{Languages.SuspendedStatus}] {ConvertNullToEmpty(l.Description)}" : l.IsTentative ? $"{ConvertNullToEmpty(l.Description)} ({Languages.TentativeLabel})" : ConvertNullToEmpty(l.Description),
                 Color = l.IsTask ? Color.FromRgb(l.RedColorType, l.GreenColorType, l.BlueColorType) : (l.Status != StatusAppointment.Suspended) ? Color.FromRgb(l.RedColorItem, l.GreenColorItem, l.BlueColorItem) : (Color)Application.Current.Resources["grayBorder"],
                 Detail = l.Place,
                 StartDate = (l.Id == 0 || l.IsTask) ? l.End.DateTime.ToLocalTime().Date : l.Start.DateTime.ToLocalTime(), // IsHoliday or Task Control 
@@ -173,7 +174,6 @@
                 IsTentative = l.IsTentative,
                 Owner = l.AgendaOwner,
                 Programmer = l.ProgrammerAgenda,
-                Title = (l.Status == StatusAppointment.Suspended) ? $"[{Languages.SuspendedStatus}] {l.Description}" : l.IsTentative ? $"{l.Description} ({Languages.TentativeLabel})" : l.Description,
                 TypeColor = Color.FromRgb(l.RedColorType, l.GreenColorType, l.BlueColorType),
                 ModuleType = l.ModuleType,
                 IsHighlighted = l.IsHighlighted,
@@ -182,9 +182,14 @@
                 SecurityLevel = l.SecurityLevel,
                 TypeId = l.TypeId,
                 Status = l.Status
-            }).Where(l =>  (Settings.IsVisibleManagementStatus && (l.Status == StatusAppointment.InManagement))
+            }).Where(l => (Settings.IsVisibleManagementStatus && (l.Status == StatusAppointment.InManagement))
                         || (Settings.IsVisibleCompletedStatus && (l.Status == StatusAppointment.Finished))
                         || (Settings.IsVisibleSuspendStatus && (l.Status == StatusAppointment.Suspended)));
+        }
+
+        private string ConvertNullToEmpty(string str)
+        {
+            return  (string.IsNullOrWhiteSpace(str)) ? string.Empty : str;
         }
 
         /// <summary>
@@ -227,7 +232,7 @@
         {
             var instructionMainViewModel = MainViewModel.GetInstance();
             instructionMainViewModel.Instructions = new InstructionsViewModel();
-            await App.Navigator.PushAsync(new InstructionsPage(),true);
+            await App.Navigator.PushAsync(new InstructionsPage(), true);
             return;
         }
 
@@ -244,10 +249,10 @@
                 Languages.MultiDayView,
                 Languages.MonthlyView,
                 Languages.YearView);
-                if (source == Languages.DailyView) CalendarView = CalendarViewMode.Day;
-                if (source == Languages.MultiDayView) CalendarView = CalendarViewMode.MultiDay;
-                if (source == Languages.MonthlyView) CalendarView = CalendarViewMode.Month;
-                if (source == Languages.YearView) CalendarView = CalendarViewMode.Year;
+            if (source == Languages.DailyView) CalendarView = CalendarViewMode.Day;
+            if (source == Languages.MultiDayView) CalendarView = CalendarViewMode.MultiDay;
+            if (source == Languages.MonthlyView) CalendarView = CalendarViewMode.Month;
+            if (source == Languages.YearView) CalendarView = CalendarViewMode.Year;
             this.IsRunning = true;
             Settings.CurrentCalendarViewMode = (int)CalendarView;
             this.IsRunning = false;
@@ -323,6 +328,25 @@
             }
         }
 
+        /// <summary>
+        /// Add new item of Magagement Center (Appointmen, Instruction or Task)
+        /// </summary>
+        private async void AddItem()
+        {
+            string[] options = { "Add", "b", "c" };
+            var newItem = await Application.Current.MainPage.DisplayActionSheet(
+                Languages.CalendarViewModeText,
+                Languages.Cancel,
+                null,
+                options);
+            if (newItem == Languages.Add)
+            {
+                var appViewModel = MainViewModel.GetInstance();
+                appViewModel.EditEvent = new EditEventViewModel();
+                await Application.Current.MainPage.Navigation.PushModalAsync(new EditEventPage(){Title = Languages.Add });
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -342,6 +366,8 @@
         public ICommand OpenCalendarsCommand => new RelayCommand(OpenCalendars);
 
         public ICommand OpenFiltersCommand => new RelayCommand(OpenFilters);
+
+        public ICommand AddItemCommand => new RelayCommand(AddItem);
 
         #endregion
 

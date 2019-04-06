@@ -369,6 +369,10 @@
     <value>Today</value>
     <comment>Today text.</comment>
   </data>
+  <data name="AllDay" xml:space="preserve">
+    <value>All Day</value>
+    <comment>All day duration event.</comment>
+  </data>
   <data name="Filters" xml:space="preserve">
     <value>Filters</value>
     <comment>Filters text.</comment>

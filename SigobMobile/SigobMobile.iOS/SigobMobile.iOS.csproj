@@ -287,6 +287,7 @@
     <BundleResource Include="Resources\ic_ev_status_finished.png" />
     <BundleResource Include="Resources\ic_ev_status_suspended.png" />
     <BundleResource Include="Resources\ic_bt_close_window.png" />
+    <BundleResource Include="Resources\ic_ev_time.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

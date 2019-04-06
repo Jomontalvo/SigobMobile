@@ -7,10 +7,27 @@
 
     public class EditEventViewModel : BaseViewModel
     {
+        #region Attributes
+        private bool isNewEvent;
+        #endregion
+
+
+        #region Properties
+        public bool IsNewEvent
+        {
+            get => this.isNewEvent;
+            set => SetValue(ref this.isNewEvent, value);
+        }
+        #endregion
+
         #region Constructors
         public EditEventViewModel(ManagementCenterEvent localEvent)
         {
-
+            IsNewEvent = false;
+        }
+        public EditEventViewModel()
+        {
+            IsNewEvent = true;
         }
         #endregion
 

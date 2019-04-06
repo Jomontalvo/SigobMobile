@@ -35,6 +35,7 @@
         #endregion
 
         #region Time Measures
+        public static string AllDay => Resources.AllDay;
         public static string Day => Resources.Day;
         public static string Days => Resources.Days;
         public static string Month => Resources.Month;
