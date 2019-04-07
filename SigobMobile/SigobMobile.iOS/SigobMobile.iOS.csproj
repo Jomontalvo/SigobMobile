@@ -99,6 +99,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\IconViewRenderer.cs" />
     <Compile Include="Renderers\BorderlessPickerRenderer.cs" />
+    <Compile Include="Renderers\BorderlessDatePickerRenderer.cs" />
+    <Compile Include="Renderers\BorderlessTimePickerRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

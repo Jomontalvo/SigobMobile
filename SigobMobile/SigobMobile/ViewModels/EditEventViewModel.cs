@@ -21,10 +21,20 @@
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:SigobMobile.ViewModels.EditEventViewModel"/> class
+        /// when the parent view select Edit Option.
+        /// </summary>
+        /// <param name="localEvent">Event object parameter.</param>
         public EditEventViewModel(ManagementCenterEvent localEvent)
         {
             IsNewEvent = false;
         }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:SigobMobile.ViewModels.EditEventViewModel"/> class
+        /// when the parent view select New Option.
+        /// </summary>
         public EditEventViewModel()
         {
             IsNewEvent = true;
@@ -33,7 +43,6 @@
 
         #region Commands
         public ICommand CancelEditCommand => new RelayCommand(CancelEdit);
-
         #endregion
 
         #region Methods

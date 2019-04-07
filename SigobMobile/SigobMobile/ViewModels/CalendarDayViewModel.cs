@@ -169,7 +169,7 @@
                 Detail = l.Place,
                 StartDate = (l.Id == 0 || l.IsTask) ? l.End.DateTime.ToLocalTime().Date : l.Start.DateTime.ToLocalTime(), // IsHoliday or Task Control 
                 EndDate = (l.Id == 0 || l.IsTask) ? l.End.DateTime.ToLocalTime().Date.AddMinutes(1) : l.End.DateTime.ToLocalTime(),
-                IsAllDay = l.IsTask || l.Id == 0,
+                IsAllDay = l.IsTask || l.Id == 0 || ((l.End - l.Start).Hours >= 24),
                 IsLocked = l.IsVisible == 1,
                 IsTentative = l.IsTentative,
                 Owner = l.AgendaOwner,
