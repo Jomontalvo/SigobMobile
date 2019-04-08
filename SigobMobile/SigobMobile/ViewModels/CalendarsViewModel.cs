@@ -35,7 +35,7 @@
 
         #region Agenda Color Attributes
         private string iconColorChecked;
-        private CalendarDayViewModel calendarDayViewModel;
+        private CalendarViewModel calendarViewModel;
         #endregion
 
         #region Properties
@@ -92,9 +92,9 @@
             this.ModelInitialization();
         }
 
-        public CalendarsViewModel(CalendarDayViewModel calendarDayViewModel)
+        public CalendarsViewModel(CalendarViewModel calendarDayViewModel)
         {
-            this.calendarDayViewModel = calendarDayViewModel;
+            this.calendarViewModel = calendarDayViewModel;
             this.ModelInitialization();
         }
 
@@ -102,7 +102,7 @@
         {
             apiService = new ApiService();
             SelectDeselectAll = Languages.ShowAll;
-            LoadCalendars();
+            Task.Run(async () => await this.LoadCalendars());
             SetColorOptions();
             IsEnabled = true;
         }
@@ -114,13 +114,13 @@
 
         public ICommand CloseChangeColorCommand => new RelayCommand(CloseChangeColor);
 
-        public ICommand OkAndCloseCommand => new RelayCommand(OkAndClose);
+        public ICommand OkAndCloseCommand => new AsyncCommand(OkAndClose);
 
-        public ICommand RefreshCommand => new RelayCommand(LoadCalendars);
+        public ICommand RefreshCommand => new AsyncCommand(LoadCalendars);
 
-        public ICommand CheckAllCalendarsCommand => new RelayCommand(CheckAllCalendars);
+        public ICommand CheckAllCalendarsCommand => new AsyncCommand(CheckAllCalendars);
 
-        public ICommand SelectColorCommand => new RelayCommand<IconView>(SelectColor);
+        public ICommand SelectColorCommand => new AsyncCommand<IconView>(SelectColor);
         #endregion
 
         #region Methods
@@ -128,7 +128,7 @@
         /// <summary>
         /// Selects the color of the calendar and change button.
         /// </summary>
-        private async void SelectColor(IconView colorSelected)
+        private async Task SelectColor(IconView colorSelected)
         {
             colorSelected.Source = (colorSelected.Source == "ic_circle_color") ? "ic_circle_check_color" : "ic_circle_color";
             var connection = await this.apiService.CheckConnection();
@@ -191,7 +191,7 @@
         /// <summary>
         /// Loads the calendars.
         /// </summary>
-        private async void LoadCalendars()
+        private async Task LoadCalendars()
         {
             this.IsRefreshing = true;
             var connection = await this.apiService.CheckConnection();
@@ -302,10 +302,10 @@
         /// <summary>
         /// Close view and return to Modal Async Parent
         /// </summary>
-        private async void OkAndClose()
+        private async Task OkAndClose()
         {
             //Refresh Observable collection from Parent
-            this.calendarDayViewModel.LoadAppointments(calendarDayViewModel.SelectedDate.GetValueOrDefault());
+            this.calendarViewModel.LoadAppointments(calendarViewModel.SelectedDate.GetValueOrDefault());
             //Go to parent page
             await Application.Current.MainPage.Navigation.PopModalAsync();
         }
@@ -313,7 +313,7 @@
         /// <summary>
         /// Set all calendars with view enabled or disabled
         /// </summary>
-        private async void CheckAllCalendars()
+        private async Task CheckAllCalendars()
         {
             IsEnabled = false;
             IsRunning = true;
@@ -322,7 +322,7 @@
             await SetVisibilityToAllCalendars(newState);
             SelectDeselectAll = (SelectDeselectAll == Languages.ShowAll) ? Languages.HideAll : Languages.ShowAll;
             IsRunning = false;
-            LoadCalendars();
+            await this.LoadCalendars();
             IsEnabled = true;
         }
 

@@ -8,14 +8,14 @@
     xmlns:telerikCalendar="clr-namespace:Telerik.XamarinForms.Input.Calendar.Commands;assembly=Telerik.XamarinForms.Input"
     xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
     xmlns:lang="clr-namespace:SigobMobile.Helpers"
-    x:Class="SigobMobile.Views.ManagementCenter.CalendaDayPage"
+    x:Class="SigobMobile.Views.ManagementCenter.CalendarPage"
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
     Title="{lang:Translate AgendaViewTitle}"
     ios:Page.UseSafeArea="true">
     <!--Title View Settings-->
     <NavigationPage.TitleView>
         <StackLayout
-            BindingContext="{Binding CalendarDay}"
+            BindingContext="{Binding Calendar}"
             Orientation="Horizontal" 
             VerticalOptions="Center" 
             HorizontalOptions="FillAndExpand">
@@ -69,7 +69,7 @@
     <!-- Content Page -->
     <ContentPage.Content>
         <Grid
-            BindingContext="{Binding CalendarDay}"
+            BindingContext="{Binding Calendar}"
             ColumnSpacing="0"
             RowSpacing="0">
             <Grid.RowDefinitions>

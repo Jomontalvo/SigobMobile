@@ -3,8 +3,9 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows.Input;
-    using GalaSoft.MvvmLight.Command;
+    //using GalaSoft.MvvmLight.Command;
     using Helpers;
     using Models;
     using Xamarin.Forms;
@@ -22,7 +23,7 @@
         private string selectedFilter;
         private int filterSelectedIndex;
         private byte viewTentative;
-        private CalendarDayViewModel calendarDayViewModel;
+        private CalendarViewModel calendarViewModel;
 
         private bool isVisibleInManagementStatus;
         private bool isVisibleCompletedStatus;
@@ -75,22 +76,22 @@
         #endregion
 
         #region Constructors
-        public CalendarFiltersViewModel(CalendarDayViewModel sourceCalendarViewModel)
+        public CalendarFiltersViewModel(CalendarViewModel sourceCalendarViewModel)
         {
             this.IsVisibleInManagementStatus = Settings.IsVisibleManagementStatus;
             this.IsVisibleCompletedStatus = Settings.IsVisibleCompletedStatus;
             this.IsVisibleSuspendedStatus = Settings.IsVisibleSuspendStatus;
-            this.calendarDayViewModel = sourceCalendarViewModel;
-            this.viewTentative = this.calendarDayViewModel.ViewTentative;
+            this.calendarViewModel = sourceCalendarViewModel;
+            this.viewTentative = this.calendarViewModel.ViewTentative;
             this.FilterSelectedIndex = this.viewTentative;
         }
         #endregion
 
         #region Commands
 
-        public ICommand CancelFiltersCommand => new RelayCommand(CancelFilters);
+        public ICommand CancelFiltersCommand => new AsyncCommand(CancelFilters);
 
-        public ICommand SaveFiltersCommand => new RelayCommand(SaveFilters);
+        public ICommand SaveFiltersCommand => new AsyncCommand(SaveFilters);
 
         #endregion
 
@@ -98,33 +99,33 @@
         /// <summary>
         /// Close filter modal view
         /// </summary>
-        private async void CancelFilters()
+        private async Task CancelFilters()
         {
             await Application.Current.MainPage.Navigation.PopModalAsync(); 
         }
         /// <summary>
         /// Save the filter options.
         /// </summary>
-        private async void SaveFilters()
+        private async Task SaveFilters()
         {
-            calendarDayViewModel.ViewTentative = (byte)FilterSelectedIndex;
+            calendarViewModel.ViewTentative = (byte)FilterSelectedIndex;
             if ((this.viewTentative != this.FilterSelectedIndex) || 
                 (!Settings.IsVisibleManagementStatus && IsVisibleInManagementStatus) || 
                 (!Settings.IsVisibleCompletedStatus && IsVisibleCompletedStatus) ||
                 (!Settings.IsVisibleSuspendStatus && IsVisibleSuspendedStatus))
             {
-                calendarDayViewModel.LoadAppointments(calendarDayViewModel.SelectedDate.GetValueOrDefault());
+                calendarViewModel.LoadAppointments(calendarViewModel.SelectedDate.GetValueOrDefault());
             }
             Settings.IsVisibleManagementStatus = this.IsVisibleInManagementStatus;
             Settings.IsVisibleCompletedStatus = this.IsVisibleCompletedStatus;
             Settings.IsVisibleSuspendStatus = this.IsVisibleSuspendedStatus;
 
             //Rebuild Observable Collection
-            eventItems = new ObservableCollection<Event>(calendarDayViewModel.Events.
+            eventItems = new ObservableCollection<Event>(calendarViewModel.Events.
                     Where((appointment) => (IsVisibleInManagementStatus && (appointment.Status == StatusAppointment.InManagement))
                                         || (IsVisibleCompletedStatus && (appointment.Status == StatusAppointment.Finished)) 
                                         || (IsVisibleSuspendedStatus && appointment.Status == StatusAppointment.Suspended)));
-            this.calendarDayViewModel.Events = eventItems;
+            this.calendarViewModel.Events = eventItems;
             await Application.Current.MainPage.Navigation.PopModalAsync();
         }
         #endregion

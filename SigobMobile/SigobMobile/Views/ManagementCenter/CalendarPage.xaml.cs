@@ -1,13 +1,10 @@
 ﻿namespace SigobMobile.Views.ManagementCenter
 {
-    using ViewModels;
-    using Telerik.XamarinForms.Input;
     using Xamarin.Forms;
-    using Helpers;
-    public partial class CalendaDayPage : ContentPage
+    public partial class CalendarPage : ContentPage
     {
         #region Constructors
-        public CalendaDayPage()
+        public CalendarPage()
         {
             InitializeComponent();
         }
@@ -20,6 +17,5 @@
             //if (cal.ViewMode == CalendarViewMode.Year) Settings.CurrentCalendarViewMode = (int)CalendarViewMode.Month;
         }
         #endregion
-
     }
 }

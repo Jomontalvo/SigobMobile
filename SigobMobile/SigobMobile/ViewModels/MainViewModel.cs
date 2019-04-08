@@ -30,7 +30,7 @@ namespace SigobMobile.ViewModels
 
         public CalendarFiltersViewModel CalendarFilters { get; set; }
 
-        public CalendarDayViewModel CalendarDay { get; set;  }
+        public CalendarViewModel Calendar { get; set;  }
 
         public EventCgViewModel EventCg { get; set; }
 

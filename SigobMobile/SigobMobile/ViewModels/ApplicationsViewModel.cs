@@ -3,8 +3,8 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows.Input;
-    using GalaSoft.MvvmLight.Command;
     using Helpers;
     using Models;
     using Services;
@@ -22,6 +22,7 @@
         private ObservableCollection<ApplicationItemViewModel> applications;
         private bool isRefreshing;
         private List<ApplicationMenuItem> applicationList;
+        private bool CanExecuteLoad() => !IsRefreshing;
         #endregion
 
         #region Properties
@@ -43,72 +44,65 @@
         public ApplicationsViewModel()
         {
             this.apiService = new ApiService();
-            this.LoadApplicationsMenu();
+            Task.Run(async () => await this.LoadApplicationsMenu());
         }
         #endregion
 
         #region Commands
-        public ICommand RefreshCommand
-        {
-            get
-            {
-                return new RelayCommand(LoadApplicationsMenu);
-            }
-        }
-
-        public ICommand SearchCommand
-        {
-            get
-            {
-                return new RelayCommand(Search);
-            }
-        }
+        public ICommand RefreshCommand => new AsyncCommand(LoadApplicationsMenu, CanExecuteLoad);
+        public ICommand SearchCommand => new AsyncCommand(Search);
         #endregion
 
         #region Methods
         /// <summary>
         /// Loads the applications menu.
         /// </summary>
-        private async void LoadApplicationsMenu()
+        private async Task LoadApplicationsMenu()
         {
-            this.IsRefreshing = true;
-            var connection = await this.apiService.CheckConnection();
-            if (!connection.IsSuccess)
+            try
             {
-                this.IsRefreshing = false;
-                await Application.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    connection.Message,
-                    Languages.Cancel);
-                await Application.Current.MainPage.Navigation.PopAsync();
-                return;
-            }
-            var response = await this.apiService.GetList<ApplicationMenuItem>(
-                Settings.UrlBaseApiSigob,
-                App.PrefixApiSigob,
-                this.apiMenuController,
-                Settings.Token,
-                Settings.DbToken
-            );
-            if (!response.IsSuccess)
-            {
-                this.IsRefreshing = false;
-                await Application.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    response.Message,
-                    Languages.Cancel);
+                this.IsRefreshing = true;
+                var connection = await this.apiService.CheckConnection();
+                if (!connection.IsSuccess)
+                {
+                    this.IsRefreshing = false;
+                    await Application.Current.MainPage.DisplayAlert(
+                        Languages.Error,
+                        connection.Message,
+                        Languages.Cancel);
+                    await Application.Current.MainPage.Navigation.PopAsync();
+                    return;
+                }
+                var response = await this.apiService.GetList<ApplicationMenuItem>(
+                    Settings.UrlBaseApiSigob,
+                    App.PrefixApiSigob,
+                    this.apiMenuController,
+                    Settings.Token,
+                    Settings.DbToken
+                );
+                if (!response.IsSuccess)
+                {
+                    this.IsRefreshing = false;
+                    await Application.Current.MainPage.DisplayAlert(
+                        Languages.Error,
+                        response.Message,
+                        Languages.Cancel);
 
-                //Error in EndPoint call. Delete persist token values and go to Login Page
-                Settings.Token = Settings.DbToken = Settings.InstitutionLogo =  string.Empty;
-                var mainViewModel = MainViewModel.GetInstance();
-                mainViewModel.Token = mainViewModel.DbToken = string.Empty;
-                Application.Current.MainPage = new NavigationPage(new LoginPage());
-                return;
+                    //Error in EndPoint call. Delete persist token values and go to Login Page
+                    Settings.Token = Settings.DbToken = Settings.InstitutionLogo = string.Empty;
+                    var mainViewModel = MainViewModel.GetInstance();
+                    mainViewModel.Token = mainViewModel.DbToken = string.Empty;
+                    Application.Current.MainPage = new NavigationPage(new LoginPage());
+                    return;
+                }
+                this.applicationList = (List<ApplicationMenuItem>)response.Result;
+                this.Applications = new ObservableCollection<ApplicationItemViewModel>(
+                    ToApplicationItemViewModel());
             }
-            this.applicationList = (List<ApplicationMenuItem>)response.Result;
-            this.Applications = new ObservableCollection<ApplicationItemViewModel>(
-                ToApplicationItemViewModel());
-            this.IsRefreshing = false;
+            finally
+            {
+                this.IsRefreshing = false;
+            }
         }
 
         /// <summary>
@@ -131,7 +125,7 @@
         /// <summary>
         /// Search this instance.
         /// </summary>
-        private async void Search()
+        private async Task Search()
         {
             await Application.Current.MainPage.DisplayAlert(
                 title: Languages.Success,
@@ -139,7 +133,6 @@
                 cancel: Languages.Accept);
             return;
         }
-
         #endregion
     }
 }

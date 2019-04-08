@@ -1,8 +1,9 @@
 ﻿namespace SigobMobile.ViewModels
 {
+    using System.Threading.Tasks;
     using System.Windows.Input;
-    using GalaSoft.MvvmLight.Command;
     using Models;
+    using Helpers;
     using Views.ManagementCenter;
 
     public class ApplicationItemViewModel : ApplicationMenuItem
@@ -12,22 +13,22 @@
         {
             get
             {
-                return new RelayCommand(SelectApplication);
+                return new AsyncCommand(SelectApplication);
             }
         }
 
         /// <summary>
         /// Select the app to navigate
         /// </summary>
-        private async void SelectApplication()
+        private async Task SelectApplication()
         {
             // 1. GetInstance of View Model
             var appViewModel = MainViewModel.GetInstance();
             switch (this.TypeApplication)
             {
                 case TypeApplication.ManagementCenter:
-                    appViewModel.CalendarDay = new CalendarDayViewModel();
-                    await App.Navigator.PushAsync(new CalendaDayPage());
+                    appViewModel.Calendar = new CalendarViewModel();
+                    await App.Navigator.PushAsync(new CalendarPage());
                     break;
                 case TypeApplication.Tasks:
                     appViewModel.CalendarMonth = new CalendarMonthViewModel();
@@ -42,6 +43,7 @@
                 default:
                     break;
             }
+            return;
         }
         #endregion
     }

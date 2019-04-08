@@ -362,7 +362,7 @@
     <comment>Text of Calendars Page Title or Filter Option.</comment>
   </data>
   <data name="Calendar" xml:space="preserve">
-    <value>calendar</value>
+    <value>Calendar</value>
     <comment>Calendar text.</comment>
   </data>
   <data name="Today" xml:space="preserve">

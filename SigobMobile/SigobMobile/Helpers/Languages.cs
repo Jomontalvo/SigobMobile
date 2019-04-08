@@ -163,6 +163,9 @@
         public static string AppointmentViewTitle => Resources.AppointmentViewTitle;
         #endregion
 
+
+        
+
         #endregion
     }
 }

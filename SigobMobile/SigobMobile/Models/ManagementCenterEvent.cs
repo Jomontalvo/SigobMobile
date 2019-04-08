@@ -84,6 +84,18 @@
     }
 
     #endregion
+
+    #region Enum SIGOB Instruments Type
+    public enum SgobInstruments : byte
+    {
+        PersonalAppointment = 5,
+        Instruction = 7,
+        Assignment = 11,
+        ManagementCenterEvent = 12,
+        Task = 40
+    }
+    #endregion
+
     /// <summary>
     /// Management Center Event.
     /// </summary>
@@ -343,5 +355,14 @@
         /// </summary>
         /// <value>The color of the type.</value>
         public Color TypeColor => Color.FromRgb(ColorTypeRed, ColorTypeGreen, ColorTypeBlue);
+    }
+
+    public class ManagementCenterNewItem
+    {
+        [JsonProperty("tipoInstrumento")]
+        public long IntrumentType { get; set; }
+
+        [JsonProperty("nombreItemProgramar")]
+        public string NewItemName { get; set; }
     }
 }

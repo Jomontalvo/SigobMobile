@@ -24,7 +24,7 @@
         public CalendarItemViewModel()
         {
             this.apiService = new ApiService();
-            this.IsCheckedChangedCommand = new Command<CheckBoxIsCheckChangedCommandContext>(this.CheckBoxChange);
+            this.IsCheckedChangedCommand = new AsyncCommand<CheckBoxIsCheckChangedCommandContext>(this.CheckBoxChange);
         }
         #endregion
 
@@ -83,7 +83,7 @@
         /// Execute when CheckBox is change.
         /// </summary>
         /// <param name="context">Context.</param>
-        private async void CheckBoxChange(CheckBoxIsCheckChangedCommandContext context)
+        private async Task CheckBoxChange(CheckBoxIsCheckChangedCommandContext context)
         {
             await SetCalendarVisibility( context.NewState );
         }

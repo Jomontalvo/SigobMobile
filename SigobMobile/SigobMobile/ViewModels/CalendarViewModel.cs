@@ -16,7 +16,7 @@
     using Views.ManagementCenter;
     using Xamarin.Forms;
 
-    public class CalendarDayViewModel : BaseViewModel
+    public class CalendarViewModel : BaseViewModel
     {
         #region Services
         internal ApiService apiService;
@@ -24,6 +24,7 @@
 
         #region ApiControllers
         internal string apiEventsController = "events/start/{0}/end/{1}/viewattempts/{2}";
+        internal string apiManagementCenterAddOptions = "cg/addoptions";
         #endregion
 
         #region Attributes
@@ -96,10 +97,10 @@
         #endregion
 
         #region Constructors
-        public CalendarDayViewModel()
+        public CalendarViewModel()
         {
             this.apiService = new ApiService();
-            this.LoadAppointments(DateTime.Today);
+            Task.Run(async () => await this.LoadAppointments(DateTime.Today));
             this.CalendarView = (CalendarViewMode)Settings.CurrentCalendarViewMode;
             this.SelectedDate = Settings.SelectedDate;
             this.DisplayDate = Settings.SelectedDate;
@@ -111,7 +112,7 @@
         /// Load the appointments.
         /// </summary>
         /// <param name="date">Date.</param>
-        public async void LoadAppointments(DateTime date)
+        public async Task LoadAppointments(DateTime date)
         {
             await UpdateAppointments(date);
         }
@@ -189,7 +190,7 @@
 
         private string ConvertNullToEmpty(string str)
         {
-            return  (string.IsNullOrWhiteSpace(str)) ? string.Empty : str;
+            return (string.IsNullOrWhiteSpace(str)) ? string.Empty : str;
         }
 
         /// <summary>
@@ -208,7 +209,7 @@
         /// <summary>
         /// Opens the calendars.
         /// </summary>
-        private async void OpenCalendars()
+        private async Task OpenCalendars()
         {
             var calendarsMainViewModel = MainViewModel.GetInstance();
             calendarsMainViewModel.Calendars = new CalendarsViewModel(this);
@@ -218,7 +219,7 @@
         /// <summary>
         /// Opens the filters.
         /// </summary>
-        private async void OpenFilters()
+        private async Task OpenFilters()
         {
             var filtersMainViewModel = MainViewModel.GetInstance();
             filtersMainViewModel.CalendarFilters = new CalendarFiltersViewModel(this);
@@ -228,7 +229,7 @@
         /// <summary>
         /// Instructionses the list.
         /// </summary>
-        private async void InstructionsList()
+        private async Task InstructionsList()
         {
             var instructionMainViewModel = MainViewModel.GetInstance();
             instructionMainViewModel.Instructions = new InstructionsViewModel();
@@ -239,7 +240,7 @@
         /// <summary>
         /// Firsts the button.
         /// </summary>
-        private async void SetCalendarViewMode()
+        private async Task SetCalendarViewMode()
         {
             var source = await Application.Current.MainPage.DisplayActionSheet(
                 Languages.CalendarViewModeText,
@@ -262,7 +263,7 @@
         /// <summary>
         /// Backs to main page.
         /// </summary>
-        private async void BackToMainPage()
+        private async Task BackToMainPage()
         {
             await App.Navigator.PopAsync();
             return;
@@ -272,7 +273,7 @@
         /// Tapped Appointments
         /// </summary>
         /// <param name="context">Context.</param>
-        private async void AppointmentTapped(AppointmentTapCommandContext context)
+        private async Task AppointmentTapped(AppointmentTapCommandContext context)
         {
             Event eventSelected = (Event)context.Appointment;
             if (eventSelected.IsVisible)
@@ -315,7 +316,7 @@
         /// <summary>
         /// Happens when calendar cell is tapped.
         /// </summary>
-        private async void CellDateTapped(CalendarDayCell cell)
+        private async Task CellDateTapped(CalendarDayCell cell)
         {
             Settings.SelectedDate = cell.Date;
             this.SelectedDate = cell.Date;
@@ -331,8 +332,42 @@
         /// <summary>
         /// Add new item of Magagement Center (Appointmen, Instruction or Task)
         /// </summary>
-        private async void AddItem()
+        private async Task AddItem()
         {
+            try
+            {
+                var connection = await this.apiService.CheckConnection();
+                if (!connection.IsSuccess)
+                {
+                    IsRunning = false;
+                    await Application.Current.MainPage.DisplayAlert(
+                        Languages.Error,
+                        connection.Message,
+                        Languages.Cancel);
+                    return;
+                }
+                var response = await this.apiService.GetList<AppointmentItem>(
+                    Settings.UrlBaseApiSigob,
+                    App.PrefixApiSigob,
+                    string.Format(this.apiEventsController, startDate, endDate, viewTentative),
+                    Settings.Token,
+                    Settings.DbToken
+                );
+                if (!response.IsSuccess)
+                {
+                    this.IsRunning = false;
+                    await Application.Current.MainPage.DisplayAlert(
+                        Languages.Error,
+                        response.Message,
+                        Languages.Cancel);
+                    return;
+                }
+            }
+            finally
+            {
+
+            }
+
             string[] options = { "Add", "b", "c" };
             var newItem = await Application.Current.MainPage.DisplayActionSheet(
                 Languages.CalendarViewModeText,
@@ -343,7 +378,7 @@
             {
                 var appViewModel = MainViewModel.GetInstance();
                 appViewModel.EditEvent = new EditEventViewModel();
-                await Application.Current.MainPage.Navigation.PushModalAsync(new EditEventPage(){Title = Languages.Add });
+                await Application.Current.MainPage.Navigation.PushModalAsync(new EditEventPage() { Title = Languages.Add });
             }
         }
 
@@ -351,23 +386,23 @@
 
         #region Commands
 
-        public ICommand AppointmentTappedCommand => new RelayCommand<AppointmentTapCommandContext>(AppointmentTapped);
+        public ICommand AppointmentTappedCommand => new AsyncCommand<AppointmentTapCommandContext>(AppointmentTapped);
 
-        public ICommand CellDateTappedCommand => new RelayCommand<CalendarDayCell>(CellDateTapped);
+        public ICommand CellDateTappedCommand => new AsyncCommand<CalendarDayCell>(CellDateTapped);
 
         public ICommand GoTodayCommand => new RelayCommand(GoToday);
 
-        public ICommand SetCalendarViewModeCommand => new RelayCommand(SetCalendarViewMode);
+        public ICommand SetCalendarViewModeCommand => new AsyncCommand(SetCalendarViewMode);
 
-        public ICommand BackToMainPageCommand => new RelayCommand(BackToMainPage);
+        public ICommand BackToMainPageCommand => new AsyncCommand(BackToMainPage);
 
-        public ICommand InstructionsListCommand => new RelayCommand(InstructionsList);
+        public ICommand InstructionsListCommand => new AsyncCommand(InstructionsList);
 
-        public ICommand OpenCalendarsCommand => new RelayCommand(OpenCalendars);
+        public ICommand OpenCalendarsCommand => new AsyncCommand(OpenCalendars);
 
-        public ICommand OpenFiltersCommand => new RelayCommand(OpenFilters);
+        public ICommand OpenFiltersCommand => new AsyncCommand(OpenFilters);
 
-        public ICommand AddItemCommand => new RelayCommand(AddItem);
+        public ICommand AddItemCommand => new AsyncCommand(AddItem);
 
         #endregion
 
