@@ -40,7 +40,7 @@
                 IsPullToRefreshEnabled="true"
                 HasUnevenRows="true"
                 SeparatorVisibility="None"
-                IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
                 ItemsSource="{Binding Applications}"
                 RefreshCommand="{Binding RefreshCommand}"
                 x:Name="listViewApplications">

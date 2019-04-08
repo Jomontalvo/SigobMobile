@@ -118,7 +118,7 @@ namespace SigobMobile
 
                 //Load Master Detail with ApplicationsPage
                 mainViewModel.Menu = new MenuViewModel();
-                mainViewModel.Applications = new ApplicationsViewModel();
+                mainViewModel.Applications = new ApplicationsViewModel() { IsRefreshing = false };
                 var mainSigobPage = new MasterDetailSigobPage();
                 //NavigatePage properties IphoneX
                 Xamarin.Forms.NavigationPage navDetailPage = (Xamarin.Forms.NavigationPage)mainSigobPage.Detail;

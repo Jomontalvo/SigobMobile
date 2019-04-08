@@ -102,6 +102,8 @@
     <Compile Include="Implementations\Localize.cs" />
     <Compile Include="Renderers\IconViewRenderer.cs" />
     <Compile Include="Renderers\BorderlessEditorRenderer.cs" />
+    <Compile Include="Renderers\BorderlessDatePickerRenderer.cs" />
+    <Compile Include="Renderers\BorderlessTimePickerRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

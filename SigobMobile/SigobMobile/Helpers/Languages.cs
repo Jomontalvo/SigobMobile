@@ -140,6 +140,7 @@
         public static string WeeklyView => Resources.WeeklyView;
         public static string SelectCalendarMessage => Resources.SelectCalendarMessage;
         public static string SelectCalendarColor => Resources.SelectCalendarColor;
+        public static string SelectItemToAddManagementCenter => Resources.SelectItemToAddManagementCenter;
         #endregion
 
         #region Event View
@@ -163,8 +164,23 @@
         public static string AppointmentViewTitle => Resources.AppointmentViewTitle;
         #endregion
 
+        #region Management Center Items
+        public static string Event => Resources.Event;
+        public static string Events => Resources.Events;
+        public static string Activity => Resources.Activity;
+        public static string Activities => Resources.Activities;
+        public static string Appointment => Resources.Appointment;
+        public static string Appointments => Resources.Appointments;
+        public static string Instruction => Resources.Instruction;
+        public static string Instructions => Resources.Instructions;
+        public static string Assignment => Resources.Assignment;
+        public static string Assignments => Resources.Assignments;
+        public static string Task => Resources.Task;
+        public static string Tasks => Resources.Tasks;
+        public static string Request => Resources.Request;
+        public static string Requests => Resources.Requests;
+        #endregion
 
-        
 
         #endregion
     }

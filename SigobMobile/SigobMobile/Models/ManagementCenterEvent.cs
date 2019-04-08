@@ -86,7 +86,7 @@
     #endregion
 
     #region Enum SIGOB Instruments Type
-    public enum SgobInstruments : byte
+    public enum SigobInstrument : byte
     {
         PersonalAppointment = 5,
         Instruction = 7,
@@ -223,7 +223,7 @@
         {
             get
             {
-                string status_ = string.Empty;
+                string status_;
                 switch (Status)
                 {
                     case StatusAppointment.InManagement:
@@ -357,12 +357,45 @@
         public Color TypeColor => Color.FromRgb(ColorTypeRed, ColorTypeGreen, ColorTypeBlue);
     }
 
+    /// <summary>
+    /// Model for Items Available to Add in Management Center
+    /// </summary>
     public class ManagementCenterNewItem
     {
         [JsonProperty("tipoInstrumento")]
-        public long IntrumentType { get; set; }
+        public SigobInstrument InstrumentType { get; set; }
 
-        [JsonProperty("nombreItemProgramar")]
-        public string NewItemName { get; set; }
+        /// <summary>
+        /// Object name available to add in Management Center
+        /// </summary>
+        public string NewItemName
+        {
+            get
+            {
+                string itemName;
+                switch (InstrumentType)
+                {
+                    case SigobInstrument.PersonalAppointment:
+                        itemName = Languages.Appointment;
+                        break;
+                    case SigobInstrument.Instruction:
+                        itemName = Languages.Instruction;
+                        break;
+                    case SigobInstrument.Assignment:
+                        itemName = Languages.Assignment;
+                        break;
+                    case SigobInstrument.ManagementCenterEvent:
+                        itemName = Languages.Event;
+                        break;
+                    case SigobInstrument.Task:
+                        itemName = Languages.Task;
+                        break;
+                    default:
+                        itemName = string.Empty;
+                        break;
+                }
+                return itemName;
+            }
+        }
     }
 }

@@ -116,8 +116,6 @@
 
         public ICommand OkAndCloseCommand => new AsyncCommand(OkAndClose);
 
-        public ICommand RefreshCommand => new AsyncCommand(LoadCalendars);
-
         public ICommand CheckAllCalendarsCommand => new AsyncCommand(CheckAllCalendars);
 
         public ICommand SelectColorCommand => new AsyncCommand<IconView>(SelectColor);
@@ -304,8 +302,10 @@
         /// </summary>
         private async Task OkAndClose()
         {
+            IsRunning = true;
             //Refresh Observable collection from Parent
-            this.calendarViewModel.LoadAppointments(calendarViewModel.SelectedDate.GetValueOrDefault());
+            await this.calendarViewModel.LoadAppointments(calendarViewModel.SelectedDate.GetValueOrDefault());
+            IsRunning = false;
             //Go to parent page
             await Application.Current.MainPage.Navigation.PopModalAsync();
         }

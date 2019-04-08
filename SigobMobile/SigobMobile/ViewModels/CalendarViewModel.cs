@@ -38,6 +38,7 @@
         private DateTime displayDate;
         private List<AppointmentItem> eventList;
         private CalendarViewMode calendarView;
+        private List<ManagementCenterNewItem> itemsToAddList;
         #endregion
 
         #region Properties
@@ -336,6 +337,7 @@
         {
             try
             {
+                IsRunning = true;
                 var connection = await this.apiService.CheckConnection();
                 if (!connection.IsSuccess)
                 {
@@ -346,10 +348,10 @@
                         Languages.Cancel);
                     return;
                 }
-                var response = await this.apiService.GetList<AppointmentItem>(
+                var response = await this.apiService.GetList<ManagementCenterNewItem>(
                     Settings.UrlBaseApiSigob,
                     App.PrefixApiSigob,
-                    string.Format(this.apiEventsController, startDate, endDate, viewTentative),
+                    this.apiManagementCenterAddOptions,
                     Settings.Token,
                     Settings.DbToken
                 );
@@ -362,23 +364,45 @@
                         Languages.Cancel);
                     return;
                 }
-            }
-            finally
-            {
-
-            }
-
-            string[] options = { "Add", "b", "c" };
-            var newItem = await Application.Current.MainPage.DisplayActionSheet(
-                Languages.CalendarViewModeText,
+                this.itemsToAddList = (List<ManagementCenterNewItem>)response.Result;
+                List<string> options = new List<string>();
+                foreach (ManagementCenterNewItem item in this.itemsToAddList)
+                {
+                    options.Add (item.NewItemName);
+                }
+                var newItem = await Application.Current.MainPage.DisplayActionSheet(
+                Languages.SelectItemToAddManagementCenter,
                 Languages.Cancel,
                 null,
-                options);
-            if (newItem == Languages.Add)
+                options.ToArray());
+                await this.CreateItem(newItem);
+            }
+            finally { IsRunning = false; }
+        }
+
+        private async Task CreateItem(string newItem)
+        {
+            var appViewModel = MainViewModel.GetInstance();
+            if (newItem == Languages.Event || newItem == Languages.Activity)
             {
-                var appViewModel = MainViewModel.GetInstance();
                 appViewModel.EditEvent = new EditEventViewModel();
-                await Application.Current.MainPage.Navigation.PushModalAsync(new EditEventPage() { Title = Languages.Add });
+                await Application.Current.MainPage.Navigation.PushModalAsync(new EditEventPage() { Title = newItem });
+            }
+            else if (newItem == Languages.Appointment)
+            {
+
+            }
+            else if (newItem == Languages.Instruction)
+            {
+
+            }
+            else if (newItem == Languages.Assignment)
+            {
+
+            }
+            else if (newItem == Languages.Task)
+            {
+
             }
         }
 

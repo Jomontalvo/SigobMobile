@@ -694,5 +694,95 @@ namespace SigobMobile.Properties {
                 return ResourceManager.GetString("EventAnnotationsText", resourceCulture);
             }
         }
+        
+        public static string Event {
+            get {
+                return ResourceManager.GetString("Event", resourceCulture);
+            }
+        }
+        
+        public static string Events {
+            get {
+                return ResourceManager.GetString("Events", resourceCulture);
+            }
+        }
+        
+        public static string Activity {
+            get {
+                return ResourceManager.GetString("Activity", resourceCulture);
+            }
+        }
+        
+        public static string Activities {
+            get {
+                return ResourceManager.GetString("Activities", resourceCulture);
+            }
+        }
+        
+        public static string Appointment {
+            get {
+                return ResourceManager.GetString("Appointment", resourceCulture);
+            }
+        }
+        
+        public static string Appointments {
+            get {
+                return ResourceManager.GetString("Appointments", resourceCulture);
+            }
+        }
+        
+        public static string Instruction {
+            get {
+                return ResourceManager.GetString("Instruction", resourceCulture);
+            }
+        }
+        
+        public static string Instructions {
+            get {
+                return ResourceManager.GetString("Instructions", resourceCulture);
+            }
+        }
+        
+        public static string Assignment {
+            get {
+                return ResourceManager.GetString("Assignment", resourceCulture);
+            }
+        }
+        
+        public static string Assignments {
+            get {
+                return ResourceManager.GetString("Assignments", resourceCulture);
+            }
+        }
+        
+        public static string Task {
+            get {
+                return ResourceManager.GetString("Task", resourceCulture);
+            }
+        }
+        
+        public static string Tasks {
+            get {
+                return ResourceManager.GetString("Tasks", resourceCulture);
+            }
+        }
+        
+        public static string Request {
+            get {
+                return ResourceManager.GetString("Request", resourceCulture);
+            }
+        }
+        
+        public static string Requests {
+            get {
+                return ResourceManager.GetString("Requests", resourceCulture);
+            }
+        }
+        
+        public static string SelectItemToAddManagementCenter {
+            get {
+                return ResourceManager.GetString("SelectItemToAddManagementCenter", resourceCulture);
+            }
+        }
     }
 }

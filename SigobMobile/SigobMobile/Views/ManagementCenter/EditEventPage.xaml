@@ -55,7 +55,7 @@
                     Grid.Row="0"
                     HorizontalOptions = "Start"
                     Padding="{OnPlatform iOS='10,5',Default='2,5'}"
-                    CornerRadius="8"
+                    CornerRadius="{OnPlatform iOS=8, Default=5}"
                     Text="{local:Translate Save}"
                     TextColor = "{StaticResource defaultBackgroundView}">
                 </telerikInput:RadButton>
@@ -88,6 +88,7 @@
                     HorizontalOptions="FillAndExpand"
                     MaxLength="250"
                     Placeholder="{local:Translate EventNameText}"
+                    PlaceholderColor="{StaticResource gray}"
                     Text="{Binding LocalEvent.Title, Mode=TwoWay}">
                     <Editor.FontFamily>
                         <OnPlatform
@@ -114,9 +115,9 @@
                     Padding="5,5"
                     RowSpacing="10">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30" />
-                        <RowDefinition Height="30" />
-                        <RowDefinition Height="30" />
+                        <RowDefinition Height="{OnPlatform iOS=32,Default=Auto}" />
+                        <RowDefinition Height="{OnPlatform iOS=30,Default=Auto}" />
+                        <RowDefinition Height="{OnPlatform iOS=30,Default=Auto}" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -154,7 +155,7 @@
                         Grid.Row="0"
                         HorizontalOptions="End"
                         IsToggled="{Binding EventCg.IsAllDay, Mode=TwoWay}"
-                        BackgroundColor="{OnPlatform Android={StaticResource lightBlue}}">
+                        OnColor="{OnPlatform Android={StaticResource lightBlue}}">
                     </Switch>
                     <!--Date and Time-->
                     <local:BorderlessDatePicker

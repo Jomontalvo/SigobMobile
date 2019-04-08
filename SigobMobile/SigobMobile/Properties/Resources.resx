@@ -549,4 +549,64 @@
     <value>Executive abstract</value>
     <comment>Title for appointment (personal agenda) view</comment>
   </data>
+  <data name="Event" xml:space="preserve">
+    <value>Event</value>
+    <comment>Event object name in singular.</comment>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Events</value>
+    <comment>Event object name in plural.</comment>
+  </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Activity</value>
+    <comment>Activity object name in singular.</comment>
+  </data>
+  <data name="Activities" xml:space="preserve">
+    <value>Activities</value>
+    <comment>Activity object name in plural.</comment>
+  </data>
+  <data name="Appointment" xml:space="preserve">
+    <value>Appointment</value>
+    <comment>Appointment object name in singular.</comment>
+  </data>
+  <data name="Appointments" xml:space="preserve">
+    <value>Appointments</value>
+    <comment>Appointment object name in plural.</comment>
+  </data>
+  <data name="Instruction" xml:space="preserve">
+    <value>Instruction</value>
+    <comment>Instruction object name in singular.</comment>
+  </data>
+  <data name="Instructions" xml:space="preserve">
+    <value>Instructions</value>
+    <comment>Instruction object name in plural.</comment>
+  </data>
+  <data name="Assignment" xml:space="preserve">
+    <value>Assignment</value>
+    <comment>Assignment object name in singular.</comment>
+  </data>
+  <data name="Assignments" xml:space="preserve">
+    <value>Assignments</value>
+    <comment>Assignment object name in plural.</comment>
+  </data>
+  <data name="Task" xml:space="preserve">
+    <value>Task</value>
+    <comment>Task object name in singular.</comment>
+  </data>
+  <data name="Tasks" xml:space="preserve">
+    <value>Tasks</value>
+    <comment>Task object name in plural.</comment>
+  </data>
+  <data name="Request" xml:space="preserve">
+    <value>Request</value>
+    <comment>Request object name in singular.</comment>
+  </data>
+  <data name="Requests" xml:space="preserve">
+    <value>Requests</value>
+    <comment>Request object name in plural.</comment>
+  </data>
+  <data name="SelectItemToAddManagementCenter" xml:space="preserve">
+    <value>Select new item to add.</value>
+    <comment>Message for choose a new item in Management Center.</comment>
+  </data>
 </root>
