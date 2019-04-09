@@ -25,7 +25,7 @@ namespace SigobMobile.Droid.Implementations
             {
                 // iOS locale not valid .NET culture (eg. "en-ES" : English in Spain)
                 // fallback to first characters, in this case "en"
-                Debug.WriteLine(e1.Message);
+                //Debug.WriteLine(e1.Message);
                 try
                 {
                     var fallback = ToDotnetFallbackLanguage(new PlatformCulture(netLanguage));
@@ -35,7 +35,7 @@ namespace SigobMobile.Droid.Implementations
                 {
                     // iOS language not valid .NET culture, falling back to English
                     ci = new CultureInfo("en");
-                    Debug.WriteLine(e2.Message);
+                    //Debug.WriteLine(e2.Message);
                 }
             }
             return ci;
