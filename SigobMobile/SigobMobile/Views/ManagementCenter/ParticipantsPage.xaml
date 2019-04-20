@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
+             xmlns:local="clr-namespace:SigobMobile.Helpers"
+             xmlns:controls="clr-namespace:SigobMobile.Controls"
+             x:Class="SigobMobile.Views.ManagementCenter.ParticipantsPage"
+             BackgroundColor="{StaticResource gray}"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="{local:Translate EventParticipantsText}"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:GenderToSourceIconConverter x:Key="GenderSource" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <NavigationPage.TitleView>
+        <StackLayout
+            BindingContext="{Binding Participants}"
+            Orientation="Horizontal" 
+            VerticalOptions="Center" 
+            HorizontalOptions="FillAndExpand">
+            <ImageButton
+                BackgroundColor="{StaticResource clear}"
+                Command="{Binding BackToParentPageCommand}"
+                HeightRequest="28"
+                HorizontalOptions="Start"
+                Source="ic_bt_close_window"
+                VerticalOptions="Center"
+                WidthRequest="28">
+            </ImageButton>
+            <Label 
+                x:Name="LabelPageTitle"
+                FontAttributes="Bold"
+                FontSize="{OnPlatform Android=Large, Default=Default}"
+                HorizontalOptions="FillAndExpand"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center">
+            </Label>
+            <Button
+                BackgroundColor="Transparent"
+                Command="{Binding SaveAndCloseCommand}"
+                IsEnabled="{Binding IsFinding, Mode=TwoWay, Converter={StaticResource inverseBool}}"
+                HorizontalOptions="End"
+                Padding="8,0"
+                Text="{local:Translate Done}"
+                TextColor="{OnPlatform Android=White, iOS={StaticResource iOSBlue}}"
+                VerticalOptions="Center">
+            </Button>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid
+            BackgroundColor="{StaticResource defaultBackgroundView}"
+            BindingContext="{Binding Participants}"
+            ColumnSpacing="0"
+            Padding="0,0"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+                <RowDefinition Height="44"/>
+            </Grid.RowDefinitions>
+            <SearchBar
+                BackgroundColor="{StaticResource softGray}"
+                FontSize="Default"
+                Grid.Row="0"
+                Placeholder="{local:Translate SearchInternalContactsPlaceHolder}"
+                SearchCommand="{Binding SearchContactCommand}"
+                Text="{Binding Filter, Mode=TwoWay}"
+                IsSpellCheckEnabled="true"
+                Keyboard="Text">
+            </SearchBar>
+            <!--Participant contacts ListView -->
+            <ListView
+                x:Name="ParticipantsContactsListView"
+                BackgroundColor="Transparent"
+                Footer=""
+                Grid.Row="1"
+                HasUnevenRows="true"
+                HorizontalOptions="FillAndExpand"
+                ItemsSource="{Binding GuestContacts}"
+                IsVisible="{Binding IsFinding, Mode=TwoWay, Converter={StaticResource inverseBool}}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid
+                                Padding="16,10,10,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    x:Name="ContactIcon"
+                                    Grid.Column="0"
+                                    HeightRequest="28"
+                                    HorizontalOptions="Center"
+                                    Source="{Binding Gender, Mode=OneWay, Converter={StaticResource GenderSource}, ConverterParameter={x:Reference ContactIcon}}" 
+                                    VerticalOptions="Center"
+                                    WidthRequest="28">
+                                </Image>
+                                <StackLayout
+                                    Grid.Column="1"
+                                    Orientation="Vertical"
+                                    Padding="5,0,0,0">
+                                    <Label
+                                        FontSize="Small"
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="FillAndExpand"
+                                        Margin="5,0,0,0"
+                                        Text="{Binding FullName}"
+                                        VerticalTextAlignment="Center">
+                                    </Label>
+                                    <Label
+                                        FontSize="Small"
+                                        HorizontalOptions="FillAndExpand"
+                                        Margin="5,0,0,0"
+                                        Text="{Binding Position}"
+                                        VerticalTextAlignment="Center">
+                                    </Label>
+                                </StackLayout>
+                                <controls:IconView
+                                    Foreground="Black"
+                                    Grid.Column="2"
+                                    IsVisible="{Binding IsEditable}"
+                                    HeightRequest="30"
+                                    HorizontalOptions="Center"
+                                    Source="ic_bt_close_window"
+                                    VerticalOptions="Center"
+                                    WidthRequest="30">
+                                    <controls:IconView.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding RemoveParticipantCommand}"
+                                            NumberOfTapsRequired="1">
+                                        </TapGestureRecognizer>
+                                    </controls:IconView.GestureRecognizers>
+                                </controls:IconView>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <!--Available contacts ListView -->
+            <ListView
+                x:Name="AvailableContactsListView"
+                Footer=""
+                Grid.Row="1"
+                HasUnevenRows="true"
+                HorizontalOptions="FillAndExpand"
+                ItemsSource="{Binding AvailableContacts}"
+                IsVisible="{Binding IsFinding, Mode=TwoWay}"
+                VerticalOptions="FillAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid
+                                Padding="16,10,10,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding AddParticipantCommand}"
+                                        NumberOfTapsRequired="1">
+                                    </TapGestureRecognizer>
+                                </Grid.GestureRecognizers>
+                                <Image
+                                    x:Name="OfficeGenderIcon"
+                                    Grid.Column="0"
+                                    HeightRequest="28"
+                                    HorizontalOptions="Center"
+                                    Source="{Binding Gender, Mode=OneWay, Converter={StaticResource GenderSource}, ConverterParameter={x:Reference OfficeGenderIcon}}" 
+                                    VerticalOptions="Center"
+                                    WidthRequest="28">
+                                </Image>
+                                <StackLayout
+                                    Grid.Column="1"
+                                    Orientation="Vertical"
+                                    Padding="0,0">
+                                    <Label
+                                        FontSize="Small"
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="FillAndExpand"
+                                        Margin="5,0,0,0"
+                                        Text="{Binding FullName}"
+                                        VerticalTextAlignment="Center">
+                                    </Label>
+                                    <Label
+                                        FontSize="Small"
+                                        HorizontalOptions="FillAndExpand"
+                                        Margin="5,0,0,0"
+                                        Text="{Binding Position}"
+                                        VerticalTextAlignment="Center">
+                                    </Label>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <!--Bottom ToolBar-->
+            <telerikPrimitives:RadBorder
+                BorderColor="{StaticResource accesoryGray}" 
+                CornerRadius="0"
+                Grid.Row="2">
+                <Grid 
+                    BackgroundColor="{StaticResource softGray}"
+                    ColumnSpacing="0"
+                    RowSpacing="0"
+                    VerticalOptions="End">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        BackgroundColor="{StaticResource softGray}"
+                        Command="{Binding OpenExternalContactsCommand}"
+                        Grid.Column="0"
+                        HorizontalOptions="CenterAndExpand"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        Text="{local:Translate SearchExternalContacts}">
+                    </Button>
+                </Grid>
+            </telerikPrimitives:RadBorder>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

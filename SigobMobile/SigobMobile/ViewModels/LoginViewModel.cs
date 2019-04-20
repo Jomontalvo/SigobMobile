@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using System.Windows.Input;
+    using AsyncAwaitBestPractices.MVVM;
     using GalaSoft.MvvmLight.Command;
     using Helpers;
     using Models;
@@ -109,33 +111,19 @@
         /// Gets the login command.
         /// </summary>
         /// <value>The login command.</value>
-        public ICommand LoginCommand
-        {
-            get
-            {
-                return new RelayCommand(Login);
-            }
-        }
+        public IAsyncCommand LoginCommand => new AsyncCommand(Login);
 
         /// <summary>
         /// Gets the list to select Institution - API command.
         /// </summary>
         /// <value>The select API command.</value>
-        public ICommand SelectApiCommand
-        {
-            get
-            {
-                return new RelayCommand(SelectApi);
-            }
-        }
+        public ICommand SelectApiCommand => new AsyncCommand(SelectApi);
 
-        public ICommand ShowHidePasswordCommand
-        { 
-            get
-            {
-                return new RelayCommand(ShowHidePassword);
-            }
-        }
+        /// <summary>
+        /// Show or hide password command button.
+        /// </summary>
+        /// <value>The show hide password command.</value>
+        public ICommand ShowHidePasswordCommand => new RelayCommand(ShowHidePassword);
         #endregion
 
         #region Methods
@@ -152,7 +140,7 @@
         /// <summary>
         /// Selects the API related with Institution
         /// </summary>
-        private async void SelectApi()
+        private async Task SelectApi()
         {
             ////Call without Navigate
             //MainViewModel.GetInstance().InstitutionsConnect = new InstitutionsConnectViewModel();
@@ -168,7 +156,7 @@
         /// <summary>
         /// Login to Sigob System with user credentials (validate entries)
         /// </summary>
-        private async void Login()
+        private async Task Login()
         {
             #region Exists values in login fields
             if (string.IsNullOrEmpty(UserName))

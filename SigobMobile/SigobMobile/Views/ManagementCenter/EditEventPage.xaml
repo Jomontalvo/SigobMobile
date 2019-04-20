@@ -7,6 +7,7 @@
     xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
     xmlns:telerikInput="clr-namespace:Telerik.XamarinForms.Input;assembly=Telerik.XamarinForms.Input"
     xmlns:local="clr-namespace:SigobMobile.Helpers"
+    xmlns:controls="clr-namespace:SigobMobile.Controls"
     BackgroundColor="{StaticResource defaultBackgroundView}"
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
     ios:Page.UseSafeArea="true">
@@ -71,7 +72,7 @@
                     <ColumnDefinition Width="20" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <local:IconView
+                <controls:IconView
                     Grid.Column="0"
                     Grid.Row="0"
                     Foreground="{StaticResource iOSPurple}"
@@ -79,8 +80,8 @@
                     HorizontalOptions="Center"
                     Source="{StaticResource clear}"
                     VerticalOptions="Start">
-                </local:IconView>
-                <local:BorderlessEditor
+                </controls:IconView>
+                <controls:BorderlessEditor
                     AutoSize="TextChanges"
                     FontSize="Large"
                     Grid.Column="1"
@@ -97,7 +98,7 @@
                             <On Platform="Android" Value="sans-serif-smallcaps" />
                         </OnPlatform>
                     </Editor.FontFamily>
-                </local:BorderlessEditor>
+                </controls:BorderlessEditor>
                 <BoxView
                     Color="{StaticResource gray}"
                     Grid.Column="0"
@@ -158,7 +159,7 @@
                         OnColor="{OnPlatform Android={StaticResource lightBlue}}">
                     </Switch>
                     <!--Date and Time-->
-                    <local:BorderlessDatePicker
+                    <controls:BorderlessDatePicker
                         BackgroundColor="Transparent"
                         Grid.Column="1"
                         Grid.Row="1"
@@ -166,27 +167,27 @@
                         Format="ddd, MMMM dd, yyyy"
                         Date="{Binding }"
                         TextColor="{StaticResource darkGray}">
-                    </local:BorderlessDatePicker>
-                    <local:BorderlessTimePicker
+                    </controls:BorderlessDatePicker>
+                    <controls:BorderlessTimePicker
                         FontSize="Default"
                         Grid.Column="2"
                         Grid.Row="1"
                         TextColor="{StaticResource darkGray}">
-                    </local:BorderlessTimePicker>
-                    <local:BorderlessDatePicker
+                    </controls:BorderlessTimePicker>
+                    <controls:BorderlessDatePicker
                         BackgroundColor="Transparent"
                         Grid.Column="1"
                         Grid.Row="2"
                         FontSize="Default"
                         TextColor="{StaticResource darkGray}"
                         Format="ddd, MMMM dd, yyyy">
-                    </local:BorderlessDatePicker>
-                    <local:BorderlessTimePicker
+                    </controls:BorderlessDatePicker>
+                    <controls:BorderlessTimePicker
                         FontSize="Default"
                         Grid.Column="2"
                         Grid.Row="2"
                         TextColor="{StaticResource darkGray}">
-                    </local:BorderlessTimePicker>
+                    </controls:BorderlessTimePicker>
                     <!--Separator 1-->
                     <BoxView
                         Color="{StaticResource gray}"
@@ -203,7 +204,7 @@
                         Source="ic_ev_calendar"
                         VerticalOptions="Center">
                     </Image>
-                    <local:IconView
+                    <controls:IconView
                         Grid.Column="0"
                         Grid.Row="4"
                         Foreground="Red"
@@ -213,7 +214,7 @@
                         Source="ic_ev_type_color"
                         VerticalOptions="End"
                         WidthRequest="8">
-                    </local:IconView>
+                    </controls:IconView>
                     <Frame
                         Padding="0"
                         CornerRadius="0"
@@ -283,14 +284,14 @@
                                                             </Frame.GestureRecognizers>
                                                             <StackLayout
                                                                 Orientation="Horizontal">
-                                                                <local:IconView
+                                                                <controls:IconView
                                                                     Foreground="{Binding Color}"
                                                                     HeightRequest="16"
                                                                     HorizontalOptions="Center"
                                                                     Source="ic_ev_type_color"
                                                                     VerticalOptions="Center"
                                                                     WidthRequest="16">
-                                                                </local:IconView>
+                                                                </controls:IconView>
                                                                 <Label
                                                                     FontSize="Default"
                                                                     HorizontalOptions="StartAndExpand"
@@ -335,7 +336,7 @@
                         VerticalOptions="Center">
                     </Label>
                     <!--Second Section-->
-                    <local:IconView
+                    <controls:IconView
                         Grid.Column="0"
                         Grid.Row="6"
                         Foreground="{Binding LocalAppointment.TypeColor}"
@@ -344,7 +345,7 @@
                         Source="ic_ev_type_color"
                         VerticalOptions="Center"
                         WidthRequest="16">
-                    </local:IconView>
+                    </controls:IconView>
                     <Label
                         FontSize="Small"
                         Grid.Column="1"

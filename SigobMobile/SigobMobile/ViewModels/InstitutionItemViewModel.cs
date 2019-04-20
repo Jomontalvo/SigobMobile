@@ -1,10 +1,10 @@
 ﻿namespace SigobMobile.ViewModels
 {
     using System.Linq;
-    using System.Windows.Input;
-    using GalaSoft.MvvmLight.Command;
-    using Models;
+    using System.Threading.Tasks;
+    using AsyncAwaitBestPractices.MVVM;
     using Helpers;
+    using Models;
     using Xamarin.Forms;
 
     /// <summary>
@@ -13,12 +13,12 @@
     public class InstitutionItemViewModel : InstitutionConnect
     {
         #region Commands
-        public ICommand SelectInstitutionCommand => new RelayCommand(SelectInstitution);
+        public IAsyncCommand SelectInstitutionCommand => new AsyncCommand(SelectInstitution);
 
         /// <summary>
         /// Selects the institution an set global url API service.
         /// </summary>
-        private async void SelectInstitution()
+        private async Task SelectInstitution()
         {
             //Assign API URL global variable and Settings
             App.UrlBaseApiSigob = 

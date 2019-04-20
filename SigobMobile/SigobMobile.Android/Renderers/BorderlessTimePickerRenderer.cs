@@ -1,6 +1,5 @@
-﻿
-using SigobMobile.Droid.Renderers;
-using SigobMobile.Helpers;
+﻿using SigobMobile.Droid.Renderers;
+using SigobMobile.Controls;
 using Xamarin.Forms;
 
 

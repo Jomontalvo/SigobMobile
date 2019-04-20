@@ -51,7 +51,11 @@
         #endregion
 
         #region Search Tools
+        public static string SearchExternalContacts => Resources.SearchExternalContacts;
         public static string SearchPlaceHolder => Resources.SearchPlaceHolder;
+        public static string SearchInternalContactsPlaceHolder => Resources.SearchInternalContactsPlaceHolder;
+        public static string SearchExternalContactsPlaceHolder => Resources.SearchExternalContactsPlaceHolder;
+        public static string SearchDeviceContactsPlaceHolder => Resources.SearchDeviceContactsPlaceHolder;
         public static string Filters => Resources.Filters;
         public static string SelectAll => Resources.SelectAll;
         public static string UnselectAll => Resources.UnselectAll;
@@ -71,6 +75,7 @@
         public static string Add => Resources.Add;
         public static string Edit => Resources.Edit;
         public static string Save => Resources.Save;
+        public static string Done => Resources.Done;
         public static string Delete => Resources.Delete;
         #endregion
 
@@ -155,9 +160,24 @@
         public static string EventStatusText => Resources.EventStatusText;
         public static string EventProgrammerText => Resources.EventProgrammerText;
         public static string EventSummaryText => Resources.EventSummaryText;
+        public static string EventParticipantText => Resources.EventParticipantText;
         public static string EventParticipantsText => Resources.EventParticipantsText;
         public static string EventAbstractText => Resources.EventAbstractText;
         public static string EventAnnotationsText => Resources.EventAnnotationsText;
+        #endregion
+
+        #region Helper text
+        public static string Me => Resources.Me;
+        public static string And => Resources.And;
+        #endregion
+
+        #region Confidentiality Level of Management Center Events
+        public static string NoConfidentialityLevel => Resources.NoConfidentialityLevel;
+        public static string PublicConfidentialityLevel => Resources.PublicConfidentialityLevel;
+        public static string LowConfidentialityLevel => Resources.LowConfidentialityLevel;
+        public static string MediumConfidentialityLevel => Resources.MediumConfidentialityLevel;
+        public static string HighConfidentialityLevel => Resources.HighConfidentialityLevel;
+        public static string PrivateConfidentialityLevel => Resources.PrivateConfidentialityLevel;
         #endregion
 
         #region Appointment View
@@ -181,6 +201,12 @@
         public static string Requests => Resources.Requests;
         #endregion
 
+        #region Institutional Directory and Contacts
+        public static string InstitutionalDirectoryTitle => Resources.InstitutionalDirectoryTitle;
+        public static string ContactsTitle => Resources.ContactsTitle;
+        public static string ExternalContactsViewTitle => Resources.ExternalContactsViewTitle;
+
+        #endregion
 
         #endregion
     }

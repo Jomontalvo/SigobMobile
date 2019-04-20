@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:local="clr-namespace:SigobMobile.Helpers"
+    x:Class="SigobMobile.Views.Common.ContactsPage"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}"
+    Title="{local:Translate ContactsTitle}"
+    ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding Contacts}">
+            <SearchBar
+                BackgroundColor="{StaticResource grayBorder}"
+                FontSize="Default"
+                Grid.Row="0"
+                Placeholder="{local:Translate SearchDeviceContactsPlaceHolder}"
+                SearchCommand="{Binding SearchContactCommand}"
+                Text="{Binding Filter, Mode=TwoWay}"
+                IsSpellCheckEnabled="true"
+                Keyboard="Default">
+            </SearchBar>
+            <ListView 
+                x:Name="lstContacts"
+                HasUnevenRows="true"
+                ItemsSource="{Binding ContactList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid
+                                Padding="16,10,10,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    Grid.Column="0"
+                                    HeightRequest="28"
+                                    HorizontalOptions="Center"
+                                    Source="ic_contact_mobile"
+                                    VerticalOptions="Center"
+                                    WidthRequest="28">
+                                </Image>
+                                <StackLayout
+                                    Padding="5,0,0,0"
+                                    Grid.Column="1">
+                                    <Label Text="{Binding Name}"/>
+                                    <Label Text="{Binding Email}"/>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

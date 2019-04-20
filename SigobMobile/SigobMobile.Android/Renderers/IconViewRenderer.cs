@@ -1,14 +1,14 @@
 ﻿using SigobMobile.Droid.Renderers;
 using Xamarin.Forms;
 
-[assembly: ExportRendererAttribute(typeof(SigobMobile.Helpers.IconView), typeof(IconViewRenderer))]
+[assembly: ExportRendererAttribute(typeof(SigobMobile.Controls.IconView), typeof(IconViewRenderer))]
 namespace SigobMobile.Droid.Renderers
 {
     using System.ComponentModel;
     using Android.Content;
     using Android.Graphics;
     using Android.Widget;
-    using Helpers;
+    using Controls;
     using Xamarin.Forms.Platform.Android;
 
     public class IconViewRenderer : ViewRenderer<IconView, ImageView>
@@ -59,13 +59,9 @@ namespace SigobMobile.Droid.Renderers
             if (!_isDisposed && !string.IsNullOrWhiteSpace(Element.Source))
             {
                 var d = Context.GetDrawable(Element.Source).Mutate();
-
                 //d.SetColorFilter(new LightingColorFilter(Element.Foreground.ToAndroid(), Element.Foreground.ToAndroid()));
-
                 //d.SetTint(Element.Foreground.ToAndroid());
-
                 d.SetColorFilter(new PorterDuffColorFilter(Element.Foreground.ToAndroid(), PorterDuff.Mode.SrcAtop));
-
                 d.Alpha = Element.Foreground.ToAndroid().A;
                 Control.SetImageDrawable(d);
                 ((IVisualElementController)Element).NativeSizeChanged();

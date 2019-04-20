@@ -2,15 +2,14 @@
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Windows.Input;
-    using GalaSoft.MvvmLight.Command;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using AsyncAwaitBestPractices.MVVM;
+    using Helpers;
+    using Interfaces;
     using Models;
     using Services;
-    using Helpers;
     using Xamarin.Forms;
-    using System.Linq;
-    using System;
-    using System.Threading.Tasks;
 
     public class InstitutionsConnectViewModel : BaseViewModel
     {
@@ -48,8 +47,9 @@
         #region Constructors
         public InstitutionsConnectViewModel()
         {
+            IErrorHandler errorHandler = null;
             this.apiService = new ApiService();
-            this.LoadInstitutionsToConnect();
+            this.LoadInstitutionsToConnect().FireAndForgetSafeAsync(errorHandler);
         }
         #endregion
 
@@ -57,7 +57,7 @@
         /// <summary>
         /// Loads the institutions (with Sigob API service) to connect.
         /// </summary>
-        private async void LoadInstitutionsToConnect()
+        private async Task LoadInstitutionsToConnect()
         {
             this.IsRefreshing = true;
             var connection = await this.apiService.CheckConnection();
@@ -122,13 +122,7 @@
         #endregion
 
         #region Commands
-        public ICommand RefreshCommand
-        {
-            get
-            {
-                return new RelayCommand(LoadInstitutionsToConnect);
-            }
-        }
+        public IAsyncCommand RefreshCommand => new AsyncCommand(LoadInstitutionsToConnect);
         #endregion
     }
 }

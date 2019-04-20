@@ -10,7 +10,7 @@ namespace SigobMobile.Models
     /// <summary>
     /// Participant of Instruction Model
     /// </summary>
-    public partial class Participant
+    public partial class InstructionParticipant
     {
         [JsonProperty("codigoDespacho")]
         public string OfficeId { get; set; }
@@ -76,7 +76,7 @@ namespace SigobMobile.Models
         public bool CanBeFinished { get; set; }
 
         [JsonProperty("participantes")]
-        public List<Participant> Participants { get; set; }
+        public List<InstructionParticipant> Participants { get; set; }
         /// <summary>
         /// Gets the color of the status.
         /// </summary>

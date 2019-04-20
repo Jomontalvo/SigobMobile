@@ -290,6 +290,11 @@
     <BundleResource Include="Resources\ic_ev_status_suspended.png" />
     <BundleResource Include="Resources\ic_bt_close_window.png" />
     <BundleResource Include="Resources\ic_ev_time.png" />
+    <BundleResource Include="Resources\ic_bt_add_contact.png" />
+    <BundleResource Include="Resources\ic_contact_female.png" />
+    <BundleResource Include="Resources\ic_contact_male.png" />
+    <BundleResource Include="Resources\ic_contact_external.png" />
+    <BundleResource Include="Resources\ic_contact_mobile.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

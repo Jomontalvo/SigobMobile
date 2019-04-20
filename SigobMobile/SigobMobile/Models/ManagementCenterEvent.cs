@@ -13,6 +13,30 @@
         ReadOnly
     }
 
+    public enum SecurityLevelEvent : byte
+    {
+        /// <summary>
+        /// Public Event
+        /// </summary>
+        Public = 0,
+        /// <summary>
+        /// Evento interno
+        /// </summary>
+        Low = 1,
+        /// <summary>
+        /// Evento semi privado
+        /// </summary>
+        Medium = 2,
+        /// <summary>
+        /// Evento privado
+        /// </summary>
+        High = 3,
+        /// <summary>
+        /// Evento confidencial
+        /// </summary>
+        Private = 4
+    }
+
     public enum AgendaAttribute : byte
     {
         None,
@@ -101,6 +125,7 @@
     /// </summary>
     public class ManagementCenterEvent
     {
+        public int Id { get; set; }
 
         [JsonProperty("codigo_centro_gestion")]
         public int ManagementCenterId { get; set; }
@@ -136,10 +161,37 @@
         public string CalendarName { get; set; }
 
         [JsonProperty("grado_reserva")]
-        public byte PrivacyLevel { get; set; }
+        public SecurityLevelEvent PrivacyLevel { get; set; }
 
-        [JsonProperty("descripcion_grado_reserva")]
-        public string PrivacyDescription { get; set; }
+        public string PrivacyDescription
+        {
+            get
+            {
+                string detailPrivacy;
+                switch (PrivacyLevel)
+                {
+                    case SecurityLevelEvent.Public:
+                        detailPrivacy = Languages.PublicConfidentialityLevel;
+                        break;
+                    case SecurityLevelEvent.Low:
+                        detailPrivacy = Languages.LowConfidentialityLevel;
+                        break;
+                    case SecurityLevelEvent.Medium:
+                        detailPrivacy = Languages.MediumConfidentialityLevel;
+                        break;
+                    case SecurityLevelEvent.High:
+                        detailPrivacy = Languages.HighConfidentialityLevel;
+                        break;
+                    case SecurityLevelEvent.Private:
+                        detailPrivacy = Languages.PrivateConfidentialityLevel;
+                        break;
+                    default:
+                        detailPrivacy = Languages.NoConfidentialityLevel;
+                        break;
+                }
+                return detailPrivacy;
+            }
+        }
 
         [JsonProperty("tentativo")]
         public bool Tentative { get; set; }
@@ -242,10 +294,14 @@
                 return status_;
             }
         }
+        public Color CalendarColor { get; set; }
+        public Color TypeColor { get; set; }
     }
 
     public class AgendaEvent
     {
+        public int Id { get; set; }
+
         [JsonProperty("titulo")]
         public string Title { get; set; }
 

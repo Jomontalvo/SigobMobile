@@ -23,4 +23,19 @@
         /// <value>The result.</value>
         public object Result { get; set; }
     }
+
+    public class TransactionResponse
+    {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>The identifier.</value>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the transaction message.
+        /// </summary>
+        /// <value>The transaction message.</value>
+        public string TransactionMessage { get; set;  }
+    }
 }

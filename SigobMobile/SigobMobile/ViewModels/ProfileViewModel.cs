@@ -1,16 +1,19 @@
 ﻿namespace SigobMobile.ViewModels
 {
     using System;
-    using System.Windows.Input;
-    using GalaSoft.MvvmLight.Command;
-    using Services;
-    using Helpers;
-    using Xamarin.Forms;
-    using Models;
-    using System.IO;
     using System.Diagnostics;
+    using System.IO;
+    using System.Threading.Tasks;
+    using System.Windows.Input;
+    using AsyncAwaitBestPractices.MVVM;
+    using GalaSoft.MvvmLight.Command;
+    using Helpers;
+    using Interfaces;
+    using Models;
     using Plugin.Media;
     using Plugin.Media.Abstractions;
+    using Services;
+    using Xamarin.Forms;
 
     public class ProfileViewModel : BaseViewModel
     {
@@ -130,25 +133,16 @@
         #region Constructors
         public ProfileViewModel()
         {
+            IErrorHandler errorHandler = null;
             this.apiService = new ApiService();
-            this.LoadUserProfile();
+            this.LoadUserProfile().FireAndForgetSafeAsync(errorHandler);
         }
         #endregion
 
         #region Commands
-        public ICommand ChangeUserImageCommand
-        {
-            get { return new RelayCommand(ChangeUserImage); }
-
-        }
-        public ICommand SelectFemaleCommand
-        {
-            get { return new RelayCommand(SelectFemale); }
-        }
-        public ICommand SelectMaleCommand
-        {
-            get { return new RelayCommand(SelectMale); }
-        }
+        public IAsyncCommand ChangeUserImageCommand => new AsyncCommand(ChangeUserImage);
+        public ICommand SelectFemaleCommand => new RelayCommand(SelectFemale);
+        public ICommand SelectMaleCommand => new RelayCommand(SelectMale);
         #endregion
 
         #region Methods
@@ -175,7 +169,7 @@
         /// <summary>
         /// Changes the user image.
         /// </summary>
-        private async void ChangeUserImage()
+        private async Task ChangeUserImage()
         {
             await CrossMedia.Current.Initialize();
 
@@ -229,7 +223,7 @@
         /// <summary>
         /// Loads the user profile.
         /// </summary>
-        private async void LoadUserProfile()
+        private async Task LoadUserProfile()
         {
             this.IsRunning = true;
             try 

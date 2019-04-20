@@ -121,492 +121,560 @@
     <value>Accept</value>
     <comment>Button Accept (different yes)</comment>
   </data>
-  <data name="Cancel" xml:space="preserve">
+    <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
     <comment>Button Cancel</comment>
   </data>
-  <data name="Error" xml:space="preserve">
+    <data name="Error" xml:space="preserve">
     <value>Error</value>
     <comment>Error name of Dialog Box</comment>
   </data>
-  <data name="No" xml:space="preserve">
+    <data name="No" xml:space="preserve">
     <value>No</value>
     <comment>No answer (Message with ask)</comment>
   </data>
-  <data name="Ok" xml:space="preserve">
+    <data name="Ok" xml:space="preserve">
     <value>Ok</value>
     <comment>Ok answer (Message with ask)</comment>
   </data>
-  <data name="Yes" xml:space="preserve">
+    <data name="Yes" xml:space="preserve">
     <value>Yes</value>
     <comment>Yes answer (Message with ask)</comment>
   </data>
-  <data name="Edit" xml:space="preserve">
+    <data name="Edit" xml:space="preserve">
     <value>Edit</value>
     <comment>Edit option of Toolbar Item</comment>
   </data>
-  <data name="Add" xml:space="preserve">
+    <data name="Add" xml:space="preserve">
     <value>Add</value>
     <comment>Add option of Toolbar Item</comment>
   </data>
-  <data name="Save" xml:space="preserve">
+    <data name="Save" xml:space="preserve">
     <value>Save</value>
     <comment>Save option of Toolbar Item</comment>
   </data>
-  <data name="ForgotPassword" xml:space="preserve">
+    <data name="Done" xml:space="preserve">
+    <value>Done</value>
+    <comment>Done option of Toolbar Item</comment>
+  </data>
+    <data name="ForgotPassword" xml:space="preserve">
     <value>Forgot your password?</value>
     <comment>Question when user forget the password access</comment>
   </data>
-  <data name="EnterCredentials" xml:space="preserve">
+    <data name="EnterCredentials" xml:space="preserve">
     <value>Enter your user credentials to access.</value>
     <comment>Message request user credentials for login</comment>
   </data>
-  <data name="Username" xml:space="preserve">
+    <data name="Username" xml:space="preserve">
     <value>Username</value>
     <comment>Username placeholder</comment>
   </data>
-  <data name="Password" xml:space="preserve">
+    <data name="Password" xml:space="preserve">
     <value>Password</value>
     <comment>Password Placeholder</comment>
   </data>
-  <data name="SelectApiInstitution" xml:space="preserve">
+    <data name="SelectApiInstitution" xml:space="preserve">
     <value>Select country and institution...</value>
     <comment>Select the institution that provides API web services</comment>
   </data>
-  <data name="Login" xml:space="preserve">
+    <data name="Login" xml:space="preserve">
     <value>Login</value>
     <comment>Button Login</comment>
   </data>
-  <data name="LoginViewTitle" xml:space="preserve">
+    <data name="LoginViewTitle" xml:space="preserve">
     <value>Login</value>
     <comment>Login View Title</comment>
   </data>
-  <data name="InstitutionsConnect" xml:space="preserve">
+    <data name="InstitutionsConnect" xml:space="preserve">
     <value>Institutions</value>
     <comment>List of Institutions to connect (API Service)</comment>
   </data>
-  <data name="UserValidationMsg" xml:space="preserve">
+    <data name="UserValidationMsg" xml:space="preserve">
     <value>Enter a username!</value>
     <comment>Message when the user name has not been entered</comment>
   </data>
-  <data name="PasswordValidationMsg" xml:space="preserve">
+    <data name="PasswordValidationMsg" xml:space="preserve">
     <value>Enter a password!</value>
     <comment>Message when the password has not been entered</comment>
   </data>
-  <data name="InvalidCredentials" xml:space="preserve">
+    <data name="InvalidCredentials" xml:space="preserve">
     <value>Invalid user or password</value>
     <comment>Message when the user and password are invalid.</comment>
   </data>
-  <data name="Success" xml:space="preserve">
+    <data name="Success" xml:space="preserve">
     <value>Success</value>
     <comment>Successfuly operation</comment>
   </data>
-  <data name="MasterPageTitle" xml:space="preserve">
+    <data name="MasterPageTitle" xml:space="preserve">
     <value>SIGOB</value>
     <comment>Left menu page title (visible depending platfform) </comment>
   </data>
-  <data name="HomeMenu" xml:space="preserve">
+    <data name="HomeMenu" xml:space="preserve">
     <value>Home</value>
     <comment>Main Menu Home Option.</comment>
   </data>
-  <data name="HelpMenu" xml:space="preserve">
+    <data name="HelpMenu" xml:space="preserve">
     <value>Help</value>
     <comment>Main Menu Help Option.</comment>
   </data>
-  <data name="TermsAndConditionsMenu" xml:space="preserve">
+    <data name="TermsAndConditionsMenu" xml:space="preserve">
     <value>Terms and Conditions</value>
     <comment>Main Menu Terms and Conditions Option.</comment>
   </data>
-  <data name="SecurityMenu" xml:space="preserve">
+    <data name="SecurityMenu" xml:space="preserve">
     <value>Security</value>
     <comment>Main Menu Security Option.</comment>
   </data>
-  <data name="ContactUs" xml:space="preserve">
+    <data name="ContactUs" xml:space="preserve">
     <value>Contact us</value>
     <comment>Main Menu Contact Us Option.</comment>
   </data>
-  <data name="LogoutMenu" xml:space="preserve">
+    <data name="LogoutMenu" xml:space="preserve">
     <value>Logout</value>
     <comment>Main Menu Logout Option.</comment>
   </data>
-  <data name="ApplicationsViewTitle" xml:space="preserve">
+    <data name="ApplicationsViewTitle" xml:space="preserve">
     <value>Sigob</value>
     <comment>SIGOB Applications View Title.</comment>
   </data>
-  <data name="ProfileViewTitle" xml:space="preserve">
+    <data name="ProfileViewTitle" xml:space="preserve">
     <value>My Profile</value>
     <comment>SIGOB Profile View Title.</comment>
   </data>
-  <data name="PersonalDataGroup" xml:space="preserve">
+    <data name="PersonalDataGroup" xml:space="preserve">
     <value>Edit personal information</value>
     <comment>Text for Group Personal Information</comment>
   </data>
-  <data name="OfficialDataGroup" xml:space="preserve">
+    <data name="OfficialDataGroup" xml:space="preserve">
     <value>View Official information</value>
     <comment>Text for Group Official Information.</comment>
   </data>
-  <data name="ContactDataGroup" xml:space="preserve">
+    <data name="ContactDataGroup" xml:space="preserve">
     <value>Edit contact information</value>
     <comment>Text for Group Contact Information.</comment>
   </data>
-  <data name="FirstNameText" xml:space="preserve">
+    <data name="FirstNameText" xml:space="preserve">
     <value>First name</value>
     <comment>Text for First Name profile Label; .</comment>
   </data>
-  <data name="LastNameText" xml:space="preserve">
+    <data name="LastNameText" xml:space="preserve">
     <value>Last name</value>
     <comment>Text for Last Name profile Label; .</comment>
   </data>
-  <data name="InstitutionText" xml:space="preserve">
+    <data name="InstitutionText" xml:space="preserve">
     <value>Institution</value>
     <comment>Text for Institution profile label.</comment>
   </data>
-  <data name="PositionText" xml:space="preserve">
+    <data name="PositionText" xml:space="preserve">
     <value>Position</value>
     <comment>Text for Position (Role) Profile label.</comment>
   </data>
-  <data name="AreaText" xml:space="preserve">
+    <data name="AreaText" xml:space="preserve">
     <value>Section</value>
     <comment>Text for Area/Section Profile label.</comment>
   </data>
-  <data name="PhoneText" xml:space="preserve">
+    <data name="PhoneText" xml:space="preserve">
     <value>Phone</value>
     <comment>Text for Phone profile label.</comment>
   </data>
-  <data name="CellPhoneText" xml:space="preserve">
+    <data name="CellPhoneText" xml:space="preserve">
     <value>Cellphone</value>
     <comment>Text for CellPhone profile label.</comment>
   </data>
-  <data name="EmailText" xml:space="preserve">
+    <data name="EmailText" xml:space="preserve">
     <value>E-mail</value>
     <comment>Text for email profile label.</comment>
   </data>
-  <data name="UserImageText" xml:space="preserve">
+    <data name="UserImageText" xml:space="preserve">
     <value>Touch for change user image.</value>
     <comment>Text for image of user profile label.</comment>
   </data>
-  <data name="AgendaViewTitle" xml:space="preserve">
+    <data name="AgendaViewTitle" xml:space="preserve">
     <value>Agenda</value>
     <comment>Text for agenda calendar page.</comment>
   </data>
-  <data name="InstructionsViewTitle" xml:space="preserve">
+    <data name="InstructionsViewTitle" xml:space="preserve">
     <value>Instructions</value>
     <comment>Text for image of user profile label.</comment>
   </data>
-  <data name="TasksViewTitle" xml:space="preserve">
+    <data name="TasksViewTitle" xml:space="preserve">
     <value>Tasks</value>
     <comment>Text for image of user profile label.</comment>
   </data>
-  <data name="SearchPlaceHolder" xml:space="preserve">
+    <data name="SearchPlaceHolder" xml:space="preserve">
     <value>Type pattern...</value>
     <comment>Text for search place holder.</comment>
   </data>
-  <data name="ManagementStatusTitle" xml:space="preserve">
+    <data name="SearchInternalContactsPlaceHolder" xml:space="preserve">
+    <value>Type pattern to search internal contacts</value>
+    <comment>Text for search internal contacts place holder.</comment>
+  </data>
+    <data name="SearchExternalContactsPlaceHolder" xml:space="preserve">
+    <value>Type pattern to search internal contacts</value>
+    <comment>Text for search internal contacts place holder.</comment>
+  </data>
+    <data name="SearchDeviceContactsPlaceHolder" xml:space="preserve">
+    <value>Type pattern to search internal contacts</value>
+    <comment>Text for search internal contacts place holder.</comment>
+  </data>
+    <data name="SearchExternalContacts" xml:space="preserve">
+    <value>Search in Institutional Directory</value>
+    <comment>Text for search internal contacts place holder.</comment>
+  </data>
+    <data name="InstitutionalDirectoryTitle" xml:space="preserve">
+    <value>Institutional Directory</value>
+    <comment>Text for Institutional Directory name.</comment>
+  </data>
+    <data name="ContactsTitle" xml:space="preserve">
+    <value>Mobile's Contacts</value>
+    <comment>Text for search internal contacts place holder.</comment>
+  </data>
+    <data name="ManagementStatusTitle" xml:space="preserve">
     <value>Management status</value>
     <comment>Text for Title of management status list or selector.</comment>
   </data>
-  <data name="InManagementStatus" xml:space="preserve">
+    <data name="InManagementStatus" xml:space="preserve">
     <value>In management</value>
     <comment>Text for Item in management status.</comment>
   </data>
-  <data name="PendingStatus" xml:space="preserve">
+    <data name="PendingStatus" xml:space="preserve">
     <value>Pending</value>
     <comment>Text for Item in pending status.</comment>
   </data>
-  <data name="CloseToDeadlinedStatus" xml:space="preserve">
+    <data name="CloseToDeadlinedStatus" xml:space="preserve">
     <value>Close to deadline</value>
     <comment>Text for Item close to deadline time status.</comment>
-  </data>  
-  <data name="ExpiredStatus" xml:space="preserve">
+  </data>
+    <data name="ExpiredStatus" xml:space="preserve">
     <value>Over deadline</value>
     <comment>Text for Item in expired time status.</comment>
   </data>
-  <data name="CompletedStatus" xml:space="preserve">
+    <data name="CompletedStatus" xml:space="preserve">
     <value>Completed</value>
     <comment>Text for Item competed.</comment>
   </data>
-  <data name="SuspendedStatus" xml:space="preserve">
+    <data name="SuspendedStatus" xml:space="preserve">
     <value>Suspended</value>
     <comment>Text for Item competed.</comment>
   </data>
-  <data name="AllStatus" xml:space="preserve">
+    <data name="AllStatus" xml:space="preserve">
     <value>All</value>
     <comment>Text for All items wherever status.</comment>
   </data>
-  <data name="Day" xml:space="preserve">
+    <data name="Day" xml:space="preserve">
     <value>day</value>
     <comment>Day text.</comment>
   </data>
-  <data name="Days" xml:space="preserve">
+    <data name="Days" xml:space="preserve">
     <value>days</value>
     <comment>Days text.</comment>
   </data>
-  <data name="Month" xml:space="preserve">
+    <data name="Month" xml:space="preserve">
     <value>month</value>
     <comment>Month text.</comment>
   </data>
-  <data name="Months" xml:space="preserve">
+    <data name="Months" xml:space="preserve">
     <value>months</value>
     <comment>Months text.</comment>
   </data>
-  <data name="Year" xml:space="preserve">
+    <data name="Year" xml:space="preserve">
     <value>year</value>
     <comment>Year text.</comment>
   </data>
-  <data name="Years" xml:space="preserve">
+    <data name="Years" xml:space="preserve">
     <value>years</value>
     <comment>Years text.</comment>
   </data>
-  <data name="CalendarsTitle" xml:space="preserve">
+    <data name="CalendarsTitle" xml:space="preserve">
     <value>Calendars</value>
     <comment>Text of Calendars Page Title or Filter Option.</comment>
   </data>
-  <data name="Calendar" xml:space="preserve">
+    <data name="Calendar" xml:space="preserve">
     <value>Calendar</value>
     <comment>Calendar text.</comment>
   </data>
-  <data name="Today" xml:space="preserve">
+    <data name="Today" xml:space="preserve">
     <value>Today</value>
     <comment>Today text.</comment>
   </data>
-  <data name="AllDay" xml:space="preserve">
+    <data name="AllDay" xml:space="preserve">
     <value>All Day</value>
     <comment>All day duration event.</comment>
   </data>
-  <data name="Filters" xml:space="preserve">
+    <data name="Filters" xml:space="preserve">
     <value>Filters</value>
     <comment>Filters text.</comment>
   </data>
-  <data name="SelectAll" xml:space="preserve">
+    <data name="SelectAll" xml:space="preserve">
     <value>Select all</value>
     <comment>Select all option text.</comment>
   </data>
-  <data name="UnselectAll" xml:space="preserve">
+    <data name="UnselectAll" xml:space="preserve">
     <value>Unselect all</value>
     <comment>Select all option text.</comment>
   </data>
-  <data name="ShowAll" xml:space="preserve">
+    <data name="ShowAll" xml:space="preserve">
     <value>Show all</value>
     <comment>View all option text.</comment>
   </data>
-  <data name="HideAll" xml:space="preserve">
+    <data name="HideAll" xml:space="preserve">
     <value>Hide all</value>
     <comment>Hide all option text.</comment>
   </data>
-  <data name="GeneralError" xml:space="preserve">
+    <data name="GeneralError" xml:space="preserve">
     <value>Sorry there was an error while making the request.</value>
     <comment>Error message when sucess Call API, but result is false.</comment>
   </data>
-  <data name="SelectCalendarMessage" xml:space="preserve">
+    <data name="SelectCalendarMessage" xml:space="preserve">
     <value>Please, select the calendars that you want to make visible in your Management Center.</value>
     <comment>Message for set visibility of calendar.</comment>
   </data>
-  <data name="CalendarFiltersMessage" xml:space="preserve">
+    <data name="CalendarFiltersMessage" xml:space="preserve">
     <value>Please, select the filtering options that you want to apply in your Management Center calendar.</value>
     <comment>Message for set filters of calendar.</comment>
   </data>
-  <data name="SelectCalendarColor" xml:space="preserve">
+    <data name="SelectCalendarColor" xml:space="preserve">
     <value>Select the calendar color.</value>
     <comment>Message for choose a color of calendar.</comment>
   </data>
-  <data name="MaleGender" xml:space="preserve">
+    <data name="MaleGender" xml:space="preserve">
     <value>Male</value>
     <comment>Text of Gender Male.</comment>
   </data>
-  <data name="FemaleGender" xml:space="preserve">
+    <data name="FemaleGender" xml:space="preserve">
     <value>Female</value>
     <comment>Text of Gender Female.</comment>
   </data>
-  <data name="GenderText" xml:space="preserve">
+    <data name="GenderText" xml:space="preserve">
     <value>Gender</value>
     <comment>Label for Gender Entry.</comment>
   </data>
-  <data name="SelectGenderPlaceHolder" xml:space="preserve">
+    <data name="SelectGenderPlaceHolder" xml:space="preserve">
     <value>Select a gender.</value>
     <comment>Placeholder text for gender selection.</comment>
   </data>
-  <data name="SourceImageQuestion" xml:space="preserve">
+    <data name="SourceImageQuestion" xml:space="preserve">
     <value>Change your profile picture.</value>
     <comment>Place from select a new image.</comment>
   </data>
-  <data name="FromGallery" xml:space="preserve">
+    <data name="FromGallery" xml:space="preserve">
     <value>Upload photo from gallery</value>
     <comment>Take image from gallery</comment>
   </data>
-  <data name="FromCamera" xml:space="preserve">
+    <data name="FromCamera" xml:space="preserve">
     <value>Take photo with camera</value>
     <comment>Take image from camera</comment>
   </data>
-  <data name="Delete" xml:space="preserve">
+    <data name="Delete" xml:space="preserve">
     <value>Delete</value>
     <comment>Delete option</comment>
   </data>
-  <data name="DeletePicture" xml:space="preserve">
+    <data name="DeletePicture" xml:space="preserve">
     <value>Remove photo</value>
     <comment>Delete the current picture</comment>
   </data>
-  <data name="CalendarViewModeText" xml:space="preserve">
+    <data name="CalendarViewModeText" xml:space="preserve">
     <value>Select the calendar view.</value>
     <comment>Monthly view of calendar</comment>
   </data>
-  <data name="MonthlyView" xml:space="preserve">
+    <data name="MonthlyView" xml:space="preserve">
     <value>Monthly view</value>
     <comment>Monthly view of calendar</comment>
   </data>
-  <data name="DailyView" xml:space="preserve">
+    <data name="DailyView" xml:space="preserve">
     <value>Daily view</value>
     <comment>Dailyy view of calendar</comment>
   </data>
-  <data name="MultiDayView" xml:space="preserve">
+    <data name="MultiDayView" xml:space="preserve">
     <value>Three days view</value>
     <comment>MultiDay view of calendar</comment>
   </data>
-  <data name="YearView" xml:space="preserve">
+    <data name="YearView" xml:space="preserve">
     <value>Year view</value>
     <comment>Year view of calendar</comment>
   </data>
-  <data name="WeeklyView" xml:space="preserve">
+    <data name="WeeklyView" xml:space="preserve">
     <value>Weekly view</value>
     <comment>Weelly view of calendar</comment>
   </data>
-  <data name="ConfirmedFilterTitle" xml:space="preserve">
+    <data name="ConfirmedFilterTitle" xml:space="preserve">
     <value>Show confirmed tentative</value>
     <comment>Title for filter of confirmation status of the appointment</comment>
   </data>
-  <data name="OnlyConfirmed" xml:space="preserve">
+    <data name="OnlyConfirmed" xml:space="preserve">
     <value>Show only confirmed</value>
     <comment>Filter to show only confirmed appointments</comment>
   </data>
-  <data name="OnlyTentative" xml:space="preserve">
+    <data name="OnlyTentative" xml:space="preserve">
     <value>Show only tentative</value>
     <comment>Filter to show only tentative appointments</comment>
   </data>
-  <data name="ConfirmedAndTentative" xml:space="preserve">
+    <data name="ConfirmedAndTentative" xml:space="preserve">
     <value>Show confirmed an tentative</value>
     <comment>Show both appointment types</comment>
   </data>
-  <data name="TentativeLabel" xml:space="preserve">
+    <data name="TentativeLabel" xml:space="preserve">
     <value>Tentative</value>
     <comment>Text for tentative appointments</comment>
   </data>
-  <data name="AppointmentViewTitle" xml:space="preserve">
+    <data name="AppointmentViewTitle" xml:space="preserve">
     <value>Appointment</value>
     <comment>Title for appointment (personal agenda) view</comment>
-  </data>    
-  <data name="EventNameText" xml:space="preserve">
+  </data>
+    <data name="EventNameText" xml:space="preserve">
     <value>Enter the event title.</value>
     <comment>Title for appointment (personal agenda) view</comment>
   </data>
-  <data name="EventLocationText" xml:space="preserve">
+    <data name="EventLocationText" xml:space="preserve">
     <value>Appointment</value>
     <comment>Title for appointment (personal agenda) view</comment>
   </data>
-  <data name="EventStartText" xml:space="preserve">
+    <data name="EventStartText" xml:space="preserve">
     <value>Appointment</value>
     <comment>Title for appointment (personal agenda) view</comment>
   </data>
-  <data name="EventEndText" xml:space="preserve">
+    <data name="EventEndText" xml:space="preserve">
     <value>Appointment</value>
     <comment>Title for appointment (personal agenda) view</comment>
   </data>
-  <data name="EventTimeStartText" xml:space="preserve">
+    <data name="EventTimeStartText" xml:space="preserve">
     <value>Appointment</value>
     <comment>Title for appointment (personal agenda) view</comment>
   </data>
-  <data name="EventTimeEndText" xml:space="preserve">
+    <data name="EventTimeEndText" xml:space="preserve">
     <value>Appointment</value>
     <comment>Title for appointment (personal agenda) view</comment>
   </data>
-  <data name="EventCalendarOwner" xml:space="preserve">
+    <data name="EventCalendarOwner" xml:space="preserve">
     <value>Appointment</value>
     <comment>Title for appointment (personal agenda) view</comment>
   </data>
-  <data name="EventTypeText" xml:space="preserve">
+    <data name="EventTypeText" xml:space="preserve">
     <value>Appointment</value>
     <comment>Title for appointment (personal agenda) view</comment>
-  </data>  
-  <data name="EventStatusText" xml:space="preserve">
+  </data>
+    <data name="EventStatusText" xml:space="preserve">
     <value>Select management status</value>
     <comment>Title for appointment (personal agenda) view</comment>
   </data>
-  <data name="EventProgrammerText" xml:space="preserve">
+    <data name="EventProgrammerText" xml:space="preserve">
     <value>Programmed by</value>
     <comment>Title for appointment (personal agenda) view</comment>
   </data>
-  <data name="EventSummaryText" xml:space="preserve">
-    <value>Appointment</value>
-    <comment>Title for appointment (personal agenda) view</comment>
+    <data name="EventSummaryText" xml:space="preserve">
+    <value>Summary</value>
+    <comment>Title for summary (personal agenda) view</comment>
   </data>
-  <data name="EventParticipantsText" xml:space="preserve">
-    <value>Guests</value>
-    <comment>Title for appointment (personal agenda) view</comment>
+    <data name="EventParticipantText" xml:space="preserve">
+    <value>Participant</value>
+    <comment>Title for participant field</comment>
   </data>
-  <data name="EventAbstractText" xml:space="preserve">
+    <data name="EventParticipantsText" xml:space="preserve">
+    <value>Participants</value>
+    <comment>Title for participants view</comment>
+  </data>
+    <data name="EventAbstractText" xml:space="preserve">
     <value>Executive abstract</value>
     <comment>Title for appointment (personal agenda) view</comment>
   </data>
-  <data name="EventAnnotationsText" xml:space="preserve">
+    <data name="EventAnnotationsText" xml:space="preserve">
     <value>Executive abstract</value>
     <comment>Title for appointment (personal agenda) view</comment>
   </data>
-  <data name="Event" xml:space="preserve">
+    <data name="Event" xml:space="preserve">
     <value>Event</value>
     <comment>Event object name in singular.</comment>
   </data>
-  <data name="Events" xml:space="preserve">
+    <data name="Events" xml:space="preserve">
     <value>Events</value>
     <comment>Event object name in plural.</comment>
   </data>
-  <data name="Activity" xml:space="preserve">
+    <data name="Activity" xml:space="preserve">
     <value>Activity</value>
     <comment>Activity object name in singular.</comment>
   </data>
-  <data name="Activities" xml:space="preserve">
+    <data name="Activities" xml:space="preserve">
     <value>Activities</value>
     <comment>Activity object name in plural.</comment>
   </data>
-  <data name="Appointment" xml:space="preserve">
+    <data name="Appointment" xml:space="preserve">
     <value>Appointment</value>
     <comment>Appointment object name in singular.</comment>
   </data>
-  <data name="Appointments" xml:space="preserve">
+    <data name="Appointments" xml:space="preserve">
     <value>Appointments</value>
     <comment>Appointment object name in plural.</comment>
   </data>
-  <data name="Instruction" xml:space="preserve">
+    <data name="Instruction" xml:space="preserve">
     <value>Instruction</value>
     <comment>Instruction object name in singular.</comment>
   </data>
-  <data name="Instructions" xml:space="preserve">
+    <data name="Instructions" xml:space="preserve">
     <value>Instructions</value>
     <comment>Instruction object name in plural.</comment>
   </data>
-  <data name="Assignment" xml:space="preserve">
+    <data name="Assignment" xml:space="preserve">
     <value>Assignment</value>
     <comment>Assignment object name in singular.</comment>
   </data>
-  <data name="Assignments" xml:space="preserve">
+    <data name="Assignments" xml:space="preserve">
     <value>Assignments</value>
     <comment>Assignment object name in plural.</comment>
   </data>
-  <data name="Task" xml:space="preserve">
+    <data name="Task" xml:space="preserve">
     <value>Task</value>
     <comment>Task object name in singular.</comment>
   </data>
-  <data name="Tasks" xml:space="preserve">
+    <data name="Tasks" xml:space="preserve">
     <value>Tasks</value>
     <comment>Task object name in plural.</comment>
   </data>
-  <data name="Request" xml:space="preserve">
+    <data name="Request" xml:space="preserve">
     <value>Request</value>
     <comment>Request object name in singular.</comment>
   </data>
-  <data name="Requests" xml:space="preserve">
+    <data name="Requests" xml:space="preserve">
     <value>Requests</value>
     <comment>Request object name in plural.</comment>
   </data>
-  <data name="SelectItemToAddManagementCenter" xml:space="preserve">
+    <data name="SelectItemToAddManagementCenter" xml:space="preserve">
     <value>Select new item to add.</value>
     <comment>Message for choose a new item in Management Center.</comment>
+  </data>
+    <data name="HighConfidentialityLevel" xml:space="preserve">
+    <value>High</value>
+    <comment>High Confidentiality</comment>
+  </data>
+    <data name="LowConfidentialityLevel" xml:space="preserve">
+    <value>Low</value>
+    <comment>Low confidentiality</comment>
+  </data>
+    <data name="PrivateConfidentialityLevel" xml:space="preserve">
+    <value>Maximum/Private</value>
+    <comment>Maximum or private confidentiality level</comment>
+  </data>
+    <data name="MediumConfidentialityLevel" xml:space="preserve">
+    <value>Medium/Discreet</value>
+    <comment>Reserved or medium confidentiality level</comment>
+  </data>
+    <data name="PublicConfidentialityLevel" xml:space="preserve">
+    <value>Minimum/Public</value>
+    <comment>Public or minimum confidentiality</comment>
+  </data>
+    <data name="NoConfidentialityLevel" xml:space="preserve">
+    <value>N/A</value>
+    <comment>Does not apply</comment>
+  </data>
+    <data name="Me" xml:space="preserve">
+    <value>Me</value>
+    <comment>Personal pronoun for Me</comment>
+  </data>
+    <data name="And" xml:space="preserve">
+    <value>and</value>
+    <comment>And operator</comment>
+  </data>
+    <data name="ExternalContactsViewTitle" xml:space="preserve">
+    <value>External Participants</value>
+    <comment>External Participoants or Contacts View Title.</comment>
   </data>
 </root>

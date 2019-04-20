@@ -6,15 +6,17 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Input;
+    using AsyncAwaitBestPractices.MVVM;
     using GalaSoft.MvvmLight.Command;
     using Models;
     using Services;
-    using SigobMobile.Helpers;
-    using SigobMobile.Views.Tasks;
+    using Helpers;
+    using Views.Tasks;
     using Telerik.XamarinForms.Input;
     using Telerik.XamarinForms.Input.Calendar.Commands;
     using Views.ManagementCenter;
     using Xamarin.Forms;
+    using SigobMobile.Interfaces;
 
     public class CalendarViewModel : BaseViewModel
     {
@@ -24,6 +26,8 @@
 
         #region ApiControllers
         internal string apiEventsController = "events/start/{0}/end/{1}/viewattempts/{2}";
+        internal string apiEventCgController = "cgcal/{0}/events/{1}";
+        internal string apiPersonalAppointmentController = "events/{0}/owner/{1}";
         internal string apiManagementCenterAddOptions = "cg/addoptions";
         #endregion
 
@@ -101,7 +105,7 @@
         public CalendarViewModel()
         {
             this.apiService = new ApiService();
-            Task.Run(async () => await this.LoadAppointments(DateTime.Today));
+            this.LoadAppointments(DateTime.Today);
             this.CalendarView = (CalendarViewMode)Settings.CurrentCalendarViewMode;
             this.SelectedDate = Settings.SelectedDate;
             this.DisplayDate = Settings.SelectedDate;
@@ -113,9 +117,10 @@
         /// Load the appointments.
         /// </summary>
         /// <param name="date">Date.</param>
-        public async Task LoadAppointments(DateTime date)
+        public void LoadAppointments(DateTime date)
         {
-            await UpdateAppointments(date);
+            IErrorHandler errorHandler = null;
+            UpdateAppointments(date).FireAndForgetSafeAsync(errorHandler);
         }
 
         /// <summary>
@@ -289,8 +294,14 @@
                             await App.Navigator.PushAsync(new AppointmentPage());
                             break;
                         case 7:
-                            appViewModel.EventCg = new EventCgViewModel(eventSelected);
-                            await App.Navigator.PushAsync(new EventCgPage());
+                            IsRunning = true;
+                            ManagementCenterEvent eventCg = await GetEventAsync(eventSelected);
+                            eventCg.Id = eventSelected.Id;
+                            eventCg.CalendarColor = eventSelected.Color;
+                            eventCg.TypeColor = eventSelected.TypeColor;
+                            appViewModel.EventCg = new EventCgViewModel(eventCg);
+                            IsRunning = false;
+                            await App.Navigator.PushAsync(new EventCgPage() { Title = eventCg.SingularEventName});
                             break;
                         default:
                             break;
@@ -303,6 +314,44 @@
                 }
             }
         }
+
+        /// <summary>
+        /// Gets the event async.
+        /// </summary>
+        /// <returns>The event async.</returns>
+        /// <param name="eventSelected">Event selected.</param>
+        private async Task<ManagementCenterEvent> GetEventAsync(Event eventSelected)
+        {
+            var connection = await this.apiService.CheckConnection();
+            if (!connection.IsSuccess)
+            {
+                IsRunning = false;
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    connection.Message,
+                    Languages.Cancel);
+                await Application.Current.MainPage.Navigation.PopAsync();
+                return null;
+            }
+            var response = await this.apiService.Get<ManagementCenterEvent>(
+                Settings.UrlBaseApiSigob,
+                App.PrefixApiSigob,
+                string.Format(this.apiEventCgController, eventSelected.Owner, eventSelected.Id),
+                Settings.Token,
+                Settings.DbToken
+            );
+            if (!response.IsSuccess)
+            {
+                this.IsRunning = false;
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    response.Message,
+                    Languages.Cancel);
+                return null;
+            }
+            return (ManagementCenterEvent)response.Result;
+        }
+
 
         /// <summary>
         /// Go Selected Date Today
@@ -380,6 +429,11 @@
             finally { IsRunning = false; }
         }
 
+        /// <summary>
+        /// Creates the item.
+        /// </summary>
+        /// <returns>The item.</returns>
+        /// <param name="newItem">New item.</param>
         private async Task CreateItem(string newItem)
         {
             var appViewModel = MainViewModel.GetInstance();
@@ -406,28 +460,29 @@
             }
         }
 
+        /// <summary>
+        /// Can execute tap in Event.
+        /// </summary>
+        /// <returns><c>true</c>, if execute was caned, <c>false</c> otherwise.</returns>
+        private bool CanExecute(object parameter)
+        {
+            return !IsRunning;
+        }
+        #endregion
+
+        #region Async Commands
+        public ICommand AppointmentTappedCommand => new AsyncCommand<AppointmentTapCommandContext>(AppointmentTapped, CanExecute);
+        public ICommand CellDateTappedCommand => new AsyncCommand<CalendarDayCell>(CellDateTapped);
+        public IAsyncCommand SetCalendarViewModeCommand => new AsyncCommand(SetCalendarViewMode);
+        public IAsyncCommand BackToMainPageCommand => new AsyncCommand(BackToMainPage);
+        public IAsyncCommand InstructionsListCommand => new AsyncCommand(InstructionsList);
+        public IAsyncCommand OpenCalendarsCommand => new AsyncCommand(OpenCalendars);
+        public IAsyncCommand OpenFiltersCommand => new AsyncCommand(OpenFilters);
+        public IAsyncCommand AddItemCommand => new AsyncCommand(AddItem);
         #endregion
 
         #region Commands
-
-        public ICommand AppointmentTappedCommand => new AsyncCommand<AppointmentTapCommandContext>(AppointmentTapped);
-
-        public ICommand CellDateTappedCommand => new AsyncCommand<CalendarDayCell>(CellDateTapped);
-
         public ICommand GoTodayCommand => new RelayCommand(GoToday);
-
-        public ICommand SetCalendarViewModeCommand => new AsyncCommand(SetCalendarViewMode);
-
-        public ICommand BackToMainPageCommand => new AsyncCommand(BackToMainPage);
-
-        public ICommand InstructionsListCommand => new AsyncCommand(InstructionsList);
-
-        public ICommand OpenCalendarsCommand => new AsyncCommand(OpenCalendars);
-
-        public ICommand OpenFiltersCommand => new AsyncCommand(OpenFilters);
-
-        public ICommand AddItemCommand => new AsyncCommand(AddItem);
-
         #endregion
 
     }

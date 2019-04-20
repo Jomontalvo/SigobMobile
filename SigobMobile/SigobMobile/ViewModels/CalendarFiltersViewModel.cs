@@ -4,11 +4,10 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
-    using System.Windows.Input;
-    //using GalaSoft.MvvmLight.Command;
     using Helpers;
     using Models;
     using Xamarin.Forms;
+    using AsyncAwaitBestPractices.MVVM;
 
     public class CalendarFiltersViewModel : BaseViewModel
     {
@@ -88,11 +87,8 @@
         #endregion
 
         #region Commands
-
-        public ICommand CancelFiltersCommand => new AsyncCommand(CancelFilters);
-
-        public ICommand SaveFiltersCommand => new AsyncCommand(SaveFilters);
-
+        public IAsyncCommand CancelFiltersCommand => new AsyncCommand(CancelFilters);
+        public IAsyncCommand SaveFiltersCommand => new AsyncCommand(SaveFilters);
         #endregion
 
         #region Methods
@@ -103,6 +99,7 @@
         {
             await Application.Current.MainPage.Navigation.PopModalAsync(); 
         }
+
         /// <summary>
         /// Save the filter options.
         /// </summary>

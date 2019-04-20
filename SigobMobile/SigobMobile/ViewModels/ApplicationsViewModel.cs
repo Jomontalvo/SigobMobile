@@ -4,9 +4,9 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
-    using System.Windows.Input;
-    using GalaSoft.MvvmLight.Command;
+    using AsyncAwaitBestPractices.MVVM;
     using Helpers;
+    using Interfaces;
     using Models;
     using Services;
     using Views;
@@ -23,7 +23,7 @@
         private ObservableCollection<ApplicationItemViewModel> applications;
         private bool isRefreshing;
         private List<ApplicationMenuItem> applicationList;
-        private bool CanExecuteLoad() => !IsRefreshing;
+        //private bool CanExecuteLoad() => !IsRefreshing;
         #endregion
 
         #region Properties
@@ -45,21 +45,21 @@
         public ApplicationsViewModel()
         {
             this.apiService = new ApiService();
-            this.LoadApplicationsMenu();
-            //Task.Run(async () => await this.LoadApplicationsMenu());
+            IErrorHandler errorHandler = null;
+            this.LoadApplicationsMenu().FireAndForgetSafeAsync(errorHandler);
         }
         #endregion
 
-        #region Commands
-        public ICommand RefreshCommand => new RelayCommand(LoadApplicationsMenu, CanExecuteLoad);
-        public ICommand SearchCommand => new AsyncCommand(Search);
+        #region Async Commands
+        public IAsyncCommand RefreshCommand => new AsyncCommand(LoadApplicationsMenu);
+        public IAsyncCommand SearchCommand => new AsyncCommand(Search);
         #endregion
 
         #region Methods
         /// <summary>
         /// Loads the applications menu.
         /// </summary>
-        private async void LoadApplicationsMenu()
+        private async Task LoadApplicationsMenu()
         {
             this.IsRefreshing = true;
             var connection = await this.apiService.CheckConnection();
@@ -118,6 +118,7 @@
             });
         }
 
+        //TODO
         /// <summary>
         /// Search this instance.
         /// </summary>

@@ -1,10 +1,8 @@
 ﻿
 namespace SigobMobile.ViewModels
 {
-    using System.Linq;
-    using System.Windows.Input;
-    using GalaSoft.MvvmLight.Command;
-    using Helpers;
+    using System.Threading.Tasks;
+    using AsyncAwaitBestPractices.MVVM;
     using Models;
     using Views.ManagementCenter;
     using Xamarin.Forms;
@@ -15,18 +13,12 @@ namespace SigobMobile.ViewModels
     public class InstructionItemViewModel : Instruction
     {
         #region Commands
-        public ICommand SelectInstructionCommand
-        {
-            get
-            {
-                return new RelayCommand(SelectInstruction);
-            }
-        }
+        public IAsyncCommand SelectInstructionCommand => new AsyncCommand(SelectInstruction);
 
         /// <summary>
         /// Selects the instruction.
         /// </summary>
-        private async void SelectInstruction()
+        private async Task SelectInstruction()
         {
             var instructionViewModel = MainViewModel.GetInstance();
             instructionViewModel.Instruction = new InstructionViewModel();

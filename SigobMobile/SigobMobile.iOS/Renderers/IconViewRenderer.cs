@@ -1,12 +1,12 @@
 ﻿using SigobMobile.iOS.Renderers;
 using Xamarin.Forms;
 
-[assembly: ExportRendererAttribute(typeof(SigobMobile.Helpers.IconView), typeof(IconViewRenderer))]
+[assembly: ExportRendererAttribute(typeof(SigobMobile.Controls.IconView), typeof(IconViewRenderer))]
 namespace SigobMobile.iOS.Renderers
 {
     using System.ComponentModel;
     using CoreGraphics;
-    using Helpers;
+    using Controls;
     using UIKit;
     using Xamarin.Forms.Platform.iOS;
 

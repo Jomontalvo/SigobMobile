@@ -6,12 +6,14 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Input;
+    using AsyncAwaitBestPractices.MVVM;
     using GalaSoft.MvvmLight.Command;
     using Helpers;
+    using Interfaces;
     using Models;
     using Services;
-    using Views.ManagementCenter;
     using Telerik.XamarinForms.DataControls.ListView.Commands;
+    using Views.ManagementCenter;
     using Xamarin.Forms;
 
     public class InstructionsViewModel : BaseViewModel
@@ -64,7 +66,8 @@
             set
             { 
                 SetValue(ref this.selectedIndex, value);
-                this.OnSelectionChanged();
+                IErrorHandler errorHandler = null;
+                this.OnSelectionChanged().FireAndForgetSafeAsync(errorHandler);
             }
         }
         public string Filter
@@ -81,13 +84,14 @@
         #region Constructors
         public InstructionsViewModel()
         {
+            IErrorHandler errorHandler = null;
             this.isRefreshingWhenNotPull = true;
             this.apiService = new ApiService();
             this.SelectedIndex = 0;
-            this.RefreshCommand = new Command<PullToRefreshRequestedCommandContext>(this.Refresh);
-            this.ItemTapCommand = new Command<ItemTapCommandContext>(this.ItemTapped);
+            this.RefreshCommand = new AsyncCommand<PullToRefreshRequestedCommandContext>(this.Refresh);
+            this.ItemTapCommand = new AsyncCommand<ItemTapCommandContext>(this.ItemTapped);
             this.LoadSegmentFilters();
-            this.LoadItems();
+            this.LoadItems().FireAndForgetSafeAsync(errorHandler);
         }
         #endregion
 
@@ -96,7 +100,7 @@
         /// <summary>
         /// Iniatial load of instructions
         /// </summary>
-        private async void LoadItems()
+        public async Task LoadItems()
         {
             await this.LoadInstructions(false);
         }
@@ -112,9 +116,9 @@
         }
 
         /// <summary>
-        /// Event ocurrs when thw selection is changed.
+        /// Event ocurrs when the selection is changed.
         /// </summary>
-        private async void OnSelectionChanged()
+        private async Task OnSelectionChanged()
         {
             await this.LoadInstructions(false);
         }
@@ -194,11 +198,11 @@
         /// Item tapped of listview.
         /// </summary>
         /// <param name="context">Context.</param>
-        private void ItemTapped(ItemTapCommandContext context)
+        private async Task ItemTapped(ItemTapCommandContext context)
         {
             var tappedItem = context.Item;
             //add your logic here
-            Application.Current.MainPage.DisplayAlert("", "You've selected " + tappedItem, "OK");
+            await Application.Current.MainPage.DisplayAlert("", "You've selected " + tappedItem, "OK");
         }
 
         /// <summary>
@@ -212,59 +216,31 @@
         /// <summary>
         /// Opens the calendars visibility options
         /// </summary>
-        private async void OpenCalendars()
+        private async Task OpenCalendars()
         {
             var calendarsMainViewModel = MainViewModel.GetInstance();
-            calendarsMainViewModel.Calendars = new CalendarsViewModel();
+            calendarsMainViewModel.Calendars = new CalendarsViewModel(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new CalendarsPage()));
-        }
-
-
-        /// <summary>
-        /// Opens the filters.
-        /// </summary>
-        private void OpenFilters()
-        {
-            //var filtersMainViewModel = MainViewModel.GetInstance();
-            //filtersMainViewModel.CalendarFilters = new CalendarFiltersViewModel(this);
-            //Application.Current.MainPage.Navigation.PushModalAsync(new CalendarFiltersPage());
         }
 
         /// <summary>
         /// Refresh the specified context.
         /// </summary>
         /// <param name="context">Context.</param>
-        private async void Refresh(PullToRefreshRequestedCommandContext context)
+        private async Task Refresh(PullToRefreshRequestedCommandContext context)
         {
-
             await LoadInstructions(true);
         }
         #endregion
 
-        #region Commands
-        public ICommand SearchCommand
-        {
-            get
-            {
-                return new RelayCommand(Search);
-            }
-        }
-        public ICommand OpenCalendarsCommand
-        {
-            get
-            {
-                return new RelayCommand(OpenCalendars);
-            }
-        }
-        public ICommand OpenFiltersCommand
-        {
-            get
-            {
-                return new RelayCommand(OpenFilters);
-            }
-        }
+        #region Async Commands
+        public IAsyncCommand OpenCalendarsCommand => new AsyncCommand(OpenCalendars);
         public ICommand RefreshCommand { get; set; }
         public ICommand ItemTapCommand { get; set; }
+        #endregion
+
+        #region Commands
+        public ICommand SearchCommand => new RelayCommand(Search);
         public ICommand SwitchSearchCommand => new RelayCommand(SwitchSearch);
         #endregion
     }

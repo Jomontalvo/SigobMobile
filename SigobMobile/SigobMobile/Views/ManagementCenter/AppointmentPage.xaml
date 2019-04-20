@@ -5,17 +5,18 @@
     x:Class="SigobMobile.Views.ManagementCenter.AppointmentPage"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:lang="clr-namespace:SigobMobile.Helpers"
+    xmlns:controls="clr-namespace:SigobMobile.Controls"
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
     Title="{lang:Translate AppointmentViewTitle}"
     ios:Page.UseSafeArea="true">
     <ContentPage.ToolbarItems>
-        <lang:ToolbarItemEx
+        <controls:ToolbarItemEx
             BindingContext="{Binding Appointment}"
             IsVisible="{Binding IsEditable}"
             Order="Default"
             Priority="0"
             Text="{lang:Translate Edit}">
-        </lang:ToolbarItemEx>
+        </controls:ToolbarItemEx>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
@@ -46,7 +47,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <lang:IconView
+                    <controls:IconView
                         Grid.Column="0"
                         Grid.Row="0"
                         Foreground="{Binding LocalAppointment.Color}"
@@ -54,7 +55,7 @@
                         HorizontalOptions="Center"
                         Source="ic_ev_calendar_color"
                         VerticalOptions="Start">
-                    </lang:IconView>
+                    </controls:IconView>
                     <StackLayout
                         Grid.Column="1"
                         Grid.Row="0">

@@ -1,26 +1,19 @@
 ﻿namespace SigobMobile.ViewModels
 {
     using System.Threading.Tasks;
-    using System.Windows.Input;
+    using AsyncAwaitBestPractices.MVVM;
     using Models;
-    using Helpers;
     using Views.ManagementCenter;
 
     public class ApplicationItemViewModel : ApplicationMenuItem
     {
-        #region Commands
-        public ICommand SelectApplicationCommand
-        {
-            get
-            {
-                return new AsyncCommand(SelectApplication);
-            }
-        }
+        #region Async Commands
+        public IAsyncCommand SelectApplicationCommand => new AsyncCommand(SelectApplicationAsync);
 
         /// <summary>
         /// Select the app to navigate
         /// </summary>
-        private async Task SelectApplication()
+        private async Task SelectApplicationAsync()
         {
             // 1. GetInstance of View Model
             var appViewModel = MainViewModel.GetInstance();
@@ -28,7 +21,7 @@
             {
                 case TypeApplication.ManagementCenter:
                     appViewModel.Calendar = new CalendarViewModel();
-                    await App.Navigator.PushAsync(new CalendarPage());
+                    await App.Navigator.PushAsync(new CalendarPage(),true);
                     break;
                 case TypeApplication.Tasks:
                     appViewModel.CalendarMonth = new CalendarMonthViewModel();
@@ -40,10 +33,7 @@
                     break;
                 case TypeApplication.Communications:
                     break;
-                default:
-                    break;
             }
-            return;
         }
         #endregion
     }

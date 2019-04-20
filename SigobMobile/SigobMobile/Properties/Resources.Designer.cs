@@ -101,6 +101,12 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string Done {
+            get {
+                return ResourceManager.GetString("Done", resourceCulture);
+            }
+        }
+        
         public static string ForgotPassword {
             get {
                 return ResourceManager.GetString("ForgotPassword", resourceCulture);
@@ -320,6 +326,42 @@ namespace SigobMobile.Properties {
         public static string SearchPlaceHolder {
             get {
                 return ResourceManager.GetString("SearchPlaceHolder", resourceCulture);
+            }
+        }
+        
+        public static string SearchInternalContactsPlaceHolder {
+            get {
+                return ResourceManager.GetString("SearchInternalContactsPlaceHolder", resourceCulture);
+            }
+        }
+        
+        public static string SearchExternalContactsPlaceHolder {
+            get {
+                return ResourceManager.GetString("SearchExternalContactsPlaceHolder", resourceCulture);
+            }
+        }
+        
+        public static string SearchDeviceContactsPlaceHolder {
+            get {
+                return ResourceManager.GetString("SearchDeviceContactsPlaceHolder", resourceCulture);
+            }
+        }
+        
+        public static string SearchExternalContacts {
+            get {
+                return ResourceManager.GetString("SearchExternalContacts", resourceCulture);
+            }
+        }
+        
+        public static string InstitutionalDirectoryTitle {
+            get {
+                return ResourceManager.GetString("InstitutionalDirectoryTitle", resourceCulture);
+            }
+        }
+        
+        public static string ContactsTitle {
+            get {
+                return ResourceManager.GetString("ContactsTitle", resourceCulture);
             }
         }
         
@@ -677,6 +719,12 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string EventParticipantText {
+            get {
+                return ResourceManager.GetString("EventParticipantText", resourceCulture);
+            }
+        }
+        
         public static string EventParticipantsText {
             get {
                 return ResourceManager.GetString("EventParticipantsText", resourceCulture);
@@ -782,6 +830,60 @@ namespace SigobMobile.Properties {
         public static string SelectItemToAddManagementCenter {
             get {
                 return ResourceManager.GetString("SelectItemToAddManagementCenter", resourceCulture);
+            }
+        }
+        
+        public static string HighConfidentialityLevel {
+            get {
+                return ResourceManager.GetString("HighConfidentialityLevel", resourceCulture);
+            }
+        }
+        
+        public static string LowConfidentialityLevel {
+            get {
+                return ResourceManager.GetString("LowConfidentialityLevel", resourceCulture);
+            }
+        }
+        
+        public static string PrivateConfidentialityLevel {
+            get {
+                return ResourceManager.GetString("PrivateConfidentialityLevel", resourceCulture);
+            }
+        }
+        
+        public static string MediumConfidentialityLevel {
+            get {
+                return ResourceManager.GetString("MediumConfidentialityLevel", resourceCulture);
+            }
+        }
+        
+        public static string PublicConfidentialityLevel {
+            get {
+                return ResourceManager.GetString("PublicConfidentialityLevel", resourceCulture);
+            }
+        }
+        
+        public static string NoConfidentialityLevel {
+            get {
+                return ResourceManager.GetString("NoConfidentialityLevel", resourceCulture);
+            }
+        }
+        
+        public static string Me {
+            get {
+                return ResourceManager.GetString("Me", resourceCulture);
+            }
+        }
+        
+        public static string And {
+            get {
+                return ResourceManager.GetString("And", resourceCulture);
+            }
+        }
+        
+        public static string ExternalContactsViewTitle {
+            get {
+                return ResourceManager.GetString("ExternalContactsViewTitle", resourceCulture);
             }
         }
     }

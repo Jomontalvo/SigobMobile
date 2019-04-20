@@ -3,9 +3,10 @@
     using System;
     using System.Collections.ObjectModel;
     using System.IO;
-    using System.Windows.Input;
-    using GalaSoft.MvvmLight.Command;
+    using System.Threading.Tasks;
+    using AsyncAwaitBestPractices.MVVM;
     using Helpers;
+    using Interfaces;
     using Models;
     using Services;
     using Views;
@@ -60,32 +61,31 @@
         public MenuViewModel()
         {
             //Get Profile image, full name and menu options.
+            IErrorHandler errorHandler = null;
             this.apiService = new ApiService();
-            this.LoadBasicProfileData();
             this.LoadMenu();
+            this.LoadBasicProfileData().FireAndForgetSafeAsync(errorHandler);
+
         }
         #endregion
 
         #region Commands
-        public ICommand GetProfileCommand
-        {
-            get { return new RelayCommand(GetProfile); }
+        public IAsyncCommand GetProfileCommand => new AsyncCommand(GetProfile);
+        #endregion
 
-        }
+        #region Methods
         /// <summary>
         /// Gets the current user profile (Tap image or full name).
         /// </summary>
-        private async void GetProfile()
+        private async Task GetProfile()
         {
             await App.Navigator.PopToRootAsync(false);
             App.Master.IsPresented = false;
             var profileViewModel = MainViewModel.GetInstance();
-            profileViewModel.Profile  = new ProfileViewModel();
-            await App.Navigator.PushAsync(new ProfilePage(),false);
+            profileViewModel.Profile = new ProfileViewModel();
+            await App.Navigator.PushAsync(new ProfilePage(), false);
         }
-        #endregion
 
-        #region Methods
         /// <summary>
         /// Backs to login page.
         /// </summary>
@@ -105,7 +105,7 @@
         /// <summary>
         /// Loads the name of the user image.
         /// </summary>
-        private async void LoadBasicProfileData()
+        private async Task LoadBasicProfileData()
         {
             this.IsRunning = true;
             var connection = await this.apiService.CheckConnection();

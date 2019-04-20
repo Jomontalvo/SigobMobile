@@ -93,14 +93,14 @@
                 <telerikInput:RadCalendar.DayViewSettings>
                     <telerikInput:DayViewSettings
                         DayStartTime="05:00:00"
-                        DayEndTime="23:00:00"
-                        TimelineInterval="1:00">
+                        DayEndTime="23:30:00"
+                        TimelineInterval="0:30">
                     </telerikInput:DayViewSettings>
                 </telerikInput:RadCalendar.DayViewSettings>
                 <telerikInput:RadCalendar.MultiDayViewSettings>
                     <telerikInput:MultiDayViewSettings
                         DayStartTime="05:00:00"
-                        DayEndTime="23:00:00"
+                        DayEndTime="23:30:00"
                         IsCurrentTimeIndicatorVisible="true"
                         IsWeekendVisible="true"
                         VisibleDays="3">

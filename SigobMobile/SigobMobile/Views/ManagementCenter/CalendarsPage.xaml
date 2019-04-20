@@ -4,22 +4,28 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"             
              xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
              xmlns:checkBoxCommands="clr-namespace:Telerik.XamarinForms.Primitives.CheckBox.Commands;assembly=Telerik.XamarinForms.Primitives"
-             xmlns:lang="clr-namespace:SigobMobile.Helpers"
+             xmlns:local="clr-namespace:SigobMobile.Helpers"
+             xmlns:controls="clr-namespace:SigobMobile.Controls"
              x:Class="SigobMobile.Views.ManagementCenter.CalendarsPage"
              BackgroundColor="{StaticResource defaultBackgroundView}"
              BindingContext="{Binding Main, Source={StaticResource Locator}}" 
-             Title="{lang:Translate CalendarsTitle}"
+             Title="{local:Translate CalendarsTitle}"
              ios:Page.UseSafeArea="true">
     <ContentPage.ToolbarItems>
         <!-- Done Button -->
         <ToolbarItem 
             BindingContext="{Binding Calendars}"
             Command="{Binding OkAndCloseCommand}"
-            Text="{lang:Translate Ok}" 
+            Text="{local:Translate Ok}" 
             Order="Primary" 
             Priority="0">
         </ToolbarItem>
     </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ColorToSourceIconConverter x:Key="ColorToSourceIconConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid
             BackgroundColor="{StaticResource softGray}"
@@ -52,7 +58,7 @@
                     HorizontalOptions="FillAndExpand"
                     HorizontalTextAlignment="Center"
                     Margin="10"
-                    Text="{lang:Translate SelectCalendarMessage}"
+                    Text="{local:Translate SelectCalendarMessage}"
                     TextColor="{StaticResource darkGray}"
                     VerticalTextAlignment="Center"
                     VerticalOptions="Center">
@@ -121,7 +127,7 @@
                                             HorizontalOptions="FillAndExpand"
                                             HorizontalTextAlignment="{OnPlatform iOS=Center, Android=Start, UWP=Start}"
                                             Margin="5,10,5,5"
-                                            Text="{lang:Translate SelectCalendarColor}">
+                                            Text="{local:Translate SelectCalendarColor}">
                                         </Label>
                                         <Grid
                                             Grid.Row="1"
@@ -143,356 +149,356 @@
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
                                             <!--Color 1-->
-                                            <lang:IconView
+                                            <controls:IconView
                                                 x:Name="circleColorRedOrange"
                                                 Foreground="{StaticResource calRedOrange}"
                                                 Grid.Column="0"
                                                 Grid.Row="0"
                                                 HeightRequest="30"
                                                 HorizontalOptions="Center"
-                                                Source="{Binding IconColorChecked}" 
+                                                Source="{Binding MyCalendarColor, Mode=OneWay, Converter={StaticResource ColorToSourceIconConverter}, ConverterParameter={StaticResource calRedOrange}}" 
                                                 WidthRequest="30"
                                                 VerticalOptions="Center">
-                                                <lang:IconView.GestureRecognizers>
+                                                <controls:IconView.GestureRecognizers>
                                                     <TapGestureRecognizer
                                                         Command ="{Binding SelectColorCommand}"
                                                         CommandParameter="{Binding Source={x:Reference circleColorRedOrange}}"
                                                         NumberOfTapsRequired="1">
                                                     </TapGestureRecognizer>
-                                                </lang:IconView.GestureRecognizers>
-                                            </lang:IconView>
+                                                </controls:IconView.GestureRecognizers>
+                                            </controls:IconView>
                                             <!--Color 2-->
-                                            <lang:IconView
+                                            <controls:IconView
                                                 x:Name="circleColorDarkGreen"
                                                 Foreground="{StaticResource calDarkGreen}"
                                                 Grid.Column="1"
                                                 Grid.Row="0"
                                                 HeightRequest="30"
                                                 HorizontalOptions="Center"
-                                                Source="{Binding IconColorChecked}" 
-                                                WidthRequest="30"
+                                                Source="{Binding MyCalendarColor, Mode=OneWay, Converter={StaticResource ColorToSourceIconConverter}, ConverterParameter={StaticResource calDarkGreen}}" 
+                                                    WidthRequest="30"
                                                 VerticalOptions="Center">
-                                                <lang:IconView.GestureRecognizers>
+                                                <controls:IconView.GestureRecognizers>
                                                     <TapGestureRecognizer
                                                         Command ="{Binding SelectColorCommand}"
                                                         CommandParameter="{Binding Source={x:Reference circleColorDarkGreen}}"
                                                         NumberOfTapsRequired="1">
                                                     </TapGestureRecognizer>
-                                                </lang:IconView.GestureRecognizers>
-                                            </lang:IconView>
+                                                </controls:IconView.GestureRecognizers>
+                                            </controls:IconView>
                                             <!--Color 3-->
-                                            <lang:IconView
+                                            <controls:IconView
                                                 x:Name="circleColorLightGreen"
                                                 Foreground="{StaticResource calLightGreen}"
                                                 Grid.Column="2"
                                                 Grid.Row="0"
                                                 HeightRequest="30"
                                                 HorizontalOptions="Center"
-                                                Source="{Binding IconColorChecked}" 
+                                                Source="{Binding MyCalendarColor, Mode=OneWay, Converter={StaticResource ColorToSourceIconConverter}, ConverterParameter={StaticResource calLightGreen}}" 
                                                 WidthRequest="30"
                                                 VerticalOptions="Center">
-                                                <lang:IconView.GestureRecognizers>
+                                                <controls:IconView.GestureRecognizers>
                                                     <TapGestureRecognizer
                                                         Command ="{Binding SelectColorCommand}"
                                                         CommandParameter="{Binding Source={x:Reference circleColorLightGreen}}"
                                                         NumberOfTapsRequired="1">
                                                     </TapGestureRecognizer>
-                                                </lang:IconView.GestureRecognizers>
-                                            </lang:IconView>
+                                                </controls:IconView.GestureRecognizers>
+                                            </controls:IconView>
                                             <!--Color 4-->
-                                            <lang:IconView
+                                            <controls:IconView
                                                 x:Name="circleColorTurquoise"
                                                 Foreground="{StaticResource calTurquoise}"
                                                 Grid.Column="3"
                                                 Grid.Row="0"
                                                 HeightRequest="30"
                                                 HorizontalOptions="Center"
-                                                Source="{Binding IconColorChecked}" 
+                                                Source="{Binding MyCalendarColor, Mode=OneWay, Converter={StaticResource ColorToSourceIconConverter}, ConverterParameter={StaticResource calTurquoise}}" 
                                                 WidthRequest="30"
                                                 VerticalOptions="Center">
-                                                <lang:IconView.GestureRecognizers>
+                                                <controls:IconView.GestureRecognizers>
                                                     <TapGestureRecognizer
                                                         Command ="{Binding SelectColorCommand}"
                                                         CommandParameter="{Binding Source={x:Reference circleColorTurquoise}}"
                                                         NumberOfTapsRequired="1">
                                                     </TapGestureRecognizer>
-                                                </lang:IconView.GestureRecognizers>
-                                            </lang:IconView>
+                                                </controls:IconView.GestureRecognizers>
+                                            </controls:IconView>
                                             <!--Color 5-->
-                                            <lang:IconView
+                                            <controls:IconView
                                                 x:Name="circleColorLightPurple"
                                                 Foreground="{StaticResource calLightPurple}"
                                                 Grid.Column="4"
                                                 Grid.Row="0"
                                                 HeightRequest="30"
                                                 HorizontalOptions="Center"
-                                                Source="{Binding IconColorChecked}" 
+                                                Source="{Binding MyCalendarColor, Mode=OneWay, Converter={StaticResource ColorToSourceIconConverter}, ConverterParameter={StaticResource calLightPurple}}" 
                                                 WidthRequest="30"
                                                 VerticalOptions="Center">
-                                                <lang:IconView.GestureRecognizers>
+                                                <controls:IconView.GestureRecognizers>
                                                     <TapGestureRecognizer
                                                         Command ="{Binding SelectColorCommand}"
                                                         CommandParameter="{Binding Source={x:Reference circleColorLightPurple}}"
                                                         NumberOfTapsRequired="1">
                                                     </TapGestureRecognizer>
-                                                </lang:IconView.GestureRecognizers>
-                                            </lang:IconView>
+                                                </controls:IconView.GestureRecognizers>
+                                            </controls:IconView>
                                             <!--Color 6-->
-                                            <lang:IconView
+                                            <controls:IconView
                                                 x:Name="circleColorLightOrange"
                                                 Foreground="{StaticResource calLightOrange}"
                                                 Grid.Column="5"
                                                 Grid.Row="0"
                                                 HeightRequest="30"
                                                 HorizontalOptions="Center"
-                                                Source="{Binding IconColorChecked}" 
+                                                Source="{Binding MyCalendarColor, Mode=OneWay, Converter={StaticResource ColorToSourceIconConverter}, ConverterParameter={StaticResource calLightOrange}}" 
                                                 WidthRequest="30"
                                                 VerticalOptions="Center">
-                                                <lang:IconView.GestureRecognizers>
+                                                <controls:IconView.GestureRecognizers>
                                                     <TapGestureRecognizer
                                                         Command ="{Binding SelectColorCommand}"
                                                         CommandParameter="{Binding Source={x:Reference circleColorLightOrange}}"
                                                         NumberOfTapsRequired="1">
                                                     </TapGestureRecognizer>
-                                                </lang:IconView.GestureRecognizers>
-                                            </lang:IconView>
+                                                </controls:IconView.GestureRecognizers>
+                                            </controls:IconView>
                                             <!--Second row-->
                                             <!--Color 7-->
-                                            <lang:IconView
+                                            <controls:IconView
                                                 x:Name="circleColorMediumGray"
                                                 Foreground="{StaticResource calMediumGray}"
                                                 Grid.Column="0"
                                                 Grid.Row="1"
                                                 HeightRequest="30"
                                                 HorizontalOptions="Center"
-                                                Source="{Binding IconColorChecked}" 
+                                                Source="{Binding MyCalendarColor, Mode=OneWay, Converter={StaticResource ColorToSourceIconConverter}, ConverterParameter={StaticResource calMediumGray}}" 
                                                 WidthRequest="30"
                                                 VerticalOptions="Center">
-                                                <lang:IconView.GestureRecognizers>
+                                                <controls:IconView.GestureRecognizers>
                                                     <TapGestureRecognizer
                                                         Command ="{Binding SelectColorCommand}"
                                                         CommandParameter="{Binding Source={x:Reference circleColorMediumGray}}"
                                                         NumberOfTapsRequired="1">
                                                     </TapGestureRecognizer>
-                                                </lang:IconView.GestureRecognizers>
-                                            </lang:IconView>
+                                                </controls:IconView.GestureRecognizers>
+                                            </controls:IconView>
                                             <!--Color 8-->
-                                            <lang:IconView
+                                            <controls:IconView
                                                 x:Name="circleColorPurple"
                                                 Foreground="{StaticResource calPurple}"
                                                 Grid.Column="1"
                                                 Grid.Row="1"
                                                 HeightRequest="30"
                                                 HorizontalOptions="Center"
-                                                Source="{Binding IconColorChecked}" 
+                                                Source="{Binding MyCalendarColor, Mode=OneWay, Converter={StaticResource ColorToSourceIconConverter}, ConverterParameter={StaticResource calPurple}}" 
                                                 WidthRequest="30"
                                                 VerticalOptions="Center">
-                                                <lang:IconView.GestureRecognizers>
+                                                <controls:IconView.GestureRecognizers>
                                                     <TapGestureRecognizer
                                                         Command ="{Binding SelectColorCommand}"
                                                         CommandParameter="{Binding Source={x:Reference circleColorPurple}}"
                                                         NumberOfTapsRequired="1">
                                                     </TapGestureRecognizer>
-                                                </lang:IconView.GestureRecognizers>
-                                            </lang:IconView>
+                                                </controls:IconView.GestureRecognizers>
+                                            </controls:IconView>
                                             <!--Color 9-->
-                                            <lang:IconView
+                                            <controls:IconView
                                                 x:Name="circleColorLightBlue"
                                                 Foreground="{StaticResource calLightBlue}"
                                                 Grid.Column="2"
                                                 Grid.Row="1"
                                                 HeightRequest="30"
                                                 HorizontalOptions="Center"
-                                                Source="{Binding IconColorChecked}" 
+                                                Source="{Binding MyCalendarColor, Mode=OneWay, Converter={StaticResource ColorToSourceIconConverter}, ConverterParameter={StaticResource calLightBlue}}" 
                                                 WidthRequest="30"
                                                 VerticalOptions="Center">
-                                                <lang:IconView.GestureRecognizers>
+                                                <controls:IconView.GestureRecognizers>
                                                     <TapGestureRecognizer
                                                         Command ="{Binding SelectColorCommand}"
                                                         CommandParameter="{Binding Source={x:Reference circleColorLightBlue}}"
                                                         NumberOfTapsRequired="1">
                                                     </TapGestureRecognizer>
-                                                </lang:IconView.GestureRecognizers>
-                                            </lang:IconView>
+                                                </controls:IconView.GestureRecognizers>
+                                            </controls:IconView>
                                             <!--Color 10-->
-                                            <lang:IconView
+                                            <controls:IconView
                                                 x:Name="circleColorFucsia"
                                                 Foreground="{StaticResource calFucsia}"
                                                 Grid.Column="3"
                                                 Grid.Row="1"
                                                 HeightRequest="30"
                                                 HorizontalOptions="Center"
-                                                Source="{Binding IconColorChecked}" 
+                                                Source="{Binding MyCalendarColor, Mode=OneWay, Converter={StaticResource ColorToSourceIconConverter}, ConverterParameter={StaticResource calFucsia}}" 
                                                 WidthRequest="30"
                                                 VerticalOptions="Center">
-                                                <lang:IconView.GestureRecognizers>
+                                                <controls:IconView.GestureRecognizers>
                                                     <TapGestureRecognizer
                                                         Command ="{Binding SelectColorCommand}"
                                                         CommandParameter="{Binding Source={x:Reference circleColorFucsia}}"
                                                         NumberOfTapsRequired="1">
                                                     </TapGestureRecognizer>
-                                                </lang:IconView.GestureRecognizers>
-                                            </lang:IconView>
+                                                </controls:IconView.GestureRecognizers>
+                                            </controls:IconView>
                                             <!--Color 11-->
-                                            <lang:IconView
+                                            <controls:IconView
                                                 x:Name="circleColorMango"
                                                 Foreground="{StaticResource calMango}"
                                                 Grid.Column="4"
                                                 Grid.Row="1"
                                                 HeightRequest="30"
                                                 HorizontalOptions="Center"
-                                                Source="{Binding IconColorChecked}" 
+                                                Source="{Binding MyCalendarColor, Mode=OneWay, Converter={StaticResource ColorToSourceIconConverter}, ConverterParameter={StaticResource calMango}}" 
                                                 WidthRequest="30"
                                                 VerticalOptions="Center">
-                                                <lang:IconView.GestureRecognizers>
+                                                <controls:IconView.GestureRecognizers>
                                                     <TapGestureRecognizer
                                                         Command ="{Binding SelectColorCommand}"
                                                         CommandParameter="{Binding Source={x:Reference circleColorMango}}"
                                                         NumberOfTapsRequired="1">
                                                     </TapGestureRecognizer>
-                                                </lang:IconView.GestureRecognizers>
-                                            </lang:IconView>
+                                                </controls:IconView.GestureRecognizers>
+                                            </controls:IconView>
                                             <!--Color 12-->
-                                            <lang:IconView
+                                            <controls:IconView
                                                 x:Name="circleColorLightBrown"
                                                 Foreground="{StaticResource calLightBrown}"
                                                 Grid.Column="5"
                                                 Grid.Row="1"
                                                 HeightRequest="30"
                                                 HorizontalOptions="Center"
-                                                Source="{Binding IconColorChecked}" 
+                                                Source="{Binding MyCalendarColor, Mode=OneWay, Converter={StaticResource ColorToSourceIconConverter}, ConverterParameter={StaticResource calLightBrown}}" 
                                                 WidthRequest="30"
                                                 VerticalOptions="Center">
-                                                <lang:IconView.GestureRecognizers>
+                                                <controls:IconView.GestureRecognizers>
                                                     <TapGestureRecognizer
                                                         Command ="{Binding SelectColorCommand}"
                                                         CommandParameter="{Binding Source={x:Reference circleColorLightBrown}}"
                                                         NumberOfTapsRequired="1">
                                                     </TapGestureRecognizer>
-                                                </lang:IconView.GestureRecognizers>
-                                            </lang:IconView>
+                                                </controls:IconView.GestureRecognizers>
+                                            </controls:IconView>
                                             <!--Third row-->
                                             <!--Color 13-->
-                                            <lang:IconView
+                                            <controls:IconView
                                                 x:Name="circleColorIndigo"
                                                 Foreground="{StaticResource calIndigo}"
                                                 Grid.Column="0"
                                                 Grid.Row="2"
                                                 HeightRequest="30"
                                                 HorizontalOptions="Center"
-                                                Source="{Binding IconColorChecked}" 
+                                                Source="{Binding MyCalendarColor, Mode=OneWay, Converter={StaticResource ColorToSourceIconConverter}, ConverterParameter={StaticResource calIndigo}}" 
                                                 WidthRequest="30"
                                                 VerticalOptions="Center">
-                                                <lang:IconView.GestureRecognizers>
+                                                <controls:IconView.GestureRecognizers>
                                                     <TapGestureRecognizer
                                                         Command ="{Binding SelectColorCommand}"
                                                         CommandParameter="{Binding Source={x:Reference circleColorIndigo}}"
                                                         NumberOfTapsRequired="1">
                                                     </TapGestureRecognizer>
-                                                </lang:IconView.GestureRecognizers>
-                                            </lang:IconView>
+                                                </controls:IconView.GestureRecognizers>
+                                            </controls:IconView>
                                             <!--Color 14-->
-                                            <lang:IconView
+                                            <controls:IconView
                                                 x:Name="circleColorDarkPink"
                                                 Foreground="{StaticResource calDarkPink}"
                                                 Grid.Column="1"
                                                 Grid.Row="2"
                                                 HeightRequest="30"
                                                 HorizontalOptions="Center"
-                                                Source="{Binding IconColorChecked}" 
+                                                Source="{Binding MyCalendarColor, Mode=OneWay, Converter={StaticResource ColorToSourceIconConverter}, ConverterParameter={StaticResource calDarkPink}}" 
                                                 WidthRequest="30"
                                                 VerticalOptions="Center">
-                                                <lang:IconView.GestureRecognizers>
+                                                <controls:IconView.GestureRecognizers>
                                                     <TapGestureRecognizer
                                                         Command ="{Binding SelectColorCommand}"
                                                         CommandParameter="{Binding Source={x:Reference circleColorDarkPink}}"
                                                         NumberOfTapsRequired="1">
                                                     </TapGestureRecognizer>
-                                                </lang:IconView.GestureRecognizers>
-                                            </lang:IconView>
+                                                </controls:IconView.GestureRecognizers>
+                                            </controls:IconView>
                                             <!--Color 15-->
-                                            <lang:IconView
+                                            <controls:IconView
                                                 x:Name="circleColorRed"
                                                 Foreground="{StaticResource calRed}"
                                                 Grid.Column="2"
                                                 Grid.Row="2"
                                                 HeightRequest="30"
                                                 HorizontalOptions="Center"
-                                                Source="{Binding IconColorChecked}" 
+                                                Source="{Binding MyCalendarColor, Mode=OneWay, Converter={StaticResource ColorToSourceIconConverter}, ConverterParameter={StaticResource calRed}}" 
                                                 WidthRequest="30"
                                                 VerticalOptions="Center">
-                                                <lang:IconView.GestureRecognizers>
+                                                <controls:IconView.GestureRecognizers>
                                                     <TapGestureRecognizer
                                                         Command ="{Binding SelectColorCommand}"
                                                         CommandParameter="{Binding Source={x:Reference circleColorRed}}"
                                                         NumberOfTapsRequired="1">
                                                     </TapGestureRecognizer>
-                                                </lang:IconView.GestureRecognizers>
-                                            </lang:IconView>
+                                                </controls:IconView.GestureRecognizers>
+                                            </controls:IconView>
                                             <!--Color 16-->
-                                            <lang:IconView
+                                            <controls:IconView
                                                 x:Name="circleColorGrayGreen"
                                                 Foreground="{StaticResource calGrayGreen}"
                                                 Grid.Column="3"
                                                 Grid.Row="2"
                                                 HeightRequest="30"
                                                 HorizontalOptions="Center"
-                                                Source="{Binding IconColorChecked}" 
+                                                Source="{Binding MyCalendarColor, Mode=OneWay, Converter={StaticResource ColorToSourceIconConverter}, ConverterParameter={StaticResource calGrayGreen}}" 
                                                 WidthRequest="30"
                                                 VerticalOptions="Center">
-                                                <lang:IconView.GestureRecognizers>
+                                                <controls:IconView.GestureRecognizers>
                                                     <TapGestureRecognizer
                                                         Command ="{Binding SelectColorCommand}"
                                                         CommandParameter="{Binding Source={x:Reference circleColorGrayGreen}}"
                                                         NumberOfTapsRequired="1">
                                                     </TapGestureRecognizer>
-                                                </lang:IconView.GestureRecognizers>
-                                            </lang:IconView>
+                                                </controls:IconView.GestureRecognizers>
+                                            </controls:IconView>
                                             <!--Color 17-->
-                                            <lang:IconView
+                                            <controls:IconView
                                                 x:Name="circleColorGray"
                                                 Foreground="{StaticResource calGray}"
                                                 Grid.Column="4"
                                                 Grid.Row="2"
                                                 HeightRequest="30"
                                                 HorizontalOptions="Center"
-                                                Source="{Binding IconColorChecked}" 
+                                                Source="{Binding MyCalendarColor, Mode=OneWay, Converter={StaticResource ColorToSourceIconConverter}, ConverterParameter={StaticResource calGray}}" 
                                                 WidthRequest="30"
                                                 VerticalOptions="Center">
-                                                <lang:IconView.GestureRecognizers>
+                                                <controls:IconView.GestureRecognizers>
                                                     <TapGestureRecognizer
                                                         Command ="{Binding SelectColorCommand}"
                                                         CommandParameter="{Binding Source={x:Reference circleColorGray}}"
                                                         NumberOfTapsRequired="1">
                                                     </TapGestureRecognizer>
-                                                </lang:IconView.GestureRecognizers>
-                                            </lang:IconView>
+                                                </controls:IconView.GestureRecognizers>
+                                            </controls:IconView>
                                             <!--Color 18-->
-                                            <lang:IconView
+                                            <controls:IconView
                                                 x:Name="circleColorAqua"
                                                 Foreground="{StaticResource calAqua}"
                                                 Grid.Column="5"
                                                 Grid.Row="2"
                                                 HeightRequest="30"
                                                 HorizontalOptions="Center"
-                                                Source="{Binding IconColorChecked}" 
+                                                Source="{Binding MyCalendarColor, Mode=OneWay, Converter={StaticResource ColorToSourceIconConverter}, ConverterParameter={StaticResource calAqua}}" 
                                                 WidthRequest="30"
                                                 VerticalOptions="Center">
-                                                <lang:IconView.GestureRecognizers>
+                                                <controls:IconView.GestureRecognizers>
                                                     <TapGestureRecognizer
                                                         Command ="{Binding SelectColorCommand}"
                                                         CommandParameter="{Binding Source={x:Reference circleColorAqua}}"
                                                         NumberOfTapsRequired="1">
                                                     </TapGestureRecognizer>
-                                                </lang:IconView.GestureRecognizers>
-                                            </lang:IconView>
+                                                </controls:IconView.GestureRecognizers>
+                                            </controls:IconView>
                                         </Grid>
                                         <Button 
                                             Command="{Binding CloseChangeColorCommand}"
                                             Grid.Row="2" 
                                             Padding="4" 
                                             HorizontalOptions="End" 
-                                            Text="{lang:Translate Cancel}" 
+                                            Text="{local:Translate Cancel}" 
                                             CornerRadius="6"
                                             BackgroundColor="Transparent">
                                         </Button>

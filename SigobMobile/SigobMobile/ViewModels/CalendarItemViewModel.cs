@@ -2,14 +2,14 @@
 {
     using System.Threading.Tasks;
     using System.Windows.Input;
+    using AsyncAwaitBestPractices.MVVM;
     using Helpers;
     using Models;
-    //using PropertyChanged;
     using Services;
     using Telerik.XamarinForms.Primitives.CheckBox.Commands;
     using Xamarin.Forms;
 
-    //[AddINotifyPropertyChangedInterface]
+
     public class CalendarItemViewModel : Calendar
     {
         #region Services

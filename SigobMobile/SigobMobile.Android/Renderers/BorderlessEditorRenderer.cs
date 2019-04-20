@@ -1,5 +1,5 @@
 ﻿using SigobMobile.Droid.Renderers;
-using SigobMobile.Helpers;
+using SigobMobile.Controls;
 using Xamarin.Forms;
 
 [assembly: ExportRenderer(typeof(BorderlessEditor), typeof(BorderlessEditorRenderer))]

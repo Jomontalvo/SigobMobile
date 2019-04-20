@@ -577,7 +577,6 @@
         /// <param name="controller">Controller.</param>
         /// <param name="authToken">Auth token.</param>
         /// <param name="authDbToken">Auth db token.</param>
-        /// <typeparam name="T">The 1st type parameter.</typeparam>
         public async Task<Response> Put<T>(
             string urlBase,
             string servicePrefix,
@@ -587,7 +586,6 @@
         {
             try
             {
-
                 HttpClient client = new HttpClient
                 {
                     BaseAddress = new Uri(urlBase)
@@ -630,17 +628,17 @@
         /// <param name="urlBase">URL base.</param>
         /// <param name="servicePrefix">Service prefix.</param>
         /// <param name="controller">Controller.</param>
-        /// <param name="tokenType">Token type.</param>
-        /// <param name="accessToken">Access token.</param>
+        /// <param name="authToken">Auth token.</param>
+        /// <param name="authDbToken">Auth db token.</param>
         /// <param name="model">Model.</param>
         /// <typeparam name="T">The 1st type parameter.</typeparam>
         public async Task<Response> Put<T>(
             string urlBase,
             string servicePrefix,
             string controller,
-            string tokenType,
-            string accessToken,
-            T model)
+            string authToken,
+            string authDbToken,
+            object model)
         {
             try
             {
@@ -648,18 +646,13 @@
                 var content = new StringContent(
                     request,
                     Encoding.UTF8, "application/json");
-                var client = new HttpClient
+                HttpClient client = new HttpClient
                 {
                     BaseAddress = new Uri(urlBase)
                 };
-                client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue(tokenType, accessToken);
-
-                var url = string.Format(
-                    "{0}{1}/{2}",
-                    servicePrefix,
-                    controller,
-                    model.GetHashCode());
+                client.DefaultRequestHeaders.Add("token", authToken);
+                client.DefaultRequestHeaders.Add("dbtoken", authDbToken);
+                var url = $"{servicePrefix}{controller}"; //model.GetHashCode());
                 var response = await client.PutAsync(url, content);
                 var result = await response.Content.ReadAsStringAsync();
 

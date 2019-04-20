@@ -1,11 +1,9 @@
 ﻿namespace SigobMobile.ViewModels
 {
-    using System.Windows.Input;
-    using GalaSoft.MvvmLight.Command;
+    using System.Threading.Tasks;
+    using AsyncAwaitBestPractices.MVVM;
     using Helpers;
     using Views;
-    using Views.ManagementCenter;
-    using Xamarin.Forms;
     using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
     public class MenuItemViewModel : BaseViewModel
@@ -17,20 +15,14 @@
         #endregion
 
         #region Commands
-        public ICommand NavigateCommand
-        {
-            get
-            {
-                return new RelayCommand(Navigate);
-            }
-        }
+        public IAsyncCommand NavigateCommand => new AsyncCommand(Navigate);
         #endregion
 
         #region Methods
         /// <summary>
         /// Navigate to Detail Page selected in MenuPage
         /// </summary>
-        private async void Navigate()
+        private async Task Navigate()
         {
             var mainViewModel = MainViewModel.GetInstance();
             await App.Navigator.PopToRootAsync(false);

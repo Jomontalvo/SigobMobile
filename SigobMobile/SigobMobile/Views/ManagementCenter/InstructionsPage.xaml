@@ -220,8 +220,6 @@
         </telerikDataControls:RadListView>
         <!--  << listview-gettingstarted-listview-xaml  -->
         <Grid
-            AbsoluteLayout.LayoutBounds=".5,1,1,.1"
-            AbsoluteLayout.LayoutFlags="All"
             ColumnSpacing="0"
             Grid.Row="4"
             RowSpacing="0"
@@ -236,28 +234,13 @@
                 BackgroundColor="{StaticResource accesoryGray}"
                 Grid.Row="0">
             </BoxView>
-            <Grid 
+            <Button 
                 BackgroundColor="{StaticResource softGray}"
+                Command="{Binding OpenCalendarsCommand}"
                 Grid.Row="1" 
-                VerticalOptions="End" 
-                RowSpacing="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Button 
-                    BackgroundColor="{StaticResource softGray}"
-                    Command="{Binding OpenCalendarsCommand}"
-                    Grid.Column="1" 
-                    Text="{lang:Translate CalendarsTitle}">
-                </Button>
-                <Button 
-                    BackgroundColor="{StaticResource softGray}"
-                    Command="{Binding OpenFiltersCommand}"
-                    Grid.Column="2" 
-                    Text="{lang:Translate Filters}">
-                </Button>
-            </Grid>
+                Text="{lang:Translate CalendarsTitle}"
+                HorizontalOptions="CenterAndExpand">
+            </Button>
         </Grid>
     </Grid>
 </ContentPage>

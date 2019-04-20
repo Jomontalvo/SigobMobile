@@ -6,8 +6,11 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Input;
+    using AsyncAwaitBestPractices.MVVM;
     using GalaSoft.MvvmLight.Command;
     using Helpers;
+    using Controls;
+    using Interfaces;
     using Models;
     using Services;
     using Xamarin.Forms;
@@ -36,6 +39,7 @@
         #region Agenda Color Attributes
         private string iconColorChecked;
         private CalendarViewModel calendarViewModel;
+        private InstructionsViewModel instructionsViewModel;
         #endregion
 
         #region Properties
@@ -92,33 +96,45 @@
             this.ModelInitialization();
         }
 
-        public CalendarsViewModel(CalendarViewModel calendarDayViewModel)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:SigobMobile.ViewModels.CalendarsViewModel"/> class.
+        /// </summary>
+        /// <param name="parentViewModel">Parent view model.</param>
+        public CalendarsViewModel(object parentViewModel)
         {
-            this.calendarViewModel = calendarDayViewModel;
+            switch(parentViewModel.GetType().Name)
+            {
+                case "CalendarViewModel":
+                    this.calendarViewModel = (CalendarViewModel)parentViewModel;
+                    break;
+                case "InstructionsViewModel":
+                    this.instructionsViewModel = (InstructionsViewModel)parentViewModel;
+                    break;
+            }
             this.ModelInitialization();
         }
 
+        /// <summary>
+        /// Initialization view.
+        /// </summary>
         private void ModelInitialization ()
         {
             apiService = new ApiService();
+            IErrorHandler errorHandler = null;
             SelectDeselectAll = Languages.ShowAll;
-            Task.Run(async () => await this.LoadCalendars());
-            SetColorOptions();
-            IsEnabled = true;
+            this.LoadCalendars().FireAndForgetSafeAsync(errorHandler);
         }
-
         #endregion
 
         #region Commands
         public ICommand OpenChangeColorCommand => new RelayCommand(OpenChangeColor);
-
         public ICommand CloseChangeColorCommand => new RelayCommand(CloseChangeColor);
+        #endregion
 
-        public ICommand OkAndCloseCommand => new AsyncCommand(OkAndClose);
-
-        public ICommand CheckAllCalendarsCommand => new AsyncCommand(CheckAllCalendars);
-
+        #region Async Commands
         public ICommand SelectColorCommand => new AsyncCommand<IconView>(SelectColor);
+        public IAsyncCommand OkAndCloseCommand => new AsyncCommand(OkAndClose);
+        public IAsyncCommand CheckAllCalendarsCommand => new AsyncCommand(CheckAllCalendars);
         #endregion
 
         #region Methods
@@ -179,14 +195,6 @@
         }
 
         /// <summary>
-        /// Sets the color options for active user calendar
-        /// </summary>
-        private void SetColorOptions()
-        {
-            IconColorChecked =  "ic_circle_color"; //TODO: Assign checked image
-        }
-
-        /// <summary>
         /// Loads the calendars.
         /// </summary>
         private async Task LoadCalendars()
@@ -225,7 +233,7 @@
             this.CalendarSource = new ObservableCollection<CalendarItemViewModel>(ToCalendarItemViewModel());
             MyCalendarColor = calendarList.Where(c => c.OfficeId == Settings.OfficeCode).Select(c => c.CalendarColor).First();
             IsRefreshing = false;
-            return;
+            IsEnabled = true;
         }
 
         /// <summary>
@@ -304,7 +312,8 @@
         {
             IsRunning = true;
             //Refresh Observable collection from Parent
-            await this.calendarViewModel.LoadAppointments(calendarViewModel.SelectedDate.GetValueOrDefault());
+            if (this.calendarViewModel != null) this.calendarViewModel.LoadAppointments(calendarViewModel.SelectedDate.GetValueOrDefault());
+            else if (this.instructionsViewModel != null) await this.instructionsViewModel.LoadItems();
             IsRunning = false;
             //Go to parent page
             await Application.Current.MainPage.Navigation.PopModalAsync();

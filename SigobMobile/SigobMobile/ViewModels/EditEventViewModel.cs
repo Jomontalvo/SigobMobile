@@ -1,7 +1,7 @@
 ﻿namespace SigobMobile.ViewModels
 {
-    using System.Windows.Input;
-    using GalaSoft.MvvmLight.Command;
+    using System.Threading.Tasks;
+    using AsyncAwaitBestPractices.MVVM;
     using Models;
     using Xamarin.Forms;
 
@@ -42,11 +42,11 @@
         #endregion
 
         #region Commands
-        public ICommand CancelEditCommand => new RelayCommand(CancelEdit);
+        public IAsyncCommand CancelEditCommand => new AsyncCommand(CancelEdit);
         #endregion
 
         #region Methods
-        private async void CancelEdit()
+        private async Task CancelEdit()
         {
             await Application.Current.MainPage.Navigation.PopModalAsync();
         }

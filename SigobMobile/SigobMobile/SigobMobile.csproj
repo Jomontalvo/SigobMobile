@@ -21,6 +21,8 @@
     <PackageReference Include="Telerik.UI.for.Xamarin" Version="2019.1.318.1" />
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
     <PackageReference Include="Refractored.FloatingActionButtonForms" Version="2.1.0" />
+    <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="2.1.0" />
+    <PackageReference Include="Xamarin.Forms.Contacts" Version="1.0.5" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
@@ -36,10 +38,14 @@
     <Folder Include="Views\Tasks\" />
     <Folder Include="Views\WorkFlow\" />
     <Folder Include="Views\GovernmentSociety\" />
+    <Folder Include="Views\Common\" />
+    <Folder Include="Controls\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="MainPage.xaml.cs" />
     <Compile Remove="Views\MasterDetailPage.xaml.cs" />
+    <Compile Remove="Helpers\AsyncCommand.cs" />
+    <Compile Remove="Interfaces\IAsyncCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
