@@ -219,3 +219,16 @@
                                             FontSize="Small"
                                             HorizontalOptions="FillAndExpand"
                                             Margin="5,0,0,0"
+                                            Text="{Binding Email}"
+                                            VerticalTextAlignment="Center">
+                                        </Label>
+                                    </StackLayout>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
