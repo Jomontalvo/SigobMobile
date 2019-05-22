@@ -886,5 +886,11 @@ namespace SigobMobile.Properties {
                 return ResourceManager.GetString("ExternalContactsViewTitle", resourceCulture);
             }
         }
+        
+        public static string Loading {
+            get {
+                return ResourceManager.GetString("Loading", resourceCulture);
+            }
+        }
     }
 }

@@ -13,7 +13,7 @@
             BindingContext="{Binding Contacts}">
             <SearchBar
                 BackgroundColor="{StaticResource grayBorder}"
-                FontSize="Default"
+                FontSize="Small"
                 Grid.Row="0"
                 Placeholder="{local:Translate SearchDeviceContactsPlaceHolder}"
                 SearchCommand="{Binding SearchContactCommand}"

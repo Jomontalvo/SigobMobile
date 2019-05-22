@@ -169,13 +169,13 @@
                         <!--Management Status-->
                         <Image
                             Grid.Column="0"
-                            Grid.Row="5"
+                            Grid.Row="4"
                             Source="{Binding IconStatus}"
                             VerticalOptions="Center">
                         </Image>
                         <Label
                             Grid.Column="1"
-                            Grid.Row="5"
+                            Grid.Row="4"
                             FontSize="Small"
                             Text="{Binding LocalEvent.StatusDescription}"
                             TextColor="{StaticResource darkGray}"
@@ -184,13 +184,13 @@
                         <!--Security Level-->
                         <Image
                             Grid.Column="0"
-                            Grid.Row="6"
+                            Grid.Row="5"
                             Source="ic_ev_security"
                             VerticalOptions="Center">
                         </Image>
                         <Label
                             Grid.Column="1"
-                            Grid.Row="6"
+                            Grid.Row="5"
                             FontSize="Small"
                             Text="{Binding LocalEvent.PrivacyDescription}"
                             TextColor="{StaticResource darkGray}"
@@ -199,13 +199,13 @@
                         <!--Programmer Name-->
                         <Image
                             Grid.Column="0"
-                            Grid.Row="7"
+                            Grid.Row="6"
                             Source="ic_ev_programmer"
                             VerticalOptions="Center">
                         </Image>
                         <Label
                             Grid.Column="1"
-                            Grid.Row="7"
+                            Grid.Row="6"
                             FontSize="Small"
                             Text="{Binding LocalEvent.ProgrammerName}"
                             TextColor="{StaticResource darkGray}"
@@ -214,14 +214,14 @@
                         <!--Event Details-->
                         <Image
                             Grid.Column="0"
-                            Grid.Row="8"
+                            Grid.Row="7"
                             Source="ic_ev_summary"
                             VerticalOptions="Center">
                         </Image>
                         <Label
                             Grid.Column="1"
                             Grid.ColumnSpan="2"
-                            Grid.Row="8"
+                            Grid.Row="7"
                             HorizontalOptions="StartAndExpand"
                             FontSize="Small"
                             Text="{Binding LocalEvent.Summary}"
@@ -232,7 +232,7 @@
                         <BoxView
                             Color="{StaticResource gray}"
                             Grid.Column="0"
-                            Grid.Row="9"
+                            Grid.Row="8"
                             Grid.ColumnSpan="3"
                             HeightRequest="1"
                             HorizontalOptions="FillAndExpand">
@@ -240,13 +240,13 @@
                         <!--Participants-->
                         <Image
                             Grid.Column="0"
-                            Grid.Row="10"
+                            Grid.Row="9"
                             Source="ic_ev_guests"
                             VerticalOptions="Center">
                         </Image>
                         <Label
                             Grid.Column="1"
-                            Grid.Row="10"
+                            Grid.Row="9"
                             FontSize="Small"
                             HorizontalOptions="FillAndExpand"
                             Text="{Binding Participants, Mode=TwoWay}"
@@ -261,9 +261,10 @@
                             </Label.GestureRecognizers>
                         </Label>
                         <ImageButton
+                            BackgroundColor="Transparent"
                             Command="{Binding LoadParticipantsCommand}"
                             Grid.Column="2"
-                            Grid.Row="10"
+                            Grid.Row="9"
                             HeightRequest="20"
                             IsVisible="{Binding IsParticipantsVisible}"
                             Source="ic_chevron"
@@ -273,13 +274,12 @@
                         <BoxView
                             Color="{StaticResource gray}"
                             Grid.Column="0"
-                            Grid.Row="11"
+                            Grid.Row="10"
                             Grid.ColumnSpan="3"
                             HeightRequest="1"
                             HorizontalOptions="FillAndExpand">
                         </BoxView>
                         <!--Executive Abstract-->
-                        
                     </Grid>
                     <!--Optional information-->
                     <Grid

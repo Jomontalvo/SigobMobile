@@ -310,11 +310,11 @@
     <comment>Text for search internal contacts place holder.</comment>
   </data>
     <data name="SearchExternalContactsPlaceHolder" xml:space="preserve">
-    <value>Type pattern to search internal contacts</value>
-    <comment>Text for search internal contacts place holder.</comment>
+    <value>Type to search into Institutional Directory</value>
+    <comment>Text for search external contacts place holder.</comment>
   </data>
     <data name="SearchDeviceContactsPlaceHolder" xml:space="preserve">
-    <value>Type pattern to search internal contacts</value>
+    <value>Type to search in Phone contacts</value>
     <comment>Text for search internal contacts place holder.</comment>
   </data>
     <data name="SearchExternalContacts" xml:space="preserve">
@@ -326,7 +326,7 @@
     <comment>Text for Institutional Directory name.</comment>
   </data>
     <data name="ContactsTitle" xml:space="preserve">
-    <value>Mobile's Contacts</value>
+    <value>Mobile Contacts</value>
     <comment>Text for search internal contacts place holder.</comment>
   </data>
     <data name="ManagementStatusTitle" xml:space="preserve">
@@ -676,5 +676,9 @@
     <data name="ExternalContactsViewTitle" xml:space="preserve">
     <value>External Participants</value>
     <comment>External Participoants or Contacts View Title.</comment>
+  </data>
+    <data name="Loading" xml:space="preserve">
+    <value>Loading...</value>
+    <comment>Loading message</comment>
   </data>
 </root>

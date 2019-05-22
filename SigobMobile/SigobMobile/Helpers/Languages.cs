@@ -79,6 +79,10 @@
         public static string Delete => Resources.Delete;
         #endregion
 
+        #region Await Messages
+        public static string Loading => Resources.Loading;
+        #endregion
+
         #region Login View
         public static string LoginViewTitle => Resources.LoginViewTitle;
         public static string EnterCredentials => Resources.EnterCredentials;

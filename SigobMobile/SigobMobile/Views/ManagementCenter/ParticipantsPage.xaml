@@ -36,6 +36,7 @@
                 FontSize="{OnPlatform Android=Large, Default=Default}"
                 HorizontalOptions="FillAndExpand"
                 HorizontalTextAlignment="Center"
+                TextColor="{OnPlatform Android=White}"
                 VerticalTextAlignment="Center">
             </Label>
             <Button
@@ -64,7 +65,7 @@
             </Grid.RowDefinitions>
             <SearchBar
                 BackgroundColor="{StaticResource softGray}"
-                FontSize="Default"
+                FontSize="Small"
                 Grid.Row="0"
                 Placeholder="{local:Translate SearchInternalContactsPlaceHolder}"
                 SearchCommand="{Binding SearchContactCommand}"

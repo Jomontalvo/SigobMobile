@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:telerikInput="clr-namespace:Telerik.XamarinForms.Input;assembly=Telerik.XamarinForms.Input"
+    xmlns:local="clr-namespace:SigobMobile.Helpers"
+    xmlns:ctrls="clr-namespace:SigobMobile.CustomControls"
+    x:Class="SigobMobile.Views.Common.ExternalContactsPage"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}"
+    BackgroundColor="{StaticResource defaultBackgroundView}"
+    ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding ExternalContacts}"
+            Padding="0,0">
+            <StackLayout
+                BackgroundColor="{StaticResource defaultBackgroundView}"
+                HeightRequest="40"
+                HorizontalOptions="FillAndExpand"
+                Orientation="Horizontal"
+                Padding="15,0, 15, 0"
+                VerticalOptions="Center">
+                <ImageButton
+                    BackgroundColor="{StaticResource clear}"
+                    Command="{Binding BackToParentPageCommand}"
+                    HeightRequest="28"
+                    HorizontalOptions="Start"
+                    Source="ic_bt_close_window"
+                    VerticalOptions="Center"
+                    WidthRequest="28">
+                </ImageButton>
+                <Label 
+                    Text="{local:Translate ExternalContactsViewTitle}"
+                    FontAttributes="Bold"
+                    FontSize="{OnPlatform Android=Medium,Default=Default}"
+                    TextColor="{OnPlatform Android={StaticResource DroidPrimary}}"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center">
+                </Label>
+                <ImageButton
+                    BackgroundColor="Transparent"
+                    Command="{Binding AddContactCommand}"
+                    HorizontalOptions="End"
+                    Source="ic_bt_add_contact">
+                </ImageButton>
+            </StackLayout>
+            <Grid
+                Padding="0,0"
+                RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <BoxView
+                    Color="{StaticResource gray}"
+                    Grid.Row="0"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand">
+                </BoxView>
+                <SearchBar
+                    BackgroundColor="{StaticResource grayBorder}"
+                    FontSize="Small"
+                    Grid.Row="1"
+                    IsSpellCheckEnabled="false"
+                    Placeholder="{Binding SearchPlaceHolderText}"
+                    SearchCommand="{Binding SearchCommand}"
+                    Text="{Binding Filter, Mode=TwoWay}">
+                </SearchBar>
+                <telerikInput:RadSegmentedControl
+                    x:Name="sourceContacts"
+                    Grid.Row="2"
+                    HeightRequest="28"
+                    ItemsSource="{Binding Categories}"
+                    Margin="10,2,10,2"
+                    SelectedIndex="{Binding SelectedCategory, Mode=TwoWay}"
+                    VerticalOptions="Start">
+                </telerikInput:RadSegmentedControl>
+                <ctrls:InfiniteListView
+                    x:Name="lstExternalContacts"
+                    Grid.Row="3"
+                    HasUnevenRows="true"
+                    IsVisible="{Binding IsSelectedMainList, Mode=TwoWay}"
+                    ItemsSource="{Binding InstitutionalDirectoryContacts}"
+                    LoadMoreCommand="{Binding LoadContactsCommand}">
+                    <ctrls:InfiniteListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid
+                                    Padding="16,10,10,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                        Grid.Column="0"
+                                        HeightRequest="28"
+                                        HorizontalOptions="Center"
+                                        Source="ic_contact_external" 
+                                        VerticalOptions="Center"
+                                        WidthRequest="28">
+                                    </Image>
+                                    <StackLayout
+                                        Grid.Column="1"
+                                        Orientation="Vertical"
+                                        Padding="5,0,0,0">
+                                        <Label
+                                            FontSize="Small"
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="FillAndExpand"
+                                            Margin="5,0,0,0"
+                                            Text="{Binding FullName}"
+                                            VerticalTextAlignment="Center">
+                                        </Label>
+                                        <Label
+                                            FontSize="Small"
+                                            HorizontalOptions="FillAndExpand"
+                                            Margin="5,0,0,0"
+                                            Text="{Binding Area}"
+                                            VerticalTextAlignment="Center">
+                                        </Label>
+                                    </StackLayout>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ctrls:InfiniteListView.ItemTemplate>
+                    <ctrls:InfiniteListView.Footer>
+                        <Grid 
+                            Padding="6" 
+                            IsVisible="{Binding IsBusy}">
+                            <!-- set the footer to have a zero height when invisible -->
+                            <Grid.Triggers>
+                                <Trigger 
+                                    TargetType="Grid" 
+                                    Property="IsVisible" 
+                                    Value="False">
+                                    <Setter Property="HeightRequest" Value="0" />
+                                </Trigger>
+                            </Grid.Triggers>
+                            <!-- the loading content -->
+                            <Label 
+                                Text="{local:Translate Loading}" 
+                                TextColor="{OnPlatform iOS={StaticResource iOSBlue }, Android={StaticResource DroidPrimary }}" 
+                                FontSize="Medium" 
+                                FontAttributes="Bold" 
+                                VerticalOptions="Center" 
+                                HorizontalOptions="Center" >
+                            </Label>
+                        </Grid>
+                    </ctrls:InfiniteListView.Footer>
+                </ctrls:InfiniteListView>
+                <ListView 
+                    x:Name="lstMobileContacts"
+                    GroupDisplayBinding="{Binding Key}"
+                    Footer=""
+                    Grid.Row="3"
+                    HasUnevenRows="true"
+                    IsGroupingEnabled="true"
+                    GroupShortNameBinding="{Binding AlphaIndex}"
+                    IsVisible="{Binding IsSelectedMainList, Mode=TwoWay,Converter={StaticResource inverseBool}}"
+                    IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                    ItemsSource="{Binding MobileContactsGrouped}">
+                    <ListView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <ViewCell Height="25">
+                                <StackLayout
+                                    Orientation="Horizontal"
+                                    VerticalOptions="FillAndExpand"
+                                    Padding="15,2"
+                                    BackgroundColor="{StaticResource softGray}">
+                                    <Label
+                                        FontSize="Medium"
+                                        FontAttributes="Bold"
+                                        Text="{Binding Name}"
+                                        VerticalOptions="Center">
+                                    </Label>
+                                    <Image
+                                        VerticalOptions="Center"
+                                        Source="{Binding ImageGroup}"
+                                        WidthRequest="30">
+                                    </Image>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.GroupHeaderTemplate>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid
+                                    Padding="16,10,10,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                        Grid.Column="0"
+                                        HeightRequest="28"
+                                        HorizontalOptions="Center"
+                                        Source="{Binding PhotoThumbnail}"
+                                        VerticalOptions="Center"
+                                        WidthRequest="28">
+                                    </Image>
+                                    <StackLayout
+                                        Padding="5,0,0,0"
+                                        Grid.Column="1">
+                                        <Label
+                                            FontSize="Small"
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="FillAndExpand"
+                                            Margin="5,0,0,0"
+                                            Text="{Binding FullName}"
+                                            VerticalTextAlignment="Center">
+                                        </Label>
+                                        <Label
+                                            FontSize="Small"
+                                            HorizontalOptions="FillAndExpand"
+                                            Margin="5,0,0,0"

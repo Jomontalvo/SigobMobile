@@ -11,7 +11,6 @@
         public string AlphaIndex { get; private set; }
         public string Name { get; private set; }
         public string ImageGroup { get; private set; }
-
         public Grouping(K key, IEnumerable<T> items)
         {
             string[] array = key.ToString().Split('|'); 

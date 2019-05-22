@@ -34,7 +34,7 @@
         private string filter;
         //private ManagementCenterEvent localEvent;
         //private AgendaEvent localAppointment;
-        private EventCgViewModel eventCgViewModel;
+        //private EventCgViewModel eventCgViewModel;
         private bool isRunning;
         private bool isFinding;
         public List<Participant> participantList;
@@ -49,6 +49,7 @@
         #endregion
 
         #region Properties
+        public EventCgViewModel eventCgViewModel;
         public List<Participant> MobileParticipants => new List<Participant>();
         public bool IsFinding
         {
@@ -383,10 +384,8 @@
         private async Task OpenExternalContacts()
         { 
             var contactsViewModel = MainViewModel.GetInstance();
-            contactsViewModel.Contacts = new ContactsViewModel();
-            await Application.Current.MainPage.Navigation.PushModalAsync(new ContactsPage());
-            //contactsViewModel.InstitucionalDirectory = new InstitucionalDirectoryViewModel();
-            //await Application.Current.MainPage.Navigation.PushModalAsync(new InstitucionalDirectoryPage { Title = Languages.InstitutionalDirectoryTitle });
+            contactsViewModel.ExternalContacts = new ExternalContactsViewModel(this);
+            await Application.Current.MainPage.Navigation.PushModalAsync(new ExternalContactsPage());
         }
 
         #endregion

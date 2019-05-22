@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Newtonsoft.Json;
+    using Xamarin.Forms;
 
     public enum Gender : byte
     {
@@ -38,6 +39,8 @@
 
         [JsonProperty("sexo")]
         public Gender Gender { get; set; }
+
+        public ImageSource PhotoThumbnail { get; set; }
     }
 
     /// <summary>
@@ -53,5 +56,19 @@
 
         [JsonProperty("contactosMovil")]
         public List<Participant> MobileContacts { get; set; }
+    }
+
+    /// <summary>
+    /// Device Phone contact.
+    /// </summary>
+    public class PhoneContact
+    {
+        public string Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string FullName { get; set; } //FullName
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public ImageSource ThumbnailUri { get; set; }
     }
 }

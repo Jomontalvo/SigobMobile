@@ -32,7 +32,7 @@ namespace SigobMobile.ViewModels
         public InstructionViewModel Instruction { get; set; }
         public TaskViewModel Task { get; set; }
         public ParticipantsViewModel Participants { get; set; }
-        public InstitucionalDirectoryViewModel InstitucionalDirectory { get; set; }
+        public ExternalContactsViewModel ExternalContacts { get; set; }
         public ContactsViewModel Contacts { get; set; }
         #endregion
 
