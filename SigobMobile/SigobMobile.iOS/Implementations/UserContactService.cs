@@ -21,7 +21,7 @@ namespace SigobMobile.iOS.Implementations
                 return new List<PhoneContact>();
 
             //Contacts
-            var keysToFetch = new[] { CNContactKey.GivenName, CNContactKey.FamilyName, CNContactKey.EmailAddresses };
+            var keysToFetch = new[] { CNContactKey.GivenName, CNContactKey.FamilyName, CNContactKey.EmailAddresses, CNContactKey.ThumbnailImageData };
             //var containerId = new CNContactStore().DefaultContainerIdentifier;
             // using the container id of null to get all containers.
             // If you want to get contacts for only a single container type, you can specify that here
@@ -51,13 +51,15 @@ namespace SigobMobile.iOS.Implementations
                 {
                     try
                     {
+                        var stream = item.ThumbnailImageData?.AsStream();
                         contacts.Add(new PhoneContact
                         {
                             FirstName = item.GivenName,
                             LastName = item.FamilyName,
                             FullName = $"{item.GivenName} {item.FamilyName}",
-                            Email = (emails.GetLength(0) > 0) ? emails[0].Value : String.Empty
-                        });
+                            Email = (emails.GetLength(0) > 0) ? emails[0].Value : String.Empty,
+                            PhotoThumbnail = Xamarin.Forms.ImageSource.FromStream(() => stream)
+                    });
                     }
                     catch (Exception ex) { Console.WriteLine (ex.Message); }
                 }

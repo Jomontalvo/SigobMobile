@@ -17,8 +17,8 @@ namespace SigobMobile.Droid.Implementations
         public async Task<IEnumerable<PhoneContact>> GetAllContacts()
         {
             var contactList = new List<PhoneContact>();
-            var uri = ContactsContract.CommonDataKinds.Phone.ContentUri;
-            //var uri = ContactsContract.Contacts.ContentUri;
+            //var uri = ContactsContract.CommonDataKinds.Phone.ContentUri;
+            var uri = ContactsContract.Contacts.ContentUri;
 
             //string[] projection = { ContactsContract.Contacts.InterfaceConsts.Id,
                 //ContactsContract.Contacts.InterfaceConsts.DisplayName,
@@ -28,7 +28,7 @@ namespace SigobMobile.Droid.Implementations
 
             //var uri = ContactsContract.Contacts.ContentUri;
             var projection = new string[]{ 
-            ContactsContract.ContactsColumns.LookupKey, 
+            ContactsContract.Contacts.InterfaceConsts.LookupKey, 
             ContactsContract.Contacts.InterfaceConsts.DisplayName, 
             ContactsContract.CommonDataKinds.Phone.Number,
             ContactsContract.Contacts.InterfaceConsts.PhotoThumbnailUri};
@@ -57,7 +57,7 @@ namespace SigobMobile.Droid.Implementations
                                     FullName = fullName.Trim(),
                                     PhoneNumber = phone,
                                     Email = phone,
-                                    ThumbnailUri = Xamarin.Forms.ImageSource.FromStream(() => stream)
+                                    PhotoThumbnail = Xamarin.Forms.ImageSource.FromStream(() => stream)
                                 };
                                 contactList.Add(muser);
                             }

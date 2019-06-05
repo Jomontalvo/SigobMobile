@@ -69,6 +69,6 @@
         public string FullName { get; set; } //FullName
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        public ImageSource ThumbnailUri { get; set; }
+        public ImageSource PhotoThumbnail { get; set; }
     }
 }

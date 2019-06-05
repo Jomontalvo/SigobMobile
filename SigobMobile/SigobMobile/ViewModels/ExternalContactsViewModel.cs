@@ -190,7 +190,7 @@
                  FullName = l.FullName,
                  PhoneNumber = l.PhoneNumber,
                  Email = l.Email,
-                 PhotoThumbnail = l.ThumbnailUri
+                 PhotoThumbnail = l.PhotoThumbnail
             });
         }
 
