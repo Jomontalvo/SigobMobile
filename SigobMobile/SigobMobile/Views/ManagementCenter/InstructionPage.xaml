@@ -1,8 +1,99 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    x:Class="SigobMobile.Views.ManagementCenter.InstructionPage">
+    x:Class="SigobMobile.Views.ManagementCenter.InstructionPage"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:lang="clr-namespace:SigobMobile.Helpers"
+    xmlns:controls="clr-namespace:SigobMobile.Controls"
+    BackgroundColor="{StaticResource defaultBackgroundView}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}"
+    ios:Page.UseSafeArea="true">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Icon="ic_bt_add">
+        </ToolbarItem>
+        <controls:ToolbarItemEx
+            BindingContext="{Binding Instruction}"
+            Command="{Binding EditButtonCommand}"
+            IsVisible="{Binding IsEditable}"
+            Order="Default"
+            Priority="0"
+            Text="{lang:Translate Edit}">
+        </controls:ToolbarItemEx>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
+        <StackLayout>
+            <ScrollView
+                BindingContext="Instruction"
+                VerticalOptions="FillAndExpand">
+                <Grid
+                    Padding="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <controls:IconView
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Foreground="Red"
+                        Margin="0,2,0,0"
+                        HorizontalOptions="Center"
+                        Source="ic_ev_calendar_color"
+                        VerticalOptions="Start">
+                    </controls:IconView>
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="0">
+                        
+                    </Label>
+                </Grid>
+            </ScrollView>
+            <Grid
+                AbsoluteLayout.LayoutBounds=".5,1,1,.1"
+                AbsoluteLayout.LayoutFlags="All"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                VerticalOptions="End">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <BoxView
+                    HeightRequest="1"
+                    BackgroundColor="{StaticResource accesoryGray}"
+                    Grid.Row="0">
+                </BoxView>
+                <Grid 
+                    BackgroundColor="{StaticResource softGray}"
+                    Grid.Row="1" 
+                    VerticalOptions="End" 
+                    RowSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button 
+                        BackgroundColor="{StaticResource softGray}"
+                        Command="{Binding CheckAllCalendarsCommand}"
+                        Grid.Column="0"
+                        HorizontalOptions="CenterAndExpand"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        Text="Finish">
+                    </Button>
+                    <Button 
+                        BackgroundColor="{StaticResource softGray}"
+                        Command="{Binding CheckAllCalendarsCommand}"
+                        Grid.Column="1"
+                        HorizontalOptions="CenterAndExpand"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        Text="Delete">
+                    </Button>
+                </Grid>
+            </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

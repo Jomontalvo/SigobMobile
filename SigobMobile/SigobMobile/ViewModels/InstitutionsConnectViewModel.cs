@@ -90,6 +90,7 @@
             this.institutionList = (List<InstitutionConnect>)response.Result;
             this.Institutions = new ObservableCollection<InstitutionItemViewModel>(
                 this.ToInstitutionItemViewModel());
+
             //Order by group Country
             var sorted = from institution in Institutions
                          orderby institution.Country

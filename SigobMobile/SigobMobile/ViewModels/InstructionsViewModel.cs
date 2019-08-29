@@ -24,6 +24,7 @@
         #endregion
 
         #region Attributes
+        private List<Instruction> instructionList;
         private ObservableCollection<Instruction> instructions;
         private ObservableCollection<string> instructionStatus;
         private int selectedIndex;
@@ -159,20 +160,37 @@
                 await App.Navigator.PopAsync();
                 return;
             }
-            var instructionList = (List<Instruction>)response.Result;
-            InstructionItems =  new ObservableCollection<Instruction>();
-            foreach (var item in instructionList)
-            {
-                if (!String.IsNullOrEmpty(item.Description))
-                {
-                    item.EndDate = item.EndDate.ToLocalTime();
-                    InstructionItems.Add(item);
-                }
-            }
-            this.InstructionList = new List<Instruction>(InstructionItems);
+            this.instructionList = (List<Instruction>)response.Result;
+            InstructionItems =  new ObservableCollection<Instruction>(this.ToInstructionItemViewModel());
+            this.InstructionList = new List<Instruction>(InstructionItems); // For search
             this.IsRefreshing = this.IsRefreshingWhenNotPull = false;
 
         }
+
+        private IEnumerable<Instruction> ToInstructionItemViewModel()
+        {
+            return this.instructionList.Select(l => new Instruction
+            {
+                Id = l.Id,
+                CanBeFinished = l.CanBeFinished,
+                Description = l.Description,
+                DocumentsAmount = l.DocumentsAmount,
+                EndDate = l.EndDate.ToLocalTime(),
+                ExpiryPeriod = l.ExpiryPeriod,
+                IsFinished = l.IsFinished,
+                IsModifiable = l.IsModifiable,
+                ManagementCenterId = l.ManagementCenterId,
+                ManagementCenterName = l.ManagementCenterName,
+                Participants = l.Participants,
+                ParticipantsAmount = l.ParticipantsAmount,
+                ProgrammerFullName = l.ProgrammerFullName,
+                ProgrammerId = l.ProgrammerId,
+                ProgrammerPosition = l.ProgrammerPosition,
+                TasksAmount = l.TasksAmount,
+                Title = l.Title
+            }).Where ( f => !String.IsNullOrEmpty(f.Description) );  //Filter
+        }
+
 
         /// <summary>
         /// Search an filter instruction.
@@ -202,7 +220,7 @@
         {
             var tappedItem = context.Item;
             //add your logic here
-            await Application.Current.MainPage.DisplayAlert("", "You've selected " + tappedItem, "OK");
+            await App.Navigator.PushAsync(new InstructionPage(), true);
         }
 
         /// <summary>

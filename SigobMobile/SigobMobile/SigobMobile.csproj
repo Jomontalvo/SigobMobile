@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.0.0.482894" />
+    <PackageReference Include="Xamarin.Forms" Version="4.2.0.709249" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
@@ -18,10 +18,10 @@
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
     <PackageReference Include="SkiaSharp" Version="1.68.0" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
-    <PackageReference Include="Telerik.UI.for.Xamarin" Version="2019.2.513.1" />
+    <PackageReference Include="Telerik.UI.for.Xamarin" Version="2019.2.802.1" />
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
     <PackageReference Include="Refractored.FloatingActionButtonForms" Version="2.1.0" />
-    <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="2.1.1" />
+    <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="3.1.0" />
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
   </ItemGroup>
   <ItemGroup>

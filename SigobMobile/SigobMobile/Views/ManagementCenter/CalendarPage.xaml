@@ -86,8 +86,8 @@
                 SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
                 ViewMode="{Binding CalendarView, Mode=TwoWay}">
                 <telerikInput:RadCalendar.AppointmentsStyle>
-                    <telerikInput:CalendarAppointmentsStyle 
-                        DisplayMode="{OnPlatform Android=TextWithShape, iOS=Shape, Default=Shape}">
+                    <telerikInput:CalendarAppointmentsStyle
+                        DisplayMode = "{OnPlatform Android=TextWithShape, iOS=Shape, Default=Shape}">
                     </telerikInput:CalendarAppointmentsStyle>
                 </telerikInput:RadCalendar.AppointmentsStyle>
                 <telerikInput:RadCalendar.DayViewSettings>
