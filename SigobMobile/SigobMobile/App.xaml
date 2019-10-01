@@ -11,6 +11,9 @@
         <ResourceDictionary>
             <local:IntToBoolConverter x:Key="intToBool" />
             <local:InverseBooleanConverter x:Key="inverseBool" />
+            <local:BoldConverter x:Key="boolToBold" />
+            <local:ItalicConverter x:Key="boolToItalic" />
+            <local:IntToFontAttribute x:Key="intToFontAttribute" />
         </ResourceDictionary>
         <!--Global colors-->
         <ResourceDictionary>

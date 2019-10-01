@@ -91,7 +91,7 @@
                 SetValue(ref this.selectedDate, value);
                 //DateTime currentSelectedDate = this.selectedDate.GetValueOrDefault();
                 //if (currentSelectedDate.Month != this.DisplayDate.Month || currentSelectedDate.Year != this.DisplayDate.Year)
-                this.DisplayDate = this.selectedDate.GetValueOrDefault();
+                //    this.DisplayDate = this.selectedDate.GetValueOrDefault();
             }
         }
         public DateTime DisplayDate
@@ -130,7 +130,7 @@
         /// <param name="date">Date.</param>
         public async Task UpdateAppointments(DateTime date)
         {
-            DateTime pivot = (date == default(DateTime)) ? DateTime.Today : date;
+            DateTime pivot = (date == default) ? DateTime.Today : date;
             this.IsRunning = true;
             startDate = pivot.AddYears(-2).ToString("yyyyMMdd");
             endDate = pivot.AddYears(5).ToString("yyyyMMdd");
@@ -301,7 +301,7 @@
                             eventCg.TypeColor = eventSelected.TypeColor;
                             appViewModel.EventCg = new EventCgViewModel(eventCg);
                             IsRunning = false;
-                            await App.Navigator.PushAsync(new EventCgPage() { Title = eventCg.SingularEventName});
+                            await App.Navigator.PushAsync(new EventCgPage() { Title = SelectedDate.Value.ToString("dd MMM yyyy")});
                             break;
                         default:
                             break;
@@ -312,6 +312,7 @@
                     appViewModel.Task = new TaskViewModel(eventSelected);
                     await App.Navigator.PushAsync(new TaskPage());
                 }
+                this.SelectedDate = Settings.SelectedDate;
             }
         }
 
@@ -358,6 +359,7 @@
         /// </summary>
         private void GoToday()
         {
+            //Settings.SelectedDate = DateTime.Today;
             this.SelectedDate = DateTime.Today;
             this.DisplayDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
             Settings.SelectedDate = this.DisplayDate;
@@ -368,15 +370,16 @@
         /// </summary>
         private async Task CellDateTapped(CalendarDayCell cell)
         {
-            Settings.SelectedDate = cell.Date;
-            this.SelectedDate = cell.Date;
             if (this.CalendarView == CalendarViewMode.Month || this.CalendarView == CalendarViewMode.Year)
             {
                 CalendarView = CalendarViewMode.Day;
-                await Task.Delay(50);
-                Settings.CurrentCalendarViewMode = (int)CalendarView;
+                this.SelectedDate = cell.Date;
                 this.DisplayDate = cell.Date;
+                await Task.Delay(10);
+                Settings.CurrentCalendarViewMode = (int)CalendarView;
+            //    //this.DisplayDate = cell.Date;
             }
+            Settings.SelectedDate = cell.Date;
         }
 
         /// <summary>

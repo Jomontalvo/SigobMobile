@@ -24,7 +24,7 @@
             <telerikInput:RadCalendar
                 x:Name="calendar"
                 Grid.Row="0"
-                ViewMode="Month"
+                ViewMode="Day"
                 BackgroundColor="White"
                 AppointmentsSource="{Binding Appointments}">
                 <telerikInput:RadCalendar.Commands>

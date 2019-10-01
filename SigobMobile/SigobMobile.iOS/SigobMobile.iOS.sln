@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SigobMobile.iOS", "SigobMobile.iOS.csproj", "{D163B896-3658-4A7F-BE75-C921ABF431DA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D163B896-3658-4A7F-BE75-C921ABF431DA}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{D163B896-3658-4A7F-BE75-C921ABF431DA}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{D163B896-3658-4A7F-BE75-C921ABF431DA}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{D163B896-3658-4A7F-BE75-C921ABF431DA}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{D163B896-3658-4A7F-BE75-C921ABF431DA}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{D163B896-3658-4A7F-BE75-C921ABF431DA}.Debug|iPhone.Build.0 = Debug|iPhone
+		{D163B896-3658-4A7F-BE75-C921ABF431DA}.Release|iPhone.ActiveCfg = Release|iPhone
+		{D163B896-3658-4A7F-BE75-C921ABF431DA}.Release|iPhone.Build.0 = Release|iPhone
+		{D163B896-3658-4A7F-BE75-C921ABF431DA}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{D163B896-3658-4A7F-BE75-C921ABF431DA}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{D163B896-3658-4A7F-BE75-C921ABF431DA}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{D163B896-3658-4A7F-BE75-C921ABF431DA}.AppStore|iPhone.Build.0 = AppStore|iPhone
+	EndGlobalSection
+EndGlobal

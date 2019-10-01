@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage
-    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:fab="clr-namespace:Refractored.FabControl;assembly=Refractored.FabControl"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:telerikInput="clr-namespace:Telerik.XamarinForms.Input;assembly=Telerik.XamarinForms.Input"
     xmlns:telerikCalendar="clr-namespace:Telerik.XamarinForms.Input.Calendar.Commands;assembly=Telerik.XamarinForms.Input"
     xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
-    xmlns:lang="clr-namespace:SigobMobile.Helpers"
+    xmlns:local="clr-namespace:SigobMobile.Helpers"
+    xmlns:controls="clr-namespace:SigobMobile.Controls"
     x:Class="SigobMobile.Views.ManagementCenter.CalendarPage"
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
-    Title="{lang:Translate AgendaViewTitle}"
+    Title="{local:Translate AgendaViewTitle}"
     ios:Page.UseSafeArea="true">
     <!--Title View Settings-->
     <NavigationPage.TitleView>
         <StackLayout
             BindingContext="{Binding Calendar}"
-            Orientation="Horizontal" 
-            VerticalOptions="Center" 
+            Orientation="Horizontal"
+            VerticalOptions="Center"
             HorizontalOptions="FillAndExpand">
             <!--Text="{Binding DisplayDate,StringFormat='{0:dd-MMM-yyyy}'}"-->
-            <Label 
-                Text="{lang:Translate MasterPageTitle}"
+            <Label
+                Text="{local:Translate MasterPageTitle}"
                 FontAttributes="{OnPlatform iOS=None, Android=Bold}"
                 FontSize="{OnPlatform Android=Large, Default=Default}"
                 HorizontalOptions="StartAndExpand"
@@ -46,8 +47,7 @@
                 Padding="10,0"
                 BackgroundColor="Transparent"
                 Command="{Binding SetCalendarViewModeCommand}"
-                HorizontalOptions="End"
-                Source="ic_bt_calendar_view">
+                HorizontalOptions="End" Source="ic_bt_calendar_view">
             </ImageButton>
             <ImageButton
                 Padding="8,0"
@@ -66,46 +66,101 @@
             </ImageButton>
         </StackLayout>
     </NavigationPage.TitleView>
+    <!--Resources-->
+    <ContentPage.Resources>
+        <local:AppointmentTemplateSelector x:Key="DayViewAppointmentTemplateSelector">
+            <local:AppointmentTemplateSelector.AllDay>
+                <DataTemplate>
+                    <Grid
+                        Padding="5,1,0,0">
+                        <Label
+                            Text="{Binding Title}"
+                            FontSize="12"
+                            TextColor="DarkSlateGray" />
+                    </Grid>
+                </DataTemplate>
+            </local:AppointmentTemplateSelector.AllDay>
+            <local:AppointmentTemplateSelector.NotAllDay>
+                <DataTemplate>
+                    <StackLayout>
+                        <BoxView
+                            Color="White"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand">
+                        </BoxView>
+                        <StackLayout
+                            Padding="5,0,0,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    Grid.Column="0"
+                                    FontSize="14"
+                                    Text="{Binding Title}"
+                                    TextColor="DarkSlateGray"
+                                    FontAttributes="{Binding TitleFont, Converter={StaticResource intToFontAttribute}}" />
+                                <controls:IconView
+                                    Grid.Column="1"
+                                    Foreground="{Binding TypeColor}"
+                                    HeightRequest="12"
+                                    HorizontalOptions="Center"
+                                    Margin="2,2,2,0"
+                                    Source="ic_ev_type_color"
+                                    VerticalOptions="Start"
+                                    WidthRequest="12">
+                                </controls:IconView>
+                            </Grid>
+                            <Label
+                                FontSize="12"
+                                Text="{Binding Detail}"
+                                TextColor="SlateGray">
+                            </Label>
+                        </StackLayout>
+                    </StackLayout>
+                </DataTemplate>
+            </local:AppointmentTemplateSelector.NotAllDay>
+        </local:AppointmentTemplateSelector>
+    </ContentPage.Resources>
     <!-- Content Page -->
     <ContentPage.Content>
-        <Grid
-            BindingContext="{Binding Calendar}"
-            ColumnSpacing="0"
-            RowSpacing="0">
+        <Grid BindingContext="{Binding Calendar}" ColumnSpacing="0" RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition />
-                <RowDefinition Height="44"/>
+                <RowDefinition Height="44" />
             </Grid.RowDefinitions>
             <telerikInput:RadCalendar
                 x:Name="calendar"
                 AppointmentsSource="{Binding Events}"
-                DisplayDate="{Binding DisplayDate, Mode=TwoWay}"
+                DisplayDate="{Binding SelectedDate, Mode=TwoWay}"
                 Grid.Row="0"
-                SelectionChanged="Calendar_OnSelectionChanged"
                 SchedulingUiEnabled="false"
+                SelectionChanged="Calendar_OnSelectionChanged"
                 SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
                 ViewMode="{Binding CalendarView, Mode=TwoWay}">
+
                 <telerikInput:RadCalendar.AppointmentsStyle>
                     <telerikInput:CalendarAppointmentsStyle
-                        DisplayMode = "{OnPlatform Android=TextWithShape, iOS=Shape, Default=Shape}">
+                        DisplayMode="{OnPlatform Android=TextWithShape, iOS=Shape, Default=Shape}">
                     </telerikInput:CalendarAppointmentsStyle>
                 </telerikInput:RadCalendar.AppointmentsStyle>
+
                 <telerikInput:RadCalendar.DayViewSettings>
                     <telerikInput:DayViewSettings
                         DayStartTime="05:00:00"
-                        DayEndTime="23:30:00"
-                        TimelineInterval="01:00">
+                        AppointmentContentTemplate="{StaticResource DayViewAppointmentTemplateSelector}">
                     </telerikInput:DayViewSettings>
                 </telerikInput:RadCalendar.DayViewSettings>
+
                 <telerikInput:RadCalendar.MultiDayViewSettings>
                     <telerikInput:MultiDayViewSettings
-                        DayStartTime="05:00:00"
-                        DayEndTime="23:30:00"
                         IsCurrentTimeIndicatorVisible="true"
                         IsWeekendVisible="true"
                         VisibleDays="3">
                     </telerikInput:MultiDayViewSettings>
                 </telerikInput:RadCalendar.MultiDayViewSettings>
+
                 <telerikInput:RadCalendar.MultiDayViewStyle>
                     <telerikInput:MultiDayViewStyle
                         AppointmentDetailsTextColor="{Binding TypeColor}"
@@ -115,7 +170,7 @@
                 <telerikInput:RadCalendar.Commands>
                     <telerikCalendar:CalendarUserCommand
                         Id="AppointmentTap"
-                        Command="{Binding AppointmentTappedCommand}"/>
+                        Command="{Binding AppointmentTappedCommand}" />
                     <telerikCalendar:CalendarUserCommand
                         Id="CellTap"
                         Command="{Binding CellDateTappedCommand}" />
@@ -137,10 +192,11 @@
                 VerticalOptions="End">
             </fab:FloatingActionButtonView>
             <telerikPrimitives:RadBorder
-                BorderColor="{StaticResource accesoryGray}" 
+                BorderColor="{StaticResource accesoryGray}"
                 CornerRadius="0"
                 Grid.Row="1">
-                <Grid 
+
+                <Grid
                     BackgroundColor="{StaticResource softGray}"
                     ColumnSpacing="0"
                     RowSpacing="0"
@@ -150,23 +206,21 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Button 
+                    <Button
                         BackgroundColor="Transparent"
                         Command="{Binding GoTodayCommand}"
                         Grid.Column="0"
-                        Text="{lang:Translate Today}">
+                        Text="{local:Translate Today}">
                     </Button>
-                    <Button 
+                    <Button
                         BackgroundColor="{StaticResource softGray}"
                         Command="{Binding OpenCalendarsCommand}"
-                        Grid.Column="1" 
-                        Text="{lang:Translate CalendarsTitle}">
+                        Grid.Column="1" Text="{local:Translate CalendarsTitle}">
                     </Button>
-                    <Button 
+                    <Button
                         BackgroundColor="{StaticResource softGray}"
                         Command="{Binding OpenFiltersCommand}"
-                        Grid.Column="2" 
-                        Text="{lang:Translate Filters}">
+                        Grid.Column="2" Text="{local:Translate Filters}">
                     </Button>
                 </Grid>
             </telerikPrimitives:RadBorder>

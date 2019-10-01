@@ -15,6 +15,14 @@
         Suspended = 2
     }
 
+    public enum TitleFontAttribute: byte
+    {
+        None = 0,
+        Bold = 1,
+        Italic = 2,
+        BoldAndItalic = 3
+    }
+
     /// <summary>
     /// Appointment item.
     /// </summary>
@@ -109,5 +117,24 @@
         public bool IsTask { get; set;  }
         public bool IsVisible { get; set; }
         public StatusAppointment Status { get; set; }
+        public TitleFontAttribute TitleFont
+        {
+            get
+            {
+                TitleFontAttribute result = TitleFontAttribute.None;
+                int fontFormat = Convert.ToByte(IsTentative) + Convert.ToByte(IsHighlighted);
+                switch (fontFormat)
+                {
+                    case 1:
+                        if (IsTentative) result = TitleFontAttribute.Bold;
+                        if (IsHighlighted) result = TitleFontAttribute.Italic;
+                        break;
+                    case 2:
+                        result = TitleFontAttribute.BoldAndItalic;
+                        break;
+                }
+                return result;
+            }
+        }
     }
 }
