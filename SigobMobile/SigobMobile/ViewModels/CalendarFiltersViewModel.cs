@@ -27,6 +27,7 @@
         private bool isVisibleInManagementStatus;
         private bool isVisibleCompletedStatus;
         private bool isVisibleSuspendedStatus;
+        private bool isEventColorByCalendar;
 
         #endregion
 
@@ -46,7 +47,11 @@
             get => this.isVisibleSuspendedStatus;
             set => SetValue(ref this.isVisibleSuspendedStatus, value);
         }
-
+        public bool IsEventColorByCalendar
+        {
+            get => this.isEventColorByCalendar;
+            set => SetValue(ref this.isEventColorByCalendar, value);
+        }
         public List<string> ConfirmedFilterItems
         {
             get => this.filterItems;
@@ -80,6 +85,7 @@
             this.IsVisibleInManagementStatus = Settings.IsVisibleManagementStatus;
             this.IsVisibleCompletedStatus = Settings.IsVisibleCompletedStatus;
             this.IsVisibleSuspendedStatus = Settings.IsVisibleSuspendStatus;
+            this.IsEventColorByCalendar = Settings.IsEventColorByCalendar;
             this.calendarViewModel = sourceCalendarViewModel;
             this.viewTentative = this.calendarViewModel.ViewTentative;
             this.FilterSelectedIndex = this.viewTentative;
@@ -109,13 +115,15 @@
             if ((this.viewTentative != this.FilterSelectedIndex) || 
                 (!Settings.IsVisibleManagementStatus && IsVisibleInManagementStatus) || 
                 (!Settings.IsVisibleCompletedStatus && IsVisibleCompletedStatus) ||
-                (!Settings.IsVisibleSuspendStatus && IsVisibleSuspendedStatus))
+                (!Settings.IsVisibleSuspendStatus && IsVisibleSuspendedStatus) ||
+                (!Settings.IsEventColorByCalendar && IsEventColorByCalendar))
             {
                 calendarViewModel.LoadAppointments(calendarViewModel.SelectedDate.GetValueOrDefault());
             }
             Settings.IsVisibleManagementStatus = this.IsVisibleInManagementStatus;
             Settings.IsVisibleCompletedStatus = this.IsVisibleCompletedStatus;
             Settings.IsVisibleSuspendStatus = this.IsVisibleSuspendedStatus;
+            Settings.IsEventColorByCalendar = this.IsEventColorByCalendar;
 
             //Rebuild Observable Collection
             eventItems = new ObservableCollection<Event>(calendarViewModel.Events.

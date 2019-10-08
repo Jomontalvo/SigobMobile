@@ -617,6 +617,18 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string ShowCalendarColorOnEvent {
+            get {
+                return ResourceManager.GetString("ShowCalendarColorOnEvent", resourceCulture);
+            }
+        }
+        
+        public static string AppointmentColor {
+            get {
+                return ResourceManager.GetString("AppointmentColor", resourceCulture);
+            }
+        }
+        
         public static string ConfirmedFilterTitle {
             get {
                 return ResourceManager.GetString("ConfirmedFilterTitle", resourceCulture);

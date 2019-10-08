@@ -213,6 +213,7 @@
             if (!response.IsSuccess)
             {
                 this.IsRunning = false;
+                this.IsEnabled = true;
                 await Application.Current.MainPage.DisplayAlert(
                     title: Languages.Error,
                     message: response.Message,

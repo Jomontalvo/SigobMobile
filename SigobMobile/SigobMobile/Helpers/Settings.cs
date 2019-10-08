@@ -39,7 +39,10 @@
         private const string isVisibleManagementStatus = "isVisibleManagementStatus";
         private const string isVisibleCompletedStatus = "isVisibleCompletedStatus";
         private const string isVisibleSuspendStatus = "isVisibleSuspendStatus";
-        private static readonly bool SettingsFilterStatus = true; 
+        private static readonly bool SettingsFilterStatus = true;
+
+        private const string isEventColorByCalendar = "isEventColorByCalendar";
+        //private static readonly bool SettingsEventColor = false;
 
         #endregion
 
@@ -64,6 +67,16 @@
             get => AppSettings.GetValueOrDefault(isVisibleSuspendStatus, SettingsFilterStatus);
             set => AppSettings.AddOrUpdateValue(isVisibleSuspendStatus, value);
         }
+
+        /// <summary>
+        /// Get or sets a value indicating if events take calendar color or event type color (false)
+        /// </summary>
+        public static bool IsEventColorByCalendar
+        {
+            get => AppSettings.GetValueOrDefault(isEventColorByCalendar, !SettingsFilterStatus);
+            set => AppSettings.AddOrUpdateValue(isEventColorByCalendar, value);
+        }
+
         /// <summary>
         /// Gets or sets the last date visited in Management Center
         /// </summary>

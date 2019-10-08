@@ -497,6 +497,14 @@
     <value>Weekly view</value>
     <comment>Weelly view of calendar</comment>
   </data>
+    <data name="ShowCalendarColorOnEvent" xml:space="preserve">
+    <value>Use calendar color in events</value>
+    <comment>Option for change appointment color</comment>
+  </data>
+    <data name="AppointmentColor" xml:space="preserve">
+    <value>Color settings</value>
+    <comment>Title for setting to change appointment color</comment>
+  </data>
     <data name="ConfirmedFilterTitle" xml:space="preserve">
     <value>Show confirmed tentative</value>
     <comment>Title for filter of confirmation status of the appointment</comment>

@@ -25,7 +25,7 @@
         #endregion
 
         #region ApiControllers
-        internal string apiEventsController = "events/start/{0}/end/{1}/viewattempts/{2}";
+        internal string apiEventsController = "events/start/{0}/end/{1}/tentatives/{2}/calendarcolor/{3}";
         internal string apiEventCgController = "cgcal/{0}/events/{1}";
         internal string apiPersonalAppointmentController = "events/{0}/owner/{1}";
         internal string apiManagementCenterAddOptions = "cg/addoptions";
@@ -148,7 +148,7 @@
             var response = await this.apiService.GetList<AppointmentItem>(
                 Settings.UrlBaseApiSigob,
                 App.PrefixApiSigob,
-                string.Format(this.apiEventsController, startDate, endDate, viewTentative),
+                string.Format(this.apiEventsController, startDate, endDate, viewTentative, Settings.IsEventColorByCalendar),
                 Settings.Token,
                 Settings.DbToken
             );

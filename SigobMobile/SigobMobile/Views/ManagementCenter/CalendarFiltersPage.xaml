@@ -50,7 +50,7 @@
                 HorizontalOptions="FillAndExpand">
             </BoxView>
             <Label
-                FontSize="Small"
+                FontSize="14"
                 WidthRequest="350"
                 HorizontalOptions="Center"
                 HorizontalTextAlignment="Center"
@@ -62,7 +62,7 @@
                 VerticalOptions="Center">
             </Label>
             <TableView
-                HeightRequest="246"
+                HeightRequest="580"
                 Intent="Settings"
                 VerticalOptions="Start">
                 <TableRoot>
@@ -85,17 +85,30 @@
                         </SwitchCell>
                     </TableSection>
                     <TableSection
+                        Title="{lang:Translate AppointmentColor}">
+                        <SwitchCell
+                            On="{Binding IsEventColorByCalendar, Mode = TwoWay}"
+                            OnColor="{OnPlatform Android={StaticResource lightBlue}}"
+                            Text="{lang:Translate ShowCalendarColorOnEvent}">
+                        </SwitchCell>
+                    </TableSection>
+                    <TableSection
                         Title="{lang:Translate ConfirmedFilterTitle}">
+                        <ViewCell>
+                            <StackLayout
+                                Padding="0,10,0,0">
+                                <controls:BorderlessPicker
+                                    Margin="15,0"
+                                    ItemsSource="{Binding ConfirmedFilterItems}"
+                                    SelectedItem="{Binding SelectedFilter}"
+                                    SelectedIndex="{Binding FilterSelectedIndex}"
+                                    Title="{lang:Translate ConfirmedFilterTitle}">
+                                </controls:BorderlessPicker>
+                            </StackLayout>
+                        </ViewCell>
                     </TableSection>
                 </TableRoot>
             </TableView>
-            <controls:BorderlessPicker
-                Margin="15,0"
-                ItemsSource="{Binding ConfirmedFilterItems}"
-                SelectedItem="{Binding SelectedFilter}"
-                SelectedIndex="{Binding FilterSelectedIndex}"
-                Title="{lang:Translate ConfirmedFilterTitle}">
-            </controls:BorderlessPicker>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

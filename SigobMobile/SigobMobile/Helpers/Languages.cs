@@ -26,12 +26,15 @@
         #endregion
 
         #region Filter for Confirmation Appointment Status
+        public static string AppointmentColor => Resources.AppointmentColor;
         public static string CalendarFiltersMessage => Resources.CalendarFiltersMessage; 
         public static string ConfirmedFilterTitle => Resources.ConfirmedFilterTitle;
         public static string OnlyConfirmed => Resources.OnlyConfirmed;
         public static string OnlyTentative => Resources.OnlyTentative;
         public static string ConfirmedAndTentative => Resources.ConfirmedAndTentative;
         public static string TentativeLabel => Resources.TentativeLabel;
+        public static string ShowCalendarColorOnEvent = Resources.ShowCalendarColorOnEvent;
+
         #endregion
 
         #region Time Measures
