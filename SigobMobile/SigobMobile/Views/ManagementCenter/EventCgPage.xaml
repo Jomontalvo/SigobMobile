@@ -38,7 +38,7 @@
                         <controls:IconView
                             Grid.Column="0"
                             Grid.Row="0"
-                            Foreground="{Binding LocalEvent.CalendarColor}"
+                            Foreground="{Binding CalendarColor}"
                             Margin="0,2,0,0"
                             HorizontalOptions="Center"
                             Source="ic_ev_calendar_color"
@@ -124,24 +124,40 @@
                             HorizontalOptions="FillAndExpand">
                         </BoxView>
                         <!--Second Section-->
-                        <Image
+                        <Frame
                             Grid.Column="0"
+                            Grid.ColumnSpan="2"
                             Grid.Row="2"
-                            Source="ic_ev_calendar"
-                            VerticalOptions="Center">
-                        </Image>
-                        <Label
-                            Grid.Column="1"
-                            Grid.Row="2"
-                            FontSize="Small"
-                            Text="{Binding LocalEvent.CalendarName}"
-                            TextColor="{StaticResource darkGray}"
-                            VerticalOptions="Center">
-                        </Label>
+                            HasShadow="False"
+                            Padding="0,10">
+                            <Grid
+                                ColumnSpacing="15">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Image
+                                    Grid.Column="0"
+                                    HorizontalOptions="Center"
+                                    Source="ic_ev_calendar"
+                                    VerticalOptions="Center">
+                                </Image>
+                                <Label
+                                    FontSize="Small"
+                                    Grid.Column="1"
+                                    Text="{Binding LocalEvent.CalendarName}"
+                                    TextColor="{StaticResource darkGray}"
+                                    VerticalOptions="Center">
+                                </Label>
+                            </Grid>
+                        </Frame>
                         <controls:IconView
                             Grid.Column="0"
                             Grid.Row="3"
-                            Foreground="{Binding LocalEvent.TypeColor}"
+                            Foreground="{Binding TypeColor}"
                             HeightRequest="20"
                             HorizontalOptions="Center"
                             Margin="0,6,0,6"
@@ -238,38 +254,52 @@
                             HorizontalOptions="FillAndExpand">
                         </BoxView>
                         <!--Participants-->
-                        <Image
+                        <Frame
+                            BorderColor="Transparent"
                             Grid.Column="0"
+                            Grid.ColumnSpan="3"
                             Grid.Row="9"
-                            Source="ic_ev_guests"
-                            VerticalOptions="Center">
-                        </Image>
-                        <Label
-                            Grid.Column="1"
-                            Grid.Row="9"
-                            FontSize="Small"
-                            HorizontalOptions="FillAndExpand"
-                            Text="{Binding Participants, Mode=TwoWay}"
-                            TextColor="{StaticResource darkGray}"
-                            VerticalOptions="FillAndExpand"
-                            VerticalTextAlignment="Center">
-                            <Label.GestureRecognizers>
+                            HasShadow="False"
+                            Padding="0,10">
+                            <Frame.GestureRecognizers>
                                 <TapGestureRecognizer
                                     Command="{Binding LoadParticipantsCommand}"
                                     NumberOfTapsRequired="1">
                                 </TapGestureRecognizer>
-                            </Label.GestureRecognizers>
-                        </Label>
-                        <ImageButton
-                            BackgroundColor="Transparent"
-                            Command="{Binding LoadParticipantsCommand}"
-                            Grid.Column="2"
-                            Grid.Row="9"
-                            HeightRequest="20"
-                            IsVisible="{Binding IsParticipantsVisible}"
-                            Source="ic_chevron"
-                            VerticalOptions="Center">
-                        </ImageButton>
+                            </Frame.GestureRecognizers>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Image
+                                    Grid.Column="0"
+                                    Source="ic_ev_guests"
+                                    VerticalOptions="Center">
+                                </Image>
+                                <Label
+                                    Grid.Column="1"
+                                    FontSize="Small"
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="{Binding Participants, Mode=TwoWay}"
+                                    TextColor="{StaticResource darkGray}"
+                                    VerticalOptions="FillAndExpand"
+                                    VerticalTextAlignment="Center">
+                                </Label>
+                                <Image
+                                    BackgroundColor="Transparent"
+                                    Grid.Column="2"
+                                    HeightRequest="16"
+                                    IsVisible="{Binding IsParticipantsVisible}"
+                                    Source="ic_chevron"
+                                    VerticalOptions="Center">
+                                </Image>
+                            </Grid>
+                        </Frame>
                         <!--Abstract Separator-->
                         <BoxView
                             Color="{StaticResource gray}"

@@ -83,7 +83,7 @@
         public byte SecurityLevel { get; set; }
 
         [JsonProperty("tipo_instru")]
-        public int ModuleType { get; set; }
+        public char ModuleType { get; set; }
 
         [JsonProperty("tentativa")]
         public bool IsTentative { get; set; }
@@ -105,7 +105,7 @@
         public Color Color { get; set; }
         public bool IsAllDay { get; set; }
         public string Detail { get; set; }
-        public int ModuleType { get; set; }
+        public char ModuleType { get; set; }
         public string Owner { get; set; }
         public string Programmer { get; set; }
         public int TypeId { get; set; }
@@ -126,8 +126,8 @@
                 switch (fontFormat)
                 {
                     case 1:
-                        if (IsTentative) result = TitleFontAttribute.Bold;
-                        if (IsHighlighted) result = TitleFontAttribute.Italic;
+                        if (IsTentative) result = TitleFontAttribute.Italic; 
+                        if (IsHighlighted) result = TitleFontAttribute.Bold;
                         break;
                     case 2:
                         result = TitleFontAttribute.BoldAndItalic;

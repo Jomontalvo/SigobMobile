@@ -113,10 +113,10 @@
         {
             calendarViewModel.ViewTentative = (byte)FilterSelectedIndex;
             if ((this.viewTentative != this.FilterSelectedIndex) || 
-                (!Settings.IsVisibleManagementStatus && IsVisibleInManagementStatus) || 
-                (!Settings.IsVisibleCompletedStatus && IsVisibleCompletedStatus) ||
-                (!Settings.IsVisibleSuspendStatus && IsVisibleSuspendedStatus) ||
-                (!Settings.IsEventColorByCalendar && IsEventColorByCalendar))
+                (Settings.IsVisibleManagementStatus != IsVisibleInManagementStatus) || 
+                (Settings.IsVisibleCompletedStatus != IsVisibleCompletedStatus) ||
+                (Settings.IsVisibleSuspendStatus != IsVisibleSuspendedStatus) ||
+                (Settings.IsEventColorByCalendar != IsEventColorByCalendar))
             {
                 calendarViewModel.LoadAppointments(calendarViewModel.SelectedDate.GetValueOrDefault());
             }

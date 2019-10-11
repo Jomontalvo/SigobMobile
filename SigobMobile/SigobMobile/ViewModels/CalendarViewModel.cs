@@ -289,11 +289,11 @@
                 {
                     switch (eventSelected.ModuleType)
                     {
-                        case 4:
+                        case '4':
                             appViewModel.Appointment = new AppointmentViewModel(eventSelected);
                             await App.Navigator.PushAsync(new AppointmentPage());
                             break;
-                        case 7:
+                        case '7':
                             IsRunning = true;
                             ManagementCenterEvent eventCg = await GetEventAsync(eventSelected);
                             eventCg.Id = eventSelected.Id;

@@ -33,6 +33,9 @@
         private bool isDocumentsVisible;
         private bool isAnnotationsVisible;
         private string participants;
+        private Color calendarColor;
+        private Color typeColor;
+
         #endregion
 
         #region Properties
@@ -42,6 +45,16 @@
         /// </summary>
         /// <value>The local event.</value>
         public ManagementCenterEvent LocalEvent { get; set; }
+        public Color CalendarColor
+        {
+            get => this.calendarColor;
+            set => SetValue(ref this.calendarColor, value);
+        }
+        public Color TypeColor
+        {
+            get => this.typeColor;
+            set => SetValue(ref this.typeColor, value);
+        }
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:SigobMobile.ViewModels.EventCgViewModel"/> is editable.
@@ -164,6 +177,9 @@
         private void LoadManagementCenterEventDetails()
         {
             IsRunning = true;
+            //Colors
+            this.CalendarColor = (Settings.IsEventColorByCalendar) ? LocalEvent.CalendarColor : LocalEvent.TypeColor;
+            this.TypeColor = (!Settings.IsEventColorByCalendar) ? LocalEvent.CalendarColor : LocalEvent.TypeColor;
             //Attributes
             IsEditable = LocalEvent.AttributeOnEvents == EventAttribute.Create ||
                          (LocalEvent.AttributeOnEvents == EventAttribute.CreateOwner && LocalEvent.ProgrammerOfficeId == Settings.OfficeCode);
@@ -179,6 +195,7 @@
                 this.Interval = $"{localStartDate.ToString("t")} - {localEndDate.ToString("t")}";
             else
                 this.Interval = $"{localStartDate.ToString("g")} - {localEndDate.ToString("g")}";
+            if (LocalEvent.Tentative) this.Interval = $"{this.Interval} ({Languages.TentativeLabel})";
             //Event Management Status
             switch (LocalEvent.Status)
             {

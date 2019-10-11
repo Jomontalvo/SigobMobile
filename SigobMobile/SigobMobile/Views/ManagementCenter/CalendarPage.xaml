@@ -100,7 +100,8 @@
                                     FontSize="14"
                                     Text="{Binding Title}"
                                     TextColor="DarkSlateGray"
-                                    FontAttributes="{Binding TitleFont, Converter={StaticResource intToFontAttribute}}" />
+                                    FontAttributes="{Binding TitleFont, Converter={StaticResource intToFontAttribute}}">
+                                </Label>
                                 <controls:IconView
                                     Grid.Column="1"
                                     Foreground="{Binding TypeColor}"
