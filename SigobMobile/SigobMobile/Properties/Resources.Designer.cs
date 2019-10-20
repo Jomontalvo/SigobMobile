@@ -209,6 +209,48 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string ChangePasswordTitle {
+            get {
+                return ResourceManager.GetString("ChangePasswordTitle", resourceCulture);
+            }
+        }
+        
+        public static string NewPassword {
+            get {
+                return ResourceManager.GetString("NewPassword", resourceCulture);
+            }
+        }
+        
+        public static string RepeatNewPassword {
+            get {
+                return ResourceManager.GetString("RepeatNewPassword", resourceCulture);
+            }
+        }
+        
+        public static string PasswordsMatchValidationMsg {
+            get {
+                return ResourceManager.GetString("PasswordsMatchValidationMsg", resourceCulture);
+            }
+        }
+        
+        public static string ChangePasswordText {
+            get {
+                return ResourceManager.GetString("ChangePasswordText", resourceCulture);
+            }
+        }
+        
+        public static string NewPwdValidationMsg {
+            get {
+                return ResourceManager.GetString("NewPwdValidationMsg", resourceCulture);
+            }
+        }
+        
+        public static string RepeatNewPwdValidationMsg {
+            get {
+                return ResourceManager.GetString("RepeatNewPwdValidationMsg", resourceCulture);
+            }
+        }
+        
         public static string ContactUs {
             get {
                 return ResourceManager.GetString("ContactUs", resourceCulture);

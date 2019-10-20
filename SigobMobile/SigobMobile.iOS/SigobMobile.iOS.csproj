@@ -300,6 +300,7 @@
     <BundleResource Include="Resources\ic_contact_mobile.png" />
     <BundleResource Include="Resources\ic_bt_add_contact%402x.png" />
     <BundleResource Include="Resources\ic_ev_calendar.png" />
+    <BundleResource Include="Resources\ic_pwd_security.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />

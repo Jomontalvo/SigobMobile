@@ -34,7 +34,6 @@
         public static string ConfirmedAndTentative => Resources.ConfirmedAndTentative;
         public static string TentativeLabel => Resources.TentativeLabel;
         public static string ShowCalendarColorOnEvent = Resources.ShowCalendarColorOnEvent;
-
         #endregion
 
         #region Time Measures
@@ -102,6 +101,16 @@
 
         #region Institutions to connect View
         public static string InstitutionsConnect => Resources.InstitutionsConnect;
+        #endregion
+
+        #region Change Password View
+        public static string ChangePasswordTitle => Resources.ChangePasswordTitle;
+        public static string NewPassword => Resources.NewPassword;
+        public static string RepeatNewPassword => Resources.RepeatNewPassword;
+        public static string PasswordsMatchValidationMsg => Resources.PasswordsMatchValidationMsg;
+        public static string NewPasswordValidationMsg => Resources.NewPwdValidationMsg;
+        public static string RepeatNewPasswordValidationMsg => Resources.RepeatNewPwdValidationMsg;
+        public static string ChangePasswordText => Resources.ChangePasswordText;
         #endregion
 
         #region Main Menu Options

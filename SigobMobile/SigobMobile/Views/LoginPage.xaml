@@ -93,7 +93,7 @@
                         IsEnabled="false"
                         Margin="0,5"
                         Padding="0"
-                        WatermarkText="{Binding Institution, Mode=TwoWay}}"
+                        WatermarkText="{Binding Institution, Mode=TwoWay}"
                         WatermarkTextColor="{Binding IsSelectedColor}">
                     </telerikInput:RadEntry>
                 </ContentView>

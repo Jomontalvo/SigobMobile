@@ -79,11 +79,8 @@
                     </Grid>
                     <Grid
                         ColumnSpacing="15"
-                        Padding="5,0"
-                        RowSpacing="{OnPlatform iOS=2,Default=10}">
+                        Padding="5,0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -300,25 +297,11 @@
                                 </Image>
                             </Grid>
                         </Frame>
-                        <!--Abstract Separator-->
-                        <BoxView
-                            Color="{StaticResource gray}"
-                            Grid.Column="0"
-                            Grid.Row="10"
-                            Grid.ColumnSpan="3"
-                            HeightRequest="1"
-                            HorizontalOptions="FillAndExpand">
-                        </BoxView>
-                        <!--Executive Abstract-->
+                        <!--Optional information-->
                     </Grid>
-                    <!--Optional information-->
                     <Grid
                         ColumnSpacing="0"
-                        Grid.Column="0"
-                        Grid.Row="11"
-                        Grid.ColumnSpan="3"
-                        Padding="0,0"
-                        RowSpacing="{OnPlatform iOS=2,Default=10}">
+                        Padding="5,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -344,7 +327,7 @@
                             BorderColor="Transparent"
                             HasShadow="false"
                             Grid.Row="1"
-                            Padding="0"
+                            Padding="0,10"
                             IsVisible="{Binding IsAbstractVisible}">
                             <Grid
                                 ColumnSpacing="15">
@@ -354,18 +337,16 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition />
                                 </Grid.RowDefinitions>
                                 <Image
                                     Grid.Column="0"
-                                    Grid.Row="0"
                                     Source="ic_ev_abstract"
                                     VerticalOptions="Center">
                                 </Image>
                                 <Label
                                     FontSize="Small"
                                     Grid.Column="1"
-                                    Grid.Row="0"
                                     Text="{lang:Translate EventAbstractText}"
                                     TextColor="{StaticResource darkGray}"
                                     VerticalOptions="Center">

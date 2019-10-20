@@ -225,6 +225,38 @@
     <value>Security</value>
     <comment>Main Menu Security Option.</comment>
   </data>
+    <data name="ChangePasswordTitle" xml:space="preserve">
+    <value>Change password</value>
+    <comment>Change password View Title</comment>
+  </data>
+    <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+    <comment>Enter new password placeholder</comment>
+  </data>
+    <data name="RepeatNewPassword" xml:space="preserve">
+    <value>Repeat new password</value>
+    <comment>Repeat the new password placeholder</comment>
+  </data>
+    <data name="PasswordsMatchValidationMsg" xml:space="preserve">
+    <value>The new passwords entered do not match!</value>
+    <comment>The new password does not match the entry where you repeat the password</comment>
+  </data>
+    <data name="ChangePasswordText" xml:space="preserve">
+    <value>Use the fields below to change your SIGOB login password.
+If you have problems, please contact with system administrator.</value>
+    <comment>Message when the repeat new password has not been entered</comment>
+  </data>
+    
+    <data name="NewPwdValidationMsg" xml:space="preserve">
+    <value>Enter a new password!</value>
+    <comment>Message when the new password has not been entered</comment>
+  </data>
+    
+    <data name="RepeatNewPwdValidationMsg" xml:space="preserve">
+    <value>Repeat the new password entered!</value>
+    <comment>Message when the repeat new password has not been entered</comment>
+  </data>
+    
     <data name="ContactUs" xml:space="preserve">
     <value>Contact us</value>
     <comment>Main Menu Contact Us Option.</comment>
