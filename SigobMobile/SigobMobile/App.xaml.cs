@@ -25,12 +25,20 @@ namespace SigobMobile
         }
 
         /// <summary>
-        /// Gets the prefix central.
+        /// Gets the central institutions prefix.
         /// </summary>
         /// <value>The prefix central.</value>
         public static string PrefixCentral
         {
             get { return "institutions"; }
+        }
+
+        /// <summary>
+        /// Gets the central parameters prefix
+        /// </summary>
+        public static string PrefixParametersCentral
+        {
+            get { return "parameters"; }
         }
 
         /// <summary>

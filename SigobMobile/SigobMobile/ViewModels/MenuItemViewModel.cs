@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
     using AsyncAwaitBestPractices.MVVM;
     using Helpers;
+    using SigobMobile.Views.Common;
     using Views;
     using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
@@ -12,6 +13,7 @@
         public string Icon { get; set; }
         public string Title { get; set; }
         public string PageName { get; set; }
+        public string Url { get; set; }
         #endregion
 
         #region Commands
@@ -30,13 +32,13 @@
             {
                 case "SecurityPage":
                     mainViewModel.Security = new SecurityViewModel();
-                    await App.Navigator.PushAsync(new SecurityPage(),false);
+                    await App.Navigator.PushAsync(new SecurityPage(),true);
                     break;
                 case "WebViewHelpPage":
-                    break;
                 case "WebViewTermsPage":
-                    break;
                 case "WebViewContactPage":
+                    mainViewModel.UrlViewer = new UrlViewerViewModel(this.Url);
+                    await App.Navigator.PushAsync(new UrlViewerPage(){ Title = this.Title}, true);
                     break;
                 case "LoginPage":
                     //Delete persist token values
@@ -55,4 +57,4 @@
         }
         #endregion
     }
-}
+} 

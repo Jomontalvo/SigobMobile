@@ -8,18 +8,8 @@
              BackgroundColor="{StaticResource defaultBackgroundView}"
              FlowDirection="{x:Static Device.FlowDirection}"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             Title="{local:Translate ChangePasswordTitle}"
+             Title="{local:Translate SecurityMenu}"
              ios:Page.UseSafeArea="true">
-    <ContentPage.ToolbarItems>
-        <!-- Change password -->
-        <ToolbarItem
-            BindingContext="{Binding Profile}"
-            Command="{Binding SaveCommand}"
-            Text="{local:Translate Ok}"
-            Order="Primary" 
-            Priority="0">
-        </ToolbarItem>
-    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <telerikInput:BorderStyle 
             x:Key="EntryBorderStyle" 
@@ -31,12 +21,19 @@
         <StackLayout
             BindingContext="{Binding Security}">
             <Image
-                Margin="0,10,0,0"
+                HeightRequest="80"
                 HorizontalOptions="Center"
+                Margin="0,10,0,0"
                 Source="ic_pwd_security">
             </Image>
             <StackLayout
                 Padding="20,10,20,10">
+                <Label
+                    FontSize="Subtitle"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="{local:Translate ChangePasswordTitle}">
+                </Label>
                 <Label
                     FontSize="Small"
                     HorizontalOptions="FillAndExpand"
@@ -44,7 +41,7 @@
                     Text="{local:Translate ChangePasswordText}">
                 </Label>
                 <Grid
-                    Padding="0, 20">
+                    Padding="0, 20, 0, 30">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
@@ -56,67 +53,71 @@
                     <telerikInput:RadEntry
                         BorderStyle="{StaticResource EntryBorderStyle}"
                         FlowDirection="{x:Static Device.FlowDirection}"
+                        Focused="Handle_NewPassword_Focused"
                         Grid.Column="0" 
                         Grid.ColumnSpan="2"
                         Grid.Row="0"
-                        IsPassword="{Binding IsPassword, Mode=TwoWay}"
+                        IsPassword="{Binding IsNewPassword, Mode=TwoWay}"
                         Margin="0,5"
                         Padding="0"
                         WatermarkText="{local:Translate NewPassword}"
                         Text="{Binding NewPassword, Mode=TwoWay}">
                     </telerikInput:RadEntry>
-                    <Image 
+                    <Image
+                        x:Name="IconViewNewPassword"
                         Grid.Column="1"
                         Grid.Row="0"
                         HorizontalOptions="End"
-                        IsVisible="{Binding IsVisibleIconViewPassword, Mode=TwoWay}"
+                        IsVisible="{Binding IsVisibleIconViewNewPassword, Mode=TwoWay}"
                         Margin="5,0,5,2"
-                        Source="{Binding IconViewPassword}" 
+                        Source="{Binding IconViewNewPassword}" 
                         VerticalOptions="Start"
                         WidthRequest="24">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer
-                                Command="{Binding ShowHidePasswordCommand}"
+                                Command="{Binding ShowHideNewPasswordCommand}"
                                 NumberOfTapsRequired="1"/>
                         </Image.GestureRecognizers>
                     </Image>
                     <telerikInput:RadEntry
                         BorderStyle="{StaticResource EntryBorderStyle}"
                         FlowDirection="{x:Static Device.FlowDirection}"
+                        Focused="Handle_VerifyPassword_Focused"
                         Grid.Column="0" 
                         Grid.ColumnSpan="2"
                         Grid.Row="1"
-                        IsPassword="{Binding IsNewPassword, Mode=TwoWay}"
+                        IsPassword="{Binding IsVerifyNewPassword, Mode=TwoWay}"
                         Margin="0,5"
-                        Padding="0"
+                        Padding="0,10"
                         WatermarkText="{local:Translate RepeatNewPassword}"
-                        Text="{Binding RepeatNewPassword, Mode=TwoWay}">
+                        Text="{Binding VerifyNewPassword, Mode=TwoWay}">
                     </telerikInput:RadEntry>
-                    <Image 
+                    <Image
+                        x:Name="IconViewVerifyPassword"
                         Grid.Column="1"
                         Grid.Row="1"
                         HorizontalOptions="End"
-                        IsVisible="{Binding IsVisibleIconViewPassword, Mode=TwoWay}"
+                        IsVisible="{Binding IsVisibleIconViewVerifyPassword, Mode=TwoWay}"
                         Margin="5,0,5,2"
-                        Source="{Binding IconViewPassword}" 
+                        Source="{Binding IconViewVerifyPassword}" 
                         VerticalOptions="Start"
                         WidthRequest="24">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer
-                                Command="{Binding ShowHidePasswordCommand}"
+                                Command="{Binding ShowHideVerifyPasswordCommand}"
                                 NumberOfTapsRequired="1"/>
                         </Image.GestureRecognizers>
                     </Image>
                 </Grid>
+                <Button 
+                    BackgroundColor="{StaticResource darkBlue}"
+                    Command="{Binding LoginCommand}"
+                    FontSize="Medium"
+                    IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                    Text="{local:Translate ChangePasswordTitle}" 
+                    TextColor="White">
+                </Button>
             </StackLayout>
-            <Button 
-                BackgroundColor="{StaticResource darkBlue}"
-                Command="{Binding LoginCommand}"
-                IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
-                Text="{local:Translate ChangePasswordTitle}" 
-                TextColor="White"
-                FontSize="Medium">
-            </Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

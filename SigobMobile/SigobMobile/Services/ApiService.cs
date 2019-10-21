@@ -55,7 +55,7 @@
         /// <param name="urlBase">URL base.</param>
         /// <param name="servicePrefix">Service prefix.</param>
         /// <param name="controller">Controller.</param>
-        /// <param name="id">Identifier.</param>
+        /// <param name="id">Identifier. if value = 0 noy use id in api call</param>
         /// <typeparam name="T">The object type parameter.</typeparam>
         public async Task<Response> Get<T>(
             string urlBase,
@@ -69,7 +69,7 @@
                 {
                     BaseAddress = new Uri(urlBase)
                 };
-                var url = $"{servicePrefix}{controller}/{id}";
+                var url = (id<0) ? $"{servicePrefix}{controller}" : $"{servicePrefix}{controller}/{id}";
                 var response = await client.GetAsync(url);
 
                 if (!response.IsSuccessStatusCode)
@@ -640,13 +640,15 @@
             string authDbToken,
             object model)
         {
+            HttpClient client = null;
             try
             {
                 var request = JsonConvert.SerializeObject(model);
                 var content = new StringContent(
                     request,
                     Encoding.UTF8, "application/json");
-                HttpClient client = new HttpClient
+                //HttpClient
+                client = new HttpClient
                 {
                     BaseAddress = new Uri(urlBase)
                 };
@@ -679,6 +681,7 @@
                     Message = ex.Message,
                 };
             }
+            finally { client.Dispose(); }
         }
 
         #endregion

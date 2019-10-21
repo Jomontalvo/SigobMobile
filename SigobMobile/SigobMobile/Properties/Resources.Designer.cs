@@ -359,9 +359,225 @@ namespace SigobMobile.Properties {
             }
         }
         
-        public static string TasksViewTitle {
+        public static string ManagementCenterAppLabel {
             get {
-                return ResourceManager.GetString("TasksViewTitle", resourceCulture);
+                return ResourceManager.GetString("ManagementCenterAppLabel", resourceCulture);
+            }
+        }
+        
+        public static string TasksAppLabel {
+            get {
+                return ResourceManager.GetString("TasksAppLabel", resourceCulture);
+            }
+        }
+        
+        public static string CorrespondenceAppLabel {
+            get {
+                return ResourceManager.GetString("CorrespondenceAppLabel", resourceCulture);
+            }
+        }
+        
+        public static string GoalsAppLabel {
+            get {
+                return ResourceManager.GetString("GoalsAppLabel", resourceCulture);
+            }
+        }
+        
+        public static string WorkflowAppLabel {
+            get {
+                return ResourceManager.GetString("WorkflowAppLabel", resourceCulture);
+            }
+        }
+        
+        public static string CommunicationsAppLabel {
+            get {
+                return ResourceManager.GetString("CommunicationsAppLabel", resourceCulture);
+            }
+        }
+        
+        public static string MsgAcomLine_1_Value_0 {
+            get {
+                return ResourceManager.GetString("MsgAcomLine_1_Value_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgAcomLine_1_Value_Greater_0 {
+            get {
+                return ResourceManager.GetString("MsgAcomLine_1_Value_Greater_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgAcomLine_2_Value_0 {
+            get {
+                return ResourceManager.GetString("MsgAcomLine_2_Value_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgAcomLine_2_Value_Greater_0 {
+            get {
+                return ResourceManager.GetString("MsgAcomLine_2_Value_Greater_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgAgendaLine_1_Value_0 {
+            get {
+                return ResourceManager.GetString("MsgAgendaLine_1_Value_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgAgendaLine_1_Value_Greater_0 {
+            get {
+                return ResourceManager.GetString("MsgAgendaLine_1_Value_Greater_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgAgendaLine_2_Value_0 {
+            get {
+                return ResourceManager.GetString("MsgAgendaLine_2_Value_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgAgendaLine_2_Vaue_Greater_0 {
+            get {
+                return ResourceManager.GetString("MsgAgendaLine_2_Vaue_Greater_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgDocumentLine_1_Value_0 {
+            get {
+                return ResourceManager.GetString("MsgDocumentLine_1_Value_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgDocumentLine_1_Value_Greater_0 {
+            get {
+                return ResourceManager.GetString("MsgDocumentLine_1_Value_Greater_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgDocumentLine_2_Value_0 {
+            get {
+                return ResourceManager.GetString("MsgDocumentLine_2_Value_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgDocumentLine_2_Value_Greater_0 {
+            get {
+                return ResourceManager.GetString("MsgDocumentLine_2_Value_Greater_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgGoalsLine_1_Value_0 {
+            get {
+                return ResourceManager.GetString("MsgGoalsLine_1_Value_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgGoalsLine_1_Value_Greater_0 {
+            get {
+                return ResourceManager.GetString("MsgGoalsLine_1_Value_Greater_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgGoalsLine_2_Alert_0 {
+            get {
+                return ResourceManager.GetString("MsgGoalsLine_2_Alert_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgGoalsLine_2_Alerts_Greater_0 {
+            get {
+                return ResourceManager.GetString("MsgGoalsLine_2_Alerts_Greater_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgGoalsLine_2_Opportunities_0 {
+            get {
+                return ResourceManager.GetString("MsgGoalsLine_2_Opportunities_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgGoalsLine_2_Opportunities_Greater_0 {
+            get {
+                return ResourceManager.GetString("MsgGoalsLine_2_Opportunities_Greater_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgGoalsLine_2_Restriction_0 {
+            get {
+                return ResourceManager.GetString("MsgGoalsLine_2_Restriction_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgGoalsLine_2_Restrictions_Greater_0 {
+            get {
+                return ResourceManager.GetString("MsgGoalsLine_2_Restrictions_Greater_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgTasksLine_1_Value_0 {
+            get {
+                return ResourceManager.GetString("MsgTasksLine_1_Value_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgTasksLine_1_Value_Greater_0 {
+            get {
+                return ResourceManager.GetString("MsgTasksLine_1_Value_Greater_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgTasksLine_2_Value_0 {
+            get {
+                return ResourceManager.GetString("MsgTasksLine_2_Value_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgTasksLine_2_Value_Greater_0 {
+            get {
+                return ResourceManager.GetString("MsgTasksLine_2_Value_Greater_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgWorkflowLine_1_Value_0 {
+            get {
+                return ResourceManager.GetString("MsgWorkflowLine_1_Value_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgWorkflowLine_1_Value_Greater_0 {
+            get {
+                return ResourceManager.GetString("MsgWorkflowLine_1_Value_Greater_0", resourceCulture);
+            }
+        }
+        
+        public static string MsgWorkflowLine_2_Activities_OutThresold {
+            get {
+                return ResourceManager.GetString("MsgWorkflowLine_2_Activities_OutThresold", resourceCulture);
+            }
+        }
+        
+        public static string MsgWorkflowLine_2_Activities_ForApproval {
+            get {
+                return ResourceManager.GetString("MsgWorkflowLine_2_Activities_ForApproval", resourceCulture);
+            }
+        }
+        
+        public static string MsgWorkflowLine_2_RejectedRequest {
+            get {
+                return ResourceManager.GetString("MsgWorkflowLine_2_RejectedRequest", resourceCulture);
+            }
+        }
+        
+        public static string MsgWorkflowLine_2_Process_OutThresol {
+            get {
+                return ResourceManager.GetString("MsgWorkflowLine_2_Process_OutThresol", resourceCulture);
+            }
+        }
+        
+        public static string MsgWorkflowLine_2_Process_ForApproval {
+            get {
+                return ResourceManager.GetString("MsgWorkflowLine_2_Process_ForApproval", resourceCulture);
             }
         }
         

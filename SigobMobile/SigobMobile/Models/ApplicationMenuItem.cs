@@ -1,5 +1,6 @@
 ﻿namespace SigobMobile.Models
 {
+    using Helpers;
     using Newtonsoft.Json;
 
     public enum TypeApplication
@@ -21,8 +22,39 @@
         [JsonProperty(PropertyName = "tipo_instru")]
         public TypeApplication TypeApplication { get; set; }
 
-        [JsonProperty(PropertyName = "nombre_aplicacion")]
-        public string ApplicationName { get; set; }
+        //[JsonProperty(PropertyName = "nombre_aplicacion")]
+        public string ApplicationName
+        {
+            get
+            {
+                string appName = string.Empty;
+                switch (TypeApplication)
+                {
+                    case TypeApplication.ManagementCenter:
+                        appName = Languages.ManagementCenterName;
+                        break;
+                    case TypeApplication.Tasks:
+                        appName = Languages.TaskManagementName;
+                        break;
+                    case TypeApplication.Goals:
+                        appName = Languages.InstitutionalGoalsName;
+                        break;
+                    case TypeApplication.Correspondence:
+                        appName = Languages.CorrespondenceName;
+                        break;
+                    case TypeApplication.WorkFlows:
+                        appName = Languages.WorkflowProcessName;
+                        break;
+                    case TypeApplication.Communications:
+                        appName = Languages.CommunicationsActionsName;
+                        break;
+                    default:
+                        appName = Languages.GeneralError;
+                        break;
+                }
+                return appName;
+            }
+        }
 
         [JsonProperty(PropertyName = "visible")]
         public bool IsVisible { get; set; }

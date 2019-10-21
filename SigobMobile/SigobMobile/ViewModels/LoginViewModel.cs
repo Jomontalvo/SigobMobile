@@ -245,7 +245,7 @@
                 {
                     this.IsRunning = false;
                     this.IsEnabled = true;
-                    await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(
+                    await Application.Current.MainPage.DisplayAlert(
                         title: Languages.Error,
                         message: Languages.InvalidCredentials,
                         cancel: Languages.Cancel);
@@ -254,7 +254,32 @@
                 //Get Session Model (Token and DbToken for logged user).
                 var sucessLogin = (SessionSigob)response.Result;
                 App.ActiveSession = sucessLogin;
+                #endregion
 
+                #region Global Parameters Central API
+                response = null;
+                int id = -1; //not use identifier
+                response = await this.apiService.Get<GlobalParameters>(
+                    App.UrlBaseCentral,
+                    App.PrefixParametersCentral,
+                    App.ControllerCentral,
+                    id
+                );
+                if (!response.IsSuccess)
+                {
+                    IsRunning = false;
+                    IsEnabled = true;
+                    await Application.Current.MainPage.DisplayAlert(
+                        Languages.Error,
+                        response.Message,
+                        Languages.Cancel);
+                    return;
+                }
+                var globalParameters = (GlobalParameters)response.Result;
+                Settings.UrlWebCentral = globalParameters.UrlWebContent.AbsoluteUri;
+                Settings.UrlWebHelpContent = globalParameters.UrlWebHelp.AbsoluteUri;
+                Settings.UrlWebTermsContent = globalParameters.UrlWebTerms.AbsoluteUri;
+                Settings.UrlWebContactUsContent = globalParameters.UrlWebContactUs.AbsoluteUri;
                 #endregion
 
                 #region Navigate to SIGOB Main Page

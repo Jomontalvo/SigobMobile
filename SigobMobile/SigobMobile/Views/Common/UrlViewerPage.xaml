@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    x:Class="SigobMobile.Views.Common.UrlViewerPage"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}"
+    ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding UrlViewer}"
+            HeightRequest="1000"
+            WidthRequest="1000">
+            <WebView
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                Source="{Binding UrlSourcePath, Mode=TwoWay}">
+            </WebView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

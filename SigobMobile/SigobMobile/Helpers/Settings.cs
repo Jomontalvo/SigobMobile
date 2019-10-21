@@ -28,6 +28,11 @@
         private const string insitutionLogo = "logo";
         private const string userFullName = "fullName";
         private const string officeCode = "officeCode";
+        //Central web contents
+        private const string urlWebCentral = "uriCentral";
+        private const string urlWebHelpContent = "uriHelp";
+        private const string urlWebTermsContent = "uriTerms";
+        private const string urlWebContactUsContent = "uriContact";
         private static readonly string SettingsDefault = string.Empty;
 
         private const string calendarViewMode = "calendarViewMode";
@@ -135,14 +140,44 @@
         /// <value>The URL base API sigob.</value>
         public static string UrlBaseApiSigob
         {
-            get
-            {
-                return AppSettings.GetValueOrDefault(urlBaseApiSigob, SettingsDefault);
-            }
-            set
-            {
-                AppSettings.AddOrUpdateValue(urlBaseApiSigob, value);
-            }
+            get => AppSettings.GetValueOrDefault(urlBaseApiSigob, SettingsDefault);
+            set => AppSettings.AddOrUpdateValue(urlBaseApiSigob, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the URL Central Web content
+        /// </summary>
+        public static string UrlWebCentral
+        {
+            get => AppSettings.GetValueOrDefault(urlWebCentral, SettingsDefault);
+            set => AppSettings.AddOrUpdateValue(urlWebCentral, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the URL Central Help content
+        /// </summary>
+        public static string UrlWebHelpContent
+        {
+            get => AppSettings.GetValueOrDefault(urlWebHelpContent, SettingsDefault);
+            set => AppSettings.AddOrUpdateValue(urlWebHelpContent, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the URL Central Terms And Conditions content
+        /// </summary>
+        public static string UrlWebTermsContent
+        {
+            get => AppSettings.GetValueOrDefault(urlWebTermsContent, SettingsDefault);
+            set => AppSettings.AddOrUpdateValue(urlWebTermsContent, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the URL Central Contact us content
+        /// </summary>
+        public static string UrlWebContactUsContent
+        {
+            get => AppSettings.GetValueOrDefault(urlWebContactUsContent, SettingsDefault);
+            set => AppSettings.AddOrUpdateValue(urlWebContactUsContent, value);
         }
 
         /// <summary>
@@ -151,14 +186,8 @@
         /// <value>The logo institution.</value>
         public static string InstitutionLogo
         {
-            get
-            {
-                return AppSettings.GetValueOrDefault(insitutionLogo, SettingsDefault);
-            }
-            set
-            {
-                AppSettings.AddOrUpdateValue( insitutionLogo, value);
-            }
+            get => AppSettings.GetValueOrDefault(insitutionLogo, SettingsDefault);
+            set => AppSettings.AddOrUpdateValue(insitutionLogo, value);
         }
 
         /// <summary>

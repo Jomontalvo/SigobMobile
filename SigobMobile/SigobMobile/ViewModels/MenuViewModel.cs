@@ -173,31 +173,36 @@
                 {
                     Icon = "ic_menu_home",
                     PageName = "ApplicationsPage",
-                    Title = Languages.HomeMenu
+                    Title = Languages.HomeMenu,
+                    Url = string.Empty
                 },
                 new MenuItemViewModel
                 {
                     Icon = "ic_menu_security",
                     PageName = "SecurityPage",
-                    Title = Languages.SecurityMenu
+                    Title = Languages.SecurityMenu,
+                    Url = string.Empty
                 },
                 new MenuItemViewModel
                 {
                     Icon = "ic_menu_help",
                     PageName = "WebViewHelpPage",
-                    Title = Languages.HelpMenu
+                    Title = Languages.HelpMenu,
+                    Url = Settings.UrlWebHelpContent
                 },
                 new MenuItemViewModel
                 {
                     Icon = "ic_menu_terms",
                     PageName = "WebViewTermsPage",
-                    Title = Languages.TermsAndConditionsMenu
+                    Title = Languages.TermsAndConditionsMenu,
+                    Url = Settings.UrlWebTermsContent
                 },
                 new MenuItemViewModel
                 {
                     Icon = "ic_menu_contact",
                     PageName = "WebViewContactPage",
-                    Title = Languages.ContactUs
+                    Title = Languages.ContactUs,
+                    Url = Settings.UrlWebContactUsContent
                 },
                 new MenuItemViewModel
                 {

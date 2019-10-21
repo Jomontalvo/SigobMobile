@@ -1,5 +1,8 @@
 ﻿namespace SigobMobile.Models
 {
+    /// <summary>
+    /// Login Credentials model
+    /// </summary>
     public class LoginCredentials
     {
         /// <summary>
@@ -26,6 +29,25 @@
         /// Gets or sets the user agent.
         /// </summary>
         /// <value>The user agent.</value>
+        public string UserAgent { get; set; }
+    }
+
+    /// <summary>
+    /// Change password model
+    /// </summary>
+    public class NewPasswordModel
+    {
+        /// <summary>
+        /// Get or set the new password value
+        /// </summary>
+        public string Password { get; set; }
+        /// <summary>
+        /// Get or set the Ip address 
+        /// </summary>
+        public string Ip { get; set; }
+        /// <summary>
+        /// Get or set the User Agent Device
+        /// </summary>
         public string UserAgent { get; set; }
     }
 }

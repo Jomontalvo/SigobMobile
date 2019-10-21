@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 
-namespace SigobMobile.Views
+namespace SigobMobile.Views.Common
 {
-    public partial class WebViewPage : ContentPage
+    public partial class DocumentViewerPage : ContentPage
     {
-        public WebViewPage()
+        public DocumentViewerPage()
         {
             InitializeComponent();
         }

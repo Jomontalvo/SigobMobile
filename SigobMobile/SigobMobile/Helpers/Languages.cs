@@ -123,6 +123,15 @@
         public static string LogoutMenu => Resources.LogoutMenu;
         #endregion
 
+        #region Applications Menu View
+        public static string ManagementCenterName => Resources.ManagementCenterAppLabel;
+        public static string TaskManagementName => Resources.TasksAppLabel;
+        public static string InstitutionalGoalsName => Resources.GoalsAppLabel;
+        public static string CorrespondenceName => Resources.CorrespondenceAppLabel;
+        public static string WorkflowProcessName => Resources.WorkflowAppLabel;
+        public static string CommunicationsActionsName => Resources.CommunicationsAppLabel;
+        #endregion
+
         #region My Profile View
         public static string ProfileViewTitle => Resources.ProfileViewTitle;
         public static string PersonalDataGroup => Resources.PersonalDataGroup;

@@ -34,6 +34,7 @@ namespace SigobMobile.ViewModels
         public ParticipantsViewModel Participants { get; set; }
         public ExternalContactsViewModel ExternalContacts { get; set; }
         public ContactsViewModel Contacts { get; set; }
+        public UrlViewerViewModel UrlViewer { get; set; }
         #endregion
 
         #region Constructors
