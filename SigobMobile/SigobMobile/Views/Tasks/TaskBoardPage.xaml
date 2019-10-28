@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:local="clr-namespace:SigobMobile.Helpers"
+    x:Class="SigobMobile.Views.Tasks.TaskBoardPage"
+    BackgroundColor="{StaticResource defaultBackgroundView}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}"
+    Title="{local:Translate TaskManagementAppName}"
+    ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding TaskBoard}">
+            <ListView
+                HasUnevenRows="True"
+                IsPullToRefreshEnabled="true"
+                ItemsSource="{Binding TaskList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame
+                                BorderColor="Transparent"
+                                HasShadow="false"
+                                Margin="10,5"
+                                Padding="5,5">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command ="{Binding SelectTaskCommand}">
+                                    </TapGestureRecognizer>
+                                </Frame.GestureRecognizers>
+                                <Label
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="{Binding Title}"
+                                    VerticalOptions="Center"
+                                    VerticalTextAlignment="Center">
+                                </Label>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

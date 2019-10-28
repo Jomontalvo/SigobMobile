@@ -12,29 +12,49 @@ namespace SigobMobile.ViewModels
         #endregion
 
         #region ViewModels
+
+        #region Login Views
         public LoginViewModel Login { get; set; }
         public InstitutionsConnectViewModel InstitutionsConnect { get; set; }
+        #endregion
+
+        #region MainView
         public MasterDetailSigobViewModel MasterDetailSigob { get; set; }
         public ApplicationsViewModel Applications { get; set; }
         public MenuViewModel Menu { get; set; }
+        #endregion
+
+        #region Options Menu Views
         public SecurityViewModel Security { get; set; }
         public ProfileViewModel Profile { get; set; }
+        public UrlViewerViewModel UrlViewer { get; set; }
+        #endregion
+
+        #region Management Center Views
         public CalendarsViewModel Calendars { get; set; }
         public CalendarFiltersViewModel CalendarFilters { get; set; }
-        public CalendarViewModel Calendar { get; set;  }
+        public CalendarViewModel Calendar { get; set; }
         public EventCgViewModel EventCg { get; set; }
         public EditEventViewModel EditEvent { get; set; }
         public EditAppointmentViewModel EditAppointment { get; set; }
         public AppointmentViewModel Appointment { get; set; }
         public CalendarWeekViewModel CalendarWeek { get; set; }
         public CalendarMonthViewModel CalendarMonth { get; set; }
-        public InstructionsViewModel Instructions { get; set;  }
+        public InstructionsViewModel Instructions { get; set; }
         public InstructionViewModel Instruction { get; set; }
+        #endregion
+
+        #region Task Views
         public TaskViewModel Task { get; set; }
+        public TaskBoardViewModel TaskBoard { get; set; }
+        #endregion
+
+        #region Contacts Views
         public ParticipantsViewModel Participants { get; set; }
         public ExternalContactsViewModel ExternalContacts { get; set; }
         public ContactsViewModel Contacts { get; set; }
-        public UrlViewerViewModel UrlViewer { get; set; }
+        #endregion
+
         #endregion
 
         #region Constructors

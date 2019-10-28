@@ -359,39 +359,39 @@ namespace SigobMobile.Properties {
             }
         }
         
-        public static string ManagementCenterAppLabel {
+        public static string ManagementCenterAppName {
             get {
-                return ResourceManager.GetString("ManagementCenterAppLabel", resourceCulture);
+                return ResourceManager.GetString("ManagementCenterAppName", resourceCulture);
             }
         }
         
-        public static string TasksAppLabel {
+        public static string TaskManagementAppName {
             get {
-                return ResourceManager.GetString("TasksAppLabel", resourceCulture);
+                return ResourceManager.GetString("TaskManagementAppName", resourceCulture);
             }
         }
         
-        public static string CorrespondenceAppLabel {
+        public static string CorrespondenceAppName {
             get {
-                return ResourceManager.GetString("CorrespondenceAppLabel", resourceCulture);
+                return ResourceManager.GetString("CorrespondenceAppName", resourceCulture);
             }
         }
         
-        public static string GoalsAppLabel {
+        public static string InstitutionalGoalsAppName {
             get {
-                return ResourceManager.GetString("GoalsAppLabel", resourceCulture);
+                return ResourceManager.GetString("InstitutionalGoalsAppName", resourceCulture);
             }
         }
         
-        public static string WorkflowAppLabel {
+        public static string WorkflowProcessAppName {
             get {
-                return ResourceManager.GetString("WorkflowAppLabel", resourceCulture);
+                return ResourceManager.GetString("WorkflowProcessAppName", resourceCulture);
             }
         }
         
-        public static string CommunicationsAppLabel {
+        public static string CommunicationsActionsAppName {
             get {
-                return ResourceManager.GetString("CommunicationsAppLabel", resourceCulture);
+                return ResourceManager.GetString("CommunicationsActionsAppName", resourceCulture);
             }
         }
         

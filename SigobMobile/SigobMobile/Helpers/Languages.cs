@@ -124,12 +124,12 @@
         #endregion
 
         #region Applications Menu View
-        public static string ManagementCenterName => Resources.ManagementCenterAppLabel;
-        public static string TaskManagementName => Resources.TasksAppLabel;
-        public static string InstitutionalGoalsName => Resources.GoalsAppLabel;
-        public static string CorrespondenceName => Resources.CorrespondenceAppLabel;
-        public static string WorkflowProcessName => Resources.WorkflowAppLabel;
-        public static string CommunicationsActionsName => Resources.CommunicationsAppLabel;
+        public static string ManagementCenterAppName => Resources.ManagementCenterAppName;
+        public static string TaskManagementAppName => Resources.TaskManagementAppName;
+        public static string InstitutionalGoalsAppName => Resources.InstitutionalGoalsAppName;
+        public static string CorrespondenceAppName => Resources.CorrespondenceAppName;
+        public static string WorkflowProcessAppName => Resources.WorkflowProcessAppName;
+        public static string CommunicationsActionsAppName => Resources.CommunicationsActionsAppName;
         #endregion
 
         #region My Profile View

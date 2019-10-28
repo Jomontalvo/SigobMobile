@@ -109,17 +109,6 @@
 
     #endregion
 
-    #region Enum SIGOB Instruments Type
-    public enum SigobInstrument : byte
-    {
-        PersonalAppointment = 5,
-        Instruction = 7,
-        Assignment = 11,
-        ManagementCenterEvent = 12,
-        Task = 40
-    }
-    #endregion
-
     /// <summary>
     /// Management Center Event.
     /// </summary>
@@ -428,28 +417,15 @@
         {
             get
             {
-                string itemName;
-                switch (InstrumentType)
+                var itemName = InstrumentType switch
                 {
-                    case SigobInstrument.PersonalAppointment:
-                        itemName = Languages.Appointment;
-                        break;
-                    case SigobInstrument.Instruction:
-                        itemName = Languages.Instruction;
-                        break;
-                    case SigobInstrument.Assignment:
-                        itemName = Languages.Assignment;
-                        break;
-                    case SigobInstrument.ManagementCenterEvent:
-                        itemName = Languages.Event;
-                        break;
-                    case SigobInstrument.Task:
-                        itemName = Languages.Task;
-                        break;
-                    default:
-                        itemName = string.Empty;
-                        break;
-                }
+                    SigobInstrument.PersonalAppointment => Languages.Appointment,
+                    SigobInstrument.Instruction => Languages.Instruction,
+                    SigobInstrument.Assignment => Languages.Assignment,
+                    SigobInstrument.ManagementCenterEvent => Languages.Event,
+                    SigobInstrument.Task => Languages.Task,
+                    _ => string.Empty,
+                };
                 return itemName;
             }
         }

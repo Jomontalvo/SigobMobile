@@ -47,6 +47,7 @@
             this.apiService = new ApiService();
             IErrorHandler errorHandler = null;
             this.LoadApplicationsMenu().FireAndForgetSafeAsync(errorHandler);
+            this.IsRefreshing = false;
         }
         #endregion
 

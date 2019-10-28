@@ -331,27 +331,27 @@ If you have problems, contact with administrator.</value>
   </data>
     
     <!-- Main options name -->
-    <data name="ManagementCenterAppLabel" xml:space="preserve">
+    <data name="ManagementCenterAppName" xml:space="preserve">
     <value>Management Center Agenda</value>
     <comment>Text for agenda menu option title.</comment>
   </data>
-    <data name="TasksAppLabel" xml:space="preserve">
+    <data name="TaskManagementAppName" xml:space="preserve">
     <value>Task Management</value>
     <comment>Text for task menu option title.</comment>
   </data>
-    <data name="CorrespondenceAppLabel" xml:space="preserve">
+    <data name="CorrespondenceAppName" xml:space="preserve">
     <value>Document Transparency</value>
     <comment>Text for correspondence menu option title.</comment>
   </data>
-    <data name="GoalsAppLabel" xml:space="preserve">
+    <data name="InstitutionalGoalsAppName" xml:space="preserve">
     <value>Institutional Goals</value>
     <comment>Text for goals menu option title.</comment>
   </data>
-    <data name="WorkflowAppLabel" xml:space="preserve">
+    <data name="WorkflowProcessAppName" xml:space="preserve">
     <value>Processes and Workflows</value>
     <comment>Text for workflow menu option title.</comment>
   </data>
-    <data name="CommunicationsAppLabel" xml:space="preserve">
+    <data name="CommunicationsActionsAppName" xml:space="preserve">
     <value>Communication Actions</value>
     <comment>Text for communications actions menu option title.</comment>
   </data>

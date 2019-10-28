@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace SigobMobile.Views.Tasks
 {
-    public partial class DashboardTasksPage : ContentPage
+    public partial class TaskBoardPage : ContentPage
     {
-        public DashboardTasksPage()
+        public TaskBoardPage()
         {
             InitializeComponent();
         }

@@ -99,7 +99,7 @@
                                     Grid.Column="0"
                                     FontSize="14"
                                     Text="{Binding Title}"
-                                    TextColor="DarkSlateGray"
+                                    TextColor="{OnPlatform Android=White, iOS=DarkSlateGray}"
                                     FontAttributes="{Binding TitleFont, Converter={StaticResource intToFontAttribute}}">
                                 </Label>
                                 <controls:IconView
@@ -116,7 +116,7 @@
                             <Label
                                 FontSize="12"
                                 Text="{Binding Detail}"
-                                TextColor="SlateGray">
+                                TextColor="{OnPlatform Android=White, iOS=SlateGray}">
                             </Label>
                         </StackLayout>
                     </StackLayout>

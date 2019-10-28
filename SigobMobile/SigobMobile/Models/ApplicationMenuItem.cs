@@ -27,31 +27,16 @@
         {
             get
             {
-                string appName = string.Empty;
-                switch (TypeApplication)
+                string appName = TypeApplication switch
                 {
-                    case TypeApplication.ManagementCenter:
-                        appName = Languages.ManagementCenterName;
-                        break;
-                    case TypeApplication.Tasks:
-                        appName = Languages.TaskManagementName;
-                        break;
-                    case TypeApplication.Goals:
-                        appName = Languages.InstitutionalGoalsName;
-                        break;
-                    case TypeApplication.Correspondence:
-                        appName = Languages.CorrespondenceName;
-                        break;
-                    case TypeApplication.WorkFlows:
-                        appName = Languages.WorkflowProcessName;
-                        break;
-                    case TypeApplication.Communications:
-                        appName = Languages.CommunicationsActionsName;
-                        break;
-                    default:
-                        appName = Languages.GeneralError;
-                        break;
-                }
+                    TypeApplication.ManagementCenter => Languages.ManagementCenterAppName,
+                    TypeApplication.Tasks => Languages.TaskManagementAppName,
+                    TypeApplication.Goals => Languages.InstitutionalGoalsAppName,
+                    TypeApplication.Correspondence => Languages.CorrespondenceAppName,
+                    TypeApplication.WorkFlows => Languages.WorkflowProcessAppName,
+                    TypeApplication.Communications => Languages.CommunicationsActionsAppName,
+                    _ => Languages.GeneralError,
+                };
                 return appName;
             }
         }

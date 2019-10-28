@@ -8,15 +8,15 @@
     using System.Windows.Input;
     using AsyncAwaitBestPractices.MVVM;
     using GalaSoft.MvvmLight.Command;
+    using Helpers;
+    using Interfaces;
     using Models;
     using Services;
-    using Helpers;
-    using Views.Tasks;
     using Telerik.XamarinForms.Input;
     using Telerik.XamarinForms.Input.Calendar.Commands;
     using Views.ManagementCenter;
+    using Views.Tasks;
     using Xamarin.Forms;
-    using SigobMobile.Interfaces;
 
     public class CalendarViewModel : BaseViewModel
     {

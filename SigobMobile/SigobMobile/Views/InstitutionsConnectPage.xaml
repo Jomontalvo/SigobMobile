@@ -14,6 +14,7 @@
             <ListView
                 x:Name="list"
                 GroupDisplayBinding="{Binding Key}"
+                HasUnevenRows="True"
                 IsGroupingEnabled="true"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
@@ -21,11 +22,11 @@
                 RefreshCommand="{Binding RefreshCommand}">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
-                        <ViewCell Height="25">
+                        <ViewCell>
                             <StackLayout
                                 Orientation="Horizontal"
                                 VerticalOptions="FillAndExpand"
-                                Padding="15,2"
+                                Padding="15,5"
                                 BackgroundColor="{StaticResource softGray}">
                                 <Image
                                     VerticalOptions="Center"

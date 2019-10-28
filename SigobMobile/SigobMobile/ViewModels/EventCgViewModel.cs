@@ -197,21 +197,13 @@
                 this.Interval = $"{localStartDate.ToString("g")} - {localEndDate.ToString("g")}";
             if (LocalEvent.Tentative) this.Interval = $"{this.Interval} ({Languages.TentativeLabel})";
             //Event Management Status
-            switch (LocalEvent.Status)
+            IconStatus = LocalEvent.Status switch
             {
-                case StatusAppointment.InManagement:
-                    IconStatus = "ic_ev_status_active";
-                    break;
-                case StatusAppointment.Finished:
-                    IconStatus = "ic_ev_status_finished";
-                    break;
-                case StatusAppointment.Suspended:
-                    IconStatus = "ic_ev_status_suspended";
-                    break;
-                default:
-                    IconStatus = "ic_ev_status";
-                    break;
-            }
+                StatusAppointment.InManagement => "ic_ev_status_active",
+                StatusAppointment.Finished => "ic_ev_status_finished",
+                StatusAppointment.Suspended => "ic_ev_status_suspended",
+                _ => "ic_ev_status",
+            };
             //Participants
             if (LocalEvent.ParticipantsAccount <= 1)
                 Participants = $"1 {Languages.EventParticipantText}";

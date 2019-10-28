@@ -4,6 +4,7 @@
     using AsyncAwaitBestPractices.MVVM;
     using Models;
     using Views.ManagementCenter;
+    using Views.Tasks;
 
     public class ApplicationItemViewModel : ApplicationMenuItem
     {
@@ -24,8 +25,8 @@
                     await App.Navigator.PushAsync(new CalendarPage(),true);
                     break;
                 case TypeApplication.Tasks:
-                    appViewModel.CalendarMonth = new CalendarMonthViewModel();
-                    await App.Navigator.PushAsync(new CalendarMonthPage(), true);
+                    appViewModel.TaskBoard = new TaskBoardViewModel();
+                    await App.Navigator.PushAsync(new TaskBoardPage(), true);
                     break;
                 case TypeApplication.Correspondence:
                     break;
