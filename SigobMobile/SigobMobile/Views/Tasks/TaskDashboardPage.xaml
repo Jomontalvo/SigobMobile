@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:telerikChart="clr-namespace:Telerik.XamarinForms.Chart;assembly=Telerik.XamarinForms.Chart"
+    xmlns:controls="clr-namespace:SigobMobile.Controls"
+    xmlns:local="clr-namespace:SigobMobile.Helpers"
+    x:Class="SigobMobile.Views.Tasks.TaskDashboardPage"
+    BackgroundColor="{StaticResource defaultBackgroundView}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}"
+    Title="{local:Translate TaskManagementAppName}"
+    ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding TaskDashboard}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="{Binding GraphTitle}">
+                </Label>
+                <telerikChart:RadPieChart
+                    Grid.Row="1"
+                    x:Name="pieStatisticsChart">
+                    <telerikChart:RadPieChart.Series>
+                        <telerikChart:DonutSeries
+                            InnerRadiusFactor="0.4"
+                            ItemsSource="{Binding TaskStatistics}"
+                            LegendTitleBinding="Category"
+                            ShowLabels="True"
+                            ValueBinding="Value"/>
+                    </telerikChart:RadPieChart.Series>
+                    <telerikChart:RadPieChart.Palette>
+                        <telerikChart:ChartPalette>
+                            <telerikChart:ChartPalette.Entries>
+                                <telerikChart:PaletteEntry FillColor="{StaticResource Key=green}" StrokeColor="{StaticResource Key=defaultBackgroundView}" />
+                                <telerikChart:PaletteEntry FillColor="{StaticResource Key=red}" StrokeColor="{StaticResource Key=defaultBackgroundView}" />
+                                <telerikChart:PaletteEntry FillColor="{StaticResource Key=darkBlue}" StrokeColor="{StaticResource Key=defaultBackgroundView}" />
+                                <telerikChart:PaletteEntry FillColor="{StaticResource Key=yellow}" StrokeColor="{StaticResource Key=defaultBackgroundView}" />
+                            </telerikChart:ChartPalette.Entries>
+                        </telerikChart:ChartPalette>
+                    </telerikChart:RadPieChart.Palette>
+                </telerikChart:RadPieChart>
+                <CollectionView
+                    Grid.Row="2"
+                    ItemsSource="{Binding ChartLegend}"
+                    ItemsLayout="HorizontalList">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <controls:IconView
+                                    Grid.Column="0"
+                                    Foreground="{Binding ColorSerie}"
+                                    HeightRequest="12"
+                                    HorizontalOptions="Center"
+                                    Margin="2,2"
+                                    Source="ic_ev_type_color"
+                                    VerticalOptions="Start"
+                                    WidthRequest="12">
+                                </controls:IconView>
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Small"
+                                    Grid.Column="1"
+                                    Text="{Binding Category}" >
+                                </Label>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

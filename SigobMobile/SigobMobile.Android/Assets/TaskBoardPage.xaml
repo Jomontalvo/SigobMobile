@@ -3,6 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:telerikChart="clr-namespace:Telerik.XamarinForms.Chart;assembly=Telerik.XamarinForms.Chart"
     xmlns:local="clr-namespace:SigobMobile.Helpers"
     x:Class="SigobMobile.Views.Tasks.TaskBoardPage"
     BackgroundColor="{StaticResource defaultBackgroundView}"
@@ -12,6 +13,26 @@
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding TaskBoard}">
+            <telerikChart:RadPieChart
+                x:Name="statusPieChart">
+                <telerikChart:RadPieChart.Series>
+                    <telerikChart:DonutSeries
+                        ShowLabels="True"
+                        LegendTitleBinding="Category"
+                        InnerRadiusFactor="0.4"
+                        ValueBinding="Value"
+                        ItemsSource="{Binding TaskStatistics}" />
+                </telerikChart:RadPieChart.Series>
+            </telerikChart:RadPieChart>
+            <telerikChart:RadLegend
+                HeightRequest="100"
+                Margin="20,0"
+                MinimumHeightRequest="40"
+                LegendItemFontColor="{StaticResource Key=grayContent}"
+                LegendItemFontSize="12"
+                LegendProvider="{x:Reference Name=statusPieChart}"
+                Orientation="Horizontal">
+            </telerikChart:RadLegend>
             <ListView
                 HasUnevenRows="True"
                 IsPullToRefreshEnabled="true"

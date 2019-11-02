@@ -46,7 +46,7 @@ namespace SigobMobile.ViewModels
 
         #region Task Views
         public TaskViewModel Task { get; set; }
-        public TaskBoardViewModel TaskBoard { get; set; }
+        public TaskDashboardViewModel TaskDashboard { get; set; }
         #endregion
 
         #region Contacts Views

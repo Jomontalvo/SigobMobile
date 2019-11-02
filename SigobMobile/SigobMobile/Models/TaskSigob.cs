@@ -2,6 +2,7 @@
 {
     using System;
     using Newtonsoft.Json;
+    using Xamarin.Forms;
 
     public enum TTaskDeletionError
     {
@@ -37,37 +38,39 @@
         public TaskSigob[] TaskList { get; set; }
 
         [JsonProperty("estadistica")]
-        public TaskStatistics[] TaskStatistics { get; set; }
+        public TaskCategoricalData[] TaskStatistics { get; set; }
 
         [JsonProperty("tituloGrafica")]
         public string GraphTitle { get; set; }
     }
 
-    public class TaskStatistics
+    public class TaskCategoricalData
     {
         [JsonProperty("id")]
         public long Id { get; set; }
 
         [JsonProperty("label")]
-        public string Label { get; set; }
-
-        [JsonProperty("colorSerie")]
-        public string ColorSerie { get; set; }
-
-        [JsonProperty("a")]
-        public long A { get; set; }
-
-        [JsonProperty("r")]
-        public long R { get; set; }
-
-        [JsonProperty("g")]
-        public long G { get; set; }
-
-        [JsonProperty("b")]
-        public long B { get; set; }
+        public object Category { get; set; }
 
         [JsonProperty("value")]
-        public long Value { get; set; }
+        public int? Value { get; set; }
+
+        [JsonProperty("colorSerie")]
+        public string ColorName { get; set; }
+
+        [JsonProperty("a")]
+        public byte A { get; set; }
+
+        [JsonProperty("r")]
+        public byte R { get; set; }
+
+        [JsonProperty("g")]
+        public byte G { get; set; }
+
+        [JsonProperty("b")]
+        public byte B { get; set; }
+
+        public Color ColorSerie { get => Color.FromRgba(R, G, B, A); }
     }
 
     public class TaskSigob

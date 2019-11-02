@@ -25,8 +25,8 @@
                     await App.Navigator.PushAsync(new CalendarPage(),true);
                     break;
                 case TypeApplication.Tasks:
-                    appViewModel.TaskBoard = new TaskBoardViewModel();
-                    await App.Navigator.PushAsync(new TaskBoardPage(), true);
+                    appViewModel.TaskDashboard = new TaskDashboardViewModel();
+                    await App.Navigator.PushAsync(new TaskDashboardPage(), true);
                     break;
                 case TypeApplication.Correspondence:
                     break;
