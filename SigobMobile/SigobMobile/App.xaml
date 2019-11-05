@@ -44,6 +44,9 @@
             <Color x:Key="iOSTealBlue">#5AC8FA</Color>
             <Color x:Key="iOSPurple">#5856D6</Color>
             <Color x:Key="iOSPink">#FF2D55</Color>
+            <Color x:Key="iOSTrafficRed">#FF6666</Color>
+            <Color x:Key="iOSTrafficGreen">#66B366</Color>
+            <Color x:Key="iOSTrafficYellow">#FFC966</Color>
         </ResourceDictionary>
         <!--Droid Colors-->
         <ResourceDictionary>

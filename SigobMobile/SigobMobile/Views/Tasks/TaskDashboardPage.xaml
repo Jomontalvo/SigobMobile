@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:telerikChart="clr-namespace:Telerik.XamarinForms.Chart;assembly=Telerik.XamarinForms.Chart"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
     xmlns:controls="clr-namespace:SigobMobile.Controls"
     xmlns:local="clr-namespace:SigobMobile.Helpers"
     x:Class="SigobMobile.Views.Tasks.TaskDashboardPage"
@@ -11,77 +12,33 @@
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
     Title="{local:Translate TaskManagementAppName}"
     ios:Page.UseSafeArea="true">
+    <ContentPage.ToolbarItems>
+        <!-- Search -->
+        <ToolbarItem 
+            BindingContext="{Binding TaskDashboard}"
+            Command="{Binding SearchCommand}"
+            Icon="ic_bt_search"
+            Order="Primary" 
+            Priority="0">
+        </ToolbarItem>
+        <controls:ToolbarItemEx
+            BindingContext="{Binding TaskDashboard}"
+            Command="{Binding AddCommand}"
+            Icon="ic_bt_add"
+            IsVisible="{Binding IsAddItemVisible}"
+            Order="Primary"
+            Priority="0">
+        </controls:ToolbarItemEx>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout
-            BindingContext="{Binding TaskDashboard}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="40" />
-                </Grid.RowDefinitions>
-                <Label
-                    Grid.Row="0"
-                    HorizontalOptions="CenterAndExpand"
-                    Text="{Binding GraphTitle}">
-                </Label>
-                <telerikChart:RadPieChart
-                    Grid.Row="1"
-                    x:Name="pieStatisticsChart">
-                    <telerikChart:RadPieChart.Series>
-                        <telerikChart:DonutSeries
-                            InnerRadiusFactor="0.4"
-                            ItemsSource="{Binding TaskStatistics}"
-                            LegendTitleBinding="Category"
-                            ShowLabels="True"
-                            ValueBinding="Value"/>
-                    </telerikChart:RadPieChart.Series>
-                    <telerikChart:RadPieChart.Palette>
-                        <telerikChart:ChartPalette>
-                            <telerikChart:ChartPalette.Entries>
-                                <telerikChart:PaletteEntry FillColor="{StaticResource Key=green}" StrokeColor="{StaticResource Key=defaultBackgroundView}" />
-                                <telerikChart:PaletteEntry FillColor="{StaticResource Key=red}" StrokeColor="{StaticResource Key=defaultBackgroundView}" />
-                                <telerikChart:PaletteEntry FillColor="{StaticResource Key=darkBlue}" StrokeColor="{StaticResource Key=defaultBackgroundView}" />
-                                <telerikChart:PaletteEntry FillColor="{StaticResource Key=yellow}" StrokeColor="{StaticResource Key=defaultBackgroundView}" />
-                            </telerikChart:ChartPalette.Entries>
-                        </telerikChart:ChartPalette>
-                    </telerikChart:RadPieChart.Palette>
-                </telerikChart:RadPieChart>
-                <CollectionView
-                    Grid.Row="2"
-                    ItemsSource="{Binding ChartLegend}"
-                    ItemsLayout="HorizontalList">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Padding="5">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <controls:IconView
-                                    Grid.Column="0"
-                                    Foreground="{Binding ColorSerie}"
-                                    HeightRequest="12"
-                                    HorizontalOptions="Center"
-                                    Margin="2,2"
-                                    Source="ic_ev_type_color"
-                                    VerticalOptions="Start"
-                                    WidthRequest="12">
-                                </controls:IconView>
-                                <Label
-                                    FontAttributes="Bold"
-                                    FontSize="Small"
-                                    Grid.Column="1"
-                                    Text="{Binding Category}" >
-                                </Label>
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </Grid>
-        </StackLayout>
+        <Grid
+            BackgroundColor="{StaticResource clear}"            BindingContext="{Binding TaskDashboard}"            ColumnSpacing="0"            Padding="0,0"            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition Height="44" />
+            </Grid.RowDefinitions>
+            <!--Bottom ToolBar-->            <telerikPrimitives:RadBorder                BorderColor="{StaticResource accesoryGray}"                 CornerRadius="0"                Grid.Row="2">                <Grid                     BackgroundColor="{StaticResource softGray}"                    ColumnSpacing="0"                    RowSpacing="0"                    VerticalOptions="End">                    <Grid.ColumnDefinitions>                        <ColumnDefinition Width="*" />                    </Grid.ColumnDefinitions>                    <Button                         BackgroundColor="{StaticResource softGray}"                        Command="{Binding CheckAllCalendarsCommand}"                        Grid.Column="0"                        HorizontalOptions="CenterAndExpand"                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"                        Text="{local:Translate CalendarsTitle}">                    </Button>                </Grid>            </telerikPrimitives:RadBorder>
+        </Grid>        
     </ContentPage.Content>
 </ContentPage>

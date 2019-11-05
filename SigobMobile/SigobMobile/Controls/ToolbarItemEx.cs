@@ -1,5 +1,7 @@
 ﻿namespace SigobMobile.Controls
 {
+    using System;
+    using System.Threading.Tasks;
     using Xamarin.Forms;
 
     public class ToolbarItemEx : ToolbarItem
@@ -42,18 +44,6 @@
                 }
             }
 
-            //var items = item.ParentPage.ToolbarItems;
-            //Device.BeginInvokeOnMainThread(() =>
-            //{
-            //    if (newVisible && !items.Contains(item))
-            //    {
-            //        items.Add(item);
-            //    }
-            //    else if (!newVisible && items.Contains(item))
-            //    {
-            //        items.Remove(item);
-            //    }
-            //});
         }
     }
 }

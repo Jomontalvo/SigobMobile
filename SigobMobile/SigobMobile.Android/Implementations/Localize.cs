@@ -16,7 +16,7 @@ namespace SigobMobile.Droid.Implementations
             var androidLocale = Java.Util.Locale.Default;
             netLanguage = AndroidToDotnetLanguage(androidLocale.ToString().Replace("_", "-"));
             // this gets called a lot - try/catch can be expensive so consider caching or something
-            CultureInfo ci = null;
+            CultureInfo ci;
             try
             {
                 ci = new CultureInfo(netLanguage);

@@ -635,6 +635,12 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string InProgressStatus {
+            get {
+                return ResourceManager.GetString("InProgressStatus", resourceCulture);
+            }
+        }
+        
         public static string PendingStatus {
             get {
                 return ResourceManager.GetString("PendingStatus", resourceCulture);
@@ -650,6 +656,12 @@ namespace SigobMobile.Properties {
         public static string ExpiredStatus {
             get {
                 return ResourceManager.GetString("ExpiredStatus", resourceCulture);
+            }
+        }
+        
+        public static string OverdueStatus {
+            get {
+                return ResourceManager.GetString("OverdueStatus", resourceCulture);
             }
         }
         
@@ -1160,6 +1172,84 @@ namespace SigobMobile.Properties {
         public static string Loading {
             get {
                 return ResourceManager.GetString("Loading", resourceCulture);
+            }
+        }
+        
+        public static string MyTasks {
+            get {
+                return ResourceManager.GetString("MyTasks", resourceCulture);
+            }
+        }
+        
+        public static string TasksOf {
+            get {
+                return ResourceManager.GetString("TasksOf", resourceCulture);
+            }
+        }
+        
+        public static string PendingTasks {
+            get {
+                return ResourceManager.GetString("PendingTasks", resourceCulture);
+            }
+        }
+        
+        public static string OverdueTasks {
+            get {
+                return ResourceManager.GetString("OverdueTasks", resourceCulture);
+            }
+        }
+        
+        public static string CompletedTasks {
+            get {
+                return ResourceManager.GetString("CompletedTasks", resourceCulture);
+            }
+        }
+        
+        public static string NewAssignedTasks {
+            get {
+                return ResourceManager.GetString("NewAssignedTasks", resourceCulture);
+            }
+        }
+        
+        public static string OngoingTaskSetByMe {
+            get {
+                return ResourceManager.GetString("OngoingTaskSetByMe", resourceCulture);
+            }
+        }
+        
+        public static string OngoingTasksThatMonitoring {
+            get {
+                return ResourceManager.GetString("OngoingTasksThatMonitoring", resourceCulture);
+            }
+        }
+        
+        public static string CompletedTasksSetByMe {
+            get {
+                return ResourceManager.GetString("CompletedTasksSetByMe", resourceCulture);
+            }
+        }
+        
+        public static string CompletedTasksThatMonitoring {
+            get {
+                return ResourceManager.GetString("CompletedTasksThatMonitoring", resourceCulture);
+            }
+        }
+        
+        public static string TaskCopies {
+            get {
+                return ResourceManager.GetString("TaskCopies", resourceCulture);
+            }
+        }
+        
+        public static string TaskMessages {
+            get {
+                return ResourceManager.GetString("TaskMessages", resourceCulture);
+            }
+        }
+        
+        public static string TaskCloseToDeadline {
+            get {
+                return ResourceManager.GetString("TaskCloseToDeadline", resourceCulture);
             }
         }
     }

@@ -5,10 +5,13 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Windows.Input;
+    using GalaSoft.MvvmLight.Command;
     using Helpers;
     using Interfaces;
     using Models;
     using Services;
+    using Telerik.XamarinForms.Chart;
     using Xamarin.Forms;
 
     public class TaskDashboardViewModel : BaseViewModel
@@ -23,6 +26,7 @@
         #endregion
 
         #region Attributes
+        private bool isAddItemVisible;
         private List<TaskSigob> taskList;
         private List<TaskCategoricalData> taskStatistics;
         private ObservableCollection<TaskSigob> taskCollection;
@@ -35,6 +39,11 @@
         #endregion
 
         #region Properties
+        public bool IsAddItemVisible
+        {
+            get { return this.isAddItemVisible; }
+            set { SetValue(ref this.isAddItemVisible, value); }
+        }
         public ObservableCollection<TaskCategoricalData> TaskStatistics
         {
             get { return this.taskStatisticsCollection; }
@@ -77,15 +86,16 @@
         #region Methods
         public void LoadTaskBoard()
         {
+            this.IsAddItemVisible = (Device.RuntimePlatform == Device.iOS) ? true : false;
             IErrorHandler errorHandler = null;
-            GetStatisticsAndTaskList().FireAndForgetSafeAsync(errorHandler);
+            GetStatisticsAndTaskList(Settings.OfficeCode,TQueryOption.TasksOf).FireAndForgetSafeAsync(errorHandler);
         }
 
         /// <summary>
         /// Get Graph and Task List according user profile
         /// </summary>
         /// <returns></returns>
-        private async Task GetStatisticsAndTaskList()
+        private async Task GetStatisticsAndTaskList(string officeCode, TQueryOption queryOption)
         {
             this.IsRefreshing = true;
             try
@@ -104,7 +114,7 @@
                 var response = await this.apiService.Get<Tasks>(
                     Settings.UrlBaseApiSigob,
                     App.PrefixApiSigob,
-                    string.Format(this.apiGetTaskStatistics, Settings.OfficeCode, 10),
+                    string.Format(this.apiGetTaskStatistics, officeCode, (byte)queryOption ),
                     Settings.Token,
                     Settings.DbToken
                 );
@@ -123,6 +133,8 @@
                 this.taskStatistics = taskObject.TaskStatistics.ToList<TaskCategoricalData>();
                 TaskList = new ObservableCollection<TaskSigob>(ToTask());
                 TaskStatistics = new ObservableCollection<TaskCategoricalData>(ToTaskStatistics());
+                // Legend
+                this.ChartLegend = new ObservableCollection<TaskCategoricalData>(taskObject.TaskStatistics.Where((point) => point.Value > 0));
             }
             catch (Exception ex)
             {
@@ -134,7 +146,7 @@
                 return;
             }
             finally { this.IsRefreshing = false; }
-            this.ChartLegend = new ObservableCollection<TaskCategoricalData>(taskObject.TaskStatistics.Where((point) => point.Value > 0));
+            
         }
 
         private IEnumerable<TaskCategoricalData> ToTaskStatistics()
@@ -142,7 +154,6 @@
             return this.taskStatistics.Select(s => new TaskCategoricalData
             {
                 Id = s.Id,
-                Category = s.Category,
                 Value = (s.Value != 0) ? s.Value : null,
                 ColorName = s.ColorName,
                 A = s.A,
@@ -162,9 +173,28 @@
                 Type = t.Type
             });
         }
+
+        
         #endregion
 
         #region Commands
+        public ICommand SliceTappedCommand => new RelayCommand<ChartSelectionBehavior>(SliceTapped);
+
+        private void SliceTapped(ChartSelectionBehavior serie)
+        {
+            if (serie.SelectedPoints.Any())
+            {
+                TaskCategoricalData selectedPoint = (TaskCategoricalData)serie.SelectedPoints.ElementAt(0).DataItem;
+                this.GraphTitle = selectedPoint.Category.ToString();
+                return;
+            }
+            else
+            {
+                serie.ClearSelection();
+                this.GraphTitle = "Filtro eliminado";
+                return;
+            }
+        }
 
         #endregion
 

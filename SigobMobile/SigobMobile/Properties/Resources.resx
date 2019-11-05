@@ -518,6 +518,10 @@ If you have problems, contact with administrator.</value>
     <value>In management</value>
     <comment>Text for Item in management status.</comment>
   </data>
+    <data name="InProgressStatus" xml:space="preserve">
+    <value>In progress</value>
+    <comment>In Progress status label (green)</comment>
+  </data>
     <data name="PendingStatus" xml:space="preserve">
     <value>Pending</value>
     <comment>Text for Item in pending status.</comment>
@@ -527,8 +531,12 @@ If you have problems, contact with administrator.</value>
     <comment>Text for Item close to deadline time status.</comment>
   </data>
     <data name="ExpiredStatus" xml:space="preserve">
-    <value>Over deadline</value>
+    <value>Expired term</value>
     <comment>Text for Item in expired time status.</comment>
+  </data>
+    <data name="OverdueStatus" xml:space="preserve">
+    <value>Overdue</value>
+    <comment>Overdue status label (red)</comment>
   </data>
     <data name="CompletedStatus" xml:space="preserve">
     <value>Completed</value>
@@ -870,4 +878,57 @@ If you have problems, contact with administrator.</value>
     <value>Loading...</value>
     <comment>Loading message</comment>
   </data>
+    <!--    Task Statistics Title-->
+    <data name="MyTasks" xml:space="preserve">
+    <value>My tasks</value>
+    <comment>My Tasks statistics chart title. Query Id = 10</comment>
+  </data>
+    <data name="TasksOf" xml:space="preserve">
+    <value>Tasks of: {0}</value>
+    <comment>Tasks of: {Officer name}. Query Id = 10, another officer</comment>
+  </data>
+    <data name="PendingTasks" xml:space="preserve">
+    <value>Pending tasks</value>
+    <comment>Pending tasks chart title. Query Id = 0</comment>
+  </data>
+    <data name="OverdueTasks" xml:space="preserve">
+    <value>Overdue tasks</value>
+    <comment>Overdue tasks chart title. Quet Id = 1</comment>
+  </data>
+    <data name="CompletedTasks" xml:space="preserve">
+    <value>Completed tasks</value>
+    <comment>Completed tasks chart title. Query Id = 2</comment>
+  </data>
+    <data name="NewAssignedTasks" xml:space="preserve">
+    <value>New assigned tasks</value>
+    <comment>New assigned tasks chart title. Query Id = 3</comment>
+  </data>
+    <data name="OngoingTaskSetByMe" xml:space="preserve">
+    <value>Ongoing tasks set by me</value>
+    <comment>Tasks set by me (in progress) chart title. Query Id = 4</comment>
+  </data>
+    <data name="OngoingTasksThatMonitoring" xml:space="preserve">
+    <value>Ongoing tasks that monitoring</value>
+    <comment>Ongoing tasks that i monitor. Query Id = 5</comment>
+  </data>
+    <data name="CompletedTasksSetByMe" xml:space="preserve">
+    <value>Tasks in progress that monitoring</value>
+    <comment>Completed tasks that i set. Query Id = 6</comment>
+  </data>
+    <data name="CompletedTasksThatMonitoring" xml:space="preserve">
+    <value>Completed tasks that monitoring</value>
+    <comment>Ongoing tasks that I monitor. Query Id = 7</comment>
+  </data>
+    <data name="TaskCopies" xml:space="preserve">
+    <value>My task copies</value>
+    <comment>Tasks copies. Query Id = 8</comment>
+  </data>
+    <data name="TaskMessages" xml:space="preserve">
+    <value>My unread messages in tasks</value>
+    <comment>Tasks messages. Query Id = 9</comment>
+  </data>
+    <data name="TaskCloseToDeadline" xml:space="preserve">
+    <value>Tasks close to deadline</value>
+    <comment>Tasks close to deadline label. Query Id = 11</comment>
+  </data>   
 </root>

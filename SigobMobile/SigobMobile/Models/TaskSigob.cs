@@ -2,6 +2,7 @@
 {
     using System;
     using Newtonsoft.Json;
+    using Helpers;
     using Xamarin.Forms;
 
     public enum TTaskDeletionError
@@ -18,6 +19,15 @@
 
     public enum TStatusTasK    {        Programmed = 0,        InManagement = 1,        Finished = 6,        PendingSend = 7,        FinishedIncomplete = 8,        Suspended = 9,        ToSendByEmail = 10,        ErrorSendEmail = 11,        Delayed = 12    }
 
+    public enum TTrafficLightStatus : long
+    {
+        InProgress = 0,
+        Overdue = 1,
+        Completed = 2,
+        CloseToDeadline = 11
+
+    }
+
     public enum TOriginTask    {        None = -1,        GovernmentActionProgram = 0,        ManagementCenterPrevious = 1,        ManagementCenterDuring = 2,        ManagementCenterPost = 3,        ManagementCenterRequest = 4,        Instruction = 5,        Assignment = 6,        PersonalAgenda = 7,        Task = 8,        CommunicativeAction = 9    }
 
     public enum TPeriodicity    {        Undefined = 0,        Weekly = 1,        Biweekly = 2,        Monthly = 3,        Bimonthly = 4    }
@@ -31,7 +41,25 @@
         /// <summary>        /// Trámites Regulares => tipo_instru = 8        /// </summary>        Workflow = 3,
         /// <summary>        /// Acción comunicacional => Tipo_instru = Z        /// </summary>        CommunicativeAction = 7    }
 
+    public enum TQueryOption : byte
+    {
+        PendingTasks = 0,
+        OverdueTasks = 1,
+        CompletedTasks = 2,
+        NewAssignedTasks = 3,
+        OngoingTaskSetByMe = 4,
+        OngoingTasksThatMonitoring = 5,
+        CompletedTasksSetByMe = 6,
+        CompletedTasksThatMonitoring = 7,
+        TaskCopies = 8,
+        TaskMessages = 9,
+        TasksOf = 10,
+        TaskCloseToDeadline = 11
+    }
 
+    /// <summary>
+    /// Task List with Statistics
+    /// </summary>
     public class Tasks
     {
         [JsonProperty("listaTareas")]
@@ -41,16 +69,63 @@
         public TaskCategoricalData[] TaskStatistics { get; set; }
 
         [JsonProperty("tituloGrafica")]
-        public string GraphTitle { get; set; }
+        public string GraphTitleNativeLanguage { get; set; }
+
+        [JsonProperty("queryId")]
+        public TQueryOption QueryId { get; set; }
+
+        [JsonProperty("despacho")]
+        public string OfficeCode { get; set; }
+
+        [JsonProperty("nombreFuncionario")]
+        public string OfficeName { get; set; }
+
+        public string GraphTitle
+        {
+            get
+            {
+                string title = QueryId switch
+                {
+                    TQueryOption.CompletedTasks => Languages.CompletedTasks,
+                    TQueryOption.CompletedTasksSetByMe => Languages.CompletedTasksSetByMe,
+                    TQueryOption.CompletedTasksThatMonitoring => Languages.CompletedTasksThatMonitoring,
+                    TQueryOption.NewAssignedTasks => Languages.NewAssignedTasks,
+                    TQueryOption.OngoingTaskSetByMe => Languages.OngoingTaskSetByMe,
+                    TQueryOption.OngoingTasksThatMonitoring => Languages.OngoingTasksThatMonitoring,
+                    TQueryOption.OverdueTasks => Languages.OverdueTasks,
+                    TQueryOption.PendingTasks => Languages.PendingTasks,
+                    TQueryOption.TaskCloseToDeadline => Languages.TaskCloseToDeadline,
+                    TQueryOption.TaskCopies => Languages.TaskCopies,
+                    TQueryOption.TaskMessages => Languages.TaskMessages,
+                    TQueryOption.TasksOf => (OfficeCode == Settings.OfficeCode) ? Languages.MyTasks : string.Format(Languages.TasksOf, OfficeName),
+                    _ => Languages.MyTasks,
+                };
+                return title;
+            }
+        }
     }
 
     public class TaskCategoricalData
     {
         [JsonProperty("id")]
-        public long Id { get; set; }
+        public TTrafficLightStatus Id { get; set; }
 
         [JsonProperty("label")]
-        public object Category { get; set; }
+        public string Category
+        {
+            get
+            {
+                string statusName = Id switch
+                {
+                    TTrafficLightStatus.InProgress => Languages.InProgressStatus,
+                    TTrafficLightStatus.Overdue => Languages.OverdueStatus,
+                    TTrafficLightStatus.Completed => Languages.CompletedStatus,
+                    TTrafficLightStatus.CloseToDeadline => Languages.CloseToDeadlinedStatus,
+                    _ => Languages.InManagementStatus,
+                };
+                return statusName;
+            }
+        }
 
         [JsonProperty("value")]
         public int? Value { get; set; }

@@ -47,9 +47,11 @@
         #endregion
 
         #region Deadline Status (all components)
+        public static string InProgressStatus => Resources.InProgressStatus;
         public static string PendingStatus => Resources.PendingStatus;
         public static string CloseToDeadlinedStatus => Resources.CloseToDeadlinedStatus;
         public static string ExpiredStatus => Resources.ExpiredStatus;
+        public static string OverdueStatus => Resources.OverdueStatus;
         #endregion
 
         #region Search Tools
@@ -230,9 +232,24 @@
         public static string InstitutionalDirectoryTitle => Resources.InstitutionalDirectoryTitle;
         public static string ContactsTitle => Resources.ContactsTitle;
         public static string ExternalContactsViewTitle => Resources.ExternalContactsViewTitle;
-
         #endregion
 
+        #region Task Management View
+        public static string MyTasks => Resources.MyTasks;
+        public static string TasksOf => Resources.TasksOf;
+        public static string PendingTasks => Resources.PendingTasks;
+        public static string OverdueTasks => Resources.OverdueTasks;
+        public static string CompletedTasks => Resources.CompletedTasks;
+        public static string NewAssignedTasks => Resources.NewAssignedTasks;
+        public static string OngoingTaskSetByMe => Resources.OngoingTaskSetByMe;
+        public static string OngoingTasksThatMonitoring => Resources.OngoingTasksThatMonitoring;
+        public static string CompletedTasksSetByMe => Resources.CompletedTasksSetByMe;
+        public static string CompletedTasksThatMonitoring => Resources.CompletedTasksThatMonitoring;
+        public static string TaskCopies => Resources.TaskCopies;
+        public static string TaskMessages => Resources.TaskMessages;
+        public static string TaskCloseToDeadline => Resources.TaskCloseToDeadline;
         #endregion
-    }
+
+    #endregion
+}
 }
