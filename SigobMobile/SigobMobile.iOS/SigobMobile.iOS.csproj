@@ -301,6 +301,18 @@
     <BundleResource Include="Resources\ic_bt_add_contact%402x.png" />
     <BundleResource Include="Resources\ic_ev_calendar.png" />
     <BundleResource Include="Resources\ic_pwd_security.png" />
+    <BundleResource Include="Resources\ic_completed.png" />
+    <BundleResource Include="Resources\ic_expired.png" />
+    <BundleResource Include="Resources\ic_deadline.png" />
+    <BundleResource Include="Resources\ic_progress.png" />
+    <BundleResource Include="Resources\ic_task_source_workflow.png" />
+    <BundleResource Include="Resources\ic_task_source_acom.png" />
+    <BundleResource Include="Resources\ic_task_source_goals.png" />
+    <BundleResource Include="Resources\ic_task_source_assignment.png" />
+    <BundleResource Include="Resources\ic_task_source_task.png" />
+    <BundleResource Include="Resources\ic_task_source_instruction.png" />
+    <BundleResource Include="Resources\ic_task_source_agenda.png" />
+    <BundleResource Include="Resources\ic_task_source_calendar.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />

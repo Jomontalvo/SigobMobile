@@ -519,7 +519,7 @@ If you have problems, contact with administrator.</value>
     <comment>Text for Item in management status.</comment>
   </data>
     <data name="InProgressStatus" xml:space="preserve">
-    <value>In progress</value>
+    <value>Doing</value>
     <comment>In Progress status label (green)</comment>
   </data>
     <data name="PendingStatus" xml:space="preserve">
@@ -527,7 +527,7 @@ If you have problems, contact with administrator.</value>
     <comment>Text for Item in pending status.</comment>
   </data>
     <data name="CloseToDeadlinedStatus" xml:space="preserve">
-    <value>Close to deadline</value>
+    <value>Near term</value>
     <comment>Text for Item close to deadline time status.</comment>
   </data>
     <data name="ExpiredStatus" xml:space="preserve">
@@ -539,7 +539,7 @@ If you have problems, contact with administrator.</value>
     <comment>Overdue status label (red)</comment>
   </data>
     <data name="CompletedStatus" xml:space="preserve">
-    <value>Completed</value>
+    <value>Done</value>
     <comment>Text for Item competed.</comment>
   </data>
     <data name="SuspendedStatus" xml:space="preserve">
@@ -884,7 +884,7 @@ If you have problems, contact with administrator.</value>
     <comment>My Tasks statistics chart title. Query Id = 10</comment>
   </data>
     <data name="TasksOf" xml:space="preserve">
-    <value>Tasks of: {0}</value>
+    <value>Tasks of another official</value>
     <comment>Tasks of: {Officer name}. Query Id = 10, another officer</comment>
   </data>
     <data name="PendingTasks" xml:space="preserve">

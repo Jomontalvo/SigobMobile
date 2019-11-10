@@ -78,7 +78,7 @@
         public string OfficeCode { get; set; }
 
         [JsonProperty("nombreFuncionario")]
-        public string OfficeName { get; set; }
+        public string OfficialName { get; set; }
 
         public string GraphTitle
         {
@@ -97,7 +97,7 @@
                     TQueryOption.TaskCloseToDeadline => Languages.TaskCloseToDeadline,
                     TQueryOption.TaskCopies => Languages.TaskCopies,
                     TQueryOption.TaskMessages => Languages.TaskMessages,
-                    TQueryOption.TasksOf => (OfficeCode == Settings.OfficeCode) ? Languages.MyTasks : string.Format(Languages.TasksOf, OfficeName),
+                    TQueryOption.TasksOf => (OfficeCode == Settings.OfficeCode) ? Languages.MyTasks : Languages.TasksOf,
                     _ => Languages.MyTasks,
                 };
                 return title;
@@ -302,6 +302,8 @@
 
         [JsonProperty("tieneMensaje")]
         public bool HasMessage { get; set; }
+
+        public string InitialsOfResponsible => RegexUtilities.ExtractInitialsFromName(ResponsibleName);
     }
 
     public class ParentEntity
@@ -321,5 +323,4 @@
         [JsonProperty("instrumento")]
         public long Instrumento { get; set; }
     }
-
 }

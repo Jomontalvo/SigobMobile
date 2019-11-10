@@ -29,16 +29,22 @@
         private bool isAddItemVisible;
         private List<TaskSigob> taskList;
         private List<TaskCategoricalData> taskStatistics;
+        private ObservableCollection<string> taskStatus;
         private ObservableCollection<TaskSigob> taskCollection;
         private Tasks taskObject;
         private ObservableCollection<TaskCategoricalData> taskStatisticsCollection;
         private ObservableCollection<TaskCategoricalData> chartLegend;
         private bool isRefreshing;
         private string graphTitle;
+        private string officialName;
+        private int selectedIndex;
+        private bool isVisibleChart;
+        private bool isVisibleGraphTitle;
 
         #endregion
 
         #region Properties
+        public ObservableCollection<string> TaskStatus => taskStatus ?? (taskStatus = new ObservableCollection<string>());
         public bool IsAddItemVisible
         {
             get { return this.isAddItemVisible; }
@@ -50,7 +56,7 @@
             set { SetValue(ref this.taskStatisticsCollection, value); }
         }
 
-        public ObservableCollection<TaskSigob> TaskList
+        public ObservableCollection<TaskSigob> TaskCollection
         {
             get { return this.taskCollection; }
             set { SetValue(ref this.taskCollection, value); }
@@ -62,10 +68,34 @@
             set { SetValue(ref this.chartLegend, value); }
         }
 
+        public int SelectedIndex
+        {
+            get { return this.selectedIndex; }
+            set
+            {
+                SetValue(ref this.selectedIndex, value);
+                //IErrorHandler errorHandler = null;
+                //OnSelectionChangedAsync().FireAndForgetSafeAsync(errorHandler);
+                OnSelectionChangedAsync();
+            }
+        }
+
         public bool IsRefreshing
         {
             get { return this.isRefreshing; }
             set { SetValue(ref this.isRefreshing, value); }
+        }
+
+        public bool IsVisibleChart
+        {
+            get { return this.isVisibleChart; }
+            set { SetValue(ref this.isVisibleChart, value); }
+        }
+
+        public bool IsVisibleGraphTitle
+        {
+            get { return this.isVisibleGraphTitle; }
+            set { SetValue(ref this.isVisibleGraphTitle, value); }
         }
 
         public string GraphTitle
@@ -73,22 +103,52 @@
             get { return this.graphTitle; }
             set { SetValue(ref this.graphTitle, value); }
         }
+
+        public string OfficialName
+        {
+            get { return this.officialName; }
+            set { SetValue(ref this.officialName, value); }
+        }
         #endregion
 
         #region Constructors
         public TaskDashboardViewModel()
         {
+            this.IsVisibleGraphTitle = false;
             this.apiService = new ApiService();
-            this.LoadTaskBoard();
+            this.IsVisibleChart = true;
+            LoadSegmentedFilters();
+            IErrorHandler errorHandler = null;
+            LoadTaskBoardAsync().FireAndForgetSafeAsync(errorHandler);
         }
         #endregion
 
         #region Methods
-        public void LoadTaskBoard()
+        /// <summary>
+        /// Event ocurrs when the selection is changed.
+        /// </summary>
+        private void OnSelectionChangedAsync()
         {
-            this.IsAddItemVisible = (Device.RuntimePlatform == Device.iOS) ? true : false;
-            IErrorHandler errorHandler = null;
-            GetStatisticsAndTaskList(Settings.OfficeCode,TQueryOption.TasksOf).FireAndForgetSafeAsync(errorHandler);
+            this.GraphTitle = SelectedIndex switch
+            {
+                0 => Languages.MyTasks,
+                1 => Languages.InProgressStatus,
+                2 => Languages.CloseToDeadlinedStatus,
+                3 => Languages.OverdueStatus,
+                4 => Languages.CompletedStatus,
+                _ => Languages.Tasks
+            };
+            //await Task.Delay(100);
+            //await LoadTaskBoardAsync();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public async Task LoadTaskBoardAsync()
+        {
+            IsAddItemVisible = (Device.RuntimePlatform == Device.iOS) ? true : false;
+            await GetStatisticsAndTaskList(Settings.OfficeCode, TQueryOption.TasksOf);
         }
 
         /// <summary>
@@ -108,7 +168,7 @@
                         Languages.Error,
                         connection.Message,
                         Languages.Cancel);
-                    await Application.Current.MainPage.Navigation.PopAsync();
+                    await App.Navigator.PopToRootAsync();
                     return;
                 }
                 var response = await this.apiService.Get<Tasks>(
@@ -129,11 +189,12 @@
                 }
                 this.taskObject = (Tasks)response.Result;
                 this.GraphTitle = taskObject.GraphTitle;
+                this.OfficialName = taskObject.OfficialName;
                 this.taskList = taskObject.TaskList.ToList<TaskSigob>();
                 this.taskStatistics = taskObject.TaskStatistics.ToList<TaskCategoricalData>();
-                TaskList = new ObservableCollection<TaskSigob>(ToTask());
+                TaskCollection = new ObservableCollection<TaskSigob>(ToTask());
                 TaskStatistics = new ObservableCollection<TaskCategoricalData>(ToTaskStatistics());
-                // Legend
+                // Set Legend and Array segment control values
                 this.ChartLegend = new ObservableCollection<TaskCategoricalData>(taskObject.TaskStatistics.Where((point) => point.Value > 0));
             }
             catch (Exception ex)
@@ -145,10 +206,30 @@
                 await Application.Current.MainPage.Navigation.PopAsync();
                 return;
             }
-            finally { this.IsRefreshing = false; }
+            finally
+            {
+                this.IsVisibleGraphTitle = true;
+                this.IsRefreshing = false;
+            }
             
         }
 
+        /// <summary>
+        /// Values for segmented control (also using as filters)
+        /// </summary>
+        private void LoadSegmentedFilters()
+        {
+            TaskStatus.Add(Languages.AllStatus);
+            TaskStatus.Add(Languages.InProgressStatus);
+            TaskStatus.Add(Languages.CloseToDeadlinedStatus);
+            TaskStatus.Add(Languages.OverdueStatus);
+            TaskStatus.Add(Languages.CompletedStatus);
+        }
+
+        /// <summary>
+        /// Convert data to chart list in observablecollection
+        /// </summary>
+        /// <returns></returns>
         private IEnumerable<TaskCategoricalData> ToTaskStatistics()
         {
             return this.taskStatistics.Select(s => new TaskCategoricalData
@@ -163,22 +244,38 @@
             });
         }
 
+        /// <summary>
+        /// Convert task list in observable collection
+        /// </summary>
+        /// <returns></returns>
         private IEnumerable<TaskSigob> ToTask()
         {
             return this.taskList.Select(t => new TaskSigob
             {
                 Id = t.Id,
                 Title = t.Title,
+                ResponsibleName = t.ResponsibleName,
                 Description = t.Description,
-                Type = t.Type
+                Type = t.Type,
             });
         }
-
-        
         #endregion
 
         #region Commands
         public ICommand SliceTappedCommand => new RelayCommand<ChartSelectionBehavior>(SliceTapped);
+        public ICommand RefreshTaskListCommand => new RelayCommand<ChartSelectionBehavior>(RefreshTaskList);
+        public ICommand SwipeChartCommand => new RelayCommand<string>(SwipeChart);
+
+        private void SwipeChart(string direction)
+        {
+
+            IsVisibleChart = (direction != SwipeDirection.Up.ToString());
+        }
+
+        private void RefreshTaskList(ChartSelectionBehavior obj)
+        {
+            IsRefreshing = false;
+        }
 
         private void SliceTapped(ChartSelectionBehavior serie)
         {
