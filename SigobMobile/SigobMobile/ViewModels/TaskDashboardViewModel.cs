@@ -29,7 +29,8 @@
         private bool isAddItemVisible;
         private List<TaskSigob> taskList;
         private List<TaskCategoricalData> taskStatistics;
-        private ObservableCollection<string> taskStatus;
+        private ObservableCollection<Segment> taskStatus;
+        private ObservableCollection<string> segmentedControlItems;
         private ObservableCollection<TaskSigob> taskCollection;
         private Tasks taskObject;
         private ObservableCollection<TaskCategoricalData> taskStatisticsCollection;
@@ -37,14 +38,23 @@
         private bool isRefreshing;
         private string graphTitle;
         private string officialName;
-        private int selectedIndex;
+        private int selectedIndex = -1;
         private bool isVisibleChart;
         private bool isVisibleGraphTitle;
-
         #endregion
 
         #region Properties
-        public ObservableCollection<string> TaskStatus => taskStatus ?? (taskStatus = new ObservableCollection<string>());
+        public ObservableCollection<string> SegmentedControlItems
+        {
+            get { return this.segmentedControlItems; }
+            set { SetValue(ref this.segmentedControlItems, value); }
+        }
+
+        public ObservableCollection<Segment> TaskStatus
+        {
+            get { return this.taskStatus; }
+            set { SetValue(ref this.taskStatus, value); }
+        }
         public bool IsAddItemVisible
         {
             get { return this.isAddItemVisible; }
@@ -67,7 +77,6 @@
             get { return this.chartLegend; }
             set { SetValue(ref this.chartLegend, value); }
         }
-
         public int SelectedIndex
         {
             get { return this.selectedIndex; }
@@ -79,7 +88,6 @@
                 OnSelectionChangedAsync();
             }
         }
-
         public bool IsRefreshing
         {
             get { return this.isRefreshing; }
@@ -114,10 +122,9 @@
         #region Constructors
         public TaskDashboardViewModel()
         {
-            this.IsVisibleGraphTitle = false;
             this.apiService = new ApiService();
             this.IsVisibleChart = true;
-            LoadSegmentedFilters();
+            this.IsVisibleGraphTitle = false;
             IErrorHandler errorHandler = null;
             LoadTaskBoardAsync().FireAndForgetSafeAsync(errorHandler);
         }
@@ -143,12 +150,13 @@
         }
 
         /// <summary>
-        /// 
+        /// Load Task Board (List and Statistics
         /// </summary>
         public async Task LoadTaskBoardAsync()
         {
             IsAddItemVisible = (Device.RuntimePlatform == Device.iOS) ? true : false;
             await GetStatisticsAndTaskList(Settings.OfficeCode, TQueryOption.TasksOf);
+            LoadSegmentedFilters();
         }
 
         /// <summary>
@@ -211,7 +219,6 @@
                 this.IsVisibleGraphTitle = true;
                 this.IsRefreshing = false;
             }
-            
         }
 
         /// <summary>
@@ -219,11 +226,30 @@
         /// </summary>
         private void LoadSegmentedFilters()
         {
-            TaskStatus.Add(Languages.AllStatus);
-            TaskStatus.Add(Languages.InProgressStatus);
-            TaskStatus.Add(Languages.CloseToDeadlinedStatus);
-            TaskStatus.Add(Languages.OverdueStatus);
-            TaskStatus.Add(Languages.CompletedStatus);
+            TaskStatus = new ObservableCollection<Segment>(ToTaskSegment(1));
+            var firstItem = new Segment() { Id=0, QueryId = 10, SegmentName = Languages.AllStatus };
+            TaskStatus.Insert(0, firstItem);
+            //Built ObservableCollection<string> with Segments Names
+            this.SegmentedControlItems = new ObservableCollection<string>(ToSegmentString());
+        }
+
+        private IEnumerable<string> ToSegmentString()
+        {
+            return this.taskStatus.Select(s => s.SegmentName);
+        }
+
+        /// <summary>
+        /// Built Task Segment ObservableCollection
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerable<Segment> ToTaskSegment(int index)
+        {
+            return this.chartLegend.Select(s => new Segment
+            {
+                Id = index++,
+                QueryId = (byte)s.Id,
+                SegmentName = s.Category
+            });
         }
 
         /// <summary>

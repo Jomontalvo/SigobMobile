@@ -48,7 +48,9 @@
         [JsonProperty("descripcion")]
         public string Description { get; set; }
     }
-
+    /// <summary>
+    /// Color tuple (Inherit tuple)
+    /// </summary>
     public class TSigColorTuple : TSigTuple
     {
         [JsonProperty("color")]
@@ -59,5 +61,17 @@
         /// </summary>
         public Color ColorAlpha => System.Drawing.Color.FromArgb(175, System.Drawing.Color.FromName(Color));
     }
-
+    /// <summary>
+    /// Class for any SegmentedControl
+    /// </summary>
+    public class Segment
+    {
+        public int Id { get; set; }
+        public byte QueryId { get; set; }
+        public string SegmentName { get; set; }
+        public override string ToString()
+        {
+            return this.SegmentName;
+        }
+    }
 }

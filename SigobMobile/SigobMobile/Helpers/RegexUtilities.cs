@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Net.Mail;
     using System.Text.RegularExpressions;
 
     /// <summary>
@@ -11,22 +12,12 @@
     {
         public static bool IsValidEmail(string email)
         {
-            var expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
-            if (Regex.IsMatch(email, expresion))
+            try
             {
-                if (Regex.Replace(email, expresion, String.Empty).Length == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                var validMail = new MailAddress(email);
+                return true;
             }
-            else
-            {
-                return false;
-            }
+            catch(FormatException){ return false; }
         }
 
         /// <summary>
