@@ -23,7 +23,14 @@
         <item name="android:timePickerDialogTheme">@style/AppCompatDialogStyle</item>
         <item name="android:colorActivatedHighlight">@android:color/transparent</item>
     </style>
+    <style name="Theme.Splash" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
     <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">#265F91</item>
     </style>
+
 </resources>

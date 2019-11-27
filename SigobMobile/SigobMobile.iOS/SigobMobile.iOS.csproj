@@ -233,7 +233,6 @@
     <BundleResource Include="Resources\ic_menu_terms%403x.png" />
     <BundleResource Include="Resources\ic_menu_terms%402x.png" />
     <BundleResource Include="Resources\ic_menu_terms.png" />
-    <BundleResource Include="Resources\ic_menu_home_simple.png" />
     <BundleResource Include="Resources\ic_avatar_men.png" />
     <BundleResource Include="Resources\ic_avatar_women.png" />
     <BundleResource Include="Resources\ic_bt_search.png" />
