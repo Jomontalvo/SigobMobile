@@ -39,7 +39,7 @@ namespace SigobMobile.Droid
         private void Startup()
         {
             Log.Debug(TAG, "Starting the SIGOB startup tasks, this operation may take a few seconds.");
-            System.Threading.Thread.Sleep(1200);
+            System.Threading.Thread.Sleep(100);
             Log.Debug(TAG, "Startup work is finished - starting MainActivity.");
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
 

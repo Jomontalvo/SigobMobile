@@ -73,7 +73,7 @@
                 <telerikInput:RadSegmentedControl
                     x:Name="sourceContacts"
                     Grid.Row="2"
-                    HeightRequest="28"
+                    HeightRequest="30"
                     ItemsSource="{Binding Categories}"
                     Margin="10,2,10,2"
                     SelectedIndex="{Binding SelectedCategory, Mode=TwoWay}"
