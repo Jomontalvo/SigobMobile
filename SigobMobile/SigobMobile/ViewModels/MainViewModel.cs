@@ -12,7 +12,6 @@ namespace SigobMobile.ViewModels
         #endregion
 
         #region ViewModels
-
         #region Login Views
         public LoginViewModel Login { get; set; }
         public InstitutionsConnectViewModel InstitutionsConnect { get; set; }
@@ -55,6 +54,9 @@ namespace SigobMobile.ViewModels
         public ContactsViewModel Contacts { get; set; }
         #endregion
 
+        #region Correspondence
+        public CorrespondenceTryViewModel CorrespondenceTry { get; set; }
+        #endregion
         #endregion
 
         #region Constructors

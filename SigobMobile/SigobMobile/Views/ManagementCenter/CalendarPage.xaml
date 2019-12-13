@@ -19,7 +19,8 @@
             BindingContext="{Binding Calendar}"
             Orientation="Horizontal"
             VerticalOptions="Center"
-            HorizontalOptions="FillAndExpand">
+            HorizontalOptions="FillAndExpand"
+            Spacing="20">
             <!--Text="{Binding DisplayDate,StringFormat='{0:dd-MMM-yyyy}'}"-->
             <Label
                 Text="{local:Translate MasterPageTitle}"
@@ -37,32 +38,43 @@
                 </Label.GestureRecognizers>
             </Label>
             <ImageButton
-                Padding="10,0"
+                Aspect="AspectFit"
                 BackgroundColor="Transparent"
                 Command="{Binding InstructionsListCommand}"
+                HeightRequest="24"
                 HorizontalOptions="End"
-                Source="ic_bt_instructions">
+                Source="ic_bt_instructions"
+                VerticalOptions="Center"
+                WidthRequest="24">
             </ImageButton>
             <ImageButton
-                Padding="10,0"
                 BackgroundColor="Transparent"
                 Command="{Binding SetCalendarViewModeCommand}"
-                HorizontalOptions="End" Source="ic_bt_calendar_view">
+                HeightRequest="24"
+                HorizontalOptions="End"
+                Source="ic_bt_calendar_view"
+                VerticalOptions="Center"
+                WidthRequest="24">
             </ImageButton>
             <ImageButton
-                Padding="8,0"
                 BackgroundColor="Transparent"
                 Command="{Binding SearchEventCommand}"
+                HeightRequest="24"
                 HorizontalOptions="End"
-                Source="ic_bt_search">
+                Source="ic_bt_search"
+                VerticalOptions="Center"
+                WidthRequest="24">
             </ImageButton>
             <ImageButton
-                Padding="8,0"
                 BackgroundColor="Transparent"
                 Command="{Binding AddItemCommand}"
+                HeightRequest="24"
                 HorizontalOptions="End"
+                Margin="0,0,5,0"
                 IsVisible="{OnPlatform Android=false, iOS=true}"
-                Source="ic_bt_add">
+                Source="ic_bt_add"
+                VerticalOptions="Center"
+                WidthRequest="24">
             </ImageButton>
         </StackLayout>
     </NavigationPage.TitleView>

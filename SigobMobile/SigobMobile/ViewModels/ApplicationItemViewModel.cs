@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
     using AsyncAwaitBestPractices.MVVM;
     using Models;
+    using Views.Correspondence;
     using Views.ManagementCenter;
     using Views.Tasks;
 
@@ -29,6 +30,8 @@
                     await App.Navigator.PushAsync(new TaskDashboardPage(), true);
                     break;
                 case TypeApplication.Correspondence:
+                    appViewModel.CorrespondenceTry = new CorrespondenceTryViewModel();
+                    await App.Navigator.PushAsync(new CorrespondenceTryPage(), true);
                     break;
                 case TypeApplication.WorkFlows:
                     break;

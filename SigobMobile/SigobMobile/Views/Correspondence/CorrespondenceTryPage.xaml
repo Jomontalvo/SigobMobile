@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:local="clr-namespace:SigobMobile.Helpers"
+    x:Class="SigobMobile.Views.Correspondence.CorrespondenceTryPage"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}"
+    Title="Tramitado a confirmar"
+    ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label 
+                Text="Lista de documentos para firmar"
+                FontSize="Large">
+            </Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
