@@ -14,47 +14,19 @@
         public MasterDetailSigobPage()
         {
             InitializeComponent();
-            App.Navigator = Navigator;
-            App.Master = this;
-
-
             //MainViewModel.GetInstance().Applications = new ApplicationsViewModel();
             ////MenuPages.Add((int)MenuItemType.Home, (NavigationPage)Detail);
             //MenuPages.Add((int)MenuItemType.Home, new NavigationPage(new ApplicationsPage()));
         }
         #endregion
 
-        //#region Methods
-        //public async Task NavigateFromMenu(int id)
-        //{
-        //    if (!MenuPages.ContainsKey(id))
-        //    {
-        //        var mainViewModel = MainViewModel.GetInstance();
-        //        switch (id)
-        //        {
-        //            case (int)MenuItemType.Home:
-        //                mainViewModel.Applications = new ApplicationsViewModel();
-        //                MenuPages.Add(id, new NavigationPage(new ApplicationsPage()));
-        //                break;
-        //            case (int)MenuItemType.Security:
-        //                mainViewModel.Security = new SecurityViewModel();
-        //                MenuPages.Add(id, new NavigationPage(new SecurityPage()));
-        //                break;
-        //        }
-        //    }
-
-        //    var newPage = MenuPages[id];
-
-        //    if (newPage != null && Detail != newPage)
-        //    {
-        //        Detail = newPage;
-
-        //        if (Device.RuntimePlatform == Device.Android)
-        //            await Task.Delay(100);
-
-        //        IsPresented = false;
-        //    }
-        //}
-        //#endregion
+        #region Methods
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            App.Navigator = this.Navigator;
+            App.Master = this;
+        }
+        #endregion
     }
 }

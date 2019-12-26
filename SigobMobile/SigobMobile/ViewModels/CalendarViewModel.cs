@@ -180,6 +180,7 @@
                 IsLocked = l.IsVisible == 1,
                 IsTentative = l.IsTentative,
                 Owner = l.AgendaOwner,
+                OwnerInitials = (!Settings.IsEventColorByCalendar)?l.OwnerInitials:string.Empty,
                 Programmer = l.ProgrammerAgenda,
                 TypeColor = Color.FromRgb(l.RedColorType, l.GreenColorType, l.BlueColorType),
                 ModuleType = l.ModuleType,
@@ -188,7 +189,8 @@
                 IsVisible = (l.IsVisible == 1),
                 SecurityLevel = l.SecurityLevel,
                 TypeId = l.TypeId,
-                Status = l.Status
+                Status = l.Status,
+                IconSize = (!Settings.IsEventColorByCalendar) ? (byte)24 : (byte)12,
             }).Where(l => (Settings.IsVisibleManagementStatus && (l.Status == StatusAppointment.InManagement))
                         || (Settings.IsVisibleCompletedStatus && (l.Status == StatusAppointment.Finished))
                         || (Settings.IsVisibleSuspendStatus && (l.Status == StatusAppointment.Suspended)));
@@ -248,14 +250,17 @@
         /// </summary>
         private async Task SetCalendarViewMode()
         {
+            string[] options = {
+                Languages.DailyView ,
+                Languages.MultiDayView,
+                Languages.MonthlyView,
+                Languages.YearView
+            };
             var source = await Application.Current.MainPage.DisplayActionSheet(
                 Languages.CalendarViewModeText,
                 Languages.Cancel,
                 null,
-                Languages.DailyView,
-                Languages.MultiDayView,
-                Languages.MonthlyView,
-                Languages.YearView);
+                options);
             if (source == Languages.DailyView) CalendarView = CalendarViewMode.Day;
             if (source == Languages.MultiDayView) CalendarView = CalendarViewMode.MultiDay;
             if (source == Languages.MonthlyView) CalendarView = CalendarViewMode.Month;
@@ -296,12 +301,16 @@
                         case '7':
                             IsRunning = true;
                             ManagementCenterEvent eventCg = await GetEventAsync(eventSelected);
-                            eventCg.Id = eventSelected.Id;
-                            eventCg.CalendarColor = eventSelected.Color;
-                            eventCg.TypeColor = eventSelected.TypeColor;
-                            appViewModel.EventCg = new EventCgViewModel(eventCg);
+                            if (eventCg != null)
+                            {
+                                eventCg.Id = eventSelected.Id;
+                                eventCg.CalendarColor = eventSelected.Color;
+                                eventCg.TypeColor = eventSelected.TypeColor;
+                                appViewModel.EventCg = new EventCgViewModel(eventCg);
+                                IsRunning = false;
+                                await App.Navigator.PushAsync(new EventCgPage() { Title = SelectedDate.Value.ToString("dd MMM yyyy") });
+                            }
                             IsRunning = false;
-                            await App.Navigator.PushAsync(new EventCgPage() { Title = SelectedDate.Value.ToString("dd MMM yyyy")});
                             break;
                         default:
                             break;
@@ -346,7 +355,7 @@
                 this.IsRunning = false;
                 await Application.Current.MainPage.DisplayAlert(
                     Languages.Error,
-                    response.Message,
+                    $"{Languages.UnauthorizedError} {response.Message}" ,
                     Languages.Cancel);
                 return null;
             }

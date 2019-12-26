@@ -76,6 +76,7 @@
         public static string No => Resources.No;
         public static string Success => Resources.Success;
         public static string GeneralError => Resources.GeneralError;
+        public static string UnauthorizedError => Resources.UnauthorizedError;
         public static string Add => Resources.Add;
         public static string Edit => Resources.Edit;
         public static string Save => Resources.Save;

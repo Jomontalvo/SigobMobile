@@ -100,37 +100,56 @@
                             HeightRequest="1"
                             HorizontalOptions="FillAndExpand">
                         </BoxView>
-                        <StackLayout
-                            Padding="5,0,0,0">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Label
-                                    Grid.Column="0"
-                                    FontSize="14"
-                                    Text="{Binding Title}"
-                                    TextColor="{OnPlatform Android=White, iOS=DarkSlateGray}"
-                                    FontAttributes="{Binding TitleFont, Converter={StaticResource intToFontAttribute}}">
-                                </Label>
-                                <controls:IconView
-                                    Grid.Column="1"
-                                    Foreground="{Binding TypeColor}"
-                                    HeightRequest="12"
-                                    HorizontalOptions="Center"
-                                    Margin="2,2,2,0"
-                                    Source="ic_ev_type_color"
-                                    VerticalOptions="Start"
-                                    WidthRequest="12">
-                                </controls:IconView>
-                            </Grid>
+                        <Grid
+                            Padding="5,0,0,0"
+                            RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <controls:IconView
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                Foreground="{Binding TypeColor}"
+                                HeightRequest="{Binding IconSize}"
+                                HorizontalOptions="Center"
+                                Source="ic_ev_type_color"
+                                VerticalOptions="Center"
+                                WidthRequest="{Binding IconSize}">
+                            </controls:IconView>
                             <Label
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                FontSize="Micro"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                Padding="1,0,0,0"
+                                Text="{Binding OwnerInitials}"
+                                TextColor="White"
+                                VerticalOptions="Center">
+                            </Label>
+                            <Label
+                                Grid.Column="1"
+                                Grid.Row="0"
+                                FontAttributes="{Binding TitleFont, Converter={StaticResource intToFontAttribute}}"
+                                FontSize="14"
+                                Text="{Binding Title}"
+                                TextColor="{OnPlatform Android=White, iOS=DarkSlateGray}"
+                                VerticalOptions="Center" >
+                            </Label>
+                            <Label
+                                Grid.Column="1"
+                                Grid.Row="1"
                                 FontSize="12"
                                 Text="{Binding Detail}"
-                                TextColor="{OnPlatform Android=White, iOS=SlateGray}">
+                                TextColor="{OnPlatform Android=White, iOS=SlateGray}"
+                                VerticalOptions="Start">
                             </Label>
-                        </StackLayout>
+                        </Grid>
                     </StackLayout>
                 </DataTemplate>
             </local:AppointmentTemplateSelector.NotAllDay>
@@ -162,6 +181,7 @@
                 <telerikInput:RadCalendar.DayViewSettings>
                     <telerikInput:DayViewSettings
                         DayStartTime="05:00:00"
+                        TimelineInterval="0:30"
                         AppointmentContentTemplate="{StaticResource DayViewAppointmentTemplateSelector}">
                     </telerikInput:DayViewSettings>
                 </telerikInput:RadCalendar.DayViewSettings>

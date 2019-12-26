@@ -7,7 +7,6 @@ namespace SigobMobile
     using Models;
     using ViewModels;
     using Views;
-    using Xamarin.Forms;
     using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
     public partial class App : Xamarin.Forms.Application
@@ -99,6 +98,7 @@ namespace SigobMobile
         /// <value>The navigator.</value>
         public static Xamarin.Forms.NavigationPage Navigator { get; internal set; }
         public static MasterDetailSigobPage Master { get; internal set; }
+        
         #endregion
 
 

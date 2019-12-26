@@ -1,6 +1,6 @@
 ﻿namespace SigobMobile.Models
 {
-    public enum MenuItemType : int
+    public enum MenuItemType
     {
         Home = 0,
         Security = 1,

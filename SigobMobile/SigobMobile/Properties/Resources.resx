@@ -614,6 +614,10 @@ If you have problems, contact with administrator.</value>
     <value>Sorry there was an error while making the request.</value>
     <comment>Error message when sucess Call API, but result is false.</comment>
   </data>
+    <data name="UnauthorizedError" xml:space="preserve">
+    <value>Unauthorized operation.</value>
+    <comment>Error message when sucess Call API, but result is null.</comment>
+  </data>
     <data name="SelectCalendarMessage" xml:space="preserve">
     <value>Please, select the calendars that you want to make visible in your Management Center.</value>
     <comment>Message for set visibility of calendar.</comment>

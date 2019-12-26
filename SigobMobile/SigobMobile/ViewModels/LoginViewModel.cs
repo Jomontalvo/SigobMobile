@@ -299,8 +299,6 @@
                 mainViewModel.Applications = new ApplicationsViewModel();
                 mainViewModel.Menu = new MenuViewModel();
                 Application.Current.MainPage = new MasterDetailSigobPage();
-
-                //await Application.Current.MainPage.Navigation.PushAsync(new ApplicationsPage());
                 #endregion
             }
             catch (Exception ex)

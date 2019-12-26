@@ -250,7 +250,7 @@
         public string FrequencyDescription { get; set; }
 
         [JsonProperty("plantilla")]
-        public int Plantilla { get; set; }
+        public int Template { get; set; }
 
         [JsonProperty("prioridad")]
         public TPriority Priority { get; set; }

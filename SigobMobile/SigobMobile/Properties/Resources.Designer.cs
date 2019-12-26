@@ -779,6 +779,12 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string UnauthorizedError {
+            get {
+                return ResourceManager.GetString("UnauthorizedError", resourceCulture);
+            }
+        }
+        
         public static string SelectCalendarMessage {
             get {
                 return ResourceManager.GetString("SelectCalendarMessage", resourceCulture);

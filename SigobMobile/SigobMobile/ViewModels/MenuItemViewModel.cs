@@ -26,35 +26,36 @@
         /// </summary>
         private async Task Navigate()
         {
+            App.Master.IsPresented = false;
             var mainViewModel = MainViewModel.GetInstance();
             await App.Navigator.PopToRootAsync(false);
             switch (this.PageName)
             {
                 case "SecurityPage":
                     mainViewModel.Security = new SecurityViewModel();
-                    await App.Navigator.PushAsync(new SecurityPage(),true);
+                    await App.Navigator.PushAsync(new SecurityPage(), true);
                     break;
                 case "WebViewHelpPage":
                 case "WebViewTermsPage":
                 case "WebViewContactPage":
                     mainViewModel.UrlViewer = new UrlViewerViewModel(this.Url);
-                    await App.Navigator.PushAsync(new UrlViewerPage(){ Title = this.Title}, true);
+                    await App.Navigator.PushAsync(new UrlViewerPage() { Title = this.Title }, true);
                     break;
                 case "LoginPage":
                     //Delete persist token values
                     Settings.Token = Settings.DbToken = Settings.InstitutionLogo = Settings.FullName = Settings.OfficeCode = string.Empty;
                     mainViewModel.Token = mainViewModel.DbToken = string.Empty;
                     //Navigate to Login 
+                    mainViewModel.Login = new LoginViewModel();
                     var navLoginPage = new Xamarin.Forms.NavigationPage(new LoginPage());
                     navLoginPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetPrefersLargeTitles(true);
                     navLoginPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetLargeTitleDisplay(LargeTitleDisplayMode.Automatic);
-                    Xamarin.Forms.Application.Current.MainPage  = navLoginPage;
+                    Xamarin.Forms.Application.Current.MainPage = navLoginPage;
                     break;
                 default:
                     break;
             }
-            App.Master.IsPresented = false;
         }
         #endregion
     }
-} 
+}

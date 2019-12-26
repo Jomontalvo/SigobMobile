@@ -10,6 +10,11 @@
     /// </summary>
     public static class RegexUtilities
     {
+        /// <summary>
+        /// Validate email format
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public static bool IsValidEmail(string email)
         {
             try

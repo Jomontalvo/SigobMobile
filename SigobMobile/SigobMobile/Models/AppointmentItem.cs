@@ -2,6 +2,7 @@
 {
     using System;
     using Newtonsoft.Json;
+    using Helpers;
     using Telerik.XamarinForms.Input;
     using Xamarin.Forms;
 
@@ -91,6 +92,8 @@
         [JsonProperty("visible")]
         public byte IsVisible { get; set; }
 
+        [JsonProperty("iniciales")]
+        public string OwnerInitials { get; set; }
     }
 
     /// <summary>
@@ -107,6 +110,7 @@
         public string Detail { get; set; }
         public char ModuleType { get; set; }
         public string Owner { get; set; }
+        public string OwnerInitials { get; set; }
         public string Programmer { get; set; }
         public int TypeId { get; set; }
         public Color TypeColor { get; set; }
@@ -136,5 +140,6 @@
                 return result;
             }
         }
+        public byte IconSize { get; set; }
     }
 }
