@@ -7,12 +7,13 @@
     using System.Threading.Tasks;
     using System.Windows.Input;
     using AsyncAwaitBestPractices.MVVM;
+    using Common.Helpers;
+    using Common.Services;
+    using Controls;
     using GalaSoft.MvvmLight.Command;
     using Helpers;
-    using Controls;
     using Interfaces;
     using Models;
-    using Services;
     using Xamarin.Forms;
 
     public class CalendarsViewModel : BaseViewModel

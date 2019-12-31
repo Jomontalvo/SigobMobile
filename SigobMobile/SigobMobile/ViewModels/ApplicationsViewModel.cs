@@ -8,9 +8,10 @@
     using Helpers;
     using Interfaces;
     using Models;
-    using Services;
+    using Common.Services;
     using Views;
     using Xamarin.Forms;
+    using Common.Helpers;
 
     public class ApplicationsViewModel : BaseViewModel
     {

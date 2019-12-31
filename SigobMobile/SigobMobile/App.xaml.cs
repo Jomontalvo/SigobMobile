@@ -3,8 +3,8 @@
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace SigobMobile
 {
-    using Helpers;
-    using Models;
+    using Common.Helpers;
+    using Common.Models;
     using ViewModels;
     using Views;
     using Xamarin.Forms.PlatformConfiguration.iOSSpecific;

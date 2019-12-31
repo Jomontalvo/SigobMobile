@@ -7,11 +7,12 @@
     using System.Threading.Tasks;
     using System.Windows.Input;
     using AsyncAwaitBestPractices.MVVM;
+    using Common.Helpers;
+    using Common.Services;
     using GalaSoft.MvvmLight.Command;
     using Helpers;
     using Interfaces;
     using Models;
-    using Services;
     using Telerik.XamarinForms.DataControls.ListView.Commands;
     using Views.ManagementCenter;
     using Xamarin.Forms;

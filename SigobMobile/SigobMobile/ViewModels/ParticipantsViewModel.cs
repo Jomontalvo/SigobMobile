@@ -1,16 +1,16 @@
 ﻿namespace SigobMobile.ViewModels
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Input;
     using AsyncAwaitBestPractices.MVVM;
+    using Common.Helpers;
+    using Common.Models;
+    using Common.Services;
     using GalaSoft.MvvmLight.Command;
     using Helpers;
-    using Models;
-    using Services;
     using Views.Common;
     using Xamarin.Forms;
 

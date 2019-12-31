@@ -7,10 +7,12 @@
     using AsyncAwaitBestPractices.MVVM;
     using Helpers;
     using Interfaces;
-    using Models;
-    using Services;
+    using Common.Services;
     using Views;
     using Xamarin.Forms;
+    using Common.Models;
+    using SigobMobile.Common.Helpers;
+
     //using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
     public class MenuViewModel : BaseViewModel

@@ -2,7 +2,7 @@
 {
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
-    using Models;
+    using Common.Models;
 
     /// <summary>
     /// Participant item view model.

@@ -2,7 +2,7 @@
 {
     using System.Threading.Tasks;
     using AsyncAwaitBestPractices.MVVM;
-    using Helpers;
+    using SigobMobile.Common.Helpers;
     using SigobMobile.Views.Common;
     using Views;
     using Xamarin.Forms.PlatformConfiguration.iOSSpecific;

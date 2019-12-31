@@ -7,13 +7,14 @@
     using System.Threading.Tasks;
     using System.Windows.Input;
     using AsyncAwaitBestPractices.MVVM;
+    using Common.Helpers;
+    using Common.Models;
+    using Common.Services;
     using GalaSoft.MvvmLight.Command;
     using Helpers;
     using Interfaces;
-    using Models;
     using Plugin.Permissions;
     using Plugin.Permissions.Abstractions;
-    using Services;
     using Xamarin.Forms;
 
     public class ExternalContactsViewModel : BaseViewModel

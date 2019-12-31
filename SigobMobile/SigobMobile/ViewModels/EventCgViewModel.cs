@@ -3,11 +3,13 @@
     using System;
     using System.Threading.Tasks;
     using AsyncAwaitBestPractices.MVVM;
+    using Common.Services;
     using Helpers;
-    using Models;
-    using Services;
+    using Common.Helpers;
     using Views.ManagementCenter;
     using Xamarin.Forms;
+    using Common.Models;
+    using ManagementCenterEvent = Models.ManagementCenterEvent;
 
     public class EventCgViewModel : BaseViewModel
     {

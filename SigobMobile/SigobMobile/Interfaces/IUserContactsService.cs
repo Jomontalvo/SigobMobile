@@ -1,9 +1,8 @@
 ﻿namespace SigobMobile.Interfaces
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using SigobMobile.Models;
+    using Common.Models;
 
     /// <summary>
     /// User contacts service.

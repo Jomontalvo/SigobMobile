@@ -10,7 +10,7 @@ namespace SigobMobile.iOS.Implementations
     using Interfaces;
     using Plugin.Permissions;
     using Plugin.Permissions.Abstractions;
-    using SigobMobile.Models;
+    using SigobMobile.Common.Models;
 
     public class UserContactService : IUserContactsService
     {
@@ -58,7 +58,7 @@ namespace SigobMobile.iOS.Implementations
                             LastName = item.FamilyName,
                             FullName = $"{item.GivenName} {item.FamilyName}",
                             Email = (emails.GetLength(0) > 0) ? emails[0].Value : String.Empty,
-                            PhotoThumbnail = Xamarin.Forms.ImageSource.FromStream(() => stream)
+                            PhotoThumbnail = "ic_user"//Xamarin.Forms.ImageSource.FromStream(() => stream)
                     });
                     }
                     catch (Exception ex) { Console.WriteLine (ex.Message); }

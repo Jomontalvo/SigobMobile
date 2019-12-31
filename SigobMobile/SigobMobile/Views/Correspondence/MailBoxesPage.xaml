@@ -1,14 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage 
-    xmlns="http://xamarin.com/schemas/2014/forms" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    x:Class="SigobMobile.Views.Correspondence.MailBoxesPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             x:Class="SigobMobile.Views.Correspondence.MailBoxesPage"
+             xmlns:local="clr-namespace:SigobMobile.Helpers"
+             BackgroundColor="{StaticResource Key=defaultBackgroundView}"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="{local:Translate CorrespondenceAppName}"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.ToolbarItems>
+        <!-- Search -->
+        <ToolbarItem 
+            BindingContext="{Binding MailBoxes}"
+            Command="{Binding SearchCommand}"
+            Icon="ic_bt_search"
+            Order="Default" 
+            Priority="0">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <Label 
-                Text="Centro de Gestión"
-                FontSize="Large">
-            </Label>
+        <StackLayout
+            BindingContext="{Binding MailBoxes}">
+            <RefreshView
+                Command="{Binding RefreshCommand}"
+                IsRefreshing="{Binding IsRefreshing}"
+                RefreshColor="{StaticResource darkGray}">
+                <CollectionView
+                    BackgroundColor="Transparent"
+                    IsGrouped="True"
+                    ItemsSource="{Binding Trays}"
+                    SelectionMode="Single">
+                    <CollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <StackLayout
+                                Spacing="0">
+                                <Grid
+                                    Padding="10,8,10,0"
+                                    BackgroundColor="{StaticResource softGray}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition Height="1" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                        Grid.Row="0"
+                                        Source="ic_doc_menu_group_folder"
+                                        WidthRequest="24">
+                                    </Image>
+                                    <Label
+                                        Grid.Column="1"
+                                        Grid.Row="0"
+                                        Padding="10,0"
+                                        Text="{Binding Name}"
+                                        TextColor="{StaticResource Key=grayContent}"
+                                        VerticalTextAlignment="Center">
+                                    </Label>
+                                </Grid>
+                                <BoxView
+                                    Color="{StaticResource gray}"
+                                    HeightRequest="1"
+                                    HorizontalOptions="FillAndExpand">
+                                </BoxView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.GroupHeaderTemplate>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid
+                                Padding="10"
+                                ColumnSpacing="10">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectMailBoxCommand}" />
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="16" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    Grid.Column="0"
+                                    IsVisible="{Binding IsSelected}"
+                                    Source="ic_checkmark"
+                                    VerticalOptions="Center"
+                                    WidthRequest="16">
+                                </Image>
+                                <Image
+                                    Grid.Column="1"
+                                    HorizontalOptions="Start"
+                                    Source="{Binding Icon}"
+                                    VerticalOptions="Center"
+                                    WidthRequest="24">
+                                </Image>
+                                <Label
+                                    Grid.Column="2"
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="{Binding Name}"
+                                    VerticalOptions="Center">
+                                </Label>
+                                <Label
+                                    Grid.Column="3"
+                                    HorizontalOptions="End"
+                                    Text="{Binding ItemCount}"
+                                    TextColor="{StaticResource Key=grayContent}"
+                                    VerticalOptions="Center">
+                                </Label>
+                                <Image
+                                    Grid.Column="4"
+                                    Source="ic_chevron"
+                                    VerticalOptions="Center"
+                                    WidthRequest="16">
+                                </Image>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

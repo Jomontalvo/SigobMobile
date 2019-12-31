@@ -251,6 +251,21 @@
         public static string TaskCloseToDeadline => Resources.TaskCloseToDeadline;
         #endregion
 
-    #endregion
-}
+        #region Correspondence Menu View
+        public static string ManagementTray = Resources.ManagementTray;
+        public static string TagTray = Resources.TagTray;
+        public static string External = Resources.External;
+        public static string Internal = Resources.Internal;
+        public static string Draft = Resources.Draft;
+        public static string ProcessedToConfirm = Resources.ProcessedToConfirm;
+        public static string Pending = Resources.Pending;
+        public static string ForYourInformation = Resources.ForYourInformation;
+        public static string Trasferred = Resources.Trasferred;
+        public static string WithDeadline = Resources.WithDeadline;
+        public static string PendingEmail = Resources.PendingEmail;
+        public static string PendingLinkedInstitution = Resources.PendingLinkedInstitution;
+        #endregion
+
+        #endregion
+    }
 }

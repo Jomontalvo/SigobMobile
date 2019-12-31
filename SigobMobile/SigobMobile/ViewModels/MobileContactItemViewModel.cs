@@ -1,6 +1,6 @@
 ﻿namespace SigobMobile.ViewModels
 {
-    using Models;
+    using Common.Models;
 
     public class MobileContactItemViewModel : Participant
     {

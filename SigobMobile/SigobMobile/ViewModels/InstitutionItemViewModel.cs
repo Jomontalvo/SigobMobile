@@ -3,8 +3,8 @@
     using System.Linq;
     using System.Threading.Tasks;
     using AsyncAwaitBestPractices.MVVM;
-    using Helpers;
-    using Models;
+    using Common.Helpers;
+    using Common.Models;
     using Xamarin.Forms;
 
     /// <summary>

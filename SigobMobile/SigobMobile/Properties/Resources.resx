@@ -246,17 +246,14 @@
 If you have problems, contact with administrator.</value>
     <comment>Message when the repeat new password has not been entered</comment>
   </data>
-    
     <data name="NewPwdValidationMsg" xml:space="preserve">
     <value>Enter a new password!</value>
     <comment>Message when the new password has not been entered</comment>
   </data>
-    
     <data name="RepeatNewPwdValidationMsg" xml:space="preserve">
     <value>Repeat the new password entered!</value>
     <comment>Message when the repeat new password has not been entered</comment>
   </data>
-    
     <data name="ContactUs" xml:space="preserve">
     <value>Contact us</value>
     <comment>Main Menu Contact Us Option.</comment>
@@ -329,7 +326,6 @@ If you have problems, contact with administrator.</value>
     <value>Instructions</value>
     <comment>Text for image of user profile label.</comment>
   </data>
-    
     <!-- Main options name -->
     <data name="ManagementCenterAppName" xml:space="preserve">
     <value>Management Center Agenda</value>
@@ -355,129 +351,128 @@ If you have problems, contact with administrator.</value>
     <value>Communication Actions</value>
     <comment>Text for communications actions menu option title.</comment>
   </data>
-    
-  <!--    Messages  -->
+    <!--    Messages  -->
     <data name="MsgAcomLine_1_Value_0" xml:space="preserve">
     <value>No topics for today</value>
     <comment>Sin temas comuniccionales</comment>
   </data>
-  <data name="MsgAcomLine_1_Value_Greater_0" xml:space="preserve">
+    <data name="MsgAcomLine_1_Value_Greater_0" xml:space="preserve">
     <value>{0} communication actions for today</value>
     <comment>Communicative Actions defined</comment>
   </data>
-  <data name="MsgAcomLine_2_Value_0" xml:space="preserve">
+    <data name="MsgAcomLine_2_Value_0" xml:space="preserve">
     <value>No messages for today</value>
     <comment>No messages for today</comment>
   </data>
-  <data name="MsgAcomLine_2_Value_Greater_0" xml:space="preserve">
+    <data name="MsgAcomLine_2_Value_Greater_0" xml:space="preserve">
     <value>{0} messages for today</value>
     <comment>Messages for delivery today</comment>
   </data>
-  <data name="MsgAgendaLine_1_Value_0" xml:space="preserve">
+    <data name="MsgAgendaLine_1_Value_0" xml:space="preserve">
     <value>No appointments today</value>
     <comment>No events today message</comment>
   </data>
-  <data name="MsgAgendaLine_1_Value_Greater_0" xml:space="preserve">
+    <data name="MsgAgendaLine_1_Value_Greater_0" xml:space="preserve">
     <value>Today: {0} appointments programmed</value>
     <comment>You have activities today</comment>
   </data>
-  <data name="MsgAgendaLine_2_Value_0" xml:space="preserve">
+    <data name="MsgAgendaLine_2_Value_0" xml:space="preserve">
     <value>No future appointments</value>
     <comment>No activities programmed</comment>
   </data>
-  <data name="MsgAgendaLine_2_Vaue_Greater_0" xml:space="preserve">
+    <data name="MsgAgendaLine_2_Vaue_Greater_0" xml:space="preserve">
     <value>{0} comming appointments</value>
     <comment>Future activities message</comment>
   </data>
-  <data name="MsgDocumentLine_1_Value_0" xml:space="preserve">
+    <data name="MsgDocumentLine_1_Value_0" xml:space="preserve">
     <value>All documents reviewed</value>
     <comment>No documents pending to review message</comment>
   </data>
-  <data name="MsgDocumentLine_1_Value_Greater_0" xml:space="preserve">
+    <data name="MsgDocumentLine_1_Value_Greater_0" xml:space="preserve">
     <value>{0} unread documents</value>
     <comment>Documentos pending to review message</comment>
   </data>
-  <data name="MsgDocumentLine_2_Value_0" xml:space="preserve">
+    <data name="MsgDocumentLine_2_Value_0" xml:space="preserve">
     <value>All correspondences within the term of management</value>
     <comment>Documents in management into the term</comment>
   </data>
-  <data name="MsgDocumentLine_2_Value_Greater_0" xml:space="preserve">
+    <data name="MsgDocumentLine_2_Value_Greater_0" xml:space="preserve">
     <value>{0} documents with expired deadline</value>
     <comment>Documents deadline message</comment>
   </data>
-  <data name="MsgGoalsLine_1_Value_0" xml:space="preserve">
+    <data name="MsgGoalsLine_1_Value_0" xml:space="preserve">
     <value>Does not participate in any goal</value>
     <comment>Not participate message</comment>
   </data>
-  <data name="MsgGoalsLine_1_Value_Greater_0" xml:space="preserve">
+    <data name="MsgGoalsLine_1_Value_Greater_0" xml:space="preserve">
     <value>You participate in {0} goals</value>
     <comment>Participate in goals message</comment>
   </data>
-  <data name="MsgGoalsLine_2_Alert_0" xml:space="preserve">
+    <data name="MsgGoalsLine_2_Alert_0" xml:space="preserve">
     <value>No alerts reported</value>
     <comment>Alerts 0 message</comment>
   </data>
-  <data name="MsgGoalsLine_2_Alerts_Greater_0" xml:space="preserve">
+    <data name="MsgGoalsLine_2_Alerts_Greater_0" xml:space="preserve">
     <value>{0} alerts reported</value>
     <comment>Exists alerts message</comment>
   </data>
-  <data name="MsgGoalsLine_2_Opportunities_0" xml:space="preserve">
+    <data name="MsgGoalsLine_2_Opportunities_0" xml:space="preserve">
     <value>No opportunities identified</value>
     <comment>Opportunities 0 message</comment>
   </data>
-  <data name="MsgGoalsLine_2_Opportunities_Greater_0" xml:space="preserve">
+    <data name="MsgGoalsLine_2_Opportunities_Greater_0" xml:space="preserve">
     <value>{0} opportunities identified</value>
     <comment>Exists opportunities message</comment>
   </data>
-  <data name="MsgGoalsLine_2_Restriction_0" xml:space="preserve">
+    <data name="MsgGoalsLine_2_Restriction_0" xml:space="preserve">
     <value>No reported restrictions</value>
     <comment>Restrictions 0 message</comment>
   </data>
-  <data name="MsgGoalsLine_2_Restrictions_Greater_0" xml:space="preserve">
+    <data name="MsgGoalsLine_2_Restrictions_Greater_0" xml:space="preserve">
     <value>{0} reported restrictions</value>
     <comment>Exists restrictions message</comment>
   </data>
-  <data name="MsgTasksLine_1_Value_0" xml:space="preserve">
+    <data name="MsgTasksLine_1_Value_0" xml:space="preserve">
     <value>All tasks within the deadline</value>
     <comment>No deadline tasks message</comment>
   </data>
-  <data name="MsgTasksLine_1_Value_Greater_0" xml:space="preserve">
+    <data name="MsgTasksLine_1_Value_Greater_0" xml:space="preserve">
     <value>You have {0} expired tasks</value>
     <comment>With expired tasks message</comment>
   </data>
-  <data name="MsgTasksLine_2_Value_0" xml:space="preserve">
+    <data name="MsgTasksLine_2_Value_0" xml:space="preserve">
     <value>No tasks planned to finish today</value>
     <comment>No tasks planned to finish today message</comment>
   </data>
-  <data name="MsgTasksLine_2_Value_Greater_0" xml:space="preserve">
+    <data name="MsgTasksLine_2_Value_Greater_0" xml:space="preserve">
     <value>{0} Tasks should be completed today</value>
     <comment>Tasks deadline today message</comment>
   </data>
-  <data name="MsgWorkflowLine_1_Value_0" xml:space="preserve">
+    <data name="MsgWorkflowLine_1_Value_0" xml:space="preserve">
     <value>Does not participate in any workflow</value>
     <comment>Nothing workflow message</comment>
   </data>
-  <data name="MsgWorkflowLine_1_Value_Greater_0" xml:space="preserve">
+    <data name="MsgWorkflowLine_1_Value_Greater_0" xml:space="preserve">
     <value>You participate in {0} group of procedures</value>
     <comment>Participate in workflows message</comment>
   </data>
-  <data name="MsgWorkflowLine_2_Activities_OutThresold" xml:space="preserve">
+    <data name="MsgWorkflowLine_2_Activities_OutThresold" xml:space="preserve">
     <value>{0} delayed activities beyond the tolerance threshold</value>
     <comment>Activities deadline beyod tolerance message</comment>
   </data>
-  <data name="MsgWorkflowLine_2_Activities_ForApproval" xml:space="preserve">
+    <data name="MsgWorkflowLine_2_Activities_ForApproval" xml:space="preserve">
     <value>{0} Activities waiting for approval</value>
     <comment>Activities pending approval message</comment>
   </data>
-  <data name="MsgWorkflowLine_2_RejectedRequest" xml:space="preserve">
+    <data name="MsgWorkflowLine_2_RejectedRequest" xml:space="preserve">
     <value>{0} Rejected requests</value>
     <comment>Rejected requests message</comment>
   </data>
-  <data name="MsgWorkflowLine_2_Process_OutThresol" xml:space="preserve">
+    <data name="MsgWorkflowLine_2_Process_OutThresol" xml:space="preserve">
     <value>{0} Delayed procedures beyond the tolerance threshold</value>
     <comment>Delayed procedures message</comment>
   </data>
-  <data name="MsgWorkflowLine_2_Process_ForApproval" xml:space="preserve">
+    <data name="MsgWorkflowLine_2_Process_ForApproval" xml:space="preserve">
     <value>{0} Procedures waiting for approval</value>
     <comment>Procedures for approval message</comment>
   </data>
@@ -934,5 +929,56 @@ If you have problems, contact with administrator.</value>
     <data name="TaskCloseToDeadline" xml:space="preserve">
     <value>Tasks close to deadline</value>
     <comment>Tasks close to deadline label. Query Id = 11</comment>
-  </data>   
+  </data>
+<!--    Type Document Trays -->
+    <data name="ManagementTray" xml:space="preserve">
+    <value>Correspondence trays</value>
+    <comment>Management documents group name </comment>
+  </data>
+    <data name="TagTray" xml:space="preserve">
+    <value>Classifiers</value>
+    <comment>Documents order by classifiers</comment>
+  </data>
+    <!--Documents Status-->
+    <data name="External" xml:space="preserve">
+    <value>External</value>
+    <comment>Document from external source. Id = 1</comment>
+  </data>
+    <data name="Internal" xml:space="preserve">
+    <value>Internal</value>
+    <comment>Document from internal source. Id = 2</comment>
+  </data>
+    <data name="Draft" xml:space="preserve">
+    <value>Draft</value>
+    <comment>Document Draft. Id = 3</comment>
+  </data>
+    <data name="ProcessedToConfirm" xml:space="preserve">
+    <value>Processed to confirm</value>
+    <comment>Document processed pending to confirm.Id = 4</comment>
+  </data>
+    <data name="Pending" xml:space="preserve">
+    <value>Pending</value>
+    <comment>Document reviewed pending to take action.Id = 5</comment>
+  </data>
+    <data name="ForYourInformation" xml:space="preserve">
+    <value>For your information</value>
+    <comment>Document sent for your information.Id = 6</comment>
+  </data>
+    <data name="Trasferred" xml:space="preserve">
+    <value>Trasferred</value>
+    <comment>Document transfered to other office.Id = 7</comment>
+  </data>
+    <data name="WithDeadline" xml:space="preserve">
+    <value>With deadline</value>
+    <comment>Document with terms of management. Id = 8</comment>
+  </data>
+    <data name="PendingEmail" xml:space="preserve">
+    <value>Pending to send via e-mail</value>
+    <comment>Document pending to deliver via e-mal.Id = 9</comment>
+  </data>
+    <data name="PendingLinkedInstitution" xml:space="preserve">
+    <value> Pending for linked institution</value>
+    <comment>Document pending to deliver via e-mal.Id = 10</comment>
+  </data>
+    
 </root>

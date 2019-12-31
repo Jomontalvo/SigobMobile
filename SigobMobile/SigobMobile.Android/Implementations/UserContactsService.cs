@@ -9,7 +9,7 @@ namespace SigobMobile.Droid.Implementations
     using Android.Database;
     using Android.Provider;
     using Interfaces;
-    using Models;
+    using Common.Models;
 
     public class UserContactsService : IUserContactsService
     {
@@ -57,7 +57,7 @@ namespace SigobMobile.Droid.Implementations
                                     FullName = fullName.Trim(),
                                     PhoneNumber = phone,
                                     Email = phone,
-                                    PhotoThumbnail = Xamarin.Forms.ImageSource.FromStream(() => stream)
+                                    //PhotoThumbnail = Xamarin.Forms.ImageSource.FromStream(() => stream)
                                 };
                                 contactList.Add(muser);
                             }

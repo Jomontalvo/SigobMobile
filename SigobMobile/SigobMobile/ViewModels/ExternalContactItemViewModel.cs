@@ -2,7 +2,7 @@
 {
     using System.Threading.Tasks;
     using AsyncAwaitBestPractices.MVVM;
-    using Models;
+    using Common.Models;
     using Xamarin.Forms;
 
     public class ExternalContactItemViewModel : Participant

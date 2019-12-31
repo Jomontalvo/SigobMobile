@@ -1,5 +1,4 @@
-﻿
-namespace SigobMobile.ViewModels
+﻿namespace SigobMobile.ViewModels
 {
     using System.Threading.Tasks;
     using AsyncAwaitBestPractices.MVVM;

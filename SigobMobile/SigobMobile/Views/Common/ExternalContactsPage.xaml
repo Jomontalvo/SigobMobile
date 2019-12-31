@@ -5,7 +5,7 @@
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:telerikInput="clr-namespace:Telerik.XamarinForms.Input;assembly=Telerik.XamarinForms.Input"
     xmlns:local="clr-namespace:SigobMobile.Helpers"
-    xmlns:ctrls="clr-namespace:SigobMobile.CustomControls"
+    xmlns:ctrls="clr-namespace:SigobMobile.Controls"
     x:Class="SigobMobile.Views.Common.ExternalContactsPage"
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
     BackgroundColor="{StaticResource defaultBackgroundView}"

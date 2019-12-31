@@ -1258,5 +1258,77 @@ namespace SigobMobile.Properties {
                 return ResourceManager.GetString("TaskCloseToDeadline", resourceCulture);
             }
         }
+        
+        public static string ManagementTray {
+            get {
+                return ResourceManager.GetString("ManagementTray", resourceCulture);
+            }
+        }
+        
+        public static string TagTray {
+            get {
+                return ResourceManager.GetString("TagTray", resourceCulture);
+            }
+        }
+        
+        public static string External {
+            get {
+                return ResourceManager.GetString("External", resourceCulture);
+            }
+        }
+        
+        public static string Internal {
+            get {
+                return ResourceManager.GetString("Internal", resourceCulture);
+            }
+        }
+        
+        public static string Draft {
+            get {
+                return ResourceManager.GetString("Draft", resourceCulture);
+            }
+        }
+        
+        public static string ProcessedToConfirm {
+            get {
+                return ResourceManager.GetString("ProcessedToConfirm", resourceCulture);
+            }
+        }
+        
+        public static string Pending {
+            get {
+                return ResourceManager.GetString("Pending", resourceCulture);
+            }
+        }
+        
+        public static string ForYourInformation {
+            get {
+                return ResourceManager.GetString("ForYourInformation", resourceCulture);
+            }
+        }
+        
+        public static string Trasferred {
+            get {
+                return ResourceManager.GetString("Trasferred", resourceCulture);
+            }
+        }
+        
+        public static string WithDeadline {
+            get {
+                return ResourceManager.GetString("WithDeadline", resourceCulture);
+            }
+        }
+        
+        public static string PendingEmail {
+            get {
+                return ResourceManager.GetString("PendingEmail", resourceCulture);
+            }
+        }
+        
+        public static string PendingLinkedInstitution {
+            get {
+                return ResourceManager.GetString("PendingLinkedInstitution", resourceCulture);
+            }
+        }
     }
 }

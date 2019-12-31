@@ -1,7 +1,7 @@
 ﻿namespace SigobMobile.ViewModels
 {
     using Models;
-    using Services;
+    using Common.Services;
 
     public class TaskViewModel : BaseViewModel
     {

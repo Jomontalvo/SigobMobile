@@ -5,9 +5,9 @@
     using System.Threading.Tasks;
     using Helpers;
     using Interfaces;
-    using Models;
     using Plugin.Permissions;
     using Plugin.Permissions.Abstractions;
+    using Common.Models;
     using Xamarin.Forms;
 
     public class ContactsViewModel : BaseViewModel

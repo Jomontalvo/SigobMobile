@@ -4,10 +4,12 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
+    using AsyncAwaitBestPractices.MVVM;
+    using Common.Helpers;
+    using Common.Models;
     using Helpers;
     using Models;
     using Xamarin.Forms;
-    using AsyncAwaitBestPractices.MVVM;
 
     public class CalendarFiltersViewModel : BaseViewModel
     {

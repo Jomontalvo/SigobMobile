@@ -6,10 +6,11 @@
     using System.Windows.Input;
     using AsyncAwaitBestPractices.MVVM;
     using GalaSoft.MvvmLight.Command;
-    using Services;
+    using Common.Services;
     using SigobMobile.Helpers;
-    using SigobMobile.Models;
     using Xamarin.Forms;
+    using Common.Helpers;
+    using Common.Models;
 
     public class SecurityViewModel : BaseViewModel
     {

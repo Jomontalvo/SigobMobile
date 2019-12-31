@@ -7,10 +7,11 @@
     using AsyncAwaitBestPractices.MVVM;
     using GalaSoft.MvvmLight.Command;
     using Helpers;
-    using Models;
-    using Services;
+    using Common.Services;
     using Views;
     using Xamarin.Forms;
+    using Common.Helpers;
+    using Common.Models;
 
     public class LoginViewModel : BaseViewModel
     {

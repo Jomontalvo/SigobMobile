@@ -4,7 +4,7 @@
     using Telerik.XamarinForms.Chart;
     using Xamarin.Forms;
 
-    static class Palette
+    public static class Palette
     {
         #region Attributes
         static readonly Color clear = ((Color)Application.Current.Resources["clear"]);
@@ -21,25 +21,25 @@
         /// <summary>
         /// Traffic Ligth Color
         /// </summary>
-        static Color TrafficLightGreen => Device.RuntimePlatform switch
+        public static Color TrafficLightGreen => Device.RuntimePlatform switch
         {
             Device.iOS => Color.FromRgba(greeniOS.R, greeniOS.G, greeniOS.B, opacity),
             Device.Android => Color.FromRgba(greenDroid.R, greenDroid.G, greenDroid.B, opacity),
             _ => Color.Green
         };
-        static Color TrafficLightRed => Device.RuntimePlatform switch
+        public static Color TrafficLightRed => Device.RuntimePlatform switch
         {
             Device.iOS => Color.FromRgba(rediOS.R, rediOS.G, rediOS.B, opacity),
             Device.Android => Color.FromRgba(redDroid.R, redDroid.G, redDroid.B, opacity),
             _ => Color.Red
         };
-        static Color TrafficLightGray => Device.RuntimePlatform switch
+        public static Color TrafficLightGray => Device.RuntimePlatform switch
         {
             Device.iOS => Color.FromRgba(grayiOS.R, grayiOS.G, grayiOS.B, opacity),
             Device.Android => Color.FromRgba(grayDroid.R, grayDroid.G, grayDroid.B, opacity),
             _ => Color.Gray
         };
-        static Color TrafficLightYellow => Device.RuntimePlatform switch
+        public static Color TrafficLightYellow => Device.RuntimePlatform switch
         {
             Device.iOS => Color.FromRgba(yellowiOS.R, yellowiOS.G, yellowiOS.B, opacity),
             Device.Android => Color.FromRgba(yellowDroid.R, yellowDroid.G, yellowDroid.B, opacity),
@@ -49,25 +49,25 @@
         /// <summary>
         /// Selected Traffic Light Color
         /// </summary>
-        static Color SelectedTrafficLightGreen => Device.RuntimePlatform switch
+        public static Color SelectedTrafficLightGreen => Device.RuntimePlatform switch
         {
             Device.iOS => Color.FromRgb(greeniOS.R, greeniOS.G, greeniOS.B),
             Device.Android => Color.FromRgb(greenDroid.R, greenDroid.G, greenDroid.B),
             _ => Color.DarkGreen
         };
-        static Color SelectedTrafficLightRed => Device.RuntimePlatform switch
+        public static Color SelectedTrafficLightRed => Device.RuntimePlatform switch
         {
             Device.iOS => Color.FromRgb(rediOS.R, rediOS.G, rediOS.B),
             Device.Android => Color.FromRgb(redDroid.R, redDroid.G, redDroid.B),
             _ => Color.DarkRed
         };
-        static Color SelectedTrafficLightGray => Device.RuntimePlatform switch
+        public static Color SelectedTrafficLightGray => Device.RuntimePlatform switch
         {
             Device.iOS => Color.FromRgb(grayiOS.R, grayiOS.G, grayiOS.B),
             Device.Android => Color.FromRgb(grayDroid.R, grayDroid.G, grayDroid.B),
             _ => Color.DarkGray
         };
-        static Color SelectedTrafficLightYellow => Device.RuntimePlatform switch
+        public static Color SelectedTrafficLightYellow => Device.RuntimePlatform switch
         {
             Device.iOS => Color.FromRgb(yellowiOS.R, yellowiOS.G, yellowiOS.B),
             Device.Android => Color.FromRgb(yellowDroid.R, yellowDroid.G, yellowDroid.B),
@@ -81,7 +81,7 @@
         public static ChartPalette SelectedTrafficLightPalette { get; set; }
         #endregion
 
-        #region COnstructors
+        #region Constructors
         static Palette()
         {
             RandomPalette = new ChartPalette();

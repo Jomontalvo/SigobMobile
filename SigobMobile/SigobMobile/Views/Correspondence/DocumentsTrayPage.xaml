@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
+             x:Class="SigobMobile.Views.Correspondence.DocumentsTrayPage"
+             xmlns:local="clr-namespace:SigobMobile.Helpers"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="{local:Translate ManagementTray}"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.ToolbarItems>
+        <!-- Search -->
+        <ToolbarItem 
+            BindingContext="{Binding DocumentsTray}"
+            Command="{Binding SearchCommand}"
+            Icon="ic_bt_search"
+            Order="Default" 
+            Priority="0">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid
+            BindingContext="{Binding DocumentsTray}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="44" />
+            </Grid.RowDefinitions>
+            <SearchBar
+                BackgroundColor="{StaticResource softGray}"
+                FontSize="Small"
+                Grid.Row="0"
+                IsVisible="{Binding IsVisibleSearch}"
+                Placeholder="{local:Translate SearchPlaceHolder}"
+                SearchCommand="{Binding SearchDocumentCommand}"
+                Text="{Binding Filter, Mode=TwoWay}"
+                IsSpellCheckEnabled="true"
+                Keyboard="Text">
+            </SearchBar>
+            <RefreshView
+                Grid.Row="1"
+                Command="{Binding RefreshDocumentListCommand}"
+                IsRefreshing="{Binding IsRefreshing}"
+                RefreshColor="{StaticResource Key=darkGray}">
+                <CollectionView
+                    ItemsSource="{Binding Documents}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid
+                                Padding="10,5"
+                                RowSpacing="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <BoxView
+                                    Margin="1"
+                                    Color="{Binding ColorStatus}"
+                                    Grid.Column="0"
+                                    WidthRequest="2"
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="Center">
+                                </BoxView>
+                                <StackLayout
+                                    Grid.Column="1"
+                                    Padding="0,5"
+                                    Spacing="10">
+                                    <BoxView
+                                        Color="{StaticResource Key={OnPlatform iOS=iOSBlue, Android=blue}}"
+                                        CornerRadius="5"
+                                        Grid.Row="1"
+                                        IsVisible="{Binding IsReviewed, Converter={StaticResource inverseBool}}"
+                                        WidthRequest="10"
+                                        HeightRequest="10"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center">
+                                    </BoxView>
+                                    <Image
+                                        IsVisible="{Binding HasAttachment}"
+                                        Source="ic_notify_attachment"
+                                        WidthRequest="16">
+                                    </Image>
+                                    <Image
+                                        IsVisible="{Binding HasResponse}"
+                                        Source="ic_notify_reply"
+                                        WidthRequest="16">
+                                    </Image>
+                                </StackLayout>
+                                <Grid
+                                    Grid.Column="2"
+                                    RowSpacing="5">
+                                    <Grid.RowDefinitions>
+                                        <!--Issuer-->
+                                        <RowDefinition Height="Auto" />
+                                        <!--Subject-->
+                                        <RowDefinition Height="Auto" />
+                                        <!--code-->
+                                        <RowDefinition Height="Auto" />
+                                        <!--Text-->
+                                        <RowDefinition Height="Auto" />
+                                        <!--Separator-->
+                                        <RowDefinition Height="3" />
+                                    </Grid.RowDefinitions>
+                                    <StackLayout
+                                        Grid.Row="0"
+                                        Orientation="Horizontal">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            Text="{Binding IssuerOrRecipient}"
+                                            HorizontalOptions="StartAndExpand"
+                                            VerticalTextAlignment="Center">
+                                        </Label>
+                                        <Label
+                                            Text="{Binding RegistrationDate, StringFormat='{0:MMM dd, yy}' }"
+                                            HorizontalOptions="End"
+                                            VerticalTextAlignment="Center">
+                                        </Label>
+                                    </StackLayout>
+                                    <Label
+                                        Grid.Row="1"
+                                        Text="{Binding Subject}">
+                                    </Label>
+                                    <Label
+                                        Grid.Row="2"
+                                        Text="{Binding RegistrationCode}">
+                                    </Label>
+                                    <Label
+                                        Grid.Row="3"
+                                        Text="{Binding TransferComment}">
+                                    </Label>
+                                    <BoxView
+                                        Color="{StaticResource Key=gray}"
+                                        Grid.Row="4"
+                                        HeightRequest="1"
+                                        HorizontalOptions="FillAndExpand"
+                                        Margin="0,1">
+                                    </BoxView>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+            <telerikPrimitives:RadBorder
+                BorderColor="{StaticResource accesoryGray}" 
+                CornerRadius="0"
+                Grid.Row="2">
+                <Grid 
+                    BackgroundColor="{StaticResource softGray}"
+                    ColumnSpacing="0"
+                    RowSpacing="0"
+                    VerticalOptions="End">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button 
+                        BackgroundColor="{StaticResource softGray}"
+                        Command="{Binding CheckAllCalendarsCommand}"
+                        Grid.Column="0"
+                        HorizontalOptions="CenterAndExpand"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        Text="{Binding SelectDeselectAll, Mode=TwoWay}">
+                    </Button>
+                </Grid>
+            </telerikPrimitives:RadBorder>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

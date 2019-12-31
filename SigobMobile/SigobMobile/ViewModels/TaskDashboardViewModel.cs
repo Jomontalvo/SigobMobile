@@ -10,9 +10,11 @@
     using Helpers;
     using Interfaces;
     using Models;
-    using Services;
+    using Common.Services;
     using Telerik.XamarinForms.Chart;
     using Xamarin.Forms;
+    using SigobMobile.Common.Helpers;
+    using SigobMobile.Common.Models;
 
     public class TaskDashboardViewModel : BaseViewModel
     {
@@ -182,7 +184,7 @@
                 var response = await this.apiService.Get<Tasks>(
                     Settings.UrlBaseApiSigob,
                     App.PrefixApiSigob,
-                    string.Format(this.apiGetTaskStatistics, officeCode, (byte)queryOption ),
+                    string.Format(this.apiGetTaskStatistics, officeCode, (byte)queryOption),
                     Settings.Token,
                     Settings.DbToken
                 );
@@ -227,7 +229,7 @@
         private void LoadSegmentedFilters()
         {
             TaskStatus = new ObservableCollection<Segment>(ToTaskSegment(1));
-            var firstItem = new Segment() { Id=0, QueryId = 10, SegmentName = Languages.AllStatus };
+            var firstItem = new Segment() { Id = 0, QueryId = 10, SegmentName = Languages.AllStatus };
             TaskStatus.Insert(0, firstItem);
             //Built ObservableCollection<string> with Segments Names
             this.SegmentedControlItems = new ObservableCollection<string>(ToSegmentString());
@@ -290,6 +292,7 @@
         #region Commands
         public ICommand SliceTappedCommand => new RelayCommand<ChartSelectionBehavior>(SliceTapped);
         public ICommand RefreshTaskListCommand => new RelayCommand<ChartSelectionBehavior>(RefreshTaskList);
+        public ICommand RefreshCommand => new Command(async () => await this.RefreshAsync());
         public ICommand SwipeChartCommand => new RelayCommand<string>(SwipeChart);
 
         private void SwipeChart(string direction)
@@ -298,6 +301,16 @@
             IsVisibleChart = (direction != SwipeDirection.Up.ToString());
         }
 
+        private async Task RefreshAsync()
+        {
+            IsRefreshing = true;
+            await Application.Current.MainPage.DisplayAlert(
+                        Languages.Error,
+                        "Hola",
+                        Languages.Cancel);
+            IsRefreshing = false;
+            return;
+        }
         private void RefreshTaskList(ChartSelectionBehavior obj)
         {
             IsRefreshing = false;

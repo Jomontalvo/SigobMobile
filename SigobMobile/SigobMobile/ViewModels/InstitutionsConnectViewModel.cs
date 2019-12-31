@@ -5,10 +5,10 @@
     using System.Linq;
     using System.Threading.Tasks;
     using AsyncAwaitBestPractices.MVVM;
+    using Common.Models;
+    using Common.Services;
     using Helpers;
     using Interfaces;
-    using Models;
-    using Services;
     using Xamarin.Forms;
 
     public class InstitutionsConnectViewModel : BaseViewModel

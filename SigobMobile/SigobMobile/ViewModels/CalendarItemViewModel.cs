@@ -3,12 +3,12 @@
     using System.Threading.Tasks;
     using System.Windows.Input;
     using AsyncAwaitBestPractices.MVVM;
+    using Common.Helpers;
+    using Common.Services;
     using Helpers;
     using Models;
-    using Services;
     using Telerik.XamarinForms.Primitives.CheckBox.Commands;
     using Xamarin.Forms;
-
 
     public class CalendarItemViewModel : Calendar
     {

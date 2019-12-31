@@ -150,13 +150,13 @@
       <Version>4.0.1.5</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp">
-      <Version>1.68.1</Version>
+      <Version>1.68.1.1</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views">
-      <Version>1.68.1</Version>
+      <Version>1.68.1.1</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
-      <Version>1.68.1</Version>
+      <Version>1.68.1.1</Version>
     </PackageReference>
     <PackageReference Include="Telerik.UI.for.Xamarin">
       <Version>2019.3.1119.1</Version>
@@ -170,6 +170,10 @@
     <ProjectReference Include="..\SigobMobile\SigobMobile.csproj">
       <Project>{C32D7C61-54DD-4CF8-B3AF-C6E5B9728358}</Project>
       <Name>SigobMobile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SigobMobile.Common\SigobMobile.Common.csproj">
+      <Project>{9E87BD60-AC4F-4E2C-B7C0-10F401EE5246}</Project>
+      <Name>SigobMobile.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -297,6 +301,21 @@
     <BundleResource Include="Resources\ic_task_deadline.png" />
     <BundleResource Include="Resources\ic_bt_close_window_gray.png" />
     <BundleResource Include="Resources\splash.png" />
+    <BundleResource Include="Resources\ic_doc_menu_0" />
+    <BundleResource Include="Resources\ic_doc_menu_1" />
+    <BundleResource Include="Resources\ic_doc_menu_2" />
+    <BundleResource Include="Resources\ic_doc_menu_3" />
+    <BundleResource Include="Resources\ic_doc_menu_4" />
+    <BundleResource Include="Resources\ic_doc_menu_5" />
+    <BundleResource Include="Resources\ic_doc_menu_6" />
+    <BundleResource Include="Resources\ic_doc_menu_7" />
+    <BundleResource Include="Resources\ic_doc_menu_8" />
+    <BundleResource Include="Resources\ic_doc_menu_9" />
+    <BundleResource Include="Resources\ic_doc_menu_10" />
+    <BundleResource Include="Resources\ic_doc_menu_100" />
+    <BundleResource Include="Resources\ic_doc_menu_group_folder" />
+    <BundleResource Include="Resources\ic_checkmark" />
+    <BundleResource Include="Resources\ic_notify_reply.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />

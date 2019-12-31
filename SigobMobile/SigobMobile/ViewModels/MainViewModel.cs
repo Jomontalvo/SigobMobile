@@ -1,5 +1,4 @@
-﻿
-namespace SigobMobile.ViewModels
+﻿namespace SigobMobile.ViewModels
 {
     /// <summary>
     /// Main view model.
@@ -55,7 +54,9 @@ namespace SigobMobile.ViewModels
         #endregion
 
         #region Correspondence
-        public CorrespondenceTryViewModel CorrespondenceTry { get; set; }
+        public MailBoxesViewModel MailBoxes { get; set; }
+        public ExternalDocumentViewModel ExternalDocument { get; set; }
+        public DocumentsTrayViewModel DocumentsTray { get; set; }
         #endregion
         #endregion
 

@@ -7,16 +7,21 @@
     using System.Threading.Tasks;
     using System.Windows.Input;
     using AsyncAwaitBestPractices.MVVM;
+    using Common.Helpers;
+    using Common.Models;
+    using Common.Services;
     using GalaSoft.MvvmLight.Command;
     using Helpers;
     using Interfaces;
     using Models;
-    using Services;
     using Telerik.XamarinForms.Input;
     using Telerik.XamarinForms.Input.Calendar.Commands;
     using Views.ManagementCenter;
     using Views.Tasks;
     using Xamarin.Forms;
+    using ManagementCenterEvent = Models.ManagementCenterEvent;
+    using ManagementCenterNewItem = Models.ManagementCenterNewItem;
+
 
     public class CalendarViewModel : BaseViewModel
     {

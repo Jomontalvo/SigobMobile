@@ -2,7 +2,7 @@
 {
     using System;
     using System.Globalization;
-    using Models;
+    using Common.Models;
     using ViewModels;
     using Xamarin.Forms;
 
