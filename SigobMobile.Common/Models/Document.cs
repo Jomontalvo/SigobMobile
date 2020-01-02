@@ -48,7 +48,7 @@
         public ManagementTermStatus Status { get; set; }
 
         [JsonProperty("prioridad")]
-        public long Priority { get; set; }
+        public int Priority { get; set; }
 
         [JsonProperty("estadoRecorrido")]
         public byte StatusTracking { get; set; }
@@ -57,7 +57,7 @@
         public bool IsReviewed { get; set; }
 
         [JsonProperty("fechaCreacion")]
-        public DateTimeOffset RegistrationDate { get; set; }
+        public DateTime RegistrationDate { get; set; }
 
         [JsonProperty("descripcion")]
         public string Subject { get; set; }

@@ -316,6 +316,7 @@
     <BundleResource Include="Resources\ic_doc_menu_group_folder" />
     <BundleResource Include="Resources\ic_checkmark" />
     <BundleResource Include="Resources\ic_notify_reply.png" />
+    <BundleResource Include="Resources\ic_notify_priority.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />

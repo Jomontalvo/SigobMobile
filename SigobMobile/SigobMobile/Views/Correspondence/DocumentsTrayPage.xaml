@@ -5,6 +5,7 @@
              xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
              x:Class="SigobMobile.Views.Correspondence.DocumentsTrayPage"
              xmlns:local="clr-namespace:SigobMobile.Helpers"
+             xmlns:controls="clr-namespace:SigobMobile.Controls"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="{local:Translate ManagementTray}"
              ios:Page.UseSafeArea="true">
@@ -43,31 +44,25 @@
                 IsRefreshing="{Binding IsRefreshing}"
                 RefreshColor="{StaticResource Key=darkGray}">
                 <CollectionView
-                    ItemsSource="{Binding Documents}">
+                    ItemsUpdatingScrollMode="KeepLastItemInView"
+                    ItemsSource="{Binding Documents}"
+                    RemainingItemsThreshold="5"
+                    RemainingItemsThresholdReachedCommand="{Binding LoadMoreDocumentsCommand}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid
                                 Padding="10,5"
                                 RowSpacing="2">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="18" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <BoxView
-                                    Margin="1"
-                                    Color="{Binding ColorStatus}"
-                                    Grid.Column="0"
-                                    WidthRequest="2"
-                                    VerticalOptions="FillAndExpand"
-                                    HorizontalOptions="Center">
-                                </BoxView>
                                 <StackLayout
-                                    Grid.Column="1"
+                                    Grid.Column="0"
                                     Padding="0,5"
-                                    Spacing="10">
+                                    Spacing="8">
                                     <BoxView
-                                        Color="{StaticResource Key={OnPlatform iOS=iOSBlue, Android=blue}}"
+                                        Color="{StaticResource Key={OnPlatform iOS=iOSBlue, Android=DroidPrimary}}"
                                         CornerRadius="5"
                                         Grid.Row="1"
                                         IsVisible="{Binding IsReviewed, Converter={StaticResource inverseBool}}"
@@ -76,6 +71,16 @@
                                         VerticalOptions="Center"
                                         HorizontalOptions="Center">
                                     </BoxView>
+                                    <controls:IconView
+                                        Foreground="{StaticResource Key={OnPlatform iOS=iOSTrafficRed, Android=red}}"
+                                        HeightRequest="16"
+                                        HorizontalOptions="Center"
+                                        IsVisible="{Binding Priority, Converter={StaticResource Key=intToBool}}"
+                                        Margin="0"
+                                        Source="ic_notify_priority"
+                                        VerticalOptions="Center"
+                                        WidthRequest="16">
+                                    </controls:IconView>
                                     <Image
                                         IsVisible="{Binding HasAttachment}"
                                         Source="ic_notify_attachment"
@@ -88,8 +93,8 @@
                                     </Image>
                                 </StackLayout>
                                 <Grid
-                                    Grid.Column="2"
-                                    RowSpacing="5">
+                                    Grid.Column="1"
+                                    RowSpacing="3">
                                     <Grid.RowDefinitions>
                                         <!--Issuer-->
                                         <RowDefinition Height="Auto" />
@@ -102,32 +107,51 @@
                                         <!--Separator-->
                                         <RowDefinition Height="3" />
                                     </Grid.RowDefinitions>
-                                    <StackLayout
+                                    <Grid
                                         Grid.Row="0"
-                                        Orientation="Horizontal">
+                                        ColumnSpacing="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
                                         <Label
+                                            Grid.Column="0"
                                             FontAttributes="Bold"
                                             Text="{Binding IssuerOrRecipient}"
                                             HorizontalOptions="StartAndExpand"
                                             VerticalTextAlignment="Center">
                                         </Label>
                                         <Label
-                                            Text="{Binding RegistrationDate, StringFormat='{0:MMM dd, yy}' }"
-                                            HorizontalOptions="End"
+                                            Padding="5,0"
+                                            BackgroundColor="{Binding ColorStatus}"
+                                            FontSize="Small"
+                                            Grid.Column="1"
+                                            HeightRequest="24"
+                                            TextColor="{Binding DateColor}"
+                                            HorizontalOptions="Center"
+                                            HorizontalTextAlignment="Center"
+                                            Text="{Binding RegistrationDateString}"
                                             VerticalTextAlignment="Center">
                                         </Label>
-                                    </StackLayout>
+                                    </Grid>
                                     <Label
+                                        FontSize="Small"
                                         Grid.Row="1"
                                         Text="{Binding Subject}">
                                     </Label>
                                     <Label
                                         Grid.Row="2"
-                                        Text="{Binding RegistrationCode}">
+                                        FontAttributes="Bold"
+                                        FontSize="Small"
+                                        Text="{Binding CodeAndManagementTime}"
+                                        TextColor="{StaticResource Key=grayContent}">
                                     </Label>
                                     <Label
+                                        FontSize="Small"
                                         Grid.Row="3"
-                                        Text="{Binding TransferComment}">
+                                        LineBreakMode="TailTruncation"
+                                        Text="{Binding TransferComment}"
+                                        TextColor="{StaticResource Key=grayContent}">
                                     </Label>
                                     <BoxView
                                         Color="{StaticResource Key=gray}"

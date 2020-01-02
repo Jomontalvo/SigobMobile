@@ -4,6 +4,7 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
+    using AsyncAwaitBestPractices.MVVM;
     using Common.Helpers;
     using Common.Models;
     using Common.Services;
@@ -20,8 +21,8 @@
         #endregion
 
         #region Attributes
-        private ApiService apiService;
-        private int id;
+        private readonly ApiService apiService;
+        private readonly int id;
         private int index;
         private int itemCount;
         private bool isRegreshing;
@@ -70,11 +71,30 @@
         }
         #endregion
 
+        #region Commands
+        public IAsyncCommand RefreshCommand => new AsyncCommand(this.Refresh);
+        public IAsyncCommand LoadMoreDocumentsCommand => new AsyncCommand(this.LoadDocumentsAsync);
+        #endregion
 
         #region Medthods
+        /// <summary>
+        /// Refresh List of Trays
+        /// </summary>
+        /// <returns></returns>
+        private async Task Refresh()
+        {
+            await this.LoadDocumentsAsync();
+            this.IsRefreshing = false;
+            return;
+        }
 
+        /// <summary>
+        /// LoadDocuments
+        /// </summary>
+        /// <returns></returns>
         private async Task LoadDocumentsAsync()
         {
+            if (RowCount == index && index > 0) { return; }
             this.IsRefreshing = true;
             // 1. Verify connection
             var connection = await this.apiService.CheckConnection();
@@ -107,6 +127,7 @@
             }
             this.documentTray = (Tray)response.Result;
             this.RefreshDocumentList();
+            index += documentList.Count;
             this.IsRefreshing = false;
         }
 

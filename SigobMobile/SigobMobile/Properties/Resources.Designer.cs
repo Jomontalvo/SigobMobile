@@ -737,6 +737,12 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string Yesterday {
+            get {
+                return ResourceManager.GetString("Yesterday", resourceCulture);
+            }
+        }
+        
         public static string AllDay {
             get {
                 return ResourceManager.GetString("AllDay", resourceCulture);

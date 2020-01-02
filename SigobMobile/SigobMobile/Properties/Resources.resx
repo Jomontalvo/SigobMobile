@@ -581,6 +581,10 @@ If you have problems, contact with administrator.</value>
     <value>Today</value>
     <comment>Today text.</comment>
   </data>
+    <data name="Yesterday" xml:space="preserve">
+    <value>Yesterday</value>
+    <comment>Yesterday text.</comment>
+  </data>
     <data name="AllDay" xml:space="preserve">
     <value>All Day</value>
     <comment>All day duration event.</comment>

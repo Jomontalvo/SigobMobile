@@ -165,6 +165,7 @@
         public static string CalendarsTitle => Resources.CalendarsTitle;
         public static string Calendar => Resources.Calendar;
         public static string Today => Resources.Today;
+        public static string Yesterday => Resources.Yesterday;
         public static string CalendarViewModeText => Resources.CalendarViewModeText;
         public static string DailyView => Resources.DailyView;
         public static string MonthlyView => Resources.MonthlyView;
