@@ -31,7 +31,8 @@
                     await App.Navigator.PushAsync(new DocumentsTrayPage() { Title = this.Name }, true);
                     break;
                 case TypeMenuBox.TagType:
-                    appViewModel.DocumentsTray = new DocumentsTrayViewModel();
+                    //TODO: Search from Archive remove Id
+                    appViewModel.DocumentsTray = new DocumentsTrayViewModel(Id);
                     await App.Navigator.PushAsync(new DocumentsTrayPage() { Title = this.Name}, true);
                     break;
             }

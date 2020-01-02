@@ -33,10 +33,10 @@
                 string date = this.RegistrationDate.ToLocalTime().ToString("MMM dd, yy");
                 if  (this.RegistrationDate.Year == DateTime.Today.Year)
                 {
-                    date = (DateTime.Today.AddDays(1) - RegistrationDate.ToLocalTime()).TotalDays switch
+                    date = (DateTime.Today.AddDays((double)1) - RegistrationDate.ToLocalTime()).TotalDays switch
                     {
                         double days when days >= 0 && days < 1 => Languages.Today,
-                        double days when days >= 0 && days < 1 => Languages.Yesterday,
+                        double days when days >= 1 && days < 2 => Languages.Yesterday,
                         _ => this.RegistrationDate.ToLocalTime().ToString("MMM dd"),
                     };
                 }

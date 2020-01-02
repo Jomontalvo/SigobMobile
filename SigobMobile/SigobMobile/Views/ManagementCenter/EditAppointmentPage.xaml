@@ -4,5 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     x:Class="SigobMobile.Views.ManagementCenter.EditAppointmentPage">
     <ContentPage.Content>
+        <Label
+            Text="Edit Appointment Page">
+        </Label>
     </ContentPage.Content>
 </ContentPage>

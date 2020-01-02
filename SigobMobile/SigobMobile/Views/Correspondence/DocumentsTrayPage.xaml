@@ -40,13 +40,13 @@
             </SearchBar>
             <RefreshView
                 Grid.Row="1"
-                Command="{Binding RefreshDocumentListCommand}"
+                Command="{Binding RefreshCommand}"
                 IsRefreshing="{Binding IsRefreshing}"
                 RefreshColor="{StaticResource Key=darkGray}">
                 <CollectionView
                     ItemsUpdatingScrollMode="KeepLastItemInView"
                     ItemsSource="{Binding Documents}"
-                    RemainingItemsThreshold="5"
+                    RemainingItemsThreshold="0"
                     RemainingItemsThresholdReachedCommand="{Binding LoadMoreDocumentsCommand}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
@@ -117,7 +117,7 @@
                                         <Label
                                             Grid.Column="0"
                                             FontAttributes="Bold"
-                                            Text="{Binding IssuerOrRecipient}"
+                                            Text="{Binding Index}"
                                             HorizontalOptions="StartAndExpand"
                                             VerticalTextAlignment="Center">
                                         </Label>
@@ -178,14 +178,15 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Button 
-                        BackgroundColor="{StaticResource softGray}"
-                        Command="{Binding CheckAllCalendarsCommand}"
-                        Grid.Column="0"
-                        HorizontalOptions="CenterAndExpand"
-                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
-                        Text="{Binding SelectDeselectAll, Mode=TwoWay}">
-                    </Button>
+                    <StackLayout
+                        Orientation="Horizontal">
+                        <Label
+                            Text="{Binding RowCount, StringFormat='Total: {0:N2}'}">
+                        </Label>
+                        <Label
+                            Text="{Binding ItemCount, StringFormat='View: {0:N2}'}">
+                        </Label>
+                    </StackLayout>
                 </Grid>
             </telerikPrimitives:RadBorder>
         </Grid>

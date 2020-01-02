@@ -1,5 +1,6 @@
 ﻿namespace SigobMobile.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -26,6 +27,7 @@
         private int index;
         private int itemCount;
         private bool isRegreshing;
+        private bool isBusy;
         private Tray documentTray;
         private int rowCount;
         private List<Document> documentList;
@@ -57,84 +59,172 @@
         #endregion
 
         #region Constructors
-        public DocumentsTrayViewModel()
-        {
-            this.apiService = new ApiService();
-        }
+        //public DocumentsTrayViewModel()
+        //{
+        //    this.apiService = new ApiService();
+        //}
 
+        /// <summary>
+        /// Constructor with Object Id parameter
+        /// </summary>
+        /// <param name="id"></param>
         public DocumentsTrayViewModel(int id)
         {
             this.id = id;
             this.apiService = new ApiService();
             IErrorHandler errorHandler = null;
-            this.LoadDocumentsAsync().FireAndForgetSafeAsync(errorHandler);
+            this.GetInitialDocumentList().FireAndForgetSafeAsync(errorHandler);
         }
         #endregion
 
         #region Commands
         public IAsyncCommand RefreshCommand => new AsyncCommand(this.Refresh);
-        public IAsyncCommand LoadMoreDocumentsCommand => new AsyncCommand(this.LoadDocumentsAsync);
+        public IAsyncCommand LoadMoreDocumentsCommand => new AsyncCommand(this.LoadMoreDocumentsAsync);
         #endregion
 
         #region Medthods
         /// <summary>
-        /// Refresh List of Trays
+        /// Firstt load when instance the constructor.
+        /// </summary>
+        /// <returns></returns>
+        private async Task GetInitialDocumentList()
+        {
+            await Refresh();
+            IsRefreshing = false;
+        }
+
+        /// <summary>
+        /// Refresh List of Documents in Selected Tray
         /// </summary>
         /// <returns></returns>
         private async Task Refresh()
         {
-            await this.LoadDocumentsAsync();
-            this.IsRefreshing = false;
-            return;
+            try
+            {
+                this.RowCount = this.index = 0;
+                this.documentTray = await LoadDocumentsAsync(this.index);
+                if (this.documentTray == null)
+                {
+                    return;
+                }
+                //Get List values
+                this.RowCount = documentTray.Rows;
+                this.documentList = documentTray.Documents;
+
+                //Create document List
+                this.Documents = new ObservableCollection<DocumentItemViewModel>(ToDocumentItemViewModel(this.documentList));
+
+                // Increase index counter
+                index += documentList.Count;
+                ItemCount = index;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    $"{Languages.GeneralError}: {ex.Message}",
+                    Languages.Cancel);
+            }
+            finally { this.IsRefreshing = false; }
         }
 
         /// <summary>
-        /// LoadDocuments
+        /// Load more documents async
         /// </summary>
         /// <returns></returns>
-        private async Task LoadDocumentsAsync()
+        private async Task LoadMoreDocumentsAsync()
         {
-            if (RowCount == index && index > 0) { return; }
-            this.IsRefreshing = true;
-            // 1. Verify connection
-            var connection = await this.apiService.CheckConnection();
-            if (!connection.IsSuccess)
+            if (isBusy) return;
+            Tray newLoadTray;
+            try
             {
-                this.IsRefreshing = false;
+                isBusy = true;
+                newLoadTray = await this.LoadDocumentsAsync(this.index);
+                if (newLoadTray == null)
+                {
+                return;
+                }
+                //Get List values
+                this.RowCount = newLoadTray.Rows;
+                List<Document> newDocumentList = newLoadTray.Documents;
+
+                //Add new values to Document List Collection
+                var partialPageDocuments = new List<DocumentItemViewModel>(ToDocumentItemViewModel(newDocumentList));
+                foreach (DocumentItemViewModel doc in partialPageDocuments)
+                {
+                    this.Documents.Add(doc);
+                    this.index += 1;
+                }
+                ItemCount = this.index;
+            }
+            catch (Exception ex)
+            {
                 await Application.Current.MainPage.DisplayAlert(
                     Languages.Error,
-                    connection.Message,
+                    $"{Languages.GeneralError}: {ex.Message}",
                     Languages.Cancel);
-                return;
             }
-
-            // 2. Get the menu list from API
-            var response = await this.apiService.Get<Tray>(
-                    Settings.UrlBaseApiSigob,
-                    App.PrefixApiSigob,
-                    $"{this.apiController}{id}{apiControllerSufix}{index}",
-                    Settings.Token,
-                    Settings.DbToken
-                );
-            if (!response.IsSuccess)
-            {
-                this.IsRefreshing = false;
-                await Application.Current.MainPage.DisplayAlert(
-                    title: Languages.Error,
-                    message: response.Message,
-                    cancel: Languages.Cancel);
-                return;
-            }
-            this.documentTray = (Tray)response.Result;
-            this.RefreshDocumentList();
-            index += documentList.Count;
-            this.IsRefreshing = false;
+            finally { isBusy = false; }
         }
 
-        private void RefreshDocumentList()
+        /// <summary>
+        /// Load Documents
+        /// </summary>
+        /// <returns></returns>
+        private async Task<Tray> LoadDocumentsAsync(int pageIndex)
         {
-            this.documentList = documentTray.Documents;
-            Documents = new ObservableCollection<DocumentItemViewModel>(this.documentList.Select(d => new DocumentItemViewModel
+            Tray myDocumentTray = new Tray();
+            try
+            {
+                // 1. Verify connection
+                var connection = await this.apiService.CheckConnection();
+                if (!connection.IsSuccess)
+                {
+                    this.IsRefreshing = false;
+                    await Application.Current.MainPage.DisplayAlert(
+                        Languages.Error,
+                        connection.Message,
+                        Languages.Cancel);
+                    return myDocumentTray;
+                }
+
+                // 2. Get the menu list from API
+                var response = await this.apiService.Get<Tray>(
+                        Settings.UrlBaseApiSigob,
+                        App.PrefixApiSigob,
+                        $"{this.apiController}{id}{apiControllerSufix}{pageIndex}",
+                        Settings.Token,
+                        Settings.DbToken
+                    );
+                if (!response.IsSuccess)
+                {
+                    this.IsRefreshing = false;
+                    await Application.Current.MainPage.DisplayAlert(
+                        title: Languages.Error,
+                        message: response.Message,
+                        cancel: Languages.Cancel);
+                    return myDocumentTray;
+                }
+                myDocumentTray = (Tray)response.Result;
+                return myDocumentTray;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    $"{Languages.GeneralError}: {ex.Message}",
+                    Languages.Cancel);
+                return myDocumentTray;
+            }
+        }
+
+        /// <summary>
+        /// Convert List of DocumentItemViewModel to Observable Collection
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerable<DocumentItemViewModel> ToDocumentItemViewModel(List<Document> list)
+        {
+            return list.Select(d => new DocumentItemViewModel
             {
                 Advertisement = d.Advertisement,
                 AttachmentCount = d.AttachmentCount,
@@ -158,9 +248,7 @@
                 TrackingId = d.TrackingId,
                 TransferComment = d.TransferComment,
                 TransferedBy = d.TransferedBy
-            }
-            ));
-            ItemCount = documentTray.Rows;
+            });
         }
         #endregion
     }
