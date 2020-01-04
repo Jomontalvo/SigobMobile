@@ -13,7 +13,7 @@
         <!-- Search -->
         <ToolbarItem 
             BindingContext="{Binding DocumentsTray}"
-            Command="{Binding SearchCommand}"
+            Command="{Binding AdvancedSearchCommand}"
             Icon="ic_bt_search"
             Order="Default" 
             Priority="0">
@@ -21,35 +21,34 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid
-            BindingContext="{Binding DocumentsTray}">
+            BindingContext="{Binding DocumentsTray}"
+            RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="44" />
+                <RowDefinition Height="30" />
             </Grid.RowDefinitions>
             <SearchBar
                 BackgroundColor="{StaticResource softGray}"
                 FontSize="Small"
                 Grid.Row="0"
-                IsVisible="{Binding IsVisibleSearch}"
                 Placeholder="{local:Translate SearchPlaceHolder}"
-                SearchCommand="{Binding SearchDocumentCommand}"
+                SearchCommand="{Binding SearchCurrentTrayCommand}"
                 Text="{Binding Filter, Mode=TwoWay}"
                 IsSpellCheckEnabled="true"
                 Keyboard="Text">
             </SearchBar>
-            <RefreshView
+            <controls:InfiniteListView
                 Grid.Row="1"
-                Command="{Binding RefreshCommand}"
+                HasUnevenRows="true"
                 IsRefreshing="{Binding IsRefreshing}"
-                RefreshColor="{StaticResource Key=darkGray}">
-                <CollectionView
-                    ItemsUpdatingScrollMode="KeepLastItemInView"
-                    ItemsSource="{Binding Documents}"
-                    RemainingItemsThreshold="0"
-                    RemainingItemsThresholdReachedCommand="{Binding LoadMoreDocumentsCommand}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
+                IsPullToRefreshEnabled="True"
+                ItemsSource="{Binding Documents}"
+                LoadMoreCommand="{Binding LoadMoreDocumentsCommand}"
+                RefreshCommand="{Binding RefreshCommand}">
+                <controls:InfiniteListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
                             <Grid
                                 Padding="10,5"
                                 RowSpacing="2">
@@ -104,8 +103,6 @@
                                         <RowDefinition Height="Auto" />
                                         <!--Text-->
                                         <RowDefinition Height="Auto" />
-                                        <!--Separator-->
-                                        <RowDefinition Height="3" />
                                     </Grid.RowDefinitions>
                                     <Grid
                                         Grid.Row="0"
@@ -117,7 +114,7 @@
                                         <Label
                                             Grid.Column="0"
                                             FontAttributes="Bold"
-                                            Text="{Binding Index}"
+                                            Text="{Binding IssuerOrRecipient}"
                                             HorizontalOptions="StartAndExpand"
                                             VerticalTextAlignment="Center">
                                         </Label>
@@ -153,41 +150,50 @@
                                         Text="{Binding TransferComment}"
                                         TextColor="{StaticResource Key=grayContent}">
                                     </Label>
-                                    <BoxView
-                                        Color="{StaticResource Key=gray}"
-                                        Grid.Row="4"
-                                        HeightRequest="1"
-                                        HorizontalOptions="FillAndExpand"
-                                        Margin="0,1">
-                                    </BoxView>
                                 </Grid>
                             </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </RefreshView>
+                        </ViewCell>
+                    </DataTemplate>
+                </controls:InfiniteListView.ItemTemplate>
+                <controls:InfiniteListView.Footer>
+                    <Grid 
+                        Padding="6" 
+                        IsVisible="{Binding IsBusy}">
+                        <!-- set the footer to have a zero height when invisible -->
+                        <Grid.Triggers>
+                            <Trigger 
+                                TargetType="Grid" 
+                                Property="IsVisible" 
+                                Value="False">
+                                <Setter Property="HeightRequest" Value="0" />
+                            </Trigger>
+                        </Grid.Triggers>
+                        <!-- the loading content -->
+                        <Label 
+                            Text="{local:Translate Loading}" 
+                            TextColor="{OnPlatform iOS={StaticResource iOSBlue }, Android={StaticResource DroidPrimary }}" 
+                            FontSize="Medium" 
+                            FontAttributes="Bold" 
+                            VerticalOptions="Center" 
+                            HorizontalOptions="Center" >
+                        </Label>
+                    </Grid>
+                </controls:InfiniteListView.Footer>
+            </controls:InfiniteListView>
             <telerikPrimitives:RadBorder
+                BackgroundColor="{StaticResource Key=softGray}"
                 BorderColor="{StaticResource accesoryGray}" 
                 CornerRadius="0"
                 Grid.Row="2">
-                <Grid 
-                    BackgroundColor="{StaticResource softGray}"
-                    ColumnSpacing="0"
-                    RowSpacing="0"
-                    VerticalOptions="End">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <StackLayout
-                        Orientation="Horizontal">
-                        <Label
-                            Text="{Binding RowCount, StringFormat='Total: {0:N2}'}">
-                        </Label>
-                        <Label
-                            Text="{Binding ItemCount, StringFormat='View: {0:N2}'}">
-                        </Label>
-                    </StackLayout>
-                </Grid>
+                <Label
+                    BackgroundColor="Transparent"
+                    FontSize="Small"
+                    HorizontalOptions="StartAndExpand"
+                    Padding="10,0"
+                    Text="{Binding PagingInfoLabel}"
+                    TextColor="{StaticResource Key=darkGray}"
+                    VerticalOptions="Center">
+                </Label>
             </telerikPrimitives:RadBorder>
         </Grid>
     </ContentPage.Content>

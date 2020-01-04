@@ -15,6 +15,7 @@
     using Xamarin.Forms;
     using SigobMobile.Common.Helpers;
     using SigobMobile.Common.Models;
+    using AsyncAwaitBestPractices.MVVM;
 
     public class TaskDashboardViewModel : BaseViewModel
     {
@@ -292,7 +293,7 @@
         #region Commands
         public ICommand SliceTappedCommand => new RelayCommand<ChartSelectionBehavior>(SliceTapped);
         public ICommand RefreshTaskListCommand => new RelayCommand<ChartSelectionBehavior>(RefreshTaskList);
-        public ICommand RefreshCommand => new Command(async () => await this.RefreshAsync());
+        public IAsyncCommand RefreshCommand => new AsyncCommand(RefreshAsync);
         public ICommand SwipeChartCommand => new RelayCommand<string>(SwipeChart);
 
         private void SwipeChart(string direction)

@@ -1336,5 +1336,17 @@ namespace SigobMobile.Properties {
                 return ResourceManager.GetString("PendingLinkedInstitution", resourceCulture);
             }
         }
+        
+        public static string TotalRows {
+            get {
+                return ResourceManager.GetString("TotalRows", resourceCulture);
+            }
+        }
+        
+        public static string ShowRowCount {
+            get {
+                return ResourceManager.GetString("ShowRowCount", resourceCulture);
+            }
+        }
     }
 }

@@ -984,5 +984,13 @@ If you have problems, contact with administrator.</value>
     <value> Pending for linked institution</value>
     <comment>Document pending to deliver via e-mal.Id = 10</comment>
   </data>
-    
+    <!--Pagination information label-->
+    <data name="TotalRows" xml:space="preserve">
+    <value>Total</value>
+    <comment>Total records</comment>
+  </data>
+    <data name="ShowRowCount" xml:space="preserve">
+    <value>Records shown</value>
+    <comment>Total records</comment>
+  </data>
 </root>

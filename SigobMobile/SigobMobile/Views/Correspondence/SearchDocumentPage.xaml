@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:telerikInput="clr-namespace:Telerik.XamarinForms.Input;assembly=Telerik.XamarinForms.Input"
+             xmlns:lang="clr-namespace:SigobMobile.Helpers"
+             x:Class="SigobMobile.Views.Correspondence.SearchDocumentPage"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding SearchDocument}"
+            Spacing="0">
+            <SearchBar
+                BackgroundColor="{StaticResource softGray}"
+                FontSize="Small"
+                Placeholder="{lang:Translate SearchPlaceHolder}"
+                SearchCommand="{Binding SearchCurrentTrayCommand}"
+                Text="{Binding Filter, Mode=TwoWay}"
+                IsSpellCheckEnabled="true"
+                Keyboard="Text">
+            </SearchBar>
+            <BoxView
+                Color="{StaticResource gray}"
+                HeightRequest="1"
+                HorizontalOptions="FillAndExpand">
+            </BoxView>
+            <StackLayout
+                Padding="10">
+                <telerikInput:RadSegmentedControl
+                    HeightRequest="{OnPlatform Android=30, iOS=28}"
+                    ItemsSource="{Binding Data}"
+                    SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
+                    SelectedSegmentBackgroundColor="{OnPlatform iOS={StaticResource Key=iOSBlue}}"
+                    SelectedSegmentTextColor="{OnPlatform iOS={StaticResource Key=defaultBackgroundView}}">
+                </telerikInput:RadSegmentedControl>
+                <Label
+                    Text="Filters here!!">
+                </Label>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

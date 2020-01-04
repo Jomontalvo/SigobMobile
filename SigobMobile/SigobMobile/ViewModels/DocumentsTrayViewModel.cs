@@ -11,6 +11,7 @@
     using Common.Services;
     using Helpers;
     using Interfaces;
+    using Views.Correspondence;
     using Xamarin.Forms;
     using DocumentItemViewModel = Models.Document;
 
@@ -24,10 +25,12 @@
         #region Attributes
         private readonly ApiService apiService;
         private readonly int id;
-        private int index;
+        private int rowPageIndex;
         private int itemCount;
+        private string pagingInfoLabel;
         private bool isRegreshing;
         private bool isBusy;
+        private bool isVisibleSearch;
         private Tray documentTray;
         private int rowCount;
         private List<Document> documentList;
@@ -41,15 +44,30 @@
             get { return this.itemCount; }
             set { SetValue(ref this.itemCount, value); }
         }
+        public bool IsVisibleSearch
+        {
+            get { return this.isVisibleSearch; }
+            set { SetValue(ref this.isVisibleSearch, value); }
+        }
         public bool IsRefreshing
         {
             get { return this.isRegreshing; }
             set { SetValue(ref this.isRegreshing, value); }
         }
+        public bool IsBusy
+        {
+            get { return this.isBusy; }
+            set { SetValue(ref this.isBusy, value); }
+        }
         public int RowCount
         {
             get { return this.rowCount; }
             set { SetValue(ref this.rowCount, value); }
+        }
+        public string PagingInfoLabel
+        {
+            get { return this.pagingInfoLabel; }
+            set { SetValue(ref this.pagingInfoLabel, value); }
         }
         public ObservableCollection<DocumentItemViewModel> Documents
         {
@@ -59,10 +77,13 @@
         #endregion
 
         #region Constructors
-        //public DocumentsTrayViewModel()
-        //{
-        //    this.apiService = new ApiService();
-        //}
+        /// <summary>
+        /// Cionstructor for Search from Archive
+        /// </summary>
+        public DocumentsTrayViewModel()
+        {
+            this.apiService = new ApiService();
+        }
 
         /// <summary>
         /// Constructor with Object Id parameter
@@ -71,26 +92,41 @@
         public DocumentsTrayViewModel(int id)
         {
             this.id = id;
+            this.IsVisibleSearch = false;
             this.apiService = new ApiService();
+            this.Documents = new ObservableCollection<DocumentItemViewModel>();
+            this.rowPageIndex = 0;
             IErrorHandler errorHandler = null;
-            this.GetInitialDocumentList().FireAndForgetSafeAsync(errorHandler);
+            this.LoadDocumentsAsync().FireAndForgetSafeAsync(errorHandler);
         }
         #endregion
 
         #region Commands
+        public IAsyncCommand AdvancedSearchCommand => new AsyncCommand(this.AdvancedSearch);
+        public IAsyncCommand SearchCurrentTrayCommand => new AsyncCommand(this.SearchCurrentTray);
         public IAsyncCommand RefreshCommand => new AsyncCommand(this.Refresh);
-        public IAsyncCommand LoadMoreDocumentsCommand => new AsyncCommand(this.LoadMoreDocumentsAsync);
+        public IAsyncCommand LoadMoreDocumentsCommand => new AsyncCommand(this.LoadDocumentsAsync);
         #endregion
 
         #region Medthods
+
         /// <summary>
-        /// Firstt load when instance the constructor.
+        /// Find in current Observable Collection
         /// </summary>
         /// <returns></returns>
-        private async Task GetInitialDocumentList()
+        private Task SearchCurrentTray()
         {
-            await Refresh();
-            IsRefreshing = false;
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Call new Modal View with Search options
+        /// </summary>
+        private async Task AdvancedSearch()
+        {
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.SearchDocument = new SearchDocumentViewModel();
+            await App.Navigator.CurrentPage.Navigation.PushModalAsync(new SearchDocumentPage(),true);
         }
 
         /// <summary>
@@ -99,114 +135,68 @@
         /// <returns></returns>
         private async Task Refresh()
         {
-            try
-            {
-                this.RowCount = this.index = 0;
-                this.documentTray = await LoadDocumentsAsync(this.index);
-                if (this.documentTray == null)
-                {
-                    return;
-                }
-                //Get List values
-                this.RowCount = documentTray.Rows;
-                this.documentList = documentTray.Documents;
-
-                //Create document List
-                this.Documents = new ObservableCollection<DocumentItemViewModel>(ToDocumentItemViewModel(this.documentList));
-
-                // Increase index counter
-                index += documentList.Count;
-                ItemCount = index;
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    $"{Languages.GeneralError}: {ex.Message}",
-                    Languages.Cancel);
-            }
-            finally { this.IsRefreshing = false; }
-        }
-
-        /// <summary>
-        /// Load more documents async
-        /// </summary>
-        /// <returns></returns>
-        private async Task LoadMoreDocumentsAsync()
-        {
-            if (isBusy) return;
-            Tray newLoadTray;
-            try
-            {
-                isBusy = true;
-                newLoadTray = await this.LoadDocumentsAsync(this.index);
-                if (newLoadTray == null)
-                {
-                return;
-                }
-                //Get List values
-                this.RowCount = newLoadTray.Rows;
-                List<Document> newDocumentList = newLoadTray.Documents;
-
-                //Add new values to Document List Collection
-                var partialPageDocuments = new List<DocumentItemViewModel>(ToDocumentItemViewModel(newDocumentList));
-                foreach (DocumentItemViewModel doc in partialPageDocuments)
-                {
-                    this.Documents.Add(doc);
-                    this.index += 1;
-                }
-                ItemCount = this.index;
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    $"{Languages.GeneralError}: {ex.Message}",
-                    Languages.Cancel);
-            }
-            finally { isBusy = false; }
+            this.IsRefreshing = true;
+            this.ItemCount = this.rowPageIndex = 0;
+            this.Documents = new ObservableCollection<DocumentItemViewModel>();
+            await LoadDocumentsAsync();
+            this.IsRefreshing = false;
+            //}
         }
 
         /// <summary>
         /// Load Documents
         /// </summary>
         /// <returns></returns>
-        private async Task<Tray> LoadDocumentsAsync(int pageIndex)
+        private async Task LoadDocumentsAsync()
         {
-            Tray myDocumentTray = new Tray();
+            if (this.IsBusy) return;
+            this.IsBusy = true;
             try
             {
                 // 1. Verify connection
                 var connection = await this.apiService.CheckConnection();
                 if (!connection.IsSuccess)
                 {
-                    this.IsRefreshing = false;
+                    this.IsBusy = false;
                     await Application.Current.MainPage.DisplayAlert(
                         Languages.Error,
                         connection.Message,
                         Languages.Cancel);
-                    return myDocumentTray;
+                    return;
                 }
 
                 // 2. Get the menu list from API
                 var response = await this.apiService.Get<Tray>(
                         Settings.UrlBaseApiSigob,
                         App.PrefixApiSigob,
-                        $"{this.apiController}{id}{apiControllerSufix}{pageIndex}",
+                        $"{this.apiController}{id}{apiControllerSufix}{rowPageIndex}",
                         Settings.Token,
                         Settings.DbToken
                     );
                 if (!response.IsSuccess)
                 {
-                    this.IsRefreshing = false;
+                    this.IsBusy = false;
                     await Application.Current.MainPage.DisplayAlert(
                         title: Languages.Error,
                         message: response.Message,
                         cancel: Languages.Cancel);
-                    return myDocumentTray;
+                    return;
                 }
-                myDocumentTray = (Tray)response.Result;
-                return myDocumentTray;
+
+                //Get List values
+                this.documentTray = (Tray)response.Result;
+                this.RowCount = documentTray.Rows;
+                this.documentList = documentTray.Documents;
+                if (!this.documentList.Any()) return;
+
+                //Get the last Index to prevent unnecessary new Load
+                this.rowPageIndex = Convert.ToInt32(this.documentList.Select(d => d.Index).Last());
+                this.ItemCount = this.rowPageIndex;
+                // Append new List
+                List<DocumentItemViewModel> partialDocumentPage = new List<DocumentItemViewModel>(ToDocumentItemViewModel(this.documentList));
+                var newCollection = new ObservableCollection<DocumentItemViewModel>(partialDocumentPage);
+                this.Documents = ConcatCollections(newCollection);
+                this.PagingInfoLabel = $"{Languages.ShowRowCount}: {this.ItemCount}, {Languages.TotalRows}: {this.RowCount} ";
             }
             catch (Exception ex)
             {
@@ -214,8 +204,22 @@
                     Languages.Error,
                     $"{Languages.GeneralError}: {ex.Message}",
                     Languages.Cancel);
-                return myDocumentTray;
             }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        /// <summary>
+        /// Concat two observable collection
+        /// </summary>
+        /// <param name="newCollection"></param>
+        /// <returns></returns>
+        private ObservableCollection<DocumentItemViewModel> ConcatCollections(ObservableCollection<DocumentItemViewModel> newCollection)
+        {
+            ObservableCollection<DocumentItemViewModel> currentDocuments = this.Documents;
+            return new ObservableCollection<DocumentItemViewModel>(currentDocuments.Union(newCollection));
         }
 
         /// <summary>

@@ -56,7 +56,9 @@
         #region Correspondence
         public MailBoxesViewModel MailBoxes { get; set; }
         public ExternalDocumentViewModel ExternalDocument { get; set; }
+        public InternalDocumentViewModel InternalDocument { get; set; }
         public DocumentsTrayViewModel DocumentsTray { get; set; }
+        public SearchDocumentViewModel SearchDocument { get; set; }
         #endregion
         #endregion
 

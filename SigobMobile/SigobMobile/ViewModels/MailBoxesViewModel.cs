@@ -12,6 +12,7 @@
     using SigobMobile.Helpers;
     using SigobMobile.Interfaces;
     using SigobMobile.Models;
+    using SigobMobile.Views.Correspondence;
     using Xamarin.Forms;
 
     /// <summary>
@@ -55,15 +56,28 @@
         #endregion
 
         #region Commands
-        public IAsyncCommand RefreshCommand => new AsyncCommand(this.Refresh);
+        public IAsyncCommand RefreshCommand => new AsyncCommand(this.RefreshAsync);
+        public IAsyncCommand SearchCommand => new AsyncCommand(this.SearchAsync);
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Call Search Service
+        /// </summary>
+        /// <returns></returns>
+        private async Task SearchAsync()
+        {
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.InternalDocument = new InternalDocumentViewModel();
+            await App.Navigator.CurrentPage.Navigation.PushModalAsync(new InternalDocumentPage(), true);
+        }
+
         /// <summary>
         /// Refresh List of Trays
         /// </summary>
         /// <returns></returns>
-        private async Task Refresh()
+        private async Task RefreshAsync()
         {
             this.IsRefreshing = true;
             await this.LoadTraysAsync();

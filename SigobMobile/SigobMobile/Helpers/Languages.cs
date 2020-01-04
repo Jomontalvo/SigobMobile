@@ -267,6 +267,11 @@
         public static string PendingLinkedInstitution = Resources.PendingLinkedInstitution;
         #endregion
 
+        #region Pagination Info
+        public static string TotalRows = Resources.TotalRows;
+        public static string ShowRowCount = Resources.ShowRowCount;
+        #endregion
+
         #endregion
     }
 }

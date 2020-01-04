@@ -9,7 +9,7 @@
     public class Document : Common.Models.Document
     {
         public string CodeAndManagementTime => $"{RegistrationCode} " +
-            $"{(this.DaysStayInOffice > 0 ? " (" + this.DaysStayInOffice + Languages.Days + ")": string.Empty)}";
+            $"{(this.DaysStayInOffice > 0 ? " (" + this.DaysStayInOffice + " " + Languages.Days + ")": string.Empty)}";
 
         public Color ColorStatus => (this.Status) switch
         {
