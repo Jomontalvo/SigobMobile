@@ -11,34 +11,59 @@
         <StackLayout
             BindingContext="{Binding SearchDocument}"
             Spacing="0">
-            <SearchBar
-                x:Name="searchBarDocs"
-                BackgroundColor="{StaticResource softGray}"
-                FontSize="Small"
-                Placeholder="{lang:Translate SearchPlaceHolder}"
-                SearchCommand="{Binding SearchCurrentTrayCommand}"
-                Text="{Binding Filter, Mode=TwoWay}"
-                IsSpellCheckEnabled="true"
-                Keyboard="Text">
-            </SearchBar>
+            <StackLayout
+                BackgroundColor="{StaticResource defaultBackgroundView}"
+                HorizontalOptions="FillAndExpand"
+                Orientation="Horizontal"
+                Spacing="0"
+                VerticalOptions="Center">
+                <SearchBar
+                    x:Name="searchBarDocs"
+                    BackgroundColor="{StaticResource softGray}"
+                    FontSize="Small"
+                    HeightRequest="38"
+                    Placeholder="{lang:Translate SearchPlaceHolder}"
+                    SearchCommand="{Binding SearchCurrentTrayCommand}"
+                    Text="{Binding Filter, Mode=TwoWay}"
+                    IsSpellCheckEnabled="true"
+                    Keyboard="Text">
+                </SearchBar>
+            </StackLayout>
             <BoxView
                 Color="{StaticResource gray}"
                 HeightRequest="1"
                 HorizontalOptions="FillAndExpand">
             </BoxView>
-            <StackLayout
-                Padding="10">
+            <Grid
+                Padding="5"
+                RowSpacing="5">
+                <Grid.RowDefinitions>
+                    <!--Segment Control-->
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
                 <telerikInput:RadSegmentedControl
-                    HeightRequest="{OnPlatform Android=30, iOS=28}"
+                    Grid.Row="0"
+                    HeightRequest="30"
                     ItemsSource="{Binding Data}"
                     SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
                     SelectedSegmentBackgroundColor="{OnPlatform iOS={StaticResource Key=iOSBlue}}"
-                    SelectedSegmentTextColor="{OnPlatform iOS={StaticResource Key=defaultBackgroundView}}">
+                    SelectedSegmentTextColor="{OnPlatform iOS={StaticResource Key=defaultBackgroundView}}"
+                    VerticalOptions="Center">
                 </telerikInput:RadSegmentedControl>
-                <Label
-                    Text="{Binding FilterInfo}">
-                </Label>
-            </StackLayout>
+                <Frame
+                    CornerRadius="10"
+                    Grid.Row="1"
+                    HorizontalOptions="FillAndExpand"
+                    HasShadow="True"
+                    VerticalOptions="FillAndExpand">
+                    <StackLayout>
+                        <Label
+                            Text="{Binding FilterInfo}">
+                        </Label>
+                    </StackLayout>
+                </Frame>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
