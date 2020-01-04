@@ -12,6 +12,7 @@
         #region Attributes
         //private ApiService apiService;
         private string filter;
+        private string filterInfo;
         private int selectedIndex = -1;
         private List<CategoricalData> dataTrayList;
         private ObservableCollection<CategoricalData> data;
@@ -27,6 +28,11 @@
         {
             get => this.filter;
             set => SetValue(ref this.filter, value);
+        }
+        public string FilterInfo
+        {
+            get => this.filterInfo;
+            set => SetValue(ref this.filterInfo, value);
         }
         public int SelectedIndex
         {
@@ -46,6 +52,7 @@
             //this.apiService = new ApiService();
             Data = new ObservableCollection<CategoricalData>(dataTrayList);
             this.SelectedIndex = 0;
+            this.Filter = " ";
         }
         #endregion
 
@@ -79,7 +86,7 @@
         /// </summary>
         private void OnSelectionChanged()
         {
-            this.Filter = (SelectedIndex == 0) ? "All Trays" : "Current Tray";
+            this.FilterInfo = (SelectedIndex == 0) ? "All Trays" : "Current Tray";
         }
         #endregion
     }

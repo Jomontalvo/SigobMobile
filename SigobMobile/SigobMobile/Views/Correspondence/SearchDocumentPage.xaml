@@ -12,6 +12,7 @@
             BindingContext="{Binding SearchDocument}"
             Spacing="0">
             <SearchBar
+                x:Name="searchBarDocs"
                 BackgroundColor="{StaticResource softGray}"
                 FontSize="Small"
                 Placeholder="{lang:Translate SearchPlaceHolder}"
@@ -35,7 +36,7 @@
                     SelectedSegmentTextColor="{OnPlatform iOS={StaticResource Key=defaultBackgroundView}}">
                 </telerikInput:RadSegmentedControl>
                 <Label
-                    Text="Filters here!!">
+                    Text="{Binding FilterInfo}">
                 </Label>
             </StackLayout>
         </StackLayout>

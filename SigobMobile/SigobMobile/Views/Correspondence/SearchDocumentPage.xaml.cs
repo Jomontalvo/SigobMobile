@@ -11,5 +11,11 @@ namespace SigobMobile.Views.Correspondence
         {
             InitializeComponent();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            searchBarDocs.Focus();
+        }
     }
 }
