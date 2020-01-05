@@ -5,10 +5,12 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Windows.Input;
     using AsyncAwaitBestPractices.MVVM;
     using Common.Helpers;
     using Common.Models;
     using Common.Services;
+    using GalaSoft.MvvmLight.Command;
     using Helpers;
     using Interfaces;
     using Views.Correspondence;
@@ -28,51 +30,63 @@
         private int rowPageIndex;
         private int itemCount;
         private string pagingInfoLabel;
+        private string filter;
         private bool isRegreshing;
         private bool isBusy;
         private bool isVisibleSearch;
         private Tray documentTray;
         private int rowCount;
         private List<Document> documentList;
+        private List<DocumentItemViewModel> completeDocumentList;
         private ObservableCollection<DocumentItemViewModel> documents;
 
         #endregion
 
         #region Properties
+        public string Filter
+        {
+            get => this.filter;
+            set
+            {
+                this.filter = value;
+                this.RefreshList();
+            }
+        }
+
         public int ItemCount
         {
-            get { return this.itemCount; }
-            set { SetValue(ref this.itemCount, value); }
+            get => this.itemCount;
+            set => SetValue(ref this.itemCount, value);
         }
         public bool IsVisibleSearch
         {
-            get { return this.isVisibleSearch; }
-            set { SetValue(ref this.isVisibleSearch, value); }
+            get => this.isVisibleSearch;
+            set => SetValue(ref this.isVisibleSearch, value);
         }
         public bool IsRefreshing
         {
-            get { return this.isRegreshing; }
-            set { SetValue(ref this.isRegreshing, value); }
+            get => this.isRegreshing;
+            set => SetValue(ref this.isRegreshing, value);
         }
         public bool IsBusy
         {
-            get { return this.isBusy; }
-            set { SetValue(ref this.isBusy, value); }
+            get => this.isBusy;
+            set => SetValue(ref this.isBusy, value);
         }
         public int RowCount
         {
-            get { return this.rowCount; }
-            set { SetValue(ref this.rowCount, value); }
+            get => this.rowCount;
+            set => SetValue(ref this.rowCount, value);
         }
         public string PagingInfoLabel
         {
-            get { return this.pagingInfoLabel; }
-            set { SetValue(ref this.pagingInfoLabel, value); }
+            get => this.pagingInfoLabel;
+            set => SetValue(ref this.pagingInfoLabel, value);
         }
         public ObservableCollection<DocumentItemViewModel> Documents
         {
-            get { return this.documents; }
-            set { SetValue(ref this.documents, value); }
+            get => this.documents;
+            set => SetValue(ref this.documents, value);
         }
         #endregion
 
@@ -94,6 +108,7 @@
             this.id = id;
             this.IsVisibleSearch = false;
             this.apiService = new ApiService();
+            this.completeDocumentList = new List<DocumentItemViewModel>();
             this.Documents = new ObservableCollection<DocumentItemViewModel>();
             this.rowPageIndex = 0;
             IErrorHandler errorHandler = null;
@@ -102,30 +117,20 @@
         #endregion
 
         #region Commands
+        public ICommand SearchCurrentTrayCommand => new RelayCommand(this.RefreshList);
         public IAsyncCommand AdvancedSearchCommand => new AsyncCommand(this.AdvancedSearch);
-        public IAsyncCommand SearchCurrentTrayCommand => new AsyncCommand(this.SearchCurrentTray);
         public IAsyncCommand RefreshCommand => new AsyncCommand(this.Refresh);
         public IAsyncCommand LoadMoreDocumentsCommand => new AsyncCommand(this.LoadDocumentsAsync);
         #endregion
 
         #region Medthods
-
-        /// <summary>
-        /// Find in current Observable Collection
-        /// </summary>
-        /// <returns></returns>
-        private Task SearchCurrentTray()
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Call new Modal View with Search options
         /// </summary>
         private async Task AdvancedSearch()
         {
             var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.SearchDocument = new SearchDocumentViewModel();
+            mainViewModel.SearchDocument = new SearchDocumentViewModel(id);
             await App.Navigator.CurrentPage.Navigation.PushModalAsync(new SearchDocumentPage(),true);
         }
 
@@ -137,10 +142,41 @@
         {
             this.IsRefreshing = true;
             this.ItemCount = this.rowPageIndex = 0;
+            this.completeDocumentList = new List<DocumentItemViewModel>();
             this.Documents = new ObservableCollection<DocumentItemViewModel>();
             await LoadDocumentsAsync();
             this.IsRefreshing = false;
             //}
+        }
+
+        /// <summary>
+        /// Refresh List
+        /// </summary>
+        public void RefreshList()
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(this.Filter))
+                {
+                    this.Documents = new ObservableCollection<DocumentItemViewModel>(completeDocumentList);
+                    this.PagingInfoLabel = $"{Languages.ShowRowCount}: {this.ItemCount}, {Languages.TotalRows}: {this.RowCount} ";
+                }
+                else
+                {
+                    string lowerFilter = this.Filter.ToLower();
+                    List<DocumentItemViewModel> filterResults =
+                        this.completeDocumentList.FindAll
+                        (p =>
+                        {
+                            return  (!string.IsNullOrEmpty(p.Subject) && p.Subject.ToLower().Contains(lowerFilter)) ||
+                                    (!string.IsNullOrEmpty(p.TransferComment) && p.TransferComment.ToLower().Contains(lowerFilter)) ||
+                                    (!string.IsNullOrEmpty(p.Text) && p.Text.ToLower().Contains(lowerFilter));
+                        }).ToList();
+                    this.Documents = new ObservableCollection<DocumentItemViewModel>(filterResults);
+                    this.PagingInfoLabel = $"{Languages.ShowRowCount}: {this.Documents.Count} -> {Languages.SearchFilters}";
+                }
+            }
+            catch (Exception) { return; }
         }
 
         /// <summary>
@@ -149,7 +185,7 @@
         /// <returns></returns>
         private async Task LoadDocumentsAsync()
         {
-            if (this.IsBusy) return;
+            if (this.IsBusy || !string.IsNullOrEmpty(this.Filter)) return;
             this.IsBusy = true;
             try
             {
@@ -187,16 +223,20 @@
                 this.documentTray = (Tray)response.Result;
                 this.RowCount = documentTray.Rows;
                 this.documentList = documentTray.Documents;
+
+                //Exit if not results
                 if (!this.documentList.Any()) return;
 
                 //Get the last Index to prevent unnecessary new Load
                 this.rowPageIndex = Convert.ToInt32(this.documentList.Select(d => d.Index).Last());
                 this.ItemCount = this.rowPageIndex;
+
                 // Append new List
                 List<DocumentItemViewModel> partialDocumentPage = new List<DocumentItemViewModel>(ToDocumentItemViewModel(this.documentList));
-                var newCollection = new ObservableCollection<DocumentItemViewModel>(partialDocumentPage);
-                this.Documents = ConcatCollections(newCollection);
-                this.PagingInfoLabel = $"{Languages.ShowRowCount}: {this.ItemCount}, {Languages.TotalRows}: {this.RowCount} ";
+                completeDocumentList = completeDocumentList.Concat(partialDocumentPage).ToList();
+
+                // Create ObservableCollection with filter
+                this.RefreshList();
             }
             catch (Exception ex)
             {
@@ -209,17 +249,6 @@
             {
                 IsBusy = false;
             }
-        }
-
-        /// <summary>
-        /// Concat two observable collection
-        /// </summary>
-        /// <param name="newCollection"></param>
-        /// <returns></returns>
-        private ObservableCollection<DocumentItemViewModel> ConcatCollections(ObservableCollection<DocumentItemViewModel> newCollection)
-        {
-            ObservableCollection<DocumentItemViewModel> currentDocuments = this.Documents;
-            return new ObservableCollection<DocumentItemViewModel>(currentDocuments.Union(newCollection));
         }
 
         /// <summary>
@@ -239,7 +268,7 @@
                 Index = d.Index,
                 Institution = d.Institution,
                 IsReviewed = d.IsReviewed,
-                IssuerOrRecipient = d.IssuerOrRecipient,
+                SenderOrReceiver = d.SenderOrReceiver,
                 Priority = d.Priority,
                 RegistrationCode = d.RegistrationCode,
                 RegistrationDate = d.RegistrationDate,

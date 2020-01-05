@@ -66,7 +66,7 @@
         public string TransferedBy { get; set; }
 
         [JsonProperty("emisorDestinatario")]
-        public string IssuerOrRecipient { get; set; }
+        public string SenderOrReceiver { get; set; }
 
         [JsonProperty("institucion")]
         public string Institution { get; set; }

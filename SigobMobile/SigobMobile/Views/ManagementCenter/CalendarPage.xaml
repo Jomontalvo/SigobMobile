@@ -160,7 +160,7 @@
         <Grid BindingContext="{Binding Calendar}" ColumnSpacing="0" RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition />
-                <RowDefinition Height="44" />
+                <RowDefinition Height="{StaticResource Key=StatusBarHeight}" />
             </Grid.RowDefinitions>
             <telerikInput:RadCalendar
                 x:Name="calendar"
@@ -228,7 +228,6 @@
                 BorderColor="{StaticResource accesoryGray}"
                 CornerRadius="0"
                 Grid.Row="1">
-
                 <Grid
                     BackgroundColor="{StaticResource softGray}"
                     ColumnSpacing="0"

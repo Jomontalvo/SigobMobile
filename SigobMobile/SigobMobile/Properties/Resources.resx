@@ -993,4 +993,22 @@ If you have problems, contact with administrator.</value>
     <value>Records shown</value>
     <comment>Total records</comment>
   </data>
+    <!--Correspondence filters and Placeholder-->
+    <data name="Search" xml:space="preserve">
+    <value>Search</value>
+    <comment>Search button label</comment>
+  </data>
+    <data name="SearchFilters" xml:space="preserve">
+    <value>Search filters</value>
+    <comment>Search filters label</comment>
+  </data>
+    <data name="Sender" xml:space="preserve">
+    <value>Sender</value>
+    <comment>Correspondence sender label</comment>
+  </data>
+    <data name="Receiver" xml:space="preserve">
+    <value>Receiver</value>
+    <comment>Correspondence receiver label</comment>
+  </data>
+    
 </root>

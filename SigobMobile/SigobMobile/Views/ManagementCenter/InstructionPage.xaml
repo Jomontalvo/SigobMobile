@@ -56,6 +56,7 @@
                 AbsoluteLayout.LayoutBounds=".5,1,1,.1"
                 AbsoluteLayout.LayoutFlags="All"
                 ColumnSpacing="0"
+                HeightRequest="{StaticResource Key=StatusBarHeight}"
                 RowSpacing="0"
                 VerticalOptions="End">
                 <Grid.RowDefinitions>

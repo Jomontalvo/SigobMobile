@@ -42,8 +42,10 @@
                 <ImageButton
                     BackgroundColor="Transparent"
                     Command="{Binding AddContactCommand}"
+                    HeightRequest="24"
                     HorizontalOptions="End"
-                    Source="ic_bt_add_contact">
+                    Source="ic_bt_add_contact"
+                    WidthRequest="24">
                 </ImageButton>
             </StackLayout>
             <Grid

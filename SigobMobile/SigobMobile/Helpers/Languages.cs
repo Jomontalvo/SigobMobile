@@ -272,6 +272,13 @@
         public static string ShowRowCount = Resources.ShowRowCount;
         #endregion
 
+        #region Search Correspondence
+        public static string Search = Resources.Search;
+        public static string SearchFilters = Resources.SearchFilters;
+        public static string Sender = Resources.Sender;
+        public static string Receiver = Resources.Receiver;
+        #endregion
+
         #endregion
     }
 }

@@ -51,7 +51,7 @@
         {
             this.apiService = new ApiService();
             IErrorHandler errorHandler = null;
-            this.LoadTraysAsync().FireAndForgetSafeAsync(errorHandler);
+            this.RefreshAsync().FireAndForgetSafeAsync(errorHandler);
         }
         #endregion
 
@@ -68,9 +68,10 @@
         /// <returns></returns>
         private async Task SearchAsync()
         {
+            int parentId = -1;
             var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.InternalDocument = new InternalDocumentViewModel();
-            await App.Navigator.CurrentPage.Navigation.PushModalAsync(new InternalDocumentPage(), true);
+            mainViewModel.SearchDocument = new SearchDocumentViewModel(parentId);
+            await App.Navigator.CurrentPage.Navigation.PushModalAsync(new SearchDocumentPage(), true);
         }
 
         /// <summary>
@@ -91,7 +92,6 @@
         /// <returns></returns>
         public async Task LoadTraysAsync()
         {
-            this.IsRefreshing = true;
             // 1. Verify connection
             var connection = await this.apiService.CheckConnection();
             if (!connection.IsSuccess)
@@ -123,7 +123,6 @@
             }
             this.menu = (CorrespondenceMenu)response.Result;
             this.RefreshMenuTrayList();
-            this.IsRefreshing = false;
         }
 
         /// <summary>

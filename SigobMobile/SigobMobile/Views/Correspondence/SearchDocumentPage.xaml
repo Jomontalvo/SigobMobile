@@ -4,6 +4,8 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:telerikInput="clr-namespace:Telerik.XamarinForms.Input;assembly=Telerik.XamarinForms.Input"
              xmlns:lang="clr-namespace:SigobMobile.Helpers"
+             xmlns:controls="clr-namespace:SigobMobile.Controls"
+             xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
              x:Class="SigobMobile.Views.Correspondence.SearchDocumentPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              ios:Page.UseSafeArea="true">
@@ -21,7 +23,7 @@
                     x:Name="searchBarDocs"
                     BackgroundColor="{StaticResource softGray}"
                     FontSize="Small"
-                    HeightRequest="38"
+                    HeightRequest="{OnPlatform iOS = 44}"
                     Placeholder="{lang:Translate SearchPlaceHolder}"
                     SearchCommand="{Binding SearchCurrentTrayCommand}"
                     Text="{Binding Filter, Mode=TwoWay}"
@@ -30,40 +32,160 @@
                 </SearchBar>
             </StackLayout>
             <BoxView
-                Color="{StaticResource gray}"
-                HeightRequest="1"
+                Color="{StaticResource Key=grayContent}"
+                HeightRequest="0.5"
                 HorizontalOptions="FillAndExpand">
             </BoxView>
+            <telerikInput:RadSegmentedControl
+                Margin="8,5"
+                Grid.Row="0"
+                HeightRequest="{OnPlatform iOS=28}"
+                ItemsSource="{Binding Data}"
+                SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
+                SelectedSegmentBackgroundColor="{OnPlatform iOS={StaticResource Key=iOSBlue}}"
+                SelectedSegmentTextColor="{OnPlatform iOS={StaticResource Key=defaultBackgroundView}}"
+                VerticalOptions="Center">
+            </telerikInput:RadSegmentedControl>
             <Grid
                 Padding="5"
-                RowSpacing="5">
+                RowSpacing="10">
                 <Grid.RowDefinitions>
-                    <!--Segment Control-->
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
+                    <!--Bottom Tool Bar-->
+                    <RowDefinition Height="{StaticResource Key=StatusBarHeight}" />
                 </Grid.RowDefinitions>
-                <telerikInput:RadSegmentedControl
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Large"
                     Grid.Row="0"
-                    HeightRequest="30"
-                    ItemsSource="{Binding Data}"
-                    SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
-                    SelectedSegmentBackgroundColor="{OnPlatform iOS={StaticResource Key=iOSBlue}}"
-                    SelectedSegmentTextColor="{OnPlatform iOS={StaticResource Key=defaultBackgroundView}}"
+                    HorizontalOptions="StartAndExpand"
+                    Padding="8,0"
+                    Text="{lang:Translate SearchFilters}"
+                    TextColor="{StaticResource Key=gray}"
                     VerticalOptions="Center">
-                </telerikInput:RadSegmentedControl>
-                <Frame
-                    CornerRadius="10"
+                </Label>
+                <TableView
                     Grid.Row="1"
-                    HorizontalOptions="FillAndExpand"
-                    HasShadow="True"
-                    VerticalOptions="FillAndExpand">
-                    <StackLayout>
-                        <Label
-                            Text="{Binding FilterInfo}">
-                        </Label>
-                    </StackLayout>
-                </Frame>
+                    HasUnevenRows="False"
+                    Intent="Data">
+                    <TableRoot>
+                        <TableSection
+                            Title="General info">
+                            <ViewCell>
+                                <controls:BorderlessPicker
+                                    ItemsSource="{Binding Types}"
+                                    Margin="20,0"
+                                    Title="Correspondence type">
+                                </controls:BorderlessPicker>
+                            </ViewCell>
+                            <ViewCell>
+                                <controls:BorderlessPicker
+                                    ItemsSource="{Binding Objectives}"
+                                    Margin="20,0"
+                                    Title="Objectives">
+                                </controls:BorderlessPicker>
+                            </ViewCell>
+                            <ViewCell>
+                                <controls:BorderlessPicker
+                                    ItemsSource="{Binding Results}"
+                                    Margin="20,0"
+                                    Title="Results">
+                                </controls:BorderlessPicker>
+                            </ViewCell>
+                        </TableSection>
+                        <TableSection
+                            Title="Time">
+                            <ViewCell>
+                                <controls:BorderlessPicker
+                                    ItemsSource="{Binding ElaborationStage}"
+                                    Margin="20,0"
+                                    Title="Elaboration stage">
+                                </controls:BorderlessPicker>
+                            </ViewCell>
+                        </TableSection>
+                        <TableSection
+                            Title="Management">
+                            <ViewCell>
+                                <controls:BorderlessPicker
+                                    ItemsSource="{Binding Officers}"
+                                    Margin="20,0"
+                                    Title="Responsible">
+                                </controls:BorderlessPicker>
+                            </ViewCell>
+                            <ViewCell>
+                                <controls:BorderlessPicker
+                                    ItemsSource="{Binding ManagementActions}"
+                                    Margin="20,0"
+                                    Title="Action taked">
+                                </controls:BorderlessPicker>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout
+                                    Orientation="Horizontal"
+                                    Padding="20,0"
+                                    Spacing="5">
+                                    <Label
+                                        HorizontalOptions="StartAndExpand"
+                                        Text="Between"
+                                        TextColor="{StaticResource Key=grayContent}"
+                                        VerticalOptions="Center">
+                                    </Label>
+                                    <controls:BorderlessDatePicker
+                                        Format="D"
+                                        HorizontalOptions="End">
+                                    </controls:BorderlessDatePicker>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout
+                                    Orientation="Horizontal"
+                                    Padding="20,0"
+                                    Spacing="5">
+                                    <Label
+                                        HorizontalOptions="StartAndExpand"
+                                        Text="And"
+                                        TextColor="{StaticResource Key=grayContent}"
+                                        VerticalOptions="Center">
+                                    </Label>
+                                    <controls:BorderlessDatePicker
+                                        Format="D"
+                                        HorizontalOptions="End">
+                                    </controls:BorderlessDatePicker>
+                                </StackLayout>
+                            </ViewCell>
+                        </TableSection>
+                    </TableRoot>
+                </TableView>
             </Grid>
+            <telerikPrimitives:RadBorder
+                BackgroundColor="{StaticResource Key=softGray}"
+                BorderColor="{StaticResource accesoryGray}" 
+                CornerRadius="0"
+                Grid.Row="2"
+                VerticalOptions="End">
+                <Grid
+                    BackgroundColor="{StaticResource softGray}"
+                    ColumnSpacing="0"
+                    RowSpacing="0"
+                    VerticalOptions="End">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        BackgroundColor="Transparent"
+                        Command="{Binding SearchCommand}"
+                        Grid.Column="0"
+                        Text="{lang:Translate Search}">
+                    </Button>
+                    <Button
+                        BackgroundColor="Transparent"
+                        Command="{Binding CloseCommand}"
+                        Grid.Column="1" Text="{lang:Translate Cancel}">
+                    </Button>
+                </Grid>
+            </telerikPrimitives:RadBorder>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1348,5 +1348,29 @@ namespace SigobMobile.Properties {
                 return ResourceManager.GetString("ShowRowCount", resourceCulture);
             }
         }
+        
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        public static string SearchFilters {
+            get {
+                return ResourceManager.GetString("SearchFilters", resourceCulture);
+            }
+        }
+        
+        public static string Sender {
+            get {
+                return ResourceManager.GetString("Sender", resourceCulture);
+            }
+        }
+        
+        public static string Receiver {
+            get {
+                return ResourceManager.GetString("Receiver", resourceCulture);
+            }
+        }
     }
 }

@@ -1,18 +1,22 @@
 ﻿namespace SigobMobile.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
     using AsyncAwaitBestPractices.MVVM;
-    //using Common.Services;
+    using Common.Services;
     using Models;
+    using SigobMobile.Helpers;
+    using SigobMobile.Interfaces;
 
     public class SearchDocumentViewModel : BaseViewModel
     {
         #region Attributes
-        //private ApiService apiService;
+        private ApiService apiService;
         private string filter;
         private string filterInfo;
+        private readonly int senderId;
         private int selectedIndex = -1;
         private List<CategoricalData> dataTrayList;
         private ObservableCollection<CategoricalData> data;
@@ -27,7 +31,15 @@
         public string Filter
         {
             get => this.filter;
-            set => SetValue(ref this.filter, value);
+            set
+            {
+                SetValue(ref this.filter, value);
+                if (value == null)
+                {
+                    IErrorHandler errorHandler = null;
+                    this.CloseSearchAsync().FireAndForgetSafeAsync(errorHandler);
+                }
+            } 
         }
         public string FilterInfo
         {
@@ -46,13 +58,14 @@
         #endregion
 
         #region Constructor
-        public SearchDocumentViewModel()
+        public SearchDocumentViewModel(int senderId)
         {
+            this.senderId = senderId;
             this.LoadSegmentedFilters();
-            //this.apiService = new ApiService();
+            this.apiService = new ApiService();
             Data = new ObservableCollection<CategoricalData>(dataTrayList);
-            this.SelectedIndex = 0;
             this.Filter = " ";
+            this.SelectedIndex = 0;
         }
         #endregion
 
@@ -61,6 +74,14 @@
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Close curret search view when Cancel button is pressed
+        /// </summary>
+        private async Task CloseSearchAsync()
+        {
+            await App.Navigator.CurrentPage.Navigation.PopModalAsync();
+        }
+
         /// <summary>
         /// Search document with specified filters
         /// </summary>
@@ -75,10 +96,21 @@
         /// </summary>
         private void LoadSegmentedFilters()
         {
-            this.dataTrayList = new List<CategoricalData>  {
-            new CategoricalData { Id = 0, Category = "All Trays", Value = 0 },
-            new CategoricalData { Id = 1, Category = "Current Tray", Value = 1 }
-            };
+            if (this.senderId >= 0) //Sender is Tray
+            {
+                this.dataTrayList = new List<CategoricalData>  {
+                new CategoricalData { Id = 0, Category = "All Trays", Value = 0 },
+                new CategoricalData { Id = 1, Category = "Current Tray", Value = 1 }
+                };
+            }
+            else //Sender is Correspondence Main Menu
+            {
+                this.dataTrayList = new List<CategoricalData>  {
+                new CategoricalData { Id = 0, Category = Languages.AllStatus, Value = 0 },
+                new CategoricalData { Id = 1, Category = Languages.External, Value = 1 },
+                new CategoricalData { Id = 2, Category = Languages.Internal, Value = 2 }
+                };
+            }
         }
 
         /// <summary>

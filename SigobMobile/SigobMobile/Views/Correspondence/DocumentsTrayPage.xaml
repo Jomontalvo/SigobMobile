@@ -26,7 +26,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="30" />
+                <!--Status Bar-->
+                <RowDefinition Height="{StaticResource Key=StatusBarHeight}" />
             </Grid.RowDefinitions>
             <SearchBar
                 BackgroundColor="{StaticResource softGray}"
@@ -34,7 +35,7 @@
                 Grid.Row="0"
                 Placeholder="{local:Translate SearchPlaceHolder}"
                 SearchCommand="{Binding SearchCurrentTrayCommand}"
-                Text="{Binding Filter, Mode=TwoWay}"
+                Text="{Binding Filter}"
                 IsSpellCheckEnabled="true"
                 Keyboard="Text">
             </SearchBar>
@@ -95,7 +96,7 @@
                                     Grid.Column="1"
                                     RowSpacing="3">
                                     <Grid.RowDefinitions>
-                                        <!--Issuer-->
+                                        <!--Sender or Recipient-->
                                         <RowDefinition Height="Auto" />
                                         <!--Subject-->
                                         <RowDefinition Height="Auto" />
@@ -114,7 +115,7 @@
                                         <Label
                                             Grid.Column="0"
                                             FontAttributes="Bold"
-                                            Text="{Binding IssuerOrRecipient}"
+                                            Text="{Binding SenderOrReceiver}"
                                             HorizontalOptions="StartAndExpand"
                                             VerticalTextAlignment="Center">
                                         </Label>
@@ -180,6 +181,7 @@
                     </Grid>
                 </controls:InfiniteListView.Footer>
             </controls:InfiniteListView>
+            <!--Status Bar-->
             <telerikPrimitives:RadBorder
                 BackgroundColor="{StaticResource Key=softGray}"
                 BorderColor="{StaticResource accesoryGray}" 

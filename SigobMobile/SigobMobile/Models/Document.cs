@@ -8,7 +8,7 @@
 
     public class Document : Common.Models.Document
     {
-        public string CodeAndManagementTime => $"{RegistrationCode} " +
+        public string CodeAndManagementTime => $"{(string.IsNullOrEmpty(RegistrationCode) ? Languages.Draft : RegistrationCode)} " +
             $"{(this.DaysStayInOffice > 0 ? " (" + this.DaysStayInOffice + " " + Languages.Days + ")": string.Empty)}";
 
         public Color ColorStatus => (this.Status) switch

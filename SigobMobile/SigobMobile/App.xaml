@@ -8,12 +8,17 @@
         <ResourceDictionary>
             <infra:InstanceLocator x:Key="Locator" />
         </ResourceDictionary>
+        <!--Coverters-->
         <ResourceDictionary>
             <local:IntToBoolConverter x:Key="intToBool" />
             <local:InverseBooleanConverter x:Key="inverseBool" />
             <local:BoldConverter x:Key="boolToBold" />
             <local:ItalicConverter x:Key="boolToItalic" />
             <local:IntToFontAttribute x:Key="intToFontAttribute" />
+        </ResourceDictionary>
+        <!--Int Values-->
+        <ResourceDictionary>
+            <x:UInt32 x:Key="StatusBarHeight">40</x:UInt32>
         </ResourceDictionary>
         <!--Global colors-->
         <ResourceDictionary>

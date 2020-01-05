@@ -61,7 +61,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
-                <RowDefinition Height="44"/>
+                <RowDefinition Height="{StaticResource Key=StatusBarHeight}"/>
             </Grid.RowDefinitions>
             <SearchBar
                 BackgroundColor="{StaticResource softGray}"
