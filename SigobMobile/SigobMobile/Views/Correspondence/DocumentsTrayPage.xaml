@@ -58,7 +58,9 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding OpenDocumentCommand}" />
+                                    <TapGestureRecognizer
+                                        Command="{Binding OpenDocumentCommand}"
+                                        CommandParameter="{Binding TrayId}"/>
                                 </Grid.GestureRecognizers>
                                 <StackLayout
                                     Grid.Column="0"

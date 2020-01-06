@@ -26,7 +26,6 @@
 
         #region Attributes
         private readonly ApiService apiService;
-        private readonly int id;
         private int rowPageIndex;
         private int itemCount;
         private string pagingInfoLabel;
@@ -43,6 +42,8 @@
         #endregion
 
         #region Properties
+        public int TrayId { get; set; }
+
         public string Filter
         {
             get => this.filter;
@@ -52,7 +53,6 @@
                 this.RefreshList();
             }
         }
-
         public int ItemCount
         {
             get => this.itemCount;
@@ -105,7 +105,7 @@
         /// <param name="id"></param>
         public DocumentsTrayViewModel(int id)
         {
-            this.id = id;
+            this.TrayId = id;
             this.IsVisibleSearch = false;
             this.apiService = new ApiService();
             this.completeDocumentList = new List<DocumentItemViewModel>();
@@ -130,7 +130,7 @@
         private async Task AdvancedSearch()
         {
             var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.SearchDocument = new SearchDocumentViewModel(id);
+            mainViewModel.SearchDocument = new SearchDocumentViewModel(TrayId);
             await App.Navigator.CurrentPage.Navigation.PushModalAsync(new SearchDocumentPage(),true);
         }
 
@@ -205,7 +205,7 @@
                 var response = await this.apiService.Get<Tray>(
                         Settings.UrlBaseApiSigob,
                         App.PrefixApiSigob,
-                        $"{this.apiController}{id}{apiControllerSufix}{rowPageIndex}",
+                        $"{this.apiController}{TrayId}{apiControllerSufix}{rowPageIndex}",
                         Settings.Token,
                         Settings.DbToken
                     );
