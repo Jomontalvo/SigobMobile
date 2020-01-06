@@ -1,7 +1,6 @@
 ﻿namespace SigobMobile.Common.Models
 {
     using System;
-    using System.Drawing;
     using Newtonsoft.Json;
 
     public enum ManagementTermStatus
@@ -24,6 +23,12 @@
         White = 16777215
     }
 
+    public enum Source : byte
+    {
+        Internal = 0,
+        External = 1
+    }
+
     public class Document
     {
         [JsonProperty("index")]
@@ -42,7 +47,7 @@
         public int Copy { get; set; }
 
         [JsonProperty("procedencia")]
-        public byte Source { get; set; }
+        public Source Source { get; set; }
 
         [JsonProperty("estadoPlazo")]
         public ManagementTermStatus Status { get; set; }

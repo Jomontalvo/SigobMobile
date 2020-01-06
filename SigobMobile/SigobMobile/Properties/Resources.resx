@@ -1010,5 +1010,37 @@ If you have problems, contact with administrator.</value>
     <value>Receiver</value>
     <comment>Correspondence receiver label</comment>
   </data>
-    
+    <!--Time Filters-->
+    <data name="Anytime" xml:space="preserve">
+    <value>Anytime</value>
+    <comment>Correspondence time filter anytime</comment>
+  </data>
+    <data name="ThisWeek" xml:space="preserve">
+    <value>This week</value>
+    <comment>Correspondence time filter current week</comment>
+  </data>
+    <data name="LastWeek" xml:space="preserve">
+    <value>Last week</value>
+    <comment>Correspondence time filter last week</comment>
+  </data>
+    <data name="LastTwoWeeks" xml:space="preserve">
+    <value>Last two weeks</value>
+    <comment>Correspondence filter last two weeks</comment>
+  </data>
+    <data name="LastMonth" xml:space="preserve">
+    <value>Last month</value>
+    <comment>Correspondence filter last month</comment>
+  </data>
+    <data name="LastTrimester" xml:space="preserve">
+    <value>Last trimester</value>
+    <comment>Correspondence filter last trimester</comment>
+  </data>
+    <data name="LastSemester" xml:space="preserve">
+    <value>Last semester</value>
+    <comment>Correspondence time filter last half-year</comment>
+  </data>
+    <data name="LastYear" xml:space="preserve">
+    <value>Last year</value>
+    <comment>Correspondence time filter last year</comment>
+  </data>
 </root>

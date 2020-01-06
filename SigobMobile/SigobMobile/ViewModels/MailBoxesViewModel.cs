@@ -27,21 +27,28 @@
         private CorrespondenceMenu menu;
         private List<DocumentTray> documentTrays;
         private List<DocumentTagTray> documentTagTrays;
+        private List<TimeFilterTuple> timeFilters;
         private List<MailBoxMenuGroup> trayMenuList;
         private ObservableCollection<MailBoxMenuGroup> trays;
         #endregion
 
         #region Properties
+        public List<TimeFilterTuple> TimeFilters
+        {
+            get => this.timeFilters;
+            set => SetValue(ref this.timeFilters, value);
+        }
+
         public ObservableCollection<MailBoxMenuGroup> Trays
         {
-            get { return this.trays; }
-            set { SetValue(ref this.trays, value); }
+            get => this.trays;
+            set => SetValue(ref this.trays, value);
         }
 
         public bool IsRefreshing
         {
-            get { return this.isRefreshing; }
-            set { SetValue(ref this.isRefreshing, value); }
+            get => this.isRefreshing;
+            set => SetValue(ref this.isRefreshing, value);
         }
 
         #endregion
@@ -132,6 +139,7 @@
         {
             this.documentTrays = menu.DocumentTrays;
             this.documentTagTrays = menu.DocumentTagTrays;
+            this.timeFilters = menu.TimeFilters;
             this.trayMenuList = new List<MailBoxMenuGroup>
             {
                 new MailBoxMenuGroup(Languages.ManagementTray,

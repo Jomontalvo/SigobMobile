@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Xamarin.Forms;
-
-namespace SigobMobile.Views.Correspondence
+﻿namespace SigobMobile.Views.Correspondence
 {
+    using Xamarin.Forms;
+
     public partial class ExternalDocumentPage : ContentPage
     {
         public ExternalDocumentPage()

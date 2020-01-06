@@ -277,6 +277,14 @@
         public static string SearchFilters = Resources.SearchFilters;
         public static string Sender = Resources.Sender;
         public static string Receiver = Resources.Receiver;
+        public static string Anytime = Resources.Anytime;
+        public static string ThisWeek = Resources.ThisWeek;
+        public static string LastWeek = Resources.LastWeek;
+        public static string LastTwoWeeks = Resources.LastTwoWeeks;
+        public static string LastMonth = Resources.LastMonth;
+        public static string LastTrimester = Resources.LastTrimester;
+        public static string LastSemester = Resources.LastSemester;
+        public static string LastYear = Resources.LastYear;
         #endregion
 
         #endregion

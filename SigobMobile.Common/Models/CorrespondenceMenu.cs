@@ -17,5 +17,22 @@ namespace SigobMobile.Common.Models
 
         [JsonProperty("clasificadores")]
         public List<DocumentTagTray> DocumentTagTrays { get; set; }
+
+        [JsonProperty("filtrosFecha")]
+        public List<TimeFilterTuple> TimeFilters { get; set; }
+    }
+
+    public class TimeFilterTuple
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("filtroFecha")]
+        public string TimeFrameName { get; set; }
+
+        public override string ToString()
+        {
+            return TimeFrameName;
+        }
     }
 }

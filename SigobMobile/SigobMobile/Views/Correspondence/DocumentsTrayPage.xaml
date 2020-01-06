@@ -57,6 +57,9 @@
                                     <ColumnDefinition Width="18" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenDocumentCommand}" />
+                                </Grid.GestureRecognizers>
                                 <StackLayout
                                     Grid.Column="0"
                                     Padding="0,5"
@@ -111,6 +114,7 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
                                         <Label
                                             Grid.Column="0"
@@ -131,6 +135,13 @@
                                             Text="{Binding RegistrationDateString}"
                                             VerticalTextAlignment="Center">
                                         </Label>
+                                        <Image
+                                            Grid.Column="2"
+                                            HeightRequest="16"
+                                            HorizontalOptions="Center"
+                                            Source="ic_chevron"
+                                            VerticalOptions="Center">
+                                        </Image>
                                     </Grid>
                                     <Label
                                         FontSize="Small"

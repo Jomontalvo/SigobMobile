@@ -15,7 +15,7 @@
     using Interfaces;
     using Views.Correspondence;
     using Xamarin.Forms;
-    using DocumentItemViewModel = Models.Document;
+    using DocumentItemViewModel = DocumentsTrayItemViewModel;
 
     public class DocumentsTrayViewModel : BaseViewModel
     {

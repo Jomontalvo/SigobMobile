@@ -1,12 +1,71 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SigobMobile.Views.Correspondence.ExternalDocumentPage">
-    <ContentPage.Content>
-        <StackLayout>
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:local="clr-namespace:SigobMobile.Helpers"
+             xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
+             x:Class="SigobMobile.Views.Correspondence.ExternalDocumentPage"
+             BackgroundColor="{StaticResource Key=defaultBackgroundView}"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="{local:Translate External}"
+             ios:Page.UseSafeArea="true">
+    <NavigationPage.TitleView>
+        <StackLayout
+            BindingContext="{Binding ExternalDocument}"
+            Orientation="Horizontal">
             <Label
-                Text="Exrternal Correspondence">
+                HorizontalOptions="CenterAndExpand"
+                Text="{Binding Document.RegistrationCode}"
+                VerticalOptions="Center">
             </Label>
+            <ImageButton
+                Aspect="AspectFit"
+                BackgroundColor="Transparent"
+                HeightRequest="24"
+                HorizontalOptions="EndAndExpand"
+                Source="ic_bt_archive"
+                VerticalOptions="Center"
+                WidthRequest="24">
+            </ImageButton>
         </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid
+            BindingContext="{Binding ExternalDocument}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="{StaticResource Key=StatusBarHeight}" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                Text="{Binding Document.SenderOrReceiver}">
+            </Label>
+            <Label
+                Grid.Row="1"
+                Text="{Binding Document.SenderOrReceiver}">
+            </Label>
+            <Label
+                Grid.Row="2"
+                Text="{Binding Document.SenderOrReceiver}">
+            </Label>
+            <!--Status Bar-->
+            <telerikPrimitives:RadBorder
+                BackgroundColor="{StaticResource Key=softGray}"
+                BorderColor="{StaticResource accesoryGray}" 
+                CornerRadius="0"
+                Grid.Row="3">
+                <Label
+                    BackgroundColor="Transparent"
+                    FontSize="Small"
+                    HorizontalOptions="StartAndExpand"
+                    Padding="10,0"
+                    Text="{Binding Document.RegistrationCode}"
+                    TextColor="{StaticResource Key=darkGray}"
+                    VerticalOptions="Center">
+                </Label>
+            </telerikPrimitives:RadBorder>
+        </Grid>        
     </ContentPage.Content>
 </ContentPage>

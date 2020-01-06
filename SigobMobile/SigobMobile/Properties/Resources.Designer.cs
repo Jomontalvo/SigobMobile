@@ -1372,5 +1372,53 @@ namespace SigobMobile.Properties {
                 return ResourceManager.GetString("Receiver", resourceCulture);
             }
         }
+        
+        public static string Anytime {
+            get {
+                return ResourceManager.GetString("Anytime", resourceCulture);
+            }
+        }
+        
+        public static string ThisWeek {
+            get {
+                return ResourceManager.GetString("ThisWeek", resourceCulture);
+            }
+        }
+        
+        public static string LastWeek {
+            get {
+                return ResourceManager.GetString("LastWeek", resourceCulture);
+            }
+        }
+        
+        public static string LastTwoWeeks {
+            get {
+                return ResourceManager.GetString("LastTwoWeeks", resourceCulture);
+            }
+        }
+        
+        public static string LastMonth {
+            get {
+                return ResourceManager.GetString("LastMonth", resourceCulture);
+            }
+        }
+        
+        public static string LastTrimester {
+            get {
+                return ResourceManager.GetString("LastTrimester", resourceCulture);
+            }
+        }
+        
+        public static string LastSemester {
+            get {
+                return ResourceManager.GetString("LastSemester", resourceCulture);
+            }
+        }
+        
+        public static string LastYear {
+            get {
+                return ResourceManager.GetString("LastYear", resourceCulture);
+            }
+        }
     }
 }

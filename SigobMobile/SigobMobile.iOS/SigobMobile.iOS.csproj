@@ -319,6 +319,8 @@
     <BundleResource Include="Resources\ic_notify_priority.png" />
     <BundleResource Include="Resources\ic_filter_clear.png" />
     <BundleResource Include="Resources\ic_filter.png" />
+    <BundleResource Include="Resources\ic_bt_archive.png" />
+    <BundleResource Include="Resources\ic_bt_transfer.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />
