@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:local="clr-namespace:SigobMobile.Helpers"
+             x:Class="SigobMobile.Views.Common.AttachmentsPage"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="{local:Translate Attachments}"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+            <StackLayout
+            BindingContext="{Binding Attachments}">
+            <ListView
+                x:Name="list"
+                Footer=""
+                GroupDisplayBinding="{Binding Key}"
+                HasUnevenRows="True"
+                IsGroupingEnabled="true"
+                IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                ItemsSource="{Binding AttachmentsGrouped}"
+                RefreshCommand="{Binding RefreshCommand}"
+                SeparatorVisibility="None"
+                VerticalOptions="FillAndExpand">
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout
+                                Orientation="Horizontal"
+                                VerticalOptions="FillAndExpand"
+                                Padding="15,5"
+                                BackgroundColor="{StaticResource softGray}">
+                                <Image
+                                    VerticalOptions="Center"
+                                    Source="{Binding ImageGroup}"
+                                    WidthRequest="20">
+                                </Image>
+                                <Label
+                                    FontSize="Medium"
+                                    FontAttributes="Bold"
+                                    Text="{Binding Name}"
+                                    VerticalOptions="Center"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                       <ViewCell>
+                            <Grid
+                                ColumnSpacing="10"
+                                Padding="20,5,10,0"
+                                RowSpacing="2">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command ="{Binding SelectAttachmentCommand}">
+                                    </TapGestureRecognizer>
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Image
+                                    Grid.Column="0"
+                                    Grid.Row="0"
+                                    Grid.RowSpan="2"
+                                    HorizontalOptions="Center"
+                                    Source="{Binding ImageType}"
+                                    VerticalOptions="Center">
+                                </Image>
+                                <Label
+                                    Grid.Column="1"
+                                    FontSize="Medium"
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="{Binding AttachmentName}"
+                                    VerticalOptions="Center"
+                                    VerticalTextAlignment="Center">
+                                </Label>
+                                <Image
+                                    Grid.Column="2"
+                                    Grid.Row="0"
+                                    Grid.RowSpan="2"
+                                    HorizontalOptions="Center"
+                                    Source="ic_chevron"
+                                    VerticalOptions="Center"
+                                    WidthRequest="16">
+                                </Image>
+                                <Grid
+                                    Grid.Column="1"
+                                    Grid.Row="1"
+                                    ColumnSpacing="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label
+                                        Grid.Column="0"
+                                        FontSize="Small"
+                                        HorizontalOptions="StartAndExpand"
+                                        Text="{Binding Size, StringFormat = '{0:2} KB |'}"
+                                        TextColor="{StaticResource Key=darkGray}"
+                                        VerticalOptions="Center">
+                                    </Label>
+                                    <Label
+                                        Grid.Column="1"
+                                        FontSize="Small"
+                                        HorizontalOptions="StartAndExpand"
+                                        Text="{Binding LastModified, StringFormat='{0:MMM dd,yyyy} |'}"
+                                        TextColor="{StaticResource Key=darkGray}"
+                                        VerticalOptions="Center">
+                                    </Label>
+                                    <Label
+                                        Grid.Column="2"
+                                        FontSize="Small"
+                                        HorizontalOptions="StartAndExpand"
+                                        Text="{Binding OwnerFullName}"
+                                        TextColor="{StaticResource Key=darkGray}"
+                                        VerticalOptions="Center">
+                                    </Label>
+                                </Grid>
+                            </Grid>
+                       </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

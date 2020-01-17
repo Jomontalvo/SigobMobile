@@ -1367,9 +1367,165 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string Senders {
+            get {
+                return ResourceManager.GetString("Senders", resourceCulture);
+            }
+        }
+        
         public static string Receiver {
             get {
                 return ResourceManager.GetString("Receiver", resourceCulture);
+            }
+        }
+        
+        public static string Receivers {
+            get {
+                return ResourceManager.GetString("Receivers", resourceCulture);
+            }
+        }
+        
+        public static string From {
+            get {
+                return ResourceManager.GetString("From", resourceCulture);
+            }
+        }
+        
+        public static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        public static string ScannedDocument {
+            get {
+                return ResourceManager.GetString("ScannedDocument", resourceCulture);
+            }
+        }
+        
+        public static string ScannedDocuments {
+            get {
+                return ResourceManager.GetString("ScannedDocuments", resourceCulture);
+            }
+        }
+        
+        public static string NoScannedDocuments {
+            get {
+                return ResourceManager.GetString("NoScannedDocuments", resourceCulture);
+            }
+        }
+        
+        public static string Attachment {
+            get {
+                return ResourceManager.GetString("Attachment", resourceCulture);
+            }
+        }
+        
+        public static string Attachments {
+            get {
+                return ResourceManager.GetString("Attachments", resourceCulture);
+            }
+        }
+        
+        public static string NoAttachments {
+            get {
+                return ResourceManager.GetString("NoAttachments", resourceCulture);
+            }
+        }
+        
+        public static string Tracking {
+            get {
+                return ResourceManager.GetString("Tracking", resourceCulture);
+            }
+        }
+        
+        public static string LinkedDocuments {
+            get {
+                return ResourceManager.GetString("LinkedDocuments", resourceCulture);
+            }
+        }
+        
+        public static string NoLinkedDocuments {
+            get {
+                return ResourceManager.GetString("NoLinkedDocuments", resourceCulture);
+            }
+        }
+        
+        public static string InKnowledgeOne {
+            get {
+                return ResourceManager.GetString("InKnowledgeOne", resourceCulture);
+            }
+        }
+        
+        public static string InKnowledgeSeveral {
+            get {
+                return ResourceManager.GetString("InKnowledgeSeveral", resourceCulture);
+            }
+        }
+        
+        public static string NoOneInformed {
+            get {
+                return ResourceManager.GetString("NoOneInformed", resourceCulture);
+            }
+        }
+        
+        public static string DocumentPurpose {
+            get {
+                return ResourceManager.GetString("DocumentPurpose", resourceCulture);
+            }
+        }
+        
+        public static string Objective {
+            get {
+                return ResourceManager.GetString("Objective", resourceCulture);
+            }
+        }
+        
+        public static string Objectives {
+            get {
+                return ResourceManager.GetString("Objectives", resourceCulture);
+            }
+        }
+        
+        public static string Result {
+            get {
+                return ResourceManager.GetString("Result", resourceCulture);
+            }
+        }
+        
+        public static string Results {
+            get {
+                return ResourceManager.GetString("Results", resourceCulture);
+            }
+        }
+        
+        public static string TransferredBy {
+            get {
+                return ResourceManager.GetString("TransferredBy", resourceCulture);
+            }
+        }
+        
+        public static string NoTags {
+            get {
+                return ResourceManager.GetString("NoTags", resourceCulture);
+            }
+        }
+        
+        public static string NotReplyRequired {
+            get {
+                return ResourceManager.GetString("NotReplyRequired", resourceCulture);
+            }
+        }
+        
+        public static string NotReplied {
+            get {
+                return ResourceManager.GetString("NotReplied", resourceCulture);
+            }
+        }
+        
+        public static string Replied {
+            get {
+                return ResourceManager.GetString("Replied", resourceCulture);
             }
         }
         

@@ -1006,9 +1006,115 @@ If you have problems, contact with administrator.</value>
     <value>Sender</value>
     <comment>Correspondence sender label</comment>
   </data>
+    <data name="Senders" xml:space="preserve">
+    <value>Senders</value>
+    <comment>Correspondence senders label</comment>
+  </data>
     <data name="Receiver" xml:space="preserve">
     <value>Receiver</value>
     <comment>Correspondence receiver label</comment>
+  </data>
+    <data name="Receivers" xml:space="preserve">
+    <value>Receivers</value>
+    <comment>Correspondence receivers label</comment>
+  </data>
+    <!--Correspondence details-->
+    <data name="From" xml:space="preserve">
+    <value>From:</value>
+    <comment>Sender info</comment>
+  </data>
+    <data name="To" xml:space="preserve">
+    <value>To:</value>
+    <comment>Receiver info</comment>
+  </data>
+    <data name="ScannedDocument" xml:space="preserve">
+    <value>Scanned document</value>
+    <comment>Scanned documents exists</comment>
+  </data>
+    <data name="ScannedDocuments" xml:space="preserve">
+    <value>Scanned documents</value>
+    <comment>Scanned documents exists</comment>
+  </data>
+    <data name="NoScannedDocuments" xml:space="preserve">
+    <value>No scanned document available</value>
+    <comment>Do not exists scanned documents</comment>
+  </data>
+    <data name="Attachment" xml:space="preserve">
+    <value>Attachment</value>
+    <comment>Attachment Document</comment>
+  </data>
+    <data name="Attachments" xml:space="preserve">
+    <value>Attachments</value>
+    <comment>Exists Attachments</comment>
+  </data>
+    <data name="NoAttachments" xml:space="preserve">
+    <value>No attachment available</value>
+    <comment>Not exists attachments</comment>
+  </data>
+    <data name="Tracking" xml:space="preserve">
+    <value>Trace route: {0} steps ({1} {2})</value>
+    <comment>Tracking document</comment>
+  </data>
+    <data name="LinkedDocuments" xml:space="preserve">
+    <value>Linked documents</value>
+    <comment>Linked documents (precedents or derivatives)</comment>
+  </data>
+    <data name="NoLinkedDocuments" xml:space="preserve">
+    <value>No linked documents</value>
+    <comment>There are no linked documents (precedents or derivatives)</comment>
+  </data>
+    <data name="InKnowledgeOne" xml:space="preserve">
+    <value>One official has been notified about this</value>
+    <comment>Official notified for take knowledge</comment>
+  </data>
+    <data name="InKnowledgeSeveral" xml:space="preserve">
+    <value>{0} officials notified to take knowledge</value>
+    <comment>Officials notified to take knowledge</comment>
+  </data>
+    <data name="NoOneInformed" xml:space="preserve">
+    <value>No one has been informed</value>
+    <comment>Officials notified for take knowledge</comment>
+  </data>
+    <data name="DocumentPurpose" xml:space="preserve">
+    <value>Document purpose</value>
+    <comment>Officials notified for take knowledge</comment>
+  </data>
+    <data name="Objective" xml:space="preserve">
+    <value>Objective</value>
+    <comment>Objective label</comment>
+  </data>
+    <data name="Objectives" xml:space="preserve">
+    <value>Objectives</value>
+    <comment>Objectives label</comment>
+  </data>
+    <data name="Result" xml:space="preserve">
+    <value>Result</value>
+    <comment>Result label</comment>
+  </data>
+    <data name="Results" xml:space="preserve">
+    <value>Results</value>
+    <comment>Results label</comment>
+  </data>
+    <data name="TransferredBy" xml:space="preserve">
+    <value>Transferred by</value>
+    <comment>Official that transferred document</comment>
+  </data>
+    <data name="NoTags" xml:space="preserve">
+    <value>No tags registered</value>
+    <comment>No tags registered</comment>
+  </data>
+    <!-- Replies-->
+    <data name="NotReplyRequired" xml:space="preserve">
+    <value>No reply required</value>
+    <comment>Letter not require reply</comment>
+  </data>
+    <data name="NotReplied" xml:space="preserve">
+    <value>Not answered</value>
+    <comment>Letter is not answered</comment>
+  </data>
+    <data name="Replied" xml:space="preserve">
+    <value>Replied</value>
+    <comment>Letter replied</comment>
   </data>
     <!--Time Filters-->
     <data name="Anytime" xml:space="preserve">

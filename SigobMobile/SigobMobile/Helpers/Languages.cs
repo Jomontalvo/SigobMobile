@@ -287,6 +287,39 @@
         public static string LastYear = Resources.LastYear;
         #endregion
 
+        #region Correspondence Details
+        public static string From = Resources.From;
+        public static string To = Resources.To;
+        public static string Senders = Resources.Senders;
+        public static string Receivers = Resources.Receivers ;
+        public static string ScannedDocuments = Resources.ScannedDocuments;
+        public static string ScannedDocument = Resources.ScannedDocument;
+        public static string NoScannedDocuments = Resources.NoScannedDocuments;
+        public static string Attachment = Resources.Attachment;
+        public static string Attachments = Resources.Attachments;
+        public static string NoAttachments = Resources.NoAttachments;
+        public static string Tracking = Resources.Tracking;
+        public static string LinkedDocuments = Resources.LinkedDocuments;
+        public static string NoLinkedDocuments = Resources.NoLinkedDocuments;
+        public static string InKnowledgeOne = Resources.InKnowledgeOne;
+        public static string InKnowledgeSeveral = Resources.InKnowledgeSeveral;
+        public static string NoOneInformed = Resources.NoOneInformed;
+        public static string DocumentPurpose =  Resources.DocumentPurpose;
+        public static string Objective = Resources.Objective;
+        public static string Objectives = Resources.Objectives;
+        public static string Result = Resources.Result;
+        public static string Results = Resources.Results;
+        public static string TransferredBy = Resources.TransferredBy;
+        public static string NoTags = Resources.NoTags;
+        
+        #endregion
+
+        #region Reply Status
+        public static string NotReplyRequired = Resources.NotReplyRequired;
+        public static string NotReplied = Resources.NotReplied;
+        public static string Replied = Resources.Replied;
+        #endregion
+
         #endregion
     }
 }

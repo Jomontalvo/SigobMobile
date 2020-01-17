@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:controls="clr-namespace:SigobMobile.Controls"
+             xmlns:local="clr-namespace:SigobMobile.Helpers"
+             xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
+             xmlns:telerikPdfViewer="clr-namespace:Telerik.XamarinForms.PdfViewer;assembly=Telerik.XamarinForms.PdfViewer"
+             x:Class="SigobMobile.Views.Correspondence.ScannedDocumentPage"
+             BackgroundColor="{StaticResource Key=defaultBackgroundView}"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="{local:Translate ScannedDocument}"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Command="{Binding ShareCommand}"
+            IconImageSource="ic_bt_share"
+            Order="Primary"
+            Priority="0">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid
+            BindingContext="{Binding ScannedDocument}"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="{StaticResource Key=StatusBarHeight}" />
+            </Grid.RowDefinitions>
+            <telerikPdfViewer:RadPdfViewerToolbar
+                Grid.Row="0"
+                PdfViewer="{Binding Source={x:Reference pdfViewer}}">
+                <telerikPdfViewer:ZoomInToolbarItem />
+                <telerikPdfViewer:ZoomOutToolbarItem />
+                <telerikPdfViewer:NavigateToNextPageToolbarItem/>
+                <telerikPdfViewer:NavigateToPreviousPageToolbarItem/>
+                <telerikPdfViewer:FitToWidthToolbarItem/>
+            </telerikPdfViewer:RadPdfViewerToolbar>
+            <!--PDF Viewer-->
+            <telerikPdfViewer:RadPdfViewer
+                Grid.Row="1"
+                LayoutMode="ContinuousScroll"
+                Source="{Binding UrlImagePdf}"
+                x:Name="pdfViewer">
+                <telerikPdfViewer:RadPdfViewer.BusyIndicatorTemplate>
+                    <DataTemplate>
+                        <telerikPrimitives:RadBusyIndicator
+                            AnimationContentColor="{StaticResource Key= {OnPlatform iOS=iOSBlue, Android=DroidPrimary}}"
+                            AnimationContentHeightRequest="40"
+                            AnimationContentWidthRequest="40"
+                            AnimationType="{OnPlatform iOS=Animation9, Android=Animation3}"
+                            IsBusy="True" />
+                    </DataTemplate>
+                </telerikPdfViewer:RadPdfViewer.BusyIndicatorTemplate>
+            </telerikPdfViewer:RadPdfViewer>
+            <telerikPrimitives:RadBorder
+                BackgroundColor="{StaticResource Key=softGray}"
+                BorderColor="{StaticResource accesoryGray}" 
+                CornerRadius="0"
+                Grid.Row="2">
+                <StackLayout
+                    Orientation="Horizontal"
+                    Padding="10,0"
+                    Spacing="10">
+                    <Label
+                        BackgroundColor="Transparent"
+                        FontSize="Small"
+                        Text="Select a Document:"
+                        VerticalOptions="Center">
+                    </Label>
+                    <controls:BorderlessPicker
+                        FontAttributes="Bold"
+                        FontSize="Small"
+                        Grid.Row="0"
+                        HorizontalOptions="FillAndExpand"
+                        ItemsSource="{Binding ScannedList}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedIndex="{Binding SelectedIndex}"
+                        SelectedItem="{Binding SelectedItem,Mode=TwoWay}"
+                        TextColor="{StaticResource Key=lightBlack}"
+                        VerticalOptions="Center">
+                    </controls:BorderlessPicker>
+                </StackLayout>
+            </telerikPrimitives:RadBorder>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

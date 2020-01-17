@@ -40,14 +40,18 @@
         public Uri UrlWebTerms { get; set; }
     }
 
+    /// <summary>
+    /// General definition of SIGOB Tuple
+    /// </summary>
     public class TSigTuple
     {
         [JsonProperty("codigo")]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("descripcion")]
         public string Description { get; set; }
     }
+
     /// <summary>
     /// Color tuple (Inherit tuple)
     /// </summary>
@@ -61,6 +65,7 @@
         /// </summary>
         public Color ColorAlpha => System.Drawing.Color.FromArgb(175, System.Drawing.Color.FromName(Color));
     }
+
     /// <summary>
     /// Class for any SegmentedControl
     /// </summary>

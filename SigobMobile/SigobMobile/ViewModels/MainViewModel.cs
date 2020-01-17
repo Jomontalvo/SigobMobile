@@ -53,12 +53,23 @@
         public ContactsViewModel Contacts { get; set; }
         #endregion
 
+        #region AttachmentsViews
+        public AttachmentsViewModel Attachments { get; set; }
+        #endregion
+
         #region Correspondence
         public MailBoxesViewModel MailBoxes { get; set; }
         public ExternalDocumentViewModel ExternalDocument { get; set; }
         public InternalDocumentViewModel InternalDocument { get; set; }
         public DocumentsTrayViewModel DocumentsTray { get; set; }
         public SearchDocumentViewModel SearchDocument { get; set; }
+        public ScannedTiffViewModel ScannedTiff { get; set; }
+        public ScannedPdfViewModel ScannedPdf { get; set;  }
+        public ScannedDocumentViewModel ScannedDocument { get; set; }
+        #endregion
+
+        #region Documents
+        public DocumentViewerViewModel DocumentViewer { get; set; }
         #endregion
         #endregion
 

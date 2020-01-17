@@ -26,7 +26,8 @@
     public enum Source : byte
     {
         Internal = 0,
-        External = 1
+        External = 1,
+        Both = 2
     }
 
     public class Document

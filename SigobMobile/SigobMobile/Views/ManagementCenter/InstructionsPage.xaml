@@ -210,11 +210,19 @@
             ItemsSource="{Binding InstructionItems}"
             ItemTemplate="{StaticResource ListViewInstructionItemTemplate}">
             <telerikDataControls:RadListView.GroupDescriptors>
-                <telerikListView:PropertyGroupDescriptor PropertyName="ManagementCenterName"/>
+                <telerikListView:PropertyGroupDescriptor
+                    PropertyName="ManagementCenterName">
+                </telerikListView:PropertyGroupDescriptor>
             </telerikDataControls:RadListView.GroupDescriptors>
             <telerikDataControls:RadListView.Commands>
-                <telerikListViewCommands:ListViewUserCommand Id="PullToRefreshRequested" Command="{Binding RefreshCommand}" />
-                <telerikListViewCommands:ListViewUserCommand Id="ItemTap" Command="{Binding ItemTapCommand}" />
+                <telerikListViewCommands:ListViewUserCommand
+                    Id="PullToRefreshRequested"
+                    Command="{Binding RefreshCommand}">
+                </telerikListViewCommands:ListViewUserCommand>
+                <telerikListViewCommands:ListViewUserCommand
+                    Id="ItemTap"
+                    Command="{Binding ItemTapCommand}">
+                </telerikListViewCommands:ListViewUserCommand>
             </telerikDataControls:RadListView.Commands>
         </telerikDataControls:RadListView>
         <!--  << listview-gettingstarted-listview-xaml  -->

@@ -4,23 +4,65 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:local="clr-namespace:SigobMobile.Helpers"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
     x:Class="SigobMobile.Views.Common.DocumentViewerPage"
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
-    Title="{local:Translate ContactsTitle}"
+    Title="{local:Translate Attachment }"
     ios:Page.UseSafeArea="true">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            BindingContext="{Binding DocumentViewer}"
+            Command="{Binding ShareDocumentCommand}"
+            IconImageSource="ic_bt_share"
+            Order="Primary"
+            Priority="0">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid
             BindingContext="{Binding DocumentViewer}"
-            Padding="5,0">
+            Padding="0"
+            RowSpacing="0">
             <Grid.RowDefinitions>
+                <!--Viewer-->
                 <RowDefinition Height="*" />
+                <!--Status Bar-->
+                <RowDefinition Height="{StaticResource Key=StatusBarHeight}" />
             </Grid.RowDefinitions>
             <WebView
                 Grid.Row="0"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
-                Source="{Binding UrlSource}">
+                Source="{Binding Doc.UrlDocument}">
             </WebView>
+            <!--Status Bar-->
+            <telerikPrimitives:RadBorder
+                BackgroundColor="{StaticResource Key=softGray}"
+                BorderColor="{StaticResource accesoryGray}" 
+                CornerRadius="0"
+                Grid.Row="1">
+                <StackLayout
+                    Orientation="Horizontal"
+                    Spacing="10">
+                    <Label
+                        BackgroundColor="Transparent"
+                        FontSize="Small"
+                        HorizontalOptions="Start"
+                        Padding="10,0,0,0"
+                        Text="{Binding Attachment.AttachmentName}"
+                        TextColor="{StaticResource Key=darkGray}"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Label
+                        BackgroundColor="Transparent"
+                        FontSize="Small"
+                        HorizontalOptions="Start"
+                        Text="{Binding Attachment.Size, Converter={StaticResource Key=intToKBytes}, StringFormat='({0:N0} KB)'}"
+                        TextColor="{StaticResource Key=darkGray}"
+                        VerticalOptions="Center">
+                    </Label>
+                </StackLayout>
+            </telerikPrimitives:RadBorder>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -4,6 +4,7 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:local="clr-namespace:SigobMobile.Helpers"
              xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
+             xmlns:controls="clr-namespace:SigobMobile.Controls"
              x:Class="SigobMobile.Views.Correspondence.ExternalDocumentPage"
              BackgroundColor="{StaticResource Key=defaultBackgroundView}"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
@@ -11,33 +12,562 @@
              ios:Page.UseSafeArea="true">
     <ContentPage.ToolbarItems>
         <ToolbarItem
+            BindingContext="{Binding ExternalDocument}"
+            Command="{Binding ArchiveCommand}"
+            IconImageSource="ic_bt_archive"
+            Order="Primary"
+            Priority="0">
+        </ToolbarItem>
+        <ToolbarItem
+            BindingContext="{Binding ExternalDocument}"
             Command="{Binding TransferCommand}"
             IconImageSource="ic_bt_transfer"
             Order="Primary"
-            Priority="0">
+            Priority="1">
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid
-            BindingContext="{Binding ExternalDocument}">
+            BindingContext="{Binding ExternalDocument}"
+            RowSpacing="5">
             <Grid.RowDefinitions>
+                <!--Sender And Receiver Info-->
                 <RowDefinition Height="Auto" />
+                <!--Abstract-->
                 <RowDefinition Height="Auto" />
+                <!--Content--> 
                 <RowDefinition Height="*" />
+                <!--Status Bar-->
                 <RowDefinition Height="{StaticResource Key=StatusBarHeight}" />
             </Grid.RowDefinitions>
-            <Label
+            <!--Sender / Receiver-->
+            <Grid
+                BackgroundColor="AliceBlue"
+                ColumnSpacing="5"
                 Grid.Row="0"
-                Text="{Binding Document.SenderOrReceiver}">
-            </Label>
-            <Label
+                Padding="15,8"
+                RowSpacing="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    HorizontalOptions="Start"
+                    Text="{local:Translate From}"
+                    VerticalOptions="Center">
+                </Label>
+                <Label
+                    FontSize="Small"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding ExternalDocument.SenderInformation}"
+                    TextColor="{StaticResource Key=lightBlack}"
+                    VerticalOptions="Center">
+                </Label>
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    HorizontalOptions="Start"
+                    Text="{local:Translate To}"
+                    VerticalOptions="Center">
+                </Label>
+                <Label
+                    FontSize="Small"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding ExternalDocument.ReceiverInformation}"
+                    TextColor="{StaticResource Key=lightBlack}"
+                    VerticalOptions="Center">
+                </Label>
+            </Grid>
+            <!--Separator-->
+            <BoxView
+                Color="{StaticResource Key=gray}"
+                Grid.Row="0"
+                HorizontalOptions="FillAndExpand"
+                HeightRequest="1"
+                VerticalOptions="EndAndExpand">
+            </BoxView>
+            <!--Abstract-->
+            <Grid
+                ColumnSpacing="8"
                 Grid.Row="1"
-                Text="{Binding Document.SenderOrReceiver}">
-            </Label>
-            <Label
-                Grid.Row="2"
-                Text="{Binding Document.SenderOrReceiver}">
-            </Label>
+                Padding="7,0"
+                RowSpacing="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1"/>
+                </Grid.RowDefinitions>
+                <BoxView
+                    Color="{Binding Document.ColorStatus}"
+                    CornerRadius="1"
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    HorizontalOptions="Center"
+                    VerticalOptions="FillAndExpand"
+                    WidthRequest="2">
+                </BoxView>
+                <!--Correspondence Subject-->
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    HorizontalOptions="StartAndExpand"
+                    Text="{Binding Document.Subject}"
+                    VerticalTextAlignment="Center">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="iOS" Value="Avenir Next" />
+                                <On Platform="Android" Value="sans-serif-smallcaps" />
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                <!--Registration Date-->
+                <Grid
+                    ColumnSpacing="0"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    RowSpacing="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                       <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Label
+                        FontSize="Small"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        HorizontalOptions="StartAndExpand"
+                        Text="{Binding ExternalDocument.RegistrationDate, StringFormat='{0:D}'}"
+                        TextColor="{StaticResource Key=darkGray}">
+                    </Label>
+                    <Label
+                        FontSize="Small"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        HorizontalOptions="StartAndExpand"
+                        Text="{Binding ExternalDocument.RegistrationDate, StringFormat='{0:T}'}"
+                        TextColor="{StaticResource Key=darkGray}">
+                    </Label>
+                    <!--Information icons-->
+                    <StackLayout
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        HorizontalOptions="End"
+                        Orientation="Horizontal"
+                        Padding="5,0"
+                        Spacing="10"
+                        VerticalOptions="Center">
+                        <controls:IconView
+                            Foreground="{StaticResource Key={OnPlatform iOS=iOSRed, Android=red}}"
+                            HorizontalOptions="Center"
+                            IsVisible="{Binding Document.Priority, Converter={StaticResource Key=intToBool}}"
+                            Margin="0"
+                            Source="ic_notify_priority"
+                            VerticalOptions="Center"
+                            WidthRequest="20">
+                        </controls:IconView>
+                        <Image
+                            Aspect="AspectFit"
+                            Source="{Binding ExternalDocument.PrivacyLevelIcon}"
+                            WidthRequest="20">
+                        </Image>
+                        <Image
+                            Aspect="AspectFit"
+                            IsVisible="{Binding ExternalDocument.ReplyRequired}"
+                            Source="{Binding ExternalDocument.ReplyIcon}"
+                            WidthRequest="20">
+                        </Image>
+                    </StackLayout>
+                </Grid>
+                <!--Separator-->
+                <BoxView
+                    Color="{StaticResource Key=gray}"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="2"
+                    HorizontalOptions="FillAndExpand"
+                    HeightRequest="1"
+                    VerticalOptions="EndAndExpand">
+                </BoxView>
+            </Grid>
+            <!--Summary-->
+            <ScrollView
+                Grid.Row="2">
+                <Grid
+                    ColumnSpacing="15"
+                    Padding="15,8,15,0"
+                    RowSpacing="{OnPlatform iOS=8,Android=15}"
+                    VerticalOptions="Start">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="24" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="1" />
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="1" />
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="1" />
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="1" />
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <!--Document Text-->
+                    <Image
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        HorizontalOptions="Center"
+                        Margin="0,4"
+                        Source="ic_ev_summary"
+                        VerticalOptions="StartAndExpand">
+                    </Image>
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        MaxLines="10"
+                        LineBreakMode="TailTruncation"
+                        Text="{Binding ExternalDocument.Text}"
+                        TextType="Text"
+                        TextColor="{StaticResource Key=lightBlack}">
+                    </Label>
+                    <!--Separator-->
+                    <BoxView
+                        Color="{StaticResource Key=gray}"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="1"
+                        HorizontalOptions="FillAndExpand"
+                        HeightRequest="1"
+                        VerticalOptions="Center">
+                    </BoxView>
+                    <!--Transferred by-->
+                    <Grid
+                        ColumnSpacing="15"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="2"
+                        RowSpacing="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="1"/>
+                        </Grid.RowDefinitions>
+                        <Image
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Grid.RowSpan="4"
+                            HorizontalOptions="Center"
+                            Margin="0,4"
+                            Source="ic_doc_transferred"
+                            VerticalOptions="StartAndExpand">
+                        </Image>
+                        <StackLayout
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Orientation="Horizontal"
+                            Spacing="5"
+                            VerticalOptions="Center">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Small"
+                                Text="{local:Translate TransferredBy}"
+                                TextColor="{StaticResource Key=darkGray}"
+                                VerticalOptions="Center">
+                            </Label>
+                            <Label
+                                FontSize="Small"
+                                Text="{Binding ExternalDocument.TransferedBy}"
+                                TextColor="{StaticResource Key=darkGray}"
+                                VerticalOptions="Center">
+                            </Label>
+                        </StackLayout>
+                        <Label
+                            FontSize="Small"
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            Text="{Binding ExternalDocument.TransferDate, StringFormat='{0:F}'}"
+                            TextColor="{StaticResource Key=darkGray}">
+                        </Label>
+                        <Label
+                            FontSize="Small"
+                            Grid.Column="1"
+                            Grid.Row="2"
+                            LineBreakMode="CharacterWrap"
+                            Padding="0,2,0,0"
+                            Text="{Binding ExternalDocument.TransferComment}"
+                            TextColor="{StaticResource Key=darkGray}">
+                        </Label>
+                        <!--Separator-->
+                        <BoxView
+                            Color="{StaticResource Key=gray}"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Grid.Row="3"
+                            HorizontalOptions="FillAndExpand"
+                            HeightRequest="1">
+                        </BoxView>
+                    </Grid>
+                    <!--Scanned documents-->
+                    <Image
+                        Grid.Column="0"
+                        Grid.Row="3"
+                        HorizontalOptions="Center"
+                        Source="ic_doc_scanned"
+                        VerticalOptions="Center">
+                    </Image>
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="3"
+                        HorizontalOptions="StartAndExpand"
+                        Text="{Binding ExternalDocument.ScannedDocumentInfo}"
+                        TextColor="{StaticResource Key=darkGray}"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Image
+                        Grid.Column="1"
+                        Grid.Row="3"
+                        HorizontalOptions="End"
+                        IsVisible="{Binding ExternalDocument.ScannedCount, Converter={StaticResource Key=intToBool}}"
+                        Source="ic_chevron"
+                        VerticalOptions="Center"
+                        WidthRequest="16">
+                    </Image>
+                    <ContentView
+                        BackgroundColor="Transparent"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="3">
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GetScannedCommand}" />
+                        </ContentView.GestureRecognizers>
+                    </ContentView>
+                    <!--Attachments-->
+                    <Image
+                        Grid.Column="0"
+                        Grid.Row="4"
+                        HorizontalOptions="Center"
+                        Source="ic_notify_attachment"
+                        VerticalOptions="Center">
+                    </Image>
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="4"
+                        HorizontalOptions="StartAndExpand"
+                        Text="{Binding ExternalDocument.AttachmentsInfo}"
+                        TextColor="{StaticResource Key=darkGray}"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Image
+                        Grid.Column="1"
+                        Grid.Row="4"
+                        HorizontalOptions="End"
+                        IsVisible="{Binding ExternalDocument.AttachmnetCount, Converter={StaticResource Key=intToBool}}"
+                        Source="ic_chevron"
+                        VerticalOptions="Center"
+                        WidthRequest="16">
+                    </Image>
+                    <ContentView
+                        BackgroundColor="Transparent"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="4">
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GetAttachmentsCommand}" />
+                        </ContentView.GestureRecognizers>
+                    </ContentView>
+                    <!--Tracking-->
+                    <Image
+                        Grid.Column="0"
+                        Grid.Row="5"
+                        HorizontalOptions="Center"
+                        Source="ic_doc_tracking"
+                        VerticalOptions="Center">
+                    </Image>
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="5"
+                        HorizontalOptions="StartAndExpand"
+                        Text="{Binding ExternalDocument.TrackingInfo}"
+                        TextColor="{StaticResource Key=darkGray}"
+                        VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GetTraceRouteCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <!--Separator-->
+                    <BoxView
+                        Color="{StaticResource Key=gray}"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="6"
+                        HorizontalOptions="FillAndExpand"
+                        HeightRequest="1"
+                        VerticalOptions="Center">
+                    </BoxView>
+                    <!--Linked Documents-->
+                    <Image
+                        Grid.Column="0"
+                        Grid.Row="7"
+                        HorizontalOptions="Center"
+                        Source="ic_doc_linked"
+                        VerticalOptions="Center">
+                    </Image>
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="7"
+                        HorizontalOptions="StartAndExpand"
+                        Text="{Binding ExternalDocument.LinkedDocumentsInfo}"
+                        TextColor="{StaticResource Key=darkGray}"
+                        VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenLinkedViewCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <!--Aware Notification-->
+                    <Image
+                        Grid.Column="0"
+                        Grid.Row="8"
+                        HorizontalOptions="Center"
+                        Source="ic_doc_copied"
+                        VerticalOptions="Center">
+                    </Image>
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="8"
+                        HorizontalOptions="StartAndExpand"
+                        Text="{Binding ExternalDocument.InKnowledge}"
+                        TextColor="{StaticResource Key=darkGray}"
+                        VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OfficialsInKnowledgeCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <!--Separator-->
+                    <BoxView
+                        Color="{StaticResource Key=gray}"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="9"
+                        HorizontalOptions="FillAndExpand"
+                        HeightRequest="1"
+                        VerticalOptions="Center">
+                    </BoxView>
+                    <!--Objectives and Results-->
+                    <Grid
+                        ColumnSpacing="15"
+                        Grid.Column = "0"
+                        Grid.ColumnSpan="2"
+                        Grid.Row = "10"
+                        Margin="0"
+                        Padding="0"
+                        RowSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="24" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <!--Objectives-->
+                        <Image
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            HorizontalOptions="Center"
+                            Source="ic_doc_objectives"
+                            VerticalOptions="Center">
+                        </Image>
+                        <Label
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            HorizontalOptions="StartAndExpand"
+                            Text="{Binding ExternalDocument.Objectives}"
+                            TextColor="{StaticResource Key=darkGray}"
+                            VerticalOptions="Center">
+                        </Label>
+                        <!--Results-->
+                        <Image
+                            Grid.Column="0"
+                            Grid.Row="1"
+                            HorizontalOptions="Center"
+                            Source="ic_doc_result"
+                            VerticalOptions="Center">
+                        </Image>
+                        <Label
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            HorizontalOptions="StartAndExpand"
+                            LineBreakMode="CharacterWrap"
+                            Text="{Binding ExternalDocument.ResultInfo}"
+                            TextColor="{StaticResource Key=darkGray}"
+                            VerticalOptions="Center">
+                        </Label>
+                    </Grid>
+                    <!--Separator-->
+                    <BoxView
+                        Color="{StaticResource Key=gray}"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="11"
+                        HorizontalOptions="FillAndExpand"
+                        HeightRequest="1"
+                        VerticalOptions="Center">
+                    </BoxView>
+                    <!--Tags-->
+                    <controls:IconView
+                        Foreground="{StaticResource Key=darkGray}"
+                        Grid.Column="0"
+                        Grid.Row="12"
+                        HorizontalOptions="Center"
+                        Source="ic_doc_menu_100"
+                        VerticalOptions="Center">
+                    </controls:IconView>
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="12"
+                        HorizontalOptions="StartAndExpand"
+                        Text="{Binding ExternalDocument.TagsInfo}"
+                        TextColor="{StaticResource Key=grayContent}"
+                        VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OfficialsInKnowledgeCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+            </ScrollView>
             <!--Status Bar-->
             <telerikPrimitives:RadBorder
                 BackgroundColor="{StaticResource Key=softGray}"
