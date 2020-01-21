@@ -168,6 +168,10 @@
 
         }
 
+        /// <summary>
+        /// Convert Intructions to InstructionItemViewModel
+        /// </summary>
+        /// <returns></returns>
         private IEnumerable<Instruction> ToInstructionItemViewModel()
         {
             return this.instructionList.Select(l => new Instruction

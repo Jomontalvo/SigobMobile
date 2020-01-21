@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:local="clr-namespace:SigobMobile.Helpers"
+             xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
+             x:Class="SigobMobile.Views.Correspondence.DocumentTraceRoutePage"
+             BackgroundColor="{StaticResource Key=grayBorder}"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="{local:Translate TrackingViewTitle}"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <Grid
+            BindingContext="{Binding DocumentTraceRoute}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="{StaticResource Key=StatusBarHeight}" />
+            </Grid.RowDefinitions>
+            <CollectionView
+                IsGrouped="True"
+                ItemsSource="{Binding TraceRoutes}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid
+                            Padding="10,0"
+                            RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <!--Connectors-->
+                            <BoxView
+                                Color="{StaticResource Key=gray}"
+                                Grid.Column="0"
+                                HorizontalOptions="Center"
+                                IsVisible="{Binding IsFirst}"
+                                Margin="0,40,0,0"
+                                VerticalOptions="FillAndExpand"
+                                WidthRequest="2">
+                            </BoxView>
+                            <BoxView
+                                Color="{StaticResource Key=gray}"
+                                Grid.Column="0"
+                                HorizontalOptions="Center"
+                                IsVisible="{Binding IsMiddle}"
+                                VerticalOptions="FillAndExpand"
+                                WidthRequest="2">
+                            </BoxView>
+                            <BoxView
+                                Color="{StaticResource Key=gray}"
+                                Grid.Column="0"
+                                HeightRequest="40"
+                                HorizontalOptions="Center"
+                                IsVisible="{Binding IsLast}"
+                                VerticalOptions="Start"
+                                WidthRequest="2">
+                            </BoxView>
+                            <!--Step circle-->
+                            <telerikPrimitives:RadBorder
+                                BackgroundColor="{Binding StepColor}"
+                                BorderColor="{StaticResource Key=defaultBackgroundView}"
+                                BorderThickness="3"
+                                CornerRadius="25,25,25,25"
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                Margin="0,5,0,0"
+                                VerticalOptions="Start">
+                                <StackLayout
+                                    BackgroundColor="Transparent"
+                                    Grid.Column="0"
+                                    Grid.Row="0"
+                                    HeightRequest="40"
+                                    HorizontalOptions="Center"
+                                    Spacing="0"
+                                    VerticalOptions="Center"
+                                    WidthRequest="40">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="Default"
+                                        HeightRequest="20"
+                                        HorizontalOptions="Center"
+                                        HorizontalTextAlignment="Center"
+                                        Margin="0"
+                                        Padding="0,6,0,0"
+                                        Text="{Binding StartDate, StringFormat='{0:dd}'}"
+                                        TextColor="White"
+                                        VerticalOptions="End"
+                                        VerticalTextAlignment="End">
+                                    </Label>
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="Micro"
+                                        HorizontalTextAlignment="Center"
+                                        Margin="0"
+                                        Padding="0"
+                                        Text="{Binding StartDate, StringFormat='{0:MMM}'}"
+                                        TextColor="White"
+                                        VerticalOptions="Start"
+                                        VerticalTextAlignment="Start">
+                                    </Label>
+                                </StackLayout>
+                            </telerikPrimitives:RadBorder>
+                            <!--Details-->
+                            <Frame
+                                BorderColor="{StaticResource Key=softGray}"
+                                Grid.Column="1"
+                                Grid.Row="0"
+                                HasShadow="False"
+                                Margin="0,5,0,5"
+                                Padding="15">
+                                <Grid
+                                    RowSpacing="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <!--Title-->
+                                        <RowDefinition Height="Auto" />
+                                        <!--Area-->
+                                        <RowDefinition Height="Auto" />
+                                        <!--Separator-->
+                                        <RowDefinition Height="1" />
+                                        <!--Properties-->
+                                        <RowDefinition Height="Auto" />
+                                        <!--Annotation-->
+                                        <RowDefinition Height="Auto"/>
+                                        <!--Transfer comment-->
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Label
+                                        FontAttributes="Bold"
+                                        Grid.Row="0"
+                                        Text="{Binding OfficialName}"
+                                        VerticalTextAlignment="Center">
+                                    </Label>
+                                    <Label
+                                        FontSize="Small"
+                                        Grid.Row="1"
+                                        Text="{Binding Area}">
+                                    </Label>
+                                    <!--Duration-->
+                                    <StackLayout
+                                        Grid.Column="1"
+                                        Grid.Row="0"
+                                        Grid.RowSpan="2"
+                                        Padding="0"
+                                        Spacing="0"
+                                        VerticalOptions="Center">
+                                        <Label
+                                            FontSize="Large"
+                                            HorizontalOptions="Center"
+                                            HorizontalTextAlignment="Center"
+                                            Text="{Binding DurationValueTitle}">
+                                        </Label>
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="Small"
+                                            HorizontalOptions="Center"
+                                            HorizontalTextAlignment="Center"
+                                            Text="{Binding DurationMeasureTitle}">
+                                        </Label>
+                                    </StackLayout>
+                                    <!--Separator-->
+                                    <BoxView
+                                        Color="{StaticResource Key=gray}"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="2"
+                                        Grid.Row="2"
+                                        HorizontalOptions="FillAndExpand"
+                                        HeightRequest="1"
+                                        VerticalOptions="EndAndExpand">
+                                    </BoxView>
+                                    <!--Properties-->
+                                    <StackLayout
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="2"
+                                        Grid.Row="3"
+                                        Orientation="Horizontal"
+                                        Padding="0,5,0,2"
+                                        Spacing="10"
+                                        VerticalOptions="Center">
+                                        <!--Year-->
+                                        <StackLayout
+                                            IsVisible="{Binding Year, Converter={StaticResource Key=intToBool}}"
+                                            Orientation="Horizontal"
+                                            Spacing="2">
+                                            <Image
+                                                Source="ic_ev_calendar"
+                                                VerticalOptions="Center"
+                                                WidthRequest="16">
+                                            </Image>
+                                            <Label
+                                                FontSize="Small"
+                                                Text="{Binding Year}"
+                                                TextColor="{StaticResource Key=darkGray}"
+                                                VerticalOptions="Center"
+                                                VerticalTextAlignment="Center">
+                                            </Label>
+                                        </StackLayout>
+                                        <!--Arrived hour-->
+                                        <StackLayout
+                                            Orientation="Horizontal"
+                                            Spacing="2">
+                                            <Image
+                                                Source="ic_ev_time"
+                                                VerticalOptions="Center"
+                                                WidthRequest="16">
+                                            </Image>
+                                            <Label
+                                                FontSize="Small"
+                                                Text="{Binding StartDate, StringFormat='{0:t}'}"
+                                                TextColor="{StaticResource Key=darkGray}"
+                                                VerticalOptions="Center"
+                                                VerticalTextAlignment="Center">
+                                            </Label>
+                                        </StackLayout>
+                                        <!--IsResolution-->
+                                        <Image
+                                            IsVisible="{Binding IsResolution}"
+                                            Source="ic_doc_certificate"
+                                            VerticalOptions="Center"
+                                            WidthRequest="16">
+                                        </Image>
+                                        <!--Has Attachments-->
+                                        <Image
+                                            IsVisible="{Binding HasAttachments}"
+                                            Source="ic_notify_attachment"
+                                            WidthRequest="16">
+                                        </Image>
+                                    </StackLayout>
+                                    <!--Annotations-->
+                                    <Label
+                                        FontSize="Small"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="2"
+                                        Grid.Row="4"
+                                        Text="{Binding Annotation}"
+                                        TextColor="{StaticResource Key=darkGray}">
+                                    </Label>
+                                    <!--Transfer Comment-->
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="Small"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="2"
+                                        Grid.Row="5"
+                                        Text="{Binding TransferComment}"
+                                        TextColor="{StaticResource Key=darkGray}">
+                                    </Label>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <StackLayout
+                            BackgroundColor="SteelBlue"
+                            Orientation="Horizontal"
+                            Padding="20,10">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Large"
+                                Text="{local:Translate Copy}"
+                                TextColor="White"
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center">
+                            </Label>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Large"
+                                Text="{Binding Copy.Copy}"
+                                TextColor="White"
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center">
+                            </Label>
+                            <Label
+                                Text="{Binding Copy.StartOfficialName}"
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center">
+                            </Label>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+                <CollectionView.GroupFooterTemplate>
+                    <DataTemplate>
+                        <StackLayout
+                            BackgroundColor="Transparent"
+                            HeightRequest="5"
+                            HorizontalOptions="StartAndExpand">
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.GroupFooterTemplate>
+            </CollectionView>
+            <!--Status Bar-->
+            <telerikPrimitives:RadBorder
+                BackgroundColor="{StaticResource Key=softGray}"
+                BorderColor="{StaticResource accesoryGray}" 
+                CornerRadius="0"
+                Grid.Row="1">
+                <StackLayout
+                    Orientation="Horizontal">
+                    <Label
+                        BackgroundColor="Transparent"
+                        FontSize="Small"
+                        HorizontalOptions="Start"
+                        Padding="10,0,0,0"
+                        Text="{Binding RegistrationCode}"
+                        TextColor="{StaticResource Key=darkGray}"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Label
+                        BackgroundColor="Transparent"
+                        FontAttributes="Bold"
+                        FontSize="Small"
+                        HorizontalOptions="StartAndExpand"
+                        Text="{Binding CurrentCopyLabel}"
+                        TextColor="{StaticResource Key=darkGray}"
+                        VerticalOptions="Center">
+                    </Label>
+                </StackLayout>
+            </telerikPrimitives:RadBorder>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

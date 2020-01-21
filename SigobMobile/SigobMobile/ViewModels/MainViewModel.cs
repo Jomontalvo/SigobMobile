@@ -66,10 +66,12 @@
         public ScannedTiffViewModel ScannedTiff { get; set; }
         public ScannedPdfViewModel ScannedPdf { get; set;  }
         public ScannedDocumentViewModel ScannedDocument { get; set; }
+        public DocumentTraceRouteViewModel DocumentTraceRoute { get; set; }
         #endregion
 
         #region Documents
         public DocumentViewerViewModel DocumentViewer { get; set; }
+        public PdfViewerViewModel PdfViewer { get; set; }
         #endregion
         #endregion
 

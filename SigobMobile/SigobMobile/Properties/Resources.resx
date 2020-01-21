@@ -545,6 +545,14 @@ If you have problems, contact with administrator.</value>
     <value>All</value>
     <comment>Text for All items wherever status.</comment>
   </data>
+    <data name="Hour" xml:space="preserve">
+    <value>hour</value>
+    <comment>Hour text.</comment>
+  </data>
+    <data name="Hours" xml:space="preserve">
+    <value>Hours</value>
+    <comment>Hours text.</comment>
+  </data>
     <data name="Day" xml:space="preserve">
     <value>day</value>
     <comment>Day text.</comment>
@@ -1054,6 +1062,19 @@ If you have problems, contact with administrator.</value>
     <data name="Tracking" xml:space="preserve">
     <value>Trace route: {0} steps ({1} {2})</value>
     <comment>Tracking document</comment>
+  </data>
+    
+    <data name="TrackingViewTitle" xml:space="preserve">
+    <value>Copies and routes</value>
+    <comment>Tracking document title</comment>
+  </data>
+    <data name="Copy" xml:space="preserve">
+    <value>Copy</value>
+    <comment>Copy label</comment>
+  </data>
+    <data name="Copies" xml:space="preserve">
+    <value>Copies</value>
+    <comment>Copies label</comment>
   </data>
     <data name="LinkedDocuments" xml:space="preserve">
     <value>Linked documents</value>

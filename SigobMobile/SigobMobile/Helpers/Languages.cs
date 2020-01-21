@@ -38,6 +38,8 @@
 
         #region Time Measures
         public static string AllDay => Resources.AllDay;
+        public static string Hour => Resources.Hour;
+        public static string Hours => Resources.Hours;
         public static string Day => Resources.Day;
         public static string Days => Resources.Days;
         public static string Month => Resources.Month;
@@ -290,6 +292,8 @@
         #region Correspondence Details
         public static string From = Resources.From;
         public static string To = Resources.To;
+        public static string Copy = Resources.Copy;
+        public static string Copies = Resources.Copies;
         public static string Senders = Resources.Senders;
         public static string Receivers = Resources.Receivers ;
         public static string ScannedDocuments = Resources.ScannedDocuments;
@@ -298,6 +302,7 @@
         public static string Attachment = Resources.Attachment;
         public static string Attachments = Resources.Attachments;
         public static string NoAttachments = Resources.NoAttachments;
+        public static string TrackingViewTitle = Resources.TrackingViewTitle;
         public static string Tracking = Resources.Tracking;
         public static string LinkedDocuments = Resources.LinkedDocuments;
         public static string NoLinkedDocuments = Resources.NoLinkedDocuments;

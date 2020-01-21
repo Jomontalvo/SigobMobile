@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:local="clr-namespace:SigobMobile.Helpers"
+             xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
+             xmlns:telerikPdfViewer="clr-namespace:Telerik.XamarinForms.PdfViewer;assembly=Telerik.XamarinForms.PdfViewer"
+             x:Class="SigobMobile.Views.Common.PdfViewerPage"
+             BackgroundColor="{StaticResource Key=defaultBackgroundView}"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="{local:Translate Attachment}"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            BindingContext="{Binding PdfViewer}"
+            Command="{Binding ShareDocumentCommand}"
+            IconImageSource="ic_bt_share"
+            Order="Primary"
+            Priority="0">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid
+            BindingContext="{Binding PdfViewer}"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="{StaticResource Key=StatusBarHeight}" />
+            </Grid.RowDefinitions>
+            <telerikPdfViewer:RadPdfViewerToolbar
+                Grid.Row="0"
+                PdfViewer="{Binding Source={x:Reference pdfViewer}}">
+                <telerikPdfViewer:ZoomInToolbarItem />
+                <telerikPdfViewer:ZoomOutToolbarItem />
+                <telerikPdfViewer:NavigateToNextPageToolbarItem/>
+                <telerikPdfViewer:NavigateToPreviousPageToolbarItem/>
+                <telerikPdfViewer:FitToWidthToolbarItem/>
+            </telerikPdfViewer:RadPdfViewerToolbar>
+            <!--PDF Viewer-->
+            <telerikPdfViewer:RadPdfViewer
+                Grid.Row="1"
+                LayoutMode="ContinuousScroll"
+                Source="{Binding DocPDF.UrlDocument}"
+                x:Name="pdfViewer">
+                <telerikPdfViewer:RadPdfViewer.BusyIndicatorTemplate>
+                    <DataTemplate>
+                        <telerikPrimitives:RadBusyIndicator
+                            AnimationContentColor="{StaticResource Key= {OnPlatform iOS=iOSBlue, Android=DroidPrimary}}"
+                            AnimationContentHeightRequest="40"
+                            AnimationContentWidthRequest="40"
+                            AnimationType="{OnPlatform iOS=Animation9, Android=Animation3}"
+                            IsBusy="True" />
+                    </DataTemplate>
+                </telerikPdfViewer:RadPdfViewer.BusyIndicatorTemplate>
+            </telerikPdfViewer:RadPdfViewer>
+            <telerikPrimitives:RadBorder
+                BackgroundColor="{StaticResource Key=softGray}"
+                BorderColor="{StaticResource accesoryGray}" 
+                CornerRadius="0"
+                Grid.Row="2">
+                <Label
+                    BackgroundColor="Transparent"
+                    FontSize="Small"
+                    HorizontalOptions="StartAndExpand"
+                    Margin="10,0,0,0"
+                    Text="{Binding DocPDF.Name}"
+                    VerticalOptions="Center">
+                </Label>
+            </telerikPrimitives:RadBorder>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

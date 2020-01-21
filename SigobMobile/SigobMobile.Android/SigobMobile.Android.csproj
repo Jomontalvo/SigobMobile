@@ -315,55 +315,55 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_doc_menu_0">
+    <AndroidResource Include="Resources\drawable\ic_doc_menu_0.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_doc_menu_1">
+    <AndroidResource Include="Resources\drawable\ic_doc_menu_1.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_doc_menu_2">
+    <AndroidResource Include="Resources\drawable\ic_doc_menu_2.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_doc_menu_3">
+    <AndroidResource Include="Resources\drawable\ic_doc_menu_3.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_doc_menu_4">
+    <AndroidResource Include="Resources\drawable\ic_doc_menu_4.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_doc_menu_5">
+    <AndroidResource Include="Resources\drawable\ic_doc_menu_5.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_doc_menu_6">
+    <AndroidResource Include="Resources\drawable\ic_doc_menu_6.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_doc_menu_7">
+    <AndroidResource Include="Resources\drawable\ic_doc_menu_7.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_doc_menu_8">
+    <AndroidResource Include="Resources\drawable\ic_doc_menu_8.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_doc_menu_9">
+    <AndroidResource Include="Resources\drawable\ic_doc_menu_9.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_doc_menu_10">
+    <AndroidResource Include="Resources\drawable\ic_doc_menu_10.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_doc_menu_100">
+    <AndroidResource Include="Resources\drawable\ic_doc_menu_100.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_doc_menu_group_folder">
+    <AndroidResource Include="Resources\drawable\ic_doc_menu_group_folder.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
@@ -508,6 +508,10 @@
       <Generator></Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\ic_doc_type_word.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\ic_doc_certificate.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>

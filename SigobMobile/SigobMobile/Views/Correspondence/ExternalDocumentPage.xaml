@@ -423,10 +423,24 @@
                         Text="{Binding ExternalDocument.TrackingInfo}"
                         TextColor="{StaticResource Key=darkGray}"
                         VerticalOptions="Center">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding GetTraceRouteCommand}" />
-                        </Label.GestureRecognizers>
                     </Label>
+                    <Image
+                        Grid.Column="1"
+                        Grid.Row="5"
+                        HorizontalOptions="End"
+                        Source="ic_chevron"
+                        VerticalOptions="Center"
+                        WidthRequest="16">
+                    </Image>
+                    <ContentView
+                        BackgroundColor="Transparent"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="5">
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GetTraceRouteCommand}" />
+                        </ContentView.GestureRecognizers>
+                    </ContentView>
                     <!--Separator-->
                     <BoxView
                         Color="{StaticResource Key=gray}"

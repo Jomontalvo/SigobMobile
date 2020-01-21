@@ -24,9 +24,7 @@
             Padding="0"
             RowSpacing="0">
             <Grid.RowDefinitions>
-                <!--Viewer-->
                 <RowDefinition Height="*" />
-                <!--Status Bar-->
                 <RowDefinition Height="{StaticResource Key=StatusBarHeight}" />
             </Grid.RowDefinitions>
             <WebView
@@ -34,6 +32,7 @@
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
                 Source="{Binding Doc.UrlDocument}">
+                <!--{Binding Doc.UrlDocument}-->
             </WebView>
             <!--Status Bar-->
             <telerikPrimitives:RadBorder

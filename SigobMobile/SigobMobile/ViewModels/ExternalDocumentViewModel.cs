@@ -77,6 +77,7 @@
         #region Commands
         public IAsyncCommand GetScannedCommand => new AsyncCommand(GetScannedAsync);
         public IAsyncCommand GetAttachmentsCommand => new AsyncCommand(GetAttachmentsAsync);
+        public IAsyncCommand GetTraceRouteCommand => new AsyncCommand(GetTraceRoute);
         #endregion
 
         #region Methods
@@ -116,6 +117,20 @@
             return;
         }
 
+        /// <summary>
+        /// Get document trace route
+        /// </summary>
+        /// <returns></returns>
+        private async Task GetTraceRoute()
+        {
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.DocumentTraceRoute = new DocumentTraceRouteViewModel(
+                ExternalDocument.Id,
+                ExternalDocument.CurrentCopy,
+                ExternalDocument.RegistrationCode);
+            await App.Navigator.PushAsync(new DocumentTraceRoutePage());
+            return;
+        }
 
         /// <summary>
         /// Load document details, difference between Request from Tray or Archive

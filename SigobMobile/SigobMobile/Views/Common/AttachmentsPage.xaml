@@ -8,7 +8,7 @@
              Title="{local:Translate Attachments}"
              ios:Page.UseSafeArea="true">
     <ContentPage.Content>
-            <StackLayout
+        <StackLayout
             BindingContext="{Binding Attachments}">
             <ListView
                 x:Name="list"
@@ -36,7 +36,7 @@
                                     WidthRequest="20">
                                 </Image>
                                 <Label
-                                    FontSize="Medium"
+                                    FontSize="Small"
                                     FontAttributes="Bold"
                                     Text="{Binding Name}"
                                     VerticalOptions="Center"/>

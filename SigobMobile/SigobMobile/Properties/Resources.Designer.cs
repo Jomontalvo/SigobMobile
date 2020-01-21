@@ -683,6 +683,18 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string Hour {
+            get {
+                return ResourceManager.GetString("Hour", resourceCulture);
+            }
+        }
+        
+        public static string Hours {
+            get {
+                return ResourceManager.GetString("Hours", resourceCulture);
+            }
+        }
+        
         public static string Day {
             get {
                 return ResourceManager.GetString("Day", resourceCulture);
@@ -1436,6 +1448,24 @@ namespace SigobMobile.Properties {
         public static string Tracking {
             get {
                 return ResourceManager.GetString("Tracking", resourceCulture);
+            }
+        }
+        
+        public static string TrackingViewTitle {
+            get {
+                return ResourceManager.GetString("TrackingViewTitle", resourceCulture);
+            }
+        }
+        
+        public static string Copy {
+            get {
+                return ResourceManager.GetString("Copy", resourceCulture);
+            }
+        }
+        
+        public static string Copies {
+            get {
+                return ResourceManager.GetString("Copies", resourceCulture);
             }
         }
         

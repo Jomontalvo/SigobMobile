@@ -304,19 +304,19 @@
     <BundleResource Include="Resources\ic_task_deadline.png" />
     <BundleResource Include="Resources\ic_bt_close_window_gray.png" />
     <BundleResource Include="Resources\splash.png" />
-    <BundleResource Include="Resources\ic_doc_menu_0" />
-    <BundleResource Include="Resources\ic_doc_menu_1" />
-    <BundleResource Include="Resources\ic_doc_menu_2" />
-    <BundleResource Include="Resources\ic_doc_menu_3" />
-    <BundleResource Include="Resources\ic_doc_menu_4" />
-    <BundleResource Include="Resources\ic_doc_menu_5" />
-    <BundleResource Include="Resources\ic_doc_menu_6" />
-    <BundleResource Include="Resources\ic_doc_menu_7" />
-    <BundleResource Include="Resources\ic_doc_menu_8" />
-    <BundleResource Include="Resources\ic_doc_menu_9" />
-    <BundleResource Include="Resources\ic_doc_menu_10" />
-    <BundleResource Include="Resources\ic_doc_menu_100" />
-    <BundleResource Include="Resources\ic_doc_menu_group_folder" />
+    <BundleResource Include="Resources\ic_doc_menu_0.png" />
+    <BundleResource Include="Resources\ic_doc_menu_1.png" />
+    <BundleResource Include="Resources\ic_doc_menu_2.png" />
+    <BundleResource Include="Resources\ic_doc_menu_3.png" />
+    <BundleResource Include="Resources\ic_doc_menu_4.png" />
+    <BundleResource Include="Resources\ic_doc_menu_5.png" />
+    <BundleResource Include="Resources\ic_doc_menu_6.png" />
+    <BundleResource Include="Resources\ic_doc_menu_7.png" />
+    <BundleResource Include="Resources\ic_doc_menu_8.png" />
+    <BundleResource Include="Resources\ic_doc_menu_9.png" />
+    <BundleResource Include="Resources\ic_doc_menu_10.png" />
+    <BundleResource Include="Resources\ic_doc_menu_100.png" />
+    <BundleResource Include="Resources\ic_doc_menu_group_folder.png" />
     <BundleResource Include="Resources\ic_checkmark" />
     <BundleResource Include="Resources\ic_notify_reply.png" />
     <BundleResource Include="Resources\ic_notify_priority.png" />
@@ -352,6 +352,7 @@
     <BundleResource Include="Resources\ic_doc_type_wma.png" />
     <BundleResource Include="Resources\ic_doc_type_wmv.png" />
     <BundleResource Include="Resources\ic_doc_type_word.png" />
+    <BundleResource Include="Resources\ic_doc_certificate.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />

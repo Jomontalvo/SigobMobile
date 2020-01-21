@@ -9,7 +9,6 @@
     using SigobMobile.Helpers;
     using SigobMobile.Interfaces;
     using Xamarin.Essentials;
-    using Xamarin.Forms;
 
     public class DocumentViewerViewModel : BaseViewModel
     {
@@ -88,7 +87,7 @@
                 if (!connection.IsSuccess)
                 {
                     this.IsRunning = false;
-                    await Application.Current.MainPage.DisplayAlert(
+                    await App.Navigator.CurrentPage.DisplayAlert(
                         Languages.Error,
                         connection.Message,
                         Languages.Cancel);
@@ -106,7 +105,7 @@
                 if (!response.IsSuccess)
                 {
                     this.IsRunning = false;
-                    await Application.Current.MainPage.DisplayAlert(
+                    await App.Navigator.CurrentPage.DisplayAlert(
                         title: Languages.Error,
                         message: response.Message,
                         cancel: Languages.Cancel);
@@ -118,7 +117,7 @@
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert(
+                await App.Navigator.CurrentPage.DisplayAlert(
                     Languages.Error,
                     $"{Languages.GeneralError}: {ex.Message}",
                     Languages.Cancel);
