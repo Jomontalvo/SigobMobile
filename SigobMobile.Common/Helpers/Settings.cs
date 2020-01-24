@@ -55,8 +55,6 @@
         /// management status.
         /// </summary>
         /// <value><c>true</c> if is visible management status; otherwise, <c>false</c>.</value>
-
-
         public static bool IsVisibleManagementStatus
         {
             get => AppSettings.GetValueOrDefault(isVisibleManagementStatus, SettingsFilterStatus);
@@ -205,14 +203,8 @@
         /// <value>The full name.</value>
         public static string FullName
         {
-            get
-            {
-                return AppSettings.GetValueOrDefault(userFullName, SettingsDefault);
-            }
-            set
-            {
-                AppSettings.AddOrUpdateValue(userFullName, value);
-            }
+            get => AppSettings.GetValueOrDefault(userFullName, SettingsDefault);
+            set => AppSettings.AddOrUpdateValue(userFullName, value);
         }
 
         /// <summary>
@@ -221,14 +213,8 @@
         /// <value>The full name.</value>
         public static string OfficeCode
         {
-            get
-            {
-                return AppSettings.GetValueOrDefault(officeCode, SettingsDefault);
-            }
-            set
-            {
-                AppSettings.AddOrUpdateValue(officeCode, value);
-            }
+            get => AppSettings.GetValueOrDefault(officeCode, SettingsDefault);
+            set => AppSettings.AddOrUpdateValue(officeCode, value);
         }
 
         #endregion

@@ -353,6 +353,7 @@
     <BundleResource Include="Resources\ic_doc_type_wmv.png" />
     <BundleResource Include="Resources\ic_doc_type_word.png" />
     <BundleResource Include="Resources\ic_doc_certificate.png" />
+    <BundleResource Include="Resources\ic_bt_slide_down_gray.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />

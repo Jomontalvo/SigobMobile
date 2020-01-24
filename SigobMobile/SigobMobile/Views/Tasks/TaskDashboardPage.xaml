@@ -55,11 +55,11 @@
                 Command="{Binding SwipeChartCommand}"                CommandParameter="Down"
                 Grid.Row="0"
                 Grid.RowSpan="2"
-                HeightRequest= "{OnPlatform Android=28, iOS=28}"
+                HeightRequest= "{OnPlatform Android=24, iOS=28}"
                 HorizontalOptions="End"
                 IsVisible="{Binding IsVisibleChart, Converter={StaticResource inverseBool}}"
                 Margin="0,0,15,0"
-                Source="ic_task_viewchart"
+                Source="ic_bt_slide_down_gray"
                 VerticalOptions="Center">
             </ImageButton>
             <Label
@@ -87,6 +87,68 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+                <telerikPrimitives:RadPopup.Popup>
+                    <telerikPrimitives:RadPopup
+                        x:Name="popup"
+                        IsModal="True"
+                        IsOpen="{Binding IsOpen}"
+                        OutsideBackgroundColor="#6F000000"
+                        Placement="Center">
+                        <telerikPrimitives:RadBorder
+                            CornerRadius="8" 
+                            BackgroundColor="White">
+                            <Grid Padding="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Grid.Row="0"
+                                    Text="{local:Translate SelectCalendarMessage}">
+                                </Label>
+                                <CollectionView
+                                    x:Name="collectionViewCalendar"
+                                    Footer=""
+                                    Grid.Row="1"
+                                    HorizontalOptions="FillAndExpand"
+                                    ItemsSource="{Binding CalendarSource}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid
+                                                Padding="16,10,10,10">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <controls:IconView 
+                                                    Grid.Column="0"
+                                                    Foreground="Beige"
+                                                    Source="ic_circle_color">
+                                                </controls:IconView>
+                                                <Label
+                                                    FontSize="Default"
+                                                    FontAttributes="{Binding IsBoldFontAttribute}"
+                                                    Grid.Column="1"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    Margin="5,0,0,0"
+                                                    Text="{Binding AgendaName}"
+                                                    VerticalOptions="Center"
+                                                    VerticalTextAlignment="Center">
+                                                </Label>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                                <Button
+                                    Command="{Binding CloseSelectCalendarCommand}"
+                                    Grid.Row="2"
+                                    Text="{local:Translate Cancel}">
+                                </Button>
+                            </Grid>
+                        </telerikPrimitives:RadBorder>
+                    </telerikPrimitives:RadPopup>
+                </telerikPrimitives:RadPopup.Popup>
                 <!--Chart component-->
                 <Frame
                     BorderColor="{StaticResource Key=grayBorder}"
@@ -224,7 +286,7 @@
                 </CollectionView>
             </Grid>
 
-            <!--Bottom ToolBar-->            <telerikPrimitives:RadBorder                BorderColor="{StaticResource accesoryGray}"                 CornerRadius="0"                Grid.Row="4">                <Grid                     BackgroundColor="{StaticResource softGray}"                    ColumnSpacing="0"                    RowSpacing="0"                    VerticalOptions="End">                    <Grid.ColumnDefinitions>                        <ColumnDefinition Width="*" />                    </Grid.ColumnDefinitions>                    <Button                         BackgroundColor="{StaticResource softGray}"                        Command="{Binding CheckAllCalendarsCommand}"                        Grid.Column="0"                        HorizontalOptions="CenterAndExpand"                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"                        Text="{local:Translate CalendarsTitle}">                    </Button>                </Grid>            </telerikPrimitives:RadBorder>
+            <!--Bottom ToolBar-->            <telerikPrimitives:RadBorder                BorderColor="{StaticResource accesoryGray}"                 CornerRadius="0"                Grid.Row="4">                <Grid                     BackgroundColor="{StaticResource softGray}"                    ColumnSpacing="0"                    RowSpacing="0"                    VerticalOptions="End">                    <Grid.ColumnDefinitions>                        <ColumnDefinition Width="*" />                        <ColumnDefinition Width="*" />                    </Grid.ColumnDefinitions>                    <Button                         BackgroundColor="{StaticResource softGray}"                        Command="{Binding SelectCalendarCommand}"                        Grid.Column="0"                        HorizontalOptions="CenterAndExpand"                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"                        Text="{local:Translate CalendarsTitle}">                    </Button>                    <Button                         BackgroundColor="{StaticResource softGray}"                        Command="{Binding CheckAllCalendarsCommand}"                        Grid.Column="1"                        HorizontalOptions="CenterAndExpand"                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"                        Text="{local:Translate ControlTitle}">                    </Button>                </Grid>            </telerikPrimitives:RadBorder>
         </Grid>        
     </ContentPage.Content>
 </ContentPage>

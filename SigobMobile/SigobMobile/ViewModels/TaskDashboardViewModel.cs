@@ -16,6 +16,7 @@
     using SigobMobile.Common.Helpers;
     using SigobMobile.Common.Models;
     using AsyncAwaitBestPractices.MVVM;
+    using Calendar = Models.Calendar;
 
     public class TaskDashboardViewModel : BaseViewModel
     {
@@ -24,11 +25,14 @@
         #endregion
 
         #region ApiControllers
+        internal string apiGetCalendarsController = "calendars";
         internal string apiGetTaskProfile = "tasks/profile";
         internal string apiGetTaskStatistics = "tasks/agenda/{0}/option/{1}";
         #endregion
 
         #region Attributes
+        private List<Calendar> calendarList;
+        private ObservableCollection<CalendarItemViewModel> calendars;
         private bool isAddItemVisible;
         private List<TaskSigob> taskList;
         private List<TaskCategoricalData> taskStatistics;
@@ -44,35 +48,47 @@
         private int selectedIndex = -1;
         private bool isVisibleChart;
         private bool isVisibleGraphTitle;
+        private bool isOpen;
         #endregion
 
         #region Properties
+        public ObservableCollection<CalendarItemViewModel> CalendarSource
+        {
+            get { return this.calendars; }
+            set { SetValue(ref this.calendars, value); }
+        }
+        public bool IsOpen
+        {
+            get => this.isOpen;
+            set => SetValue(ref this.isOpen, value);
+        }
+
         public ObservableCollection<string> SegmentedControlItems
         {
-            get { return this.segmentedControlItems; }
-            set { SetValue(ref this.segmentedControlItems, value); }
+            get => this.segmentedControlItems;
+            set => SetValue(ref this.segmentedControlItems, value);
         }
 
         public ObservableCollection<Segment> TaskStatus
         {
-            get { return this.taskStatus; }
-            set { SetValue(ref this.taskStatus, value); }
+            get => this.taskStatus;
+            set => SetValue(ref this.taskStatus, value);
         }
         public bool IsAddItemVisible
         {
-            get { return this.isAddItemVisible; }
-            set { SetValue(ref this.isAddItemVisible, value); }
+            get => this.isAddItemVisible;
+            set => SetValue(ref this.isAddItemVisible, value);
         }
         public ObservableCollection<TaskCategoricalData> TaskStatistics
         {
-            get { return this.taskStatisticsCollection; }
-            set { SetValue(ref this.taskStatisticsCollection, value); }
+            get => this.taskStatisticsCollection;
+            set => SetValue(ref this.taskStatisticsCollection, value);
         }
 
         public ObservableCollection<TaskSigob> TaskCollection
         {
-            get { return this.taskCollection; }
-            set { SetValue(ref this.taskCollection, value); }
+            get => this.taskCollection;
+            set => SetValue(ref this.taskCollection, value);
         }
 
         public ObservableCollection<TaskCategoricalData> ChartLegend
@@ -129,7 +145,8 @@
             this.IsVisibleChart = true;
             this.IsVisibleGraphTitle = false;
             IErrorHandler errorHandler = null;
-            LoadTaskBoardAsync().FireAndForgetSafeAsync(errorHandler);
+            this.LoadCalendars().FireAndForgetSafeAsync(errorHandler);
+            this.LoadTaskBoardAsync().FireAndForgetSafeAsync(errorHandler);
         }
         #endregion
 
@@ -288,13 +305,86 @@
                 Type = t.Type,
             });
         }
+
+        /// <summary>
+        /// Loads the calendars.
+        /// </summary>
+        private async Task LoadCalendars()
+        {
+            var connection = await this.apiService.CheckConnection();
+            if (!connection.IsSuccess)
+            {
+                this.IsRefreshing = false;
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    connection.Message,
+                    Languages.Cancel);
+                await Application.Current.MainPage.Navigation.PopModalAsync();
+                return;
+            }
+
+            var response = await this.apiService.GetList<Calendar>(
+                Settings.UrlBaseApiSigob,
+                App.PrefixApiSigob,
+                this.apiGetCalendarsController,
+                Settings.Token,
+                Settings.DbToken
+            );
+            if (!response.IsSuccess)
+            {
+                this.IsRefreshing = false;
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    response.Message,
+                    Languages.Cancel);
+                await Application.Current.MainPage.Navigation.PopModalAsync();
+                return;
+            }
+            calendarList = (List<Calendar>)response.Result;
+            this.CalendarSource = new ObservableCollection<CalendarItemViewModel>(ToCalendarItemViewModel());
+        }
+
+        /// <summary>
+        /// Convert list obtained with API Call to ViewModel ObservableCollection.
+        /// </summary>
+        /// <returns>The calendar item view model.</returns>
+        private IEnumerable<CalendarItemViewModel> ToCalendarItemViewModel()
+        {
+            return calendarList.Select(c => new CalendarItemViewModel
+            {
+                AgendaName = c.AgendaName,
+                BlueColor = c.BlueColor,
+                GreenColor = c.GreenColor,
+                IsOwner = c.IsOwner,
+                IsVisible = c.IsVisible,
+                ManagementCenterId = c.ManagementCenterId,
+                NumberColor = c.NumberColor,
+                OfficeId = c.OfficeId,
+                Permission = c.Permission,
+                RedColor = c.RedColor
+            }).Where(c => c.OfficeId != Settings.OfficeCode);
+        }
         #endregion
 
         #region Commands
         public ICommand SliceTappedCommand => new RelayCommand<ChartSelectionBehavior>(SliceTapped);
         public ICommand RefreshTaskListCommand => new RelayCommand<ChartSelectionBehavior>(RefreshTaskList);
         public IAsyncCommand RefreshCommand => new AsyncCommand(RefreshAsync);
+        public ICommand SelectCalendarCommand => new RelayCommand(SelectCalendar);
+        public ICommand CloseSelectCalendarCommand => new RelayCommand(CloseSelectCalendar);
+
+        private void CloseSelectCalendar()
+        {
+            this.IsOpen = false;
+        }
+
+        private void SelectCalendar()
+        {
+            this.IsOpen = true;
+        }
+
         public ICommand SwipeChartCommand => new RelayCommand<string>(SwipeChart);
+
 
         private void SwipeChart(string direction)
         {

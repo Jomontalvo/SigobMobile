@@ -45,9 +45,11 @@
         public decimal Duration { get; set; }
 
         [JsonProperty("unidadMedida")]
-        public string UnidadMedida { get; set; }
+        public string MeasureUnit { get; set; }
 
         [JsonProperty("duracionGestionEsperada")]
-        public int DuracionGestionEsperada { get; set; }
+        public int ExpectedDuration { get; set; }
+
+        public bool IsCompleted { get => Duration != 0; }
     }
 }

@@ -1277,6 +1277,30 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string TaskControl {
+            get {
+                return ResourceManager.GetString("TaskControl", resourceCulture);
+            }
+        }
+        
+        public static string ControlTitle {
+            get {
+                return ResourceManager.GetString("ControlTitle", resourceCulture);
+            }
+        }
+        
+        public static string PersonalControl {
+            get {
+                return ResourceManager.GetString("PersonalControl", resourceCulture);
+            }
+        }
+        
+        public static string GeneralControl {
+            get {
+                return ResourceManager.GetString("GeneralControl", resourceCulture);
+            }
+        }
+        
         public static string ManagementTray {
             get {
                 return ResourceManager.GetString("ManagementTray", resourceCulture);
@@ -1466,6 +1490,24 @@ namespace SigobMobile.Properties {
         public static string Copies {
             get {
                 return ResourceManager.GetString("Copies", resourceCulture);
+            }
+        }
+        
+        public static string OfficialStart {
+            get {
+                return ResourceManager.GetString("OfficialStart", resourceCulture);
+            }
+        }
+        
+        public static string CurrentOfficial {
+            get {
+                return ResourceManager.GetString("CurrentOfficial", resourceCulture);
+            }
+        }
+        
+        public static string OfficialEnd {
+            get {
+                return ResourceManager.GetString("OfficialEnd", resourceCulture);
             }
         }
         

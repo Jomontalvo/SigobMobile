@@ -942,7 +942,24 @@ If you have problems, contact with administrator.</value>
     <value>Tasks close to deadline</value>
     <comment>Tasks close to deadline label. Query Id = 11</comment>
   </data>
-<!--    Type Document Trays -->
+  <!--Task Controls and Options-->
+    <data name="TaskControl" xml:space="preserve">
+    <value>Task control</value>
+    <comment>Tasks control title</comment>
+  </data>
+    <data name="ControlTitle" xml:space="preserve">
+    <value>Control</value>
+    <comment>Control title</comment>
+  </data>
+    <data name="PersonalControl" xml:space="preserve">
+    <value>Personal control</value>
+    <comment>Personal control title</comment>
+  </data>
+    <data name="GeneralControl" xml:space="preserve">
+    <value>Main control</value>
+    <comment>Main control</comment>
+  </data>
+  <!--    Type Document Trays -->
     <data name="ManagementTray" xml:space="preserve">
     <value>Correspondence trays</value>
     <comment>Management documents group name </comment>
@@ -1063,7 +1080,6 @@ If you have problems, contact with administrator.</value>
     <value>Trace route: {0} steps ({1} {2})</value>
     <comment>Tracking document</comment>
   </data>
-    
     <data name="TrackingViewTitle" xml:space="preserve">
     <value>Copies and routes</value>
     <comment>Tracking document title</comment>
@@ -1075,6 +1091,18 @@ If you have problems, contact with administrator.</value>
     <data name="Copies" xml:space="preserve">
     <value>Copies</value>
     <comment>Copies label</comment>
+  </data>
+    <data name="OfficialStart" xml:space="preserve">
+    <value>Started:</value>
+    <comment>Start Offical name</comment>
+  </data>
+    <data name="CurrentOfficial" xml:space="preserve">
+    <value>Currently:</value>
+    <comment>Currently official</comment>
+  </data>
+    <data name="OfficialEnd" xml:space="preserve">
+    <value>Completed:</value>
+    <comment>Finish official</comment>
   </data>
     <data name="LinkedDocuments" xml:space="preserve">
     <value>Linked documents</value>

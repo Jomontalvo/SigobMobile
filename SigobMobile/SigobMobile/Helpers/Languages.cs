@@ -252,6 +252,10 @@
         public static string TaskCopies => Resources.TaskCopies;
         public static string TaskMessages => Resources.TaskMessages;
         public static string TaskCloseToDeadline => Resources.TaskCloseToDeadline;
+        public static string TaskControl => Resources.TaskControl;
+        public static string ControlTitle => Resources.ControlTitle;
+        public static string PersonalControl => Resources.PersonalControl;
+        public static string GeneralControl => Resources.GeneralControl;
         #endregion
 
         #region Correspondence Menu View
@@ -302,7 +306,6 @@
         public static string Attachment = Resources.Attachment;
         public static string Attachments = Resources.Attachments;
         public static string NoAttachments = Resources.NoAttachments;
-        public static string TrackingViewTitle = Resources.TrackingViewTitle;
         public static string Tracking = Resources.Tracking;
         public static string LinkedDocuments = Resources.LinkedDocuments;
         public static string NoLinkedDocuments = Resources.NoLinkedDocuments;
@@ -316,7 +319,14 @@
         public static string Results = Resources.Results;
         public static string TransferredBy = Resources.TransferredBy;
         public static string NoTags = Resources.NoTags;
-        
+        #endregion
+
+        #region Document Trace
+        public static string TrackingViewTitle = Resources.TrackingViewTitle;
+        public static string OfficialStart = Resources.OfficialStart;
+        public static string CurrentOfficial = Resources.CurrentOfficial;
+        public static string OfficialEnd = Resources.OfficialEnd;
+
         #endregion
 
         #region Reply Status
