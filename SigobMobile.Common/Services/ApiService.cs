@@ -689,6 +689,60 @@
         #region DELETE API Call
 
         /// <summary>
+        /// Delete the specified urlBase, servicePrefix, controller, tokenType, accessToken.
+        /// </summary>
+        /// <returns>The delete.</returns>
+        /// <param name="urlBase">URL base.</param>
+        /// <param name="servicePrefix">Service prefix.</param>
+        /// <param name="controller">Controller.</param>
+        /// <param name="tokenType">Token type.</param>
+        /// <param name="accessToken">Access token.</param>
+        /// <param name="id">Object id to delete.</param>
+        public async Task<Response> DeleteAsync(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            string authToken,
+            string authDbToken,
+            int id)
+        {
+            using var client = new HttpClient
+            {
+                BaseAddress = new Uri(urlBase)
+            };
+            try
+            {
+                client.DefaultRequestHeaders.Add("token", authToken);
+                client.DefaultRequestHeaders.Add("dbtoken", authDbToken);
+                var url = $"{servicePrefix}{controller}/{id}";
+                var response = await client.DeleteAsync(url);
+                var answer = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = answer,
+                    };
+                }
+                return new Response
+                {
+                    IsSuccess = true,
+                    Message = "Ok"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+            }
+            finally { client.Dispose(); }
+        }
+
+        /// <summary>
         /// Delete the specified urlBase, servicePrefix, controller, tokenType, accessToken and model.
         /// </summary>
         /// <returns>The delete.</returns>

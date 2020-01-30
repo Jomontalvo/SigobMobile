@@ -7,6 +7,7 @@
     using SigobMobile.Common.Models;
     using SigobMobile.Common.Services;
     using SigobMobile.Helpers;
+    using SigobMobile.Interfaces;
     using SigobMobile.Views.Common;
     using Xamarin.Essentials;
     using Xamarin.Forms;
@@ -32,6 +33,7 @@
         #region Methods
         private async Task SelectAttachmentAsync()
         {
+            
             var mainViewModel = MainViewModel.GetInstance();
             if (this.FileType == DocumentType.PDF)
             {
@@ -89,7 +91,18 @@
                 bool canOpen = await Launcher.CanOpenAsync(localDocument.UrlDocument);
                 if (canOpen)
                 {
-                    await Launcher.TryOpenAsync(new Uri(localDocument.UrlDocument));
+                    string filename = string.Empty;
+                    Uri uri = new Uri(localDocument.UrlDocument);
+                    if (uri.IsFile)
+                    {
+                        filename = System.IO.Path.GetFileName(uri.LocalPath);
+                    }
+                    else return;
+                    await Launcher.OpenAsync(new OpenFileRequest
+                    {
+                        Title = localDocument.Name,
+                        File = new ReadOnlyFile(filename)
+                    }) ;
                 }
             }
             catch (Exception ex)

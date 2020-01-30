@@ -18,7 +18,7 @@
 
     public enum TStatusTasK    {        Programmed = 0,        InManagement = 1,        Finished = 6,        PendingSend = 7,        FinishedIncomplete = 8,        Suspended = 9,        ToSendByEmail = 10,        ErrorSendEmail = 11,        Delayed = 12    }
 
-    public enum TTrafficLightStatus : long
+    public enum TTrafficLightStatus : int
     {
         InProgress = 0,
         Overdue = 1,
@@ -96,25 +96,25 @@
         public int ReportStatus { get; set; }
 
         [JsonProperty("estadoDescripcion")]
-        public string StatusDescrition { get; set; }
+        public string StatusDescription { get; set; }
 
         [JsonProperty("fechaFinProgramada")]
-        public DateTimeOffset EndProgrammedDate { get; set; }
+        public DateTime EndProgrammedDate { get; set; }
 
         [JsonProperty("fechaFinalizada")]
-        public DateTimeOffset EndDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         [JsonProperty("fechaInicio")]
-        public DateTimeOffset StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         [JsonProperty("fechaModificacionDetalle")]
-        public DateTimeOffset ModificationDatailDate { get; set; }
+        public DateTime ModificationDatailDate { get; set; }
 
         [JsonProperty("fechaModificacionReporte")]
-        public DateTimeOffset ModificationReportDate { get; set; }
+        public DateTime ModificationReportDate { get; set; }
 
         [JsonProperty("fechaProximoReporte")]
-        public DateTimeOffset NextReportDate { get; set; }
+        public DateTime NextReportDate { get; set; }
 
         [JsonProperty("historicoDetalle")]
         public string HistoricalDetail { get; set; }
@@ -213,6 +213,29 @@
         public bool HasMessage { get; set; }
 
         public string InitialsOfResponsible => RegexUtilities.ExtractInitialsFromName(ResponsibleName);
+
+        public TTrafficLightStatus TrafficLight
+        {
+            get
+            {
+                if (Status != TStatusTasK.Finished && Status != TStatusTasK.FinishedIncomplete && Status != TStatusTasK.Suspended)
+                {
+                    TimeSpan diff = EndProgrammedDate.Subtract(DateTime.Today);
+                    TTrafficLightStatus result = (int)diff.TotalDays switch
+                    {
+                        int days when days > 2 => TTrafficLightStatus.InProgress,
+                        int days when days >= 0 && days <= 2 => TTrafficLightStatus.CloseToDeadline,
+                        int days when days < 0 => TTrafficLightStatus.Overdue,
+                        _ => TTrafficLightStatus.Completed
+                    };
+                    return result;
+                }
+                else
+                {
+                    return TTrafficLightStatus.Completed;
+                }
+            }
+        }
     }
 
     public class ParentEntity

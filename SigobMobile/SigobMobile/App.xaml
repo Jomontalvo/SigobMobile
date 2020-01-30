@@ -11,6 +11,7 @@
         <!--Coverters-->
         <ResourceDictionary>
             <local:IntToBoolConverter x:Key="intToBool" />
+            <local:EmptyToBoolConverter x:Key="strToBool" />
             <local:InverseBooleanConverter x:Key="inverseBool" />
             <local:BoldConverter x:Key="boolToBold" />
             <local:ItalicConverter x:Key="boolToItalic" />

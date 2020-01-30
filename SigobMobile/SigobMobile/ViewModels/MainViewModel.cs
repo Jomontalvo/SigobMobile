@@ -45,6 +45,8 @@
         #region Task Views
         public TaskViewModel Task { get; set; }
         public TaskDashboardViewModel TaskDashboard { get; set; }
+        public EditTaskViewModel EditTask { get; set; }
+        public EventTasksViewModel EventTasks { get; set; }
         #endregion
 
         #region Contacts Views

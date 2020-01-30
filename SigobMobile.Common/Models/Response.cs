@@ -1,5 +1,7 @@
 ﻿namespace SigobMobile.Common.Models
 {
+    using Newtonsoft.Json;
+
     /// <summary>
     /// Response when request an API EndPoint
     /// </summary>
@@ -24,6 +26,9 @@
         public object Result { get; set; }
     }
 
+    /// <summary>
+    /// Transaction response (Put Endpoint)
+    /// </summary>
     public class TransactionResponse
     {
         /// <summary>
@@ -36,6 +41,7 @@
         /// Gets or sets the transaction message.
         /// </summary>
         /// <value>The transaction message.</value>
+        [JsonProperty("message")]
         public string TransactionMessage { get; set;  }
     }
 }

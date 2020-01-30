@@ -117,6 +117,21 @@
         }
         #endregion
 
+        #region Async Commands
+        public ICommand AppointmentTappedCommand => new AsyncCommand<AppointmentTapCommandContext>(AppointmentTapped, CanExecute);
+        public ICommand CellDateTappedCommand => new AsyncCommand<CalendarDayCell>(CellDateTapped);
+        public IAsyncCommand SetCalendarViewModeCommand => new AsyncCommand(SetCalendarViewMode);
+        public IAsyncCommand BackToMainPageCommand => new AsyncCommand(BackToMainPage);
+        public IAsyncCommand InstructionsListCommand => new AsyncCommand(InstructionsList);
+        public IAsyncCommand OpenCalendarsCommand => new AsyncCommand(OpenCalendars);
+        public IAsyncCommand OpenFiltersCommand => new AsyncCommand(OpenFilters);
+        public IAsyncCommand AddItemCommand => new AsyncCommand(AddItem);
+        #endregion
+
+        #region Commands
+        public ICommand GoTodayCommand => new RelayCommand(GoToday);
+        #endregion
+
         #region Methods
         /// <summary>
         /// Load the appointments.
@@ -167,39 +182,42 @@
                 return;
             }
             this.eventList = (List<AppointmentItem>)response.Result;
-            this.Events = new ObservableCollection<Event>(ToCalendarEvents());
             this.IsRunning = false;
+            this.RefresEventList();
+
+            //this.Events = new ObservableCollection<Event>(ToCalendarEvents());
+            
         }
 
-        private IEnumerable<Event> ToCalendarEvents()
-        {
-            return this.eventList.Select(l => new Event
-            {
-                Id = l.Id,
-                Title = (l.Status == StatusAppointment.Suspended) ? $"[{Languages.SuspendedStatus}] {ConvertNullToEmpty(l.Description)}" : l.IsTentative ? $"{ConvertNullToEmpty(l.Description)} ({Languages.TentativeLabel})" : ConvertNullToEmpty(l.Description),
-                Color = l.IsTask ? Color.FromRgb(l.RedColorType, l.GreenColorType, l.BlueColorType) : (l.Status != StatusAppointment.Suspended) ? Color.FromRgb(l.RedColorItem, l.GreenColorItem, l.BlueColorItem) : (Color)Application.Current.Resources["grayBorder"],
-                Detail = l.Place,
-                StartDate = (l.Id == 0 || l.IsTask) ? l.End.DateTime.ToLocalTime().Date : l.Start.DateTime.ToLocalTime(), // IsHoliday or Task Control 
-                EndDate = (l.Id == 0 || l.IsTask) ? l.End.DateTime.ToLocalTime().Date.AddMinutes(1) : l.End.DateTime.ToLocalTime(),
-                IsAllDay = l.IsTask || l.Id == 0 || ((l.End - l.Start).Hours >= 24),
-                IsLocked = l.IsVisible == 1,
-                IsTentative = l.IsTentative,
-                Owner = l.AgendaOwner,
-                OwnerInitials = (!Settings.IsEventColorByCalendar)?l.OwnerInitials:string.Empty,
-                Programmer = l.ProgrammerAgenda,
-                TypeColor = Color.FromRgb(l.RedColorType, l.GreenColorType, l.BlueColorType),
-                ModuleType = l.ModuleType,
-                IsHighlighted = l.IsHighlighted,
-                IsTask = l.IsTask,
-                IsVisible = (l.IsVisible == 1),
-                SecurityLevel = l.SecurityLevel,
-                TypeId = l.TypeId,
-                Status = l.Status,
-                IconSize = (!Settings.IsEventColorByCalendar) ? (byte)24 : (byte)12,
-            }).Where(l => (Settings.IsVisibleManagementStatus && (l.Status == StatusAppointment.InManagement))
-                        || (Settings.IsVisibleCompletedStatus && (l.Status == StatusAppointment.Finished))
-                        || (Settings.IsVisibleSuspendStatus && (l.Status == StatusAppointment.Suspended)));
-        }
+        //private IEnumerable<Event> ToCalendarEvents()
+        //{
+        //    return this.eventList.Select(l => new Event
+        //    {
+        //        Id = l.Id,
+        //        Title = (l.Status == StatusAppointment.Suspended) ? $"[{Languages.SuspendedStatus}] {ConvertNullToEmpty(l.Description)}" : l.IsTentative ? $"{ConvertNullToEmpty(l.Description)} ({Languages.TentativeLabel})" : ConvertNullToEmpty(l.Description),
+        //        Color = l.IsTask ? Color.FromRgb(l.RedColorType, l.GreenColorType, l.BlueColorType) : (l.Status != StatusAppointment.Suspended) ? Color.FromRgb(l.RedColorItem, l.GreenColorItem, l.BlueColorItem) : (Color)Application.Current.Resources["grayBorder"],
+        //        Detail = l.Place,
+        //        StartDate = (l.Id == 0 || l.IsTask) ? l.End.DateTime.ToLocalTime().Date : l.Start.DateTime.ToLocalTime(), // IsHoliday or Task Control 
+        //        EndDate = (l.Id == 0 || l.IsTask) ? l.End.DateTime.ToLocalTime().Date.AddMinutes(1) : l.End.DateTime.ToLocalTime(),
+        //        IsAllDay = l.IsTask || l.Id == 0 || ((l.End - l.Start).Hours >= 24),
+        //        IsLocked = l.IsVisible == 1,
+        //        IsTentative = l.IsTentative,
+        //        Owner = l.AgendaOwner,
+        //        OwnerInitials = (!Settings.IsEventColorByCalendar)?l.OwnerInitials:string.Empty,
+        //        Programmer = l.ProgrammerAgenda,
+        //        TypeColor = Color.FromRgb(l.RedColorType, l.GreenColorType, l.BlueColorType),
+        //        ModuleType = l.ModuleType,
+        //        IsHighlighted = l.IsHighlighted,
+        //        IsTask = l.IsTask,
+        //        IsVisible = (l.IsVisible == 1),
+        //        SecurityLevel = l.SecurityLevel,
+        //        TypeId = l.TypeId,
+        //        Status = l.Status,
+        //        IconSize = (!Settings.IsEventColorByCalendar) ? (byte)24 : (byte)12,
+        //    }).Where(l => (Settings.IsVisibleManagementStatus && (l.Status == StatusAppointment.InManagement))
+        //                || (Settings.IsVisibleCompletedStatus && (l.Status == StatusAppointment.Finished))
+        //                || (Settings.IsVisibleSuspendStatus && (l.Status == StatusAppointment.Suspended)));
+        //}
 
         private string ConvertNullToEmpty(string str)
         {
@@ -323,11 +341,59 @@
                 }
                 else
                 {
-                    appViewModel.Task = new TaskViewModel(eventSelected);
+                    appViewModel.Task = new TaskViewModel(eventSelected.Id);
                     await App.Navigator.PushAsync(new TaskPage());
                 }
                 this.SelectedDate = Settings.SelectedDate;
             }
+        }
+
+        /// <summary>
+        /// Delete item in Observable Collection
+        /// </summary>
+        /// <param name="id"></param>
+        internal void DeleteEventInList(int id)
+        {
+            var previousEvent = this.eventList.Where(p => p.Id == id).FirstOrDefault();
+            if (previousEvent != null)
+            {
+                this.eventList.Remove(previousEvent);
+            }
+            this.RefresEventList();
+        }
+
+        /// <summary>
+        /// Convert List to Observable Collectionm
+        /// </summary>
+        internal void RefresEventList()
+        {
+            this.Events = new ObservableCollection<Event>(
+                this.eventList.Select(l => new Event
+                {
+                    Id = l.Id,
+                    Title = (l.Status == StatusAppointment.Suspended) ? $"[{Languages.SuspendedStatus}] {ConvertNullToEmpty(l.Description)}" : l.IsTentative ? $"{ConvertNullToEmpty(l.Description)} ({Languages.TentativeLabel})" : ConvertNullToEmpty(l.Description),
+                    Color = l.IsTask ? Color.FromRgb(l.RedColorType, l.GreenColorType, l.BlueColorType) : (l.Status != StatusAppointment.Suspended) ? Color.FromRgb(l.RedColorItem, l.GreenColorItem, l.BlueColorItem) : (Color)Application.Current.Resources["grayBorder"],
+                    Detail = l.Place,
+                    StartDate = (l.Id == 0 || l.IsTask) ? l.End.DateTime.ToLocalTime().Date : l.Start.DateTime.ToLocalTime(), // IsHoliday or Task Control 
+                    EndDate = (l.Id == 0 || l.IsTask) ? l.End.DateTime.ToLocalTime().Date.AddMinutes(1) : l.End.DateTime.ToLocalTime(),
+                    IsAllDay = l.IsTask || l.Id == 0 || ((l.End - l.Start).Hours >= 24),
+                    IsLocked = l.IsVisible == 1,
+                    IsTentative = l.IsTentative,
+                    Owner = l.AgendaOwner,
+                    OwnerInitials = (!Settings.IsEventColorByCalendar) ? l.OwnerInitials : string.Empty,
+                    Programmer = l.ProgrammerAgenda,
+                    TypeColor = Color.FromRgb(l.RedColorType, l.GreenColorType, l.BlueColorType),
+                    ModuleType = l.ModuleType,
+                    IsHighlighted = l.IsHighlighted,
+                    IsTask = l.IsTask,
+                    IsVisible = (l.IsVisible == 1),
+                    SecurityLevel = l.SecurityLevel,
+                    TypeId = l.TypeId,
+                    Status = l.Status,
+                    IconSize = (!Settings.IsEventColorByCalendar) ? (byte)28 : (byte)12,
+                }).Where(l => (Settings.IsVisibleManagementStatus && (l.Status == StatusAppointment.InManagement))
+                            || (Settings.IsVisibleCompletedStatus && (l.Status == StatusAppointment.Finished))
+                            || (Settings.IsVisibleSuspendStatus && (l.Status == StatusAppointment.Suspended))).ToList());
         }
 
         /// <summary>
@@ -486,21 +552,5 @@
             return !IsRunning;
         }
         #endregion
-
-        #region Async Commands
-        public ICommand AppointmentTappedCommand => new AsyncCommand<AppointmentTapCommandContext>(AppointmentTapped, CanExecute);
-        public ICommand CellDateTappedCommand => new AsyncCommand<CalendarDayCell>(CellDateTapped);
-        public IAsyncCommand SetCalendarViewModeCommand => new AsyncCommand(SetCalendarViewMode);
-        public IAsyncCommand BackToMainPageCommand => new AsyncCommand(BackToMainPage);
-        public IAsyncCommand InstructionsListCommand => new AsyncCommand(InstructionsList);
-        public IAsyncCommand OpenCalendarsCommand => new AsyncCommand(OpenCalendars);
-        public IAsyncCommand OpenFiltersCommand => new AsyncCommand(OpenFilters);
-        public IAsyncCommand AddItemCommand => new AsyncCommand(AddItem);
-        #endregion
-
-        #region Commands
-        public ICommand GoTodayCommand => new RelayCommand(GoToday);
-        #endregion
-
     }
 }

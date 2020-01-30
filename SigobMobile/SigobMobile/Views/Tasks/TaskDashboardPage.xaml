@@ -181,6 +181,7 @@
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
@@ -194,7 +195,7 @@
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="{Binding Title}"
-                                                            TextDecorations="Strikethrough" 
+                                                            TextDecorations="None" 
                                                             TextColor="{StaticResource Key=darkGray}"/>
                                                 </FormattedString>
                                             </Label.FormattedText>
@@ -209,10 +210,21 @@
                                             LineBreakMode="TailTruncation"
                                             VerticalOptions="End">
                                         </Label>
+                                        <Label
+                                            FontSize="Small"
+                                            Grid.Row="2"
+                                            Grid.Column="1"
+                                            HorizontalOptions="FillAndExpand"
+                                            Text="{Binding Status}"
+                                            TextColor="{StaticResource Key=darkGray}"
+                                            LineBreakMode="TailTruncation"
+                                            VerticalOptions="End">
+                                        </Label>
                                         <StackLayout
                                             Grid.Column="1"
-                                            Grid.Row="2"
-                                            Orientation="Horizontal">
+                                            Grid.Row="3"
+                                            Orientation="Horizontal"
+                                            Spacing="15">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition />
@@ -221,11 +233,33 @@
                                                 <Image
                                                     Grid.Column="0"
                                                     HeightRequest="16"
-                                                    Source="ic_ev_calendar">
+                                                    Source="ic_ev_calendar"
+                                                    VerticalOptions="Center">
                                                 </Image>
                                                 <Label
                                                     Grid.Column="1"
-                                                    Text="1">
+                                                    Text="{Binding InitialsOfResponsible}"
+                                                    TextColor="{StaticResource Key=darkGray}"
+                                                    VerticalOptions="Center">
+                                                </Label>
+                                            </Grid>
+                                            <Grid
+                                                IsVisible="{Binding HasMessage}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <Image
+                                                    Grid.Column="0"
+                                                    HeightRequest="16"
+                                                    Source="ic_ev_summary"
+                                                    VerticalOptions="Center">
+                                                </Image>
+                                                <Label
+                                                    Grid.Column="1"
+                                                    Text="{local:Translate TaskMessages}"
+                                                    TextColor="{StaticResource Key=darkGray}"
+                                                    VerticalOptions="Center">
                                                 </Label>
                                             </Grid>
                                             <Grid>
@@ -236,30 +270,18 @@
                                                 <Image
                                                     Grid.Column="0"
                                                     HeightRequest="16"
-                                                    Source="ic_ev_summary">
+                                                    Source="ic_ev_tasks"
+                                                    VerticalOptions="Center">
                                                 </Image>
                                                 <Label
                                                     Grid.Column="1"
-                                                    Text="1">
-                                                </Label>
-                                            </Grid>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition />
-                                                    <ColumnDefinition />
-                                                </Grid.ColumnDefinitions>
-                                                <Image
-                                                    Grid.Column="0"
-                                                    HeightRequest="16"
-                                                    Source="ic_ev_tasks">
-                                                </Image>
-                                                <Label
-                                                    Grid.Column="1"
-                                                    Text="1">
+                                                    Text="{Binding DaysLate}"
+                                                    TextColor="{StaticResource Key=darkGray}"
+                                                    VerticalOptions="Center">
                                                 </Label>
                                             </Grid>
                                             <Frame
-                                                BackgroundColor="IndianRed"
+                                                BackgroundColor="{Binding TTrafficLightColor}"
                                                 HasShadow="False"
                                                 Padding="4">
                                                 <Grid
@@ -273,7 +295,7 @@
                                                         TextColor="White"
                                                         FontSize="Small"
                                                         Grid.Column="1"
-                                                        Text="Oct 18">
+                                                        Text="{Binding EndProgrammedDate, StringFormat='{0:MMM dd, yy}'}">
                                                     </Label>
                                                 </Grid>
                                             </Frame>

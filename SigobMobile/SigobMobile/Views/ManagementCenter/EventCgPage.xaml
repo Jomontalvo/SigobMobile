@@ -5,7 +5,7 @@
     x:Class="SigobMobile.Views.ManagementCenter.EventCgPage"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:lang="clr-namespace:SigobMobile.Helpers"
-    xmlns:controls="clr-namespace:SigobMobile.Controls"
+    xmlns:controls="clr-namespace:SigobMobile.Controls" xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
     BackgroundColor="{StaticResource defaultBackgroundView}"
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
     ios:Page.UseSafeArea="true">
@@ -20,9 +20,16 @@
         </controls:ToolbarItemEx>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout
-            BindingContext="{Binding EventCg}">
+        <Grid
+            BindingContext="{Binding EventCg}"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="{StaticResource Key=StatusBarHeight}" />
+            </Grid.RowDefinitions>
+            <!--Event Details-->
             <ScrollView
+                Grid.Row="0"
                 Padding="10,5,5,0"
                 VerticalOptions="StartAndExpand">
                 <StackLayout>
@@ -75,15 +82,29 @@
                                 TextColor="{StaticResource darkGray}"
                                 VerticalOptions="Center">
                             </Label>
+                            <StackLayout
+                                Orientation="Horizontal"
+                                Spacing="2">
+                                <Label
+                                    FontSize="Small"
+                                    Text="{lang:Translate EventProgrammerText}"
+                                    TextColor="{StaticResource lightBlack}"
+                                    VerticalOptions="Center">
+                                </Label>
+                                <Label
+                                    FontSize="Small"
+                                    Text="{Binding LocalEvent.ProgrammerName}"
+                                    TextColor="{StaticResource lightBlack}"
+                                    VerticalOptions="Center">
+                                </Label>
+                            </StackLayout>
                         </StackLayout>
                     </Grid>
                     <Grid
                         ColumnSpacing="15"
-                        Padding="5,0">
+                        Padding="5,0"
+                        RowSpacing="0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -97,20 +118,41 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
+                        <!--Location-->
                         <Image
                             Grid.Column="0"
                             Grid.Row="0"
+                            IsVisible="{Binding IsLocationVisible}"
                             Source="ic_ev_location"
                             VerticalOptions="Center">
                         </Image>
                         <Label
                             Grid.Column="1"
                             Grid.Row="0"
-                            FontSize="Small"
+                            FontSize="Medium"
+                            IsVisible="{Binding IsLocationVisible}"
                             Text="{Binding LocalEvent.Location}"
                             TextColor="{StaticResource darkGray}"
                             VerticalOptions="Center">
                         </Label>
+                        <StackLayout
+                            Grid.Column="2"
+                            Grid.Row="0"
+                            Orientation="Horizontal">
+                            <Image
+                                HeightRequest="20"
+                                HorizontalOptions="Center"
+                                Source="{Binding IconStatus}"
+                                VerticalOptions="Center">
+                            </Image>
+                            <Image
+                                HeightRequest="20"
+                                HorizontalOptions="Center"
+                                Margin="5,0"
+                                Source="{Binding IconPrivacy}"
+                                VerticalOptions="Center">
+                            </Image>
+                        </StackLayout>
                         <!--Separator 1-->
                         <BoxView
                             Color="{StaticResource gray}"
@@ -118,39 +160,26 @@
                             Grid.Row="1"
                             Grid.ColumnSpan="3"
                             HeightRequest="1"
-                            HorizontalOptions="FillAndExpand">
+                            HorizontalOptions="FillAndExpand"
+                            Margin="0,5,0,10">
                         </BoxView>
                         <!--Second Section-->
-                        <Frame
+                        <!--Owner-->
+                        <Image
                             Grid.Column="0"
-                            Grid.ColumnSpan="2"
                             Grid.Row="2"
-                            HasShadow="False"
-                            Padding="0,10">
-                            <Grid
-                                ColumnSpacing="15">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="20" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <Image
-                                    Grid.Column="0"
-                                    HorizontalOptions="Center"
-                                    Source="ic_ev_calendar"
-                                    VerticalOptions="Center">
-                                </Image>
-                                <Label
-                                    FontSize="Small"
-                                    Grid.Column="1"
-                                    Text="{Binding LocalEvent.CalendarName}"
-                                    TextColor="{StaticResource darkGray}"
-                                    VerticalOptions="Center">
-                                </Label>
-                            </Grid>
-                        </Frame>
+                            HorizontalOptions="Center"
+                            Source="ic_ev_calendar"
+                            VerticalOptions="Center">
+                        </Image>
+                        <Label
+                            Grid.Column="1"
+                            Grid.Row="2"
+                            Text="{Binding LocalEvent.CalendarName}"
+                            TextColor="{StaticResource darkGray}"
+                            VerticalOptions="Center">
+                        </Label>
+                        <!--Event type-->
                         <controls:IconView
                             Grid.Column="0"
                             Grid.Row="3"
@@ -163,7 +192,6 @@
                             WidthRequest="20">
                         </controls:IconView>
                         <Label
-                            FontSize="Small"
                             Grid.Column="1"
                             Grid.Row="3"
                             HorizontalOptions="Start"
@@ -171,72 +199,22 @@
                             TextColor="{StaticResource darkGray}"
                             VerticalOptions="Center">
                         </Label>
-                        <!--Activity Indicator-->
-                        <ActivityIndicator
-                            Grid.Column="0"
-                            Grid.ColumnSpan="3"
-                            Grid.Row="4"
-                            IsRunning="{Binding IsRunning}"
-                            IsVisible="{Binding IsRunning}">
-                        </ActivityIndicator>
-                        <!--Management Status-->
-                        <Image
-                            Grid.Column="0"
-                            Grid.Row="4"
-                            Source="{Binding IconStatus}"
-                            VerticalOptions="Center">
-                        </Image>
-                        <Label
-                            Grid.Column="1"
-                            Grid.Row="4"
-                            FontSize="Small"
-                            Text="{Binding LocalEvent.StatusDescription}"
-                            TextColor="{StaticResource darkGray}"
-                            VerticalOptions="Center">
-                        </Label>
-                        <!--Security Level-->
-                        <Image
-                            Grid.Column="0"
-                            Grid.Row="5"
-                            Source="ic_ev_security"
-                            VerticalOptions="Center">
-                        </Image>
-                        <Label
-                            Grid.Column="1"
-                            Grid.Row="5"
-                            FontSize="Small"
-                            Text="{Binding LocalEvent.PrivacyDescription}"
-                            TextColor="{StaticResource darkGray}"
-                            VerticalOptions="Center">
-                        </Label>
-                        <!--Programmer Name-->
-                        <Image
-                            Grid.Column="0"
-                            Grid.Row="6"
-                            Source="ic_ev_programmer"
-                            VerticalOptions="Center">
-                        </Image>
-                        <Label
-                            Grid.Column="1"
-                            Grid.Row="6"
-                            FontSize="Small"
-                            Text="{Binding LocalEvent.ProgrammerName}"
-                            TextColor="{StaticResource darkGray}"
-                            VerticalOptions="Center">
-                        </Label>
                         <!--Event Details-->
                         <Image
                             Grid.Column="0"
-                            Grid.Row="7"
+                            Grid.Row="4"
+                            IsVisible="{Binding IsSummaryVisible}"
                             Source="ic_ev_summary"
                             VerticalOptions="Center">
                         </Image>
                         <Label
+                            FontSize="Small"
                             Grid.Column="1"
                             Grid.ColumnSpan="2"
-                            Grid.Row="7"
+                            Grid.Row="4"
                             HorizontalOptions="StartAndExpand"
-                            FontSize="Small"
+                            IsVisible="{Binding IsSummaryVisible}"
+                            Padding="0,0,10,0"
                             Text="{Binding LocalEvent.Summary}"
                             TextColor="{StaticResource darkGray}"
                             VerticalOptions="Center">
@@ -245,7 +223,7 @@
                         <BoxView
                             Color="{StaticResource gray}"
                             Grid.Column="0"
-                            Grid.Row="8"
+                            Grid.Row="5"
                             Grid.ColumnSpan="3"
                             HeightRequest="1"
                             HorizontalOptions="FillAndExpand">
@@ -255,24 +233,22 @@
                             BorderColor="Transparent"
                             Grid.Column="0"
                             Grid.ColumnSpan="3"
-                            Grid.Row="9"
+                            Grid.Row="6"
                             HasShadow="False"
-                            Padding="0,10">
+                            Padding="0,15,0,10">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer
                                     Command="{Binding LoadParticipantsCommand}"
                                     NumberOfTapsRequired="1">
                                 </TapGestureRecognizer>
                             </Frame.GestureRecognizers>
-                            <Grid>
+                            <Grid
+                                ColumnSpacing="15">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="20" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
                                 <Image
                                     Grid.Column="0"
                                     Source="ic_ev_guests"
@@ -280,7 +256,6 @@
                                 </Image>
                                 <Label
                                     Grid.Column="1"
-                                    FontSize="Small"
                                     HorizontalOptions="FillAndExpand"
                                     Text="{Binding Participants, Mode=TwoWay}"
                                     TextColor="{StaticResource darkGray}"
@@ -300,265 +275,319 @@
                         <!--Optional information-->
                     </Grid>
                     <Grid
-                        ColumnSpacing="0"
+                        RowSpacing="0"
                         Padding="5,0">
                         <Grid.RowDefinitions>
+                            <!--Abstract-->
                             <RowDefinition Height="Auto"/>
+                            <!--Record-->
                             <RowDefinition Height="Auto"/>
+                            <!--Tasks-->
                             <RowDefinition Height="Auto"/>
+                            <!--Documents-->
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <!--Annotations-->
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <!--Abstract-->
-                        <BoxView
-                            Color="{StaticResource gray}"
+                        <StackLayout
                             Grid.Row="0"
-                            HeightRequest="1"
-                            HorizontalOptions="FillAndExpand"
                             IsVisible="{Binding IsAbstractVisible}">
-                        </BoxView>
-                        <Frame
-                            x:Name="AbstractFrame"
-                            BorderColor="Transparent"
-                            HasShadow="false"
-                            Grid.Row="1"
-                            Padding="0,10"
-                            IsVisible="{Binding IsAbstractVisible}">
-                            <Grid
-                                ColumnSpacing="15">
-                                <Grid.ColumnDefinitions >
-                                    <ColumnDefinition Width="20"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <Image
-                                    Grid.Column="0"
-                                    Source="ic_ev_abstract"
-                                    VerticalOptions="Center">
-                                </Image>
-                                <Label
-                                    FontSize="Small"
-                                    Grid.Column="1"
-                                    Text="{lang:Translate EventAbstractText}"
-                                    TextColor="{StaticResource darkGray}"
-                                    VerticalOptions="Center">
-                                </Label>
-                            </Grid>
-                        </Frame>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding LoadExecutiveAbstractCommand}" />
+                            </StackLayout.GestureRecognizers>
+                            <BoxView
+                                Color="{StaticResource gray}"
+                                HeightRequest="1"
+                                HorizontalOptions="FillAndExpand">
+                            </BoxView>
+                            <Frame
+                                x:Name="AbstractFrame"
+                                BorderColor="Transparent"
+                                HasShadow="false"
+                                Padding="0,10,0,15">
+                                <Grid
+                                    ColumnSpacing="15">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                        Grid.Column="0"
+                                        Source="ic_ev_abstract"
+                                        VerticalOptions="Center">
+                                    </Image>
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="{lang:Translate EventAbstractText}"
+                                        TextColor="{StaticResource darkGray}"
+                                        VerticalOptions="Center">
+                                    </Label>
+                                    <Image
+                                        BackgroundColor="Transparent"
+                                        Grid.Column="2"
+                                        HeightRequest="16"
+                                        Source="ic_chevron"
+                                        VerticalOptions="Center">
+                                    </Image>
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
                         <!--Record-->
-                        <BoxView
-                            Color="{StaticResource gray}"
-                            Grid.Row="2"
-                            HeightRequest="1"
-                            HorizontalOptions="FillAndExpand"
+                        <StackLayout
+                            Grid.Row="1"
                             IsVisible="{Binding IsRecordVisible}">
-                        </BoxView>
-                        <Frame
-                            x:Name="RecordFrame"
-                            BorderColor="Transparent"
-                            HasShadow="false"
-                            Grid.Row="3"
-                            Padding="0"
-                            IsVisible="{Binding IsRecordVisible}">
-                            <Grid
-                                ColumnSpacing="15">
-                                <Grid.ColumnDefinitions >
-                                    <ColumnDefinition Width="20"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Image
-                                    Grid.Column="0"
-                                    Grid.Row="0"
-                                    Source="ic_ev_record"
-                                    VerticalOptions="Center">
-                                </Image>
-                                <Label
-                                    FontSize="Small"
-                                    Grid.Column="1"
-                                    Grid.Row="0"
-                                    Text="{Binding LocalEvent.RecordTitle}"
-                                    TextColor="{StaticResource darkGray}"
-                                    VerticalOptions="Center">
-                                </Label>
-                            </Grid>
-                        </Frame>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding LoadRecordCommand}" />
+                            </StackLayout.GestureRecognizers>
+                            <BoxView
+                                Color="{StaticResource gray}"
+                                HeightRequest="1"
+                                HorizontalOptions="FillAndExpand">
+                            </BoxView>
+                            <Frame
+                                x:Name="RecordFrame"
+                                BorderColor="Transparent"
+                                HasShadow="false"
+                                Padding="0,10,0,15">
+                                <Grid
+                                    ColumnSpacing="15">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                        Grid.Column="0"
+                                        Source="ic_ev_record"
+                                        VerticalOptions="Center">
+                                    </Image>
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="{Binding LocalEvent.RecordTitle}"
+                                        TextColor="{StaticResource darkGray}"
+                                        VerticalOptions="Center">
+                                    </Label>
+                                    <Image
+                                        BackgroundColor="Transparent"
+                                        Grid.Column="2"
+                                        HeightRequest="16"
+                                        Source="ic_chevron"
+                                        VerticalOptions="Center">
+                                    </Image>
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
                         <!--Tasks-->
-                        <BoxView
-                            Color="{StaticResource gray}"
-                            Grid.Row="4"
-                            HeightRequest="1"
-                            HorizontalOptions="FillAndExpand"
+                        <StackLayout
+                            Grid.Row="2"
                             IsVisible="{Binding IsTasksVisible}">
-                        </BoxView>
-                        <Frame
-                            x:Name="TasksFrame"
-                            BorderColor="Transparent"
-                            HasShadow="false"
-                            Grid.Row="5"
-                            Padding="0"
-                            IsVisible="{Binding IsTasksVisible}">
-                            <Grid
-                                ColumnSpacing="15">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="20"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Image
-                                    Grid.Column="0"
-                                    Grid.Row="0"
-                                    Source="ic_ev_tasks"
-                                    VerticalOptions="Center">
-                                </Image>
-                                <Label
-                                    FontSize="Small"
-                                    Grid.Column="1"
-                                    Grid.Row="0"
-                                    Text="{lang:Translate Tasks}"
-                                    TextColor="{StaticResource darkGray}"
-                                    VerticalOptions="Center">
-                                </Label>
-                            </Grid>
-                        </Frame>
+                            <BoxView
+                                Color="{StaticResource gray}"
+                                HeightRequest="1"
+                                HorizontalOptions="FillAndExpand">
+                            </BoxView>
+                            <Frame
+                                x:Name="TasksFrame"
+                                BorderColor="Transparent"
+                                HasShadow="false"
+                                Padding="0,10,0,15">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding GetTasksCommand}" />
+                                </Frame.GestureRecognizers>
+                                <Grid
+                                    ColumnSpacing="15">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                        Grid.Column="0"
+                                        Source="ic_ev_tasks"
+                                        VerticalOptions="Center">
+                                    </Image>
+                                    <StackLayout
+                                        Grid.Column="1"
+                                        HorizontalOptions="StartAndExpand"
+                                        Orientation="Horizontal"
+                                        VerticalOptions="Center">
+                                        <Label
+                                            Text="{Binding LocalEvent.TaskAccount}"
+                                            TextColor="{StaticResource darkGray}"
+                                            VerticalOptions="Center">
+                                        </Label>
+                                        <Label
+                                            Text="{lang:Translate Tasks}"
+                                            TextColor="{StaticResource darkGray}"
+                                            VerticalOptions="Center">
+                                        </Label>
+                                    </StackLayout>
+                                    <Image
+                                        BackgroundColor="Transparent"
+                                        Grid.Column="2"
+                                        HeightRequest="16"
+                                        Source="ic_chevron"
+                                        VerticalOptions="Center">
+                                    </Image>
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
                         <!--Documents-->
-                        <BoxView
-                            Color="{StaticResource gray}"
-                            Grid.Row="6"
-                            HeightRequest="1"
-                            HorizontalOptions="FillAndExpand"
-                            IsVisible="{Binding IsDocumentsVisible}">
-                        </BoxView>
-                        <Frame
-                            x:Name="DocumentsFrame"
-                            BorderColor="Transparent"
-                            HasShadow="false"
-                            Grid.Row="7"
-                            Padding="0"
-                            IsVisible="{Binding IsDocumentsVisible}">
-                            <Grid
-                                ColumnSpacing="15">
-                                <Grid.ColumnDefinitions >
-                                    <ColumnDefinition Width="20"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Image
-                                    Grid.Column="0"
-                                    Grid.Row="0"
-                                    Source="ic_ev_documents"
-                                    VerticalOptions="Center">
-                                </Image>
-                                <Label
-                                    FontSize="Small"
-                                    Grid.Column="1"
-                                    Grid.Row="0"
-                                    Text="{Binding LocalEvent.DocumentsTitle}"
-                                    TextColor="{StaticResource darkGray}">
-                                </Label>
-                            </Grid>
-                        </Frame>
-                        <BoxView
-                            Color="{StaticResource gray}"
-                            Grid.Row="8"
-                            HeightRequest="1"
-                            HorizontalOptions="FillAndExpand"
+                        <StackLayout
+                            IsVisible="{Binding IsDocumentsVisible}"
+                            Grid.Row="3">
+                            <BoxView
+                                Color="{StaticResource gray}"
+                                HeightRequest="1"
+                                HorizontalOptions="FillAndExpand">
+                            </BoxView>
+                            <Frame
+                                x:Name="DocumentsFrame"
+                                BorderColor="Transparent"
+                                HasShadow="false"
+                                Padding="0,10,0,15">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding GetDocumentsCommand}" />
+                                </Frame.GestureRecognizers>
+                                <Grid
+                                    ColumnSpacing="15">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                        Grid.Column="0"
+                                        Source="ic_doc_menu_group_folder"
+                                        VerticalOptions="Center">
+                                    </Image>
+                                    <StackLayout
+                                        Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        VerticalOptions="Center">
+                                        <Label
+                                            Text="{Binding LocalEvent.DocumentsAccount}"
+                                            TextColor="{StaticResource darkGray}"
+                                            VerticalOptions="Center">
+                                        </Label>
+                                        <Label
+                                            Text="{Binding LocalEvent.DocumentsTitle}"
+                                            TextColor="{StaticResource darkGray}"
+                                            VerticalOptions="Center">
+                                        </Label>
+                                    </StackLayout>
+                                    <Image
+                                        BackgroundColor="Transparent"
+                                        Grid.Column="2"
+                                        HeightRequest="16"
+                                        Source="ic_chevron"
+                                        VerticalOptions="Center">
+                                    </Image>
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                        <!--Annotations-->
+                        <StackLayout
+                            Grid.Row="4"
                             IsVisible="{Binding IsAnnotationsVisible}">
-                        </BoxView>
-                        <Frame
-                            x:Name="AnnotationsFrame"
-                            BorderColor="Transparent"
-                            HasShadow="false"
-                            Grid.Row="9"
-                            Padding="0"
-                            IsVisible="{Binding IsAnnotationsVisible}">
-                            <Grid
-                                ColumnSpacing="15">
-                                <Grid.ColumnDefinitions >
-                                    <ColumnDefinition Width="20"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Image
-                                    Grid.Column="0"
-                                    Grid.Row="0"
-                                    Source="ic_ev_annotations"
-                                    VerticalOptions="Center">
-                                </Image>
-                                <Label
-                                    FontSize="Small"
-                                    Grid.Column="1"
-                                    Grid.Row="0"
-                                    Text="{Binding LocalEvent.Annotations}"
-                                    TextColor="{StaticResource darkGray}">
-                                </Label>
-                            </Grid>
-                        </Frame>
+                            <BoxView
+                                Color="{StaticResource gray}"
+                                HeightRequest="1"
+                                HorizontalOptions="FillAndExpand">
+                            </BoxView>
+                            <Frame
+                                x:Name="AnnotationsFrame"
+                                BorderColor="Transparent"
+                                HasShadow="false"
+                                Padding="0,10,10,0">
+                                <Grid
+                                    ColumnSpacing="15">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                        Grid.Column="0"
+                                        Source="ic_ev_annotations"
+                                        VerticalOptions="Center">
+                                    </Image>
+                                    <Label
+                                        FontSize="Small"
+                                        Grid.Column="1"
+                                        Text="{Binding LocalEvent.Annotations}"
+                                        TextColor="{StaticResource darkGray}">
+                                    </Label>
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
                     </Grid>
                 </StackLayout>
             </ScrollView>
-            <Grid
-                AbsoluteLayout.LayoutBounds=".5,1,1,.1"
-                AbsoluteLayout.LayoutFlags="All"
-                ColumnSpacing="0"
-                RowSpacing="0"
-                VerticalOptions="End">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <BoxView
-                    HeightRequest="1"
-                    BackgroundColor="{StaticResource accesoryGray}"
-                    Grid.Row="0">
-                </BoxView>
-                <Grid 
-                    BackgroundColor="{StaticResource softGray}"
-                    Grid.Row="1" 
-                    VerticalOptions="End" 
-                    RowSpacing="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+            <!--Activity Indicator-->
+            <ActivityIndicator
+                Grid.Row="0"
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsRunning}"
+                IsVisible="{Binding IsRunning}"
+                VerticalOptions="Center">
+            </ActivityIndicator>
+            <!--Status Bar-->
+            <telerikPrimitives:RadBorder
+                BackgroundColor="{StaticResource Key=softGray}"
+                BorderColor="{StaticResource accesoryGray}" 
+                CornerRadius="0"
+                Grid.Row="1">
+                <StackLayout
+                    Orientation="Horizontal">
                     <Button 
                         BackgroundColor="{StaticResource softGray}"
-                        Command="{Binding CheckAllCalendarsCommand}"
+                        Command="{Binding ChangeStatusCommand}"
                         Grid.Column="0"
                         HorizontalOptions="CenterAndExpand"
                         IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
-                        Text="Finish">
+                        IsVisible="{Binding LocalEvent.IsInManagement}"
+                        Text="{lang:Translate EventFinishCommand}">
+                        <Button.CommandParameter>
+                            <x:Int32>1</x:Int32>
+                        </Button.CommandParameter>
                     </Button>
                     <Button 
                         BackgroundColor="{StaticResource softGray}"
-                        Command="{Binding CheckAllCalendarsCommand}"
+                        Command="{Binding ChangeStatusCommand}"
+                        Grid.Column="0"
+                        HorizontalOptions="CenterAndExpand"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        IsVisible="{Binding LocalEvent.IsInManagement}"
+                        Text="{lang:Translate EventSuspendCommand}">
+                        <Button.CommandParameter>
+                            <x:Int32>2</x:Int32>
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button 
+                        BackgroundColor="{StaticResource softGray}"
+                        Command="{Binding ChangeStatusCommand}"
+                        Grid.Column="0"
+                        HorizontalOptions="CenterAndExpand"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        IsVisible="{Binding LocalEvent.IsInManagement, Converter={StaticResource Key=inverseBool}}"
+                        Text="{lang:Translate EventActivateCommand}">
+                        <Button.CommandParameter>
+                            <x:Int32>0</x:Int32>
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button 
+                        BackgroundColor="{StaticResource softGray}"
+                        Command="{Binding DeleteEventCommand}"
                         Grid.Column="1"
                         HorizontalOptions="CenterAndExpand"
                         IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
-                        Text="Delete">
+                        Text="{lang:Translate Delete}">
                     </Button>
-                </Grid>
-            </Grid>    
-        </StackLayout>
+                </StackLayout>
+            </telerikPrimitives:RadBorder>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

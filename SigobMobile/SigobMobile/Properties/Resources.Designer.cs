@@ -107,6 +107,36 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string ConfirmTitle {
+            get {
+                return ResourceManager.GetString("ConfirmTitle", resourceCulture);
+            }
+        }
+        
+        public static string ConfirmEventDeletion {
+            get {
+                return ResourceManager.GetString("ConfirmEventDeletion", resourceCulture);
+            }
+        }
+        
+        public static string EventResumeMessage {
+            get {
+                return ResourceManager.GetString("EventResumeMessage", resourceCulture);
+            }
+        }
+        
+        public static string EventFinishMessage {
+            get {
+                return ResourceManager.GetString("EventFinishMessage", resourceCulture);
+            }
+        }
+        
+        public static string EventSuspendMessage {
+            get {
+                return ResourceManager.GetString("EventSuspendMessage", resourceCulture);
+            }
+        }
+        
         public static string ForgotPassword {
             get {
                 return ResourceManager.GetString("ForgotPassword", resourceCulture);
@@ -1061,6 +1091,24 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string EventFinishCommand {
+            get {
+                return ResourceManager.GetString("EventFinishCommand", resourceCulture);
+            }
+        }
+        
+        public static string EventSuspendCommand {
+            get {
+                return ResourceManager.GetString("EventSuspendCommand", resourceCulture);
+            }
+        }
+        
+        public static string EventActivateCommand {
+            get {
+                return ResourceManager.GetString("EventActivateCommand", resourceCulture);
+            }
+        }
+        
         public static string Activity {
             get {
                 return ResourceManager.GetString("Activity", resourceCulture);
@@ -1118,6 +1166,24 @@ namespace SigobMobile.Properties {
         public static string Tasks {
             get {
                 return ResourceManager.GetString("Tasks", resourceCulture);
+            }
+        }
+        
+        public static string TaskPrevious {
+            get {
+                return ResourceManager.GetString("TaskPrevious", resourceCulture);
+            }
+        }
+        
+        public static string TaskSupport {
+            get {
+                return ResourceManager.GetString("TaskSupport", resourceCulture);
+            }
+        }
+        
+        public static string TaskCommitments {
+            get {
+                return ResourceManager.GetString("TaskCommitments", resourceCulture);
             }
         }
         
@@ -1646,6 +1712,24 @@ namespace SigobMobile.Properties {
         public static string LastYear {
             get {
                 return ResourceManager.GetString("LastYear", resourceCulture);
+            }
+        }
+        
+        public static string SelectApp {
+            get {
+                return ResourceManager.GetString("SelectApp", resourceCulture);
+            }
+        }
+        
+        public static string Folder {
+            get {
+                return ResourceManager.GetString("Folder", resourceCulture);
+            }
+        }
+        
+        public static string DefaultFolder {
+            get {
+                return ResourceManager.GetString("DefaultFolder", resourceCulture);
             }
         }
     }

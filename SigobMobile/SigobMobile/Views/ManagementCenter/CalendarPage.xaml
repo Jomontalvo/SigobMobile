@@ -101,14 +101,14 @@
                             HorizontalOptions="FillAndExpand">
                         </BoxView>
                         <Grid
-                            Padding="5,0,0,0"
+                            Padding="5,0,5,0"
                             RowSpacing="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <controls:IconView

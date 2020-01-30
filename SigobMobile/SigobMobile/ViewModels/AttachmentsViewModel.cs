@@ -51,6 +51,12 @@
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Create a new List of Attachments 
+        /// </summary>
+        /// <param name="parentId"></param>
+        /// <param name="component"></param>
+        /// <param name="source"></param>
         public AttachmentsViewModel(int parentId, SigobInstrument component, DocumentSource source)
         {
             this.parentId = parentId;
@@ -60,6 +66,11 @@
             this.LoadAttachments();
         }
 
+        /// <summary>
+        /// Display Attachment List from Sender
+        /// </summary>
+        /// <param name="attachments"></param>
+        /// <param name="source"></param>
         public AttachmentsViewModel(List<Attachment> attachments, DocumentSource source)
         {
             this.apiService = new ApiService();
@@ -158,7 +169,7 @@
                 Date = a.Date,
                 FileType = a.FileType,
                 FolderId = a.FolderId,
-                FolderName = a.FolderName,
+                FolderName = string.IsNullOrEmpty(a.FolderName) ? Languages.DefaultFolder : a.FolderName,
                 Id = a.Id,
                 IsFolderOwner = a.IsFolderOwner,
                 LastModified = a.LastModified,

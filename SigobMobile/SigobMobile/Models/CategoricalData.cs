@@ -8,9 +8,6 @@
         public byte Id { get; set; }
         public object Category { get; set; }
         public double? Value { get; set; }
-        public override string ToString()
-        {
-            return this.Category.ToString();
-        }
+        public string CategoryName => this.Category.ToString();
     }
 }

@@ -17,6 +17,7 @@
     using SigobMobile.Common.Models;
     using AsyncAwaitBestPractices.MVVM;
     using Calendar = Models.Calendar;
+    using TaskSigob = Models.TaskSigob;
 
     public class TaskDashboardViewModel : BaseViewModel
     {
@@ -74,6 +75,7 @@
             get => this.taskStatus;
             set => SetValue(ref this.taskStatus, value);
         }
+
         public bool IsAddItemVisible
         {
             get => this.isAddItemVisible;
@@ -220,7 +222,7 @@
                 this.OfficialName = taskObject.OfficialName;
                 this.taskList = taskObject.TaskList.ToList<TaskSigob>();
                 this.taskStatistics = taskObject.TaskStatistics.ToList<TaskCategoricalData>();
-                TaskCollection = new ObservableCollection<TaskSigob>(ToTask());
+                TaskCollection = new ObservableCollection<TaskSigob>(this.taskList);
                 TaskStatistics = new ObservableCollection<TaskCategoricalData>(ToTaskStatistics());
                 // Set Legend and Array segment control values
                 this.ChartLegend = new ObservableCollection<TaskCategoricalData>(taskObject.TaskStatistics.Where((point) => point.Value > 0));
@@ -397,7 +399,7 @@
             IsRefreshing = true;
             await Application.Current.MainPage.DisplayAlert(
                         Languages.Error,
-                        "Hola",
+                        Languages.Ok, //TODO: RefreshList implementation
                         Languages.Cancel);
             IsRefreshing = false;
             return;
@@ -418,7 +420,7 @@
             else
             {
                 serie.ClearSelection();
-                this.GraphTitle = "Filtro eliminado";
+                this.GraphTitle = "All";
                 return;
             }
         }

@@ -84,6 +84,8 @@
         public static string Save => Resources.Save;
         public static string Done => Resources.Done;
         public static string Delete => Resources.Delete;
+        public static string Confirm => Resources.ConfirmTitle;
+        public static string ConfirmEventDeletion => Resources.ConfirmEventDeletion;
         #endregion
 
         #region Await Messages
@@ -195,6 +197,12 @@
         public static string EventParticipantsText => Resources.EventParticipantsText;
         public static string EventAbstractText => Resources.EventAbstractText;
         public static string EventAnnotationsText => Resources.EventAnnotationsText;
+        public static string EventFinishCommand => Resources.EventFinishCommand;
+        public static string EventSuspendCommand => Resources.EventSuspendCommand;
+        public static string EventActivateCommand => Resources.EventActivateCommand;
+        public static string EventFinishMessage => Resources.EventFinishMessage;
+        public static string EventResumeMessage => Resources.EventResumeMessage;
+        public static string EventSuspendMessage => Resources.EventSuspendMessage;
         #endregion
 
         #region Helper text
@@ -230,6 +238,9 @@
         public static string Tasks => Resources.Tasks;
         public static string Request => Resources.Request;
         public static string Requests => Resources.Requests;
+        public static string TaskPrevious => Resources.TaskPrevious;
+        public static string TaskSupport => Resources.TaskSupport;
+        public static string TaskCommitments => Resources.TaskCommitments;
         #endregion
 
         #region Institutional Directory and Contacts
@@ -303,9 +314,6 @@
         public static string ScannedDocuments = Resources.ScannedDocuments;
         public static string ScannedDocument = Resources.ScannedDocument;
         public static string NoScannedDocuments = Resources.NoScannedDocuments;
-        public static string Attachment = Resources.Attachment;
-        public static string Attachments = Resources.Attachments;
-        public static string NoAttachments = Resources.NoAttachments;
         public static string Tracking = Resources.Tracking;
         public static string LinkedDocuments = Resources.LinkedDocuments;
         public static string NoLinkedDocuments = Resources.NoLinkedDocuments;
@@ -319,6 +327,15 @@
         public static string Results = Resources.Results;
         public static string TransferredBy = Resources.TransferredBy;
         public static string NoTags = Resources.NoTags;
+        #endregion
+
+        #region Documents Attachments
+        public static string Attachment = Resources.Attachment;
+        public static string Attachments = Resources.Attachments;
+        public static string NoAttachments = Resources.NoAttachments;
+        public static string SelectApp = Resources.SelectApp;
+        public static string Folder = Resources.Folder;
+        public static string DefaultFolder = Resources.DefaultFolder;
         #endregion
 
         #region Document Trace
