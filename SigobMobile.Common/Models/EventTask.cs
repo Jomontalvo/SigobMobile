@@ -69,7 +69,7 @@
         public int ReportStatus { get; set; }
 
         [JsonProperty("periodicidad")]
-        public byte Periodicity { get; set; }
+        public TPeriodicity Periodicity { get; set; }
 
         [JsonProperty("reporteRevisado")]
         public byte RevisedReport { get; set; }
@@ -85,6 +85,15 @@
 
         [JsonProperty("porcentajeAvance")]
         public string PercentageOfCompletion { get; set; }
+
+
+        public TOriginTask Source => TaskMomentId switch
+        {
+            EventTaskMoment.Previous => TOriginTask.ManagementCenterPrevious,
+            EventTaskMoment.Support => TOriginTask.ManagementCenterDuring,
+            EventTaskMoment.Later => TOriginTask.ManagementCenterPost,
+            _ => TOriginTask.None
+        };
 
         public TTrafficLightStatus TrafficLight
         {

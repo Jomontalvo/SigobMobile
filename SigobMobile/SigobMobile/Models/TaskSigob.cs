@@ -14,5 +14,14 @@
             _ => Palette.SelectedTrafficLightGray
 
         };
+
+        public string PeriodicityLabel => this.ReportFrequency switch
+        {
+            TPeriodicity.Weekly => $"({Languages.PeriodicityWeekly})",
+            TPeriodicity.Biweekly => $"({Languages.PeriodicityBiWeekly})",
+            TPeriodicity.Monthly => $"({Languages.PeriodicityMonthly})",
+            TPeriodicity.Bimonthly => $"({Languages.PeriodicityBiMonthly})",
+            _ => $"{Languages.PeriodicityUndefined}"
+        };
     }
 }

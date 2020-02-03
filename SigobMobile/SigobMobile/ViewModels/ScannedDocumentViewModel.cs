@@ -10,6 +10,7 @@
     using SigobMobile.Common.Models;
     using SigobMobile.Helpers;
     using SigobMobile.Interfaces;
+    using Xamarin.Essentials;
     using Xamarin.Forms;
 
     public class ScannedDocumentViewModel : BaseViewModel
@@ -87,19 +88,38 @@
         #region Constructors
         public ScannedDocumentViewModel(string registrationCode)
         {
+            this.IsBusy = true;
             this.SelectedIndex = -1;
             this.apiService = new ApiService();
             this.registrationCode = registrationCode;
             IErrorHandler errorHandler = null;
             this.LoadScannedDocuments().FireAndForgetSafeAsync(errorHandler);
+            //this.IsBusy = false;
         }
         #endregion
 
         #region Commands
-        public IAsyncCommand CloseCommand => new AsyncCommand(Close);
+        public IAsyncCommand ShareScannedCommand => new AsyncCommand(ShareScannedAsync);
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Share URL document
+        /// </summary>
+        /// <returns></returns>
+        private async Task ShareScannedAsync()
+        {
+            if (this.listImages.Any())
+            {
+                await Share.RequestAsync(new ShareTextRequest
+                {
+                    Title = Languages.Attachment,
+                    Uri = this.UrlImagePdf.AbsoluteUri
+                });
+            }
+        }
+
         /// <summary>
         /// Get Scanned Document
         /// </summary>
@@ -203,7 +223,11 @@
 
                 //Get List values
                 this.ScannedList = (List<ScanDocument>)response.Result;
-                this.SelectedIndex = 0; //First Scanned Document
+                if (this.ScannedList.Any())
+                {
+                    this.IsEnabled = true;
+                    this.SelectedIndex = 0; //First Scanned Document
+                }
             }
             catch (Exception ex)
             {
@@ -217,11 +241,6 @@
                 IsBusy = false;
                 IsEnabled = true;
             }
-        }
-
-        private Task Close()
-        {
-            throw new NotImplementedException();
         }
         #endregion
     }

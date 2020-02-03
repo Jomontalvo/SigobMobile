@@ -357,6 +357,16 @@
     <BundleResource Include="Resources\ic_doc_certificate.png" />
     <BundleResource Include="Resources\ic_bt_slide_down_gray.png" />
     <BundleResource Include="Resources\ic_ev_privacy_private.png" />
+    <BundleResource Include="Resources\ic_task_deadline_bold.png" />
+    <BundleResource Include="Resources\ic_task_gauge.png" />
+    <BundleResource Include="Resources\ic_task_report_frequency.png" />
+    <BundleResource Include="Resources\ic_task_report.png" />
+    <BundleResource Include="Resources\ic_task_messages.png" />
+    <BundleResource Include="Resources\ic_task_control_personal.png" />
+    <BundleResource Include="Resources\ic_task_control.png" />
+    <BundleResource Include="Resources\ic_task_control_general.png" />
+    <BundleResource Include="Resources\ic_cal_management_center.png" />
+    <BundleResource Include="Resources\ic_cal_personal_agenda.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />

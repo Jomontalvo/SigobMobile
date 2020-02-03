@@ -17,6 +17,7 @@
             <local:ItalicConverter x:Key="boolToItalic" />
             <local:IntToFontAttribute x:Key="intToFontAttribute" />
             <local:IntToKBytesConverter x:Key="intToKBytes" />
+            <local:DataSourceConverter x:Key="listEmptyToBool" />
         </ResourceDictionary>
         <!--Int Values-->
         <ResourceDictionary>

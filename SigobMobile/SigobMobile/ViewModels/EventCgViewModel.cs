@@ -1,21 +1,19 @@
 ﻿namespace SigobMobile.ViewModels
 {
     using System;
+    using System.IO;
     using System.Threading.Tasks;
     using AsyncAwaitBestPractices.MVVM;
+    using Common.Helpers;
+    using Common.Models;
     using Common.Services;
     using Helpers;
-    using Common.Helpers;
-    using Views.ManagementCenter;
-    using Xamarin.Forms;
-    using Common.Models;
-    using ManagementCenterEvent = Models.ManagementCenterEvent;
     using SigobMobile.Interfaces;
-    using System.IO;
-    using System.Windows.Input;
-    using GalaSoft.MvvmLight.Command;
     using SigobMobile.Views.Common;
     using SigobMobile.Views.Tasks;
+    using Views.ManagementCenter;
+    using Xamarin.Forms;
+    using ManagementCenterEvent = Models.ManagementCenterEvent;
 
     public class EventCgViewModel : BaseViewModel
     {

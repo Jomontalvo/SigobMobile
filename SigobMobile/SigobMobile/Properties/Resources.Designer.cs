@@ -851,6 +851,18 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string ManagementCenters {
+            get {
+                return ResourceManager.GetString("ManagementCenters", resourceCulture);
+            }
+        }
+        
+        public static string PersonalAgendas {
+            get {
+                return ResourceManager.GetString("PersonalAgendas", resourceCulture);
+            }
+        }
+        
         public static string MaleGender {
             get {
                 return ResourceManager.GetString("MaleGender", resourceCulture);
@@ -1367,6 +1379,60 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string OverdueControl {
+            get {
+                return ResourceManager.GetString("OverdueControl", resourceCulture);
+            }
+        }
+        
+        public static string PeriodicityUndefined {
+            get {
+                return ResourceManager.GetString("PeriodicityUndefined", resourceCulture);
+            }
+        }
+        
+        public static string PeriodicityWeekly {
+            get {
+                return ResourceManager.GetString("PeriodicityWeekly", resourceCulture);
+            }
+        }
+        
+        public static string PeriodicityBiWeekly {
+            get {
+                return ResourceManager.GetString("PeriodicityBiWeekly", resourceCulture);
+            }
+        }
+        
+        public static string PeriodicityMonthly {
+            get {
+                return ResourceManager.GetString("PeriodicityMonthly", resourceCulture);
+            }
+        }
+        
+        public static string PeriodicityBiMonthly {
+            get {
+                return ResourceManager.GetString("PeriodicityBiMonthly", resourceCulture);
+            }
+        }
+        
+        public static string OverdueTasksByType {
+            get {
+                return ResourceManager.GetString("OverdueTasksByType", resourceCulture);
+            }
+        }
+        
+        public static string OverdueTasksByProgrammer {
+            get {
+                return ResourceManager.GetString("OverdueTasksByProgrammer", resourceCulture);
+            }
+        }
+        
+        public static string OverdueTasksByResponsible {
+            get {
+                return ResourceManager.GetString("OverdueTasksByResponsible", resourceCulture);
+            }
+        }
+        
         public static string ManagementTray {
             get {
                 return ResourceManager.GetString("ManagementTray", resourceCulture);
@@ -1730,6 +1796,60 @@ namespace SigobMobile.Properties {
         public static string DefaultFolder {
             get {
                 return ResourceManager.GetString("DefaultFolder", resourceCulture);
+            }
+        }
+        
+        public static string EmptyTaskList {
+            get {
+                return ResourceManager.GetString("EmptyTaskList", resourceCulture);
+            }
+        }
+        
+        public static string TaskProgrammerText {
+            get {
+                return ResourceManager.GetString("TaskProgrammerText", resourceCulture);
+            }
+        }
+        
+        public static string ReportPeriodicity {
+            get {
+                return ResourceManager.GetString("ReportPeriodicity", resourceCulture);
+            }
+        }
+        
+        public static string NoReportAvailable {
+            get {
+                return ResourceManager.GetString("NoReportAvailable", resourceCulture);
+            }
+        }
+        
+        public static string NewReport {
+            get {
+                return ResourceManager.GetString("NewReport", resourceCulture);
+            }
+        }
+        
+        public static string Message {
+            get {
+                return ResourceManager.GetString("Message", resourceCulture);
+            }
+        }
+        
+        public static string Messages {
+            get {
+                return ResourceManager.GetString("Messages", resourceCulture);
+            }
+        }
+        
+        public static string NewMessage {
+            get {
+                return ResourceManager.GetString("NewMessage", resourceCulture);
+            }
+        }
+        
+        public static string SendMessage {
+            get {
+                return ResourceManager.GetString("SendMessage", resourceCulture);
             }
         }
     }

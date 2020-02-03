@@ -160,7 +160,7 @@
     <data name="ConfirmTitle" xml:space="preserve">
     <value>Confirm</value>
     <comment>Confirm Title</comment>
-  </data>    
+  </data>
     <data name="ConfirmEventDeletion" xml:space="preserve">
     <value>Are you sure you want delete the event?</value>
     <comment>Question previous to delete event</comment>
@@ -168,7 +168,7 @@
     <data name="EventResumeMessage" xml:space="preserve">
     <value>You will set the current event in management. Are you sure?</value>
     <comment>Question previous to finish event</comment>
-  </data>    
+  </data>
     <data name="EventFinishMessage" xml:space="preserve">
     <value>You will terminate the current event. Are you sure?</value>
     <comment>Question previous to suspend event</comment>
@@ -176,7 +176,7 @@
     <data name="EventSuspendMessage" xml:space="preserve">
     <value>You will suspend the current event. Are you sure?</value>
     <comment>Question previous to resume event management</comment>
-  </data>    
+  </data>
     <data name="ForgotPassword" xml:space="preserve">
     <value>Forgot your password?</value>
     <comment>Question when user forget the password access</comment>
@@ -657,6 +657,14 @@ If you have problems, contact with administrator.</value>
     <value>Select the calendar color.</value>
     <comment>Message for choose a color of calendar.</comment>
   </data>
+    <data name="ManagementCenters" xml:space="preserve">
+    <value>Management Centers</value>
+    <comment>Message for display a Management Center calendar.</comment>
+  </data>
+    <data name="PersonalAgendas" xml:space="preserve">
+    <value>Personal Agendas</value>
+    <comment>Message for display a Personal Agenda calendar.</comment>
+  </data>
     <data name="MaleGender" xml:space="preserve">
     <value>Male</value>
     <comment>Text of Gender Male.</comment>
@@ -986,7 +994,7 @@ If you have problems, contact with administrator.</value>
     <value>Tasks close to deadline</value>
     <comment>Tasks close to deadline label. Query Id = 11</comment>
   </data>
-  <!--Task Controls and Options-->
+    <!--Task Controls and Options-->
     <data name="TaskControl" xml:space="preserve">
     <value>Task control</value>
     <comment>Tasks control title</comment>
@@ -1000,10 +1008,47 @@ If you have problems, contact with administrator.</value>
     <comment>Personal control title</comment>
   </data>
     <data name="GeneralControl" xml:space="preserve">
-    <value>Main control</value>
+    <value>General control</value>
     <comment>Main control</comment>
   </data>
-  <!--    Type Document Trays -->
+    <data name="OverdueControl" xml:space="preserve">
+    <value>Overdue tasks control</value>
+    <comment>Overdue task control</comment>
+  </data>
+    <!--Task Report-->
+    <data name="PeriodicityUndefined" xml:space="preserve">
+    <value>No periodicity</value>
+    <comment>No periodicity defined</comment>
+  </data>
+    <data name="PeriodicityWeekly" xml:space="preserve">
+    <value>Weekly</value>
+    <comment>One week label</comment>
+  </data>
+    <data name="PeriodicityBiWeekly" xml:space="preserve">
+    <value>Biweekly</value>
+    <comment>Two weeks label</comment>
+  </data>
+    <data name="PeriodicityMonthly" xml:space="preserve">
+    <value>Monthly</value>
+    <comment>Monthly label</comment>
+  </data>
+    <data name="PeriodicityBiMonthly" xml:space="preserve">
+    <value>Bimonthly</value>
+    <comment>Two months label</comment>
+  </data>
+    <data name="OverdueTasksByType" xml:space="preserve">
+    <value>Overdue tasks by type</value>
+    <comment>Delayed task type</comment>
+  </data>
+    <data name="OverdueTasksByProgrammer" xml:space="preserve">
+    <value>Programmers with overdue tasks</value>
+    <comment>Delayes programmers</comment>
+  </data>
+    <data name="OverdueTasksByResponsible" xml:space="preserve">
+    <value>Responsible with overdue tasks</value>
+    <comment>Delayed responsibles</comment>
+  </data>
+    <!--    Type Document Trays -->
     <data name="ManagementTray" xml:space="preserve">
     <value>Correspondence trays</value>
     <comment>Management documents group name </comment>
@@ -1255,6 +1300,41 @@ If you have problems, contact with administrator.</value>
     <value>Default folder</value>
     <comment>Default folder title</comment>
   </data>
-    
-    
+    <data name="EmptyTaskList" xml:space="preserve">
+    <value>No scheduled tasks</value>
+    <comment>Tasl list empty message</comment>
+  </data>
+    <data name="TaskProgrammerText" xml:space="preserve">
+    <value>Programmed by</value>
+    <comment>Task programed by text</comment>
+  </data>
+    <data name="ReportPeriodicity" xml:space="preserve">
+    <value>Report frequency</value>
+    <comment>Frequency of update report text</comment>
+  </data>
+    <data name="NoReportAvailable" xml:space="preserve">
+    <value>No report available</value>
+    <comment>No report available message.</comment>
+  </data>
+    <data name="NewReport" xml:space="preserve">
+    <value>New report</value>
+    <comment>Send new report.</comment>
+  </data>
+    <!--Messages-->
+    <data name="Message" xml:space="preserve">
+    <value>Message</value>
+    <comment>Message text</comment>
+  </data>
+    <data name="Messages" xml:space="preserve">
+    <value>Messages</value>
+    <comment>Messages text</comment>
+  </data>
+    <data name="NewMessage" xml:space="preserve">
+    <value>New message</value>
+    <comment>Compose new message text</comment>
+  </data>
+    <data name="SendMessage" xml:space="preserve">
+    <value>Send</value>
+    <comment>Send message text</comment>
+  </data>
 </root>

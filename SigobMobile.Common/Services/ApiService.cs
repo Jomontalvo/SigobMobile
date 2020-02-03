@@ -173,16 +173,18 @@
             string urlBase,
             string servicePrefix,
             string controller,
-            string token,
             string authToken,
+            string authDbToken,
             int id)
         {
+            using var client = new HttpClient
+            {
+                BaseAddress = new Uri(urlBase)
+            };
             try
             {
-                var client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue(token, authToken);
-                client.BaseAddress = new Uri(urlBase);
+                client.DefaultRequestHeaders.Add("token", authToken);
+                client.DefaultRequestHeaders.Add("dbtoken", authDbToken);
                 var url = $"{servicePrefix}{controller}/{id}";
                 var response = await client.GetAsync(url);
 
@@ -212,6 +214,7 @@
                     Message = ex.Message,
                 };
             }
+            finally { client.Dispose(); }
         }
 
         /// <summary>

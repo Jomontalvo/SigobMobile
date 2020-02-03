@@ -5,7 +5,8 @@
     x:Class="SigobMobile.Views.ManagementCenter.EventCgPage"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:lang="clr-namespace:SigobMobile.Helpers"
-    xmlns:controls="clr-namespace:SigobMobile.Controls" xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
+    xmlns:controls="clr-namespace:SigobMobile.Controls"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
     BackgroundColor="{StaticResource defaultBackgroundView}"
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
     ios:Page.UseSafeArea="true">

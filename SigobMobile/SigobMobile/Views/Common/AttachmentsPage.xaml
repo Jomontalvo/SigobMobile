@@ -8,11 +8,15 @@
              Title="{local:Translate Attachments}"
              ios:Page.UseSafeArea="true">
     <ContentPage.Content>
-        <StackLayout
+        <Grid
             BindingContext="{Binding Attachments}">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
             <ListView
                 x:Name="list"
                 Footer=""
+                Grid.Row="0"
                 GroupDisplayBinding="{Binding Key}"
                 HasUnevenRows="True"
                 IsGroupingEnabled="true"
@@ -129,6 +133,22 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </StackLayout>
+            <Label
+                Grid.Row="0"
+                x:Name="EmptyListMessage"
+                HorizontalOptions="CenterAndExpand"
+                IsVisible="{Binding Attachments, Converter={StaticResource listEmptyToBool}}"
+                Text="{local:Translate NoAttachments}"
+                TextColor="{StaticResource Key=darkGray}"
+                VerticalOptions="CenterAndExpand">
+            </Label>
+            <ActivityIndicator
+                Grid.Row="0"
+                HorizontalOptions="CenterAndExpand"
+                IsVisible="True"
+                IsRunning="{Binding IsRunning}"
+                VerticalOptions="CenterAndExpand">
+            </ActivityIndicator>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

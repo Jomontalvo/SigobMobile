@@ -266,5 +266,15 @@
 
         [JsonProperty("tituloCarpetasTrabajo")]
         public string DocumentsTitle { get; set; }
+
+        [JsonProperty("tituloTareasPrevias")]
+        public string PreviousTaskTitle { get; set; }
+
+        [JsonProperty("tituloTareasLogisticas")]
+        public string SupportTaskTitle { get; set; }
+
+        [JsonProperty("tituloTareasSeguimiento")]
+        public string CommitmentTaskTitle { get; set; }
+
     }
 }

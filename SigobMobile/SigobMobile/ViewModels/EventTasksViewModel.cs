@@ -1,6 +1,5 @@
 ﻿namespace SigobMobile.ViewModels
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -28,17 +27,19 @@
         private bool isRefreshing;
         private bool isVisibleSearch;
         private string filter;
-        private int selectedIndex;
+        private int selectedIndex = -1;
         private readonly int mngCenterId;
         private readonly int eventId;
-        private readonly EventTasksAttribute auth;
-        private readonly EventTaskMoment tick;
+        private EventTasksAttribute auth;
+        private EventTaskMoment tick;
         private List<EventTask> taskList;
         private ObservableCollection<string> segmentedControlItems;
         private ObservableCollection<EventTasksItemViewModel> taskItems;
         #endregion
 
         #region Properties
+
+        internal bool IsLoadSegments { get; set; }
 
         public ObservableCollection<string> SegmentedControlItems
         {
@@ -58,7 +59,7 @@
             set => SetValue(ref this.isVisibleSearch, value);
         }
 
-        public ObservableCollection<Segment> TaskStatus { get; set; }
+        public List<Segment> TaskStatus { get; set; }
 
         public string Filter
         {
@@ -66,13 +67,13 @@
             set
             {
                 SetValue(ref this.filter, value);
-                if (value == null)
-                {
-                    IErrorHandler errorHandler = null;
-                    this.SearchTaskAsync().FireAndForgetSafeAsync(errorHandler);
-                }
+                this.RefreshTaskList();
             }
         }
+
+        public string EventTitle { get; set; }
+
+        public string TotalTask { get; set; }
 
         public ObservableCollection<EventTasksItemViewModel> TaskItems
         {
@@ -88,8 +89,11 @@
             set
             {
                 SetValue(ref this.selectedIndex, value);
-                IErrorHandler errorHandler = null;
-                this.OnSelectionChanged().FireAndForgetSafeAsync(errorHandler);
+                if (!IsRefreshing)
+                { 
+                    IErrorHandler errorHandler = null;
+                    this.OnSelectionChanged().FireAndForgetSafeAsync(errorHandler);
+                }
             }
         }
         #endregion
@@ -105,13 +109,13 @@
             this.tick = tick;
             this.LoadSegments();
             this.SelectedIndex = 0;
-            this.LoadEventTasks();
         }
         #endregion
 
         #region Commands
         public IAsyncCommand AddTaskCommand => new AsyncCommand(AddTaskAsync);
-        public IAsyncCommand SearchCommand => new AsyncCommand(SearchTaskAsync);
+        public ICommand RefreshCommand => new RelayCommand(LoadEventTasks);
+        public ICommand SearchCommand => new RelayCommand(RefreshTaskList);
         public ICommand SearchEnabledCommand => new RelayCommand(ActiveSearchBar);
         #endregion
 
@@ -121,22 +125,47 @@
         /// </summary>
         private void LoadSegments()
         {
+            this.IsLoadSegments = true;
             int i = 0;
-            TaskStatus = new ObservableCollection<Segment>
+            TaskStatus = new List<Segment>
             {
-                new Segment() { Id = i, QueryId = 3, SegmentName = Languages.AllStatus }
+                new Segment() { Id = i++, QueryId = 3, SegmentName = Languages.AllStatus }
             };
             var parentViewModel = MainViewModel.GetInstance().EventCg;
             if (parentViewModel.LocalEvent.PreviousTask != EventTasksAttribute.NotAuthorized)
-                TaskStatus.Add(new Segment() { Id = i++, QueryId = 0, SegmentName = Languages.TaskPrevious });
+                TaskStatus.Add(new Segment() {
+                    Id = i++,
+                    QueryId = 0,
+                    SegmentName = string.IsNullOrEmpty(parentViewModel.LocalEvent.PreviousTaskTitle)
+                    ? Languages.TaskPrevious
+                    : parentViewModel.LocalEvent.PreviousTaskTitle
+                });
             if (parentViewModel.LocalEvent.SupportTasks != EventTasksAttribute.NotAuthorized)
-                TaskStatus.Add(new Segment() { Id = i++, QueryId = 1, SegmentName = Languages.TaskSupport });
+                TaskStatus.Add(new Segment() {
+                    Id = i++,
+                    QueryId = 1,
+                    SegmentName = string.IsNullOrEmpty(parentViewModel.LocalEvent.SupportTaskTitle)
+                    ? Languages.TaskSupport
+                    : parentViewModel.LocalEvent.SupportTaskTitle});
             if (parentViewModel.LocalEvent.LaterTasks != EventTasksAttribute.NotAuthorized)
-                TaskStatus.Add(new Segment() { Id = i++, QueryId = 2, SegmentName = Languages.TaskCommitments });
+                TaskStatus.Add(new Segment() {
+                    Id = i++,
+                    QueryId = 2,
+                    SegmentName = string.IsNullOrEmpty(parentViewModel.LocalEvent.CommitmentTaskTitle)
+                    ? Languages.TaskCommitments
+                    : parentViewModel.LocalEvent.CommitmentTaskTitle});
             //Built ObservableCollection<string> with Segments Names
             this.SegmentedControlItems = new ObservableCollection<string>(ToSegmentString());
+            //Get information to StatusBar
+            this.EventTitle = $"- {parentViewModel.LocalEvent.Title}";
+            this.TotalTask = $"{Languages.TotalRows}: {parentViewModel.LocalEvent.TaskAccount} {Languages.Tasks}";
+            this.IsLoadSegments = false;
         }
 
+        /// <summary>
+        /// Create Segments
+        /// </summary>
+        /// <returns></returns>
         private IEnumerable<string> ToSegmentString()
         {
             return this.TaskStatus.Select(s => s.SegmentName);
@@ -153,21 +182,32 @@
             this.IsRefreshing = false;
         }
 
+        /// <summary>
+        /// Active Search bar
+        /// </summary>
         private void ActiveSearchBar()
         {
             this.IsVisibleSearch = !this.IsVisibleSearch;
         }
 
-        private async Task SearchTaskAsync()
-        {
-            throw new NotImplementedException();
-        }
 
+        /// <summary>
+        /// Add New Event Task
+        /// </summary>
+        /// <returns></returns>
         private async Task AddTaskAsync()
         {
-            var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.EditTask = new EditTaskViewModel();
-            await App.Navigator.PushAsync(new TaskPage());
+            var result = await App.Navigator.DisplayActionSheet(
+                $"{Languages.Add} {Languages.Task}",
+                Languages.Cancel,
+                null,
+                new string[] { "Tarea Previa", "Tarea Logística", "Compromiso" });
+            if (result != Languages.Cancel)
+            {
+                var mainViewModel = MainViewModel.GetInstance();
+                mainViewModel.EditTask = new EditTaskViewModel();
+                await App.Navigator.PushAsync(new TaskPage());
+            }
         }
 
         /// <summary>
@@ -191,7 +231,7 @@
             var response = await this.apiService.GetList<EventTask>(
                 Settings.UrlBaseApiSigob,
                 App.PrefixApiSigob,
-                string.Format(this.ApiTaskController, this.SelectedIndex),
+                this.ApiTaskController,
                 Settings.Token,
                 Settings.DbToken
             );
@@ -207,48 +247,136 @@
             }
 
             this.taskList = (List<EventTask>)response.Result;
-            this.FilteredTaskList = new List<EventTask>(this.taskList); // For search
-            TaskItems = new ObservableCollection<EventTasksItemViewModel>(this.ToEvenTasksItemViewModel());
-            
+            this.RefreshTaskList();            
         }
 
-        private IEnumerable<EventTasksItemViewModel> ToEvenTasksItemViewModel()
+        /// <summary>
+        /// Refresh Task List
+        /// </summary>
+        private void RefreshTaskList()
         {
-            return taskList.Select( t => new EventTasksItemViewModel
+            if (string.IsNullOrEmpty(this.Filter))
             {
-                Title = t.Title,
-                EndProgrammedDate = t.EndProgrammedDate,
-                HasReport = t.HasReport,
-                Id = t.Id,
-                IsOwner = t.IsOwner,
-                MonitorName = t.MonitorName,
-                MonitorOfficeId = t.MonitorOfficeId,
-                NextReportDate = t.NextReportDate,
-                PercentageOfCompletion = t.PercentageOfCompletion,
-                Periodicity = t.Periodicity,
-                ProgrammerName = t.ProgrammerName,
-                Reiterations = t.Reiterations,
-                ReportStatus = t.ReportStatus,
-                ResponsibleName = t.ResponsibleName,
-                RevisedReport = t.RevisedReport,
-                Status = t.Status,
-                StatusDescription = t.StatusDescription,
-                TaskMomentId = t.TaskMomentId,
-                TimeManagementStatus = t.TimeManagementStatus,
-                Type = t.Type,
-                TypeBlue = t.TypeBlue,
-                TypeGreen = t.TypeGreen,
-                TypeRed = t.TypeRed
-            });
+                this.TaskItems = new ObservableCollection<EventTasksItemViewModel>(taskList.Select(t => new EventTasksItemViewModel
+                {
+                    Title = t.Title,
+                    Description = t.Description,
+                    IsExternalResponsible = t.IsExternalResponsible,
+                    LastReportUpdate = t.LastReportUpdate,
+                    Report = t.Report,
+                    EndProgrammedDate = t.EndProgrammedDate,
+                    HasReport = t.HasReport,
+                    Id = t.Id,
+                    IsOwner = t.IsOwner,
+                    MonitorName = t.MonitorName,
+                    MonitorOfficeId = t.MonitorOfficeId,
+                    NextReportDate = t.NextReportDate,
+                    PercentageOfCompletion = IsNumeric(t.PercentageOfCompletion)
+                            ? $"{t.PercentageOfCompletion}%"
+                            : t.PercentageOfCompletion,
+                    Periodicity = t.Periodicity,
+                    ProgrammerName = t.ProgrammerName,
+                    Reiterations = t.Reiterations,
+                    ReportStatus = t.ReportStatus,
+                    ResponsibleName = t.ResponsibleName,
+                    RevisedReport = t.RevisedReport,
+                    Status = t.Status,
+                    StatusDescription = t.StatusDescription,
+                    TaskMomentId = t.TaskMomentId,
+                    TimeManagementStatus = t.TimeManagementStatus,
+                    Type = t.Type,
+                    TypeBlue = t.TypeBlue,
+                    TypeGreen = t.TypeGreen,
+                    TypeRed = t.TypeRed
+                })
+            .OrderByDescending(t => t.TrafficLight)
+            .ToList());
+            }
+            else
+            {
+                this.TaskItems = new ObservableCollection<EventTasksItemViewModel>(taskList.Select(t => new EventTasksItemViewModel
+                {
+                    Title = t.Title,
+                    Description = t.Description,
+                    IsExternalResponsible = t.IsExternalResponsible,
+                    LastReportUpdate = t.LastReportUpdate,
+                    Report = t.Report,
+                    EndProgrammedDate = t.EndProgrammedDate,
+                    HasReport = t.HasReport,
+                    Id = t.Id,
+                    IsOwner = t.IsOwner,
+                    MonitorName = t.MonitorName,
+                    MonitorOfficeId = t.MonitorOfficeId,
+                    NextReportDate = t.NextReportDate,
+                    PercentageOfCompletion = IsNumeric(t.PercentageOfCompletion)
+                            ? $"{t.PercentageOfCompletion}%"
+                            : t.PercentageOfCompletion,
+                    Periodicity = t.Periodicity,
+                    ProgrammerName = t.ProgrammerName,
+                    Reiterations = t.Reiterations,
+                    ReportStatus = t.ReportStatus,
+                    ResponsibleName = t.ResponsibleName,
+                    RevisedReport = t.RevisedReport,
+                    Status = t.Status,
+                    StatusDescription = t.StatusDescription,
+                    TaskMomentId = t.TaskMomentId,
+                    TimeManagementStatus = t.TimeManagementStatus,
+                    Type = t.Type,
+                    TypeBlue = t.TypeBlue,
+                    TypeGreen = t.TypeGreen,
+                    TypeRed = t.TypeRed
+                })
+            .Where (t => (!string.IsNullOrEmpty(t.Title) && t.Title.ToLower().Contains(this.Filter.ToLower())) ||
+                         (!string.IsNullOrEmpty(t.Description) && t.Description.ToLower().Contains(this.Filter.ToLower())) ||
+                         (!string.IsNullOrEmpty(t.ResponsibleName) && t.ResponsibleName.ToLower().Contains(this.Filter.ToLower())) ||
+                         (!string.IsNullOrEmpty(t.Report) && t.Report.ToLower().Contains(this.Filter.ToLower())) ||
+                         (!string.IsNullOrEmpty(t.MonitorName) && t.MonitorName.ToLower().Contains(this.Filter.ToLower())))
+            .OrderByDescending(t => t.TrafficLight)
+            .ToList());
+            }
         }
-
 
         /// <summary>
         /// Event ocurrs when the selection is changed.
         /// </summary>
         private async Task OnSelectionChanged()
         {
+            this.IsRefreshing = true;
+            int queryId = this.TaskStatus.FirstOrDefault(s => s.Id == SelectedIndex).QueryId;
+            var localEvent = MainViewModel.GetInstance().EventCg.LocalEvent;
+            switch (queryId)
+            {
+                case 0:
+                    this.tick = EventTaskMoment.Previous;
+                    this.auth = localEvent.PreviousTask;
+                    break;
+                case 1:
+                    this.tick = EventTaskMoment.Support;
+                    this.auth = localEvent.SupportTasks;
+                    break;
+                case 2:
+                    this.tick = EventTaskMoment.Later;
+                    this.auth = localEvent.LaterTasks;
+                    break;
+                case 3:
+                    this.tick = EventTaskMoment.All;
+                    this.auth = EventTasksAttribute.ViewAll;
+                    break;
+                default:
+                    break;
+            }
             await this.GetEventTasksAsync();
+            this.IsRefreshing = false;
+        }
+
+        /// <summary>
+        /// Check the inpot is valid integer number
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool IsNumeric(string value)
+        {
+            return int.TryParse(value, out int retNum);
         }
         #endregion
 

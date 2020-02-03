@@ -29,7 +29,7 @@
 
     public enum TOriginTask    {        None = -1,        GovernmentActionProgram = 0,        ManagementCenterPrevious = 1,        ManagementCenterDuring = 2,        ManagementCenterPost = 3,        ManagementCenterRequest = 4,        Instruction = 5,        Assignment = 6,        PersonalAgenda = 7,        Task = 8,        CommunicativeAction = 9    }
 
-    public enum TPeriodicity    {        Undefined = 0,        Weekly = 1,        Biweekly = 2,        Monthly = 3,        Bimonthly = 4    }
+    public enum TPeriodicity : byte    {        Undefined = 0,        Weekly = 1,        Biweekly = 2,        Monthly = 3,        Bimonthly = 4    }
 
     public enum TPriority    {        Minimum = 0,        Low = 1,        Middle = 2,        High = 3,        Maxim = 4    }
 
@@ -60,7 +60,7 @@
     public class TaskSigob
     {
         [JsonProperty("codigo")]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("asunto")]
         public string Title { get; set; }
@@ -102,19 +102,19 @@
         public DateTime EndProgrammedDate { get; set; }
 
         [JsonProperty("fechaFinalizada")]
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         [JsonProperty("fechaInicio")]
         public DateTime StartDate { get; set; }
 
         [JsonProperty("fechaModificacionDetalle")]
-        public DateTime ModificationDatailDate { get; set; }
+        public DateTime? ModificationDetailDate { get; set; }
 
         [JsonProperty("fechaModificacionReporte")]
-        public DateTime ModificationReportDate { get; set; }
+        public DateTime? ModificationReportDate { get; set; }
 
         [JsonProperty("fechaProximoReporte")]
-        public DateTime NextReportDate { get; set; }
+        public DateTime? NextReportDate { get; set; }
 
         [JsonProperty("historicoDetalle")]
         public string HistoricalDetail { get; set; }
@@ -147,7 +147,7 @@
         public bool IsNew { get; set; }
 
         [JsonProperty("origen")]
-        public TOriginTask Origin { get; set; }
+        public TOriginTask Source { get; set; }
 
         [JsonProperty("padre")]
         public object Parent { get; set; }
@@ -241,18 +241,18 @@
     public class ParentEntity
     {
         [JsonProperty("codigo")]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("codigoInstrumento")]
-        public long CodigoInstrumento { get; set; }
+        public int CodigoInstrumento { get; set; }
 
         [JsonProperty("descripcion")]
         public string Description { get; set; }
 
         [JsonProperty("fecha")]
-        public DateTimeOffset Date { get; set; }
+        public DateTime Date { get; set; }
 
         [JsonProperty("instrumento")]
-        public long Instrumento { get; set; }
+        public SigobInstrument Instrumento { get; set; }
     }
 }

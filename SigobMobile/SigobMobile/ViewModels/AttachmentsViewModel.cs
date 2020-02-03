@@ -26,6 +26,7 @@
         private ObservableCollection<AttachmentsItemViewModel> attachments;
         private ObservableCollection<Grouping<string, AttachmentsItemViewModel>> attachmentsGrouped;
         private bool isRefreshing;
+        private bool isRunning;
         private List<Attachment> attachmentList;
         #endregion
 
@@ -48,6 +49,11 @@
             get => this.attachmentsGrouped;
             set => SetValue(ref this.attachmentsGrouped, value);
         }
+        public bool IsRunning
+        {
+            get => this.isRunning;
+            set => SetValue(ref this.isRunning, value);
+        }
         #endregion
 
         #region Constructors
@@ -59,6 +65,7 @@
         /// <param name="source"></param>
         public AttachmentsViewModel(int parentId, SigobInstrument component, DocumentSource source)
         {
+            this.IsRunning = true;
             this.parentId = parentId;
             this.component = component;
             this.source = source;
@@ -73,10 +80,12 @@
         /// <param name="source"></param>
         public AttachmentsViewModel(List<Attachment> attachments, DocumentSource source)
         {
+            this.IsRunning = true;
             this.apiService = new ApiService();
             this.source = source;
             this.attachmentList = attachments;
             this.GetAttachmentCollection();
+            this.IsRunning = false;
         }
         #endregion
 
@@ -97,6 +106,7 @@
                 this.LoadFiles().FireAndForgetSafeAsync(errorHandler);
             }
             this.IsRefreshing = false;
+            this.IsRunning = false;
         }
 
         /// <summary>

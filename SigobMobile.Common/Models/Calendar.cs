@@ -41,6 +41,8 @@
 
         [JsonProperty("visible")]
         public bool IsVisible { get; set; }
+        
+        public string IconType => (this.ManagementCenterId != 0) ? "cal_management_center" : "cal_personal_agenda";
 
     }
 }

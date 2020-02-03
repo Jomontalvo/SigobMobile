@@ -179,6 +179,8 @@
         public static string SelectCalendarMessage => Resources.SelectCalendarMessage;
         public static string SelectCalendarColor => Resources.SelectCalendarColor;
         public static string SelectItemToAddManagementCenter => Resources.SelectItemToAddManagementCenter;
+        public static string ManagementCenters => Resources.ManagementCenters;
+        public static string PersonalAgendas => Resources.PersonalAgendas;
         #endregion
 
         #region Event View
@@ -267,6 +269,30 @@
         public static string ControlTitle => Resources.ControlTitle;
         public static string PersonalControl => Resources.PersonalControl;
         public static string GeneralControl => Resources.GeneralControl;
+        public static string OverdueControl => Resources.OverdueControl;
+        public static string EmptyTaskList => Resources.EmptyTaskList;
+        public static string TaskProgrammerText => Resources.TaskProgrammerText;
+        public static string OverdueTasksByType => Resources.OverdueTasksByType;
+        public static string OverdueTasksByProgrammer => Resources.OverdueTasksByProgrammer;
+        public static string OverdueTasksByResponsible => Resources.OverdueTasksByResponsible;
+        #endregion
+
+        #region Report View
+        public static string ReportPeriodicity => Resources.ReportPeriodicity;
+        public static string PeriodicityUndefined => Resources.PeriodicityUndefined;
+        public static string PeriodicityWeekly => Resources.PeriodicityWeekly;
+        public static string PeriodicityBiWeekly => Resources.PeriodicityBiWeekly;
+        public static string PeriodicityMonthly => Resources.PeriodicityMonthly;
+        public static string PeriodicityBiMonthly => Resources.PeriodicityBiMonthly;
+        public static string NewReport => Resources.NewReport;
+        public static string NoReportAvailable => Resources.NoReportAvailable;
+        #endregion
+
+        #region Messages
+        public static string Messages => Resources.Messages;
+        public static string Message => Resources.Message;
+        public static string NewMessage => Resources.NewMessage;
+        public static string SendMessage => Resources.SendMessage;
         #endregion
 
         #region Correspondence Menu View

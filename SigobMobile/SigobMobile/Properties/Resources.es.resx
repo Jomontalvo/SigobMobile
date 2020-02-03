@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+    <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,148 +59,1276 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+        <xsd:element name="root" msdata:IsDataSet="true">
             <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+                <xsd:choice maxOccurs="unbounded">
+                    <xsd:element name="metadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                            </xsd:sequence>
+                            <xsd:attribute name="name" use="required" type="xsd:string" />
+                            <xsd:attribute name="type" type="xsd:string" />
+                            <xsd:attribute name="mimetype" type="xsd:string" />
+                            <xsd:attribute ref="xml:space" />
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="assembly">
+                        <xsd:complexType>
+                            <xsd:attribute name="alias" type="xsd:string" />
+                            <xsd:attribute name="name" type="xsd:string" />
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="data">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+                            <xsd:attribute ref="xml:space" />
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="resheader">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" />
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:choice>
             </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="Accept" xml:space="preserve">
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Accept" xml:space="preserve">
     <value>Aceptar</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
+    <data name="Cancel" xml:space="preserve">
     <value>Cancelar</value>
   </data>
-  <data name="Error" xml:space="preserve">
+    <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
-  <data name="No" xml:space="preserve">
+    <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
-  <data name="Ok" xml:space="preserve">
+    <data name="Ok" xml:space="preserve">
     <value>Ok</value>
   </data>
-  <data name="Yes" xml:space="preserve">
+    <data name="Yes" xml:space="preserve">
     <value>Si</value>
   </data>
-  <data name="ForgotPassword" xml:space="preserve">
-    <value>¿Olvidó su contraseña?</value>
+    <data name="Edit" xml:space="preserve">
+    <value>Editar</value>
+    <comment>Edit option of Toolbar Item</comment>
   </data>
-  <data name="Username" xml:space="preserve">
+    <data name="Add" xml:space="preserve">
+    <value>Nuevo</value>
+    <comment>Add option of Toolbar Item</comment>
+  </data>
+    <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
+    <comment>Save option of Toolbar Item</comment>
+  </data>
+    <data name="Done" xml:space="preserve">
+    <value>Hecho</value>
+    <comment>Done option of Toolbar Item</comment>
+  </data>
+    <data name="ConfirmTitle" xml:space="preserve">
+    <value>Confirmación</value>
+    <comment>Confirm Title</comment>
+  </data>
+    <data name="ConfirmEventDeletion" xml:space="preserve">
+    <value>Está seguro que desea borrar la actividad?</value>
+    <comment>Question previous to delete event</comment>
+  </data>
+    <data name="EventResumeMessage" xml:space="preserve">
+    <value>Va a dejar la acividad actual en gestión. ¿Desea continuar?</value>
+    <comment>Question previous to finish event</comment>
+  </data>
+    <data name="EventFinishMessage" xml:space="preserve">
+    <value>Va a dar por terminada la acividad actual. ¿Desea continuar?</value>
+    <comment>Question previous to suspend event</comment>
+  </data>
+    <data name="EventSuspendMessage" xml:space="preserve">
+    <value>Va a suspender la acividad actual. ¿Desea continuar?</value>
+    <comment>Question previous to resume event management</comment>
+  </data>
+    <data name="ForgotPassword" xml:space="preserve">
+    <value>Olvidó su contraseña?</value>
+    <comment>Question when user forget the password access</comment>
+  </data>
+    <data name="EnterCredentials" xml:space="preserve">
+    <value>Ingrese sus credenciales de acceso al sistema.</value>
+    <comment>Message request user credentials for login</comment>
+  </data>
+    <data name="Username" xml:space="preserve">
     <value>Nombre de usuario</value>
+    <comment>Username placeholder</comment>
   </data>
-  <data name="Password" xml:space="preserve">
-    <value>Contraseña</value>
+    <data name="Password" xml:space="preserve">
+    <value>Conraseña</value>
+    <comment>Password Placeholder</comment>
   </data>
-  <data name="SelectApiInstitution" xml:space="preserve">
-    <value>Seleccione la institución...</value>
+    <data name="SelectApiInstitution" xml:space="preserve">
+    <value>Seleccione institución...</value>
+    <comment>Select the institution that provides API web services</comment>
   </data>
-  <data name="LoginViewTitle" xml:space="preserve">
-    <value>Inicio de sesión</value>
-  </data>
-  <data name="Login" xml:space="preserve">
+    <data name="Login" xml:space="preserve">
     <value>Iniciar sesión</value>
+    <comment>Button Login</comment>
   </data>
-  <data name="InstitutionsConnect" xml:space="preserve">
+    <data name="LoginViewTitle" xml:space="preserve">
+    <value>Inicio de sesión</value>
+    <comment>Login View Title</comment>
+  </data>
+    <data name="InstitutionsConnect" xml:space="preserve">
     <value>Instituciones</value>
+    <comment>List of Institutions to connect (API Service)</comment>
   </data>
-  <data name="EnterCredentials" xml:space="preserve">
-    <value>Ingrese sus credenciales de usuario</value>
+    <data name="UserValidationMsg" xml:space="preserve">
+    <value>Ingrerse un nombre de usuario</value>
+    <comment>Message when the user name has not been entered</comment>
   </data>
-  <data name="UserValidationMsg" xml:space="preserve">
-    <value>Ingrese un nombre de usuario</value>
-  </data>
-  <data name="PasswordValidationMsg" xml:space="preserve">
+    <data name="PasswordValidationMsg" xml:space="preserve">
     <value>Ingrese una contraseña</value>
+    <comment>Message when the password has not been entered</comment>
   </data>
-  <data name="InvalidCredentials" xml:space="preserve">
-    <value>Credenciales de ingreso inválidas</value>
+    <data name="InvalidCredentials" xml:space="preserve">
+    <value>Nombre de usuario o contraseña no válidos</value>
+    <comment>Message when the user and password are invalid.</comment>
   </data>
-  <data name="Success" xml:space="preserve">
-    <value>Operación exitosa</value>
+    <data name="Success" xml:space="preserve">
+    <value>Éxito</value>
+    <comment>Successfuly operation</comment>
   </data>
-  <data name="MasterPageTitle" xml:space="preserve">
+    <data name="MasterPageTitle" xml:space="preserve">
     <value>SIGOB</value>
-    <comment>Título de la pagina de Menú principal (visible dependiendo de la plataforma) </comment>
+    <comment>Left menu page title (visible depending platfform) </comment>
   </data>
-  <data name="HomeMenu" xml:space="preserve">
+    <data name="HomeMenu" xml:space="preserve">
     <value>Inicio</value>
-    <comment>Opción de Menú Inicio.</comment>
+    <comment>Main Menu Home Option.</comment>
   </data>
-  <data name="HelpMenu" xml:space="preserve">
+    <data name="HelpMenu" xml:space="preserve">
     <value>Ayuda</value>
-    <comment>Opcion de Menú Ayuda.</comment>
+    <comment>Main Menu Help Option.</comment>
   </data>
-  <data name="TermsAndConditionsMenu" xml:space="preserve">
+    <data name="TermsAndConditionsMenu" xml:space="preserve">
     <value>Términos y Condiciones</value>
-    <comment>Opción de Menú Términos y Condiciones.</comment>
+    <comment>Main Menu Terms and Conditions Option.</comment>
   </data>
-  <data name="SecurityMenu" xml:space="preserve">
+    <data name="SecurityMenu" xml:space="preserve">
     <value>Seguridad</value>
-    <comment>Opción de Menú Seguridad</comment>
+    <comment>Main Menu Security Option.</comment>
   </data>
-  <data name="ContactUs" xml:space="preserve">
+    <data name="ChangePasswordTitle" xml:space="preserve">
+    <value>Cambiar contraseña</value>
+    <comment>Change password View Title</comment>
+  </data>
+    <data name="NewPassword" xml:space="preserve">
+    <value>Nueva contraseña</value>
+    <comment>Enter new password placeholder</comment>
+  </data>
+    <data name="RepeatNewPassword" xml:space="preserve">
+    <value>Repita la nueva contraseña</value>
+    <comment>Repeat the new password placeholder</comment>
+  </data>
+    <data name="PasswordsMatchValidationMsg" xml:space="preserve">
+    <value>Las nuevasbcontraseñas ingresadas no coinciden!</value>
+    <comment>The new password does not match the entry where you repeat the password</comment>
+  </data>
+    <data name="ChangePasswordText" xml:space="preserve">
+    <value>Utilice los campos abajo para cambiar su contraseña.
+Si tiene algún problema, contacte con un Administrador.</value>
+    <comment>Message when the repeat new password has not been entered</comment>
+  </data>
+    <data name="NewPwdValidationMsg" xml:space="preserve">
+    <value>Ingrese una nueva contraseña!</value>
+    <comment>Message when the new password has not been entered</comment>
+  </data>
+    <data name="RepeatNewPwdValidationMsg" xml:space="preserve">
+    <value>Repita la nueva contraseña ingresada!</value>
+    <comment>Message when the repeat new password has not been entered</comment>
+  </data>
+    <data name="ContactUs" xml:space="preserve">
     <value>Contáctenos</value>
-    <comment>Opción de Menú Contáctenos.</comment>
+    <comment>Main Menu Contact Us Option.</comment>
   </data>
-  <data name="LogoutMenu" xml:space="preserve">
+    <data name="LogoutMenu" xml:space="preserve">
     <value>Cerrar sesión</value>
-    <comment>Opción de Menú Cerrar sesión.</comment>
+    <comment>Main Menu Logout Option.</comment>
   </data>
-  <data name="ApplicationsViewTitle" xml:space="preserve">
-    <value>S I G O B</value>
-    <comment>Título de la ventana proncipal de módulos SIGOB</comment>
+    <data name="ApplicationsViewTitle" xml:space="preserve">
+    <value>Sigob</value>
+    <comment>SIGOB Applications View Title.</comment>
+  </data>
+    <data name="ProfileViewTitle" xml:space="preserve">
+    <value>Mi Perfil</value>
+    <comment>SIGOB Profile View Title.</comment>
+  </data>
+    <data name="PersonalDataGroup" xml:space="preserve">
+    <value>Editar información personal</value>
+    <comment>Text for Group Personal Information</comment>
+  </data>
+    <data name="OfficialDataGroup" xml:space="preserve">
+    <value>Información del despacho</value>
+    <comment>Text for Group Official Information.</comment>
+  </data>
+    <data name="ContactDataGroup" xml:space="preserve">
+    <value>Editar información de contacto</value>
+    <comment>Text for Group Contact Information.</comment>
+  </data>
+    <data name="FirstNameText" xml:space="preserve">
+    <value>Nombres</value>
+    <comment>Text for First Name profile Label; .</comment>
+  </data>
+    <data name="LastNameText" xml:space="preserve">
+    <value>Apellidos</value>
+    <comment>Text for Last Name profile Label; .</comment>
+  </data>
+    <data name="InstitutionText" xml:space="preserve">
+    <value>Institución</value>
+    <comment>Text for Institution profile label.</comment>
+  </data>
+    <data name="PositionText" xml:space="preserve">
+    <value>Cargo</value>
+    <comment>Text for Position (Role) Profile label.</comment>
+  </data>
+    <data name="AreaText" xml:space="preserve">
+    <value>Area</value>
+    <comment>Text for Area/Section Profile label.</comment>
+  </data>
+    <data name="PhoneText" xml:space="preserve">
+    <value>Teléfono</value>
+    <comment>Text for Phone profile label.</comment>
+  </data>
+    <data name="CellPhoneText" xml:space="preserve">
+    <value>Celular</value>
+    <comment>Text for CellPhone profile label.</comment>
+  </data>
+    <data name="EmailText" xml:space="preserve">
+    <value>E-mail</value>
+    <comment>Text for email profile label.</comment>
+  </data>
+    <data name="UserImageText" xml:space="preserve">
+    <value>Toque para cambiar la imagen.</value>
+    <comment>Text for image of user profile label.</comment>
+  </data>
+    <data name="AgendaViewTitle" xml:space="preserve">
+    <value>Agenda</value>
+    <comment>Text for agenda calendar page.</comment>
+  </data>
+    <data name="InstructionsViewTitle" xml:space="preserve">
+    <value>Instrucciones</value>
+    <comment>Text for image of user profile label.</comment>
+  </data>
+    <!-- Main options name -->
+    <data name="ManagementCenterAppName" xml:space="preserve">
+    <value>Agenda del Centro de Gestión</value>
+    <comment>Text for agenda menu option title.</comment>
+  </data>
+    <data name="TaskManagementAppName" xml:space="preserve">
+    <value>Gesión y Control de Tareas</value>
+    <comment>Text for task menu option title.</comment>
+  </data>
+    <data name="CorrespondenceAppName" xml:space="preserve">
+    <value>Transparencia Documental</value>
+    <comment>Text for correspondence menu option title.</comment>
+  </data>
+    <data name="InstitutionalGoalsAppName" xml:space="preserve">
+    <value>Metas Institucionales</value>
+    <comment>Text for goals menu option title.</comment>
+  </data>
+    <data name="WorkflowProcessAppName" xml:space="preserve">
+    <value>Trámites Regulares Estructurados</value>
+    <comment>Text for workflow menu option title.</comment>
+  </data>
+    <data name="CommunicationsActionsAppName" xml:space="preserve">
+    <value>Monitoreo de Actores y Temas</value>
+    <comment>Text for communications actions menu option title.</comment>
+  </data>
+    <!--    Messages  -->
+    <data name="MsgAcomLine_1_Value_0" xml:space="preserve">
+    <value>No hay temas reggistrados hoy</value>
+    <comment>Sin temas comuniccionales</comment>
+  </data>
+    <data name="MsgAcomLine_1_Value_Greater_0" xml:space="preserve">
+    <value>{0} acciones comunicacionales para hoy</value>
+    <comment>Communicative Actions defined</comment>
+  </data>
+    <data name="MsgAcomLine_2_Value_0" xml:space="preserve">
+    <value>No existen mensajes para hoy</value>
+    <comment>No messages for today</comment>
+  </data>
+    <data name="MsgAcomLine_2_Value_Greater_0" xml:space="preserve">
+    <value>{0} mensajes para hoy</value>
+    <comment>Messages for delivery today</comment>
+  </data>
+    <data name="MsgAgendaLine_1_Value_0" xml:space="preserve">
+    <value>No hay actividades programadas paea hoy</value>
+    <comment>No events today message</comment>
+  </data>
+    <data name="MsgAgendaLine_1_Value_Greater_0" xml:space="preserve">
+    <value>Hoy: {0} actividades programadas</value>
+    <comment>You have activities today</comment>
+  </data>
+    <data name="MsgAgendaLine_2_Value_0" xml:space="preserve">
+    <value>No hay citas programadas proximamente</value>
+    <comment>No activities programmed</comment>
+  </data>
+    <data name="MsgAgendaLine_2_Vaue_Greater_0" xml:space="preserve">
+    <value>{0} actividades próximas a realizarse</value>
+    <comment>Future activities message</comment>
+  </data>
+    <data name="MsgDocumentLine_1_Value_0" xml:space="preserve">
+    <value>Toda la correspondencia revisada</value>
+    <comment>No documents pending to review message</comment>
+  </data>
+    <data name="MsgDocumentLine_1_Value_Greater_0" xml:space="preserve">
+    <value>{0} correspondencias no revisadas</value>
+    <comment>Documentos pending to review message</comment>
+  </data>
+    <data name="MsgDocumentLine_2_Value_0" xml:space="preserve">
+    <value>Todas las correspondencias dentro del plazo de gestión</value>
+    <comment>Documents in management into the term</comment>
+  </data>
+    <data name="MsgDocumentLine_2_Value_Greater_0" xml:space="preserve">
+    <value>{0} correspondencias con plazo de gestión vencido</value>
+    <comment>Documents deadline message</comment>
+  </data>
+    <data name="MsgGoalsLine_1_Value_0" xml:space="preserve">
+    <value>Usted no participa en ninguna meta</value>
+    <comment>Not participate message</comment>
+  </data>
+    <data name="MsgGoalsLine_1_Value_Greater_0" xml:space="preserve">
+    <value>Usted participa en {0} metas</value>
+    <comment>Participate in goals message</comment>
+  </data>
+    <data name="MsgGoalsLine_2_Alert_0" xml:space="preserve">
+    <value>No hay alertas reportadas</value>
+    <comment>Alerts 0 message</comment>
+  </data>
+    <data name="MsgGoalsLine_2_Alerts_Greater_0" xml:space="preserve">
+    <value>{0} alertas repostadas</value>
+    <comment>Exists alerts message</comment>
+  </data>
+    <data name="MsgGoalsLine_2_Opportunities_0" xml:space="preserve">
+    <value>No hay oportunidades identificadas</value>
+    <comment>Opportunities 0 message</comment>
+  </data>
+    <data name="MsgGoalsLine_2_Opportunities_Greater_0" xml:space="preserve">
+    <value>{0} oportunidades identificadas</value>
+    <comment>Exists opportunities message</comment>
+  </data>
+    <data name="MsgGoalsLine_2_Restriction_0" xml:space="preserve">
+    <value>NO hay restricciones identificadas</value>
+    <comment>Restrictions 0 message</comment>
+  </data>
+    <data name="MsgGoalsLine_2_Restrictions_Greater_0" xml:space="preserve">
+    <value>{0} restricciones reportadas</value>
+    <comment>Exists restrictions message</comment>
+  </data>
+    <data name="MsgTasksLine_1_Value_0" xml:space="preserve">
+    <value>Todas sus actividades dentro del plazo de gestión</value>
+    <comment>No deadline tasks message</comment>
+  </data>
+    <data name="MsgTasksLine_1_Value_Greater_0" xml:space="preserve">
+    <value>Usted tiene {0} tareas vencidas</value>
+    <comment>With expired tasks message</comment>
+  </data>
+    <data name="MsgTasksLine_2_Value_0" xml:space="preserve">
+    <value>No hay actividades que deban finalizar hoy</value>
+    <comment>No tasks planned to finish today message</comment>
+  </data>
+    <data name="MsgTasksLine_2_Value_Greater_0" xml:space="preserve">
+    <value>{0} tareas deberían ser finalizadas hoy</value>
+    <comment>Tasks deadline today message</comment>
+  </data>
+    <data name="MsgWorkflowLine_1_Value_0" xml:space="preserve">
+    <value>Usted no participa en ningún trámite</value>
+    <comment>Nothing workflow message</comment>
+  </data>
+    <data name="MsgWorkflowLine_1_Value_Greater_0" xml:space="preserve">
+    <value>Usted es participante en {0} grupos de trámites</value>
+    <comment>Participate in workflows message</comment>
+  </data>
+    <data name="MsgWorkflowLine_2_Activities_OutThresold" xml:space="preserve">
+    <value>{0} actividades atrasadas  más allá del umbral de tolerancia</value>
+    <comment>Activities deadline beyod tolerance message</comment>
+  </data>
+    <data name="MsgWorkflowLine_2_Activities_ForApproval" xml:space="preserve">
+    <value>{0} Actividades esperando su aprobación</value>
+    <comment>Activities pending approval message</comment>
+  </data>
+    <data name="MsgWorkflowLine_2_RejectedRequest" xml:space="preserve">
+    <value>{0} Solicitudes de trámites rechazadas</value>
+    <comment>Rejected requests message</comment>
+  </data>
+    <data name="MsgWorkflowLine_2_Process_OutThresol" xml:space="preserve">
+    <value>{0} Trámites atrasados fuera del umbral de tolerancia</value>
+    <comment>Delayed procedures message</comment>
+  </data>
+    <data name="MsgWorkflowLine_2_Process_ForApproval" xml:space="preserve">
+    <value>{0} rámites esperando aprobación</value>
+    <comment>Procedures for approval message</comment>
+  </data>
+    <!--    Search labels -->
+    <data name="SearchPlaceHolder" xml:space="preserve">
+    <value>Escriba el criterio de búsqueda...</value>
+    <comment>Text for search place holder.</comment>
+  </data>
+    <data name="SearchInternalContactsPlaceHolder" xml:space="preserve">
+    <value>Escriba aquí para buscar en la lista de despachos</value>
+    <comment>Text for search internal contacts place holder.</comment>
+  </data>
+    <data name="SearchExternalContactsPlaceHolder" xml:space="preserve">
+    <value>Escriba aquí para buscar en el directorio institucional</value>
+    <comment>Text for search external contacts place holder.</comment>
+  </data>
+    <data name="SearchDeviceContactsPlaceHolder" xml:space="preserve">
+    <value>Escriba aquí para buscar en sus contactos</value>
+    <comment>Text for search internal contacts place holder.</comment>
+  </data>
+    <data name="SearchExternalContacts" xml:space="preserve">
+    <value>Buscar en Directorio Institucional</value>
+    <comment>Text for search internal contacts place holder.</comment>
+  </data>
+    <data name="InstitutionalDirectoryTitle" xml:space="preserve">
+    <value>Directorio Institucional</value>
+    <comment>Text for Institutional Directory name.</comment>
+  </data>
+    <data name="ContactsTitle" xml:space="preserve">
+    <value>Contactos del dispositivo</value>
+    <comment>Text for search internal contacts place holder.</comment>
+  </data>
+    <data name="ManagementStatusTitle" xml:space="preserve">
+    <value>Estado de gestión</value>
+    <comment>Text for Title of management status list or selector.</comment>
+  </data>
+    <data name="InManagementStatus" xml:space="preserve">
+    <value>En gestión</value>
+    <comment>Text for Item in management status.</comment>
+  </data>
+    <data name="InProgressStatus" xml:space="preserve">
+    <value>En curso</value>
+    <comment>In Progress status label (green)</comment>
+  </data>
+    <data name="PendingStatus" xml:space="preserve">
+    <value>Pendiente</value>
+    <comment>Text for Item in pending status.</comment>
+  </data>
+    <data name="CloseToDeadlinedStatus" xml:space="preserve">
+    <value>Por vencer</value>
+    <comment>Text for Item close to deadline time status.</comment>
+  </data>
+    <data name="ExpiredStatus" xml:space="preserve">
+    <value>Vencida</value>
+    <comment>Text for Item in expired time status.</comment>
+  </data>
+    <data name="OverdueStatus" xml:space="preserve">
+    <value>Atrasada</value>
+    <comment>Overdue status label (red)</comment>
+  </data>
+    <data name="CompletedStatus" xml:space="preserve">
+    <value>Hecha</value>
+    <comment>Text for Item competed.</comment>
+  </data>
+    <data name="SuspendedStatus" xml:space="preserve">
+    <value>Suspendida</value>
+    <comment>Text for Item competed.</comment>
+  </data>
+    <data name="AllStatus" xml:space="preserve">
+    <value>Todos</value>
+    <comment>Text for All items wherever status.</comment>
+  </data>
+    <data name="Hour" xml:space="preserve">
+    <value>Hora</value>
+    <comment>Hour text.</comment>
+  </data>
+    <data name="Hours" xml:space="preserve">
+    <value>Horas</value>
+    <comment>Hours text.</comment>
+  </data>
+    <data name="Day" xml:space="preserve">
+    <value>Día</value>
+    <comment>Day text.</comment>
+  </data>
+    <data name="Days" xml:space="preserve">
+    <value>Días</value>
+    <comment>Days text.</comment>
+  </data>
+    <data name="Month" xml:space="preserve">
+    <value>Mes</value>
+    <comment>Month text.</comment>
+  </data>
+    <data name="Months" xml:space="preserve">
+    <value>Meses</value>
+    <comment>Months text.</comment>
+  </data>
+    <data name="Year" xml:space="preserve">
+    <value>year</value>
+    <comment>Year text.</comment>
+  </data>
+    <data name="Years" xml:space="preserve">
+    <value>years</value>
+    <comment>Years text.</comment>
+  </data>
+    <data name="CalendarsTitle" xml:space="preserve">
+    <value>Calendarios</value>
+    <comment>Text of Calendars Page Title or Filter Option.</comment>
+  </data>
+    <data name="Calendar" xml:space="preserve">
+    <value>Calendario</value>
+    <comment>Calendar text.</comment>
+  </data>
+    <data name="Today" xml:space="preserve">
+    <value>Hoy</value>
+    <comment>Today text.</comment>
+  </data>
+    <data name="Yesterday" xml:space="preserve">
+    <value>Ayer</value>
+    <comment>Yesterday text.</comment>
+  </data>
+    <data name="AllDay" xml:space="preserve">
+    <value>Todo el día</value>
+    <comment>All day duration event.</comment>
+  </data>
+    <data name="Filters" xml:space="preserve">
+    <value>Filtros</value>
+    <comment>Filters text.</comment>
+  </data>
+    <data name="SelectAll" xml:space="preserve">
+    <value>Seleccionar todo</value>
+    <comment>Select all option text.</comment>
+  </data>
+    <data name="UnselectAll" xml:space="preserve">
+    <value>Quitar selección</value>
+    <comment>Select all option text.</comment>
+  </data>
+    <data name="ShowAll" xml:space="preserve">
+    <value>Ver todos</value>
+    <comment>View all option text.</comment>
+  </data>
+    <data name="HideAll" xml:space="preserve">
+    <value>Ocultar todos</value>
+    <comment>Hide all option text.</comment>
+  </data>
+    <data name="GeneralError" xml:space="preserve">
+    <value>Lamentablemente ocurrió un error en su solicitud.</value>
+    <comment>Error message when sucess Call API, but result is false.</comment>
+  </data>
+    <data name="UnauthorizedError" xml:space="preserve">
+    <value>Operación no permitida.</value>
+    <comment>Error message when sucess Call API, but result is null.</comment>
+  </data>
+    <data name="SelectCalendarMessage" xml:space="preserve">
+    <value>Por favor, seleccione los calendarios que desea consultar en su Centro de Gestión.</value>
+    <comment>Message for set visibility of calendar.</comment>
+  </data>
+    <data name="CalendarFiltersMessage" xml:space="preserve">
+    <value>Por favor, seleccione los filtros de consulta para los calendarios de su Centro de Gestión.</value>
+    <comment>Message for set filters of calendar.</comment>
+  </data>
+    <data name="SelectCalendarColor" xml:space="preserve">
+    <value>Seleccione el color de calendario.</value>
+    <comment>Message for choose a color of calendar.</comment>
+  </data>
+    <data name="ManagementCenters" xml:space="preserve">
+    <value>Centros de Gestión</value>
+    <comment>Message for display a Management Center calendar.</comment>
+  </data>
+    <data name="PersonalAgendas" xml:space="preserve">
+    <value>Agendas Personales</value>
+    <comment>Message for display a Personal Agenda calendar.</comment>
+  </data>
+    <data name="MaleGender" xml:space="preserve">
+    <value>Hombre</value>
+    <comment>Text of Gender Male.</comment>
+  </data>
+    <data name="FemaleGender" xml:space="preserve">
+    <value>Mujer</value>
+    <comment>Text of Gender Female.</comment>
+  </data>
+    <data name="GenderText" xml:space="preserve">
+    <value>Género</value>
+    <comment>Label for Gender Entry.</comment>
+  </data>
+    <data name="SelectGenderPlaceHolder" xml:space="preserve">
+    <value>Selecciones el género.</value>
+    <comment>Placeholder text for gender selection.</comment>
+  </data>
+    <data name="SourceImageQuestion" xml:space="preserve">
+    <value>Cambie su imagen de perfil.</value>
+    <comment>Place from select a new image</comment>
+  </data>
+    <data name="FromGallery" xml:space="preserve">
+    <value>Cargar imagen desde galería</value>
+    <comment>Take image from gallery</comment>
+  </data>
+    <data name="FromCamera" xml:space="preserve">
+    <value>Tomar una nueva fotografía</value>
+    <comment>Take image from camera</comment>
+  </data>
+    <data name="Delete" xml:space="preserve">
+    <value>Eliminar</value>
+    <comment>Delete option</comment>
+  </data>
+    <data name="DeletePicture" xml:space="preserve">
+    <value>Eliminar imagen</value>
+    <comment>Delete the current picture</comment>
+  </data>
+    <data name="CalendarViewModeText" xml:space="preserve">
+    <value>Seleccione la vista del calendario</value>
+    <comment>Select view of calendar</comment>
+  </data>
+    <data name="MonthlyView" xml:space="preserve">
+    <value>Mensual</value>
+    <comment>Monthly view of calendar</comment>
+  </data>
+    <data name="DailyView" xml:space="preserve">
+    <value>Diaria</value>
+    <comment>Dailyy view of calendar</comment>
+  </data>
+    <data name="MultiDayView" xml:space="preserve">
+    <value>Varios días (3)</value>
+    <comment>MultiDay view of calendar</comment>
+  </data>
+    <data name="YearView" xml:space="preserve">
+    <value>Anual</value>
+    <comment>Year view of calendar</comment>
+  </data>
+    <data name="WeeklyView" xml:space="preserve">
+    <value>Semanal</value>
+    <comment>Weelly view of calendar</comment>
+  </data>
+    <data name="ShowCalendarColorOnEvent" xml:space="preserve">
+    <value>Utilizar el color de calendario para las actividades</value>
+    <comment>Option for change appointment color</comment>
+  </data>
+    <data name="AppointmentColor" xml:space="preserve">
+    <value>Color de actividades</value>
+    <comment>Title for setting to change appointment color</comment>
+  </data>
+    <data name="ConfirmedFilterTitle" xml:space="preserve">
+    <value>Mostrar según estado de confirmación</value>
+    <comment>Title for filter of confirmation status of the appointment</comment>
+  </data>
+    <data name="OnlyConfirmed" xml:space="preserve">
+    <value>Ver solo confirmadas</value>
+    <comment>Filter to show only confirmed appointments</comment>
+  </data>
+    <data name="OnlyTentative" xml:space="preserve">
+    <value>Ver solo entativas</value>
+    <comment>Filter to show only tentative appointments</comment>
+  </data>
+    <data name="ConfirmedAndTentative" xml:space="preserve">
+    <value>Ver confirmadas y tentativas</value>
+    <comment>Show both appointment types</comment>
+  </data>
+    <data name="TentativeLabel" xml:space="preserve">
+    <value>Tentativas</value>
+    <comment>Text for tentative appointments</comment>
+  </data>
+    <data name="AppointmentViewTitle" xml:space="preserve">
+    <value>Cita</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+    <data name="EventNameText" xml:space="preserve">
+    <value>Ingrese un título</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+    <data name="EventLocationText" xml:space="preserve">
+    <value>Lugar</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+    <data name="EventStartText" xml:space="preserve">
+    <value>Inicio</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+    <data name="EventEndText" xml:space="preserve">
+    <value>Fin</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+    <data name="EventTimeStartText" xml:space="preserve">
+    <value>Hora inicio</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+    <data name="EventTimeEndText" xml:space="preserve">
+    <value>Hora término</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+    <data name="EventCalendarOwner" xml:space="preserve">
+    <value>Propietario</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+    <data name="EventTypeText" xml:space="preserve">
+    <value>Tipo</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+    <data name="EventStatusText" xml:space="preserve">
+    <value>Seleccione un estado de gestión</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+    <data name="EventProgrammerText" xml:space="preserve">
+    <value>Programado por</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+    <data name="EventSummaryText" xml:space="preserve">
+    <value>Detalle</value>
+    <comment>Title for summary (personal agenda) view</comment>
+  </data>
+    <data name="EventParticipantText" xml:space="preserve">
+    <value>Participante</value>
+    <comment>Title for participant field</comment>
+  </data>
+    <data name="EventParticipantsText" xml:space="preserve">
+    <value>Participantes</value>
+    <comment>Title for participants view</comment>
+  </data>
+    <data name="EventAbstractText" xml:space="preserve">
+    <value>Ficha ejecutiva</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+    <data name="EventAnnotationsText" xml:space="preserve">
+    <value>Anotaciones</value>
+    <comment>Title for appointment (personal agenda) view</comment>
+  </data>
+    <data name="Event" xml:space="preserve">
+    <value>Evento</value>
+    <comment>Event object name in singular.</comment>
+  </data>
+    <data name="Events" xml:space="preserve">
+    <value>Eventos</value>
+    <comment>Event object name in plural.</comment>
+  </data>
+    <data name="EventFinishCommand" xml:space="preserve">
+    <value>Terminar</value>
+    <comment>Finish Event command.</comment>
+  </data>
+    <data name="EventSuspendCommand" xml:space="preserve">
+    <value>Suspender</value>
+    <comment>Suspend Event command.</comment>
+  </data>
+    <data name="EventActivateCommand" xml:space="preserve">
+    <value>Reanudar</value>
+    <comment>Return to in progress event status.</comment>
+  </data>
+    <data name="Activity" xml:space="preserve">
+    <value>Actividad</value>
+    <comment>Activity object name in singular.</comment>
+  </data>
+    <data name="Activities" xml:space="preserve">
+    <value>Actividades</value>
+    <comment>Activity object name in plural.</comment>
+  </data>
+    <data name="Appointment" xml:space="preserve">
+    <value>Cita</value>
+    <comment>Appointment object name in singular.</comment>
+  </data>
+    <data name="Appointments" xml:space="preserve">
+    <value>Citas</value>
+    <comment>Appointment object name in plural.</comment>
+  </data>
+    <data name="Instruction" xml:space="preserve">
+    <value>Instrucción</value>
+    <comment>Instruction object name in singular.</comment>
+  </data>
+    <data name="Instructions" xml:space="preserve">
+    <value>Instrucciones</value>
+    <comment>Instruction object name in plural.</comment>
+  </data>
+    <data name="Assignment" xml:space="preserve">
+    <value>Encargo</value>
+    <comment>Assignment object name in singular.</comment>
+  </data>
+    <data name="Assignments" xml:space="preserve">
+    <value>Encargos</value>
+    <comment>Assignment object name in plural.</comment>
+  </data>
+    <data name="Task" xml:space="preserve">
+    <value>Tarea</value>
+    <comment>Task object name in singular.</comment>
+  </data>
+    <data name="Tasks" xml:space="preserve">
+    <value>Tareas</value>
+    <comment>Task object name in plural.</comment>
+  </data>
+    <data name="TaskPrevious" xml:space="preserve">
+    <value>Previas</value>
+    <comment>Previous tasks name.</comment>
+  </data>
+    <data name="TaskSupport" xml:space="preserve">
+    <value>Soporte</value>
+    <comment>Support Tasks name.</comment>
+  </data>
+    <data name="TaskCommitments" xml:space="preserve">
+    <value>Compromisos</value>
+    <comment>Tracing Tasks  name.</comment>
+  </data>
+    <data name="Request" xml:space="preserve">
+    <value>Solicitud</value>
+    <comment>Request object name in singular.</comment>
+  </data>
+    <data name="Requests" xml:space="preserve">
+    <value>Solicitudes</value>
+    <comment>Request object name in plural.</comment>
+  </data>
+    <data name="SelectItemToAddManagementCenter" xml:space="preserve">
+    <value>Seleccione una opción par el nuevo ítem.</value>
+    <comment>Message for choose a new item in Management Center.</comment>
+  </data>
+    <data name="HighConfidentialityLevel" xml:space="preserve">
+    <value>Alta</value>
+    <comment>High Confidentiality</comment>
+  </data>
+    <data name="LowConfidentialityLevel" xml:space="preserve">
+    <value>Baja</value>
+    <comment>Low confidentiality</comment>
+  </data>
+    <data name="PrivateConfidentialityLevel" xml:space="preserve">
+    <value>Máxima/Privada</value>
+    <comment>Maximum or private confidentiality level</comment>
+  </data>
+    <data name="MediumConfidentialityLevel" xml:space="preserve">
+    <value>Media/Discreta</value>
+    <comment>Reserved or medium confidentiality level</comment>
+  </data>
+    <data name="PublicConfidentialityLevel" xml:space="preserve">
+    <value>Mínima/Pública</value>
+    <comment>Public or minimum confidentiality</comment>
+  </data>
+    <data name="NoConfidentialityLevel" xml:space="preserve">
+    <value>N/A</value>
+    <comment>Does not apply</comment>
+  </data>
+    <data name="Me" xml:space="preserve">
+    <value>Yo</value>
+    <comment>Personal pronoun for Me</comment>
+  </data>
+    <data name="And" xml:space="preserve">
+    <value>y</value>
+    <comment>And operator</comment>
+  </data>
+    <data name="ExternalContactsViewTitle" xml:space="preserve">
+    <value>Participantes externos</value>
+    <comment>External Participoants or Contacts View Title.</comment>
+  </data>
+    <data name="Loading" xml:space="preserve">
+    <value>Cargando...</value>
+    <comment>Loading message</comment>
+  </data>
+    <!--    Task Statistics Title-->
+    <data name="MyTasks" xml:space="preserve">
+    <value>Mis tareas</value>
+    <comment>My Tasks statistics chart title. Query Id = 10</comment>
+  </data>
+    <data name="TasksOf" xml:space="preserve">
+    <value>Tareas de otro funcionario</value>
+    <comment>Tasks of: {Officer name}. Query Id = 10, another officer</comment>
+  </data>
+    <data name="PendingTasks" xml:space="preserve">
+    <value>Tareas pendientes</value>
+    <comment>Pending tasks chart title. Query Id = 0</comment>
+  </data>
+    <data name="OverdueTasks" xml:space="preserve">
+    <value>Tareas vencidas</value>
+    <comment>Overdue tasks chart title. Quet Id = 1</comment>
+  </data>
+    <data name="CompletedTasks" xml:space="preserve">
+    <value>Tareas finalizadas</value>
+    <comment>Completed tasks chart title. Query Id = 2</comment>
+  </data>
+    <data name="NewAssignedTasks" xml:space="preserve">
+    <value>Nuevas tareas asignadas</value>
+    <comment>New assigned tasks chart title. Query Id = 3</comment>
+  </data>
+    <data name="OngoingTaskSetByMe" xml:space="preserve">
+    <value>En gestión programadas por mi</value>
+    <comment>Tasks set by me (in progress) chart title. Query Id = 4</comment>
+  </data>
+    <data name="OngoingTasksThatMonitoring" xml:space="preserve">
+    <value>En gestión que yo monitoreo</value>
+    <comment>Ongoing tasks that i monitor. Query Id = 5</comment>
+  </data>
+    <data name="CompletedTasksSetByMe" xml:space="preserve">
+    <value>Finalizadas propramadas por mi</value>
+    <comment>Completed tasks that i set. Query Id = 6</comment>
+  </data>
+    <data name="CompletedTasksThatMonitoring" xml:space="preserve">
+    <value>Finalizadas que yo monitoreo</value>
+    <comment>Ongoing tasks that I monitor. Query Id = 7</comment>
+  </data>
+    <data name="TaskCopies" xml:space="preserve">
+    <value>Copias de tareas</value>
+    <comment>Tasks copies. Query Id = 8</comment>
+  </data>
+    <data name="TaskMessages" xml:space="preserve">
+    <value>Mensajes de tareas sin revisar</value>
+    <comment>Tasks messages. Query Id = 9</comment>
+  </data>
+    <data name="TaskCloseToDeadline" xml:space="preserve">
+    <value>Tareas próximas a vencer</value>
+    <comment>Tasks close to deadline label. Query Id = 11</comment>
+  </data>
+    <!--Task Controls and Options-->
+    <data name="TaskControl" xml:space="preserve">
+    <value>Control de tareas</value>
+    <comment>Tasks control title</comment>
+  </data>
+    <data name="ControlTitle" xml:space="preserve">
+    <value>Control</value>
+    <comment>Control title</comment>
+  </data>
+    <data name="PersonalControl" xml:space="preserve">
+    <value>Control personal</value>
+    <comment>Personal control title</comment>
+  </data>
+    <data name="GeneralControl" xml:space="preserve">
+    <value>Control general</value>
+    <comment>Main control</comment>
+  </data>
+    <data name="OverdueControl" xml:space="preserve">
+    <value>Control de tareas atrasadas</value>
+    <comment>Overdue task control</comment>
+  </data>
+    <!--Task Report-->
+    <data name="PeriodicityUndefined" xml:space="preserve">
+    <value>Sin definir frecuencia</value>
+    <comment>No periodicity defined</comment>
+  </data>
+    <data name="PeriodicityWeekly" xml:space="preserve">
+    <value>Semanal</value>
+    <comment>One week label</comment>
+  </data>
+    <data name="PeriodicityBiWeekly" xml:space="preserve">
+    <value>Quincenal</value>
+    <comment>Two weeks label</comment>
+  </data>
+    <data name="PeriodicityMonthly" xml:space="preserve">
+    <value>Mensual</value>
+    <comment>Monthly label</comment>
+  </data>
+    <data name="PeriodicityBiMonthly" xml:space="preserve">
+    <value>Bimestral</value>
+    <comment>Two months label</comment>
+  </data>
+    <data name="OverdueTasksByType" xml:space="preserve">
+    <value>Tareas atrasadas según tipo</value>
+    <comment>Delayed task type</comment>
+  </data>
+    <data name="OverdueTasksByProgrammer" xml:space="preserve">
+    <value>Programadores con tareas atrasadas</value>
+    <comment>Delayes programmers</comment>
+  </data>
+    <data name="OverdueTasksByResponsible" xml:space="preserve">
+    <value>Responsables con tareas atrasadas</value>
+    <comment>Delayed responsibles</comment>
+  </data>
+    <!--    Type Document Trays -->
+    <data name="ManagementTray" xml:space="preserve">
+    <value>Bandejas de correspondencia</value>
+    <comment>Management documents group name </comment>
+  </data>
+    <data name="TagTray" xml:space="preserve">
+    <value>Clasificadores</value>
+    <comment>Documents order by classifiers</comment>
+  </data>
+    <!--Documents Status-->
+    <data name="External" xml:space="preserve">
+    <value>Externa</value>
+    <comment>Document from external source. Id = 1</comment>
+  </data>
+    <data name="Internal" xml:space="preserve">
+    <value>Interna</value>
+    <comment>Document from internal source. Id = 2</comment>
+  </data>
+    <data name="Draft" xml:space="preserve">
+    <value>En elaboración</value>
+    <comment>Document Draft. Id = 3</comment>
+  </data>
+    <data name="ProcessedToConfirm" xml:space="preserve">
+    <value>Tramitas a confirmar</value>
+    <comment>Document processed pending to confirm.Id = 4</comment>
+  </data>
+    <data name="Pending" xml:space="preserve">
+    <value>Pendientes</value>
+    <comment>Document reviewed pending to take action.Id = 5</comment>
+  </data>
+    <data name="ForYourInformation" xml:space="preserve">
+    <value>Para su conocimiento</value>
+    <comment>Document sent for your information.Id = 6</comment>
+  </data>
+    <data name="Trasferred" xml:space="preserve">
+    <value>Transferidas</value>
+    <comment>Document transfered to other office.Id = 7</comment>
+  </data>
+    <data name="WithDeadline" xml:space="preserve">
+    <value>Con plazo de gestión</value>
+    <comment>Document with terms of management. Id = 8</comment>
+  </data>
+    <data name="PendingEmail" xml:space="preserve">
+    <value>Pendiente de envío por e-mail</value>
+    <comment>Document pending to deliver via e-mal.Id = 9</comment>
+  </data>
+    <data name="PendingLinkedInstitution" xml:space="preserve">
+    <value> Pendiente de envíoa a institución vinculada</value>
+    <comment>Document pending to deliver via e-mal.Id = 10</comment>
+  </data>
+    <!--Pagination information label-->
+    <data name="TotalRows" xml:space="preserve">
+    <value>Total</value>
+    <comment>Total records</comment>
+  </data>
+    <data name="ShowRowCount" xml:space="preserve">
+    <value>Registros mostrados</value>
+    <comment>Total records</comment>
+  </data>
+    <!--Correspondence filters and Placeholder-->
+    <data name="Search" xml:space="preserve">
+    <value>Buscar</value>
+    <comment>Search button label</comment>
+  </data>
+    <data name="SearchFilters" xml:space="preserve">
+    <value>Filtros de búsqueda</value>
+    <comment>Search filters label</comment>
+  </data>
+    <data name="Sender" xml:space="preserve">
+    <value>Emisor</value>
+    <comment>Correspondence sender label</comment>
+  </data>
+    <data name="Senders" xml:space="preserve">
+    <value>Emisores</value>
+    <comment>Correspondence senders label</comment>
+  </data>
+    <data name="Receiver" xml:space="preserve">
+    <value>Destinatario</value>
+    <comment>Correspondence receiver label</comment>
+  </data>
+    <data name="Receivers" xml:space="preserve">
+    <value>Destinatarios</value>
+    <comment>Correspondence receivers label</comment>
+  </data>
+    <!--Correspondence details-->
+    <data name="From" xml:space="preserve">
+    <value>De:</value>
+    <comment>Sender info</comment>
+  </data>
+    <data name="To" xml:space="preserve">
+    <value>Para:</value>
+    <comment>Receiver info</comment>
+  </data>
+    <data name="ScannedDocument" xml:space="preserve">
+    <value>Documento digitalizados</value>
+    <comment>Scanned documents exists</comment>
+  </data>
+    <data name="ScannedDocuments" xml:space="preserve">
+    <value>Documentos digitalizados</value>
+    <comment>Scanned documents exists</comment>
+  </data>
+    <data name="NoScannedDocuments" xml:space="preserve">
+    <value>No existen documentos digitalizados</value>
+    <comment>Do not exists scanned documents</comment>
+  </data>
+    <data name="Attachment" xml:space="preserve">
+    <value>Documento anexos</value>
+    <comment>Attachment Document</comment>
+  </data>
+    <data name="Attachments" xml:space="preserve">
+    <value>Documentos anexos</value>
+    <comment>Exists Attachments</comment>
+  </data>
+    <data name="NoAttachments" xml:space="preserve">
+    <value>No existen documentos anexos</value>
+    <comment>Not exists attachments</comment>
+  </data>
+    <data name="Tracking" xml:space="preserve">
+    <value>Recorrido: {0} pasos ({1} {2})</value>
+    <comment>Tracking document</comment>
+  </data>
+    <data name="TrackingViewTitle" xml:space="preserve">
+    <value>Copias y recorridos</value>
+    <comment>Tracking document title</comment>
+  </data>
+    <data name="Copy" xml:space="preserve">
+    <value>Copia</value>
+    <comment>Copy label</comment>
+  </data>
+    <data name="Copies" xml:space="preserve">
+    <value>Copias</value>
+    <comment>Copies label</comment>
+  </data>
+    <data name="OfficialStart" xml:space="preserve">
+    <value>Inició:</value>
+    <comment>Start Offical name</comment>
+  </data>
+    <data name="CurrentOfficial" xml:space="preserve">
+    <value>Actualmente:</value>
+    <comment>Currently official</comment>
+  </data>
+    <data name="OfficialEnd" xml:space="preserve">
+    <value>Finalizó:</value>
+    <comment>Finish official</comment>
+  </data>
+    <data name="LinkedDocuments" xml:space="preserve">
+    <value>Documentos relacionados</value>
+    <comment>Linked documents (precedents or derivatives)</comment>
+  </data>
+    <data name="NoLinkedDocuments" xml:space="preserve">
+    <value>No existen documentos relacionados</value>
+    <comment>There are no linked documents (precedents or derivatives)</comment>
+  </data>
+    <data name="InKnowledgeOne" xml:space="preserve">
+    <value>Un funcionario ha sido notificado</value>
+    <comment>Official notified for take knowledge</comment>
+  </data>
+    <data name="InKnowledgeSeveral" xml:space="preserve">
+    <value>{0} funcionarios fueron notificados</value>
+    <comment>Officials notified to take knowledge</comment>
+  </data>
+    <data name="NoOneInformed" xml:space="preserve">
+    <value>Nadie más ha sido puesto en conocimiento</value>
+    <comment>Officials notified for take knowledge</comment>
+  </data>
+    <data name="DocumentPurpose" xml:space="preserve">
+    <value>Objetivos de la correspondencia</value>
+    <comment>Officials notified for take knowledge</comment>
+  </data>
+    <data name="Objective" xml:space="preserve">
+    <value>Objetivo</value>
+    <comment>Objective label</comment>
+  </data>
+    <data name="Objectives" xml:space="preserve">
+    <value>Objetivos</value>
+    <comment>Objectives label</comment>
+  </data>
+    <data name="Result" xml:space="preserve">
+    <value>Resultado</value>
+    <comment>Result label</comment>
+  </data>
+    <data name="Results" xml:space="preserve">
+    <value>Resultados</value>
+    <comment>Results label</comment>
+  </data>
+    <data name="TransferredBy" xml:space="preserve">
+    <value>Transferida por</value>
+    <comment>Official that transferred document</comment>
+  </data>
+    <data name="NoTags" xml:space="preserve">
+    <value>Sin clasificadores relacionados</value>
+    <comment>No tags registered</comment>
+  </data>
+    <!-- Replies-->
+    <data name="NotReplyRequired" xml:space="preserve">
+    <value>No requiere respuesta</value>
+    <comment>Letter not require reply</comment>
+  </data>
+    <data name="NotReplied" xml:space="preserve">
+    <value>Sin responder</value>
+    <comment>Letter is not answered</comment>
+  </data>
+    <data name="Replied" xml:space="preserve">
+    <value>Respondida</value>
+    <comment>Letter replied</comment>
+  </data>
+    <!--Time Filters-->
+    <data name="Anytime" xml:space="preserve">
+    <value>Cualquier momento</value>
+    <comment>Correspondence time filter anytime</comment>
+  </data>
+    <data name="ThisWeek" xml:space="preserve">
+    <value>Esta semana</value>
+    <comment>Correspondence time filter current week</comment>
+  </data>
+    <data name="LastWeek" xml:space="preserve">
+    <value>La semana pasada</value>
+    <comment>Correspondence time filter last week</comment>
+  </data>
+    <data name="LastTwoWeeks" xml:space="preserve">
+    <value>Últimas dos semanas</value>
+    <comment>Correspondence filter last two weeks</comment>
+  </data>
+    <data name="LastMonth" xml:space="preserve">
+    <value>Mes pasado </value>
+    <comment>Correspondence filter last month</comment>
+  </data>
+    <data name="LastTrimester" xml:space="preserve">
+    <value>Último trimestre</value>
+    <comment>Correspondence filter last trimester</comment>
+  </data>
+    <data name="LastSemester" xml:space="preserve">
+    <value>Último semestre</value>
+    <comment>Correspondence time filter last half-year</comment>
+  </data>
+    <data name="LastYear" xml:space="preserve">
+    <value>Año pasado</value>
+    <comment>Correspondence time filter last year</comment>
+  </data>
+    <!-- Documents-->
+    <data name="SelectApp" xml:space="preserve">
+    <value>Seleccione App para abrir archivo</value>
+    <comment>Choose Application to open file</comment>
+  </data>
+    <data name="Folder" xml:space="preserve">
+    <value>Carpeta</value>
+    <comment>Doument Folder title</comment>
+  </data>
+    <data name="DefaultFolder" xml:space="preserve">
+    <value>Carpeta predeterminada</value>
+    <comment>Default folder title</comment>
+  </data>
+    <data name="EmptyTaskList" xml:space="preserve">
+    <value>No existen tareas registradas</value>
+    <comment>Tasl list empty message</comment>
+  </data>
+    <data name="TaskProgrammerText" xml:space="preserve">
+    <value>Puesta por</value>
+    <comment>Tasl programed by text</comment>
+  </data>
+    <data name="ReportPeriodicity" xml:space="preserve">
+    <value>Actualización</value>
+    <comment>Frequency of update report text</comment>
+  </data>
+    <data name="NoReportAvailable" xml:space="preserve">
+    <value>No se ha registrado reporte</value>
+    <comment>No report available message.</comment>
+  </data>
+    <data name="NewReport" xml:space="preserve">
+    <value>Reportar avance</value>
+    <comment>Send new report.</comment>
+  </data>
+    <!--Messages-->
+    <data name="Message" xml:space="preserve">
+    <value>Mensaje</value>
+    <comment>Message text</comment>
+  </data>
+    <data name="Messages" xml:space="preserve">
+    <value>Mensajes</value>
+    <comment>Messages text</comment>
+  </data>
+    <data name="NewMessage" xml:space="preserve">
+    <value>Nuevo mensaje</value>
+    <comment>Compose new message text</comment>
+  </data>
+    <data name="SendMessage" xml:space="preserve">
+    <value>Enviar</value>
+    <comment>Send message text</comment>
   </data>
 </root>

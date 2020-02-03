@@ -13,8 +13,10 @@
              ios:Page.UseSafeArea="true">
     <ContentPage.ToolbarItems>
         <ToolbarItem
-            Command="{Binding ShareCommand}"
+            BindingContext="{Binding ScannedDocument}"
+            Command="{Binding ShareScannedCommand}"
             IconImageSource="ic_bt_share"
+            IsEnabled="{Binding IsEnabled}"
             Order="Primary"
             Priority="0">
         </ToolbarItem>
@@ -74,6 +76,7 @@
                         FontSize="Small"
                         Grid.Row="0"
                         HorizontalOptions="FillAndExpand"
+                        IsEnabled="{Binding IsEnabled}"
                         ItemsSource="{Binding ScannedList}"
                         ItemDisplayBinding="{Binding Name}"
                         SelectedIndex="{Binding SelectedIndex}"
@@ -83,6 +86,13 @@
                     </controls:BorderlessPicker>
                 </StackLayout>
             </telerikPrimitives:RadBorder>
+            <ActivityIndicator
+                Grid.Row="1"
+                HorizontalOptions="CenterAndExpand"
+                IsRunning="{Binding IsBusy}"
+                IsVisible="True"
+                VerticalOptions="CenterAndExpand">
+            </ActivityIndicator>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -23,7 +23,7 @@
         </ToolbarItem>
         <controls:ToolbarItemEx
             BindingContext="{Binding EventTasks}"
-            Command="{Binding AddCommand}"
+            Command="{Binding AddTaskCommand}"
             Icon="ic_bt_add"
             IsVisible="{Binding IsAddItemVisible}"
             Order="Primary"
@@ -64,7 +64,7 @@
                 ItemsSource="{Binding SegmentedControlItems}"
                 HeightRequest="{OnPlatform Android=30}"
                 Margin="10,5,10,0"
-                SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
+                SelectedIndex="{Binding SelectedIndex,Mode=TwoWay}"
                 SelectedSegmentBackgroundColor="{OnPlatform iOS={StaticResource Key=iOSBlue}}"
                 SelectedSegmentTextColor="{OnPlatform iOS={StaticResource Key=defaultBackgroundView}}"
                 VerticalOptions="Start">
@@ -78,6 +78,7 @@
                 <!--Task List-->
                 <CollectionView
                     BackgroundColor="{StaticResource Key=softGray}"
+                    EmptyView="{local:Translate EmptyTaskList}" 
                     Footer=""
                     ItemsLayout="VerticalList"
                     ItemsSource="{Binding TaskItems}">
@@ -89,6 +90,9 @@
                                     BorderColor="{StaticResource Key=grayBorder}"
                                     HasShadow="False"
                                     Padding="10,10">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SelectTaskCommand}" />
+                                    </Frame.GestureRecognizers>
                                     <Grid
                                         Padding="0"
                                         HorizontalOptions="FillAndExpand">
@@ -125,76 +129,32 @@
                                             LineBreakMode="TailTruncation"
                                             VerticalOptions="End">
                                         </Label>
-                                        <Label
-                                            FontSize="Small"
+                                        <StackLayout
                                             Grid.Row="2"
                                             Grid.Column="1"
-                                            HorizontalOptions="FillAndExpand"
-                                            Text="{Binding StatusDescription}"
-                                            TextColor="{StaticResource Key=darkGray}"
-                                            LineBreakMode="TailTruncation"
-                                            VerticalOptions="End">
-                                        </Label>
+                                            Orientation="Horizontal">
+                                            <Label
+                                                FontSize="Small"
+                                                HorizontalOptions="Start"
+                                                Text="{Binding ResponsibleName}"
+                                                TextColor="{StaticResource Key=darkGray}"
+                                                LineBreakMode="TailTruncation"
+                                                VerticalOptions="End">
+                                            </Label>
+                                            <Label
+                                                FontSize="Small"
+                                                HorizontalOptions="FillAndExpand"
+                                                Text="{Binding PeriodicityLabel}"
+                                                TextColor="{StaticResource Key=darkGray}"
+                                                VerticalOptions="End">
+                                            </Label>
+                                        </StackLayout>
                                         <StackLayout
                                             Grid.Column="1"
                                             Grid.Row="3"
+                                            HorizontalOptions="Start"
                                             Orientation="Horizontal"
                                             Spacing="15">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition />
-                                                    <ColumnDefinition />
-                                                </Grid.ColumnDefinitions>
-                                                <Image
-                                                    Grid.Column="0"
-                                                    HeightRequest="16"
-                                                    Source="ic_ev_calendar"
-                                                    VerticalOptions="Center">
-                                                </Image>
-                                                <Label
-                                                    Grid.Column="1"
-                                                    Text="{Binding ResponsibleName}"
-                                                    TextColor="{StaticResource Key=darkGray}"
-                                                    VerticalOptions="Center">
-                                                </Label>
-                                            </Grid>
-                                            <Grid
-                                                IsVisible="{Binding HasReport}">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition />
-                                                    <ColumnDefinition />
-                                                </Grid.ColumnDefinitions>
-                                                <Image
-                                                    Grid.Column="0"
-                                                    HeightRequest="16"
-                                                    Source="ic_ev_summary"
-                                                    VerticalOptions="Center">
-                                                </Image>
-                                                <Label
-                                                    Grid.Column="1"
-                                                    Text="{local:Translate TaskMessages}"
-                                                    TextColor="{StaticResource Key=darkGray}"
-                                                    VerticalOptions="Center">
-                                                </Label>
-                                            </Grid>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition />
-                                                    <ColumnDefinition />
-                                                </Grid.ColumnDefinitions>
-                                                <Image
-                                                    Grid.Column="0"
-                                                    HeightRequest="16"
-                                                    Source="ic_ev_tasks"
-                                                    VerticalOptions="Center">
-                                                </Image>
-                                                <Label
-                                                    Grid.Column="1"
-                                                    Text="{Binding LastReportUpdate}"
-                                                    TextColor="{StaticResource Key=darkGray}"
-                                                    VerticalOptions="Center">
-                                                </Label>
-                                            </Grid>
                                             <Frame
                                                 BackgroundColor="{Binding TTrafficLightColor}"
                                                 HasShadow="False"
@@ -205,15 +165,53 @@
                                                         <ColumnDefinition Width="Auto" />
                                                         <ColumnDefinition Width="Auto" />
                                                     </Grid.ColumnDefinitions>
-                                                    <controls:IconView                                                        Grid.Column="0"                                                        Foreground="White"                                                        HeightRequest="16"                                                        HorizontalOptions="Center"                                                        Source="ic_task_deadline"                                                        VerticalOptions="Center"                                                        WidthRequest="16">                                                    </controls:IconView>
+                                                    <controls:IconView                                                        Grid.Column="0"                                                        Foreground="White"                                                        HeightRequest="16"                                                        HorizontalOptions="Center"                                                        Source="ic_task_deadline_bold"                                                        VerticalOptions="Center"                                                        WidthRequest="16">                                                    </controls:IconView>
                                                     <Label
-                                                        TextColor="White"
-                                                        FontSize="Small"
+                                                        FontAttributes="Bold"
                                                         Grid.Column="1"
-                                                        Text="{Binding EndProgrammedDate, StringFormat='{0:MMM dd, yy}'}">
+                                                        Text="{Binding EndProgrammedDate, StringFormat='{0:MMM dd, yyyy}'}"
+                                                        TextColor="White">
                                                     </Label>
                                                 </Grid>
                                             </Frame>
+                                            <Grid
+                                                ColumnSpacing="5">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image
+                                                    Grid.Column="0"
+                                                    HeightRequest="16"
+                                                    Source="ic_ev_summary"
+                                                    VerticalOptions="Center">
+                                                </Image>
+                                                <Label
+                                                    Grid.Column="1"
+                                                    Text="{Binding ReportLabel}"
+                                                    TextColor="{StaticResource Key=darkGray}"
+                                                    VerticalOptions="Center">
+                                                </Label>
+                                            </Grid>
+                                            <Grid
+                                                ColumnSpacing="5">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image
+                                                    Grid.Column="0"
+                                                    HeightRequest="16"
+                                                    Source="ic_task_gauge"
+                                                    VerticalOptions="Center">
+                                                </Image>
+                                                <Label
+                                                    Grid.Column="1"
+                                                    Text="{Binding PercentageOfCompletion}"
+                                                    TextColor="{StaticResource Key=darkGray}"
+                                                    VerticalOptions="Center">
+                                                </Label>
+                                            </Grid>
                                         </StackLayout>
                                     </Grid>
                                 </Frame>
@@ -222,7 +220,7 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </RefreshView>
-            <!--Bottom ToolBar-->            <telerikPrimitives:RadBorder                BorderColor="{StaticResource accesoryGray}"                 CornerRadius="0"                Grid.Row="3">                <Label                    BackgroundColor="Transparent"                    HorizontalOptions="FillAndExpand"                    LineBreakMode="TailTruncation"                    Text="{Binding EventTitle}"                    TextColor="{StaticResource Key=darkGray}"                    VerticalOptions="Center">                </Label>            </telerikPrimitives:RadBorder>
+            <!--Bottom ToolBar-->            <telerikPrimitives:RadBorder                BorderColor="{StaticResource accesoryGray}"                 CornerRadius="0"                Grid.Row="3">                <Grid                    Padding="10,0,5,0">                    <Grid.ColumnDefinitions>                        <ColumnDefinition Width="Auto" />                        <ColumnDefinition Width="*" />                    </Grid.ColumnDefinitions>                    <Label                        BackgroundColor="Transparent"                        FontAttributes="Bold"                        Grid.Column="0"                        HorizontalOptions="Start"                        HorizontalTextAlignment="Start"                        Text="{Binding TotalTask}"                        TextColor="{StaticResource Key=darkGray}"                        VerticalOptions="CenterAndExpand">                    </Label>                    <Label                        FontSize="Small"                        BackgroundColor="Transparent"                        Grid.Column="1"                        LineBreakMode="TailTruncation"                        MaxLines="1"                        Text="{Binding EventTitle}"                        TextColor="{StaticResource Key=darkGray}"                        VerticalOptions="Center">                    </Label>                </Grid>            </telerikPrimitives:RadBorder>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

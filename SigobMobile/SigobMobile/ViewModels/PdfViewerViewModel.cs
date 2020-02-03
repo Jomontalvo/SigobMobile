@@ -56,7 +56,7 @@
         #endregion
 
         #region Commands
-        public IAsyncCommand ShareDocumentCommand => new AsyncCommand(this.ShareDocument);
+        public IAsyncCommand ShareDocumentCommand => new AsyncCommand(this.ShareDocumentAsync);
         #endregion
 
         #region Methods
@@ -64,12 +64,12 @@
         /// Share command
         /// </summary>
         /// <returns></returns>
-        private async Task ShareDocument()
+        private async Task ShareDocumentAsync()
         {
-            await Share.RequestAsync(new ShareFileRequest
+            await Share.RequestAsync(new ShareTextRequest
             {
                 Title = Languages.Attachment,
-                File = new ShareFile(DocPDF.UrlDocument)
+                Uri = DocPDF.UrlDocument
             });
         }
 

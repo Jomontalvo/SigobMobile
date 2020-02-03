@@ -14,7 +14,13 @@
     {
         #region Services
         internal ApiService apiService;
-        internal string apiPostVisibilityController = "calendars/linkedcal/{0}/visible/{1}";
+        private string selectedOfficeId;
+        private bool? visibility;
+        #endregion
+
+        #region ExtendedProperties
+        internal string ApiPostVisibilityController => $"calendars/linkedcal/{this.selectedOfficeId}/visible/{this.visibility}";
+        public string CalendarType => (this.ManagementCenterId != 0) ? Languages.ManagementCenters : Languages.PersonalAgendas;
         #endregion
 
         #region Constructor
@@ -24,12 +30,12 @@
         public CalendarItemViewModel()
         {
             this.apiService = new ApiService();
-            this.IsCheckedChangedCommand = new AsyncCommand<CheckBoxIsCheckChangedCommandContext>(this.CheckBoxChange);
+            //this.IsCheckedChangedCommand = new AsyncCommand<CheckBoxIsCheckChangedCommandContext>(this.CheckBoxChange);
         }
         #endregion
 
         #region Commands
-        public ICommand IsCheckedChangedCommand { get; set; }
+        public ICommand IsCheckedChangedCommand => new AsyncCommand<CheckBoxIsCheckChangedCommandContext>(this.CheckBoxChange);
         #endregion
 
         #region Methods
@@ -54,7 +60,7 @@
             var response = await this.apiService.Post<bool>(
                 Settings.UrlBaseApiSigob,
                 App.PrefixApiSigob,
-                string.Format(apiPostVisibilityController, this.OfficeId, isVisible),
+                ApiPostVisibilityController,
                 Settings.Token,
                 Settings.DbToken
             );
@@ -85,7 +91,20 @@
         /// <param name="context">Context.</param>
         private async Task CheckBoxChange(CheckBoxIsCheckChangedCommandContext context)
         {
-            await SetCalendarVisibility( context.NewState );
+            //Unselect all previous checked calendars
+            //var parentViewModel = MainViewModel.GetInstance().Calendars;
+            //foreach ( CalendarItemViewModel cal in parentViewModel.Calendars)
+            //{
+            //    if (cal.IsVisible && cal.OfficeId != this.OfficeId)
+            //    {
+            //        cal.IsVisible = false;
+            //    }
+            //}
+            //parentViewModel.RefreshAndGroupCalendarList();
+            //Set visibility of new calendar selected
+            this.selectedOfficeId = this.OfficeId;
+            this.visibility = context.NewState;
+            await SetCalendarVisibility(this.visibility);
         }
         #endregion
     }
