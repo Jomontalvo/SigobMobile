@@ -13,71 +13,27 @@
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
     Title="{local:Translate AgendaViewTitle}"
     ios:Page.UseSafeArea="true">
-    <!--Title View Settings-->
-    <NavigationPage.TitleView>
-        <StackLayout
-            BindingContext="{Binding Calendar}"
-            Orientation="Horizontal"
-            VerticalOptions="Center"
-            HorizontalOptions="FillAndExpand"
-            Spacing="20">
-            <!--Text="{Binding DisplayDate,StringFormat='{0:dd-MMM-yyyy}'}"-->
-            <Label
-                Text="{local:Translate MasterPageTitle}"
-                FontAttributes="{OnPlatform iOS=None, Android=Bold}"
-                FontSize="{OnPlatform Android=Large, Default=Default}"
-                HorizontalOptions="StartAndExpand"
-                HorizontalTextAlignment="Start"
-                TextColor="{OnPlatform Android=White, iOS={StaticResource iOSBlue}}"
-                VerticalTextAlignment="Center">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer
-                        Command="{Binding BackToMainPageCommand}"
-                        NumberOfTapsRequired="1">
-                    </TapGestureRecognizer>
-                </Label.GestureRecognizers>
-            </Label>
-            <ImageButton
-                Aspect="AspectFit"
-                BackgroundColor="Transparent"
-                Command="{Binding InstructionsListCommand}"
-                HeightRequest="24"
-                HorizontalOptions="End"
-                Source="ic_bt_instructions"
-                VerticalOptions="Center"
-                WidthRequest="24">
-            </ImageButton>
-            <ImageButton
-                BackgroundColor="Transparent"
-                Command="{Binding SetCalendarViewModeCommand}"
-                HeightRequest="24"
-                HorizontalOptions="End"
-                Source="ic_bt_calendar_view"
-                VerticalOptions="Center"
-                WidthRequest="24">
-            </ImageButton>
-            <ImageButton
-                BackgroundColor="Transparent"
-                Command="{Binding SearchEventCommand}"
-                HeightRequest="24"
-                HorizontalOptions="End"
-                Source="ic_bt_search"
-                VerticalOptions="Center"
-                WidthRequest="24">
-            </ImageButton>
-            <ImageButton
-                BackgroundColor="Transparent"
-                Command="{Binding AddItemCommand}"
-                HeightRequest="24"
-                HorizontalOptions="End"
-                Margin="0,0,5,0"
-                IsVisible="{OnPlatform Android=false, iOS=true}"
-                Source="ic_bt_add"
-                VerticalOptions="Center"
-                WidthRequest="24">
-            </ImageButton>
-        </StackLayout>
-    </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Command="{Binding SearchEventCommand}"
+            IconImageSource="ic_bt_search"
+            Order="Default"
+            Priority="0">
+        </ToolbarItem>
+        <controls:ToolbarItemEx
+            Command="{Binding AddItemCommand}"
+            IconImageSource="ic_bt_add"
+            IsVisible="{OnPlatform Android=false, iOS=true}"
+            Order="Default"
+            Priority="1">
+        </controls:ToolbarItemEx>
+        <ToolbarItem
+            Command="{Binding SearchEventCommand}"
+            IconImageSource="ic_bt_ellipsis"
+            Order="Default"
+            Priority="2">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <!--Resources-->
     <ContentPage.Resources>
         <local:AppointmentTemplateSelector x:Key="DayViewAppointmentTemplateSelector">

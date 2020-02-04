@@ -27,7 +27,7 @@
             {
                 case TypeApplication.ManagementCenter:
                     appViewModel.Calendar = new CalendarViewModel();
-                    await App.Navigator.PushAsync(new CalendarPage(),true);
+                    await App.Navigator.PushAsync(new CalendarPage() { Title = string.Empty },true);
                     break;
                 case TypeApplication.Tasks:
                     appViewModel.TaskDashboard = new TaskDashboardViewModel();

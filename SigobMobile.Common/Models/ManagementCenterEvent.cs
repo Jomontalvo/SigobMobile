@@ -140,8 +140,8 @@
         [JsonProperty("descripcion_tipo_evento")]
         public string EventTypeDescription { get; set; }
 
-        [JsonProperty("colorTipoEvento")]
-        public Color ColorTipoEvento { get; set; }
+        //[JsonProperty("colorTipoEvento")]
+        //public Color EventTypeColor { get; set; }
 
         [JsonProperty("inicio")]
         public DateTime Start { get; set; }
