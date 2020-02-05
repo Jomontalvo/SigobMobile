@@ -1,5 +1,4 @@
 ﻿using System;
-using SigobMobile.Helpers;
 using Telerik.XamarinForms.Input;
 using Xamarin.Forms;
 

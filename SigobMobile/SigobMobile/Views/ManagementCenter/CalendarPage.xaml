@@ -15,20 +15,23 @@
     ios:Page.UseSafeArea="true">
     <ContentPage.ToolbarItems>
         <ToolbarItem
+            BindingContext="{Binding Calendar}"
             Command="{Binding SearchEventCommand}"
             IconImageSource="ic_bt_search"
             Order="Default"
             Priority="0">
         </ToolbarItem>
         <controls:ToolbarItemEx
+            BindingContext="{Binding Calendar}"
             Command="{Binding AddItemCommand}"
             IconImageSource="ic_bt_add"
-            IsVisible="{OnPlatform Android=false, iOS=true}"
+            IsVisible="{Binding IsPlatformVisible}"
             Order="Default"
             Priority="1">
         </controls:ToolbarItemEx>
         <ToolbarItem
-            Command="{Binding SearchEventCommand}"
+            BindingContext="{Binding Calendar}"
+            Command="{Binding OpenCalendarMenuCommand}"
             IconImageSource="ic_bt_ellipsis"
             Order="Default"
             Priority="2">
@@ -113,7 +116,197 @@
     </ContentPage.Resources>
     <!-- Content Page -->
     <ContentPage.Content>
-        <Grid BindingContext="{Binding Calendar}" ColumnSpacing="0" RowSpacing="0">
+        <Grid
+            BindingContext="{Binding Calendar}"
+            ColumnSpacing="0"
+            RowSpacing="0">
+            <telerikPrimitives:RadPopup.Popup>
+                <telerikPrimitives:RadPopup
+                    IsModal="False"
+                    IsOpen="{Binding IsOpenMenu}"
+                    OutsideBackgroundColor="#6F000000"
+                    HorizontalOffset="20"
+                    Placement="Right">
+                    <Frame
+                        CornerRadius="20">
+                        <Grid
+                            BackgroundColor="Transparent"                            
+                            RowSpacing="20">
+                            <Grid.RowDefinitions>
+                                <!--Title Group 1-->
+                                <RowDefinition Height="Auto" />
+                                <!--Day view-->
+                                <RowDefinition Height="Auto" />
+                                <!--Week view-->
+                                <RowDefinition Height="Auto" />
+                                <!--Month view-->
+                                <RowDefinition Height="Auto" />
+                                <!--Year view-->
+                                <RowDefinition Height="Auto" />
+                                <!--Agenda view-->
+                                <RowDefinition Height="Auto" />
+                                <!--Separator-->
+                                <RowDefinition Height="1" />
+                                <!--Title Group 2-->
+                                <RowDefinition Height="Auto" />
+                                <!--Instructios-->
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <!--Group 1-->
+                            <Label
+                                Grid.Row="0"
+                                FontAttributes="Bold"
+                                MaxLines="1"
+                                Text="Calendar view options">
+                            </Label>
+                            <!--Daily View-->
+                            <StackLayout
+                                Grid.Row="1"
+                                Orientation="Horizontal"
+                                Spacing="20">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding SetCalendarViewModeCommand}">
+                                        <TapGestureRecognizer.CommandParameter>
+                                            <x:Int32>6</x:Int32>
+                                        </TapGestureRecognizer.CommandParameter>
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                                <Image
+                                    Source="ic_cal_day_view"
+                                    WidthRequest="20">
+                                </Image>
+                                <Label
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="{local:Translate DailyView}">
+                                </Label>
+                            </StackLayout>
+                            <!--Weekly View-->
+                            <StackLayout
+                                Grid.Row="2"
+                                Orientation="Horizontal"
+                                Spacing="20">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding SetCalendarViewModeCommand}">
+                                        <TapGestureRecognizer.CommandParameter>
+                                            <x:Int32>7</x:Int32>
+                                        </TapGestureRecognizer.CommandParameter>
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                                <Image
+                                    Source="ic_cal_week_view"
+                                    WidthRequest="20">
+                                </Image>
+                                <Label
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="{local:Translate MultiDayView}">
+                                </Label>
+                            </StackLayout>
+                            <!--Monthly View-->
+                            <StackLayout
+                                Grid.Row="3"
+                                Orientation="Horizontal"
+                                Spacing="20">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding SetCalendarViewModeCommand}">
+                                        <TapGestureRecognizer.CommandParameter>
+                                            <x:Int32>0</x:Int32>
+                                        </TapGestureRecognizer.CommandParameter>
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                                <Image
+                                    Source="ic_cal_month_view"
+                                    WidthRequest="20">
+                                </Image>
+                                <Label
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="{local:Translate MonthlyView}">
+                                </Label>
+                            </StackLayout>
+                            <!--Year View-->
+                            <StackLayout
+                                Grid.Row="4"
+                                Orientation="Horizontal"
+                                Spacing="20">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding SetCalendarViewModeCommand}">
+                                        <TapGestureRecognizer.CommandParameter>
+                                            <x:Int32>3</x:Int32>
+                                        </TapGestureRecognizer.CommandParameter>
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                                <Image
+                                    Source="ic_cal_year_view"
+                                    WidthRequest="20">
+                                </Image>
+                                <Label
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="{local:Translate YearView}">
+                                </Label>
+                            </StackLayout>
+                            <!--Agenda View-->
+                            <StackLayout
+                                Grid.Row="5"
+                                Orientation="Horizontal"
+                                Spacing="20">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding SetCalendarViewModeCommand}">
+                                        <TapGestureRecognizer.CommandParameter>
+                                            <x:Int32>8</x:Int32>
+                                        </TapGestureRecognizer.CommandParameter>
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                                <Image
+                                    Source="ic_cal_list_view"
+                                    WidthRequest="20">
+                                </Image>
+                                <Label
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="{local:Translate AgendaViewTitle}">
+                                </Label>
+                            </StackLayout>
+                            <!--Separator-->
+                            <BoxView
+                                Color="{StaticResource gray}"
+                                Grid.Row="6"
+                                HeightRequest="1"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="Center">
+                            </BoxView>
+                            <!--Group 2-->
+                            <Label
+                                Grid.Row="7"
+                                FontAttributes="Bold"
+                                Text="Query options">
+                            </Label>
+                            <!--Instructios Option-->
+                            <StackLayout
+                                Grid.Row="8"
+                                Orientation="Horizontal"
+                                Spacing="20">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding InstructionsListCommand}" />
+                                </StackLayout.GestureRecognizers>
+                                <Image
+                                    Source="ic_cal_instructions"
+                                    WidthRequest="20">
+                                </Image>
+                                <Label
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="{local:Translate Instructions}">
+                                </Label>
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                </telerikPrimitives:RadPopup>
+            </telerikPrimitives:RadPopup.Popup>
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition Height="{StaticResource Key=StatusBarHeight}" />
@@ -121,7 +314,7 @@
             <telerikInput:RadCalendar
                 x:Name="calendar"
                 AppointmentsSource="{Binding Events}"
-                DisplayDate="{Binding SelectedDate, Mode=TwoWay}"
+                DisplayDate="{Binding DisplayDate, Mode=TwoWay}"
                 Grid.Row="0"
                 SchedulingUiEnabled="false"
                 SelectionChanged="Calendar_OnSelectionChanged"
@@ -156,6 +349,19 @@
                         TodayBackgroundColor="#F9F7EA">
                     </telerikInput:MultiDayViewStyle>
                 </telerikInput:RadCalendar.MultiDayViewStyle>
+
+                <telerikInput:RadCalendar.AgendaViewSettings>
+                    <telerikInput:AgendaViewSettings
+                        MonthItemFormat="YYYY MMM"
+                        WeekItemStartDateFormat="dd MMMM"
+                        WeekItemEndDateFormat="dd"
+                        DayItemFormat="EEE d MMM"
+                        AppointmentItemTimeFormat="HH mm"
+                        AppointmentItemEndDateFormat="MMM d"
+                        AppointmentItemStartDateFormat="MMM d">
+                    </telerikInput:AgendaViewSettings>
+                </telerikInput:RadCalendar.AgendaViewSettings>
+
                 <telerikInput:RadCalendar.Commands>
                     <telerikCalendar:CalendarUserCommand
                         Id="AppointmentTap"

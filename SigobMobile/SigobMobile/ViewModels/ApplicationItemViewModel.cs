@@ -9,6 +9,7 @@
     using Views.ManagementCenter;
     using Views.Tasks;
     using Views.WorkFlow;
+    using Xamarin.Forms;
     using ApplicationMenuItem = Models.ApplicationMenuItem;
 
     public class ApplicationItemViewModel : ApplicationMenuItem
@@ -27,7 +28,12 @@
             {
                 case TypeApplication.ManagementCenter:
                     appViewModel.Calendar = new CalendarViewModel();
-                    await App.Navigator.PushAsync(new CalendarPage() { Title = string.Empty },true);
+                    await App.Navigator.PushAsync(
+                        new CalendarPage()
+                        { Title = ( Device.RuntimePlatform != Device.Android)
+                            ? string.Empty
+                            : Languages.MasterPageTitle },
+                        true);
                     break;
                 case TypeApplication.Tasks:
                     appViewModel.TaskDashboard = new TaskDashboardViewModel();

@@ -373,6 +373,12 @@
     <BundleResource Include="Resources\ic_bt_ellipsis.png" />
     <BundleResource Include="Resources\ic_bt_ellipsis%402x.png" />
     <BundleResource Include="Resources\ic_bt_ellipsis%403x.png" />
+    <BundleResource Include="Resources\ic_cal_day_view.png" />
+    <BundleResource Include="Resources\ic_cal_week_view.png" />
+    <BundleResource Include="Resources\ic_cal_month_view.png" />
+    <BundleResource Include="Resources\ic_cal_list_view.png" />
+    <BundleResource Include="Resources\ic_cal_year_view.png" />
+    <BundleResource Include="Resources\ic_cal_instructions.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />

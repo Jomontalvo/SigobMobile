@@ -40,6 +40,8 @@
         private ObservableCollection<Event> events;
         private bool isRunning;
         private bool isEnabled;
+        private bool isPlatformVisible;
+        private bool isOpenMenu;
         private string startDate;
         private string endDate;
         private byte viewTentative;
@@ -67,6 +69,16 @@
         {
             get { return this.isRunning; }
             set { SetValue(ref this.isRunning, value); }
+        }
+        public bool IsOpenMenu
+        {
+            get { return this.isOpenMenu; }
+            set { SetValue(ref this.isOpenMenu, value); }
+        }
+        public bool IsPlatformVisible
+        {
+            get { return this.isPlatformVisible; }
+            set { SetValue(ref this.isPlatformVisible, value); }
         }
         public bool IsEnabled
         {
@@ -110,6 +122,7 @@
         public CalendarViewModel()
         {
             this.apiService = new ApiService();
+            this.IsPlatformVisible = (Device.RuntimePlatform == Device.iOS);
             this.LoadAppointments(DateTime.Today);
             this.CalendarView = (CalendarViewMode)Settings.CurrentCalendarViewMode;
             this.SelectedDate = Settings.SelectedDate;
@@ -117,22 +130,31 @@
         }
         #endregion
 
-        #region Async Commands
-        public ICommand AppointmentTappedCommand => new AsyncCommand<AppointmentTapCommandContext>(AppointmentTapped, CanExecute);
-        public ICommand CellDateTappedCommand => new AsyncCommand<CalendarDayCell>(CellDateTapped);
-        public IAsyncCommand SetCalendarViewModeCommand => new AsyncCommand(SetCalendarViewMode);
+        #region Commands        
         public IAsyncCommand BackToMainPageCommand => new AsyncCommand(BackToMainPage);
         public IAsyncCommand InstructionsListCommand => new AsyncCommand(InstructionsList);
         public IAsyncCommand OpenCalendarsCommand => new AsyncCommand(OpenCalendars);
         public IAsyncCommand OpenFiltersCommand => new AsyncCommand(OpenFilters);
         public IAsyncCommand AddItemCommand => new AsyncCommand(AddItem);
-        #endregion
-
-        #region Commands
+        public ICommand OpenCalendarMenuCommand => new RelayCommand(OpenCalendarMenu);
+        public ICommand SetCalendarViewModeCommand => new RelayCommand<int>(SetCalendarViewMode);
+        public ICommand AppointmentTappedCommand => new AsyncCommand<AppointmentTapCommandContext>(AppointmentTapped, CanExecute);
+        public ICommand CellDateTappedCommand => new RelayCommand<CalendarDayCell>(CellDateTapped);
+        public ICommand CloseMenuCommand => new RelayCommand(CloseMenu);
         public ICommand GoTodayCommand => new RelayCommand(GoToday);
         #endregion
 
         #region Methods
+        private void OpenCalendarMenu()
+        {
+            this.IsOpenMenu = true;
+        }
+
+        private void CloseMenu()
+        {
+            this.IsOpenMenu = false;
+        }
+
         /// <summary>
         /// Load the appointments.
         /// </summary>
@@ -184,40 +206,7 @@
             this.eventList = (List<AppointmentItem>)response.Result;
             this.IsRunning = false;
             this.RefresEventList();
-
-            //this.Events = new ObservableCollection<Event>(ToCalendarEvents());
-            
         }
-
-        //private IEnumerable<Event> ToCalendarEvents()
-        //{
-        //    return this.eventList.Select(l => new Event
-        //    {
-        //        Id = l.Id,
-        //        Title = (l.Status == StatusAppointment.Suspended) ? $"[{Languages.SuspendedStatus}] {ConvertNullToEmpty(l.Description)}" : l.IsTentative ? $"{ConvertNullToEmpty(l.Description)} ({Languages.TentativeLabel})" : ConvertNullToEmpty(l.Description),
-        //        Color = l.IsTask ? Color.FromRgb(l.RedColorType, l.GreenColorType, l.BlueColorType) : (l.Status != StatusAppointment.Suspended) ? Color.FromRgb(l.RedColorItem, l.GreenColorItem, l.BlueColorItem) : (Color)Application.Current.Resources["grayBorder"],
-        //        Detail = l.Place,
-        //        StartDate = (l.Id == 0 || l.IsTask) ? l.End.DateTime.ToLocalTime().Date : l.Start.DateTime.ToLocalTime(), // IsHoliday or Task Control 
-        //        EndDate = (l.Id == 0 || l.IsTask) ? l.End.DateTime.ToLocalTime().Date.AddMinutes(1) : l.End.DateTime.ToLocalTime(),
-        //        IsAllDay = l.IsTask || l.Id == 0 || ((l.End - l.Start).Hours >= 24),
-        //        IsLocked = l.IsVisible == 1,
-        //        IsTentative = l.IsTentative,
-        //        Owner = l.AgendaOwner,
-        //        OwnerInitials = (!Settings.IsEventColorByCalendar)?l.OwnerInitials:string.Empty,
-        //        Programmer = l.ProgrammerAgenda,
-        //        TypeColor = Color.FromRgb(l.RedColorType, l.GreenColorType, l.BlueColorType),
-        //        ModuleType = l.ModuleType,
-        //        IsHighlighted = l.IsHighlighted,
-        //        IsTask = l.IsTask,
-        //        IsVisible = (l.IsVisible == 1),
-        //        SecurityLevel = l.SecurityLevel,
-        //        TypeId = l.TypeId,
-        //        Status = l.Status,
-        //        IconSize = (!Settings.IsEventColorByCalendar) ? (byte)24 : (byte)12,
-        //    }).Where(l => (Settings.IsVisibleManagementStatus && (l.Status == StatusAppointment.InManagement))
-        //                || (Settings.IsVisibleCompletedStatus && (l.Status == StatusAppointment.Finished))
-        //                || (Settings.IsVisibleSuspendStatus && (l.Status == StatusAppointment.Suspended)));
-        //}
 
         private string ConvertNullToEmpty(string str)
         {
@@ -262,6 +251,7 @@
         /// </summary>
         private async Task InstructionsList()
         {
+            this.IsOpenMenu = false;
             var instructionMainViewModel = MainViewModel.GetInstance();
             instructionMainViewModel.Instructions = new InstructionsViewModel();
             await App.Navigator.PushAsync(new InstructionsPage(), true);
@@ -271,24 +261,11 @@
         /// <summary>
         /// Firsts the button.
         /// </summary>
-        private async Task SetCalendarViewMode()
+        private void SetCalendarViewMode(int parameter)
         {
-            string[] options = {
-                Languages.DailyView ,
-                Languages.MultiDayView,
-                Languages.MonthlyView,
-                Languages.YearView
-            };
-            var source = await Application.Current.MainPage.DisplayActionSheet(
-                Languages.CalendarViewModeText,
-                Languages.Cancel,
-                null,
-                options);
-            if (source == Languages.DailyView) CalendarView = CalendarViewMode.Day;
-            if (source == Languages.MultiDayView) CalendarView = CalendarViewMode.MultiDay;
-            if (source == Languages.MonthlyView) CalendarView = CalendarViewMode.Month;
-            if (source == Languages.YearView) CalendarView = CalendarViewMode.Year;
+            this.IsOpenMenu = false;
             this.IsRunning = true;
+            this.CalendarView = (CalendarViewMode)parameter;
             Settings.CurrentCalendarViewMode = (int)CalendarView;
             this.IsRunning = false;
             return;
@@ -338,6 +315,7 @@
                         default:
                             break;
                     }
+                    //if (this.CalendarView == CalendarViewMode.Agenda) { this.SelectedDate = eventSelected.StartDate; }
                 }
                 else
                 {
@@ -448,14 +426,13 @@
         /// <summary>
         /// Happens when calendar cell is tapped.
         /// </summary>
-        private async Task CellDateTapped(CalendarDayCell cell)
+        private void CellDateTapped(CalendarDayCell cell)
         {
             if (this.CalendarView == CalendarViewMode.Month || this.CalendarView == CalendarViewMode.Year)
             {
                 CalendarView = CalendarViewMode.Day;
                 this.SelectedDate = cell.Date;
                 this.DisplayDate = cell.Date;
-                await Task.Delay(10);
                 Settings.CurrentCalendarViewMode = (int)CalendarView;
             //    //this.DisplayDate = cell.Date;
             }

@@ -159,6 +159,7 @@
                             </BoxView>
                             <!--Close-->
                             <Button
+                                BackgroundColor="Transparent"
                                 Command="{Binding CloseControlMenuCommand}"
                                 Grid.Row="6"
                                 HorizontalOptions="Center"

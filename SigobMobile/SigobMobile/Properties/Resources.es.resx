@@ -1180,7 +1180,7 @@ Si tiene algún problema, contacte con un Administrador.</value>
     <comment>Start Offical name</comment>
   </data>
     <data name="CurrentOfficial" xml:space="preserve">
-    <value>Actualmente:</value>
+    <value>Ahora:</value>
     <comment>Currently official</comment>
   </data>
     <data name="OfficialEnd" xml:space="preserve">
