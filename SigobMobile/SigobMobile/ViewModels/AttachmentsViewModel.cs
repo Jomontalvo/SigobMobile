@@ -26,6 +26,7 @@
         private ObservableCollection<AttachmentsItemViewModel> attachments;
         private ObservableCollection<Grouping<string, AttachmentsItemViewModel>> attachmentsGrouped;
         private bool isRefreshing;
+        private bool isRunning;
         private List<Attachment> attachmentList;
         #endregion
 
@@ -48,11 +49,23 @@
             get => this.attachmentsGrouped;
             set => SetValue(ref this.attachmentsGrouped, value);
         }
+        public bool IsRunning
+        {
+            get => this.isRunning;
+            set => SetValue(ref this.isRunning, value);
+        }
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Create a new List of Attachments 
+        /// </summary>
+        /// <param name="parentId"></param>
+        /// <param name="component"></param>
+        /// <param name="source"></param>
         public AttachmentsViewModel(int parentId, SigobInstrument component, DocumentSource source)
         {
+            this.IsRunning = true;
             this.parentId = parentId;
             this.component = component;
             this.source = source;
@@ -60,12 +73,19 @@
             this.LoadAttachments();
         }
 
+        /// <summary>
+        /// Display Attachment List from Sender
+        /// </summary>
+        /// <param name="attachments"></param>
+        /// <param name="source"></param>
         public AttachmentsViewModel(List<Attachment> attachments, DocumentSource source)
         {
+            this.IsRunning = true;
             this.apiService = new ApiService();
             this.source = source;
             this.attachmentList = attachments;
             this.GetAttachmentCollection();
+            this.IsRunning = false;
         }
         #endregion
 
@@ -86,6 +106,7 @@
                 this.LoadFiles().FireAndForgetSafeAsync(errorHandler);
             }
             this.IsRefreshing = false;
+            this.IsRunning = false;
         }
 
         /// <summary>
@@ -158,7 +179,7 @@
                 Date = a.Date,
                 FileType = a.FileType,
                 FolderId = a.FolderId,
-                FolderName = a.FolderName,
+                FolderName = string.IsNullOrEmpty(a.FolderName) ? Languages.DefaultFolder : a.FolderName,
                 Id = a.Id,
                 IsFolderOwner = a.IsFolderOwner,
                 LastModified = a.LastModified,

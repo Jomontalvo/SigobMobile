@@ -41,5 +41,6 @@
         }
         public Color CalendarColor { get; set; }
         public Color TypeColor { get; set; }
+        public bool IsInManagement { get => Status == StatusAppointment.InManagement ; }
     }
 }

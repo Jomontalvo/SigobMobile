@@ -5,18 +5,415 @@
     x:Class="SigobMobile.Views.Tasks.TaskPage"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:lang="clr-namespace:SigobMobile.Helpers"
+    xmlns:controls="clr-namespace:SigobMobile.Controls"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
     BackgroundColor="{StaticResource defaultBackgroundView}"
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
-    Title="Task"
+    Title="{lang:Translate Task}"
     ios:Page.UseSafeArea="true">
+    <ContentPage.ToolbarItems>
+        <controls:ToolbarItemEx
+            BindingContext="{Binding Task}"
+            Command="{Binding EditButtonCommand}"
+            IsVisible="{Binding IsEditable}"
+            Order="Default"
+            Priority="0"
+            Text="{lang:Translate Edit}">
+        </controls:ToolbarItemEx>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout
-            BindingContext="{Binding Task}">
-            <Label
-                HorizontalOptions="CenterAndExpand"
-                Text="{Binding LocalTask.Title}"
-                VerticalOptions="CenterAndExpand">
-            </Label>
-        </StackLayout>
+        <Grid
+            BindingContext="{Binding Task}"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="{StaticResource Key=StatusBarHeight}" />
+            </Grid.RowDefinitions>
+            <!--Task Details-->
+            <ScrollView
+                Grid.Row="0"
+                Padding="10,5,5,0"
+                VerticalOptions="StartAndExpand">
+                <StackLayout>
+                    <!--Header-->
+                    <Grid
+                        Padding="5,5,5,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <controls:IconView
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Foreground="{Binding LocalTask.Type.ColorAlpha}"
+                            Margin="0,2,0,0"
+                            HorizontalOptions="Center"
+                            Source="ic_ev_calendar_color"
+                            VerticalOptions="Start">
+                        </controls:IconView>
+                        <StackLayout
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Padding="10,0,0,0">
+                            <Label
+                                x:Name="TaskTitle"
+                                FontSize="Large"
+                                HorizontalOptions="StartAndExpand"
+                                Text="{Binding LocalTask.Title}"
+                                VerticalTextAlignment="Center">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                            <On Platform="iOS" Value="Avenir Next" />
+                                            <On Platform="Android" Value="sans-serif-smallcaps" />
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                            <!--End Date-->
+                            <Frame
+                                BackgroundColor="{Binding LocalTask.TTrafficLightColor}"
+                                HasShadow="False"
+                                HorizontalOptions="Start"
+                                Padding="4">
+                                <Grid
+                                    ColumnSpacing="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <controls:IconView                                        Grid.Column="0"                                        Foreground="White"                                        HeightRequest="16"                                        HorizontalOptions="Center"                                        Source="ic_task_deadline_bold"                                        VerticalOptions="Center"                                        WidthRequest="16">                                    </controls:IconView>
+                                    <Label
+                                        FontAttributes="Bold"
+                                        Grid.Column="1"
+                                        HorizontalOptions="Start"
+                                        Text="{Binding LocalTask.EndProgrammedDate, StringFormat='{0:D}'}"
+                                        TextColor="White">
+                                    </Label>
+                                </Grid>
+                            </Frame>
+                            <!--Programmed by-->
+                            <StackLayout
+                                Orientation="Horizontal"
+                                Spacing="2">
+                                <Label
+                                    FontSize="Small"
+                                    Text="{lang:Translate TaskProgrammerText}"
+                                    TextColor="{StaticResource lightBlack}"
+                                    VerticalOptions="Center">
+                                </Label>
+                                <Label
+                                    FontSize="Small"
+                                    Text="{Binding LocalTask.ProgrammerName}"
+                                    TextColor="{StaticResource lightBlack}"
+                                    VerticalOptions="Center">
+                                </Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </Grid>
+                    <!--Section 1-->
+                    <Grid
+                        ColumnSpacing="15"
+                        Padding="5,0"
+                        RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <!--Separator-->
+                            <RowDefinition Height="Auto"/>
+                            <!--Responsible-->
+                            <RowDefinition Height="Auto" />
+                            <!--Task Details-->
+                            <RowDefinition Height="Auto" />
+                            <!--Separator-->
+                            <RowDefinition Height="Auto" />
+                            <!--Report Periodicity-->
+                            <RowDefinition Height="Auto" />
+                            <!--Task Report -->
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <!--Separator-->
+                        <BoxView
+                            Color="{StaticResource gray}"
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Grid.ColumnSpan="2"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            Margin="0"
+                            VerticalOptions="Center">
+                        </BoxView>
+                        <!--Responsible-->
+                        <Image
+                            Grid.Column="0"
+                            Grid.Row="1"
+                            Source="ic_contact_male"
+                            VerticalOptions="Center">
+                        </Image>
+                        <StackLayout
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            Orientation="Horizontal"
+                            Padding="0"
+                            Spacing="5">
+                            <Label
+                                FontAttributes="Bold"
+                                Text="{lang:Translate To}"
+                                TextColor="{StaticResource darkGray}"
+                                VerticalOptions="Center">
+                            </Label>
+                                <Label
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="{Binding LocalTask.ResponsibleName}"
+                                TextColor="{StaticResource darkGray}"
+                                VerticalOptions="Center">
+                            </Label>
+                        </StackLayout>
+                        <!--Task details-->
+                        <Image
+                            Grid.Column="0"
+                            Grid.Row="2"
+                            IsVisible="{Binding IsDetailVisible}"
+                            Margin="0,4,0,0"
+                            Source="ic_ev_summary"
+                            VerticalOptions="Start">
+                        </Image>
+                        <Label
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Grid.Row="2"
+                            HorizontalOptions="StartAndExpand"
+                            IsVisible="{Binding IsDetailVisible}"
+                            LineBreakMode="WordWrap"
+                            Text="{Binding TrimDescription}"
+                            TextColor="{StaticResource darkGray}"
+                            VerticalOptions="Start">
+                        </Label>
+                        <!--Separator-->
+                        <BoxView
+                            Color="{StaticResource gray}"
+                            Grid.Column="1"
+                            Grid.Row="3"
+                            Grid.ColumnSpan="2"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            Margin="0,5,0,0"
+                            VerticalOptions="Center">
+                        </BoxView>
+                        <!--Report Periodicity-->
+                        <Image
+                            Grid.Column="0"
+                            Grid.Row="4"
+                            Source="ic_task_report_frequency"
+                            VerticalOptions="Center">
+                        </Image>
+                        <StackLayout
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Grid.Row="4"
+                            Orientation="Horizontal">
+                            <Label
+                                Text="{lang:Translate ReportPeriodicity}"
+                                TextColor="{StaticResource darkGray}"
+                                VerticalOptions="Center">
+                            </Label>
+                            <Label
+                                Text="{Binding LocalTask.PeriodicityLabel, StringFormat=': {0}'}"
+                                TextColor="{StaticResource darkGray}"
+                                VerticalOptions="Center">
+                            </Label>
+                        </StackLayout>
+                        <!--Task Report -->
+                        <Image
+                            Grid.Column="0"
+                            Grid.Row="5"
+                            HorizontalOptions="Center"
+                            Margin="0,5,0,0"
+                            Source="ic_task_report"
+                            VerticalOptions="Start">
+                        </Image>
+                        <Label
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Grid.Row="5"
+                            HorizontalOptions="FillAndExpand"
+                            Text="{Binding LastReportText}"
+                            TextColor="{StaticResource darkGray}"
+                            VerticalOptions="Center">
+                        </Label>
+                    </Grid>
+                    <!--Section 2-->
+                    <Grid
+                        RowSpacing="0"
+                        Padding="5,10">
+                        <Grid.RowDefinitions>
+                            <!--Messages-->
+                            <RowDefinition Height="Auto"/>
+                            <!--Documents-->
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <!--Messages-->
+                        <StackLayout
+                            Grid.Row="0">
+                            <BoxView
+                                Color="{StaticResource gray}"
+                                HeightRequest="1"
+                                HorizontalOptions="FillAndExpand">
+                            </BoxView>
+                            <Frame
+                                x:Name="TasksFrame"
+                                BorderColor="Transparent"
+                                HasShadow="false"
+                                Padding="0,10,0,15">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding GetMessagesCommand}" />
+                                </Frame.GestureRecognizers>
+                                <Grid
+                                    ColumnSpacing="15">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                        Grid.Column="0"
+                                        Source="ic_task_messages"
+                                        VerticalOptions="Center">
+                                    </Image>
+                                    <StackLayout
+                                        Grid.Column="1"
+                                        HorizontalOptions="StartAndExpand"
+                                        Orientation="Horizontal"
+                                        VerticalOptions="Center">
+                                        <Label
+                                            Text="{Binding LocalTask.AccountMessages}"
+                                            TextColor="{StaticResource darkGray}"
+                                            VerticalOptions="Center">
+                                        </Label>
+                                        <Label
+                                            Text="{lang:Translate Messages}"
+                                            TextColor="{StaticResource darkGray}"
+                                            VerticalOptions="Center">
+                                        </Label>
+                                    </StackLayout>
+                                    <Image
+                                        BackgroundColor="Transparent"
+                                        Grid.Column="2"
+                                        HeightRequest="16"
+                                        Source="ic_chevron"
+                                        VerticalOptions="Center">
+                                    </Image>
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                        <!--Documents-->
+                        <StackLayout
+                            Grid.Row="1">
+                            <BoxView
+                                Color="{StaticResource gray}"
+                                HeightRequest="1"
+                                HorizontalOptions="FillAndExpand">
+                            </BoxView>
+                            <Frame
+                                x:Name="DocumentsFrame"
+                                BorderColor="Transparent"
+                                HasShadow="false"
+                                Padding="0,10,0,15">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding GetDocumentsCommand}" />
+                                </Frame.GestureRecognizers>
+                                <Grid
+                                    ColumnSpacing="15">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                        Grid.Column="0"
+                                        Source="ic_doc_menu_group_folder"
+                                        VerticalOptions="Center">
+                                    </Image>
+                                    <StackLayout
+                                        Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        VerticalOptions="Center">
+                                        <Label
+                                            Text="{Binding LocalTask.AttachmentsAccount}"
+                                            TextColor="{StaticResource darkGray}"
+                                            VerticalOptions="Center">
+                                        </Label>
+                                        <Label
+                                            Text="{lang:Translate Attachments}"
+                                            TextColor="{StaticResource darkGray}"
+                                            VerticalOptions="Center">
+                                        </Label>
+                                    </StackLayout>
+                                    <Image
+                                        BackgroundColor="Transparent"
+                                        Grid.Column="2"
+                                        HeightRequest="16"
+                                        Source="ic_chevron"
+                                        VerticalOptions="Center">
+                                    </Image>
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+            <!--Activity Indicator-->
+            <ActivityIndicator
+                Grid.Row="0"
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsRunning}"
+                IsVisible="{Binding IsRunning}"
+                VerticalOptions="Center">
+            </ActivityIndicator>
+            <!--Status Bar-->
+            <telerikPrimitives:RadBorder
+                BackgroundColor="{StaticResource Key=softGray}"
+                BorderColor="{StaticResource accesoryGray}" 
+                CornerRadius="0"
+                Grid.Row="1">
+                <StackLayout
+                    Orientation="Horizontal">
+                    <Button 
+                        BackgroundColor="{StaticResource softGray}"
+                        Command="{Binding ChangeStatusCommand}"
+                        HorizontalOptions="CenterAndExpand"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        IsVisible="{Binding LocalEvent.IsInManagement, Converter={StaticResource Key=inverseBool}}"
+                        Text="{lang:Translate NewReport}">
+                        <Button.CommandParameter>
+                            <x:Int32>0</x:Int32>
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button 
+                        BackgroundColor="{StaticResource softGray}"
+                        Command="{Binding ChangeStatusCommand}"
+                        HorizontalOptions="CenterAndExpand"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        IsVisible="{Binding LocalEvent.IsInManagement}"
+                        Text="{lang:Translate EventFinishCommand}">
+                        <Button.CommandParameter>
+                            <x:Int32>1</x:Int32>
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button 
+                        BackgroundColor="{StaticResource softGray}"
+                        Command="{Binding DeleteEventCommand}"
+                        HorizontalOptions="CenterAndExpand"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        Text="{lang:Translate Delete}">
+                    </Button>
+                </StackLayout>
+            </telerikPrimitives:RadBorder>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

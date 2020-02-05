@@ -11,11 +11,13 @@
         <!--Coverters-->
         <ResourceDictionary>
             <local:IntToBoolConverter x:Key="intToBool" />
+            <local:EmptyToBoolConverter x:Key="strToBool" />
             <local:InverseBooleanConverter x:Key="inverseBool" />
             <local:BoldConverter x:Key="boolToBold" />
             <local:ItalicConverter x:Key="boolToItalic" />
             <local:IntToFontAttribute x:Key="intToFontAttribute" />
             <local:IntToKBytesConverter x:Key="intToKBytes" />
+            <local:DataSourceConverter x:Key="listEmptyToBool" />
         </ResourceDictionary>
         <!--Int Values-->
         <ResourceDictionary>

@@ -28,6 +28,7 @@
 
         #region Attributes
         private ObservableCollection<CalendarItemViewModel> calendars;
+        private ObservableCollection<Grouping<string, CalendarItemViewModel>> calendarsGrouped;
         private List<Calendar> calendarList;
         private bool isRefreshing;
         private bool isRunning;
@@ -44,11 +45,18 @@
         #endregion
 
         #region Properties
-        public ObservableCollection<CalendarItemViewModel> CalendarSource
+        public ObservableCollection<Grouping<string, CalendarItemViewModel>> CalendarsGrouped
+        {
+            get { return this.calendarsGrouped; }
+            set { SetValue(ref this.calendarsGrouped, value); }
+        }
+
+        public ObservableCollection<CalendarItemViewModel> Calendars
         {
             get { return this.calendars; }
             set { SetValue(ref this.calendars, value); }
         }
+
         public bool IsRefreshing
         {
             get { return this.isRefreshing; }
@@ -121,9 +129,8 @@
         private void ModelInitialization ()
         {
             apiService = new ApiService();
-            IErrorHandler errorHandler = null;
             SelectDeselectAll = Languages.ShowAll;
-            this.LoadCalendars().FireAndForgetSafeAsync(errorHandler);
+            this.LoadCalendars();
         }
         #endregion
 
@@ -139,6 +146,9 @@
         #endregion
 
         #region Methods
+
+
+
 
         /// <summary>
         /// Selects the color of the calendar and change button.
@@ -196,45 +206,83 @@
         }
 
         /// <summary>
-        /// Loads the calendars.
+        /// Main call to load calendars
         /// </summary>
-        private async Task LoadCalendars()
+        public void LoadCalendars()
         {
             this.IsRefreshing = true;
-            var connection = await this.apiService.CheckConnection();
-            if (!connection.IsSuccess)
-            {
-                this.IsRefreshing = false;
-                await Application.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    connection.Message,
-                    Languages.Cancel);
-                await Application.Current.MainPage.Navigation.PopModalAsync();
-                return;
-            }
+            IErrorHandler errorHandler = null;
+            LoadCalendarVisibility().FireAndForgetSafeAsync(errorHandler);
+            this.IsRefreshing = false;
+        }
 
-            var response = await this.apiService.GetList<Calendar>(
-                Settings.UrlBaseApiSigob,
-                App.PrefixApiSigob,
-                this.apiGetCalendarsController,
-                Settings.Token,
-                Settings.DbToken
-            );
-            if (!response.IsSuccess)
+
+        /// <summary>
+        /// Loads the calendars.
+        /// </summary>
+        public async Task LoadCalendarVisibility()
+        {
+            try
             {
-                this.IsRefreshing = false;
-                await Application.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    response.Message,
-                    Languages.Cancel);
-                await Application.Current.MainPage.Navigation.PopModalAsync();
+                var connection = await this.apiService.CheckConnection();
+                if (!connection.IsSuccess)
+                {
+                    this.IsRefreshing = false;
+                    await Application.Current.MainPage.DisplayAlert(
+                        Languages.Error,
+                        connection.Message,
+                        Languages.Cancel);
+                    await Application.Current.MainPage.Navigation.PopModalAsync();
+                    return;
+                }
+
+                var response = await this.apiService.GetList<Calendar>(
+                    Settings.UrlBaseApiSigob,
+                    App.PrefixApiSigob,
+                    this.apiGetCalendarsController,
+                    Settings.Token,
+                    Settings.DbToken
+                );
+                if (!response.IsSuccess)
+                {
+                    this.IsRefreshing = false;
+                    await Application.Current.MainPage.DisplayAlert(
+                        Languages.Error,
+                        response.Message,
+                        Languages.Cancel);
+                    await Application.Current.MainPage.Navigation.PopModalAsync();
+                    return;
+                }
+                calendarList = (List<Calendar>)response.Result;
+                MyCalendarColor = calendarList.Where(c => c.OfficeId == Settings.OfficeCode).Select(c => c.CalendarColor).First();
+                this.Calendars = new ObservableCollection<CalendarItemViewModel>(ToCalendarItemViewModel());
+                this.RefreshAndGroupCalendarList();
+            }
+            catch (Exception ex)
+            {
+                await App.Navigator.DisplayAlert(Languages.Error, ex.Message, Languages.Cancel);
                 return;
             }
-            calendarList = (List<Calendar>)response.Result;
-            this.CalendarSource = new ObservableCollection<CalendarItemViewModel>(ToCalendarItemViewModel());
-            MyCalendarColor = calendarList.Where(c => c.OfficeId == Settings.OfficeCode).Select(c => c.CalendarColor).First();
-            IsRefreshing = false;
-            IsEnabled = true;
+            finally
+            {
+                IsRefreshing = false;
+                IsEnabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Refresh Calendar List 
+        /// </summary>
+        public void RefreshAndGroupCalendarList()
+        {
+            // Order by group Agenda Type
+            var sorted = from calendar in Calendars
+                         orderby calendar.ManagementCenterId descending
+                         group calendar by $"{string.Empty}|{calendar.CalendarType}|{calendar.IconType}"
+                         into calendarGroup
+                         select new Grouping<string, CalendarItemViewModel>(calendarGroup.Key, calendarGroup);
+
+            this.CalendarsGrouped = new ObservableCollection<Grouping<string, CalendarItemViewModel>>(sorted);
         }
 
         /// <summary>
@@ -328,11 +376,11 @@
             IsEnabled = false;
             IsRunning = true;
             bool newState = (SelectDeselectAll == Languages.ShowAll);
-            this.CalendarSource.Select(c => { c.IsVisible = newState; return c; }).ToList();
+            this.Calendars.Select(c => { c.IsVisible = newState; return c; }).ToList();
             await SetVisibilityToAllCalendars(newState);
             SelectDeselectAll = (SelectDeselectAll == Languages.ShowAll) ? Languages.HideAll : Languages.ShowAll;
+            await this.LoadCalendarVisibility();
             IsRunning = false;
-            await this.LoadCalendars();
             IsEnabled = true;
         }
 

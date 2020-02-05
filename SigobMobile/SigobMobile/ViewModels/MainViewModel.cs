@@ -45,6 +45,9 @@
         #region Task Views
         public TaskViewModel Task { get; set; }
         public TaskDashboardViewModel TaskDashboard { get; set; }
+        public EditTaskViewModel EditTask { get; set; }
+        public EventTasksViewModel EventTasks { get; set; }
+        public TaskGeneralControlViewModel TaskGeneralControl { get; set; }
         #endregion
 
         #region Contacts Views
@@ -72,6 +75,11 @@
         #region Documents
         public DocumentViewerViewModel DocumentViewer { get; set; }
         public PdfViewerViewModel PdfViewer { get; set; }
+        #endregion
+
+        #region Workflows Views
+        public WorkflowsViewModel Workflows { get; set; }
+        //public ActivitiesViewModel Activities { get; set; }
         #endregion
         #endregion
 

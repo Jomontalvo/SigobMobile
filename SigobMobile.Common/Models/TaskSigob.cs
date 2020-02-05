@@ -18,7 +18,7 @@
 
     public enum TStatusTasK    {        Programmed = 0,        InManagement = 1,        Finished = 6,        PendingSend = 7,        FinishedIncomplete = 8,        Suspended = 9,        ToSendByEmail = 10,        ErrorSendEmail = 11,        Delayed = 12    }
 
-    public enum TTrafficLightStatus : long
+    public enum TTrafficLightStatus : int
     {
         InProgress = 0,
         Overdue = 1,
@@ -29,7 +29,7 @@
 
     public enum TOriginTask    {        None = -1,        GovernmentActionProgram = 0,        ManagementCenterPrevious = 1,        ManagementCenterDuring = 2,        ManagementCenterPost = 3,        ManagementCenterRequest = 4,        Instruction = 5,        Assignment = 6,        PersonalAgenda = 7,        Task = 8,        CommunicativeAction = 9    }
 
-    public enum TPeriodicity    {        Undefined = 0,        Weekly = 1,        Biweekly = 2,        Monthly = 3,        Bimonthly = 4    }
+    public enum TPeriodicity : byte    {        Undefined = 0,        Weekly = 1,        Biweekly = 2,        Monthly = 3,        Bimonthly = 4    }
 
     public enum TPriority    {        Minimum = 0,        Low = 1,        Middle = 2,        High = 3,        Maxim = 4    }
 
@@ -60,7 +60,7 @@
     public class TaskSigob
     {
         [JsonProperty("codigo")]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("asunto")]
         public string Title { get; set; }
@@ -96,25 +96,25 @@
         public int ReportStatus { get; set; }
 
         [JsonProperty("estadoDescripcion")]
-        public string StatusDescrition { get; set; }
+        public string StatusDescription { get; set; }
 
         [JsonProperty("fechaFinProgramada")]
-        public DateTimeOffset EndProgrammedDate { get; set; }
+        public DateTime EndProgrammedDate { get; set; }
 
         [JsonProperty("fechaFinalizada")]
-        public DateTimeOffset EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         [JsonProperty("fechaInicio")]
-        public DateTimeOffset StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         [JsonProperty("fechaModificacionDetalle")]
-        public DateTimeOffset ModificationDatailDate { get; set; }
+        public DateTime? ModificationDetailDate { get; set; }
 
         [JsonProperty("fechaModificacionReporte")]
-        public DateTimeOffset ModificationReportDate { get; set; }
+        public DateTime? ModificationReportDate { get; set; }
 
         [JsonProperty("fechaProximoReporte")]
-        public DateTimeOffset NextReportDate { get; set; }
+        public DateTime? NextReportDate { get; set; }
 
         [JsonProperty("historicoDetalle")]
         public string HistoricalDetail { get; set; }
@@ -147,7 +147,7 @@
         public bool IsNew { get; set; }
 
         [JsonProperty("origen")]
-        public TOriginTask Origin { get; set; }
+        public TOriginTask Source { get; set; }
 
         [JsonProperty("padre")]
         public object Parent { get; set; }
@@ -213,23 +213,46 @@
         public bool HasMessage { get; set; }
 
         public string InitialsOfResponsible => RegexUtilities.ExtractInitialsFromName(ResponsibleName);
+
+        public TTrafficLightStatus TrafficLight
+        {
+            get
+            {
+                if (Status != TStatusTasK.Finished && Status != TStatusTasK.FinishedIncomplete && Status != TStatusTasK.Suspended)
+                {
+                    TimeSpan diff = EndProgrammedDate.Subtract(DateTime.Today);
+                    TTrafficLightStatus result = (int)diff.TotalDays switch
+                    {
+                        int days when days > 2 => TTrafficLightStatus.InProgress,
+                        int days when days >= 0 && days <= 2 => TTrafficLightStatus.CloseToDeadline,
+                        int days when days < 0 => TTrafficLightStatus.Overdue,
+                        _ => TTrafficLightStatus.Completed
+                    };
+                    return result;
+                }
+                else
+                {
+                    return TTrafficLightStatus.Completed;
+                }
+            }
+        }
     }
 
     public class ParentEntity
     {
         [JsonProperty("codigo")]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("codigoInstrumento")]
-        public long CodigoInstrumento { get; set; }
+        public int CodigoInstrumento { get; set; }
 
         [JsonProperty("descripcion")]
         public string Description { get; set; }
 
         [JsonProperty("fecha")]
-        public DateTimeOffset Date { get; set; }
+        public DateTime Date { get; set; }
 
         [JsonProperty("instrumento")]
-        public long Instrumento { get; set; }
+        public SigobInstrument Instrumento { get; set; }
     }
 }

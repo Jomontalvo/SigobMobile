@@ -3,11 +3,11 @@
     using System;
     using System.Threading.Tasks;
     using AsyncAwaitBestPractices.MVVM;
-    using SigobMobile.Common.Helpers;
-    using SigobMobile.Common.Models;
-    using SigobMobile.Common.Services;
-    using SigobMobile.Helpers;
-    using SigobMobile.Interfaces;
+    using Common.Helpers;
+    using Common.Models;
+    using Common.Services;
+    using Helpers;
+    using Interfaces;
     using Xamarin.Essentials;
 
     public class DocumentViewerViewModel : BaseViewModel
@@ -51,6 +51,11 @@
             this.Source = source;
             IErrorHandler errorHandler = null;
             this.GetDownloadDocument().FireAndForgetSafeAsync(errorHandler);
+        }
+
+        public DocumentViewerViewModel(DownloadDocument doc)
+        {
+            this.Doc = doc;
         }
         #endregion
 
@@ -112,7 +117,7 @@
                     return;
                 }
 
-                //Get downliad file values
+                //Get download file values
                 this.Doc = (DownloadDocument)response.Result;
             }
             catch (Exception ex)

@@ -1,10 +1,11 @@
 ﻿namespace SigobMobile.Common.Models
 {
     using System;
+    using System.Drawing;
     using Newtonsoft.Json;
-    using SigobMobile.Common.Models;
 
-    #region Enum Event Attributes
+    #region Enum using in Event
+
     public enum EventAttribute : byte
     {
         Create,
@@ -34,6 +35,13 @@
         /// Evento confidencial
         /// </summary>
         Private = 4
+    }
+
+    public enum ConfirmAttendance : byte
+    {
+        Accept = 0,
+        Tentative = 1,
+        Decline = 2
     }
 
     public enum AgendaAttribute : byte
@@ -94,9 +102,7 @@
         ViewOnlyAssigned,
         NotAuthorized
     }
-    #endregion
 
-    #region Enum Event Properties
     public enum EventSecurytyLevel : byte
     {
         Minimum,
@@ -106,6 +112,13 @@
         Maximum
     }
 
+    public enum EventTaskMoment : byte
+    {
+        Previous = 0,
+        Support = 1,
+        Later = 2,
+        All = 3
+    }
     #endregion
 
     /// <summary>
@@ -122,16 +135,19 @@
         public string Title { get; set; }
 
         [JsonProperty("codigo_tipo_evento")]
-        public int EventTypeId { get; set; }
+        public short EventTypeId { get; set; }
 
         [JsonProperty("descripcion_tipo_evento")]
         public string EventTypeDescription { get; set; }
 
+        //[JsonProperty("colorTipoEvento")]
+        //public Color EventTypeColor { get; set; }
+
         [JsonProperty("inicio")]
-        public DateTimeOffset Start { get; set; }
+        public DateTime Start { get; set; }
 
         [JsonProperty("fin")]
-        public DateTimeOffset End { get; set; }
+        public DateTime End { get; set; }
 
         [JsonProperty("ubicacion")]
         public string Location { get; set; }
@@ -148,6 +164,15 @@
         [JsonProperty("nombre_calendario")]
         public string CalendarName { get; set; }
 
+        [JsonProperty("tipoInstrumento")]
+        public char ModuleType { get; set; }
+
+        [JsonProperty("fechaActualizacion")]
+        public DateTime? LastUpdate { get; set; }
+
+        [JsonProperty("comentario")]
+        public string GuestComment { get; set; }
+
         [JsonProperty("grado_reserva")]
         public SecurityLevelEvent PrivacyLevel { get; set; }
 
@@ -160,17 +185,18 @@
         [JsonProperty("notificacion")]
         public bool Notification { get; set; }
 
+        [JsonProperty("pendiente")]
+        public byte Pending { get; set; }
+        [JsonProperty("revisado")]        public bool Reviewed { get; set; }
+
         [JsonProperty("aviso")]
         public short Alert { get; set; }
 
         [JsonProperty("tamano_ficha_ejecutiva")]
-        public long AbstractDocSize { get; set; }
+        public int AbstractDocSize { get; set; }
 
         [JsonProperty("tamano_acta")]
-        public long RecordDocSize { get; set; }
-
-        [JsonProperty("terminado")]
-        public bool Finished { get; set; }
+        public int RecordDocSize { get; set; }
 
         [JsonProperty("programado_cg")]
         public bool IsProgrammedFromMCenter { get; set; }
@@ -183,6 +209,18 @@
 
         [JsonProperty("anotaciones")]
         public string Annotations { get; set; }
+
+        [JsonProperty("descripcionPadre")]
+        public string ParentDescription { get; set; }
+
+        [JsonProperty("asistencia")]
+        public ConfirmAttendance EventAttendance { get; set; }
+
+        [JsonProperty("confirmaAsistenciaPropia")]
+        public bool CanConfirmOwnerAttendance { get; set; }
+
+        [JsonProperty("confirmaAsistenciaTitularCg")]
+        public bool CanConfirmChiefAttendance { get; set; }
 
         [JsonProperty("puede_modificar")]
         public EventAttribute AttributeOnEvents { get; set; }
@@ -228,5 +266,15 @@
 
         [JsonProperty("tituloCarpetasTrabajo")]
         public string DocumentsTitle { get; set; }
+
+        [JsonProperty("tituloTareasPrevias")]
+        public string PreviousTaskTitle { get; set; }
+
+        [JsonProperty("tituloTareasLogisticas")]
+        public string SupportTaskTitle { get; set; }
+
+        [JsonProperty("tituloTareasSeguimiento")]
+        public string CommitmentTaskTitle { get; set; }
+
     }
 }

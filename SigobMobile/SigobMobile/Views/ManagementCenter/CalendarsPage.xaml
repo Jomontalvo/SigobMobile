@@ -520,16 +520,39 @@
                     x:Name="listViewCalendar"
                     Footer=""
                     Grid.Row="3"
+                    IsGroupingEnabled="True"
                     HorizontalOptions="FillAndExpand"
                     HasUnevenRows="false"
                     IsPullToRefreshEnabled="false"
                     IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
-                    ItemsSource="{Binding CalendarSource}">
+                    ItemsSource="{Binding CalendarsGrouped}">
+                    <ListView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout
+                                    Orientation="Horizontal"
+                                    VerticalOptions="FillAndExpand"
+                                    Padding="15,5"
+                                    BackgroundColor="{StaticResource softGray}">
+                                    <Image
+                                        VerticalOptions="Center"
+                                        Source="{Binding ImageGroup}"
+                                        WidthRequest="30">
+                                    </Image>
+                                    <Label
+                                        FontSize="Medium"
+                                        FontAttributes="Bold"
+                                        Text="{Binding Name}"
+                                        VerticalOptions="Center"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.GroupHeaderTemplate>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <Grid
-                                    Padding="16,10,10,10">
+                                    Padding="40,10,5,10">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*" />

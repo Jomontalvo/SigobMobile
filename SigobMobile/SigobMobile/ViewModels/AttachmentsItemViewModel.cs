@@ -1,12 +1,14 @@
 ﻿namespace SigobMobile.ViewModels
 {
     using System;
+    using System.IO;
     using System.Threading.Tasks;
     using AsyncAwaitBestPractices.MVVM;
     using SigobMobile.Common.Helpers;
     using SigobMobile.Common.Models;
     using SigobMobile.Common.Services;
     using SigobMobile.Helpers;
+    using SigobMobile.Interfaces;
     using SigobMobile.Views.Common;
     using Xamarin.Essentials;
     using Xamarin.Forms;
@@ -18,11 +20,19 @@
     {
         #region Fields
         private readonly ApiService apiService = new ApiService();
+        private readonly IFileViewerService fileViewerService;
         #endregion
 
         #region Properties
         public DocumentSource Source { get; set; }
         public string ApiController { get => $"documents/{this.Id}/source/{(int)this.Source}/type/{(int)this.FileType}"; }
+        #endregion
+
+        #region Constructors
+        public AttachmentsItemViewModel()
+        {
+            this.fileViewerService = DependencyService.Get<IFileViewerService>();
+        }
         #endregion
 
         #region Commands
@@ -32,28 +42,26 @@
         #region Methods
         private async Task SelectAttachmentAsync()
         {
-            var mainViewModel = MainViewModel.GetInstance();
+            var attachmentsViewModel = MainViewModel.GetInstance().Attachments;
+            attachmentsViewModel.IsRunning = true;
             if (this.FileType == DocumentType.PDF)
             {
+                var mainViewModel = MainViewModel.GetInstance();
                 mainViewModel.PdfViewer = new PdfViewerViewModel((Attachment)this, Source);
                 await App.Navigator.PushAsync(new PdfViewerPage());
             }
-            else if (Device.RuntimePlatform == Device.iOS)
-            {
-                mainViewModel.DocumentViewer = new DocumentViewerViewModel((Attachment)this, Source);
-                await App.Navigator.PushAsync(new DocumentViewerPage());
-            }
             else
             {
-                await OpenAttachmentDocument();
+                await OpenAttachmentDocumentAsync();
             }
+            attachmentsViewModel.IsRunning = false;
         }
 
         /// <summary>
-        /// Open Document (for Android)
+        /// Get Stream and Open Attachment
         /// </summary>
         /// <returns></returns>
-        private async Task OpenAttachmentDocument()
+        private async Task OpenAttachmentDocumentAsync()
         {
             try
             {
@@ -89,8 +97,13 @@
                 bool canOpen = await Launcher.CanOpenAsync(localDocument.UrlDocument);
                 if (canOpen)
                 {
-                    await Launcher.TryOpenAsync(new Uri(localDocument.UrlDocument));
+                    Uri uri = new Uri(localDocument.UrlDocument);
+                    string filename = System.IO.Path.GetFileName(uri.LocalPath);
+                    MemoryStream stream = await new GetStream().GetStreamFromUrl(localDocument.UrlDocument);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    await this.fileViewerService.View(stream, filename);
                 }
+                else return;
             }
             catch (Exception ex)
             {

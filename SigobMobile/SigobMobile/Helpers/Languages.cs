@@ -84,6 +84,8 @@
         public static string Save => Resources.Save;
         public static string Done => Resources.Done;
         public static string Delete => Resources.Delete;
+        public static string Confirm => Resources.ConfirmTitle;
+        public static string ConfirmEventDeletion => Resources.ConfirmEventDeletion;
         #endregion
 
         #region Await Messages
@@ -177,6 +179,8 @@
         public static string SelectCalendarMessage => Resources.SelectCalendarMessage;
         public static string SelectCalendarColor => Resources.SelectCalendarColor;
         public static string SelectItemToAddManagementCenter => Resources.SelectItemToAddManagementCenter;
+        public static string ManagementCenters => Resources.ManagementCenters;
+        public static string PersonalAgendas => Resources.PersonalAgendas;
         #endregion
 
         #region Event View
@@ -195,6 +199,12 @@
         public static string EventParticipantsText => Resources.EventParticipantsText;
         public static string EventAbstractText => Resources.EventAbstractText;
         public static string EventAnnotationsText => Resources.EventAnnotationsText;
+        public static string EventFinishCommand => Resources.EventFinishCommand;
+        public static string EventSuspendCommand => Resources.EventSuspendCommand;
+        public static string EventActivateCommand => Resources.EventActivateCommand;
+        public static string EventFinishMessage => Resources.EventFinishMessage;
+        public static string EventResumeMessage => Resources.EventResumeMessage;
+        public static string EventSuspendMessage => Resources.EventSuspendMessage;
         #endregion
 
         #region Helper text
@@ -230,6 +240,9 @@
         public static string Tasks => Resources.Tasks;
         public static string Request => Resources.Request;
         public static string Requests => Resources.Requests;
+        public static string TaskPrevious => Resources.TaskPrevious;
+        public static string TaskSupport => Resources.TaskSupport;
+        public static string TaskCommitments => Resources.TaskCommitments;
         #endregion
 
         #region Institutional Directory and Contacts
@@ -256,6 +269,30 @@
         public static string ControlTitle => Resources.ControlTitle;
         public static string PersonalControl => Resources.PersonalControl;
         public static string GeneralControl => Resources.GeneralControl;
+        public static string OverdueControl => Resources.OverdueControl;
+        public static string EmptyTaskList => Resources.EmptyTaskList;
+        public static string TaskProgrammerText => Resources.TaskProgrammerText;
+        public static string OverdueTasksByType => Resources.OverdueTasksByType;
+        public static string OverdueTasksByProgrammer => Resources.OverdueTasksByProgrammer;
+        public static string OverdueTasksByResponsible => Resources.OverdueTasksByResponsible;
+        #endregion
+
+        #region Report View
+        public static string ReportPeriodicity => Resources.ReportPeriodicity;
+        public static string PeriodicityUndefined => Resources.PeriodicityUndefined;
+        public static string PeriodicityWeekly => Resources.PeriodicityWeekly;
+        public static string PeriodicityBiWeekly => Resources.PeriodicityBiWeekly;
+        public static string PeriodicityMonthly => Resources.PeriodicityMonthly;
+        public static string PeriodicityBiMonthly => Resources.PeriodicityBiMonthly;
+        public static string NewReport => Resources.NewReport;
+        public static string NoReportAvailable => Resources.NoReportAvailable;
+        #endregion
+
+        #region Messages
+        public static string Messages => Resources.Messages;
+        public static string Message => Resources.Message;
+        public static string NewMessage => Resources.NewMessage;
+        public static string SendMessage => Resources.SendMessage;
         #endregion
 
         #region Correspondence Menu View
@@ -303,9 +340,6 @@
         public static string ScannedDocuments = Resources.ScannedDocuments;
         public static string ScannedDocument = Resources.ScannedDocument;
         public static string NoScannedDocuments = Resources.NoScannedDocuments;
-        public static string Attachment = Resources.Attachment;
-        public static string Attachments = Resources.Attachments;
-        public static string NoAttachments = Resources.NoAttachments;
         public static string Tracking = Resources.Tracking;
         public static string LinkedDocuments = Resources.LinkedDocuments;
         public static string NoLinkedDocuments = Resources.NoLinkedDocuments;
@@ -319,6 +353,15 @@
         public static string Results = Resources.Results;
         public static string TransferredBy = Resources.TransferredBy;
         public static string NoTags = Resources.NoTags;
+        #endregion
+
+        #region Documents Attachments
+        public static string Attachment = Resources.Attachment;
+        public static string Attachments = Resources.Attachments;
+        public static string NoAttachments = Resources.NoAttachments;
+        public static string SelectApp = Resources.SelectApp;
+        public static string Folder = Resources.Folder;
+        public static string DefaultFolder = Resources.DefaultFolder;
         #endregion
 
         #region Document Trace
