@@ -16,10 +16,17 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem
             BindingContext="{Binding Calendar}"
+            Command="{Binding OpenCalendarMenuCommand}"
+            IconImageSource="ic_bt_ellipsis"
+            Order="Default"
+            Priority="0">
+        </ToolbarItem>
+        <ToolbarItem
+            BindingContext="{Binding Calendar}"
             Command="{Binding SearchEventCommand}"
             IconImageSource="ic_bt_search"
             Order="Default"
-            Priority="0">
+            Priority="1">
         </ToolbarItem>
         <controls:ToolbarItemEx
             BindingContext="{Binding Calendar}"
@@ -27,19 +34,13 @@
             IconImageSource="ic_bt_add"
             IsVisible="{Binding IsPlatformVisible}"
             Order="Default"
-            Priority="1">
-        </controls:ToolbarItemEx>
-        <ToolbarItem
-            BindingContext="{Binding Calendar}"
-            Command="{Binding OpenCalendarMenuCommand}"
-            IconImageSource="ic_bt_ellipsis"
-            Order="Default"
             Priority="2">
-        </ToolbarItem>
+        </controls:ToolbarItemEx>
     </ContentPage.ToolbarItems>
     <!--Resources-->
     <ContentPage.Resources>
-        <local:AppointmentTemplateSelector x:Key="DayViewAppointmentTemplateSelector">
+        <local:AppointmentTemplateSelector
+            x:Key="DayViewAppointmentTemplateSelector">
             <local:AppointmentTemplateSelector.AllDay>
                 <DataTemplate>
                     <Grid
@@ -113,6 +114,58 @@
                 </DataTemplate>
             </local:AppointmentTemplateSelector.NotAllDay>
         </local:AppointmentTemplateSelector>
+        <local:AgendaViewItemStyleSelector
+            x:Key="AgendaViewItemStyleSelector">
+            <local:AgendaViewItemStyleSelector.CurrentMonthStyle>
+                <telerikInput:AgendaTextItemStyle
+                    TextColor="#EE6D4C"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    HorizontalTextAlignment="Center">
+                </telerikInput:AgendaTextItemStyle>
+            </local:AgendaViewItemStyleSelector.CurrentMonthStyle>
+            <local:AgendaViewItemStyleSelector.CurrentMonthWeeksStyle>
+                <telerikInput:AgendaTextItemStyle
+                    TextColor="#218CFF"
+                    FontSize="16"
+                    HorizontalTextAlignment="Center">
+                </telerikInput:AgendaTextItemStyle>
+            </local:AgendaViewItemStyleSelector.CurrentMonthWeeksStyle>
+            <local:AgendaViewItemStyleSelector.TodayStyle>
+                <telerikInput:AgendaTextItemStyle
+                    FontAttributes="Bold"
+                    FontSize="15"
+                    HorizontalTextAlignment="Start"
+                    Padding="15,5"
+                    TextColor="#5EB1FF">
+                </telerikInput:AgendaTextItemStyle>
+            </local:AgendaViewItemStyleSelector.TodayStyle>
+            <local:AgendaViewItemStyleSelector.NotTodayStyle>
+                <telerikInput:AgendaTextItemStyle
+                    FontSize="15"
+                    HorizontalTextAlignment="Start"
+                    Padding="15,5">
+                </telerikInput:AgendaTextItemStyle>
+            </local:AgendaViewItemStyleSelector.NotTodayStyle>
+            <local:AgendaViewItemStyleSelector.AllDayAppointmentStyle>
+                <telerikInput:AgendaAppointmentItemStyle
+                    TitleTextColor="#4B5157"
+                    TitleFontSize="14"
+                    DaysDurationFontSize="13"
+                    DaysDurationTextColor="#4B5157"
+                    TimeDurationFontAttributes="Bold"
+                    TimeDurationFontSize="12"
+                    TimeDurationTextColor="#929293">
+                </telerikInput:AgendaAppointmentItemStyle>
+            </local:AgendaViewItemStyleSelector.AllDayAppointmentStyle>
+            <local:AgendaViewItemStyleSelector.NotAllDayAppointmentStyle>
+                <telerikInput:AgendaAppointmentItemStyle
+                    TitleTextColor="{OnPlatform Android={StaticResource Key=defaultBackgroundView}}"
+                    DaysDurationTextColor="{OnPlatform Android={StaticResource Key=defaultBackgroundView}}"
+                    TimeDurationTextColor="{OnPlatform Android={StaticResource Key=defaultBackgroundView}}">
+                </telerikInput:AgendaAppointmentItemStyle>
+            </local:AgendaViewItemStyleSelector.NotAllDayAppointmentStyle>
+    </local:AgendaViewItemStyleSelector>
     </ContentPage.Resources>
     <!-- Content Page -->
     <ContentPage.Content>
@@ -352,13 +405,8 @@
 
                 <telerikInput:RadCalendar.AgendaViewSettings>
                     <telerikInput:AgendaViewSettings
-                        MonthItemFormat="YYYY MMM"
-                        WeekItemStartDateFormat="dd MMMM"
-                        WeekItemEndDateFormat="dd"
-                        DayItemFormat="EEE d MMM"
-                        AppointmentItemTimeFormat="HH mm"
-                        AppointmentItemEndDateFormat="MMM d"
-                        AppointmentItemStartDateFormat="MMM d">
+                        AgendaItemStyleSelector="{StaticResource AgendaViewItemStyleSelector}"
+                        AppointmentItemTimeFormat="  hh:mm a ">
                     </telerikInput:AgendaViewSettings>
                 </telerikInput:RadCalendar.AgendaViewSettings>
 
