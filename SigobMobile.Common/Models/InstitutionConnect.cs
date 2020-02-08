@@ -62,6 +62,11 @@
         [JsonProperty(PropertyName = "URLServicio")]
         public string UrlApiService { get; set; }
         /// <summary>
+        /// API REST version number
+        /// </summary>
+        [JsonProperty(PropertyName = "version")]
+        public double Version { get; set; }
+        /// <summary>
         /// Gets the name sort.
         /// </summary>
         /// <value>The name sort.</value>

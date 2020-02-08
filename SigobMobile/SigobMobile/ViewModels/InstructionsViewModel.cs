@@ -114,7 +114,7 @@
         {
             InstructionStatus.Add(Languages.PendingStatus);
             InstructionStatus.Add(Languages.CompletedStatus);
-            InstructionStatus.Add(Languages.AllStatus);
+            InstructionStatus.Add(Languages.AllTaskStatus);
         }
 
         /// <summary>

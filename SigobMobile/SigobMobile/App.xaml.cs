@@ -18,36 +18,29 @@ namespace SigobMobile
         /// Gets the URL base central.
         /// </summary>
         /// <value>The URL base central.</value>
-        public static string UrlBaseCentral
-        {
-            get { return "https://sigob-movil.firebaseio.com"; }
-        }
+        public static string UrlBaseCentral => "https://sigob-movil.firebaseio.com";
 
         /// <summary>
         /// Gets the central institutions prefix.
         /// </summary>
         /// <value>The prefix central.</value>
-        public static string PrefixCentral
-        {
-            get { return "institutions"; }
-        }
+        public static string PrefixCentral => "institutions";
 
         /// <summary>
         /// Gets the central parameters prefix
         /// </summary>
-        public static string PrefixParametersCentral
-        {
-            get { return "parameters"; }
-        }
+        public static string PrefixParametersCentral => "parameters";
 
         /// <summary>
         /// Gets the controller central.
         /// </summary>
         /// <value>The controller central.</value>
-        public static string ControllerCentral
-        {
-            get { return ".json"; }
-        }
+        public static string ControllerCentral => $".json";
+
+        /// <summary>
+        /// Version for filter instituttion list
+        /// </summary>
+        public static double  Version => 2.2;
         #endregion
 
         #region SIGOB Institution API
@@ -61,10 +54,7 @@ namespace SigobMobile
         /// Gets the prefix API sigob.
         /// </summary>
         /// <value>The prefix API sigob.</value>
-        public static string PrefixApiSigob
-        {
-            get { return "api/"; }
-        }
+        public static string PrefixApiSigob => "api/";
         #endregion
 
         #region SIGOB Active Session

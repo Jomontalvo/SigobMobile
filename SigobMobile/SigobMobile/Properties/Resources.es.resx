@@ -341,6 +341,10 @@ Si tiene algún problema, contacte con un Administrador.</value>
     <comment>Text for image of user profile label.</comment>
   </data>
     <!-- Main options name -->
+    <data name="ComponentsManagementCenter" xml:space="preserve">
+    <value>Componentes adicionales </value>
+    <comment>Text for menu of instructions or requests title.</comment>
+  </data>
     <data name="ManagementCenterAppName" xml:space="preserve">
     <value>Agenda del Centro de Gestión</value>
     <comment>Text for agenda menu option title.</comment>
@@ -532,7 +536,7 @@ Si tiene algún problema, contacte con un Administrador.</value>
     <comment>In Progress status label (green)</comment>
   </data>
     <data name="PendingStatus" xml:space="preserve">
-    <value>Pendiente</value>
+    <value>Pendientes</value>
     <comment>Text for Item in pending status.</comment>
   </data>
     <data name="CloseToDeadlinedStatus" xml:space="preserve">
@@ -540,24 +544,28 @@ Si tiene algún problema, contacte con un Administrador.</value>
     <comment>Text for Item close to deadline time status.</comment>
   </data>
     <data name="ExpiredStatus" xml:space="preserve">
-    <value>Vencida</value>
+    <value>Vencidas</value>
     <comment>Text for Item in expired time status.</comment>
   </data>
     <data name="OverdueStatus" xml:space="preserve">
-    <value>Atrasada</value>
+    <value>Atrasadas</value>
     <comment>Overdue status label (red)</comment>
   </data>
     <data name="CompletedStatus" xml:space="preserve">
-    <value>Hecha</value>
+    <value>Hechas</value>
     <comment>Text for Item competed.</comment>
   </data>
     <data name="SuspendedStatus" xml:space="preserve">
-    <value>Suspendida</value>
+    <value>Suspendidas</value>
     <comment>Text for Item competed.</comment>
   </data>
     <data name="AllStatus" xml:space="preserve">
     <value>Todos</value>
     <comment>Text for All items wherever status.</comment>
+  </data>
+    <data name="AllTaskStatus" xml:space="preserve">
+    <value>Todas</value>
+    <comment>Text for All task items wherever status.</comment>
   </data>
     <data name="Hour" xml:space="preserve">
     <value>Hora</value>
@@ -696,7 +704,7 @@ Si tiene algún problema, contacte con un Administrador.</value>
     <comment>Delete the current picture</comment>
   </data>
     <data name="CalendarViewModeText" xml:space="preserve">
-    <value>Seleccione la vista del calendario</value>
+    <value>Opciones de vista calendario</value>
     <comment>Select view of calendar</comment>
   </data>
     <data name="MonthlyView" xml:space="preserve">

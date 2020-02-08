@@ -588,7 +588,7 @@
         private void LoadSegmentedFilters()
         {
             TaskStatus = new ObservableCollection<Segment>(ToTaskSegment(1));
-            var firstItem = new Segment() { Id = 0, QueryId = 10, SegmentName = Languages.AllStatus };
+            var firstItem = new Segment() { Id = 0, QueryId = 10, SegmentName = Languages.AllTaskStatus };
             TaskStatus.Insert(0, firstItem);
             //Built ObservableCollection<string> with Segments Names
             this.SegmentedControlItems = new ObservableCollection<string>(ToSegmentString());

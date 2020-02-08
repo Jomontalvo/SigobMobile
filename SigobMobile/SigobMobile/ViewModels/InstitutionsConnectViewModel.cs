@@ -117,8 +117,9 @@
                 Institution = l.Institution,
                 SecurityLogin = l.SecurityLogin,
                 Status = l.Status,
-                UrlApiService = l.UrlApiService
-            });
+                UrlApiService = l.UrlApiService,
+                Version = l.Version
+            }).Where( l => l.Version >= App.Version);
         }
         #endregion
 

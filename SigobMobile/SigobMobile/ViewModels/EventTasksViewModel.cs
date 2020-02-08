@@ -129,7 +129,7 @@
             int i = 0;
             TaskStatus = new List<Segment>
             {
-                new Segment() { Id = i++, QueryId = 3, SegmentName = Languages.AllStatus }
+                new Segment() { Id = i++, QueryId = 3, SegmentName = Languages.AllTaskStatus }
             };
             var parentViewModel = MainViewModel.GetInstance().EventCg;
             if (parentViewModel.LocalEvent.PreviousTask != EventTasksAttribute.NotAuthorized)

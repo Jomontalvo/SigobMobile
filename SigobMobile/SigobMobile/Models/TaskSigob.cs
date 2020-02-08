@@ -3,6 +3,7 @@
     using Helpers;
     using Common.Models;
     using Xamarin.Forms;
+    using System;
 
     public class TaskSigob : Common.Models.TaskSigob
     {
@@ -14,6 +15,17 @@
             _ => Palette.SelectedTrafficLightGray
 
         };
+
+        public string ReportLabel
+        {
+            get
+            {
+                string label = string.IsNullOrEmpty(Report)
+                    ? Languages.No
+                    : $"{((int)ModificationReportDate?.Subtract(DateTime.Today).TotalDays).ToString()} {Languages.Days.ToLower()} ";
+                return label;
+            }
+        }
 
         public string PeriodicityLabel => this.ReportFrequency switch
         {

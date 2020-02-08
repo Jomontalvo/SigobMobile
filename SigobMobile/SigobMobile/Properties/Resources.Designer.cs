@@ -389,6 +389,12 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string ComponentsManagementCenter {
+            get {
+                return ResourceManager.GetString("ComponentsManagementCenter", resourceCulture);
+            }
+        }
+        
         public static string ManagementCenterAppName {
             get {
                 return ResourceManager.GetString("ManagementCenterAppName", resourceCulture);
@@ -710,6 +716,12 @@ namespace SigobMobile.Properties {
         public static string AllStatus {
             get {
                 return ResourceManager.GetString("AllStatus", resourceCulture);
+            }
+        }
+        
+        public static string AllTaskStatus {
+            get {
+                return ResourceManager.GetString("AllTaskStatus", resourceCulture);
             }
         }
         

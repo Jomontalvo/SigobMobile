@@ -213,7 +213,7 @@
                                 Grid.Row="0"
                                 FontAttributes="Bold"
                                 MaxLines="1"
-                                Text="Calendar view options">
+                                Text="{local:Translate CalendarViewModeText}">
                             </Label>
                             <!--Daily View-->
                             <StackLayout
@@ -337,7 +337,7 @@
                             <Label
                                 Grid.Row="7"
                                 FontAttributes="Bold"
-                                Text="Query options">
+                                Text="{local:Translate ComponentsManagementCenter}">
                             </Label>
                             <!--Instructios Option-->
                             <StackLayout

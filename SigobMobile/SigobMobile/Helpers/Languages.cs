@@ -19,6 +19,7 @@
 
         #region Management Status (all componentes)
         public static string AllStatus => Resources.AllStatus;
+        public static string AllTaskStatus => Resources.AllTaskStatus; 
         public static string CompletedStatus => Resources.CompletedStatus;
         public static string InManagementStatus => Resources.InManagementStatus;
         public static string ManagementStatusTitle => Resources.ManagementStatusTitle;
@@ -181,6 +182,7 @@
         public static string SelectItemToAddManagementCenter => Resources.SelectItemToAddManagementCenter;
         public static string ManagementCenters => Resources.ManagementCenters;
         public static string PersonalAgendas => Resources.PersonalAgendas;
+        public static string ComponentsManagementCenter => Resources.ComponentsManagementCenter;
         #endregion
 
         #region Event View

@@ -226,7 +226,7 @@
                 Grid.Row="3"
                 IsVisible="{Binding IsVisibleChart, Converter={StaticResource inverseBool}}"
                 ItemsSource="{Binding SegmentedControlItems}"
-                HeightRequest="{OnPlatform Android=30}"
+                HeightRequest="{OnPlatform Android=36}"
                 Margin="10,5,10,0"
                 SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
                 SelectedSegmentBackgroundColor="{OnPlatform iOS={StaticResource Key=iOSBlue}}"
@@ -325,6 +325,7 @@
                         ItemsSource="{Binding TaskCollection}">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
+
                                 <StackLayout
                                     Padding="10,3">
                                     <Frame
@@ -370,76 +371,32 @@
                                                 LineBreakMode="TailTruncation"
                                                 VerticalOptions="End">
                                             </Label>
-                                            <Label
-                                                FontSize="Small"
+                                            <StackLayout
                                                 Grid.Row="2"
                                                 Grid.Column="1"
-                                                HorizontalOptions="FillAndExpand"
-                                                Text="{Binding Status}"
-                                                TextColor="{StaticResource Key=darkGray}"
-                                                LineBreakMode="TailTruncation"
-                                                VerticalOptions="End">
-                                            </Label>
+                                                Orientation="Horizontal">
+                                                <Label
+                                                    FontSize="Small"
+                                                    HorizontalOptions="Start"
+                                                    Text="{Binding ResponsibleName}"
+                                                    TextColor="{StaticResource Key=darkGray}"
+                                                    LineBreakMode="TailTruncation"
+                                                    VerticalOptions="End">
+                                                </Label>
+                                                <Label
+                                                    FontSize="Small"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    Text="{Binding PeriodicityLabel}"
+                                                    TextColor="{StaticResource Key=darkGray}"
+                                                    VerticalOptions="End">
+                                                </Label>
+                                            </StackLayout>
                                             <StackLayout
                                                 Grid.Column="1"
                                                 Grid.Row="3"
+                                                HorizontalOptions="Start"
                                                 Orientation="Horizontal"
                                                 Spacing="15">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition />
-                                                        <ColumnDefinition />
-                                                    </Grid.ColumnDefinitions>
-                                                    <Image
-                                                        Grid.Column="0"
-                                                        HeightRequest="16"
-                                                        Source="ic_ev_calendar"
-                                                        VerticalOptions="Center">
-                                                    </Image>
-                                                    <Label
-                                                        Grid.Column="1"
-                                                        Text="{Binding InitialsOfResponsible}"
-                                                        TextColor="{StaticResource Key=darkGray}"
-                                                        VerticalOptions="Center">
-                                                    </Label>
-                                                </Grid>
-                                                <Grid
-                                                    IsVisible="{Binding HasMessage}">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition />
-                                                        <ColumnDefinition />
-                                                    </Grid.ColumnDefinitions>
-                                                    <Image
-                                                        Grid.Column="0"
-                                                        HeightRequest="16"
-                                                        Source="ic_ev_summary"
-                                                        VerticalOptions="Center">
-                                                    </Image>
-                                                    <Label
-                                                        Grid.Column="1"
-                                                        Text="{local:Translate TaskMessages}"
-                                                        TextColor="{StaticResource Key=darkGray}"
-                                                        VerticalOptions="Center">
-                                                    </Label>
-                                                </Grid>
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition />
-                                                        <ColumnDefinition />
-                                                    </Grid.ColumnDefinitions>
-                                                    <Image
-                                                        Grid.Column="0"
-                                                        HeightRequest="16"
-                                                        Source="ic_ev_tasks"
-                                                        VerticalOptions="Center">
-                                                    </Image>
-                                                    <Label
-                                                        Grid.Column="1"
-                                                        Text="{Binding DaysLate}"
-                                                        TextColor="{StaticResource Key=darkGray}"
-                                                        VerticalOptions="Center">
-                                                    </Label>
-                                                </Grid>
                                                 <Frame
                                                     BackgroundColor="{Binding TTrafficLightColor}"
                                                     HasShadow="False"
@@ -452,17 +409,55 @@
                                                         </Grid.ColumnDefinitions>
                                                         <controls:IconView                                                            Grid.Column="0"                                                            Foreground="White"                                                            HeightRequest="16"                                                            HorizontalOptions="Center"                                                            Source="ic_task_deadline_bold"                                                            VerticalOptions="Center"                                                            WidthRequest="16">                                                        </controls:IconView>
                                                         <Label
-                                                            TextColor="White"
-                                                            FontSize="Small"
+                                                            FontAttributes="Bold"
                                                             Grid.Column="1"
-                                                            Text="{Binding EndProgrammedDate, StringFormat='{0:MMM dd, yy}'}">
+                                                            Text="{Binding EndProgrammedDate, StringFormat='{0:MMM dd, yyyy}'}"
+                                                            TextColor="White">
                                                         </Label>
                                                     </Grid>
                                                 </Frame>
+                                                <Grid
+                                                    ColumnSpacing="5">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image
+                                                        Grid.Column="0"
+                                                        HeightRequest="16"
+                                                        Source="ic_ev_summary"
+                                                        VerticalOptions="Center">
+                                                    </Image>
+                                                    <Label
+                                                        Grid.Column="1"
+                                                        Text="{Binding ReportLabel}"
+                                                        TextColor="{StaticResource Key=darkGray}"
+                                                        VerticalOptions="Center">
+                                                    </Label>
+                                                </Grid>
+                                                <Grid
+                                                    ColumnSpacing="5">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image
+                                                        Grid.Column="0"
+                                                        HeightRequest="16"
+                                                        Source="ic_task_gauge"
+                                                        VerticalOptions="Center">
+                                                    </Image>
+                                                    <Label
+                                                        Grid.Column="1"
+                                                        Text="{Binding PercentageOfCompletion}"
+                                                        TextColor="{StaticResource Key=darkGray}"
+                                                        VerticalOptions="Center">
+                                                    </Label>
+                                                </Grid>
                                             </StackLayout>
                                         </Grid>
                                     </Frame>
-                                </StackLayout>
+                                </StackLayout>                                
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>

@@ -347,6 +347,10 @@ If you have problems, contact with administrator.</value>
     <comment>Text for image of user profile label.</comment>
   </data>
     <!-- Main options name -->
+    <data name="ComponentsManagementCenter" xml:space="preserve">
+    <value>Available components </value>
+    <comment>Text for menu of instructions or requests title.</comment>
+  </data>
     <data name="ManagementCenterAppName" xml:space="preserve">
     <value>Management Center Agenda</value>
     <comment>Text for agenda menu option title.</comment>
@@ -565,6 +569,10 @@ If you have problems, contact with administrator.</value>
     <value>All</value>
     <comment>Text for All items wherever status.</comment>
   </data>
+    <data name="AllTaskStatus" xml:space="preserve">
+    <value>All</value>
+    <comment>Text for All task items wherever status.</comment>
+  </data>
     <data name="Hour" xml:space="preserve">
     <value>hour</value>
     <comment>Hour text.</comment>
@@ -702,8 +710,8 @@ If you have problems, contact with administrator.</value>
     <comment>Delete the current picture</comment>
   </data>
     <data name="CalendarViewModeText" xml:space="preserve">
-    <value>Select the calendar view.</value>
-    <comment>Monthly view of calendar</comment>
+    <value>Calendar view options</value>
+    <comment>Select view mode message</comment>
   </data>
     <data name="MonthlyView" xml:space="preserve">
     <value>Monthly view</value>
