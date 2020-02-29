@@ -6,7 +6,7 @@
     using Models;
     using Views.Tasks;
 
-    public class EventTasksItemViewModel : EventTask
+    public class EventTasksItemViewModel : TaskSigob
     {
         #region Commands
         public IAsyncCommand SelectTaskCommand => new AsyncCommand(SelectTask);
@@ -17,7 +17,7 @@
         private async Task SelectTask()
         {
             var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.Task = new TaskViewModel((EventTask)this);
+            mainViewModel.Task = new TaskViewModel(this);
             await App.Navigator.PushAsync(new TaskPage() { Title = $"{Languages.Task} [{this.Id}]" });
         }
         #endregion

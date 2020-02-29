@@ -57,13 +57,16 @@
     /// </summary>
     public class TSigColorTuple : TSigTuple
     {
+        /// <summary>
+        /// String Color original value
+        /// </summary>
         [JsonProperty("color")]
-        public string Color { get; set; }
+        public string StringColor { get; set; }
 
         /// <summary>
         /// Color with Alpha
         /// </summary>
-        public Color ColorAlpha => System.Drawing.Color.FromArgb(175, System.Drawing.Color.FromName(Color));
+        public Color ColorAlpha => System.Drawing.Color.FromArgb(175, Color.FromName(StringColor));
     }
 
     /// <summary>

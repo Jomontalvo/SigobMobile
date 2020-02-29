@@ -11,7 +11,7 @@
     using SigobMobile.Views.Common;
     using SigobMobile.Common.Models;
     using TaskSigob = Models.TaskSigob;
-    using EventTask = Models.EventTask;
+    using Xamarin.Forms;
 
     public class TaskViewModel : BaseViewModel
     {
@@ -23,11 +23,14 @@
         #region Attributes
         private readonly int id;
         private bool isRunning;
+        private bool isParentVisible;
         private string lastReportText;
+        private string reportStatusText;
+        private string auditStatusText;
         private string trimDescription;
+        private string taskOrigin;
         private TaskSigob localTask;
-        private EventTask localEventTask;
-
+        private ImageSource iconParent;
         #endregion
 
         #region Properties
@@ -36,7 +39,11 @@
             get { return this.isRunning; }
             set { SetValue(ref this.isRunning, value); }
         }
-
+        public bool IsParentVisible
+        {
+            get { return this.isParentVisible; }
+            set { SetValue(ref this.isParentVisible, value); }
+        }
         public TaskSigob LocalTask
         {
             get { return this.localTask; }
@@ -49,12 +56,35 @@
             set { SetValue(ref this.lastReportText, value); }
         }
 
+        public string ReportStatusText
+        {
+            get { return this.reportStatusText; }
+            set { SetValue(ref this.reportStatusText, value); }
+        }
+
         public string TrimDescription
         {
             get { return this.trimDescription; }
             set { SetValue(ref this.trimDescription, value); }
         }
 
+        public string TaskOrigin
+        {
+            get { return this.taskOrigin; }
+            set { SetValue(ref this.taskOrigin, value); }
+        }
+
+        public string AuditStatusText
+        {
+            get { return this.auditStatusText; }
+            set { SetValue(ref this.auditStatusText, value); }
+        }
+
+        public ImageSource IconParent
+        {
+            get { return this.iconParent; }
+            set { SetValue(ref this.iconParent, value); }
+        }
         #endregion
 
         #region Constructors
@@ -70,40 +100,7 @@
             this.LastReportText = string.IsNullOrEmpty(this.LocalTask.Report)
                 ? Languages.NoReportAvailable
                 : this.LocalTask.Report;
-            this.TrimDescription = this.LocalTask.Description.TrimEnd();
-        }
-
-        /// <summary>
-        /// Initialize from EventTask parameter (called from Management Center)
-        /// </summary>
-        /// <param name="eventTask">Objet type EventTask</param>
-        public TaskViewModel(EventTask eventTask)
-        {
-            this.localEventTask = eventTask;
-            this.LocalTask = new TaskSigob
-            {
-                Id = localEventTask.Id,
-                Title = localEventTask.Title,
-                Description = localEventTask.Description.TrimEnd(),
-                EndProgrammedDate = localEventTask.EndProgrammedDate,
-                Status = localEventTask.Status,
-                ResponsibleName = localEventTask.ResponsibleName,
-                Report = localEventTask.Report,
-                ReportStatus = localEventTask.ReportStatus,
-                RevisedReport = localEventTask.RevisedReport,
-                Type = localEventTask.Type,
-                ProgrammerName = localEventTask.ProgrammerName,
-                NextReportDate = localEventTask.NextReportDate,
-                MonitorName = localEventTask.MonitorName,
-                ReportFrequency = localEventTask.Periodicity,
-                ModificationReportDate = localEventTask.LastReportUpdate,
-                Source = localEventTask.Source,
-                Instrument = SigobInstrument.EventTask
-            };
-            this.LastReportText = string.IsNullOrEmpty(this.LocalTask.Report)
-                ? Languages.NoReportAvailable
-                : this.LocalTask.Report;
-            this.TrimDescription = this.LocalTask.Description;
+            this.SetExtendedTaskInfo();
         }
 
         /// <summary>
@@ -116,7 +113,7 @@
             this.LastReportText = string.IsNullOrEmpty(this.LocalTask.Report)
                 ? Languages.NoReportAvailable
                 : this.LocalTask.Report;
-            this.TrimDescription = this.LocalTask.Description.TrimEnd();
+            this.SetExtendedTaskInfo();
         }
         #endregion
 
@@ -125,6 +122,77 @@
         #endregion
 
         #region Methods
+
+
+        private void SetExtendedTaskInfo()
+        {
+            this.TrimDescription = this.LocalTask.Description.TrimEnd();
+            this.ReportStatusText = LocalTask.ReportStatus switch
+            {
+                TReportStatus.NotApply => Languages.ReportStatusNotApply,
+                TReportStatus.OnTime => Languages.ReportStatusOnTime,
+                TReportStatus.Overdue => Languages.ReportStatusOverdue,
+                _ => Languages.ReportStatusNotApply
+            };
+            this.AuditStatusText = LocalTask.AuditStatus switch
+            {
+                TAuditStatus.NoRequested => Languages.AuditNoRequested,
+                TAuditStatus.ToElaborate => Languages.AuditToElaborate,
+                TAuditStatus.InElaboration => Languages.AuditInElaboration,
+                TAuditStatus.Finished => Languages.AuditFinished,
+                TAuditStatus.Reviewed => Languages.AuditReviewed,
+                _ => Languages.AuditNoRequested
+            };
+
+            switch (LocalTask.Instrument)
+            {
+                case SigobInstrument.EventTask:
+                    this.IconParent = ImageSource.FromFile("ic_task_source_calendar");
+                    this.TaskOrigin = $"{Languages.TaskOrigin}: {Languages.Event}";
+                    this.IsParentVisible = true;
+                    break;
+                case SigobInstrument.RequestTask:
+                    this.IconParent = ImageSource.FromFile("ic_task_source_task");
+                    this.TaskOrigin = $"{Languages.TaskOrigin}: {Languages.Request}";
+                    this.IsParentVisible = true;
+                    break;
+                case SigobInstrument.InstructionTask:
+                    this.IconParent = ImageSource.FromFile("ic_task_source_instruction");
+                    this.TaskOrigin = $"{Languages.TaskOrigin}: {Languages.Instruction}";
+                    this.IsParentVisible = true;
+                    break;
+                case SigobInstrument.Assignment:
+                    this.IconParent = ImageSource.FromFile("ic_task_source_assignment");
+                    this.TaskOrigin = $"{Languages.TaskOrigin}: {Languages.Assignment}";
+                    this.IsParentVisible = false;
+                    break;
+                case SigobInstrument.CommunicativeActionTask:
+                    this.IconParent = ImageSource.FromFile("ic_task_source_acom");
+                    this.TaskOrigin = $"{Languages.TaskOrigin}: {Languages.CommunicationsActionsAppName}";
+                    this.IsParentVisible = true;
+                    break;
+                case SigobInstrument.GapTask:
+                    this.IconParent = ImageSource.FromFile("ic_task_source_goals");
+                    this.TaskOrigin = $"{Languages.TaskOrigin}: {Languages.InstitutionalGoalsAppName}"; //TODO: Change by PAG Resource
+                    this.IsParentVisible = true;
+                    break;
+                case SigobInstrument.Task:
+                    this.IconParent = ImageSource.FromFile("ic_task_source_agenda");
+                    this.TaskOrigin = $"{Languages.TaskOrigin}: {Languages.PersonalAgendas}";
+                    this.IsParentVisible = false;
+                    break;
+                case SigobInstrument.Activity:
+                    this.IconParent = ImageSource.FromFile("ic_task_source_workflow");
+                    this.TaskOrigin = $"{Languages.TaskOrigin}: {Languages.Activity}";
+                    this.IsParentVisible = true;
+                    break;
+                default:
+                    this.IconParent = ImageSource.FromFile("ic_task_source_task");
+                    this.TaskOrigin = $"{Languages.TaskOrigin}: {Languages.Task}";
+                    this.IsParentVisible = false;
+                    break;
+            }
+        }
 
         /// <summary>
         /// Open attachments

@@ -136,7 +136,7 @@
                                             <Label
                                                 FontSize="Small"
                                                 HorizontalOptions="Start"
-                                                Text="{Binding ResponsibleName}"
+                                                Text="{Binding Responsible.Name}"
                                                 TextColor="{StaticResource Key=darkGray}"
                                                 LineBreakMode="TailTruncation"
                                                 VerticalOptions="End">
@@ -169,7 +169,7 @@
                                                     <Label
                                                         FontAttributes="Bold"
                                                         Grid.Column="1"
-                                                        Text="{Binding EndProgrammedDate, StringFormat='{0:MMM dd, yyyy}'}"
+                                                        Text="{Binding ProgrammedEndDate, StringFormat='{0:MMM dd, yyyy}'}"
                                                         TextColor="White">
                                                     </Label>
                                                 </Grid>

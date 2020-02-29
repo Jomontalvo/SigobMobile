@@ -253,6 +253,12 @@
         public static string ExternalContactsViewTitle => Resources.ExternalContactsViewTitle;
         #endregion
 
+        #region TaskView
+        public static string TaskOrigin => Resources.TaskOrigin;
+        public static string TaskMonitoringText => Resources.TaskMonitoringText;
+        #endregion
+
+
         #region Task Management View
         public static string MyTasks => Resources.MyTasks;
         public static string TasksOf => Resources.TasksOf;
@@ -280,6 +286,11 @@
         #endregion
 
         #region Report View
+        public static string ProgressReport => Resources.ProgressReport;
+        public static string ReportLastUpdate => Resources.ReportLastUpdate;
+        public static string ReportStatusNotApply => Resources.ReportStatusNotApply;
+        public static string ReportStatusOnTime => Resources.ReportStatusOnTime;
+        public static string ReportStatusOverdue => Resources.ReportStatusOverdue;
         public static string ReportPeriodicity => Resources.ReportPeriodicity;
         public static string PeriodicityUndefined => Resources.PeriodicityUndefined;
         public static string PeriodicityWeekly => Resources.PeriodicityWeekly;
@@ -288,6 +299,19 @@
         public static string PeriodicityBiMonthly => Resources.PeriodicityBiMonthly;
         public static string NewReport => Resources.NewReport;
         public static string NoReportAvailable => Resources.NoReportAvailable;
+        #endregion
+
+        #region Audit View
+        public static string AuditStatus => Resources.AuditStatus;
+        public static string AuditNoRequested => Resources.AuditNoRequested;
+        public static string AuditToElaborate => Resources.AuditToElaborate;
+        public static string AuditInElaboration => Resources.AuditInElaboration;
+        public static string AuditFinished => Resources.AuditFinished;
+        public static string AuditReviewed => Resources.AuditReviewed;
+        public static string AuditNoOpinion => Resources.AuditNoOpinion;
+        public static string AuditOpinionRejected => Resources.AuditOpinionRejected;
+        public static string AuditOpinionWithIssues => Resources.AuditOpinionWithIssues;
+        public static string AuditOpinionApproved => Resources.AuditOpinionApproved;
         #endregion
 
         #region Messages

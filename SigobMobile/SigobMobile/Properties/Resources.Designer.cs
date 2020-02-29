@@ -1397,6 +1397,12 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string ReportStatus {
+            get {
+                return ResourceManager.GetString("ReportStatus", resourceCulture);
+            }
+        }
+        
         public static string PeriodicityUndefined {
             get {
                 return ResourceManager.GetString("PeriodicityUndefined", resourceCulture);
@@ -1823,6 +1829,48 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string TaskOrigin {
+            get {
+                return ResourceManager.GetString("TaskOrigin", resourceCulture);
+            }
+        }
+        
+        public static string TaskMonitoringText {
+            get {
+                return ResourceManager.GetString("TaskMonitoringText", resourceCulture);
+            }
+        }
+        
+        public static string ProgressReport {
+            get {
+                return ResourceManager.GetString("ProgressReport", resourceCulture);
+            }
+        }
+        
+        public static string ReportLastUpdate {
+            get {
+                return ResourceManager.GetString("ReportLastUpdate", resourceCulture);
+            }
+        }
+        
+        public static string ReportStatusNotApply {
+            get {
+                return ResourceManager.GetString("ReportStatusNotApply", resourceCulture);
+            }
+        }
+        
+        public static string ReportStatusOnTime {
+            get {
+                return ResourceManager.GetString("ReportStatusOnTime", resourceCulture);
+            }
+        }
+        
+        public static string ReportStatusOverdue {
+            get {
+                return ResourceManager.GetString("ReportStatusOverdue", resourceCulture);
+            }
+        }
+        
         public static string ReportPeriodicity {
             get {
                 return ResourceManager.GetString("ReportPeriodicity", resourceCulture);
@@ -1838,6 +1886,66 @@ namespace SigobMobile.Properties {
         public static string NewReport {
             get {
                 return ResourceManager.GetString("NewReport", resourceCulture);
+            }
+        }
+        
+        public static string AuditStatus {
+            get {
+                return ResourceManager.GetString("AuditStatus", resourceCulture);
+            }
+        }
+        
+        public static string AuditNoRequested {
+            get {
+                return ResourceManager.GetString("AuditNoRequested", resourceCulture);
+            }
+        }
+        
+        public static string AuditToElaborate {
+            get {
+                return ResourceManager.GetString("AuditToElaborate", resourceCulture);
+            }
+        }
+        
+        public static string AuditInElaboration {
+            get {
+                return ResourceManager.GetString("AuditInElaboration", resourceCulture);
+            }
+        }
+        
+        public static string AuditFinished {
+            get {
+                return ResourceManager.GetString("AuditFinished", resourceCulture);
+            }
+        }
+        
+        public static string AuditReviewed {
+            get {
+                return ResourceManager.GetString("AuditReviewed", resourceCulture);
+            }
+        }
+        
+        public static string AuditNoOpinion {
+            get {
+                return ResourceManager.GetString("AuditNoOpinion", resourceCulture);
+            }
+        }
+        
+        public static string AuditOpinionRejected {
+            get {
+                return ResourceManager.GetString("AuditOpinionRejected", resourceCulture);
+            }
+        }
+        
+        public static string AuditOpinionWithIssues {
+            get {
+                return ResourceManager.GetString("AuditOpinionWithIssues", resourceCulture);
+            }
+        }
+        
+        public static string AuditOpinionApproved {
+            get {
+                return ResourceManager.GetString("AuditOpinionApproved", resourceCulture);
             }
         }
         

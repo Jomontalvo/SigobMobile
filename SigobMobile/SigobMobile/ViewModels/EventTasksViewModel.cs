@@ -13,7 +13,7 @@
     using Helpers;
     using Interfaces;
     using Views.Tasks;
-    using EventTask = Models.EventTask;
+    using EventTask = Models.TaskSigob;
 
     public class EventTasksViewModel : BaseViewModel
     {
@@ -259,35 +259,58 @@
             {
                 this.TaskItems = new ObservableCollection<EventTasksItemViewModel>(taskList.Select(t => new EventTasksItemViewModel
                 {
-                    Title = t.Title,
+                    AuditorOfficeId = t.AuditorOfficeId,
+                    AuditStatus = t.AuditStatus,
+                    CanCloseReport = t.CanCloseReport,
+                    CanViewTaskParent = t.CanViewTaskParent,
+                    Changes = t.Changes,
+                    ChangesValue = t.ChangesValue,
+                    Completion = t.Completion,
+                    CostExecuted = t.CostExecuted,
+                    CostPlanned = t.CostPlanned,
+                    Delay = t.Delay,
+                    DeletionError = t.DeletionError,
                     Description = t.Description,
-                    IsExternalResponsible = t.IsExternalResponsible,
-                    LastReportUpdate = t.LastReportUpdate,
-                    Report = t.Report,
-                    EndProgrammedDate = t.EndProgrammedDate,
-                    HasReport = t.HasReport,
+                    EndDate = t.EndDate,
+                    HasAudit = t.HasAudit,
+                    HasMessage = t.HasMessage,
+                    HistoricalDetail = t.HistoricalDetail,
+                    HistoricalReport = t.HistoricalReport,
                     Id = t.Id,
-                    IsOwner = t.IsOwner,
-                    MonitorName = t.MonitorName,
-                    MonitorOfficeId = t.MonitorOfficeId,
+                    Instrument = t.Instrument,
+                    IsDeleted = t.IsDeleted,
+                    IsInserted = t.IsInserted,
+                    IsNew = t.IsNew,
+                    IsTaskReviewed = t.IsTaskReviewed,
+                    IsUpdating = t.IsUpdating,
+                    LastErrorMessage = t.LastErrorMessage,
+                    ModificationDetailDate = t.ModificationDetailDate,
+                    ModificationReportDate = t.ModificationReportDate,
+                    ModuleId = t.ModuleId,
+                    Monitor = t.Monitor,
+                    MonitorCanFinishTask = t.MonitorCanFinishTask,
                     NextReportDate = t.NextReportDate,
-                    PercentageOfCompletion = IsNumeric(t.PercentageOfCompletion)
-                            ? $"{t.PercentageOfCompletion}%"
-                            : t.PercentageOfCompletion,
-                    Periodicity = t.Periodicity,
-                    ProgrammerName = t.ProgrammerName,
-                    Reiterations = t.Reiterations,
+                    ParentEntity = t.ParentEntity,
+                    Priority = t.Priority,
+                    ProgrammedEndDate = t.ProgrammedEndDate,
+                    Programmer = t.Programmer,
+                    ReadOnly = t.ReadOnly,
+                    ReiterationsCount = t.ReiterationsCount,
+                    Report = t.Report,
+                    ReportFrequency = t.ReportFrequency,
                     ReportStatus = t.ReportStatus,
-                    ResponsibleName = t.ResponsibleName,
+                    Responsible = t.Responsible,
                     RevisedReport = t.RevisedReport,
+                    Source = t.Source,
+                    StartDate = t.StartDate,
                     Status = t.Status,
-                    StatusDescription = t.StatusDescription,
-                    TaskMomentId = t.TaskMomentId,
-                    TimeManagementStatus = t.TimeManagementStatus,
-                    Type = t.Type,
-                    TypeBlue = t.TypeBlue,
-                    TypeGreen = t.TypeGreen,
-                    TypeRed = t.TypeRed
+                    Template = t.Template,
+                    TipoColorBlue = t.TipoColorBlue,
+                    TipoColorGreen = t.TipoColorGreen,
+                    TipoColorRed = t.TipoColorRed,
+                    Title = t.Title,
+                    TrafficLight = t.TrafficLight,
+                    Type = t.Type
                 })
             .OrderByDescending(t => t.TrafficLight)
             .ToList());
@@ -296,41 +319,64 @@
             {
                 this.TaskItems = new ObservableCollection<EventTasksItemViewModel>(taskList.Select(t => new EventTasksItemViewModel
                 {
-                    Title = t.Title,
+                    AuditorOfficeId = t.AuditorOfficeId,
+                    AuditStatus = t.AuditStatus,
+                    CanCloseReport = t.CanCloseReport,
+                    CanViewTaskParent = t.CanViewTaskParent,
+                    Changes = t.Changes,
+                    ChangesValue = t.ChangesValue,
+                    Completion = t.Completion,
+                    CostExecuted = t.CostExecuted,
+                    CostPlanned = t.CostPlanned,
+                    Delay = t.Delay,
+                    DeletionError = t.DeletionError,
                     Description = t.Description,
-                    IsExternalResponsible = t.IsExternalResponsible,
-                    LastReportUpdate = t.LastReportUpdate,
-                    Report = t.Report,
-                    EndProgrammedDate = t.EndProgrammedDate,
-                    HasReport = t.HasReport,
+                    EndDate = t.EndDate,
+                    HasAudit = t.HasAudit,
+                    HasMessage = t.HasMessage,
+                    HistoricalDetail = t.HistoricalDetail,
+                    HistoricalReport = t.HistoricalReport,
                     Id = t.Id,
-                    IsOwner = t.IsOwner,
-                    MonitorName = t.MonitorName,
-                    MonitorOfficeId = t.MonitorOfficeId,
+                    Instrument = t.Instrument,
+                    IsDeleted = t.IsDeleted,
+                    IsInserted = t.IsInserted,
+                    IsNew = t.IsNew,
+                    IsTaskReviewed = t.IsTaskReviewed,
+                    IsUpdating = t.IsUpdating,
+                    LastErrorMessage = t.LastErrorMessage,
+                    ModificationDetailDate = t.ModificationDetailDate,
+                    ModificationReportDate = t.ModificationReportDate,
+                    ModuleId = t.ModuleId,
+                    Monitor = t.Monitor,
+                    MonitorCanFinishTask = t.MonitorCanFinishTask,
                     NextReportDate = t.NextReportDate,
-                    PercentageOfCompletion = IsNumeric(t.PercentageOfCompletion)
-                            ? $"{t.PercentageOfCompletion}%"
-                            : t.PercentageOfCompletion,
-                    Periodicity = t.Periodicity,
-                    ProgrammerName = t.ProgrammerName,
-                    Reiterations = t.Reiterations,
+                    ParentEntity = t.ParentEntity,
+                    Priority = t.Priority,
+                    ProgrammedEndDate = t.ProgrammedEndDate,
+                    Programmer = t.Programmer,
+                    ReadOnly = t.ReadOnly,
+                    ReiterationsCount = t.ReiterationsCount,
+                    Report = t.Report,
+                    ReportFrequency = t.ReportFrequency,
                     ReportStatus = t.ReportStatus,
-                    ResponsibleName = t.ResponsibleName,
+                    Responsible = t.Responsible,
                     RevisedReport = t.RevisedReport,
+                    Source = t.Source,
+                    StartDate = t.StartDate,
                     Status = t.Status,
-                    StatusDescription = t.StatusDescription,
-                    TaskMomentId = t.TaskMomentId,
-                    TimeManagementStatus = t.TimeManagementStatus,
-                    Type = t.Type,
-                    TypeBlue = t.TypeBlue,
-                    TypeGreen = t.TypeGreen,
-                    TypeRed = t.TypeRed
+                    Template = t.Template,
+                    TipoColorBlue = t.TipoColorBlue,
+                    TipoColorGreen = t.TipoColorGreen,
+                    TipoColorRed = t.TipoColorRed,
+                    Title = t.Title,
+                    TrafficLight = t.TrafficLight,
+                    Type = t.Type
                 })
             .Where (t => (!string.IsNullOrEmpty(t.Title) && t.Title.ToLower().Contains(this.Filter.ToLower())) ||
                          (!string.IsNullOrEmpty(t.Description) && t.Description.ToLower().Contains(this.Filter.ToLower())) ||
-                         (!string.IsNullOrEmpty(t.ResponsibleName) && t.ResponsibleName.ToLower().Contains(this.Filter.ToLower())) ||
+                         (!string.IsNullOrEmpty(t.Responsible.Name) && t.Responsible.Name.ToLower().Contains(this.Filter.ToLower())) ||
                          (!string.IsNullOrEmpty(t.Report) && t.Report.ToLower().Contains(this.Filter.ToLower())) ||
-                         (!string.IsNullOrEmpty(t.MonitorName) && t.MonitorName.ToLower().Contains(this.Filter.ToLower())))
+                         (!string.IsNullOrEmpty(t.Monitor.Name) && t.Monitor.Name.ToLower().Contains(this.Filter.ToLower())))
             .OrderByDescending(t => t.TrafficLight)
             .ToList());
             }

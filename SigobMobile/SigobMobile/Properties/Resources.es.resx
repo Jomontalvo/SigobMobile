@@ -1018,6 +1018,14 @@ Si tiene algún problema, contacte con un Administrador.</value>
     <comment>Overdue task control</comment>
   </data>
     <!--Task Report-->
+    <data name="ReportStatus" xml:space="preserve">
+    <value>Estado del reporte</value>
+    <comment>Report Status label</comment>
+  </data>
+    <data name="ProgressReport" xml:space="preserve">
+    <value>Reporte de Avance</value>
+    <comment>Progress report label</comment>
+  </data>
     <data name="PeriodicityUndefined" xml:space="preserve">
     <value>Sin definir frecuencia</value>
     <comment>No periodicity defined</comment>
@@ -1310,6 +1318,31 @@ Si tiene algún problema, contacte con un Administrador.</value>
     <value>Puesta por</value>
     <comment>Tasl programed by text</comment>
   </data>
+    <data name="TaskOrigin" xml:space="preserve">
+    <value>Origen</value>
+    <comment>Task origin text</comment>
+  </data>
+    <data name="TaskMonitoringText" xml:space="preserve">
+    <value>Monitor</value>
+    <comment>Monitored by text</comment>
+  </data>
+    <!--Report-->
+    <data name="ReportLastUpdate" xml:space="preserve">
+    <value>Actualizado</value>
+    <comment>Last update report text</comment>
+  </data>
+    <data name="ReportStatusNotApply" xml:space="preserve">
+    <value>No aplica</value>
+    <comment>Not apply status text</comment>
+  </data>
+    <data name="ReportStatusOnTime" xml:space="preserve">
+    <value>Al día</value>
+    <comment>Report on time text</comment>
+  </data>
+    <data name="ReportStatusOverdue" xml:space="preserve">
+    <value>Atrasado</value>
+    <comment>Overdue report text</comment>
+  </data>
     <data name="ReportPeriodicity" xml:space="preserve">
     <value>Actualización</value>
     <comment>Frequency of update report text</comment>
@@ -1321,6 +1354,47 @@ Si tiene algún problema, contacte con un Administrador.</value>
     <data name="NewReport" xml:space="preserve">
     <value>Reportar avance</value>
     <comment>Send new report.</comment>
+  </data>
+    <data name="AuditStatus" xml:space="preserve">
+    <value>Auditoría</value>
+    <comment>Audit Status label</comment>
+  </data>
+   <data name="AuditNoRequested" xml:space="preserve">
+    <value>No solicitada</value>
+    <comment>Audit status No Requested label.</comment>
+  </data>
+    <data name="AuditToElaborate" xml:space="preserve">
+    <value>Para elaborar</value>
+    <comment>Audit status To Elaborate label.</comment>
+  </data>
+    <data name="AuditInElaboration" xml:space="preserve">
+    <value>En curso</value>
+    <comment>Audit status In Elaboration label.</comment>
+  </data>
+    <data name="AuditFinished" xml:space="preserve">
+    <value>Finalizada</value>
+    <comment>Audit status Finished label.</comment>
+  </data>
+    <data name="AuditReviewed" xml:space="preserve">
+    <value>Revisada</value>
+    <comment>Audit status review label.</comment>
+  </data>
+    <!--Opinion-->
+    <data name="AuditNoOpinion" xml:space="preserve">
+    <value>Sin dictamen</value>
+    <comment>Audit No Opinion label.</comment>
+  </data>
+    <data name="AuditOpinionRejected" xml:space="preserve">
+    <value>Rechazada</value>
+    <comment>Audit Rejected opinion label.</comment>
+  </data>
+    <data name="AuditOpinionWithIssues" xml:space="preserve">
+    <value>Con observaciones</value>
+    <comment>Audit with issues label.</comment>
+  </data>
+    <data name="AuditOpinionApproved" xml:space="preserve">
+    <value>Aprobada</value>
+    <comment>Audit opinion Approved label.</comment>
   </data>
     <!--Messages-->
     <data name="Message" xml:space="preserve">

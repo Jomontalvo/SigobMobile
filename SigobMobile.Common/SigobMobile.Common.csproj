@@ -7,6 +7,7 @@
   <ItemGroup>
     <Compile Remove="Class1.cs" />
     <Compile Remove="Properties\Resources.Designer.cs" />
+    <Compile Remove="Models\EventTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />

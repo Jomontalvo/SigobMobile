@@ -32,12 +32,12 @@
             <!--Task Details-->
             <ScrollView
                 Grid.Row="0"
-                Padding="10,5,5,0"
+                Padding="0,5,0,0"
                 VerticalOptions="StartAndExpand">
-                <StackLayout>
+                <StackLayout Spacing="0">
                     <!--Header-->
                     <Grid
-                        Padding="5,5,5,0">
+                        Padding="15,5,5,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
@@ -51,7 +51,7 @@
                             Foreground="{Binding LocalTask.Type.ColorAlpha}"
                             Margin="0,2,0,0"
                             HorizontalOptions="Center"
-                            Source="ic_ev_calendar_color"
+                            Source="ic_ev_type_color"
                             VerticalOptions="Start">
                         </controls:IconView>
                         <StackLayout
@@ -71,6 +71,13 @@
                                     </OnPlatform>
                                 </Label.FontFamily>
                             </Label>
+                            <!--Origin and Type-->
+                            <Label
+                                HorizontalOptions="StartAndExpand"
+                                Text="{Binding LocalTask.Type.Description}"
+                                TextColor="{StaticResource lightBlack}"
+                                VerticalTextAlignment="Center">
+                            </Label>
                             <!--End Date-->
                             <Frame
                                 BackgroundColor="{Binding LocalTask.TTrafficLightColor}"
@@ -88,7 +95,7 @@
                                         FontAttributes="Bold"
                                         Grid.Column="1"
                                         HorizontalOptions="Start"
-                                        Text="{Binding LocalTask.EndProgrammedDate, StringFormat='{0:D}'}"
+                                        Text="{Binding LocalTask.ProgrammedEndDate, StringFormat='{0:D}'}"
                                         TextColor="White">
                                     </Label>
                                 </Grid>
@@ -105,58 +112,106 @@
                                 </Label>
                                 <Label
                                     FontSize="Small"
-                                    Text="{Binding LocalTask.ProgrammerName}"
+                                    Text="{Binding LocalTask.Programmer.Name}"
                                     TextColor="{StaticResource lightBlack}"
                                     VerticalOptions="Center">
                                 </Label>
                             </StackLayout>
                         </StackLayout>
                     </Grid>
+                    <!--Separator-->
+                    <BoxView
+                        Color="{StaticResource gray}"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand"
+                        Margin="0,5,0,0"
+                        VerticalOptions="Center">
+                    </BoxView>
+                    <!--Source-->
+                    <Grid
+                        BackgroundColor="AliceBlue"
+                        ColumnSpacing="15"
+                        Padding="15,10"
+                        RowSpacing="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                         </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Image
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            IsVisible="{Binding IsDetailVisible}"
+                            Margin="0,4,0,0"
+                            Source="{Binding IconParent}"
+                            VerticalOptions="Start">
+                        </Image>
+                        <Label
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            Text="{Binding LocalTask.ParentEntity.Description}"
+                            TextColor="{StaticResource lightBlack}"
+                            VerticalOptions="Center">
+                        </Label>
+                        <Label
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Text="{Binding TaskOrigin}"
+                            TextColor="{StaticResource lightBlack}">
+                        </Label>
+                        <ImageButton
+                            Grid.Column="2"
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            HeightRequest="24"
+                            HorizontalOptions="Center"
+                            IsVisible="{Binding IsParentVisible}"
+                            Source="ic_bt_viewmore_gray"
+                            VerticalOptions="Center"
+                            WidthRequest="24">
+                        </ImageButton>
+                    </Grid>
+                    <!--Separator-->
+                    <BoxView
+                        Color="{StaticResource gray}"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand"
+                        Margin="0"
+                        VerticalOptions="Center">
+                    </BoxView>
                     <!--Section 1-->
                     <Grid
                         ColumnSpacing="15"
-                        Padding="5,0"
+                        Padding="15,10"
                         RowSpacing="0">
                         <Grid.RowDefinitions>
-                            <!--Separator-->
-                            <RowDefinition Height="Auto"/>
                             <!--Responsible-->
+                            <RowDefinition />
+                            <!--Monitor-->
                             <RowDefinition Height="Auto" />
                             <!--Task Details-->
                             <RowDefinition Height="Auto" />
-                            <!--Separator-->
-                            <RowDefinition Height="Auto" />
-                            <!--Report Periodicity-->
-                            <RowDefinition Height="Auto" />
-                            <!--Task Report -->
-                            <RowDefinition />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="20" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <!--Separator-->
-                        <BoxView
-                            Color="{StaticResource gray}"
-                            Grid.Column="1"
-                            Grid.Row="0"
-                            Grid.ColumnSpan="2"
-                            HeightRequest="1"
-                            HorizontalOptions="FillAndExpand"
-                            Margin="0"
-                            VerticalOptions="Center">
-                        </BoxView>
                         <!--Responsible-->
                         <Image
                             Grid.Column="0"
-                            Grid.Row="1"
+                            Grid.Row="0"
                             Source="ic_contact_male"
                             VerticalOptions="Center">
                         </Image>
                         <StackLayout
                             Grid.Column="1"
-                            Grid.Row="1"
+                            Grid.Row="0"
                             Orientation="Horizontal"
                             Padding="0"
                             Spacing="5">
@@ -169,7 +224,26 @@
                                 <Label
                                 FontAttributes="Bold"
                                 FontSize="Medium"
-                                Text="{Binding LocalTask.ResponsibleName}"
+                                Text="{Binding LocalTask.Responsible.Name}"
+                                TextColor="{StaticResource darkGray}"
+                                VerticalOptions="Center">
+                            </Label>
+                        </StackLayout>
+                        <!--Monitor-->
+                        <StackLayout
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            Orientation="Horizontal"
+                            Padding="0,0,0,10"
+                            Spacing="0">
+                            <Label
+                                Text="{lang:Translate TaskMonitoringText}"
+                                TextColor="{StaticResource darkGray}"
+                                VerticalOptions="Center">
+                            </Label>
+                                <Label
+                                FontSize="Medium"
+                                Text="{Binding LocalTask.Monitor.Name, StringFormat=': {0}'}"
                                 TextColor="{StaticResource darkGray}"
                                 VerticalOptions="Center">
                             </Label>
@@ -194,29 +268,70 @@
                             TextColor="{StaticResource darkGray}"
                             VerticalOptions="Start">
                         </Label>
-                        <!--Separator-->
-                        <BoxView
-                            Color="{StaticResource gray}"
-                            Grid.Column="1"
-                            Grid.Row="3"
-                            Grid.ColumnSpan="2"
-                            HeightRequest="1"
-                            HorizontalOptions="FillAndExpand"
-                            Margin="0,5,0,0"
+                    </Grid>
+                    <!--Separator-->
+                    <BoxView
+                        Color="{StaticResource gray}"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand"
+                        Margin="0,5,0,0"
+                        VerticalOptions="Center">
+                    </BoxView>
+                    <StackLayout
+                        BackgroundColor="{StaticResource softGray}"
+                        Spacing="0">
+                        <Label
+                            FontAttributes="Bold"
+                            Padding="15,10"
+                            Text="{lang:Translate ProgressReport}"
+                            TextColor="{StaticResource Key=darkGray}"
+                            VerticalTextAlignment="Center"
                             VerticalOptions="Center">
-                        </BoxView>
+                        </Label>
+                    </StackLayout>
+                    <!--Separator-->
+                    <BoxView
+                        Color="{StaticResource gray}"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand"
+                        Margin="0,0,0,5"
+                        VerticalOptions="Center">
+                    </BoxView>
+                    <!--Section Report-->
+                    <Grid
+                        ColumnSpacing="15"
+                        Padding="15,10"
+                        RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <!--Report Periodicity-->
+                            <RowDefinition />
+                            <!--Report Status-->
+                            <RowDefinition Height="Auto" />
+                            <!--Last update-->
+                            <RowDefinition />
+                            <!--Progress Report-->
+                            <RowDefinition Height="Auto" />
+                            <!--Audit Button-->
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
                         <!--Report Periodicity-->
                         <Image
                             Grid.Column="0"
-                            Grid.Row="4"
+                            Grid.Row="0"
                             Source="ic_task_report_frequency"
                             VerticalOptions="Center">
                         </Image>
                         <StackLayout
                             Grid.Column="1"
                             Grid.ColumnSpan="2"
-                            Grid.Row="4"
-                            Orientation="Horizontal">
+                            Grid.Row="0"
+                            Orientation="Horizontal"
+                            Spacing="0">
                             <Label
                                 Text="{lang:Translate ReportPeriodicity}"
                                 TextColor="{StaticResource darkGray}"
@@ -228,29 +343,105 @@
                                 VerticalOptions="Center">
                             </Label>
                         </StackLayout>
-                        <!--Task Report -->
+                        <!--Report Status-->
                         <Image
                             Grid.Column="0"
-                            Grid.Row="5"
-                            HorizontalOptions="Center"
-                            Margin="0,5,0,0"
-                            Source="ic_task_report"
-                            VerticalOptions="Start">
+                            Grid.Row="1"
+                            Source="ic_task_flag_status"
+                            VerticalOptions="Center">
                         </Image>
+                        <StackLayout
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Grid.Row="1"
+                            Orientation="Horizontal"
+                            Spacing="0">
+                            <Label
+                                HorizontalOptions="Start"
+                                Text="{lang:Translate ReportStatus}"
+                                TextColor="{StaticResource darkGray}"
+                                VerticalOptions="Center">
+                            </Label>
+                            <Label
+                                Text="{Binding ReportStatusText, StringFormat=': {0}'}"
+                                TextColor="{StaticResource darkGray}"
+                                VerticalOptions="Center">
+                            </Label>
+                        </StackLayout>
+                        <!--Last Update-->
+                        <Image
+                            Grid.Column="0"
+                            Grid.Row="2"
+                            Source="ic_task_report"
+                            VerticalOptions="Center">
+                        </Image>
+                        <StackLayout
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Grid.Row="2"
+                            Orientation="Horizontal"
+                            Spacing="0">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Small"
+                                Text="{lang:Translate ReportLastUpdate}"
+                                TextColor="{StaticResource darkGray}"
+                                VerticalOptions="Start">
+                            </Label>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Small"
+                                Text="{Binding LocalTask.ModificationReportDate, StringFormat=': {0:dd MMM yyyy, HH:mm:ss}'}"
+                                TextColor="{StaticResource darkGray}"
+                                VerticalOptions="Start">
+                            </Label>
+                        </StackLayout>
+                        <!--Task Report -->
                         <Label
                             Grid.Column="1"
                             Grid.ColumnSpan="2"
-                            Grid.Row="5"
+                            Grid.Row="3"
                             HorizontalOptions="FillAndExpand"
                             Text="{Binding LastReportText}"
                             TextColor="{StaticResource darkGray}"
                             VerticalOptions="Center">
                         </Label>
+                        <!--Audit-->
+                        <Image
+                            Grid.Column="0"
+                            Grid.Row="4"
+                            Source="ic_task_audit"
+                            VerticalOptions="Center">
+                        </Image>
+                        <StackLayout
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Grid.Row="4"
+                            Orientation="Horizontal"
+                            Spacing="0">
+                            <Label
+                                Text="{lang:Translate AuditStatus}"
+                                TextColor="{StaticResource darkGray}"
+                                VerticalOptions="Center">
+                            </Label>
+                            <Label
+                                Text="{Binding AuditStatusText, StringFormat=': {0}'}"
+                                TextColor="{StaticResource darkGray}"
+                                VerticalOptions="Center">
+                            </Label>
+                        </StackLayout>
+                        <Image
+                            BackgroundColor="Transparent"
+                            Grid.Column="2"
+                            Grid.Row="4"
+                            HeightRequest="16"
+                            Source="ic_chevron"
+                            VerticalOptions="Center">
+                        </Image>
                     </Grid>
-                    <!--Section 2-->
                     <Grid
                         RowSpacing="0"
-                        Padding="5,10">
+                        Padding="15,0">
                         <Grid.RowDefinitions>
                             <!--Messages-->
                             <RowDefinition Height="Auto"/>

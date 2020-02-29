@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
     using AsyncAwaitBestPractices.MVVM;
     using Models;
+    using SigobMobile.Helpers;
     using Views.Tasks;
 
     public class TaskItemViewModel : TaskSigob
@@ -20,7 +21,7 @@
         {
             var maiViewModel = MainViewModel.GetInstance();
             maiViewModel.Task = new TaskViewModel(this);
-            await App.Navigator.PushAsync(new TaskPage());
+            await App.Navigator.PushAsync(new TaskPage() { Title = $"{Languages.Task} [{this.Id}]" });
         }
         #endregion
 

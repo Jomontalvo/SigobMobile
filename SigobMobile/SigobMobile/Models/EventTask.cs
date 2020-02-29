@@ -5,7 +5,7 @@
     using Helpers;
     using Xamarin.Forms;
 
-    public class EventTask : Common.Models.EventTask
+    public class EventTask : Common.Models.TaskSigob
     {
         public Color TTrafficLightColor => TrafficLight switch
         {
@@ -21,12 +21,12 @@
             {
                 string label = string.IsNullOrEmpty(Report)
                     ? Languages.No
-                    : $"{((int)LastReportUpdate?.Subtract(DateTime.Today).TotalDays).ToString()} {Languages.Days.ToLower()} ";
+                    : $"{((int)ModificationReportDate?.Subtract(DateTime.Today).TotalDays).ToString()} {Languages.Days.ToLower()} ";
                 return label;
             }
         }
 
-        public string PeriodicityLabel => Periodicity switch
+        public string PeriodicityLabel => ReportFrequency switch
         {
             TPeriodicity.Weekly => $"({Languages.PeriodicityWeekly})",
             TPeriodicity.Biweekly => $"({Languages.PeriodicityBiWeekly})",

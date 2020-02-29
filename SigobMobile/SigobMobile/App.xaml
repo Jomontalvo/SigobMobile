@@ -18,6 +18,7 @@
             <local:IntToFontAttribute x:Key="intToFontAttribute" />
             <local:IntToKBytesConverter x:Key="intToKBytes" />
             <local:DataSourceConverter x:Key="listEmptyToBool" />
+            <local:StringCaseConverter x:Key="caseConverter" />
         </ResourceDictionary>
         <!--Int Values-->
         <ResourceDictionary>

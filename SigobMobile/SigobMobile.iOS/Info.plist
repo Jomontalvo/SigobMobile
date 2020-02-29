@@ -5,7 +5,6 @@
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
-		<integer>2</integer>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
@@ -71,7 +70,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleVersion</key>
-	<string>2.2.0</string>
+	<string>2.2.1</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Sigob Mobile needs acces to your location.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

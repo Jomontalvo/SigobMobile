@@ -296,7 +296,7 @@
                     {
                         case '4':
                             appViewModel.Appointment = new AppointmentViewModel(eventSelected);
-                            await App.Navigator.PushAsync(new AppointmentPage());
+                            await App.Navigator.PushAsync(new AppointmentPage() { Title = Languages.Appointment });
                             break;
                         case '7':
                             IsRunning = true;
@@ -308,7 +308,7 @@
                                 eventCg.TypeColor = eventSelected.TypeColor;
                                 appViewModel.EventCg = new EventCgViewModel(eventCg);
                                 IsRunning = false;
-                                await App.Navigator.PushAsync(new EventCgPage() { Title = SelectedDate.Value.ToString("dd MMM yyyy") });
+                                await App.Navigator.PushAsync(new EventCgPage() { Title = eventCg.SingularEventName });
                             }
                             IsRunning = false;
                             break;

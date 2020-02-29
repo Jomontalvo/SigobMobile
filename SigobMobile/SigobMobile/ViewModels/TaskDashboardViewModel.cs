@@ -38,7 +38,7 @@
         private bool isAddItemVisible;
         private List<TaskSigob> taskList;
         private List<TaskCategoricalData> taskStatistics;
-        private ObservableCollection<Segment> taskStatus;
+        private List<Segment> taskStatus;
         private ObservableCollection<string> segmentedControlItems;
         private ObservableCollection<TaskItemViewModel> taskCollection;
         private Tasks taskObject;
@@ -49,11 +49,13 @@
         private string officialName;
         private string filter;
         private int selectedIndex = -1;
+        private TTrafficLightStatus segmentFilter = TTrafficLightStatus.All;
         private bool isVisibleSearch;
         private bool isVisibleChart;
         private bool isVisibleGraphTitle;
         private bool isOpen;
         private bool isOpenControl;
+        private bool isSegmentBuilt = false;
         #endregion
 
         #region Properties
@@ -97,7 +99,7 @@
             set => SetValue(ref this.segmentedControlItems, value);
         }
 
-        public ObservableCollection<Segment> TaskStatus
+        public List<Segment> TaskStatus
         {
             get => this.taskStatus;
             set => SetValue(ref this.taskStatus, value);
@@ -131,9 +133,7 @@
             set
             {
                 SetValue(ref this.selectedIndex, value);
-                //IErrorHandler errorHandler = null;
-                //OnSelectionChangedAsync().FireAndForgetSafeAsync(errorHandler);
-                OnSelectionChangedAsync();
+                this.OnSelectionChangedAsync();
             }
         }
         public bool IsRefreshing
@@ -175,7 +175,7 @@
             this.IsVisibleGraphTitle = false;
             IsAddItemVisible = (Device.RuntimePlatform == Device.iOS) ? true : false;
             IErrorHandler errorHandler = null;
-            this.LoadTaskBoard().FireAndForgetSafeAsync(errorHandler);
+            this.LoadTaskBoardAsync().FireAndForgetSafeAsync(errorHandler);
             this.LoadCalendars().FireAndForgetSafeAsync(errorHandler);
         }
         #endregion
@@ -184,12 +184,12 @@
         public ICommand SearchCommand => new RelayCommand(SearchView);
         public ICommand SliceTappedCommand => new RelayCommand<ChartSelectionBehavior>(SliceTapped);
         public ICommand RefreshTaskListFromChartCommand => new RelayCommand<ChartSelectionBehavior>(RefreshTaskListFromChart);
-        public IAsyncCommand RefreshCommand => new AsyncCommand(LoadTaskBoard);
         public ICommand SelectCalendarCommand => new RelayCommand(SelectCalendar);
         public ICommand CloseSelectCalendarCommand => new RelayCommand(CloseSelectCalendar);
         public ICommand SwipeChartCommand => new RelayCommand<string>(SwipeChart);
         public ICommand LoadMenuControlCommand => new RelayCommand(LoadMenuControl);
         public ICommand CloseControlMenuCommand => new RelayCommand(CloseControlMenu);
+        public IAsyncCommand RefreshCommand => new AsyncCommand(LoadTaskBoardAsync);
         public IAsyncCommand LoadGeneralControlMenuCommand => new AsyncCommand(LoadGeneralControlMenuAsync);
         public IAsyncCommand LoadPersonalControlMenuCommand => new AsyncCommand(LoadPersonalControlMenuAsync);
         public IAsyncCommand LoadOverdueControlMenuCommand => new AsyncCommand(LoadOverdueControlMenuAsync);
@@ -319,121 +319,126 @@
                 TaskCollection = new ObservableCollection<TaskItemViewModel>(
                 this.taskList.Select(t => new TaskItemViewModel
                 {
+                    AuditorOfficeId = t.AuditorOfficeId,
+                    AuditStatus = t.AuditStatus,
                     CanCloseReport = t.CanCloseReport,
+                    CanViewTaskParent = t.CanViewTaskParent,
                     Changes = t.Changes,
-                    DaysLate = t.DaysLate,
-                    Deleted = t.Deleted,
+                    ChangesValue = t.ChangesValue,
+                    Completion = t.Completion,
+                    CostExecuted = t.CostExecuted,
+                    CostPlanned = t.CostPlanned,
+                    Delay = t.Delay,
                     DeletionError = t.DeletionError,
-                    Description = t.Description,
+                    Description = (!string.IsNullOrEmpty(t.Description))?t.Description.TrimEnd() : string.Empty,
                     EndDate = t.EndDate,
-                    EndProgrammedDate = t.EndProgrammedDate,
-                    FrequencyDescription = t.FrequencyDescription,
+                    HasAudit = t.HasAudit,
                     HasMessage = t.HasMessage,
-                    HistoriacalReport = t.HistoriacalReport,
                     HistoricalDetail = t.HistoricalDetail,
-                    IconTaskOrigin = t.IconTaskOrigin,
+                    HistoricalReport = t.HistoricalReport,
                     Id = t.Id,
-                    Inserted = t.Inserted,
                     Instrument = t.Instrument,
-                    IsExternalResponsible = t.IsExternalResponsible,
+                    IsDeleted = t.IsDeleted,
+                    IsInserted = t.IsInserted,
                     IsNew = t.IsNew,
-                    IsParentVisible = t.IsParentVisible,
+                    IsTaskReviewed = t.IsTaskReviewed,
+                    IsUpdating = t.IsUpdating,
                     LastErrorMessage = t.LastErrorMessage,
                     ModificationDetailDate = t.ModificationDetailDate,
                     ModificationReportDate = t.ModificationReportDate,
-                    Modifications = t.Modifications,
                     ModuleId = t.ModuleId,
+                    Monitor = t.Monitor,
                     MonitorCanFinishTask = t.MonitorCanFinishTask,
-                    MonitorName = t.MonitorName,
-                    MonitorOfficeId = t.MonitorOfficeId,
                     NextReportDate = t.NextReportDate,
-                    Source = t.Source,
-                    Parent = t.Parent,
                     ParentEntity = t.ParentEntity,
                     Priority = t.Priority,
-                    ProgrammerName = t.ProgrammerName,
-                    ProgrammerOfficeId = t.ProgrammerOfficeId,
+                    ProgrammedEndDate = t.ProgrammedEndDate,
+                    Programmer = t.Programmer,
                     ReadOnly = t.ReadOnly,
-                    Report = t.Report,
+                    ReiterationsCount = t.ReiterationsCount,
+                    Report = (!string.IsNullOrEmpty(t.Report)) ? t.Report.TrimEnd() : Languages.NoReportAvailable,
                     ReportFrequency = t.ReportFrequency,
                     ReportStatus = t.ReportStatus,
-                    ResponsibleEmail = t.ResponsibleEmail,
-                    ResponsibleName = t.ResponsibleName,
-                    ResponsibleOfficeId = t.ResponsibleOfficeId,
+                    Responsible = t.Responsible,
                     RevisedReport = t.RevisedReport,
+                    Source = t.Source,
                     StartDate = t.StartDate,
                     Status = t.Status,
-                    StatusDescription = t.StatusDescription,
                     Template = t.Template,
+                    TipoColorBlue = t.TipoColorBlue,
+                    TipoColorGreen = t.TipoColorGreen,
+                    TipoColorRed = t.TipoColorRed,
                     Title = t.Title,
-                    Type = t.Type,
-                    TypeBlue = t.TypeBlue,
-                    TypeGreen = t.TypeGreen,
-                    TypeRed = t.TypeRed
-                }));
+                    TrafficLight = t.TrafficLight,
+                    Type = t.Type
+                })
+                .Where(t => (segmentFilter == TTrafficLightStatus.All || t.TrafficLight  == segmentFilter))
+                .OrderBy(t => t.TrafficLight));
             }
             else
             {
                 TaskCollection = new ObservableCollection<TaskItemViewModel>(
                 this.taskList.Select(t => new TaskItemViewModel
                 {
+                    AuditorOfficeId = t.AuditorOfficeId,
+                    AuditStatus = t.AuditStatus,
                     CanCloseReport = t.CanCloseReport,
+                    CanViewTaskParent = t.CanViewTaskParent,
                     Changes = t.Changes,
-                    DaysLate = t.DaysLate,
-                    Deleted = t.Deleted,
+                    ChangesValue = t.ChangesValue,
+                    Completion = t.Completion,
+                    CostExecuted = t.CostExecuted,
+                    CostPlanned = t.CostPlanned,
+                    Delay = t.Delay,
                     DeletionError = t.DeletionError,
-                    Description = t.Description,
+                    Description = (!string.IsNullOrEmpty(t.Description)) ? t.Description.TrimEnd() : string.Empty,
                     EndDate = t.EndDate,
-                    EndProgrammedDate = t.EndProgrammedDate,
-                    FrequencyDescription = t.FrequencyDescription,
+                    HasAudit = t.HasAudit,
                     HasMessage = t.HasMessage,
-                    HistoriacalReport = t.HistoriacalReport,
                     HistoricalDetail = t.HistoricalDetail,
-                    IconTaskOrigin = t.IconTaskOrigin,
+                    HistoricalReport = t.HistoricalReport,
                     Id = t.Id,
-                    Inserted = t.Inserted,
                     Instrument = t.Instrument,
-                    IsExternalResponsible = t.IsExternalResponsible,
+                    IsDeleted = t.IsDeleted,
+                    IsInserted = t.IsInserted,
                     IsNew = t.IsNew,
-                    IsParentVisible = t.IsParentVisible,
+                    IsTaskReviewed = t.IsTaskReviewed,
+                    IsUpdating = t.IsUpdating,
                     LastErrorMessage = t.LastErrorMessage,
                     ModificationDetailDate = t.ModificationDetailDate,
                     ModificationReportDate = t.ModificationReportDate,
-                    Modifications = t.Modifications,
                     ModuleId = t.ModuleId,
+                    Monitor = t.Monitor,
                     MonitorCanFinishTask = t.MonitorCanFinishTask,
-                    MonitorName = t.MonitorName,
-                    MonitorOfficeId = t.MonitorOfficeId,
                     NextReportDate = t.NextReportDate,
-                    Source = t.Source,
-                    Parent = t.Parent,
                     ParentEntity = t.ParentEntity,
                     Priority = t.Priority,
-                    ProgrammerName = t.ProgrammerName,
-                    ProgrammerOfficeId = t.ProgrammerOfficeId,
+                    ProgrammedEndDate = t.ProgrammedEndDate,
+                    Programmer = t.Programmer,
                     ReadOnly = t.ReadOnly,
-                    Report = t.Report,
+                    ReiterationsCount = t.ReiterationsCount,
+                    Report = (!string.IsNullOrEmpty(t.Report)) ? t.Report.TrimEnd() : Languages.NoReportAvailable,
                     ReportFrequency = t.ReportFrequency,
                     ReportStatus = t.ReportStatus,
-                    ResponsibleEmail = t.ResponsibleEmail,
-                    ResponsibleName = t.ResponsibleName,
-                    ResponsibleOfficeId = t.ResponsibleOfficeId,
+                    Responsible = t.Responsible,
                     RevisedReport = t.RevisedReport,
+                    Source = t.Source,
                     StartDate = t.StartDate,
                     Status = t.Status,
-                    StatusDescription = t.StatusDescription,
                     Template = t.Template,
+                    TipoColorBlue = t.TipoColorBlue,
+                    TipoColorGreen = t.TipoColorGreen,
+                    TipoColorRed = t.TipoColorRed,
                     Title = t.Title,
-                    Type = t.Type,
-                    TypeBlue = t.TypeBlue,
-                    TypeGreen = t.TypeGreen,
-                    TypeRed = t.TypeRed
+                    TrafficLight = t.TrafficLight,
+                    Type = t.Type
                 })
+                .Where(t => (segmentFilter == TTrafficLightStatus.All || t.TrafficLight == segmentFilter))
                 .Where(t => (!string.IsNullOrEmpty(t.Title) && t.Title.ToLower().Contains(this.Filter.ToLower())) ||
                         (!string.IsNullOrEmpty(t.Description) && t.Description.ToLower().Contains(this.Filter.ToLower())) ||
-                        (!string.IsNullOrEmpty(t.ResponsibleName) && t.ResponsibleName.ToLower().Contains(this.Filter.ToLower())) ||
+                        (!string.IsNullOrEmpty(t.Responsible.Name) && t.Responsible.Name.ToLower().Contains(this.Filter.ToLower())) ||
                         (!string.IsNullOrEmpty(t.Report) && t.Report.ToLower().Contains(this.Filter.ToLower())) ||
-                        (!string.IsNullOrEmpty(t.MonitorName) && t.MonitorName.ToLower().Contains(this.Filter.ToLower())))
+                        (!string.IsNullOrEmpty(t.Monitor.Name) && t.Monitor.Name.ToLower().Contains(this.Filter.ToLower())))
             .OrderByDescending(t => t.TrafficLight)
             .ToList());
             }
@@ -453,13 +458,12 @@
             if (serie.SelectedPoints.Any())
             {
                 TaskCategoricalData selectedPoint = (TaskCategoricalData)serie.SelectedPoints.ElementAt(0).DataItem;
-                this.GraphTitle = selectedPoint.Category.ToString();
-                return;
+                this.SelectedIndex = this.TaskStatus.FirstOrDefault(s => s.QueryId == (byte)selectedPoint.Id).Id;
             }
             else
             {
                 serie.ClearSelection();
-                this.GraphTitle = Languages.MyTasks;
+                this.SelectedIndex = 0; //All
                 return;
             }
         }
@@ -469,54 +473,35 @@
         /// </summary>
         private void OnSelectionChangedAsync()
         {
-            this.GraphTitle = SelectedIndex switch
+            //this.IsRefreshing = true;
+            int queryId = this.TaskStatus.FirstOrDefault(s => s.Id == SelectedIndex).QueryId;
+            this.segmentFilter = (TTrafficLightStatus)queryId;
+            this.RefreshTaskList();
+            this.SetGraphTitle();
+            //this.IsRefreshing = false;
+        }
+
+        private void SetGraphTitle()
+        {
+            this.GraphTitle = segmentFilter switch
             {
-                0 => Languages.MyTasks,
-                1 => Languages.InProgressStatus,
-                2 => Languages.CloseToDeadlinedStatus,
-                3 => Languages.OverdueStatus,
-                4 => Languages.CompletedStatus,
+                TTrafficLightStatus.All => Languages.MyTasks,
+                TTrafficLightStatus.InProgress => Languages.InProgressStatus,
+                TTrafficLightStatus.CloseToDeadline => Languages.CloseToDeadlinedStatus,
+                TTrafficLightStatus.Overdue => Languages.OverdueStatus,
+                TTrafficLightStatus.Completed => Languages.CompletedStatus,
                 _ => Languages.Tasks
             };
-
-            //this.IsRefreshing = true;
-            //int queryId = this.TaskStatus.FirstOrDefault(s => s.Id == SelectedIndex).QueryId;
-            //var localEvent = MainViewModel.GetInstance().EventCg.LocalEvent;
-            //switch (queryId)
-            //{
-            //    case 0:
-            //        this.tick = EventTaskMoment.Previous;
-            //        this.auth = localEvent.PreviousTask;
-            //        break;
-            //    case 1:
-            //        this.tick = EventTaskMoment.Support;
-            //        this.auth = localEvent.SupportTasks;
-            //        break;
-            //    case 2:
-            //        this.tick = EventTaskMoment.Later;
-            //        this.auth = localEvent.LaterTasks;
-            //        break;
-            //    case 3:
-            //        this.tick = EventTaskMoment.All;
-            //        this.auth = EventTasksAttribute.ViewAll;
-            //        break;
-            //    default:
-            //        break;
-            //}
-            //await this.GetEventTasksAsync();
-            //this.IsRefreshing = false;
-            //await Task.Delay(100);
-            //await LoadTaskBoardAsync();
         }
 
         /// <summary>
         /// Load Task Board (List and Statistics)
         /// </summary>
-        public async Task LoadTaskBoard()
+        public async Task LoadTaskBoardAsync()
         {
             this.IsRefreshing = true;
             await GetStatisticsAndTaskList(Settings.OfficeCode, TQueryOption.TasksOf);
-            LoadSegmentedFilters();
+            this.LoadSegmentedFilters();
             this.IsRefreshing = false;
         }
 
@@ -556,14 +541,14 @@
                     return;
                 }
                 this.taskObject = (Tasks)response.Result;
-                this.GraphTitle = taskObject.GraphTitle;
                 this.OfficialName = taskObject.OfficialName;
                 this.taskList = taskObject.TaskList.ToList<TaskSigob>();
                 this.taskStatistics = taskObject.TaskStatistics.ToList<TaskCategoricalData>();
-                TaskStatistics = new ObservableCollection<TaskCategoricalData>(ToTaskStatistics());
+                this.TaskStatistics = new ObservableCollection<TaskCategoricalData>(ToTaskStatistics());
                 // Set Legend and Array segment control values
                 this.ChartLegend = new ObservableCollection<TaskCategoricalData>(
                     taskObject.TaskStatistics.Where((point) => point.Value > 0));
+                this.SetGraphTitle();
                 this.RefreshTaskList();
             }
             catch (Exception ex)
@@ -587,11 +572,19 @@
         /// </summary>
         private void LoadSegmentedFilters()
         {
-            TaskStatus = new ObservableCollection<Segment>(ToTaskSegment(1));
-            var firstItem = new Segment() { Id = 0, QueryId = 10, SegmentName = Languages.AllTaskStatus };
-            TaskStatus.Insert(0, firstItem);
-            //Built ObservableCollection<string> with Segments Names
-            this.SegmentedControlItems = new ObservableCollection<string>(ToSegmentString());
+            if(!this.isSegmentBuilt)
+            {
+                TaskStatus = new List<Segment>(ToTaskSegment(1));
+                var firstItem = new Segment() { Id = 0, QueryId = 10, SegmentName = Languages.AllTaskStatus };
+                TaskStatus.Insert(0, firstItem);
+                //Built ObservableCollection<string> with Segments Names
+                this.SegmentedControlItems = new ObservableCollection<string>(ToSegmentString());
+                isSegmentBuilt = true;
+            }
+            else
+            {
+                return;
+            }
         }
 
         private IEnumerable<string> ToSegmentString()

@@ -14,6 +14,9 @@
         readonly CultureInfo ci;
         const string ResourceId = "SigobMobile.Properties.Resources";
 
+        public string Text { get; set; }
+        public IValueConverter Converter { get; set; }
+
         static readonly Lazy<ResourceManager> ResMgr =
             new Lazy<ResourceManager>(() => new ResourceManager(
                 ResourceId,
@@ -24,8 +27,6 @@
             ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
         }
 
-        public string Text { get; set; }
-
         public object ProvideValue(IServiceProvider serviceProvider)
         {
             if (Text == null)
@@ -35,6 +36,10 @@
 
             var translation = ResMgr.Value.GetString(Text, ci);
 
+            if (this.Converter != null)
+            {
+                translation = Converter.Convert(translation, typeof(string), null, CultureInfo.CurrentCulture).ToString() ?? translation;
+            }
             if (translation == null)
             {
 #if DEBUG

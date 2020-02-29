@@ -18,11 +18,20 @@
 
     public enum TStatusTasK    {        Programmed = 0,        InManagement = 1,        Finished = 6,        PendingSend = 7,        FinishedIncomplete = 8,        Suspended = 9,        ToSendByEmail = 10,        ErrorSendEmail = 11,        Delayed = 12    }
 
+    public enum TReportStatus
+    {
+        NotApply = 0,
+        OnTime = 1,
+        Overdue = 2,
+        Available = 3
+    }
+
     public enum TTrafficLightStatus : int
     {
         InProgress = 0,
         Overdue = 1,
         Completed = 2,
+        All = 10,
         CloseToDeadline = 11
 
     }
@@ -33,7 +42,7 @@
 
     public enum TPriority    {        Minimum = 0,        Low = 1,        Middle = 2,        High = 3,        Maxim = 4    }
 
-    public enum TIconTaskOrigin    {
+    public enum TModuleTaskOrigin    {
         /// <summary>        /// Agenda Personal => tipo_instru = 4        /// </summary>        PersonalAgenda = 0,
         /// <summary>        /// Programas Calendario => tipo_instru = 6         /// </summary>        Goals = 1,
         /// <summary>        /// Centro de Gestión => tipo_instru = 7        /// </summary>        ManagementCenter = 2,
@@ -56,56 +65,153 @@
         TaskCloseToDeadline = 11
     }
 
+    public enum TChange    {
+        NotSending,
+        Subject,
+        Date,
+        Details,
+        Summary,
+        Status,
+        DocumentsOwner,
+        RestrictionsOwner,
+        AlertsOwner,
+        DocumentsResponsible,
+        RestrictionsResponsible,
+        AlertsResponsible,
+        Responsible,
+        SendChangesByEmail,
+        ErrorSendChangesByEmail,
+        Type,
+        Monitor,
+        StartDate,
+        Priority,
+        SendResponsible,
+        MonitorCanFinish,
+        ReportFrequency,
+        ReportReview,
+        PlannedCost,
+        RealCost,
+        PercentageOfCompletion    }
 
-    public class TaskSigob
+    /// <summary>
+    /// Audit Status model
+    /// </summary>
+    public enum TAuditStatus    {        NoRequested = 0,        ToElaborate = 1,        InElaboration = 2,        Finished = 3,        Reviewed = 4    }
+
+    /// <summary>
+    /// Audit opinion (result)
+    /// </summary>
+    public enum TAuditOpinion
+    {
+        NoOpinion = 0,
+        Rejected = 1,
+        WithObservations = 2,
+        Approved = 3
+    }
+
+    /// <summary>
+    /// Office model
+    /// </summary>
+    public class Office
     {
         [JsonProperty("codigo")]
-        public int Id { get; set; }
+        public string OfficeId { get; set; }
+
+        [JsonProperty("nombre")]
+        public string Name { get; set; }
+
+        [JsonProperty("cargo")]
+        public object Position { get; set; }
+
+        [JsonProperty("area")]
+        public object Area { get; set; }
+
+        [JsonProperty("correoElectronico")]
+        public object Email { get; set; }
+
+        [JsonProperty("institucion")]
+        public object Institution { get; set; }
+
+        [JsonProperty("externo")]
+        public bool IsExternal { get; set; }
+    }
+
+    /// <summary>
+    /// Task Changes object model
+    /// </summary>
+    public class TaskChanges
+    {
+        [JsonProperty("valor")]
+        public long Value { get; set; }
+
+        [JsonProperty("vacio")]
+        public bool IsEmpty { get; set; }
+    }
+
+    /// <summary>
+    /// General Task Model 
+    /// </summary>
+    public class TaskSigob
+    {
+        [JsonProperty("actualizando")]
+        public bool IsUpdating { get; set; }
 
         [JsonProperty("asunto")]
         public string Title { get; set; }
 
         [JsonProperty("cambios")]
-        public long Changes { get; set; }
+        public long ChangesValue { get; set; }
+
+        [JsonProperty("codigo")]
+        public int Id { get; set; }
+
+        [JsonProperty("codigoDespachoAuditor")]
+        public string AuditorOfficeId { get; set; }
 
         [JsonProperty("codigoInstrumento")]
-        public int ModuleId { get; set; }
+        public TModuleTaskOrigin ModuleId { get; set; }
 
-        [JsonProperty("despachoProgramador")]
-        public string ProgrammerOfficeId { get; set; }
+        [JsonProperty("costoEjecutado")]
+        public double CostExecuted { get; set; }
 
-        [JsonProperty("nombreProgramador")]
-        public string ProgrammerName { get; set; }
+        [JsonProperty("costoProgramado")]
+        public double CostPlanned { get; set; }
+
+        [JsonProperty("programador")]
+        public Office Programmer { get; set; }
 
         [JsonProperty("detalle")]
         public string Description { get; set; }
 
         [JsonProperty("eliminado")]
-        public bool Deleted { get; set; }
+        public bool IsDeleted { get; set; }
 
         [JsonProperty("entidadPadre")]
         public ParentEntity ParentEntity { get; set; }
 
         [JsonProperty("errorEliminacion")]
-        public TTaskDeletionError DeletionError { get; set; }
+        public int DeletionError { get; set; }
 
         [JsonProperty("estado")]
         public TStatusTasK Status { get; set; }
 
+        [JsonProperty("estadoAuditoria")]
+        public TAuditStatus AuditStatus { get; set; }
+        
         [JsonProperty("estadoReporte")]
-        public int ReportStatus { get; set; }
+        public TReportStatus ReportStatus { get; set; }
 
-        [JsonProperty("estadoDescripcion")]
-        public string StatusDescription { get; set; }
-
-        [JsonProperty("fechaFinProgramada")]
-        public DateTime EndProgrammedDate { get; set; }
+        [JsonProperty("estadoSemaforo")]
+        public TTrafficLightStatus TrafficLight { get; set; }
 
         [JsonProperty("fechaFinalizada")]
         public DateTime? EndDate { get; set; }
 
+        [JsonProperty("fechaFinProgramada")]
+        public DateTime ProgrammedEndDate { get; set; }
+
         [JsonProperty("fechaInicio")]
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
         [JsonProperty("fechaModificacionDetalle")]
         public DateTime? ModificationDetailDate { get; set; }
@@ -120,10 +226,10 @@
         public string HistoricalDetail { get; set; }
 
         [JsonProperty("historicoReporteEjecucion")]
-        public string HistoriacalReport { get; set; }
+        public string HistoricalReport { get; set; }
 
         [JsonProperty("insertado")]
-        public bool Inserted { get; set; }
+        public bool IsInserted { get; set; }
 
         [JsonProperty("instrumento")]
         public SigobInstrument Instrument { get; set; }
@@ -132,13 +238,10 @@
         public string LastErrorMessage { get; set; }
 
         [JsonProperty("modificaciones")]
-        public long? Modifications { get; set; }
+        public TaskChanges Changes { get; set; }
 
-        [JsonProperty("despachoMonitor")]
-        public string MonitorOfficeId { get; set; }
-
-        [JsonProperty("nombreMonitor")]
-        public string MonitorName { get; set; }
+        [JsonProperty("monitor")]
+        public Office Monitor { get; set; }
 
         [JsonProperty("monitorPuedeFinalizar")]
         public bool MonitorCanFinishTask { get; set; }
@@ -149,17 +252,17 @@
         [JsonProperty("origen")]
         public TOriginTask Source { get; set; }
 
-        [JsonProperty("padre")]
-        public object Parent { get; set; }
+        //[JsonProperty("padre")]
+        //public TaskModel Parent { get; set; }
 
         [JsonProperty("periodicidad")]
         public TPeriodicity ReportFrequency { get; set; }
 
-        [JsonProperty("periodicidadDescripcion")]
-        public string FrequencyDescription { get; set; }
-
         [JsonProperty("plantilla")]
         public int Template { get; set; }
+
+        [JsonProperty("porcentajeAvance")]
+        public int Completion { get; set; }
 
         [JsonProperty("prioridad")]
         public TPriority Priority { get; set; }
@@ -167,84 +270,59 @@
         [JsonProperty("puedeCerrarReporte")]
         public bool CanCloseReport { get; set; }
 
+        [JsonProperty("reiteraciones")]
+        public int ReiterationsCount { get; set; }
+
         [JsonProperty("reporteEjecucion")]
         public string Report { get; set; }
 
         [JsonProperty("reporteRevisado")]
         public int RevisedReport { get; set; }
 
-        [JsonProperty("despachoResponsable")]
-        public string ResponsibleOfficeId { get; set; }
+        [JsonProperty("responsable")]
+        public Office Responsible { get; set; }
 
-        [JsonProperty("nombreResponsable")]
-        public string ResponsibleName { get; set; }
-
-        [JsonProperty("emailResponsable")]
-        public string ResponsibleEmail { get; set; }
-
-        [JsonProperty("responsableExterno")]
-        public bool IsExternalResponsible { get; set; }
+        [JsonProperty("revisado")]
+        public bool IsTaskReviewed { get; set; }
 
         [JsonProperty("soloLectura")]
         public bool ReadOnly { get; set; }
 
-        [JsonProperty("tipo")]
-        public TSigColorTuple Type { get; set; }
-
-        [JsonProperty("tipo_Color_Red")]
-        public int TypeRed { get; set; }
-
-        [JsonProperty("tipo_Color_Green")]
-        public long TypeGreen { get; set; }
-
-        [JsonProperty("tipo_Color_Blue")]
-        public long TypeBlue { get; set; }
-
-        [JsonProperty("tipoInstrumentoOrigen")]
-        public TIconTaskOrigin IconTaskOrigin { get; set; }
-
-        [JsonProperty("veTareaPadre")]
-        public bool IsParentVisible { get; set; }
-
-        [JsonProperty("retraso")]
-        public int DaysLate { get; set; }
+        [JsonProperty("tieneAuditoria")]
+        public bool HasAudit { get; set; }
 
         [JsonProperty("tieneMensaje")]
         public bool HasMessage { get; set; }
 
-        public string InitialsOfResponsible => RegexUtilities.ExtractInitialsFromName(ResponsibleName);
+        [JsonProperty("tipo")]
+        public TSigColorTuple Type { get; set; }
 
-        public TTrafficLightStatus TrafficLight
-        {
-            get
-            {
-                if (Status != TStatusTasK.Finished && Status != TStatusTasK.FinishedIncomplete && Status != TStatusTasK.Suspended)
-                {
-                    TimeSpan diff = EndProgrammedDate.Subtract(DateTime.Today);
-                    TTrafficLightStatus result = (int)diff.TotalDays switch
-                    {
-                        int days when days > 2 => TTrafficLightStatus.InProgress,
-                        int days when days >= 0 && days <= 2 => TTrafficLightStatus.CloseToDeadline,
-                        int days when days < 0 => TTrafficLightStatus.Overdue,
-                        _ => TTrafficLightStatus.Completed
-                    };
-                    return result;
-                }
-                else
-                {
-                    return TTrafficLightStatus.Completed;
-                }
-            }
-        }
+        [JsonProperty("veTareaPadre")]
+        public bool CanViewTaskParent { get; set; }
+
+        [JsonProperty("tipoColorRed")]
+        public byte TipoColorRed { get; set; }
+
+        [JsonProperty("tipoColorGreen")]
+        public byte TipoColorGreen { get; set; }
+
+        [JsonProperty("tipoColorBlue")]
+        public byte TipoColorBlue { get; set; }
+
+        [JsonProperty("retraso")]
+        public int Delay { get; set; }
     }
 
+    /// <summary>
+    /// Parent Entity Model
+    /// </summary>
     public class ParentEntity
     {
         [JsonProperty("codigo")]
         public int Id { get; set; }
 
         [JsonProperty("codigoInstrumento")]
-        public int CodigoInstrumento { get; set; }
+        public int InstrumentId { get; set; }
 
         [JsonProperty("descripcion")]
         public string Description { get; set; }
@@ -253,6 +331,6 @@
         public DateTime Date { get; set; }
 
         [JsonProperty("instrumento")]
-        public SigobInstrument Instrumento { get; set; }
+        public SigobInstrument Instrument { get; set; }
     }
 }
