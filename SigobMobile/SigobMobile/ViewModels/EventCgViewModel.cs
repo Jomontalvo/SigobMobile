@@ -29,10 +29,10 @@
         internal string apiDeleteController = "cg/{0}/events";
         internal string apiStatusController = "events/{0}/status/{1}";
         //internal string apiEventTypeController = "cgcal/{0}/events/{1}";
-#endregion
+        #endregion
 
-#region Attributes
-private bool isRunning;
+        #region Attributes
+        private bool isRunning;
         private bool isEnabled;
         private bool isEditable;
         private string iconStatus;
@@ -49,7 +49,7 @@ private bool isRunning;
         private string participants;
         private Color calendarColor;
         private Color typeColor;
-        private DownloadDocument docDownloaded; 
+        private DownloadDocument docDownloaded;
         #endregion
 
         #region Properties
@@ -222,7 +222,7 @@ private bool isRunning;
                 LocalEvent.Id,
                 SigobInstrument.ManagementCenterEvent,
                 DocumentSource.MgCenterEvent);
-            await App.Navigator.PushAsync(new  AttachmentsPage());
+            await App.Navigator.PushAsync(new AttachmentsPage());
         }
 
 
@@ -359,7 +359,7 @@ private bool isRunning;
             var stream = new MemoryStream(bytes);
             stream.Seek(0, SeekOrigin.Begin);
             await this.fileViewerService.View(stream,
-                $"{Languages.EventAbstractText.Replace(" ",string.Empty)}" +
+                $"{Languages.EventAbstractText.Replace(" ", string.Empty)}" +
                 $"-{LocalEvent.Id}.{docDownloaded.Extension}");
         }
 
@@ -420,7 +420,7 @@ private bool isRunning;
             var response = await this.apiService.DeleteAsync(
                     Settings.UrlBaseApiSigob,
                     App.PrefixApiSigob,
-                    string.Format(apiDeleteController,LocalEvent.ManagementCenterId),
+                    string.Format(apiDeleteController, LocalEvent.ManagementCenterId),
                     Settings.Token,
                     Settings.DbToken,
                     LocalEvent.Id);
@@ -501,8 +501,8 @@ private bool isRunning;
                 Participants = $"1 {Languages.EventParticipantText}";
             else
             {
-                Participants = (LocalEvent.IsParticipant) ? 
-                    $"{Languages.EventParticipantsText} ({Languages.Me} {Languages.And} {LocalEvent.ParticipantsAccount - 1}+)" : 
+                Participants = (LocalEvent.IsParticipant) ?
+                    $"{Languages.EventParticipantsText} ({Languages.Me} {Languages.And} {LocalEvent.ParticipantsAccount - 1}+)" :
                     $"{LocalEvent.ParticipantsAccount} {Languages.EventParticipantsText}";
             }
             this.IsParticipantsVisible = !(LocalEvent.ModifyParticipants == EventParticipantsAttribute.NotAuthorized);
@@ -513,8 +513,8 @@ private bool isRunning;
 
             //Tasks
             this.IsTasksVisible = !((LocalEvent.TaskAccount == 0) ||
-                (LocalEvent.PreviousTask == EventTasksAttribute.NotAuthorized && 
-                 LocalEvent.SupportTasks == EventTasksAttribute.NotAuthorized && 
+                (LocalEvent.PreviousTask == EventTasksAttribute.NotAuthorized &&
+                 LocalEvent.SupportTasks == EventTasksAttribute.NotAuthorized &&
                  LocalEvent.LaterTasks == EventTasksAttribute.NotAuthorized)
                 );
 

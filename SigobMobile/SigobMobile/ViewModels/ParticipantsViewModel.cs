@@ -37,11 +37,14 @@
         //private EventCgViewModel eventCgViewModel;
         private bool isRunning;
         private bool isFinding;
+        private bool isEditable;
+        private bool isSearchExternalEnabled;
         public List<Participant> participantList;
         public List<Participant> availableList;
         private readonly int IdEvent;
         private readonly int ManagementCenterId;
         private readonly string OwnerOfficeId;
+        private readonly string ProgrammerOfficeId;
         private readonly char InstrumentType;
         private ObservableCollection<ParticipantItemViewModel> participants;
         private ObservableCollection<ParticipantItemViewModel> available;
@@ -50,6 +53,8 @@
 
         #region Properties
         public EventCgViewModel eventCgViewModel;
+        public AppointmentViewModel appointmentViewModel;
+
         public List<Participant> MobileParticipants => new List<Participant>();
         public bool IsFinding
         {
@@ -61,6 +66,17 @@
             get => this.isRunning;
             set => SetValue(ref this.isRunning, value);
         }
+        public bool IsEditable
+        {
+            get => this.isEditable;
+            set => SetValue(ref this.isEditable, value);
+        }
+        public bool IsSearchExternalEnabled
+        {
+            get => this.isSearchExternalEnabled;
+            set => SetValue(ref this.isSearchExternalEnabled, value);
+        }
+
         public string Filter
         {
             get { return this.filter; }
@@ -98,31 +114,48 @@
         #endregion
 
         #region Constructors
-
+        /// <summary>
+        /// Constructor from Management Center Event
+        /// </summary>
+        /// <param name="eventCgViewModel"></param>
         public ParticipantsViewModel(EventCgViewModel eventCgViewModel)
         {
             apiService = new ApiService();
             this.eventCgViewModel = eventCgViewModel;
-            if (eventCgViewModel.LocalEvent.ManagementCenterId !=0)
-            {
-                IdEvent = eventCgViewModel.LocalEvent.Id;
-                InstrumentType = '7';
-                ManagementCenterId = eventCgViewModel.LocalEvent.ManagementCenterId;
-                OwnerOfficeId = eventCgViewModel.LocalEvent.OwnerOfficeId;
-            }
-            else
-            {
-                //localAppointment = (AgendaEvent)ev;
-                //IdEvent = localAppointment.Id;
-                //InstrumentType = '4';
-                //ManagementCenterId = 0;
-                //OwnerOfficeId = localAppointment.OwnerOfficeId;
-            }
+            IdEvent = eventCgViewModel.LocalEvent.Id;
+            InstrumentType = '7';
+            ManagementCenterId = eventCgViewModel.LocalEvent.ManagementCenterId;
+            OwnerOfficeId = eventCgViewModel.LocalEvent.OwnerOfficeId;
+            ProgrammerOfficeId = eventCgViewModel.LocalEvent.ProgrammerOfficeId;
+            IsEditable = (eventCgViewModel.LocalEvent.ModifyParticipants == EventParticipantsAttribute.InsertAndModify);
+            IsSearchExternalEnabled = IsEditable;
+            LoadParticipants().FireAndForgetSafeAsync();
+        }
+
+        /// <summary>
+        /// Constructor from Personal Appointment 
+        /// </summary>
+        /// <param name="appointmentViewModel"></param>
+        public ParticipantsViewModel(AppointmentViewModel appointmentViewModel)
+        {
+            apiService = new ApiService();
+            this.appointmentViewModel = appointmentViewModel;
+            IdEvent = appointmentViewModel.LocalAppointment.Id;
+            InstrumentType = '4';
+            ManagementCenterId = 0;
+            OwnerOfficeId = appointmentViewModel.LocalAppointment.OwnerOfficeId;
+            ProgrammerOfficeId = appointmentViewModel.LocalAppointment.ProgrammerOfficeId;
+            IsEditable = appointmentViewModel.LocalAppointment.IsEditable;
+            IsSearchExternalEnabled = false;
             LoadParticipants().FireAndForgetSafeAsync();
         }
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Load Current Event Participants
+        /// </summary>
+        /// <returns></returns>
         private async Task LoadParticipants()
         {
             IsRunning = true;
@@ -182,7 +215,8 @@
                 OfficeId = l.OfficeId,
                 PersonId = l.PersonId,
                 PhoneNumber = l.PhoneNumber,
-                Position = l.Position
+                Position = l.Position,
+                IsRemovable = this.IsEditable
             }).OrderBy(l => l.FullName);
         }
 
@@ -258,7 +292,8 @@
                 OfficeId = l.OfficeId,
                 PersonId = l.PersonId,
                 PhoneNumber = l.PhoneNumber,
-                Position = l.Position
+                Position = l.Position,
+                IsRemovable = this.IsEditable
             }).OrderBy(l => l.FullName);
         }
 
@@ -291,48 +326,56 @@
         /// </summary>
         private async Task SaveAndClose()
         {
-            IsRunning = true;
-            if (this.IsPrepareGuestsModel())
+            if (!IsEditable)
             {
-                var connection = await this.apiService.CheckConnection();
-                if (!connection.IsSuccess)
-                {
-                    IsRunning = false;
-                    await Application.Current.MainPage.DisplayAlert(
-                        Languages.Error,
-                        connection.Message,
-                        Languages.Cancel);
-                    await Application.Current.MainPage.Navigation.PopAsync();
-                    return;
-                }
-                var response = await this.apiService.Put<TransactionResponse>(
-                    Settings.UrlBaseApiSigob,
-                    App.PrefixApiSigob,
-                    string.Format(apiSaveParticipants, IdEvent, InstrumentType, OwnerOfficeId),
-                    Settings.Token,
-                    Settings.DbToken,
-                    guests);
-                if (!response.IsSuccess)
-                {
-                    this.IsRunning = false;
-                    await Application.Current.MainPage.DisplayAlert(
-                        Languages.Error,
-                        response.Message,
-                        Languages.Cancel);
-                    return;
-                }
-                this.UpdateParticipantsLabel();
-                IsRunning = false;
-                _ = await Application.Current.MainPage.Navigation.PopModalAsync();
+                await BackToParentPageAsync();
+                return;
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert(
-                        Languages.Error,
-                        Languages.GeneralError,
-                        Languages.Cancel);
-                return;
-            }
+                IsRunning = true;
+                if (this.IsPrepareGuestsModel())
+                {
+                    var connection = await this.apiService.CheckConnection();
+                    if (!connection.IsSuccess)
+                    {
+                        IsRunning = false;
+                        await Application.Current.MainPage.DisplayAlert(
+                            Languages.Error,
+                            connection.Message,
+                            Languages.Cancel);
+                        await Application.Current.MainPage.Navigation.PopAsync();
+                        return;
+                    }
+                    var response = await this.apiService.Put<TransactionResponse>(
+                        Settings.UrlBaseApiSigob,
+                        App.PrefixApiSigob,
+                        string.Format(apiSaveParticipants, IdEvent, InstrumentType, OwnerOfficeId),
+                        Settings.Token,
+                        Settings.DbToken,
+                        guests);
+                    if (!response.IsSuccess)
+                    {
+                        this.IsRunning = false;
+                        await Application.Current.MainPage.DisplayAlert(
+                            Languages.Error,
+                            response.Message,
+                            Languages.Cancel);
+                        return;
+                    }
+                    this.UpdateParticipantsLabel();
+                    IsRunning = false;
+                    _ = await Application.Current.MainPage.Navigation.PopModalAsync();
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert(
+                            Languages.Error,
+                            Languages.GeneralError,
+                            Languages.Cancel);
+                    return;
+                }
+            }            
         }
 
         /// <summary>
@@ -375,13 +418,13 @@
         /// Backs to parent page.
         /// <returns>The to parent page.</returns>
         /// </summary>
-        private async Task BackToParentPage()
+        private async Task BackToParentPageAsync()
         {
             _ = await Application.Current.MainPage.Navigation.PopModalAsync();
             return;
         }
 
-        private async Task OpenExternalContacts()
+        private async Task OpenExternalContactsAsync()
         { 
             var contactsViewModel = MainViewModel.GetInstance();
             contactsViewModel.ExternalContacts = new ExternalContactsViewModel(this);
@@ -396,8 +439,8 @@
 
         #region Async Commands
         public IAsyncCommand SaveAndCloseCommand => new AsyncCommand(SaveAndClose);
-        public IAsyncCommand BackToParentPageCommand => new AsyncCommand(BackToParentPage);
-        public IAsyncCommand OpenExternalContactsCommand => new AsyncCommand(OpenExternalContacts);
+        public IAsyncCommand BackToParentPageCommand => new AsyncCommand(BackToParentPageAsync);
+        public IAsyncCommand OpenExternalContactsCommand => new AsyncCommand(OpenExternalContactsAsync);
         #endregion
     }
 }

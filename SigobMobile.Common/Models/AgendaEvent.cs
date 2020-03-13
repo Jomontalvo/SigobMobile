@@ -24,16 +24,16 @@
         public string Location { get; set; }
 
         [JsonProperty("inicio")]
-        public DateTimeOffset Start { get; set; }
+        public DateTime Start { get; set; }
 
         [JsonProperty("fin")]
-        public DateTimeOffset End { get; set; }
+        public DateTime End { get; set; }
 
         [JsonProperty("todo_el_dia")]
         public bool IsAllDay { get; set; }
 
         [JsonProperty("grado_reserva")]
-        public short PrivacyLevel { get; set; }
+        public SecurityLevelEvent PrivacyLevel { get; set; }
 
         [JsonProperty("descripcion_grado_reserva")]
         public string PrivacyDescription { get; set; }
@@ -72,7 +72,7 @@
         public short Alert { get; set; }
 
         [JsonProperty("tentativo")]
-        public byte Tentative { get; set; }
+        public bool IsTentative { get; set; }
 
         [JsonProperty("anotaciones")]
         public string Annotations { get; set; }
@@ -84,7 +84,7 @@
         public bool IsParticipant { get; set; }
 
         [JsonProperty("fecha_actualizacion")]
-        public DateTimeOffset UpdateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
 
         [JsonProperty("color_tipo_red")]
         public int ColorTypeRed { get; set; }

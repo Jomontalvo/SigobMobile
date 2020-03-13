@@ -1,5 +1,6 @@
 ﻿namespace SigobMobile.Models
 {
+    using SigobMobile.Common.Helpers;
     using Xamarin.Forms;
 
     /// <summary>
@@ -17,5 +18,9 @@
         /// </summary>
         /// <value>The color of the type.</value>
         public Color TypeColor => Color.FromRgb(ColorTypeRed, ColorTypeGreen, ColorTypeBlue);
+        /// <summary>
+        /// Record is editable (remove biutton enabled)
+        /// </summary>
+        public bool IsEditable => OwnerOfficeId == Settings.OfficeCode || ProgrammerOfficeId == Settings.OfficeCode ;
     }
 }

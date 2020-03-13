@@ -132,6 +132,7 @@
                 new Segment() { Id = i++, QueryId = 3, SegmentName = Languages.AllTaskStatus }
             };
             var parentViewModel = MainViewModel.GetInstance().EventCg;
+            //Segment authorization
             if (parentViewModel.LocalEvent.PreviousTask != EventTasksAttribute.NotAuthorized)
                 TaskStatus.Add(new Segment() {
                     Id = i++,
@@ -157,7 +158,7 @@
             //Built ObservableCollection<string> with Segments Names
             this.SegmentedControlItems = new ObservableCollection<string>(ToSegmentString());
             //Get information to StatusBar
-            this.EventTitle = $"- {parentViewModel.LocalEvent.Title}";
+            this.EventTitle = parentViewModel.LocalEvent.Title;
             this.TotalTask = $"{Languages.TotalRows}: {parentViewModel.LocalEvent.TaskAccount} {Languages.Tasks}";
             this.IsLoadSegments = false;
         }
@@ -290,7 +291,14 @@
                     Monitor = t.Monitor,
                     MonitorCanFinishTask = t.MonitorCanFinishTask,
                     NextReportDate = t.NextReportDate,
-                    ParentEntity = t.ParentEntity,
+                    ParentEntity = new ParentEntity()
+                    {
+                        Id = t.ParentEntity.Id,
+                        Date = t.ParentEntity.Date,
+                        Description = (!string.IsNullOrEmpty(t.ParentEntity.Description))? t.ParentEntity.Description : this.EventTitle,
+                        Instrument = t.ParentEntity.Instrument,
+                        InstrumentId = t.ParentEntity.InstrumentId
+                    },
                     Priority = t.Priority,
                     ProgrammedEndDate = t.ProgrammedEndDate,
                     Programmer = t.Programmer,
@@ -350,7 +358,14 @@
                     Monitor = t.Monitor,
                     MonitorCanFinishTask = t.MonitorCanFinishTask,
                     NextReportDate = t.NextReportDate,
-                    ParentEntity = t.ParentEntity,
+                    ParentEntity = new ParentEntity()
+                    {
+                        Id = t.ParentEntity.Id,
+                        Date = t.ParentEntity.Date,
+                        Description = (!string.IsNullOrEmpty(t.ParentEntity.Description)) ? t.ParentEntity.Description : this.EventTitle,
+                        Instrument = t.ParentEntity.Instrument,
+                        InstrumentId = t.ParentEntity.InstrumentId
+                    },
                     Priority = t.Priority,
                     ProgrammedEndDate = t.ProgrammedEndDate,
                     Programmer = t.Programmer,

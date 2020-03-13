@@ -71,6 +71,7 @@
                 SearchCommand="{Binding SearchContactCommand}"
                 Text="{Binding Filter, Mode=TwoWay}"
                 IsSpellCheckEnabled="true"
+                IsVisible="{Binding IsEditable}"
                 Keyboard="Text">
             </SearchBar>
             <!--Participant contacts ListView -->
@@ -125,7 +126,7 @@
                                 <controls:IconView
                                     Foreground="Black"
                                     Grid.Column="2"
-                                    IsVisible="{Binding IsEditable}"
+                                    IsVisible="{Binding IsRemovable}"
                                     HeightRequest="30"
                                     HorizontalOptions="Center"
                                     Source="ic_bt_close_window"
@@ -220,7 +221,7 @@
                         Command="{Binding OpenExternalContactsCommand}"
                         Grid.Column="0"
                         HorizontalOptions="CenterAndExpand"
-                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        IsEnabled="{Binding IsSearchExternalEnabled, Mode=TwoWay}"
                         Text="{local:Translate SearchExternalContacts}">
                     </Button>
                 </Grid>

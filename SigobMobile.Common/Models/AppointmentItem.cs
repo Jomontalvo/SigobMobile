@@ -22,7 +22,7 @@
     }
 
     /// <summary>
-    /// Appointment item.
+    /// Appointment item of Calendar List
     /// </summary>
     public class AppointmentItem
     {
@@ -78,7 +78,7 @@
         public bool IsHighlighted { get; set; }
 
         [JsonProperty("grado_reserva")]
-        public byte SecurityLevel { get; set; }
+        public SecurityLevelEvent SecurityLevel { get; set; }
 
         [JsonProperty("tipo_instru")]
         public char ModuleType { get; set; }

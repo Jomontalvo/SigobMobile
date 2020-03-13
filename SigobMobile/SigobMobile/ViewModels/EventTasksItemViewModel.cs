@@ -17,7 +17,7 @@
         private async Task SelectTask()
         {
             var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.Task = new TaskViewModel(this);
+            mainViewModel.Task = new TaskViewModel(this, true);
             await App.Navigator.PushAsync(new TaskPage() { Title = $"{Languages.Task} [{this.Id}]" });
         }
         #endregion

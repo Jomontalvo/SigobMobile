@@ -9,6 +9,10 @@
     /// </summary>
     public class ParticipantItemViewModel : Participant
     {
+        #region Properties
+        public bool IsRemovable { get; set; }
+        #endregion
+
         #region Commands
         public ICommand RemoveParticipantCommand => new RelayCommand(RemoveParticipant);
         public ICommand AddParticipantCommand => new RelayCommand(AddParticipant);

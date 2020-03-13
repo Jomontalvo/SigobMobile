@@ -19,8 +19,8 @@
         #region Methods
         private async Task SelectTaskAsync()
         {
-            var maiViewModel = MainViewModel.GetInstance();
-            maiViewModel.Task = new TaskViewModel(this);
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.Task = new TaskViewModel(this, false);
             await App.Navigator.PushAsync(new TaskPage() { Title = $"{Languages.Task} [{this.Id}]" });
         }
         #endregion

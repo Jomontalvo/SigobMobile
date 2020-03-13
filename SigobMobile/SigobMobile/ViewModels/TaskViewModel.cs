@@ -1,27 +1,22 @@
 ﻿namespace SigobMobile.ViewModels
 {
-    using Models;
+    using System.Threading.Tasks;
+    using AsyncAwaitBestPractices.MVVM;
     using Common.Services;
     using Helpers;
-    using SigobMobile.Interfaces;
-    using System;
-    using System.Threading.Tasks;
-    using SigobMobile.Common.Helpers;
-    using AsyncAwaitBestPractices.MVVM;
-    using SigobMobile.Views.Common;
     using SigobMobile.Common.Models;
-    using TaskSigob = Models.TaskSigob;
+    using SigobMobile.Views.Common;
     using Xamarin.Forms;
+    using TaskSigob = Models.TaskSigob;
 
     public class TaskViewModel : BaseViewModel
     {
         #region Services
         internal ApiService apiService;
-        internal string ApiTaskController => $"tasks";
         #endregion
 
         #region Attributes
-        private readonly int id;
+        private readonly bool isCalledFromEvent;
         private bool isRunning;
         private bool isParentVisible;
         private string lastReportText;
@@ -42,7 +37,11 @@
         public bool IsParentVisible
         {
             get { return this.isParentVisible; }
-            set { SetValue(ref this.isParentVisible, value); }
+            set
+            {
+                if (!this.isCalledFromEvent) SetValue(ref this.isParentVisible, value);
+                else SetValue(ref this.isParentVisible, false); ;
+            }
         }
         public TaskSigob LocalTask
         {
@@ -87,29 +86,16 @@
         }
         #endregion
 
-        #region Constructors
-        /// <summary>
-        /// Initialize with Task Id
-        /// </summary>
-        /// <param name="id"></param>
-        public TaskViewModel(int id)
-        {
-            this.apiService = new ApiService();
-            this.id = id;
-            this.LoadTaskDetails();
-            this.LastReportText = string.IsNullOrEmpty(this.LocalTask.Report)
-                ? Languages.NoReportAvailable
-                : this.LocalTask.Report;
-            this.SetExtendedTaskInfo();
-        }
-
+        #region Constructor
         /// <summary>
         /// Task is called from Control Task View
         /// </summary>
         /// <param name="task"></param>
-        public TaskViewModel (TaskSigob task)
+        public TaskViewModel (TaskSigob task, bool isCalledFromEvent)
         {
+            this.apiService = new ApiService();
             this.LocalTask = task;
+            this.isCalledFromEvent = isCalledFromEvent;
             this.LastReportText = string.IsNullOrEmpty(this.LocalTask.Report)
                 ? Languages.NoReportAvailable
                 : this.LocalTask.Report;
@@ -220,56 +206,6 @@
                 this.LocalTask.Instrument,
                 senderSource);
             await App.Navigator.PushAsync(new AttachmentsPage() { Title = Languages.Attachments});
-        }
-
-        /// <summary>
-        /// Get Task details (using API)
-        /// </summary>
-        private void LoadTaskDetails()
-        {
-            IsRunning = true;
-            IErrorHandler errorHandler = null;
-            this.GetTaskDetailAsync().FireAndForgetSafeAsync(errorHandler);
-            IsRunning = false;
-        }
-
-        /// <summary>
-        /// Get detail task.
-        /// </summary>
-        /// <returns></returns>
-        private async Task GetTaskDetailAsync()
-        {
-            var connection = await this.apiService.CheckConnection();
-            if (!connection.IsSuccess)
-            {
-                this.IsRunning = false;
-                await App.Navigator.DisplayAlert(
-                    Languages.Error,
-                    connection.Message,
-                    Languages.Cancel);
-                await App.Navigator.PopToRootAsync();
-                return;
-            }
-
-            var response = await this.apiService.Get<TaskSigob>(
-                Settings.UrlBaseApiSigob,
-                App.PrefixApiSigob,
-                this.ApiTaskController,
-                Settings.Token,
-                Settings.DbToken,
-                id
-            );
-            if (!response.IsSuccess)
-            {
-                this.IsRunning = false;
-                await App.Navigator.DisplayAlert(
-                    Languages.Error,
-                    response.Message,
-                    Languages.Cancel);
-                await App.Navigator.PopAsync();
-                return;
-            }
-            this.LocalTask = (TaskSigob)response.Result;
         }
         #endregion
     }

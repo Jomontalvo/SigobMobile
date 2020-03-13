@@ -19,8 +19,10 @@
     using Views.ManagementCenter;
     using Views.Tasks;
     using Xamarin.Forms;
+    using AgendaEvent = Models.AgendaEvent;
     using ManagementCenterEvent = Models.ManagementCenterEvent;
     using ManagementCenterNewItem = Models.ManagementCenterNewItem;
+    using TaskSigob = Models.TaskSigob;
 
 
     public class CalendarViewModel : BaseViewModel
@@ -33,6 +35,7 @@
         internal string apiEventsController = "events/start/{0}/end/{1}/tentatives/{2}/calendarcolor/{3}";
         internal string apiEventCgController = "cgcal/{0}/events/{1}";
         internal string apiPersonalAppointmentController = "events/{0}/owner/{1}";
+        internal string apiTaskController = "tasks";
         internal string apiManagementCenterAddOptions = "cg/addoptions";
         #endregion
 
@@ -205,7 +208,7 @@
             }
             this.eventList = (List<AppointmentItem>)response.Result;
             this.IsRunning = false;
-            this.RefresEventList();
+            this.RefreshEventList();
         }
 
         private string ConvertNullToEmpty(string str)
@@ -295,8 +298,15 @@
                     switch (eventSelected.ModuleType)
                     {
                         case '4':
-                            appViewModel.Appointment = new AppointmentViewModel(eventSelected);
-                            await App.Navigator.PushAsync(new AppointmentPage() { Title = Languages.Appointment });
+                            IsRunning = true;
+                            AgendaEvent appointment = await GetAppointmentAsync(eventSelected);
+                            if (appointment != null)
+                            {
+                                appointment.Id = eventSelected.Id;
+                                appViewModel.Appointment = new AppointmentViewModel(appointment);
+                                await App.Navigator.PushAsync(new AppointmentPage() { Title = Languages.Appointment });
+                            }
+                            IsRunning = false;
                             break;
                         case '7':
                             IsRunning = true;
@@ -319,8 +329,14 @@
                 }
                 else
                 {
-                    appViewModel.Task = new TaskViewModel(eventSelected.Id);
-                    await App.Navigator.PushAsync(new TaskPage());
+                    IsRunning = true;
+                    TaskSigob taskSigob = await GetTaskAsync(eventSelected);
+                    if (taskSigob != null)
+                    {
+                        appViewModel.Task = new TaskViewModel(taskSigob, false);
+                        await App.Navigator.PushAsync(new TaskPage() { Title = $"{Languages.Task} [{taskSigob.Id}]" });
+                    }
+                    IsRunning = false;
                 }
                 this.SelectedDate = Settings.SelectedDate;
             }
@@ -337,13 +353,13 @@
             {
                 this.eventList.Remove(previousEvent);
             }
-            this.RefresEventList();
+            this.RefreshEventList();
         }
 
         /// <summary>
         /// Convert List to Observable Collectionm
         /// </summary>
-        internal void RefresEventList()
+        internal void RefreshEventList()
         {
             this.Events = new ObservableCollection<Event>(
                 this.eventList.Select(l => new Event
@@ -371,7 +387,7 @@
                     IconSize = (!Settings.IsEventColorByCalendar) ? (byte)28 : (byte)12,
                 }).Where(l => (Settings.IsVisibleManagementStatus && (l.Status == StatusAppointment.InManagement))
                             || (Settings.IsVisibleCompletedStatus && (l.Status == StatusAppointment.Finished))
-                            || (Settings.IsVisibleSuspendStatus && (l.Status == StatusAppointment.Suspended))).ToList());
+                            || (Settings.IsVisibleSuspendStatus && (l.Status == StatusAppointment.Suspended))).ToList()); ;
         }
 
         /// <summary>
@@ -411,6 +427,81 @@
             return (ManagementCenterEvent)response.Result;
         }
 
+        /// <summary>
+        /// Gets the personal appointmrnt event async.
+        /// </summary>
+        /// <returns>The event async.</returns>
+        /// <param name="eventSelected">Event selected.</param>
+        private async Task<AgendaEvent> GetAppointmentAsync(Event eventSelected)
+        {
+            var connection = await this.apiService.CheckConnection();
+            if (!connection.IsSuccess)
+            {
+                IsRunning = false;
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    connection.Message,
+                    Languages.Cancel);
+                await Application.Current.MainPage.Navigation.PopAsync();
+                return null;
+            }
+            var response = await this.apiService.Get<AgendaEvent>(
+                Settings.UrlBaseApiSigob,
+                App.PrefixApiSigob,
+                string.Format(this.apiPersonalAppointmentController, eventSelected.Id, eventSelected.Owner),
+                Settings.Token,
+                Settings.DbToken
+            );
+            if (!response.IsSuccess)
+            {
+                this.IsRunning = false;
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    $"{Languages.UnauthorizedError} {response.Message}",
+                    Languages.Cancel);
+                return null;
+            }
+            return (AgendaEvent)response.Result;
+        }
+
+        /// <summary>
+        /// Get detail task.
+        /// </summary>
+        /// <returns></returns>
+        private async Task<TaskSigob> GetTaskAsync(Event eventSelected)
+        {
+            var connection = await this.apiService.CheckConnection();
+            if (!connection.IsSuccess)
+            {
+                this.IsRunning = false;
+                await App.Navigator.DisplayAlert(
+                    Languages.Error,
+                    connection.Message,
+                    Languages.Cancel);
+                await App.Navigator.PopToRootAsync();
+                return null;
+            }
+
+            var response = await this.apiService.Get<TaskSigob>(
+                Settings.UrlBaseApiSigob,
+                App.PrefixApiSigob,
+                this.apiTaskController,
+                Settings.Token,
+                Settings.DbToken,
+                eventSelected.Id
+            );
+            if (!response.IsSuccess)
+            {
+                this.IsRunning = false;
+                await App.Navigator.DisplayAlert(
+                    Languages.Error,
+                    response.Message,
+                    Languages.Cancel);
+                await App.Navigator.PopAsync();
+                return null;
+            }
+            return (TaskSigob)response.Result;
+        }
 
         /// <summary>
         /// Go Selected Date Today

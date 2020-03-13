@@ -23,7 +23,7 @@
         public string Programmer { get; set; }
         public int TypeId { get; set; }
         public Color TypeColor { get; set; }
-        public byte SecurityLevel { get; set; }
+        public SecurityLevelEvent SecurityLevel { get; set; }
         public bool IsLocked { get; set; }
         public bool IsTentative { get; set; }
         public bool IsHighlighted { get; set; }

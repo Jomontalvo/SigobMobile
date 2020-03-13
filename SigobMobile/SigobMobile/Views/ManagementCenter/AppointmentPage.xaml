@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     x:Class="SigobMobile.Views.ManagementCenter.AppointmentPage"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
     xmlns:lang="clr-namespace:SigobMobile.Helpers"
     xmlns:controls="clr-namespace:SigobMobile.Controls"
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
@@ -19,67 +20,347 @@
         </controls:ToolbarItemEx>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
+        <Grid
+            BindingContext="{Binding Appointment}"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="{StaticResource Key=StatusBarHeight}" />
+            </Grid.RowDefinitions>
+            <!--Event Details-->
             <ScrollView
-                BindingContext="{Binding Appointment}"
+                Grid.Row="0"
                 Padding="10,5,5,0"
                 VerticalOptions="StartAndExpand">
-                <Grid
-                    ColumnSpacing="15"
-                    Padding="5,5"
-                    RowSpacing="10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <controls:IconView
-                        Grid.Column="0"
-                        Grid.Row="0"
-                        Foreground="{Binding LocalAppointment.Color}"
-                        Margin="0,1,0,0"
-                        HorizontalOptions="Center"
-                        Source="ic_ev_calendar_color"
-                        VerticalOptions="Start">
-                    </controls:IconView>
-                    <StackLayout
-                        Grid.Column="1"
-                        Grid.Row="0">
+                <StackLayout>
+                    <Grid
+                        Padding="5,5,5,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <controls:IconView
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Foreground="{Binding CalendarColor}"
+                            Margin="0,2,0,0"
+                            HorizontalOptions="Center"
+                            Source="ic_ev_calendar_color"
+                            VerticalOptions="Start">
+                        </controls:IconView>
+                        <StackLayout
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Padding="10,0,0,0">
+                            <Label
+                                x:Name="EventTitle"
+                                FontSize="Large"
+                                HorizontalOptions="StartAndExpand"
+                                Text="{Binding LocalAppointment.Title}"
+                                VerticalTextAlignment="Center">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                            <On Platform="iOS" Value="Avenir Next" />
+                                            <On Platform="Android" Value="sans-serif-smallcaps" />
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="{Binding DateEvent}"
+                                TextColor="{StaticResource darkGray}"
+                                VerticalOptions="Center">
+                            </Label>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="{Binding Interval}"
+                                TextColor="{StaticResource darkGray}"
+                                VerticalOptions="Center">
+                            </Label>
+                            <StackLayout
+                                Orientation="Horizontal"
+                                Spacing="2">
+                                <Label
+                                    FontSize="Small"
+                                    Text="{lang:Translate EventProgrammerText}"
+                                    TextColor="{StaticResource lightBlack}"
+                                    VerticalOptions="Center">
+                                </Label>
+                                <Label
+                                    FontSize="Small"
+                                    Text="{Binding LocalAppointment.ProgrammerName}"
+                                    TextColor="{StaticResource lightBlack}"
+                                    VerticalOptions="Center">
+                                </Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </Grid>
+                    <Grid
+                        ColumnSpacing="15"
+                        Padding="5,0"
+                        RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <!--Location-->
+                        <Image
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            IsVisible="{Binding IsLocationVisible}"
+                            Source="ic_ev_location"
+                            VerticalOptions="Center">
+                        </Image>
                         <Label
-                            x:Name="EventTitle"
+                            Grid.Column="1"
+                            Grid.Row="0"
                             FontSize="Medium"
-                            HorizontalOptions="StartAndExpand"
-                            Text="{Binding LocalAppointment.Title}">
-                            <Label.FontFamily>
-                                <OnPlatform x:TypeArguments="x:String">
-                                        <On Platform="iOS" Value="Avenir Next" />
-                                        <On Platform="Android" Value="monospace" />
-                                </OnPlatform>
-                            </Label.FontFamily>
-                        </Label>
-                        <Label
-                            FontSize="Small"
-                            Text="{Binding LocalAppointment.StartDate, StringFormat='{0:dddd, dd MMMM yyyy}'}"
+                            IsVisible="{Binding IsLocationVisible}"
+                            Text="{Binding LocalAppointment.Location}"
                             TextColor="{StaticResource darkGray}"
                             VerticalOptions="Center">
                         </Label>
-                    </StackLayout>
-                </Grid>
+                        <StackLayout
+                            Grid.Column="2"
+                            Grid.Row="0"
+                            Orientation="Horizontal">
+                            <Image
+                                HeightRequest="20"
+                                HorizontalOptions="Center"
+                                Source="{Binding IconStatus}"
+                                VerticalOptions="Center">
+                            </Image>
+                            <Image
+                                HeightRequest="20"
+                                HorizontalOptions="Center"
+                                Margin="5,0"
+                                Source="{Binding IconPrivacy}"
+                                VerticalOptions="Center">
+                            </Image>
+                        </StackLayout>
+                        <!--Separator 1-->
+                        <BoxView
+                            Color="{StaticResource gray}"
+                            Grid.Column="0"
+                            Grid.Row="1"
+                            Grid.ColumnSpan="3"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            Margin="0,5,0,10">
+                        </BoxView>
+                        <!--Second Section-->
+                        <!--Owner-->
+                        <Image
+                            Grid.Column="0"
+                            Grid.Row="2"
+                            HorizontalOptions="Center"
+                            Source="ic_ev_calendar"
+                            VerticalOptions="Center">
+                        </Image>
+                        <Label
+                            Grid.Column="1"
+                            Grid.Row="2"
+                            Text="{Binding LocalAppointment.CalendarName}"
+                            TextColor="{StaticResource darkGray}"
+                            VerticalOptions="Center">
+                        </Label>
+                        <!--Event Details-->
+                        <Image
+                            Grid.Column="0"
+                            Grid.Row="3"
+                            IsVisible="{Binding IsSummaryVisible}"
+                            Source="ic_ev_summary"
+                            VerticalOptions="Center">
+                        </Image>
+                        <Label
+                            FontSize="Small"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Grid.Row="3"
+                            HorizontalOptions="StartAndExpand"
+                            IsVisible="{Binding IsSummaryVisible}"
+                            Padding="0,0,10,0"
+                            Text="{Binding LocalAppointment.Summary}"
+                            TextColor="{StaticResource darkGray}"
+                            VerticalOptions="Center">
+                        </Label>
+                        <!--Separator 2-->
+                        <BoxView
+                            Color="{StaticResource gray}"
+                            Grid.Column="0"
+                            Grid.Row="4"
+                            Grid.ColumnSpan="3"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand">
+                        </BoxView>
+                        <!--Participants-->
+                        <Frame
+                            BorderColor="Transparent"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Grid.Row="5"
+                            HasShadow="False"
+                            Padding="0,15,0,10">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding LoadParticipantsCommand}"
+                                    NumberOfTapsRequired="1">
+                                </TapGestureRecognizer>
+                            </Frame.GestureRecognizers>
+                            <Grid
+                                ColumnSpacing="15">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    Grid.Column="0"
+                                    Source="ic_ev_guests"
+                                    VerticalOptions="Center">
+                                </Image>
+                                <Label
+                                    Grid.Column="1"
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="{Binding Participants, Mode=TwoWay}"
+                                    TextColor="{StaticResource darkGray}"
+                                    VerticalOptions="FillAndExpand"
+                                    VerticalTextAlignment="Center">
+                                </Label>
+                                <Image
+                                    BackgroundColor="Transparent"
+                                    Grid.Column="2"
+                                    HeightRequest="16"
+                                    IsVisible="{Binding IsParticipantsVisible}"
+                                    Source="ic_chevron"
+                                    VerticalOptions="Center">
+                                </Image>
+                            </Grid>
+                        </Frame>
+                        <!--Optional information-->
+                    </Grid>
+                    <Grid
+                        RowSpacing="0"
+                        Padding="5,0">
+                        <Grid.RowDefinitions>
+                            <!--Comments-->
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <!--Comments-->
+                        <StackLayout
+                            Grid.Row="0"
+                            IsVisible="{Binding IsAnnotationsVisible}">
+                            <BoxView
+                                Color="{StaticResource gray}"
+                                HeightRequest="1"
+                                HorizontalOptions="FillAndExpand">
+                            </BoxView>
+                            <Frame
+                                x:Name="CommentFrame"
+                                BorderColor="Transparent"
+                                HasShadow="false"
+                                IsVisible="{Binding IsCommentVisible}"
+                                Padding="0,10,10,0">
+                                <Grid
+                                    ColumnSpacing="15">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                        Grid.Column="0"
+                                        Source="ic_ev_annotations"
+                                        VerticalOptions="Center">
+                                    </Image>
+                                    <Label
+                                        FontSize="Small"
+                                        Grid.Column="1"
+                                        Text="{Binding LocalAppointment.Comment}"
+                                        TextColor="{StaticResource darkGray}">
+                                    </Label>
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
             </ScrollView>
-        </StackLayout>
+            <!--Activity Indicator-->
+            <ActivityIndicator
+                Grid.Row="0"
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsRunning}"
+                IsVisible="{Binding IsRunning}"
+                VerticalOptions="Center">
+            </ActivityIndicator>
+            <!--Status Bar-->
+            <telerikPrimitives:RadBorder
+                BackgroundColor="{StaticResource Key=softGray}"
+                BorderColor="{StaticResource accesoryGray}" 
+                CornerRadius="0"
+                Grid.Row="1">
+                <StackLayout
+                    Orientation="Horizontal">
+                    <Button 
+                        BackgroundColor="{StaticResource softGray}"
+                        Command="{Binding ChangeStatusCommand}"
+                        Grid.Column="0"
+                        HorizontalOptions="CenterAndExpand"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        IsVisible="{Binding LocalAppointment.IsInManagement}"
+                        Text="{lang:Translate EventFinishCommand}">
+                        <Button.CommandParameter>
+                            <x:Int32>1</x:Int32>
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button 
+                        BackgroundColor="{StaticResource softGray}"
+                        Command="{Binding ChangeStatusCommand}"
+                        Grid.Column="0"
+                        HorizontalOptions="CenterAndExpand"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        IsVisible="{Binding LocalEvent.IsInManagement}"
+                        Text="{lang:Translate EventSuspendCommand}">
+                        <Button.CommandParameter>
+                            <x:Int32>2</x:Int32>
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button 
+                        BackgroundColor="{StaticResource softGray}"
+                        Command="{Binding ChangeStatusCommand}"
+                        Grid.Column="0"
+                        HorizontalOptions="CenterAndExpand"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        IsVisible="{Binding LocalAppointment.IsInManagement, Converter={StaticResource Key=inverseBool}}"
+                        Text="{lang:Translate EventActivateCommand}">
+                        <Button.CommandParameter>
+                            <x:Int32>0</x:Int32>
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button 
+                        BackgroundColor="{StaticResource softGray}"
+                        Command="{Binding DeleteEventCommand}"
+                        Grid.Column="1"
+                        HorizontalOptions="CenterAndExpand"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        Text="{lang:Translate Delete}">
+                    </Button>
+                </StackLayout>
+            </telerikPrimitives:RadBorder>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

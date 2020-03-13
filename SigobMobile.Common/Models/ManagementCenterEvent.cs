@@ -103,15 +103,6 @@
         NotAuthorized
     }
 
-    public enum EventSecurytyLevel : byte
-    {
-        Minimum,
-        Low,
-        Medium,
-        High,
-        Maximum
-    }
-
     public enum EventTaskMoment : byte
     {
         Previous = 0,

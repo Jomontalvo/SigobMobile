@@ -84,7 +84,7 @@
                             <Label
                                 Grid.Column="0"
                                 Grid.Row="0"
-                                FontSize="Micro"
+                                FontSize="8"
                                 FontAttributes="Bold"
                                 HorizontalOptions="Center"
                                 Padding="1,0,0,0"
@@ -406,7 +406,7 @@
                 <telerikInput:RadCalendar.AgendaViewSettings>
                     <telerikInput:AgendaViewSettings
                         AgendaItemStyleSelector="{StaticResource AgendaViewItemStyleSelector}"
-                        AppointmentItemTimeFormat="  hh:mm a ">
+                        AppointmentItemTimeFormat="  HH:mm">
                     </telerikInput:AgendaViewSettings>
                 </telerikInput:RadCalendar.AgendaViewSettings>
 
