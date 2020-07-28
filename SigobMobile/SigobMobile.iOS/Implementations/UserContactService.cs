@@ -73,11 +73,10 @@ namespace SigobMobile.iOS.Implementations
         /// <returns>The granting.</returns>
         public async Task<bool> PermissionGranting()
         {
-            var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Contacts);
+            var status = await CrossPermissions.Current.CheckPermissionStatusAsync<ContactsPermission>();
             if (status != PermissionStatus.Granted)
             {
-                var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Contacts);
-                status = results[Permission.Contacts];
+                status = await CrossPermissions.Current.RequestPermissionAsync<ContactsPermission>();
             }
             if (status != PermissionStatus.Granted)
             {
