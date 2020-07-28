@@ -5,10 +5,12 @@
     using System.Threading.Tasks;
     using Helpers;
     using Interfaces;
-    using Plugin.Permissions;
-    using Plugin.Permissions.Abstractions;
+    //using Plugin.Permissions;
+    //using Plugin.Permissions.Abstractions;
     using Common.Models;
     using Xamarin.Forms;
+    using Xamarin.Essentials;
+    using static Xamarin.Essentials.Permissions;
 
     public class ContactsViewModel : BaseViewModel
     {
@@ -41,25 +43,31 @@
         #endregion
 
         #region Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private async Task LoadDeviceContacts()
         {
-            Page page = Application.Current.MainPage;
             IsRefreshing = true;
-            var current = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Contacts);
-            if (current != PermissionStatus.Granted)
-            {
-                if (Device.RuntimePlatform == Device.Android)
-                {
-                    var rationale = await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Contacts);
-                    if (rationale)
-                    {
-                        await page.DisplayAlert("Need it!", "Gimme permission", "Ok");
-                    }
-                }
-                var status = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Contacts });
-                current = status[Permission.Contacts];
-            }
-            if (current == PermissionStatus.Granted)
+            var status = await CheckAndRequestPermissionAsync(new Xamarin.Essentials.Permissions.ContactsRead());
+
+            //var current = await Permissions.CheckStatusAsync<Permissions.ContactsRead>();//Current.CheckPermissionStatusAsync<ContactsPermission>();
+            //if (current != PermissionStatus.Granted)
+            //{
+            //    if (Device.RuntimePlatform == Device.Android)
+            //    {
+            //        var rationale = await Permissions.ch  Current.ShouldShowRequestPermissionRationaleAsync(Permission.Contacts);
+            //        if (rationale)
+            //        {
+            //            await page.DisplayAlert("Need it!", "Gimme permission", "Ok");
+            //        }
+            //    }
+            //    var status = await CrossPermissions.Current.RequestPermissionAsync<ContactsPermission>();
+            //    current = status;
+            //}
+
+            if (status == PermissionStatus.Granted) 
             {
                 var contacts = await DependencyService.Get<IUserContactsService>().GetAllContacts();
                 this.MobileContactsList = new List<PhoneContact>((List<PhoneContact>)contacts);
@@ -76,6 +84,18 @@
                 //this.MobileContactsGrouped = new ObservableCollection<Grouping<string, MobileContactItemViewModel>>(sorted);
             }
             this.IsRefreshing = false;
+        }
+
+        public async Task<PermissionStatus> CheckAndRequestPermissionAsync<T>(T permission)
+            where T : BasePermission
+        {
+            var status = await permission.CheckStatusAsync();
+            if (status != PermissionStatus.Granted)
+            {
+                status = await permission.RequestAsync();
+            }
+
+            return status;
         }
 
         #endregion

@@ -657,6 +657,10 @@ If you have problems, contact with administrator.</value>
     <value>Please, select the calendars that you want to make visible in your Management Center.</value>
     <comment>Message for set visibility of calendar.</comment>
   </data>
+    <data name="SelectCalendarControlTaskMessage" xml:space="preserve">
+    <value>Please, select the calendar to control.</value>
+    <comment>Message for select calendar which want control tasks.</comment>
+  </data>
     <data name="CalendarFiltersMessage" xml:space="preserve">
     <value>Please, select the filtering options that you want to apply in your Management Center calendar.</value>
     <comment>Message for set filters of calendar.</comment>
@@ -955,7 +959,7 @@ If you have problems, contact with administrator.</value>
     <comment>My Tasks statistics chart title. Query Id = 10</comment>
   </data>
     <data name="TasksOf" xml:space="preserve">
-    <value>Tasks of another official</value>
+    <value>Tasks of </value>
     <comment>Tasks of: {Officer name}. Query Id = 10, another officer</comment>
   </data>
     <data name="PendingTasks" xml:space="preserve">
@@ -1001,6 +1005,22 @@ If you have problems, contact with administrator.</value>
     <data name="TaskCloseToDeadline" xml:space="preserve">
     <value>Tasks close to deadline</value>
     <comment>Tasks close to deadline label. Query Id = 11</comment>
+  </data>
+    <data name="TaskWithAuditReport" xml:space="preserve">
+    <value>Tasks with audit report</value>
+    <comment>Tasks with audit report. Query Id = 12</comment>
+  </data>
+    <data name="TasksSetByMe" xml:space="preserve">
+    <value>Tasks set by me</value>
+    <comment>All Tasks set by me title. Query Id = 4 and 6</comment>
+  </data>
+    <data name="TasksMonitoredByMe" xml:space="preserve">
+    <value>Tasks that I monitor</value>
+    <comment>All tasks that I monitor. Query Id = 5 and 7</comment>
+  </data>
+    <data name="SelectControlTaskMenuItem" xml:space="preserve">
+    <value>Select a task query option item.</value>
+    <comment>Subtitle of Personal Control Menú </comment>
   </data>
     <!--Task Controls and Options-->
     <data name="TaskControl" xml:space="preserve">
@@ -1314,7 +1334,11 @@ If you have problems, contact with administrator.</value>
   </data>
     <data name="EmptyTaskList" xml:space="preserve">
     <value>No scheduled tasks</value>
-    <comment>Tasl list empty message</comment>
+    <comment>Task list empty message</comment>
+  </data>
+    <data name="EmptyGraphList" xml:space="preserve">
+    <value>No graph data</value>
+    <comment>Graph Task empty message</comment>
   </data>
     <data name="TaskProgrammerText" xml:space="preserve">
     <value>Programmed by</value>

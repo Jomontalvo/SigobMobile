@@ -1,10 +1,12 @@
 ﻿namespace SigobMobile.ViewModels
 {
+    using System;
     using System.Threading.Tasks;
     using System.Windows.Input;
     using AsyncAwaitBestPractices.MVVM;
     using Common.Helpers;
     using Common.Services;
+    using GalaSoft.MvvmLight.Command;
     using Helpers;
     using Models;
     using Telerik.XamarinForms.Primitives.CheckBox.Commands;
@@ -21,6 +23,7 @@
         #region ExtendedProperties
         internal string ApiPostVisibilityController => $"calendars/linkedcal/{this.selectedOfficeId}/visible/{this.visibility}";
         public string CalendarType => (this.ManagementCenterId != 0) ? Languages.ManagementCenters : Languages.PersonalAgendas;
+        public bool IsSelectedForControl { get; set; }
         #endregion
 
         #region Constructor
@@ -35,6 +38,7 @@
         #endregion
 
         #region Commands
+        public ICommand SelectCalendarCommand => new AsyncCommand(SelectCalendarAsync);
         public ICommand IsCheckedChangedCommand => new AsyncCommand<CheckBoxIsCheckChangedCommandContext>(this.CheckBoxChange);
         #endregion
 
@@ -44,7 +48,7 @@
         /// Sets the calendar visibility.
         /// </summary>
         /// <returns>The calendar visibility.</returns>
-        public async Task SetCalendarVisibility(bool? isVisible)
+        public async Task SetCalendarVisibility()
         {
             var connection = await this.apiService.CheckConnection();
             if (!connection.IsSuccess)
@@ -91,21 +95,27 @@
         /// <param name="context">Context.</param>
         private async Task CheckBoxChange(CheckBoxIsCheckChangedCommandContext context)
         {
-            //Unselect all previous checked calendars
-            //var parentViewModel = MainViewModel.GetInstance().Calendars;
-            //foreach ( CalendarItemViewModel cal in parentViewModel.Calendars)
-            //{
-            //    if (cal.IsVisible && cal.OfficeId != this.OfficeId)
-            //    {
-            //        cal.IsVisible = false;
-            //    }
-            //}
-            //parentViewModel.RefreshAndGroupCalendarList();
             //Set visibility of new calendar selected
             this.selectedOfficeId = this.OfficeId;
             this.visibility = context.NewState;
-            await SetCalendarVisibility(this.visibility);
+            await SetCalendarVisibility();
         }
+
+        /// <summary>
+        /// Select calendat to task control
+        /// </summary>
+        private async Task SelectCalendarAsync()
+        {
+            //Unselect all previous checked calendars
+            var parentViewModel = MainViewModel.GetInstance().TaskDashboard;
+            if (parentViewModel.currentOfficeId == this.OfficeId) return;
+            parentViewModel.currentOfficeId = this.OfficeId;
+            parentViewModel.IsOpenCalendar = false;
+            parentViewModel.RefreshCalendarList();
+            parentViewModel.isSegmentBuilt = false;
+            await parentViewModel.LoadTaskBoardAsync();
+        }
+
         #endregion
     }
 }

@@ -100,7 +100,9 @@ namespace SigobMobile
         {
             InitializeComponent();
             //Settings.Token = Settings.DbToken = Settings.InstitutionLogo =  string.Empty;
-            if (string.IsNullOrEmpty(Settings.Token) || string.IsNullOrEmpty(Settings.OfficeCode))
+            if (string.IsNullOrEmpty(Settings.Token)
+                || string.IsNullOrEmpty(Settings.OfficeCode)
+                || string.IsNullOrEmpty(Settings.TaskControlOfficeCode))
             {
                 var navPage = new Xamarin.Forms.NavigationPage(new LoginPage());
                 navPage.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetPrefersLargeTitles(true);

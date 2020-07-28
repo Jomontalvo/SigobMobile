@@ -851,6 +851,12 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string SelectCalendarControlTaskMessage {
+            get {
+                return ResourceManager.GetString("SelectCalendarControlTaskMessage", resourceCulture);
+            }
+        }
+        
         public static string CalendarFiltersMessage {
             get {
                 return ResourceManager.GetString("CalendarFiltersMessage", resourceCulture);
@@ -1367,6 +1373,30 @@ namespace SigobMobile.Properties {
             }
         }
         
+        public static string TaskWithAuditReport {
+            get {
+                return ResourceManager.GetString("TaskWithAuditReport", resourceCulture);
+            }
+        }
+        
+        public static string TasksSetByMe {
+            get {
+                return ResourceManager.GetString("TasksSetByMe", resourceCulture);
+            }
+        }
+        
+        public static string TasksMonitoredByMe {
+            get {
+                return ResourceManager.GetString("TasksMonitoredByMe", resourceCulture);
+            }
+        }
+        
+        public static string SelectControlTaskMenuItem {
+            get {
+                return ResourceManager.GetString("SelectControlTaskMenuItem", resourceCulture);
+            }
+        }
+        
         public static string TaskControl {
             get {
                 return ResourceManager.GetString("TaskControl", resourceCulture);
@@ -1820,6 +1850,12 @@ namespace SigobMobile.Properties {
         public static string EmptyTaskList {
             get {
                 return ResourceManager.GetString("EmptyTaskList", resourceCulture);
+            }
+        }
+        
+        public static string EmptyGraphList {
+            get {
+                return ResourceManager.GetString("EmptyGraphList", resourceCulture);
             }
         }
         

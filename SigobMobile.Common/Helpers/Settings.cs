@@ -22,6 +22,9 @@
         private const string insitutionLogo = "logo";
         private const string userFullName = "fullName";
         private const string officeCode = "officeCode";
+        private const string taskControlOfficeCode = "taskControlOfficeCode";
+        private const string managementCenterId = "managementCenterId";
+        private static readonly int ManagementCenterDefault = 0;
 
         //Central web contents
         private const string urlWebCentral = "uriCentral";
@@ -115,14 +118,8 @@
         /// <value>The token.</value>
         public static string Token
         {
-            get
-            {
-                return AppSettings.GetValueOrDefault(token, SettingsDefault);
-            }
-            set
-            {
-                AppSettings.AddOrUpdateValue(token, value);
-            }
+            get => AppSettings.GetValueOrDefault(token, SettingsDefault);
+            set => AppSettings.AddOrUpdateValue(token, value);
         }
 
         /// <summary>
@@ -131,14 +128,8 @@
         /// <value>The db token.</value>
         public static string DbToken
         {
-            get
-            {
-                return AppSettings.GetValueOrDefault(dbToken, SettingsDefault);
-            }
-            set
-            {
-                AppSettings.AddOrUpdateValue(dbToken, value);
-            }
+            get => AppSettings.GetValueOrDefault(dbToken, SettingsDefault);
+            set => AppSettings.AddOrUpdateValue(dbToken, value);
         }
 
         /// <summary>
@@ -215,6 +206,23 @@
         {
             get => AppSettings.GetValueOrDefault(officeCode, SettingsDefault);
             set => AppSettings.AddOrUpdateValue(officeCode, value);
+        }
+        /// <summary>
+        /// Gets or sets the SIGOB office code of active user.
+        /// </summary>
+        /// <value>The full name.</value>
+        public static string TaskControlOfficeCode
+        {
+            get => AppSettings.GetValueOrDefault(taskControlOfficeCode, SettingsDefault);
+            set => AppSettings.AddOrUpdateValue(taskControlOfficeCode, value);
+        }
+        /// <summary>
+        /// Get or set de Management Center Code in Logged User
+        /// </summary>
+        public static int ManagementCenterId
+        {
+            get => AppSettings.GetValueOrDefault(managementCenterId, ManagementCenterDefault);
+            set => AppSettings.AddOrUpdateValue(managementCenterId, value);
         }
 
         #endregion

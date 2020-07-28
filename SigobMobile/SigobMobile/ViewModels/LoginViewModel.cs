@@ -118,7 +118,7 @@
         /// Gets the list to select Institution - API command.
         /// </summary>
         /// <value>The select API command.</value>
-        public ICommand SelectApiCommand => new AsyncCommand(SelectApi);
+        public IAsyncCommand SelectApiCommand => new AsyncCommand(SelectApiAsync);
 
         /// <summary>
         /// Show or hide password command button.
@@ -141,7 +141,7 @@
         /// <summary>
         /// Selects the API related with Institution
         /// </summary>
-        private async Task SelectApi()
+        private async Task SelectApiAsync()
         {
             ////Call without Navigate
             //MainViewModel.GetInstance().InstitutionsConnect = new InstitutionsConnectViewModel();
@@ -295,7 +295,8 @@
                 Settings.InstitutionLogo = sucessLogin.InstitutionLogo;
                 Settings.FullName = sucessLogin.LoggedUser.Name;
                 Settings.OfficeCode = sucessLogin.LoggedUser.OfficeCode;
-
+                Settings.TaskControlOfficeCode = sucessLogin.LoggedUser.OfficeCode;
+                Settings.ManagementCenterId = sucessLogin.HasCG;
                 //Load Master Detail with ApplicationsPage
                 mainViewModel.Applications = new ApplicationsViewModel();
                 mainViewModel.Menu = new MenuViewModel();

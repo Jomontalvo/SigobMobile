@@ -35,6 +35,7 @@
         #region Attributes
         private List<Calendar> calendarList;
         private ObservableCollection<CalendarItemViewModel> calendars;
+        private ObservableCollection<TaskControlMenuItemViewModel> personalMenuOptionsList;
         private bool isAddItemVisible;
         private List<TaskSigob> taskList;
         private List<TaskCategoricalData> taskStatistics;
@@ -46,23 +47,25 @@
         private ObservableCollection<TaskCategoricalData> chartLegend;
         private bool isRefreshing;
         private string graphTitle;
+        internal string currentOfficeId;
         private string officialName;
         private string filter;
         private int selectedIndex = -1;
+        private bool hasTask;
         private TTrafficLightStatus segmentFilter = TTrafficLightStatus.All;
         private bool isVisibleSearch;
         private bool isVisibleChart;
         private bool isVisibleGraphTitle;
-        private bool isOpen;
+        private bool isOpenCalendar;
         private bool isOpenControl;
-        private bool isSegmentBuilt = false;
+        internal bool isSegmentBuilt = false;
         #endregion
 
         #region Properties
         public ObservableCollection<CalendarItemViewModel> CalendarSource
         {
-            get { return this.calendars; }
-            set { SetValue(ref this.calendars, value); }
+            get => this.calendars;
+            set => SetValue(ref this.calendars, value);
         }
 
         public string Filter
@@ -82,10 +85,10 @@
             set => SetValue(ref this.isVisibleSearch, value);
         }
 
-        public bool IsOpen
+        public bool IsOpenCalendar
         {
-            get => this.isOpen;
-            set => SetValue(ref this.isOpen, value);
+            get => this.isOpenCalendar;
+            set => SetValue(ref this.isOpenCalendar, value);
         }
         public bool IsOpenControl
         {
@@ -127,6 +130,7 @@
             get { return this.chartLegend; }
             set { SetValue(ref this.chartLegend, value); }
         }
+
         public int SelectedIndex
         {
             get { return this.selectedIndex; }
@@ -136,6 +140,7 @@
                 this.OnSelectionChangedAsync();
             }
         }
+
         public bool IsRefreshing
         {
             get { return this.isRefreshing; }
@@ -165,6 +170,19 @@
             get { return this.officialName; }
             set { SetValue(ref this.officialName, value); }
         }
+
+        public bool HasTask
+        {
+            get => this.hasTask;
+            set => SetValue(ref this.hasTask, value);
+        }
+
+        public ObservableCollection<TaskControlMenuItemViewModel> PersonalMenuOptionsList
+        {
+            get => this.personalMenuOptionsList;
+            set => SetValue(ref this.personalMenuOptionsList, value);
+        }
+
         #endregion
 
         #region Constructors
@@ -174,9 +192,11 @@
             this.IsVisibleChart = true;
             this.IsVisibleGraphTitle = false;
             IsAddItemVisible = (Device.RuntimePlatform == Device.iOS) ? true : false;
+            this.currentOfficeId = Settings.TaskControlOfficeCode;
             IErrorHandler errorHandler = null;
-            this.LoadTaskBoardAsync().FireAndForgetSafeAsync(errorHandler);
             this.LoadCalendars().FireAndForgetSafeAsync(errorHandler);
+            this.LoadTaskBoardAsync().FireAndForgetSafeAsync(errorHandler);
+            
         }
         #endregion
 
@@ -187,12 +207,12 @@
         public ICommand SelectCalendarCommand => new RelayCommand(SelectCalendar);
         public ICommand CloseSelectCalendarCommand => new RelayCommand(CloseSelectCalendar);
         public ICommand SwipeChartCommand => new RelayCommand<string>(SwipeChart);
-        public ICommand LoadMenuControlCommand => new RelayCommand(LoadMenuControl);
         public ICommand CloseControlMenuCommand => new RelayCommand(CloseControlMenu);
-        public IAsyncCommand RefreshCommand => new AsyncCommand(LoadTaskBoardAsync);
+        public IAsyncCommand LoadMenuControlCommand => new AsyncCommand(LoadMenuControlAsync);
         public IAsyncCommand LoadGeneralControlMenuCommand => new AsyncCommand(LoadGeneralControlMenuAsync);
         public IAsyncCommand LoadPersonalControlMenuCommand => new AsyncCommand(LoadPersonalControlMenuAsync);
         public IAsyncCommand LoadOverdueControlMenuCommand => new AsyncCommand(LoadOverdueControlMenuAsync);
+        public IAsyncCommand RefreshCommand => new AsyncCommand(LoadTaskBoardAsync);
         #endregion
 
         #region Methods
@@ -202,6 +222,130 @@
         private void SearchView()
         {
             this.IsVisibleSearch = !this.IsVisibleSearch;
+        }
+
+        /// <summary>
+        /// Built Menu Options (Personal Control)
+        /// </summary>
+        private void LoadPersonalControlMenuOptions(int managementCenterId)
+        {
+            if (managementCenterId == 0)
+            {
+                PersonalMenuOptionsList = new ObservableCollection<TaskControlMenuItemViewModel>
+                {
+                    new TaskControlMenuItemViewModel
+                    {
+                        Icon = $"ic_task_status_10",
+                        Id = 10,
+                        IsEnabled = true,
+                        Key = string.Empty,
+                        MenuItemName = Languages.AllTaskStatus
+                    },
+                    new TaskControlMenuItemViewModel
+                    {
+                        Icon = "ic_task_status_3",
+                        Id = 3,
+                        IsEnabled = true,
+                        Key = string.Empty,
+                        MenuItemName = Languages.NewAssignedTasks
+                    },
+                    new TaskControlMenuItemViewModel
+                    {
+                        Icon = "ic_task_status_4",
+                        Id = 4,
+                        IsEnabled = true,
+                        Key = string.Empty,
+                        MenuItemName = Languages.TasksSetByMe
+                    },
+                    new TaskControlMenuItemViewModel
+                    {
+                        Icon = "ic_task_status_5",
+                        Id = 5,
+                        IsEnabled = true,
+                        Key = string.Empty,
+                        MenuItemName = Languages.TasksMonitoredByMe
+                    },
+                    new TaskControlMenuItemViewModel
+                    {
+                        Icon = "ic_task_status_8",
+                        Id = 8,
+                        IsEnabled = true,
+                        Key = string.Empty,
+                        MenuItemName = Languages.TaskCopies
+                    },
+                    new TaskControlMenuItemViewModel
+                    {
+                        Icon = "ic_task_status_9",
+                        Id = 9,
+                        IsEnabled = true,
+                        Key = string.Empty,
+                        MenuItemName = Languages.TaskMessages
+                    }
+                };
+            }
+            else
+            {
+                PersonalMenuOptionsList = new ObservableCollection<TaskControlMenuItemViewModel>
+                {
+                    new TaskControlMenuItemViewModel
+                    {
+                        Icon = $"ic_task_status_10",
+                        Id = 10,
+                        IsEnabled = true,
+                        Key = string.Empty,
+                        MenuItemName = Languages.AllTaskStatus
+                    },
+                    new TaskControlMenuItemViewModel
+                    {
+                        Icon = "ic_task_status_3",
+                        Id = 3,
+                        IsEnabled = true,
+                        Key = string.Empty,
+                        MenuItemName = Languages.NewAssignedTasks
+                    },
+                    new TaskControlMenuItemViewModel
+                    {
+                        Icon = "ic_task_status_4",
+                        Id = 4,
+                        IsEnabled = true,
+                        Key = string.Empty,
+                        MenuItemName = Languages.TasksSetByMe
+                    },
+                    new TaskControlMenuItemViewModel
+                    {
+                        Icon = "ic_task_status_5",
+                        Id = 5,
+                        IsEnabled = true,
+                        Key = string.Empty,
+                        MenuItemName = Languages.TasksMonitoredByMe
+                    },
+                    new TaskControlMenuItemViewModel
+                    {
+                        Icon = "ic_task_status_8",
+                        Id = 8,
+                        IsEnabled = true,
+                        Key = string.Empty,
+                        MenuItemName = Languages.TaskCopies
+                    },
+                    new TaskControlMenuItemViewModel
+                    {
+                        Icon = "ic_task_status_9",
+                        Id = 9,
+                        IsEnabled = true,
+                        Key = string.Empty,
+                        MenuItemName = Languages.TaskMessages
+                    },
+                    new TaskControlMenuItemViewModel
+                    {
+                        Icon = "ic_task_status_12",
+                        Id = 12,
+                        IsEnabled = true,
+                        Key = string.Empty,
+                        MenuItemName = Languages.TaskWithAuditReport
+                    }
+                };
+            }
+                
         }
 
         /// <summary>
@@ -270,9 +414,34 @@
         /// <summary>
         /// Open Popup Menu for task control
         /// </summary>
-        private void LoadMenuControl()
+        private async Task LoadMenuControlAsync()
         {
-            this.IsOpenControl = true;
+            string[] optionsArray = { Languages.GeneralControl, Languages.PersonalControl };
+            CalendarItemViewModel selectedCalendar = this.CalendarSource.Single(c => c.IsSelectedForControl);
+            if (selectedCalendar.ManagementCenterId > 0)
+            {
+                Array.Resize(ref optionsArray, optionsArray.Length + 1);
+                optionsArray[^1] = ($"{Languages.OverdueControl}");
+            }
+
+            //Load Personal Control Options
+            this.LoadPersonalControlMenuOptions(selectedCalendar.ManagementCenterId);
+
+
+            var result = await App.Navigator.DisplayActionSheet(
+                Languages.TaskControl,
+                Languages.Cancel,
+                null,
+                optionsArray);
+
+            if (result == Languages.GeneralControl)
+            {
+                await App.Navigator.DisplayAlert(Languages.ControlTitle, Languages.GeneralError, null, Languages.Accept);
+                return;
+            }
+            else if (result == Languages.PersonalControl) this.IsOpenControl = true;
+            else if (result == Languages.OverdueControl) this.IsOpenControl = false;
+            else return;
         }
 
         /// <summary>
@@ -288,7 +457,7 @@
         /// </summary>
         private void CloseSelectCalendar()
         {
-            this.IsOpen = false;
+            this.IsOpenCalendar = false;
         }
 
         /// <summary>
@@ -296,7 +465,7 @@
         /// </summary>
         private void SelectCalendar()
         {
-            this.IsOpen = true;
+            this.IsOpenCalendar = true;
         }
 
         /// <summary>
@@ -330,7 +499,7 @@
                     CostPlanned = t.CostPlanned,
                     Delay = t.Delay,
                     DeletionError = t.DeletionError,
-                    Description = (!string.IsNullOrEmpty(t.Description))?t.Description.TrimEnd() : string.Empty,
+                    Description = (!string.IsNullOrEmpty(t.Description)) ? t.Description.TrimEnd() : string.Empty,
                     EndDate = t.EndDate,
                     HasAudit = t.HasAudit,
                     HasMessage = t.HasMessage,
@@ -372,7 +541,7 @@
                     TrafficLight = t.TrafficLight,
                     Type = t.Type
                 })
-                .Where(t => (segmentFilter == TTrafficLightStatus.All || t.TrafficLight  == segmentFilter))
+                .Where(t => (segmentFilter == TTrafficLightStatus.All || t.TrafficLight == segmentFilter))
                 .OrderBy(t => t.TrafficLight));
             }
             else
@@ -485,7 +654,9 @@
         {
             this.GraphTitle = segmentFilter switch
             {
-                TTrafficLightStatus.All => Languages.MyTasks,
+                TTrafficLightStatus.All => (this.currentOfficeId == Settings.OfficeCode)
+                    ?Languages.MyTasks :
+                    $"{Languages.TasksOf} {this.OfficialName}" ,
                 TTrafficLightStatus.InProgress => Languages.InProgressStatus,
                 TTrafficLightStatus.CloseToDeadline => Languages.CloseToDeadlinedStatus,
                 TTrafficLightStatus.Overdue => Languages.OverdueStatus,
@@ -500,8 +671,9 @@
         public async Task LoadTaskBoardAsync()
         {
             this.IsRefreshing = true;
-            await GetStatisticsAndTaskList(Settings.OfficeCode, TQueryOption.TasksOf);
+            await GetStatisticsAndTaskList(this.currentOfficeId, TQueryOption.TasksOf);
             this.LoadSegmentedFilters();
+            Settings.TaskControlOfficeCode = this.currentOfficeId;
             this.IsRefreshing = false;
         }
 
@@ -541,7 +713,8 @@
                     return;
                 }
                 this.taskObject = (Tasks)response.Result;
-                this.OfficialName = taskObject.OfficialName;
+                this.OfficialName =  taskObject.OfficialName;
+                this.HasTask = taskObject.TaskList.Count() > 0;
                 this.taskList = taskObject.TaskList.ToList<TaskSigob>();
                 this.taskStatistics = taskObject.TaskStatistics.ToList<TaskCategoricalData>();
                 this.TaskStatistics = new ObservableCollection<TaskCategoricalData>(ToTaskStatistics());
@@ -572,7 +745,7 @@
         /// </summary>
         private void LoadSegmentedFilters()
         {
-            if(!this.isSegmentBuilt)
+            if (!this.isSegmentBuilt)
             {
                 TaskStatus = new List<Segment>(ToTaskSegment(1));
                 var firstItem = new Segment() { Id = 0, QueryId = 10, SegmentName = Languages.AllTaskStatus };
@@ -659,6 +832,14 @@
                 return;
             }
             calendarList = (List<Calendar>)response.Result;
+            this.RefreshCalendarList();
+        }
+
+        /// <summary>
+        /// Refresh calendar list with selected calendar
+        /// </summary>
+        internal void RefreshCalendarList()
+        {
             this.CalendarSource = new ObservableCollection<CalendarItemViewModel>(ToCalendarItemViewModel());
         }
 
@@ -679,8 +860,9 @@
                 NumberColor = c.NumberColor,
                 OfficeId = c.OfficeId,
                 Permission = c.Permission,
-                RedColor = c.RedColor
-            }).Where(c => c.OfficeId != Settings.OfficeCode);
+                RedColor = c.RedColor,
+                IsSelectedForControl = c.OfficeId == currentOfficeId,
+            });
         }
         #endregion
     }

@@ -142,7 +142,7 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.356" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1080" />
     <PackageReference Include="Xam.Plugin.Connectivity">
       <Version>3.2.0</Version>
     </PackageReference>
@@ -153,25 +153,25 @@
       <Version>3.0.0.5</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
-      <Version>4.0.1.5</Version>
+      <Version>5.0.1</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp">
-      <Version>1.68.1.1</Version>
+      <Version>2.80.0</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views">
-      <Version>1.68.1.1</Version>
+      <Version>2.80.0</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
-      <Version>1.68.1.1</Version>
+      <Version>2.80.0</Version>
     </PackageReference>
     <PackageReference Include="Telerik.UI.for.Xamarin">
-      <Version>2020.1.218.1</Version>
+      <Version>2020.2.624.1</Version>
     </PackageReference>
     <PackageReference Include="Plugin.Permissions">
-      <Version>3.0.0.12</Version>
+      <Version>6.0.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
-      <Version>1.5.1</Version>
+      <Version>1.5.3.2</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -384,6 +384,27 @@
     <BundleResource Include="Resources\ic_bt_viewmore_gray.png" />
     <BundleResource Include="Resources\ic_task_flag_status.png" />
     <BundleResource Include="Resources\ic_task_audit.png" />
+    <BundleResource Include="Resources\ic_task_status_3%403x.png" />
+    <BundleResource Include="Resources\ic_task_status_3%402x.png" />
+    <BundleResource Include="Resources\ic_task_status_3.png" />
+    <BundleResource Include="Resources\ic_task_status_9%403x.png" />
+    <BundleResource Include="Resources\ic_task_status_9%402x.png" />
+    <BundleResource Include="Resources\ic_task_status_9.png" />
+    <BundleResource Include="Resources\ic_task_status_8%403x.png" />
+    <BundleResource Include="Resources\ic_task_status_8%402x.png" />
+    <BundleResource Include="Resources\ic_task_status_8.png" />
+    <BundleResource Include="Resources\ic_task_status_5%403x.png" />
+    <BundleResource Include="Resources\ic_task_status_5%402x.png" />
+    <BundleResource Include="Resources\ic_task_status_5.png" />
+    <BundleResource Include="Resources\ic_task_status_4%403x.png" />
+    <BundleResource Include="Resources\ic_task_status_4%402x.png" />
+    <BundleResource Include="Resources\ic_task_status_4.png" />
+    <BundleResource Include="Resources\ic_task_status_10.png" />
+    <BundleResource Include="Resources\ic_task_status_10%402x.png" />
+    <BundleResource Include="Resources\ic_task_status_10%403x.png" />
+    <BundleResource Include="Resources\ic_task_status_12.png" />
+    <BundleResource Include="Resources\ic_task_status_12%402x.png" />
+    <BundleResource Include="Resources\ic_task_status_12%403x.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />

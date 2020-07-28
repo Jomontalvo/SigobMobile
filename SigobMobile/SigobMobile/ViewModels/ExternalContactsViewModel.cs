@@ -145,22 +145,46 @@
         private async Task LoadDeviceContacts()
         {
             Page page = Application.Current.MainPage;
+            var status = PermissionStatus.Unknown;
             IsRefreshing = true;
-            var current = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Contacts);
-            if(current != PermissionStatus.Granted)
-            {
-                if (Device.RuntimePlatform == Device.Android)
-                {
-                    var rationale = await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Contacts);
-                    if (rationale)
-                    {
-                        await page.DisplayAlert("Need it!", "Gimme permission", "Ok");
-                    }
-                }
-                var status = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Contacts });
-                current = status[Permission.Contacts];
-            }
-            if(current == PermissionStatus.Granted)
+            status = await CrossPermissions.Current.CheckPermissionStatusAsync<ContactsPermission>();
+
+
+
+
+            //Aqui lo de Chrome.
+
+
+
+
+
+            var current = await CrossPermissions.Current.CheckPermissionStatusAsync<ContactsPermission>();
+
+
+
+
+
+
+
+
+
+
+            //if (current != PermissionStatus.Granted)
+            //{
+            //    current = Permissions.CheckPermissions(new )
+
+
+            //    if (Device.RuntimePlatform == Device.Android)
+            //    {
+            //        var rationale = await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Contacts);
+            //        if (rationale)
+            //        {
+            //            await page.DisplayAlert("Need it!", "Gimme permission", "Ok");
+            //        }
+            //    }
+            //    current = await CrossPermissions.Current.RequestPermissionAsync<ContactsPermission>();
+            //}
+            if (current == PermissionStatus.Granted)
             {
                 var contacts = await DependencyService.Get<IUserContactsService>().GetAllContacts();
                 this.MobileContactsList = new List<PhoneContact>((List<PhoneContact>)contacts);

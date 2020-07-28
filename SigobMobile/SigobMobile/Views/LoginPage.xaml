@@ -20,7 +20,15 @@
             BindingContext="{Binding Login}">
             <StackLayout 
                 Padding="20,20,20,20">
-                <Image WidthRequest="240" Source="sigob_logo">
+                <Image
+                    Source="sigob_logo"
+                    WidthRequest="240">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+
+                            Command="{Binding ShowHidePasswordCommand}"
+                            NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
                 </Image>
                 <Label 
                     VerticalOptions="CenterAndExpand" 
@@ -47,8 +55,8 @@
                         Padding="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
                         <telerikInput:RadEntry
                             BorderStyle="{StaticResource EntryBorderStyle}"
                             FlowDirection="{x:Static Device.FlowDirection}"
@@ -65,6 +73,7 @@
                         <Image 
                             Grid.Column="1"
                             HorizontalOptions="End"
+                            IsEnabled="True"
                             IsVisible="{Binding IsVisibleIconViewPassword, Mode=TwoWay}"
                             Margin="5,0,5,2"
                             Source="{Binding IconViewPassword}" 
@@ -80,7 +89,9 @@
                     </Grid>
                 </StackLayout>
                 <ContentView
-                    HorizontalOptions="FillAndExpand">
+                    BackgroundColor="AliceBlue"
+                    HorizontalOptions="FillAndExpand"
+                    IsEnabled="True">
                     <ContentView.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding SelectApiCommand}">
@@ -90,7 +101,7 @@
                         BorderStyle="{StaticResource EntryBorderStyle}"
                         FlowDirection="MatchParent"
                         HorizontalOptions="FillAndExpand"
-                        IsEnabled="false"
+                        IsEnabled="False"
                         Margin="0,5"
                         Padding="0"
                         WatermarkText="{Binding Institution, Mode=TwoWay}"

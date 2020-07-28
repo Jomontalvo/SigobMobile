@@ -273,16 +273,22 @@
         public static string TaskCopies => Resources.TaskCopies;
         public static string TaskMessages => Resources.TaskMessages;
         public static string TaskCloseToDeadline => Resources.TaskCloseToDeadline;
+        public static string TaskWithAuditReport => Resources.TaskWithAuditReport;
+        public static string TasksSetByMe => Resources.TasksSetByMe;
+        public static string TasksMonitoredByMe => Resources.TasksMonitoredByMe;
+        public static string SelectControlTaskMenuItem => Resources.SelectControlTaskMenuItem;
         public static string TaskControl => Resources.TaskControl;
         public static string ControlTitle => Resources.ControlTitle;
         public static string PersonalControl => Resources.PersonalControl;
         public static string GeneralControl => Resources.GeneralControl;
         public static string OverdueControl => Resources.OverdueControl;
         public static string EmptyTaskList => Resources.EmptyTaskList;
+        public static string EmptyGraphList => Resources.EmptyGraphList;
         public static string TaskProgrammerText => Resources.TaskProgrammerText;
         public static string OverdueTasksByType => Resources.OverdueTasksByType;
         public static string OverdueTasksByProgrammer => Resources.OverdueTasksByProgrammer;
         public static string OverdueTasksByResponsible => Resources.OverdueTasksByResponsible;
+        public static string SelectCalendarControlTaskMessage => Resources.SelectCalendarControlTaskMessage;
         #endregion
 
         #region Report View

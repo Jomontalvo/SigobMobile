@@ -543,6 +543,10 @@ Si tiene algún problema, contacte con un Administrador.</value>
     <value>Por vencer</value>
     <comment>Text for Item close to deadline time status.</comment>
   </data>
+    <data name="TaskWithAuditReport" xml:space="preserve">
+    <value>Con informe de auditoría</value>
+    <comment>Tasks with audit report. Query Id = 12</comment>
+  </data>
     <data name="ExpiredStatus" xml:space="preserve">
     <value>Vencidas</value>
     <comment>Text for Item in expired time status.</comment>
@@ -650,6 +654,10 @@ Si tiene algún problema, contacte con un Administrador.</value>
     <data name="SelectCalendarMessage" xml:space="preserve">
     <value>Por favor, seleccione los calendarios que desea consultar en su Centro de Gestión.</value>
     <comment>Message for set visibility of calendar.</comment>
+  </data>
+    <data name="SelectCalendarControlTaskMessage" xml:space="preserve">
+    <value>Seleccione el calendario a controlar.</value>
+    <comment>Message for select calendar which want control tasks.</comment>
   </data>
     <data name="CalendarFiltersMessage" xml:space="preserve">
     <value>Por favor, seleccione los filtros de consulta para los calendarios de su Centro de Gestión.</value>
@@ -949,7 +957,7 @@ Si tiene algún problema, contacte con un Administrador.</value>
     <comment>My Tasks statistics chart title. Query Id = 10</comment>
   </data>
     <data name="TasksOf" xml:space="preserve">
-    <value>Tareas de otro funcionario</value>
+    <value>Tareas de </value>
     <comment>Tasks of: {Officer name}. Query Id = 10, another officer</comment>
   </data>
     <data name="PendingTasks" xml:space="preserve">
@@ -969,7 +977,7 @@ Si tiene algún problema, contacte con un Administrador.</value>
     <comment>New assigned tasks chart title. Query Id = 3</comment>
   </data>
     <data name="OngoingTaskSetByMe" xml:space="preserve">
-    <value>En gestión programadas por mi</value>
+    <value>En gestión programadas por mí</value>
     <comment>Tasks set by me (in progress) chart title. Query Id = 4</comment>
   </data>
     <data name="OngoingTasksThatMonitoring" xml:space="preserve">
@@ -977,7 +985,7 @@ Si tiene algún problema, contacte con un Administrador.</value>
     <comment>Ongoing tasks that i monitor. Query Id = 5</comment>
   </data>
     <data name="CompletedTasksSetByMe" xml:space="preserve">
-    <value>Finalizadas propramadas por mi</value>
+    <value>Finalizadas propramadas por mí</value>
     <comment>Completed tasks that i set. Query Id = 6</comment>
   </data>
     <data name="CompletedTasksThatMonitoring" xml:space="preserve">
@@ -989,12 +997,24 @@ Si tiene algún problema, contacte con un Administrador.</value>
     <comment>Tasks copies. Query Id = 8</comment>
   </data>
     <data name="TaskMessages" xml:space="preserve">
-    <value>Mensajes de tareas sin revisar</value>
+    <value>Mensajes de tareas</value>
     <comment>Tasks messages. Query Id = 9</comment>
   </data>
     <data name="TaskCloseToDeadline" xml:space="preserve">
     <value>Tareas próximas a vencer</value>
     <comment>Tasks close to deadline label. Query Id = 11</comment>
+  </data>
+    <data name="TasksSetByMe" xml:space="preserve">
+    <value>Programadas por mí</value>
+    <comment>All Tasks set by me title. Query Id = 4 and 6</comment>
+  </data>
+    <data name="TasksMonitoredByMe" xml:space="preserve">
+    <value>De las que soy monitor</value>
+    <comment>All tasks that I monitor. Query Id = 5 and 7</comment>
+  </data>
+    <data name="SelectControlTaskMenuItem" xml:space="preserve">
+    <value>Seleccione una opción de consulta de tareas</value>
+    <comment>Subtitle of Personal Control Menú </comment>
   </data>
     <!--Task Controls and Options-->
     <data name="TaskControl" xml:space="preserve">
@@ -1312,7 +1332,11 @@ Si tiene algún problema, contacte con un Administrador.</value>
   </data>
     <data name="EmptyTaskList" xml:space="preserve">
     <value>No existen tareas registradas</value>
-    <comment>Tasl list empty message</comment>
+    <comment>Task list empty message</comment>
+  </data>
+    <data name="EmptyGraphList" xml:space="preserve">
+    <value>Sin datos gráficos.</value>
+    <comment>Graph Task empty message</comment>
   </data>
     <data name="TaskProgrammerText" xml:space="preserve">
     <value>Puesta por</value>
